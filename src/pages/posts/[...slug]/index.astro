@@ -62,6 +62,7 @@ const locale = Astro.currentLocale ?? config.site.lang;
 
 const {
   title,
+  lang,
   description,
   ogImage: initOgImage,
   canonicalURL,
@@ -110,10 +111,12 @@ const ogImage = ogImageUrl
 
   <main
     id="main-content"
+    lang={lang ?? locale}
     class:list={["app-layout", { "mt-8": !config.features.showBackButton }]}
     data-pagefind-body
   >
     <h1
+      lang={lang}
       style={{ viewTransitionName: toTransitionName(title) }}
       class="text-accent inline-block text-2xl font-bold sm:text-3xl"
     >
@@ -136,6 +139,7 @@ const ogImage = ogImageUrl
 
     <article
       id="article"
+      lang={lang}
       class:list={[
         "mt-8 w-full",
         "app-prose max-w-app",

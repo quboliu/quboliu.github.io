@@ -7,9 +7,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --font-app:
-    "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui,
-    sans-serif;
+  --font-app: var(--font-google-sans-code);
   --font-mono:
     "Maple Mono NF CN", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
@@ -17,22 +15,22 @@
 /* Light theme values */
 :root,
 [data-theme="light"] {
-  --background: #fffaf4;
-  --foreground: #2d251f;
-  --accent: #d95613;
+  --background: #fdfdfd;
+  --foreground: #282728;
+  --accent: #006cac;
   --accent-foreground: #ffffff;
-  --muted: #f3e7da;
-  --muted-foreground: #76675b;
-  --border: #ead8c7;
+  --muted: #e6e6e6;
+  --muted-foreground: #6b7280;
+  --border: #ece9e9;
 }
 
 /* Dark theme values */
 [data-theme="dark"] {
-  --background: #1d1916;
-  --foreground: #f7ede4;
-  --accent: #ff8a4c;
-  --accent-foreground: #24150d;
-  --muted: #382b23;
-  --muted-foreground: #c4b4a7;
-  --border: #59402f;
+  --background: #212737;
+  --foreground: #eaedf3;
+  --accent: #ff6b01;
+  --accent-foreground: #ffffff;
+  --muted: #343f60;
+  --muted-foreground: #afb9ca;
+  --border: #ab4b08;
 }

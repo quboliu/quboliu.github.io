@@ -9,7 +9,7 @@ const configured = Boolean(repoId && categoryId);
     <section class="mt-10" aria-labelledby="comments-title">
       <hr class="border-border mb-8 border-dashed" />
       <h2 id="comments-title" class="mb-6 text-xl font-semibold">
-        评论
+        Comments
       </h2>
       {configured ? (
         <script
@@ -25,15 +25,15 @@ const configured = Boolean(repoId && categoryId);
           data-emit-metadata="0"
           data-input-position="top"
           data-theme="preferred_color_scheme"
-          data-lang="zh-CN"
+          data-lang="en"
           data-loading="lazy"
           crossorigin="anonymous"
           async
         />
       ) : (
         <p class="border-border bg-muted/40 text-muted-foreground rounded-xl border p-4 text-sm">
-          开发提示：仓库启用 Discussions 并设置 Giscus 的两个公开环境变量后，
-          评论区会自动出现在这里。
+          Development note: enable GitHub Discussions and set both public Giscus
+          environment variables to show comments here.
         </p>
       )}
     </section>

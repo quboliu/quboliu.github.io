@@ -1,4 +1,5 @@
 ---
+import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import { resolveDefaultOgImagePath } from "@/utils/resolveDefaultOgImagePath";
 import { getAssetPath } from "@/utils/withBase";
@@ -40,6 +41,12 @@ const rssHref = getAssetPath("rss.xml");
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- Latin UI font with a Chinese-capable fallback stack. -->
+    <Font
+      cssVariable="--font-google-sans-code"
+      preload={[{ subset: "latin", weight: 400, style: "normal" }]}
+    />
+
     <!-- Primary meta -->
     <title>{title}</title>
     <meta name="title" content={title} />
@@ -49,7 +56,6 @@ const rssHref = getAssetPath("rss.xml");
 
     <!-- Open Graph -->
     <meta property="og:type" content={ogType} />
-    <meta property="og:locale" content="zh_CN" />
     <meta property="og:site_name" content={site.title} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -73,7 +79,7 @@ const rssHref = getAssetPath("rss.xml");
     />
 
     <!-- Filled at runtime by theme.ts to match the current background colour -->
-    <meta name="theme-color" content="#fffaf4" />
+    <meta name="theme-color" content="#fdfdfd" />
 
     <!-- Extra head content injected by child layouts (e.g. JSON-LD, article meta) -->
     <slot name="head" />

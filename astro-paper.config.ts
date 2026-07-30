@@ -3,18 +3,18 @@ import { defineAstroPaperConfig } from "./src/types/config";
 export default defineAstroPaperConfig({
   site: {
     url: "https://quboliu.github.io/",
-    title: "蘧伯流 · 🍊",
-    description: "写代码，也写相信的事。记录软件、工具与思考。",
-    author: "蘧伯流",
+    title: "AstroPaper",
+    description: "A minimal, responsive and SEO-friendly Astro blog theme.",
+    author: "quboliu",
     profile: "https://github.com/quboliu",
-    ogImage: "default-og.png",
-    lang: "zh-CN",
+    ogImage: "default-og.jpg",
+    lang: "en",
     timezone: "America/New_York",
     dir: "ltr",
   },
   posts: {
-    perPage: 6,
-    perIndex: 5,
+    perPage: 4,
+    perIndex: 4,
     scheduledPostMargin: 15 * 60 * 1000,
   },
   features: {
@@ -32,7 +32,7 @@ export default defineAstroPaperConfig({
     {
       name: "github",
       url: "https://github.com/quboliu",
-      linkTitle: "在 GitHub 上查看 quboliu",
+      linkTitle: "quboliu on GitHub",
     },
   ],
   shareLinks: [
@@ -40,7 +40,7 @@ export default defineAstroPaperConfig({
     { name: "telegram", url: "https://t.me/share/url?url=" },
     {
       name: "mail",
-      url: "mailto:?subject=%E5%88%86%E4%BA%AB%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0&body=",
+      url: "mailto:?subject=See%20this%20post&body=",
     },
   ],
 });

@@ -1,9 +1,10 @@
-# 蘧伯流的博客
+# AstroPaper Blog
 
 [![Deploy to GitHub Pages](https://github.com/quboliu/quboliu.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/quboliu/quboliu.github.io/actions/workflows/deploy.yml)
 
-基于 Astro、MDX 和 GitHub Pages 的个人博客，地址为
-[quboliu.github.io](https://quboliu.github.io/)。
+基于 AstroPaper、MDX 和 GitHub Pages 的博客，地址为
+[quboliu.github.io](https://quboliu.github.io/)。站点使用接近 AstroPaper
+官方演示站的英文界面，同时支持发布中文文章。
 
 ## 已包含
 
@@ -54,6 +55,7 @@ src/content/posts/
 
 ```yaml
 ---
+lang: "zh-CN"
 pubDatetime: 2026-07-30T12:00:00-04:00
 title: "文章标题"
 draft: false
@@ -131,12 +133,11 @@ YouTube：
 
 - 站点信息与社交链接：`astro-paper.config.ts`
 - 首页：`src/pages/index.astro`
-- 项目列表：`src/data/projects.ts`
-- 中文界面文案：`src/i18n/lang/zh-CN.ts`
+- 英文界面文案：`src/i18n/lang/en.ts`
 - 关于页正文：`src/content/pages/about.md`
 - 视频组件：`src/components/VideoEmbed.astro`
 - 评论组件：`src/components/Comments.astro`
-- 默认分享图：`public/default-og.png`
+- 默认分享图：`public/default-og.jpg`
 
 ## 致谢与许可
 

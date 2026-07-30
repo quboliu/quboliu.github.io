@@ -35,7 +35,7 @@ const watchUrl =
     ? `https://www.youtube.com/watch?v=${normalizedId}${normalizedStart ? `&t=${normalizedStart}s` : ""}`
     : `https://www.bilibili.com/video/${normalizedId}/?p=${normalizedPage}`;
 
-const providerLabel = provider === "youtube" ? "YouTube" : "哔哩哔哩";
+const providerLabel = provider === "youtube" ? "YouTube" : "Bilibili";
 ---
 
 <video-embed class="not-prose my-8 block">
@@ -56,7 +56,7 @@ const providerLabel = provider === "youtube" ? "YouTube" : "哔哩哔哩";
           />
         ) : (
           <div
-            class="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(255,138,76,0.38),transparent_34%),linear-gradient(135deg,var(--muted),var(--background))]"
+            class="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(0,108,172,0.3),transparent_34%),linear-gradient(135deg,var(--muted),var(--background))]"
             aria-hidden="true"
           />
         )
@@ -70,7 +70,7 @@ const providerLabel = provider === "youtube" ? "YouTube" : "哔哩哔哩";
         type="button"
         data-video-load
         class="focus-outline group relative flex flex-col items-center gap-3 rounded-2xl bg-black/65 px-6 py-4 text-white backdrop-blur-sm transition hover:scale-105 hover:bg-black/75"
-        aria-label={`播放视频：${title}`}
+        aria-label={`Play video: ${title}`}
       >
         <span
           class="bg-accent text-accent-foreground grid size-12 place-items-center rounded-full shadow-lg"
@@ -107,7 +107,7 @@ const providerLabel = provider === "youtube" ? "YouTube" : "哔哩哔哩";
       rel="noopener noreferrer"
       class="hover:text-accent underline decoration-dashed underline-offset-4"
     >
-      在原平台观看 ↗
+      Watch on {providerLabel} ↗
     </a>
   </div>
 </video-embed>

@@ -26,12 +26,14 @@ const { src, title, poster, captions, mimeType = "video/mp4" } = Astro.props;
           kind="captions"
           src={captions}
           srclang="zh"
-          label="中文字幕"
+          label="Chinese captions"
           default
         />
       )
     }
-    你的浏览器不支持 HTML 视频。<a href={src}>打开视频文件</a>。
+    Your browser does not support HTML video. <a href={src}
+      >Open the video file</a
+    >.
   </video>
   <figcaption class="text-muted-foreground mt-2 px-1 text-center text-sm">
     {title}
