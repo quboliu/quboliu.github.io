@@ -1,0 +1,144 @@
+---
+type Provider = "youtube" | "bilibili";
+
+type Props = {
+  provider: Provider;
+  id: string;
+  title: string;
+  page?: number;
+  start?: number;
+  poster?: string;
+};
+
+const { provider, id, title, page = 1, start = 0, poster } = Astro.props;
+
+const normalizedId = id.trim();
+const validId =
+  provider === "youtube"
+    ? /^[A-Za-z0-9_-]{6,20}$/.test(normalizedId)
+    : /^BV[A-Za-z0-9]{10,20}$/.test(normalizedId);
+
+if (!validId) {
+  throw new Error(`Invalid ${provider} video id: ${id}`);
+}
+
+const normalizedPage = Math.max(1, Math.floor(page));
+const normalizedStart = Math.max(0, Math.floor(start));
+
+const embedUrl =
+  provider === "youtube"
+    ? `https://www.youtube-nocookie.com/embed/${normalizedId}?rel=0&start=${normalizedStart}&autoplay=1`
+    : `https://player.bilibili.com/player.html?bvid=${normalizedId}&page=${normalizedPage}&high_quality=1&danmaku=0&autoplay=1`;
+
+const watchUrl =
+  provider === "youtube"
+    ? `https://www.youtube.com/watch?v=${normalizedId}${normalizedStart ? `&t=${normalizedStart}s` : ""}`
+    : `https://www.bilibili.com/video/${normalizedId}/?p=${normalizedPage}`;
+
+const providerLabel = provider === "youtube" ? "YouTube" : "哔哩哔哩";
+---
+
+<video-embed class="not-prose my-8 block">
+  <div
+    class="border-border bg-muted/30 relative aspect-video overflow-hidden rounded-2xl border"
+  >
+    <div
+      data-video-preview
+      class="absolute inset-0 flex items-center justify-center overflow-hidden"
+    >
+      {
+        poster ? (
+          <img
+            src={poster}
+            alt=""
+            loading="lazy"
+            class="absolute inset-0 size-full object-cover"
+          />
+        ) : (
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(255,138,76,0.38),transparent_34%),linear-gradient(135deg,var(--muted),var(--background))]"
+            aria-hidden="true"
+          />
+        )
+      }
+      <div
+        class="absolute inset-0 bg-linear-to-t from-black/45 via-black/5 to-transparent"
+        aria-hidden="true"
+      >
+      </div>
+      <button
+        type="button"
+        data-video-load
+        class="focus-outline group relative flex flex-col items-center gap-3 rounded-2xl bg-black/65 px-6 py-4 text-white backdrop-blur-sm transition hover:scale-105 hover:bg-black/75"
+        aria-label={`播放视频：${title}`}
+      >
+        <span
+          class="bg-accent text-accent-foreground grid size-12 place-items-center rounded-full shadow-lg"
+          aria-hidden="true"
+        >
+          <svg viewBox="0 0 24 24" class="ms-0.5 size-6 fill-current">
+            <path d="M8 5v14l11-7z"></path>
+          </svg>
+        </span>
+        <span class="max-w-sm text-center text-sm font-semibold">{title}</span>
+      </button>
+    </div>
+
+    <iframe
+      data-video-frame
+      data-src={embedUrl}
+      title={title}
+      class="absolute inset-0 size-full border-0"
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+      hidden
+    >
+    </iframe>
+  </div>
+  <div
+    class="text-muted-foreground mt-2 flex flex-wrap items-center justify-between gap-2 px-1 text-sm"
+  >
+    <span>{providerLabel} · {title}</span>
+    <a
+      href={watchUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:text-accent underline decoration-dashed underline-offset-4"
+    >
+      在原平台观看 ↗
+    </a>
+  </div>
+</video-embed>
+
+<script>
+  class DeferredVideoEmbed extends HTMLElement {
+    connectedCallback() {
+      if (this.dataset.ready === "true") return;
+      this.dataset.ready = "true";
+
+      const button = this.querySelector<HTMLButtonElement>("[data-video-load]");
+      const preview = this.querySelector<HTMLElement>("[data-video-preview]");
+      const frame = this.querySelector<HTMLIFrameElement>("[data-video-frame]");
+
+      button?.addEventListener(
+        "click",
+        () => {
+          const source = frame?.dataset.src;
+          if (!frame || !source) return;
+
+          frame.src = source;
+          frame.hidden = false;
+          if (preview) preview.hidden = true;
+          frame.focus();
+        },
+        { once: true }
+      );
+    }
+  }
+
+  if (!customElements.get("video-embed")) {
+    customElements.define("video-embed", DeferredVideoEmbed);
+  }
+</script>

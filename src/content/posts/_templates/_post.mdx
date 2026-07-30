@@ -1,0 +1,52 @@
+---
+pubDatetime: 2026-07-30T12:00:00-04:00
+title: "替换为文章标题"
+featured: false
+draft: true
+tags:
+  - 示例标签
+description: "用一句话概括文章内容。"
+---
+
+import VideoEmbed from "@/components/VideoEmbed.astro";
+import HostedVideo from "@/components/HostedVideo.astro";
+
+这里开始写正文。
+
+图片与文章放在同一目录：
+
+```md
+![图片说明](./image.png)
+```
+
+## 嵌入 YouTube
+
+```mdx
+<VideoEmbed
+  provider="youtube"
+  id="替换为视频 ID"
+  title="视频标题"
+/>
+```
+
+## 嵌入哔哩哔哩
+
+```mdx
+<VideoEmbed
+  provider="bilibili"
+  id="替换为 BV 号"
+  title="视频标题"
+  page={1}
+/>
+```
+
+## 播放外部 MP4
+
+```mdx
+<HostedVideo
+  src="https://media.example.com/video.mp4"
+  poster="/images/video-cover.webp"
+  title="视频标题"
+  captions="https://media.example.com/video.zh.vtt"
+/>
+```

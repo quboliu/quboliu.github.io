@@ -1,0 +1,194 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import IconRss from "@/assets/icons/IconRss.svg";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+import avatar from "@/assets/images/quboliu-avatar.png";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Socials from "@/components/Socials.astro";
+import Card from "@/components/Card.astro";
+import LinkButton from "@/components/LinkButton.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import { projects } from "@/data/projects";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+const { socials, posts: postsConfig } = config;
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+
+const posts = await getCollection("posts");
+const sortedPosts = getSortedPosts(posts);
+const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+const homePath = getRelativeLocaleUrl(locale, "");
+---
+
+<Layout>
+  <Header />
+  <main
+    id="main-content"
+    data-layout="index"
+    data-home-path={homePath}
+    class="app-layout"
+  >
+    <section
+      id="hero"
+      class="border-border grid items-center gap-8 border-b py-10 sm:grid-cols-[1fr_auto] sm:py-14"
+    >
+      <div>
+        <p class="text-accent mb-4 text-sm font-semibold tracking-[0.18em]">
+          BUILD · WRITE · THINK
+        </p>
+        <h1
+          class="max-w-xl text-4xl leading-tight font-bold tracking-tight sm:text-5xl"
+        >
+          你好，我是蘧伯流。
+        </h1>
+        <p class="mt-5 max-w-2xl text-lg leading-8">
+          写代码，也写相信的事。这里记录软件、工具，以及把想法做出来的过程。
+        </p>
+        <blockquote
+          class="border-accent text-muted-foreground mt-5 border-s-2 ps-4 italic"
+        >
+          “How you believe is how you live.”
+        </blockquote>
+
+        <div class="mt-7 flex flex-wrap items-center gap-3">
+          <LinkButton
+            href={getRelativeLocaleUrl(locale, "posts")}
+            class="bg-accent text-accent-foreground hover:text-accent-foreground rounded-full px-5 py-2.5 font-semibold transition hover:-translate-y-0.5"
+          >
+            开始阅读
+            <IconArrowRight class="inline-block" />
+          </LinkButton>
+          <LinkButton
+            href={getRelativeLocaleUrl(locale, "projects")}
+            class="border-border hover:border-accent rounded-full border px-5 py-2.5 font-semibold transition"
+          >
+            查看项目
+          </LinkButton>
+          <a
+            target="_blank"
+            href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`}
+            class="focus-outline hover:text-accent ms-1 inline-flex rounded-full p-2"
+            aria-label="订阅 RSS"
+            title="订阅 RSS"
+          >
+            <IconRss class="size-6 stroke-current stroke-2" />
+          </a>
+        </div>
+
+        {
+          socials.length > 0 && (
+            <div class="text-muted-foreground mt-6 flex items-center gap-2 text-sm">
+              <span>{t.home.socialLinks}</span>
+              <Socials />
+            </div>
+          )
+        }
+      </div>
+
+      <div class="mx-auto sm:mx-0">
+        <div
+          class="border-border bg-muted/40 relative size-40 overflow-hidden rounded-[2rem] border p-1 shadow-[8px_8px_0_var(--border)] sm:size-48"
+        >
+          <Image
+            src={avatar}
+            alt="蘧伯流的头像：海边橙色屋顶上的两只猫"
+            width={192}
+            height={192}
+            quality="mid"
+            class="size-full rounded-[1.7rem] object-cover"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="border-border border-b py-12">
+      <div class="mb-6 flex items-end justify-between gap-4">
+        <div>
+          <p class="text-accent mb-2 text-xs font-semibold tracking-[0.16em]">
+            OPEN SOURCE
+          </p>
+          <h2 class="text-2xl font-semibold tracking-wide">最近在做</h2>
+        </div>
+        <LinkButton
+          href={getRelativeLocaleUrl(locale, "projects")}
+          class="text-muted-foreground text-sm"
+        >
+          全部项目
+          <IconArrowRight class="inline-block" />
+        </LinkButton>
+      </div>
+      <ul class="grid gap-4 md:grid-cols-3">
+        {
+          projects
+            .filter(project => project.featured)
+            .slice(0, 3)
+            .map((project, index) => <ProjectCard {project} {index} />)
+        }
+      </ul>
+    </section>
+
+    {
+      featuredPosts.length > 0 && (
+        <section
+          id="featured"
+          class:list={[
+            "pt-12 pb-6",
+            { "border-border border-b": recentPosts.length > 0 },
+          ]}
+        >
+          <h2 class="text-2xl font-semibold tracking-wide">
+            {t.home.featured}
+          </h2>
+          <ul>
+            {featuredPosts.map(data => (
+              <Card variant="h3" {...data} />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      recentPosts.length > 0 && (
+        <section id="recent-posts" class="pt-12 pb-6">
+          <h2 class="text-2xl font-semibold tracking-wide">
+            {t.home.recentPosts}
+          </h2>
+          <ul>
+            {recentPosts.slice(0, postsConfig.perIndex).map(data => (
+              <Card variant="h3" {...data} />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <div class="my-8 text-center">
+      <LinkButton href={getRelativeLocaleUrl(locale, "posts")}>
+        {t.home.allPosts}
+        <IconArrowRight class="inline-block rtl:-rotate-180" />
+      </LinkButton>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
+      ?.dataset;
+    const baseRoot = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+    if (indexLayout?.layout) {
+      sessionStorage.setItem("backUrl", indexLayout.homePath ?? baseRoot);
+    }
+  });
+</script>

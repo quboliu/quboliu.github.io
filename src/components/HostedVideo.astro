@@ -1,0 +1,39 @@
+---
+type Props = {
+  src: string;
+  title: string;
+  poster?: string;
+  captions?: string;
+  mimeType?: string;
+};
+
+const { src, title, poster, captions, mimeType = "video/mp4" } = Astro.props;
+---
+
+<figure class="not-prose my-8">
+  <video
+    controls
+    playsinline
+    preload="metadata"
+    poster={poster}
+    class="border-border bg-muted/30 aspect-video w-full rounded-2xl border"
+    aria-label={title}
+  >
+    <source {src} type={mimeType} />
+    {
+      captions && (
+        <track
+          kind="captions"
+          src={captions}
+          srclang="zh"
+          label="中文字幕"
+          default
+        />
+      )
+    }
+    你的浏览器不支持 HTML 视频。<a href={src}>打开视频文件</a>。
+  </video>
+  <figcaption class="text-muted-foreground mt-2 px-1 text-center text-sm">
+    {title}
+  </figcaption>
+</figure>

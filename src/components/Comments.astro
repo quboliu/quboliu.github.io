@@ -1,0 +1,41 @@
+---
+const repoId = import.meta.env.PUBLIC_GISCUS_REPO_ID;
+const categoryId = import.meta.env.PUBLIC_GISCUS_CATEGORY_ID;
+const configured = Boolean(repoId && categoryId);
+---
+
+{
+  (configured || import.meta.env.DEV) && (
+    <section class="mt-10" aria-labelledby="comments-title">
+      <hr class="border-border mb-8 border-dashed" />
+      <h2 id="comments-title" class="mb-6 text-xl font-semibold">
+        评论
+      </h2>
+      {configured ? (
+        <script
+          is:inline
+          src="https://giscus.app/client.js"
+          data-repo="quboliu/quboliu.github.io"
+          data-repo-id={repoId}
+          data-category="Announcements"
+          data-category-id={categoryId}
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="zh-CN"
+          data-loading="lazy"
+          crossorigin="anonymous"
+          async
+        />
+      ) : (
+        <p class="border-border bg-muted/40 text-muted-foreground rounded-xl border p-4 text-sm">
+          开发提示：仓库启用 Discussions 并设置 Giscus 的两个公开环境变量后，
+          评论区会自动出现在这里。
+        </p>
+      )}
+    </section>
+  )
+}
