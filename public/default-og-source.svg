@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">quboliu</title>
+  <desc id="desc">Notes on software, tools, and ideas.</desc>
+
+  <rect width="1200" height="630" fill="#fdfdfd"/>
+  <rect x="108" y="76" width="984" height="478" rx="4" fill="#fff" stroke="#ece9e9" stroke-width="3"/>
+
+  <text x="164" y="150" fill="#282728" font-family="Google Sans Code, Noto Sans Mono CJK SC, monospace" font-size="38" font-weight="700">quboliu</text>
+  <text x="852" y="150" fill="#282728" font-family="Google Sans Code, Noto Sans Mono CJK SC, monospace" font-size="22">POSTS</text>
+  <text x="958" y="150" fill="#282728" font-family="Google Sans Code, Noto Sans Mono CJK SC, monospace" font-size="22">TAGS</text>
+  <line x1="164" y1="180" x2="1036" y2="180" stroke="#ece9e9" stroke-width="3"/>
+
+  <text x="164" y="310" fill="#282728" font-family="Google Sans Code, Noto Sans Mono CJK SC, monospace" font-size="88" font-weight="700">Hello.</text>
+  <path d="M455 281a46 46 0 0 1 46 46M455 299a28 28 0 0 1 28 28M456 325h1" fill="none" stroke="#006cac" stroke-width="8" stroke-linecap="round"/>
+
+  <text x="164" y="382" fill="#282728" font-family="Google Sans Code, Noto Sans Mono CJK SC, monospace" font-size="28">Notes on software, tools, and ideas.</text>
+  <text x="164" y="430" fill="#6b7280" font-family="Google Sans Code, Noto Sans Mono CJK SC, monospace" font-size="24">English interface · Chinese writing</text>
+
+  <line x1="164" y1="478" x2="1036" y2="478" stroke="#ece9e9" stroke-width="3"/>
+  <circle cx="174" cy="518" r="7" fill="#006cac"/>
+  <text x="194" y="527" fill="#6b7280" font-family="Google Sans Code, Noto Sans Mono CJK SC, monospace" font-size="20">quboliu.github.io</text>
+</svg>

@@ -3,7 +3,7 @@ title: "About"
 description: "About this site and how it is built."
 ---
 
-This is a minimal publishing space built with [Astro](https://astro.build/), [AstroPaper](https://github.com/satnaing/astro-paper), and GitHub Pages.
+This is quboliu's minimal publishing space, built with [Astro](https://astro.build/), [AstroPaper](https://github.com/satnaing/astro-paper), and GitHub Pages.
 
 The interface stays intentionally simple and in English, while articles may be written in Chinese.
 

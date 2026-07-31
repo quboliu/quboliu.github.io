@@ -3,8 +3,9 @@ import { defineAstroPaperConfig } from "./src/types/config";
 export default defineAstroPaperConfig({
   site: {
     url: "https://quboliu.github.io/",
-    title: "AstroPaper",
-    description: "A minimal, responsive and SEO-friendly Astro blog theme.",
+    title: "quboliu",
+    description:
+      "Notes on software, tools, and ideas, mostly written in Chinese.",
     author: "quboliu",
     profile: "https://github.com/quboliu",
     ogImage: "default-og.jpg",

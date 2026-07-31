@@ -1,4 +1,4 @@
-# AstroPaper Blog
+# quboliu.github.io
 
 [![Deploy to GitHub Pages](https://github.com/quboliu/quboliu.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/quboliu/quboliu.github.io/actions/workflows/deploy.yml)
 
