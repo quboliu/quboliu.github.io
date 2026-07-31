@@ -1,10 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 128 128">
-  <circle cx="59" cy="57" r="38" stroke-width="12"/>
-  <path d="M82 80l25 26" stroke-width="12" stroke-linecap="round"/>
-  <style>
-    circle, path { stroke: #000; }
-    @media (prefers-color-scheme: dark) {
-      circle, path { stroke: #fff; }
-    }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <text
+    x="50"
+    y="82"
+    text-anchor="middle"
+    font-family="Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif"
+    font-size="84"
+  >🍊</text>
 </svg>

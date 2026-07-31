@@ -3,8 +3,7 @@
 [![Deploy to GitHub Pages](https://github.com/quboliu/quboliu.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/quboliu/quboliu.github.io/actions/workflows/deploy.yml)
 
 基于 AstroPaper、MDX 和 GitHub Pages 的博客，地址为
-[quboliu.github.io](https://quboliu.github.io/)。站点使用接近 AstroPaper
-官方演示站的英文界面，同时支持发布中文文章。
+[quboliu.github.io](https://quboliu.github.io/)。
 
 ## 已包含
 

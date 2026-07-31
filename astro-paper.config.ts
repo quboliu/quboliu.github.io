@@ -4,8 +4,7 @@ export default defineAstroPaperConfig({
   site: {
     url: "https://quboliu.github.io/",
     title: "quboliu",
-    description:
-      "Notes on software, tools, and ideas, mostly written in Chinese.",
+    description: "Notes on software, tools, and ideas.",
     author: "quboliu",
     profile: "https://github.com/quboliu",
     ogImage: "default-og.jpg",
@@ -34,6 +33,11 @@ export default defineAstroPaperConfig({
       name: "github",
       url: "https://github.com/quboliu",
       linkTitle: "quboliu on GitHub",
+    },
+    {
+      name: "link",
+      url: "https://jvzi.notion.site/",
+      linkTitle: "Orange Garden on Notion",
     },
   ],
   shareLinks: [
