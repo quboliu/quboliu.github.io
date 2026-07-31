@@ -7,12 +7,10 @@ title: "Piclist+缤纷云=个人图床"
 featured: false
 draft: false
 tags: []
-description: "创建完成后进入访问管理。"
+description: "使用缤纷云对象存储和 PicList 搭建个人图床，并将图片嵌入博客文章。"
 ---
 
-# 缤纷云+Piclist
-
-#### 一. 在缤纷云创建桶
+## 一. 在缤纷云创建桶
 
 ![image-20240730141430-vrwweuf.png](./image-20240730141430-vrwweuf.png)
 
@@ -29,7 +27,7 @@ description: "创建完成后进入访问管理。"
   - 这个应该是比较必要，白名单里面配置的是自己的博客的地址。  
     ![image-20240730141946-x0jrrch.png](./image-20240730141946-x0jrrch.png)
 
-#### 二. 配置Piclist的npm镜像源并安装Amazon S3插件并配置
+## 二. 配置 PicList 的 npm 镜像源并安装 Amazon S3 插件
 
 1.  下载地址：<a href="https://piclist.cn/" rel="noopener" target="_blank">PicList</a>。
 2.  设置npm镜像  
@@ -49,21 +47,21 @@ description: "创建完成后进入访问管理。"
 6.  确定  
     ![image-20240730143255-l5obts1.png](./image-20240730143255-l5obts1.png)
 
-#### 三. 上传图片
+## 三. 上传图片
 
 ![image-20240730143320-x08l76l.png](./image-20240730143320-x08l76l.png)  
 ![image-20240730143337-fcldbh3.png](./image-20240730143337-fcldbh3.png)  
 ![image-20240730143429-9z5fsx8.png](./image-20240730143429-9z5fsx8.png)
 
-#### 四. 贴到博客里面
+## 四. 嵌入博客文章
 
 ![image-20240730143639-0va95qe.png](./image-20240730143639-0va95qe.png)  
-`"![](https://4blog.s3.bitiful.net/test.drawio.svg)"`
+`"![draw.io 测试图](https://4blog.s3.bitiful.net/test.drawio.svg)"`
 
 下面就是呈现：  
-![](./test.drawio.svg)
+![draw.io 测试图](./test.drawio.svg)
 
-#### 附录: 参考连接
+## 参考链接
 
 1.  <a href="https://www.yvii.cn/archives/2014.html" rel="noopener" target="_blank">https://www.yvii.cn/archives/2014.html</a>
 2.  <a href="https://piclist.cn/manage#s3s" rel="noopener" target="_blank">https://piclist.cn/manage#s3s</a>

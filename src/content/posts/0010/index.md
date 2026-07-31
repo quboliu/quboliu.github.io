@@ -7,10 +7,10 @@ title: "win11下hexo+github+vscode+piclist+缤纷云搭建博客工作流"
 featured: false
 draft: false
 tags: []
-description: "这个的前置步骤是这个： Piclist+缤纷云=个人图床 使得Piclist软件可用。"
+description: "记录 Windows 11 下使用 Hexo、GitHub、VS Code、PicList 与缤纷云组织博客写作和图片上传的工作流。"
 ---
 
-### 〇. 前置步骤
+## 〇. 前置步骤
 
 这个的前置步骤是这个：[Piclist+缤纷云=个人图床](/posts/0009/ "Piclist+缤纷云=个人图床")  
 使得Piclist软件可用。
@@ -24,13 +24,13 @@ description: "这个的前置步骤是这个： Piclist+缤纷云=个人图床 �
   也没啥问题。
 - 同样的，npm不要忘了配置淘宝镜像。最新版的那个，不要老的。
 
-### 一. 一般配置
+## 一. 一般配置
 
-##### 下载
+### 下载
 
 ![image-20240730152910-i2fxp8q.png](./image-20240730152910-i2fxp8q.png)
 
-#### 配置vs-PicList
+### 配置 vs-piclist
 
 ![image-20240730152946-d8s4ttt.png](./image-20240730152946-d8s4ttt.png)
 
@@ -40,13 +40,13 @@ description: "这个的前置步骤是这个： Piclist+缤纷云=个人图床 �
 
 ![image-20240730153120-bdm9ry4.png](./image-20240730153120-bdm9ry4.png)
 
-#### vs-piclist命令
+### vs-piclist 命令
 
 `F1`或者`Ctrl + Shift + P`，主要是下面7个命令：
 
 ![image-20240730153426-ak4v1do.png](./image-20240730153426-ak4v1do.png)
 
-###### PicList: Upload all images in the file
+#### PicList: Upload all images in the file
 
 这个命令很有价值，最佳实践就是：
 
@@ -58,7 +58,7 @@ description: "这个的前置步骤是这个： Piclist+缤纷云=个人图床 �
 
 - 然后把markdown中的图片URL都替换成图床中的。
 
-###### Upload from explorer
+#### Upload from explorer
 
 - 就是很基础从文件夹中选图片上传。
 
@@ -66,33 +66,33 @@ description: "这个的前置步骤是这个： Piclist+缤纷云=个人图床 �
 
 - 这个功能不太适合流程化操作，适合用于“修修补补”。
 
-###### PicList：Upload from input path or url
+#### PicList: Upload from input path or URL
 
 - 没怎么使用，估计如其描述所述吧。
 
-###### PicList：Open PicList image database
+#### PicList: Open PicList image database
 
 - 没怎么使用，不太清楚。
 
-###### PicList：Upload Image by PicList
+#### PicList: Upload Image by PicList
 
 - 不清楚
 
-###### PicList: Delte Image by PicList
+#### PicList: Delete Image by PicList
 
 - 还没用
 
-###### PicList：Upload from clipboard
+#### PicList: Upload from clipboard
 
 - 还没用
 
-###### 注意：
+#### 注意
 
 还有几个好用的功能没有用到，但是作者在README中有gif的展示。
 
 不要忘了时刻学习。
 
-### 二. SiYuan笔记+VScode实践
+## 二. SiYuan 笔记 + VS Code 实践
 
 这个主要是起一个草稿+发布的搭配。当然了，SiYuan笔记还可以起到一个备份的作用。
 
@@ -116,7 +116,7 @@ description: "这个的前置步骤是这个： Piclist+缤纷云=个人图床 �
 >   - 然后F1——\>PicList: Upload all images in the file  
 >     就可以进行文档中图片的上传和URL替换。
 
-### 三. drawio+vscode实践
+## 三. draw.io + VS Code 实践
 
 - 上面的SiYuan操作主要是由于普通的截图+贴图然后可以先很顺畅的完成整个文章的撰写，然后再利用vs-piclist统一的上传转换，这个感受上是比较完整和顺的，不会太碎。
 
@@ -140,7 +140,7 @@ description: "这个的前置步骤是这个： Piclist+缤纷云=个人图床 �
 
 上面这个流程的问题是，在SiYuan本地中没有备份了。但是也可以用SiYuan的导入功能，也还好其实。
 
-### 四. 关于vs-piclist插件
+## 四. 关于 vs-piclist 插件
 
 - 这个插件的演示gif里面有很好的功能，但是好像总是报错。等后续搞明白了再补充吧。
 

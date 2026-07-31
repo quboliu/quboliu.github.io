@@ -7,7 +7,7 @@ title: "从Linux底层看协程的切换"
 featured: false
 draft: false
 tags: []
-description: "参考文献 https://zhuanlan.zhihu.com/p/619176666?utm_id=0"
+description: "收集从 Linux 底层理解协程切换机制的参考资料。"
 ---
 
 ## 参考文献

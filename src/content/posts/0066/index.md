@@ -7,10 +7,8 @@ title: "postgresql系列之编译安装-步骤拆解"
 featured: false
 draft: false
 tags: []
-description: "说明："
+description: "从源码下载、依赖安装、编译配置到 initdb 与 systemd 服务，拆解 PostgreSQL 16.1 的编译安装流程。"
 ---
-
-# postgresql系列之编译安装-步骤拆解
 
 - 基本按照这个步骤来的：<a href="https://blog.frognew.com/2021/11/postgresql-get-started.html" rel="noopener" target="_blank">https://blog.frognew.com/2021/11/postgresql-get-started.html</a>
 - 本文目的不仅仅在于普通的安装，而更加侧重于“是什么”，“为什么”。
@@ -18,9 +16,9 @@ description: "说明："
 
 ---
 
-### 正式步骤
+## 安装步骤
 
-#### 一. 下载源码包并解压
+### 一. 下载源码包并解压
 
 ```shell
 curl -O -k https://ftp.postgresql.org/pub/source/v16.1/postgresql-16.1.tar.gz
@@ -34,7 +32,7 @@ tar -zxvf postgresql-16.1.tar.gz
 
 下载解压没有什么好说的。curl和tar的用法自己去看。
 
-#### 二. 安装编译工具及相关依赖
+### 二. 安装编译工具及相关依赖
 
 ```shell
 sudo apt install make gcc bison g++ libreadline-dev \
@@ -87,7 +85,7 @@ RedHat系相关的命令是：
 sudo yum install -y make gcc bison gcc-c++ readline readline-devel zlib zlib-devel systemd-devel libicu-devel
 ```
 
-#### 三. 在服务器上额外创建postgres用户
+### 三. 在服务器上额外创建 postgres 用户
 
 ```shell
 useradd -m postgres
@@ -113,7 +111,7 @@ chown -R postgres:postgres /home/postgres
   - 配置文件：可能存储一些自定义的配置文件。
   - 临时文件：在数据库初始化过程中可能用到的临时文件。
 
-#### 四. 编译安装PostgreSQL
+### 四. 编译安装 PostgreSQL
 
 ```shell
 cd postgresql-16.1
@@ -167,7 +165,7 @@ sudo make install
 
 - 指定数据目录的位置。注意,这通常用于指定实际的数据存储位置,而不是初始化脚本目录。
 
-#### 五. 初始化数据库设置
+### 五. 初始化数据库
 
 首先切换到`postgres`用户中：
 
@@ -264,7 +262,7 @@ systemctl status postgresql
     > - 数据目录应该是空的，或者不存在（命令会创建它）。
     > - 这个命令只需要在首次设置PostgreSQL时运行一次。之后的日常操作不需要重复执行这个命令。
 
-#### 六. 生成简易一键安装脚本
+### 六. 生成简易一键安装脚本
 
 就是简单的组合一下，倒也没什么用处，主要是为了便于我看。主要是有助于一目了然。
 
@@ -335,7 +333,7 @@ systemctl status postgresql
 3. 请你在标准输出和日志中记录，说明每一步都在做什么。4. 增强整体脚本的健壮性。
 ```
 
-###### DeepSeek的原结果
+#### DeepSeek 的原结果
 
 ```shell
 #!/bin/bash
@@ -421,7 +419,7 @@ sudo systemctl status postgresql || handle_error "检查服务状态失败"
 log_info "PostgreSQL 16.1 安装完成"
 ```
 
-###### ChatGPT的原结果：
+#### ChatGPT 的原结果
 
 ```shell
 #!/bin/bash
@@ -534,13 +532,13 @@ echo "PostgreSQL 16.1 安装和配置完成"
 代码待写...TODO
 ```
 
-### 参考文献
+## 参考文献
 
 1.  <a href="https://blog.frognew.com/2023/11/install-postgresql-16-from-source-code.html" rel="noopener" target="_blank">https://blog.frognew.com/2023/11/install-postgresql-16-from-source-code.html</a>
 
-### 附录
+## 附录
 
-##### 1. libicu缺失的问题
+### 1. libicu 缺失的问题
 
 AGS_SL_MODULE… yes  
 checking whether the C compiler still works… yes  
@@ -614,9 +612,7 @@ sudo apt install libicu70
     >
     >     /usr/local/pgsql/bin/pg_ctl -D /home/postgres/data -l logfile start
 
-4.
-
-##### 2. postgres账户下的两个目录的作用，联系和区别
+### 2. postgres 账户下两个目录的作用、联系和区别
 
 ```txt
 /usr/local/pgsql/bin/initdb -D /home/postgres/data 中的路径和./configure --with-pgport=5432 --prefix=/usr/local/pgsql --with-systemd --with-segsize=16 --with-blocksize=8 --with-wal-blocksize=8 --datadir=/home/postgres/init中的datadir的区别和联系是什么
@@ -655,7 +651,7 @@ sudo apt install libicu70
 >
 > ———————————————————————————来自Claude
 
-##### 3. /etc/systemd/system/postgresql.service文件说明
+### 3. /etc/systemd/system/postgresql.service 文件说明
 
 > 这个文件是一个systemd服务单元配置文件，用于管理PostgreSQL数据库服务。让我逐行解释：
 >

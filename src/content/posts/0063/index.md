@@ -7,7 +7,7 @@ title: "阅读归纳-Go领域那些年我们一起追过的大佬"
 featured: false
 draft: false
 tags: []
-description: "本博客源自于 https://www.cnblogs.com/qcrao-2018/p/14490148.html 的笔记，意学习一些大佬。后来个人在互联网游荡的时候，还是能看到不少“高人”的，于是动念头，搜集这些人。主要是看看他们的博客，Github，能加上微信自然是最好了。如果后面内容做的多了，或许可以归纳一…"
+description: "整理 Go 领域开发者、博客、书籍与项目资源，作为持续补充的学习索引。"
 ---
 
 ## 人物基本信息
@@ -74,7 +74,7 @@ Github：<a href="https://github.com/changkun" rel="noopener" target="_blank">ch
 <td style="text-align: center;">曹大</td>
 <td>1. Go</td>
 <td>书籍：《Go 语言高级编程》<br />
-博客：<a href="xargin.com">xargin.com</a></td>
+博客：<a href="https://xargin.com/" rel="noopener" target="_blank">xargin.com</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Stefno</td>
@@ -167,54 +167,6 @@ Blog: <a href="https://huanglianjing.com/" rel="noopener" target="_blank">https:
 <td>书籍：<a href="https://pegasuswang.readthedocs.io/zh/latest/golang/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" rel="noopener" target="_blank">《Go学习笔记源码剖析》</a><br />
 GitHub: <a href="https://github.com/pegasuswang" rel="noopener" target="_blank">https://github.com/pegasuswang</a><br />
 邮件：<a href="mailto:291374108@qq.com">291374108@qq.com</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td></td>
-<td></td>
 </tr>
 </tbody>
 </table>

@@ -9,10 +9,8 @@ draft: false
 tags:
   - "基础架构研发"
   - "Kubernetes"
-description: "可以参考这一篇: https://www.bmpi.dev/dev/guide-to-k8s-cloud-native/"
+description: "收集 Kubernetes 集群搭建与应用部署演练的参考资料。"
 ---
-
-## k8s部署搭建
 
 ## 应用开发部署
 

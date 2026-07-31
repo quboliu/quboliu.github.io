@@ -7,7 +7,7 @@ title: "进程、线程、协程————并发与通信"
 featured: false
 draft: false
 tags: []
-description: "参考文献 https://www.v2ex.com/t/791169 https://v2ex.com/t/855790 https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/concurrency-model/"
+description: "收集进程、线程与协程的并发和通信模型相关参考资料。"
 ---
 
 ## 参考文献

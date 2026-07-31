@@ -7,7 +7,7 @@ title: "从Go源代码看goroutine的切换"
 featured: false
 draft: false
 tags: []
-description: "CPU的指令包括特权级指令和非特权级指令。"
+description: "从 Go 运行时角度理解 goroutine 切换时的寄存器保存，以及为何无需切换到内核态。"
 ---
 
 - CPU的指令包括特权级指令和非特权级指令。

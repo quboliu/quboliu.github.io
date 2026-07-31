@@ -7,7 +7,7 @@ title: "进程和作业控制梳理-理解容器进程的基础"
 featured: false
 draft: false
 tags: []
-description: "思路："
+description: "整理 Linux 进程与作业控制相关资料，为理解容器进程打下基础。"
 ---
 
 思路：

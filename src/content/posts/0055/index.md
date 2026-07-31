@@ -3,11 +3,11 @@ lang: "zh-CN"
 pubDatetime: 2024-08-14T23:52:07+08:00
 modDatetime: 2024-08-14T23:58:13+08:00
 timezone: "Asia/Shanghai"
-title: "Go语言Github官网的一张图"
+title: "Go 语言 GitHub 官网的一张图"
 featured: false
 draft: false
 tags: []
-description: "图源: Go语言Github官方仓库"
+description: "摘录 Go 官方 GitHub 仓库中的 Gopher 图片。"
 ---
 
 Go语言工程师就算是五一也要工作：

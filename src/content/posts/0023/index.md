@@ -7,7 +7,7 @@ title: "bash和tty的关系"
 featured: false
 draft: false
 tags: []
-description: "https://waynerv.com/posts/how-tty-system-works/"
+description: "从本地终端与远程 SSH 两个场景，梳理 TTY、PTY、Shell 和命令执行之间的关系。"
 ---
 
 <a href="https://waynerv.com/posts/how-tty-system-works/" rel="noopener" target="_blank">https://waynerv.com/posts/how-tty-system-works/</a>
@@ -91,7 +91,7 @@ description: "https://waynerv.com/posts/how-tty-system-works/"
 - **动作**：Shell 使用 `fork()` 创建一个新子进程，并在该子进程中执行 `ls` 命令。
 - **系统反应**：
   - **子进程创建**：Shell 通过 `fork()` 创建一个新进程，这个新进程是 Shell 的子进程。它继承了父进程（Shell）的环境变量和文件描述符，包括伪终端从设备的文件描述符。
-  - \*\*执行 `ls`\*\*：在子进程中，Shell 使用 `exec()` 系列系统调用，将子进程的进程映像替换为 `ls` 命令的二进制代码。
+  - **执行 `ls`**：在子进程中，Shell 使用 `exec()` 系列系统调用，将子进程的进程映像替换为 `ls` 命令的二进制代码。
 
 ### 5. **显示命令输出**
 

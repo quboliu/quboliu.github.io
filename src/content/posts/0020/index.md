@@ -8,16 +8,16 @@ featured: false
 draft: false
 tags:
   - "计算机网络"
-description: "安装: sudo apt install nmap"
+description: "使用 nmap 扫描局域网网段中的可用 IP，为虚拟机选择静态地址。"
 ---
 
-#### 场景
+## 场景
 
 - 一个网段aaa.bbb.ccc.xxx中，搜索其中可用的没有被其他主机占用的ip用以配置虚拟机的ip。
 - 其中，网关是aaa.bbb.ccc.1。
 - 子网掩码是255.255.255.0。
 
-#### nmap工具
+## nmap 工具
 
 - 安装: sudo apt install nmap
 

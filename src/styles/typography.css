@@ -31,8 +31,10 @@
       @apply text-foreground hover:text-accent wrap-break-word decoration-dashed underline-offset-4 focus-visible:no-underline;
     }
 
+    ol,
     ul {
       @apply overflow-x-clip;
+      overflow-wrap: anywhere;
     }
 
     li {
@@ -60,9 +62,11 @@
     }
 
     table {
+      @apply block max-w-full overflow-x-auto;
+
       th,
       td {
-        @apply border-border border p-2;
+        @apply border-border min-w-28 border p-2;
       }
 
       th {

@@ -16,30 +16,8 @@ description: "贵在坚持，希望能坚持，必能坚持。"
 
 ![image.png](./image.png)
 
-### 关于Tag
-
-Tag主要分为如下几类:
-
-##### xxxx
-
-##### xxxx
-
-##### xxxx
-
-### 关于Categories
-
-Categories主要分为如下几类:
-
-#### xxxx
-
-#### xxxx
-
-#### xxxx
-
-### 用过的正则
+## 常用正则
 
 ```shell
 MAC Address: [0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}
 ```
-
-### 用过的shell脚本

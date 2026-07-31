@@ -7,25 +7,17 @@ title: "gotest和go test的使用"
 featured: false
 draft: false
 tags: []
-description: "来自通义千问的说法"
+description: "梳理 gotest 与 go test 的基本概念，并记录后续用法和实践的整理方向。"
 ---
 
-#### 什么是gotest
+## 什么是 gotest
 
 1.  来自通义千问的说法
 
 2.  来自gotest官方文档的说法
 
-#### 什么是go test
+## 什么是 go test
 
 1.  来自通义千问的说法
 
 2.  来自go官方文档的说法
-
-#### gotest用法一览
-
-#### go test用法一览
-
-#### 实践一: 待测文件和测试代码在同目录
-
-#### 实践二: 待测文件和测试代码不在同目录

@@ -7,17 +7,17 @@ title: "全文翻译 The Native POSIX Thread Library for Linux"
 featured: false
 draft: false
 tags: []
-description: "The Linux Threads library which is currently part of the standard runtime environment of a Linux system does a poor job of satisfying the demand for POSIX co…"
+description: "整理 Linux 原生 POSIX 线程库（NPTL）论文，涵盖设计背景、实现选择、性能结果与遗留挑战。"
 ---
 
-### Abstract
+## Abstract
 
 The Linux Threads library which is currently part of the standard runtime  
 environment of a Linux system does a poor job of satisfying the demand for  
 POSIX compliant threading used in modern systems. It is not designed to  
 leverage the Linux kernel extensions present and in development today, it does not scale efficiently, and it does not take modern processor architectures into account. A completely new design is necessary and this paper will outline the design and implementation.
 
-### Table of Contents
+## Table of Contents
 
 The Initial Implementation 3  
 Improvements Over Time 3  
@@ -36,7 +36,7 @@ Thread Creation and Destruction Timing 16
 Contention Handling 17  
 Remaining Challenges 17
 
-### The Initial Implementation
+## The Initial Implementation
 
 The Linux Threads implementation, which is currently the standard POSIX  
 thread library for Linux, is based on the principles outlined by the kernel  
@@ -50,7 +50,7 @@ Perhaps the biggest problem was the absence of usable synchronization
 primitives in the kernel which forced the implementation to resort to using  
 signals. The absence of a concept for thread groups in the kernel versions of the time led to non-compliant and fragile signal handling in the thread library.
 
-### Improvements Over Time
+## Improvements Over Time
 
 The code of the thread library was significantly improved in the six years  
 following its creation. The improvements came in two principal areas: the ABI and the kernel.
@@ -76,7 +76,7 @@ The changes made in the development of the kernel up to version 2.4 consisted of
 
 Unfortunately, the manager thread still could not be eliminated completely for a number of reasons. One reason is that the stack memory deallocation could not be performed by the thread which uses the memory itself. A second reason is that terminated threads must be waited on in order to avoid zombie kernel threads. Since these and numerous other problems were not yet solved, there was limited incentive to rewrite the thread library to take advantage of the new features which became available.
 
-### Problems with the Existing Implementation
+## Problems with the Existing Implementation
 
 The existing Linux Threads implementation has been found to perform  
 reasonably well in many applications;nevertheless, it has numerous problems, especially when operated in extreme circumstances:
@@ -100,57 +100,57 @@ reasonably well in many applications;nevertheless, it has numerous problems, esp
 - The misuse of signals to implement synchronization primitives adds even  
   more to the problems. Delivering signals is a very heavy-handed approach to ensure synchronization.
 
-### Goals For A New Implementation
+## Goals For A New Implementation
 
 Trying to incrementally fix the existing implementation would not have been efficient. The whole design is centered around limitations of 1996-era Linux kernel technology. A complete rewrite taking into account modern kernel features was necessary. The goal was to be ABI compatible with Linux Threads,which is not an unobtainable goal thanks to the way the old thread
 
 API was designed. Still it was necessary to reevaluate every design decision made. Making the right decisions meant knowing the requirements of the implementation. The requirements which were collected include:
 
-###### POSIX compliance
+### POSIX compliance
 
 Compliance with the latest POSIX standard is the highest goal to achieve source code compatibility with other platforms. This does not mean that extensions beyond the POSIX specification are not added, but rather that POSIX compliance must take precedence.
 
-###### Effective use of SMP
+### Effective use of SMP
 
 One of the main goals of using threads is to provide means to use thecapabilities of multi-processor systems. Splitting the work in as many parts as there are CPUs can ideally provide linear speedups.
 
-###### Low startup cost
+### Low startup cost
 
 Creating new threads should have very low associated costs so that it’s possible to create threads even for small pieces of work.
 
-###### Low link-in cost
+### Low link-in cost
 
 Programs linked with the thread library (directly or in-directly) but not using threads should be minimally affected.
 
-###### Binary compatibility
+### Binary compatibility
 
 The new library should be maximally binary compatible with the Linux Threads implementation. Some semantic differences are unavoidable as the LinuxThreads implementation is not POSIX compliant; the non-compliant functionality necessarily must change.
 
-###### Hardware Scalability
+### Hardware Scalability
 
 The thread implementation should run sufficiently well on large numbers of processors. The administrative costs should not rise much with increasing numbers of processors.
 
-###### Software Scalability
+### Software Scalability
 
 Another use of threads is to solve sub-problems of the user application in separate execution contexts. In Java environments threads are used toimplement the programming environment due to missing asynchronousoperations. The result is the same: enormous amounts of threads can be created. The new implementation should ideally have no fixed limits on the number of threads or any other object.
 
-###### Machine Architecture Support
+### Machine Architecture Support
 
 Designs for mainframe machines have always been more complicated thanthose for consumer and mainstream machines. Efficient support for thesemachines requires the kernel and user-level code close to the OS to knowdetails about the machine’s architecture. For instance, processors in thesemachines are often divided into separate nodes, and using resources on other nodes is more expensive.
 
-###### NUMA Support
+### NUMA Support
 
 One special class of future machines of interest are based on non-uniformmemory architectures (NUMA). Code like the thread library should be designed with this in mind to leverage the benefits of NUMA when using threads on such machines. For these systems the design of data structures is critical.
 
-###### Integration With C++
+### Integration With C++
 
 C++ defines exception handling, which deals automatically with the cleanup of objects in the scopes left when throwing an exception. Cancellation of a thread is similar to this, and it is reasonable to expect that cancellation also calls the necessary object destructors.
 
-### Design Decisions
+## Design Decisions
 
 Before starting the implementation, a number of basic decisions have to be made. They affect the implementation fundamentally.
 
-##### 1-on-1 vs. M-on-N
+### 1-on-1 vs. M-on-N
 
 The most basic design decision involves the relationship between the kernel  
 threads and the user-level threads. It need not be mentioned that kernel threads are used; a pure user-level implementation could exist, but it would not be able to take advantage of multi-processing, which was one of the primary goals listed previously.
@@ -171,7 +171,7 @@ constant execution time (O(1)) as opposed to linear time with respect to the num
 Finally, the costs of maintaining the additional code necessary for an M-on-N  
 implementation cannot be neglected. Especially for highly complicated code like a thread library,there’s a lot to be said for a clean and slim implementation.
 
-##### Signal Handling
+### Signal Handling
 
 Another reason for using an M-on-N model is to simplify the signal handling in the kernel. Signal masks are maintained on a per-thread basis whereas the  
 registration of a signal handler, and therefore also the fact whether a signal is  
@@ -192,7 +192,7 @@ In summary, it is certainly possible to implement the signal handling of a M-on-
 Alternatively all POSIX signal handling can be implemented in the kernel. In this case the kernel must resolve the multitude of signal masks, but the  
 implementation is otherwise straightforward. Since the signal will only be sent to a thread if it is unblocked, no unnecessary interruptions through signals occur. The kernel is also in a much better situation to determine the best thread to receive the signal. Obviously this helps only if the1-on-1 model is used.
 
-##### Helper/Manager Thread or Not
+### Helper/Manager Thread or Not
 
 In the current Linux Threads library a so-called manager thread is used to  
 handle a variety of internal work. The manager thread never executes user program code. Instead all the other threads send requests like’create a new thread’which are centrally and sequentially executed by the manager thread. This is necessary to help implement the correct semantics for a number of  
@@ -211,7 +211,7 @@ None of these problems necessarily implies that a manager thread must be used. W
 Not being forced to serialize important and frequently performed requests like creating a thread can be a significant performance benefit. The manager thread can only run on one of the CPUs, so any synchronization done can cause serious scalability problems on SMP systems, and even worse scalability  
 problems on NUMA systems. Frequent reliance on the manager thread also causes a significantly increased rate of context-switching. Having no manager thread in any case simplifies the design. The goal for the new implementation therefore should be to avoid a manager thread.
 
-##### List of all Threads
+### List of all Threads
 
 The Linux Threads implementation keeps a list of all running threads which is occasionally traversed to perform operations involving all threads. The most important operation is killing all threads at process termination. This could be avoided if the kernel were responsible for killing the threads when the process exits.
 
@@ -226,7 +226,7 @@ therefore becomes a simple increment operation.
 
 Maintaining the list of threads can not be entirely avoided. Implementation of the fork function without memory leaks requires reclaiming the memory used for stacks and other internal information of all threads except the thread calling fork. The kernel can not help in this situation.
 
-##### Synchronization Primitives
+### Synchronization Primitives
 
 The implementation of the synchronization primitives such as mutexes, read-  
 write locks, condition variables, semaphores, and barriers requires some form of kernel support. Busy waiting is inefficient and fails to account for differences in thread priorities. The same arguments rule out the exclusive use of sched yield. Signals were the only viable solution for the Linux Threads implementation. Threads block in the kernel until woken by a signal. This method has severe drawbacks in terms of speed and reliability caused by spurious wakeups and degradation of the quality of the signal handling in the application.
@@ -238,7 +238,7 @@ For example, a mutex can be implemented in half a dozen instructions with the fa
 
 Another benefit of the futex approach is that it works on shared memory regions and can therefore be shared by processes having access to the same piece of shared memory. This, together with the wait queues being entirely handled by the kernel, is exactly the requirement the inter-process POSIX synchronization primitives have. It now becomes possible to implement the desired PTHREAD_PROCESS_SHARED option.
 
-##### Memory Allocation
+### Memory Allocation
 
 One of the goals for the library is to have minimal startup costs for threads. The biggest time consuming operation outside the kernel is allocating the memory needed for the thread data structures, thread-local storage, and the stack.  
 Optimizing this memory allocation is done in two steps:
@@ -260,7 +260,7 @@ This is a tuning variable which on 64-bit machines might as well have a value la
 
 One potential drawback of this scheme is that the thread handle is simply the pointer to the thread descriptor, so successively created threads will get the same handle. This might hide bugs and lead to strange results. If this became a significant problem, the thread descriptor allocation routine could have a debug mode in which it would avoid producing the same thread handles again. This is nothing the standard runtime environment should be troubled with.
 
-### **Kernel Improvements**
+## Kernel Improvements
 
 The early 2.5.x development version of the Linux kernel provided only a portion of the functionality needed for a good thread implementation. Additional changes to the official kernel were made in August and September 2002 by Ingo Molnar as part of this project. The design of the kernel functionality and thread library went hand in hand to ensure optimal interfaces between the two components. Changes to the kernel include:
 
@@ -298,12 +298,12 @@ Another important change is adding support for a signal safe loading of the thre
 
 - The way the kernel signals termination of a thread makes it possible for pthread_join to return after the child is really dead,i.e., all TSD destructors ran, and therefore stack memory can be reused, which is important if the stack was allocated by the user.
 
-### **Results**
+## Results
 
 This section presents the results of two completely different measurements. The first set is a measurement of the time needed for thread creation and  
 destruction. The second measurement concerns itself with measuring the handling of lock contention.
 
-##### Thread Creation and Destruction Timing
+### Thread Creation and Destruction Timing
 
 What is measured is simply the time to create and destroy threads under various conditions. The first variable in this testis the number of threads which exist at one time. If the maximum number of parallel threads is reached, the program waits for a thread to terminate before creating a new one. This keeps resource requirements at a manageable level. New threads are created by possibly more than one thread; the exact number is the second variable in the test series.
 
@@ -318,7 +318,7 @@ The results of the benchmark runs are summarized in two tables. In both cases we
 
 In Figure 2 we see thescalability effects. If too many threads in parallel try to create even more threads all implementations are impacted, some more, some less.
 
-##### Contention Handling
+### Contention Handling
 
 Figure 3 (see page 20) shows timings of a program which creates 32 threads  
 and a variable number of critical regions which the threads try to enter, a total of 50,000 times \[csfast\]. The fewer critical regions that exist, the higher the probability of contention.

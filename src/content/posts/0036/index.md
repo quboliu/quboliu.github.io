@@ -9,7 +9,7 @@ draft: false
 tags:
   - "工具使用、绘图"
   - "vscode插件"
-description: "vscode插件市场检索、安装excalidraw插件。 重启vscode。 创建ceshi.excalidraw.svg文件。 开始绘制。 要想简单地支持中文，需要使用Excalidraw-cj插件，并且只能绘制png格式的。 示例： 其实，没啥用，建议不要用这个cj结尾的插件了。 欸不对欸，你可以看到，是可以…"
+description: "记录在 VS Code 中使用 Excalidraw 插件绘图，以及中文与 SVG 格式支持的实际测试结果。"
 ---
 
 1.  vscode插件市场检索、安装excalidraw插件。

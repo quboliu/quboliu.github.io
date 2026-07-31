@@ -8,10 +8,10 @@ featured: false
 draft: false
 tags:
   - "转载"
-description: "文章来源： https://www.oschina.net/news/160294"
+description: "按时间梳理自由软件基金会、Apache、Linux、CNCF、Rust 等常见开源基金会。"
 ---
 
-# 世界最著名的16个开源基金会一览，你认识几个？
+## 世界最著名的 16 个开源基金会
 
 文章来源：<a href="https://www.oschina.net/news/160294" rel="noopener" target="_blank">https://www.oschina.net/news/160294</a>
 

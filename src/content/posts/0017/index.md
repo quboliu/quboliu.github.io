@@ -8,14 +8,12 @@ featured: false
 draft: false
 tags:
   - "转载"
-description: "该篇文章搬运自： tanjunchen/cloud-native-travel"
+description: "介绍开源社区的选择方法，并以 CNCF 与 Kubernetes 为例梳理参与贡献的基本流程。"
 ---
 
-# 说明
+## 来源说明
 
 该篇文章搬运自：<a href="https://github.com/tanjunchen/cloud-native-travel" rel="noopener" target="_blank">tanjunchen/cloud-native-travel</a>
-
-# 开源社区
 
 本仓库已迁移至 <a href="https://github.com/tanjunchen/cloud-native-travel" rel="noopener" target="_blank">tanjunchen/cloud-native-travel</a>，欢迎大家关注新仓库，与大家一起分享探索云原生趣事。
 
@@ -88,8 +86,6 @@ CNCF 是一个开源软件基金会，致力于使云原生计算具有普遍性
 
 ![kubernetes.png](./kubernetes.png)
 
-### 贡献准备
-
 ### 注册 GitHub & 签署 CNCF-CLA
 
 - 注册 <a href="https://github.com/" rel="noopener" target="_blank">Github</a> 账户，提倡 @gmail.com 邮箱注册(尽量避免 QQ 邮箱)。_避免以后关联 slack 出现问题_
@@ -101,8 +97,6 @@ CNCF 是一个开源软件基金会，致力于使云原生计算具有普遍性
   ![linuxfoundation.png](./linuxfoundation.png)
 
 注意事项：签署 CLA 协议的邮箱应该与 Git 客户端本地配置邮箱保持一致，否则验证不过。访问 CLA 签署网站需要科学上网。所以注册邮箱不推荐使用 QQ 邮箱。具体流程可以参考：[官方指导](https://github.com/kubernetes/community/blob/master/CLA.md#the-contributor-license-agreement)
-
-### 参与贡献
 
 ### 知识必备
 
@@ -160,7 +154,7 @@ Kubernetes 目前已经是云时代的操作系统，作为容器编排领域和
 4.  大厂加分项等等
 5.  ……
 
-### Github 常用语
+### GitHub 常用语
 
 1.  PR: Pull Request。拉取请求。
 2.  LGTM: Looks Good To Me。看起来不错，代码已 review，可以合并。
@@ -195,7 +189,7 @@ Kubernetes 目前已经是云时代的操作系统，作为容器编排领域和
 31. Gist：如果我们没有项目可以开源或者只是单纯的想分享一些代码片段的话，我们就可以选择 Gist。
 32. 等等……
 
-### Github 常见 Topic
+### GitHub 常见 Topic
 
 <a href="https://github.com/trending" rel="noopener" target="_blank">GitHub Trend</a> 页面总结了每天/每周/每月周期的热门 Repositories 和 Developers，你可以看到在某个周期处于热门状态的开发项目和开发者。而 <a href="https://github.com/topics" rel="noopener" target="_blank">GitHub Topic</a> 展示了最新和最流行的讨论主题，在这里你不仅能够看到开发项目，还能看到更多非开发技术的讨论主题，比如 Job、Chrome 浏览器等。
 
@@ -203,7 +197,7 @@ Kubernetes 目前已经是云时代的操作系统，作为容器编排领域和
 
 ![github_topic.png](./github_topic.png)
 
-## Github 得力助手
+## GitHub 得力助手
 
 在 Github 上有很多的项目，我们应该如何去抉择呢？有很多种方式提高我们的搜索效率。如搜索某个用户：
 

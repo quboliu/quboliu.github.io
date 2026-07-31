@@ -7,7 +7,7 @@ title: "如何阅读Go源代码-转载"
 featured: false
 draft: false
 tags: []
-description: "As Linus once said, if one wants to understand the details of a software project, one should “RTFSC—Read The F**king Source Code.”"
+description: "转载并整理阅读 Go 源码的方法，包括标准库追踪、汇编分析和 Delve 调试。"
 ---
 
 As Linus once said, if one wants to understand  
