@@ -4,7 +4,7 @@ pubDatetime: 2024-07-30T23:26:14+08:00
 modDatetime: 2024-07-30T23:33:54+08:00
 timezone: "Asia/Shanghai"
 title: "关于go测试概念：测试代码放置的位置——包内测试和包外测试"
-featured: false
+featured: true
 draft: false
 tags: []
 description: "由于Go构建工具链在编译包时会自动根据文件名是否具有_test.go后缀将包源文件和包的测试源文件分开，测试代码不会进入包正常构建的范畴，因此测试代码使用与被测包名相同的包内测试方法是一个很自然的选择。"
