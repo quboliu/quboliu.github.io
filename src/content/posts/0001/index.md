@@ -1,0 +1,45 @@
+---
+lang: "zh-CN"
+pubDatetime: 2024-07-25T09:40:16+08:00
+modDatetime: 2024-08-05T11:12:03+08:00
+timezone: "Asia/Shanghai"
+title: "楔子"
+featured: false
+draft: false
+tags:
+  - "生活"
+  - "碎碎念"
+description: "贵在坚持，希望能坚持，必能坚持。"
+---
+
+贵在坚持，希望能坚持，必能坚持。
+
+![image.png](./image.png)
+
+### 关于Tag
+
+Tag主要分为如下几类:
+
+##### xxxx
+
+##### xxxx
+
+##### xxxx
+
+### 关于Categories
+
+Categories主要分为如下几类:
+
+#### xxxx
+
+#### xxxx
+
+#### xxxx
+
+### 用过的正则
+
+```shell
+MAC Address: [0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}
+```
+
+### 用过的shell脚本
