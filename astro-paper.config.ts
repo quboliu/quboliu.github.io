@@ -35,7 +35,7 @@ export default defineAstroPaperConfig({
       linkTitle: "quboliu on GitHub",
     },
     {
-      name: "link",
+      name: "notion",
       url: "https://jvzi.notion.site/",
       linkTitle: "Orange Garden on Notion",
     },
