@@ -17,14 +17,10 @@ const currentYear = new Date().getFullYear();
   class:list={["app-layout", { "mt-auto": !noMarginTop }, className]}
   {...attrs}
 >
-  <div
-    class="border-border flex flex-col items-center justify-between border-t py-6 sm:flex-row-reverse sm:py-4"
-  >
+  <div class="text-muted-foreground py-6 text-center text-sm">
     <Socials />
-    <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
-      <span>{t.footer.copyright} &#169; {currentYear}</span>
-      <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
-      <span>{t.footer.allRightsReserved}</span>
-    </div>
+    <p class="mt-2">
+      {t.footer.copyright} &#169; {currentYear} · {t.footer.allRightsReserved}
+    </p>
   </div>
 </footer>

@@ -1,36 +1,59 @@
-/* Register design tokens for Tailwind v4 */
+/* Register design tokens for Tailwind v4 — Bear Blog style */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-heading: var(--heading);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --font-app: var(--font-google-sans-code);
+  --color-visited: var(--visited);
+  --font-app: var(--font-main);
   --font-mono:
-    "Maple Mono NF CN", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
-/* Light theme values */
+/* Light theme values (Bear default) */
 :root,
 [data-theme="light"] {
-  --background: #fdfdfd;
-  --foreground: #282728;
-  --accent: #006cac;
+  --background: #ffffff;
+  --foreground: #444444;
+  --heading: #222222;
+  --accent: #3273dc;
   --accent-foreground: #ffffff;
-  --muted: #e6e6e6;
-  --muted-foreground: #6b7280;
-  --border: #ece9e9;
+  --visited: #8b6fcb;
+  --muted: #f2f2f2;
+  --muted-foreground: #777777;
+  --border: #dddddd;
+  --font-main:
+    Verdana, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    "Noto Sans SC", sans-serif;
 }
 
-/* Dark theme values */
+/* Dark theme values (Bear default) */
 [data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #63bff0;
-  --accent-foreground: #172033;
-  --muted: #343f60;
-  --muted-foreground: #afb9ca;
-  --border: #4b5877;
+  --background: #01242e;
+  --foreground: #dddddd;
+  --heading: #eeeeee;
+  --accent: #8cc2dd;
+  --accent-foreground: #01242e;
+  --visited: #8b6fcb;
+  --muted: #000000;
+  --muted-foreground: #9ab5bd;
+  --border: #1e4552;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-main);
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--heading);
+  }
 }

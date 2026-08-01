@@ -10,7 +10,12 @@
   * {
     @apply border-border outline-accent/75;
     scrollbar-width: auto;
-    scrollbar-color: var(--color-muted) transparent;
+    scrollbar-color: var(--color-muted-foreground) transparent;
+  }
+  body {
+    @apply bg-background text-foreground;
+    line-height: 1.5;
+    overflow-wrap: break-word;
   }
   a,
   button {
@@ -23,19 +28,43 @@
 }
 
 @utility max-w-app {
-  @apply max-w-3xl;
+  max-width: 720px;
 }
 
 @utility app-layout {
-  @apply max-w-app mx-auto w-full px-4;
+  @apply max-w-app mx-auto w-full px-5;
 }
 
 @utility active-nav {
-  @apply underline decoration-wavy decoration-2 underline-offset-8;
+  @apply underline underline-offset-4;
 }
 
 @utility toc-active {
   @apply border-accent font-medium text-accent;
+}
+
+/* Bear-style post list: monospace date + title link */
+@utility blog-posts {
+  @apply list-none p-0;
+
+  & li {
+    @apply flex gap-2 py-0.5;
+  }
+
+  & li > span {
+    flex: 0 0 130px;
+    font-family: monospace;
+    font-size: 15px;
+    @apply text-muted-foreground;
+  }
+
+  & li a {
+    @apply text-accent no-underline hover:underline;
+  }
+
+  & li a:visited {
+    color: var(--visited);
+  }
 }
 
 :target {

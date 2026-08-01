@@ -1,16 +1,21 @@
 @plugin "@tailwindcss/typography";
 
 @layer base {
-  /* ===== Override default Tailwind Typography styles ===== */
+  /* ===== Bear Blog style article typography ===== */
   .app-prose {
-    @apply prose;
+    @apply prose max-w-none;
+
+    line-height: 1.6;
 
     h1,
     h2,
     h3,
     h4,
+    h5,
+    h6,
     th {
-      @apply text-foreground mb-3;
+      color: var(--heading);
+      @apply mb-3;
     }
 
     h3 {
@@ -27,8 +32,13 @@
       @apply text-foreground;
     }
 
+    strong,
+    b {
+      color: var(--heading);
+    }
+
     a {
-      @apply text-foreground hover:text-accent wrap-break-word decoration-dashed underline-offset-4 focus-visible:no-underline;
+      @apply text-accent no-underline wrap-break-word hover:underline focus-visible:underline;
     }
 
     ol,
@@ -37,16 +47,14 @@
       overflow-wrap: anywhere;
     }
 
-    li {
-      @apply marker:text-accent;
-    }
-
     hr {
-      @apply border-border;
+      border: 0;
+      border-top: 1px dashed var(--muted-foreground);
     }
 
     img {
-      @apply border-border mx-auto border;
+      @apply mx-auto;
+      max-width: 100%;
     }
 
     img[role="button"] {
@@ -75,7 +83,10 @@
     }
 
     code {
-      @apply bg-muted/75 text-foreground rounded p-1 font-mono wrap-break-word before:content-none after:content-none;
+      background-color: var(--muted);
+      color: var(--heading);
+      @apply rounded p-1 font-mono wrap-break-word before:content-none after:content-none;
+      padding: 2px;
     }
 
     .astro-code code {
@@ -83,7 +94,17 @@
     }
 
     blockquote {
-      @apply border-s-accent/80 wrap-break-word opacity-80;
+      border-left: 1px solid #999;
+      color: var(--foreground);
+      padding-left: 20px;
+      font-style: italic;
+      @apply wrap-break-word opacity-90;
+    }
+
+    time {
+      font-family: monospace;
+      font-style: normal;
+      font-size: 15px;
     }
 
     details:not(.callout) {
@@ -101,11 +122,14 @@
 
   /* ===== Code Blocks & Syntax Highlighting ===== */
   .astro-code {
-    @apply outline-border flex border bg-(--shiki-light-bg) text-(--shiki-light) [&_span]:text-(--shiki-light);
+    background-color: var(--muted);
+    color: var(--heading);
+    @apply flex rounded text-(--shiki-light) [&_span]:text-(--shiki-light);
+    padding: 1px 15px;
   }
 
   html[data-theme="dark"] .astro-code {
-    @apply bg-(--shiki-dark-bg) text-(--shiki-dark) [&_span]:text-(--shiki-dark);
+    @apply text-(--shiki-dark) [&_span]:text-(--shiki-dark);
   }
 
   /* Styles for Shiki transformers */
