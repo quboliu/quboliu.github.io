@@ -34,28 +34,33 @@ const datetime = dayjs(isModified ? modDatetime : pubDatetime).tz(
 );
 
 const date = datetime.format("D MMM, YYYY");
+
+// Set to true to hide all article timestamps (cards and post pages).
+const HIDE_DATETIME = true;
 ---
 
-<div
-  class:list={["text-muted-foreground flex items-center gap-x-2", className]}
->
-  <IconCalendar
-    class:list={[
-      "inline-block size-6 min-w-5.5",
-      { "scale-90": size === "sm" },
-    ]}
-  />
-  {
-    isModified && (
-      <span class:list={["text-sm", { "sm:text-base": size === "lg" }]}>
-        {t.post.updatedAt}:
-      </span>
-    )
-  }
-  <time
-    class:list={["text-sm", { "sm:text-base": size === "lg" }]}
-    datetime={datetime.toISOString()}
-  >
-    {date}
-  </time>
-</div>
+{
+  !HIDE_DATETIME && (
+    <div
+      class:list={["text-muted-foreground flex items-center gap-x-2", className]}
+    >
+      <IconCalendar
+        class:list={[
+          "inline-block size-6 min-w-5.5",
+          { "scale-90": size === "sm" },
+        ]}
+      />
+      {isModified && (
+        <span class:list={["text-sm", { "sm:text-base": size === "lg" }]}>
+          {t.post.updatedAt}:
+        </span>
+      )}
+      <time
+        class:list={["text-sm", { "sm:text-base": size === "lg" }]}
+        datetime={datetime.toISOString()}
+      >
+        {date}
+      </time>
+    </div>
+  )
+}
