@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
-pubDatetime: 2026-08-01T10:25:00-04:00
+pubDatetime: 2026-02-17T20:52:57+08:00
+timezone: "Asia/Shanghai"
 title: "第一性原理概念摘要"
 featured: true
 draft: false

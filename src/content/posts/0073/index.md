@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
-pubDatetime: 2026-08-01T10:35:00-04:00
+pubDatetime: 2026-04-07T20:10:55+08:00
+timezone: "Asia/Shanghai"
 title: "Vibe Coding 故障实录：ShardingSphere 堆泄漏排查"
 featured: true
 draft: false

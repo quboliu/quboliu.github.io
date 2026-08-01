@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
-pubDatetime: 2026-08-01T10:30:00-04:00
+pubDatetime: 2026-03-20T13:47:01+08:00
+timezone: "Asia/Shanghai"
 title: "【转载】First Principles: Elon Musk on the Power of Thinking for Yourself"
 featured: true
 draft: false

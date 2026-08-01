@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
-pubDatetime: 2026-08-01T10:40:00-04:00
+pubDatetime: 2026-05-15T15:19:28+08:00
+timezone: "Asia/Shanghai"
 title: "声明式接口的约束、选择与代价：关系数据库管理系统、Kubernetes 与 Agent"
 featured: true
 draft: false
