@@ -2,8 +2,8 @@
 lang: "zh-CN"
 pubDatetime: 2026-05-12T12:00:00+08:00
 timezone: "Asia/Shanghai"
-title: "VibeCoding 分享 —— WWQ"
-featured: false
+title: "VibeCoding 分享"
+featured: true
 draft: false
 tags:
   - "Vibe Coding"
