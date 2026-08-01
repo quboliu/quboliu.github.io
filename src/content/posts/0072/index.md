@@ -39,7 +39,7 @@ In 2002, Musk began his quest to send the first rocket to Mars—an idea that wo
 2002 年，马斯克开始探索把第一枚火箭送往火星——这个想法后来发展成了航空航天公司 SpaceX。
 >
 
-He ran into a major challenge right off the bat. After visiting a number of aerospace manufacturers around the world, Musk discovered the cost of purchasing a rocket was astronomical—up to $65 million. Given the high price, he began to rethink the problem.[1]
+He ran into a major challenge right off the bat. After visiting a number of aerospace manufacturers around the world, Musk discovered the cost of purchasing a rocket was astronomical—up to \$65 million. Given the high price, he began to rethink the problem.[1]
 
 > **中文翻译**
 他一开始就遇到了一个重大挑战。在走访世界各地多家航空航天制造商后，马斯克发现购买一枚火箭的价格高得惊人——最高可达 6500 万美元。面对如此高昂的价格，他开始重新思考这个问题。
@@ -267,7 +267,7 @@ If you want to enhance an existing process or belief, continuous improvement is 
 
 ### Notes｜注释
 
-**[1]** When Musk originally looked into hiring another firm to send a rocket from Earth to Mars, he was quoted prices as high as $65 million. He also traveled to Russia to see if he could buy an intercontinental ballistic missile (ICBM), which could then be retrofitted for space flight. It was cheaper, but still in the $8 million to $20 million range.
+**[1]** When Musk originally looked into hiring another firm to send a rocket from Earth to Mars, he was quoted prices as high as \$65 million. He also traveled to Russia to see if he could buy an intercontinental ballistic missile (ICBM), which could then be retrofitted for space flight. It was cheaper, but still in the \$8 million to \$20 million range.
 
 > **中文翻译**
 马斯克最初考虑雇用另一家公司把火箭从地球送往火星时，对方给出的报价最高达 6500 万美元。他还前往俄罗斯，看看能否购买一枚洲际弹道导弹（ICBM），再将其改装用于太空飞行。这样做便宜一些，但价格仍在 800 万至 2000 万美元之间。
