@@ -34,6 +34,10 @@
   @apply underline decoration-wavy decoration-2 underline-offset-8;
 }
 
+@utility toc-active {
+  @apply border-accent font-medium text-accent;
+}
+
 :target {
   scroll-margin-block: 1rem;
 }

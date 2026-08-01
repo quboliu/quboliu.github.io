@@ -15,6 +15,7 @@ import BackButton from "./_components/BackButton.astro";
 import BackToTopButton from "./_components/BackToTopButton.astro";
 import AdjacentPostNav from "./_components/AdjacentPostNav.astro";
 import Comments from "@/components/Comments.astro";
+import TableOfContents from "./_components/TableOfContents.astro";
 import config from "@/config";
 
 export async function getStaticPaths() {
@@ -73,7 +74,7 @@ const {
   hideEditPost,
 } = post.data;
 
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 
 let ogImageUrl: string | undefined;
 
@@ -149,6 +150,8 @@ const ogImage = ogImageUrl
       <Content />
     </article>
 
+    <TableOfContents {headings} />
+
     <hr class="my-8 border-dashed" />
 
     <EditPost class="sm:hidden" {hideEditPost} {post} />
@@ -222,6 +225,32 @@ const ogImage = ogImageUrl
     }
   }
   addHeadingLinks();
+
+  function initTocSpy() {
+    const links = Array.from(document.querySelectorAll("[data-toc-link]"));
+    if (links.length === 0) return;
+    const targets = links
+      .map(link => document.getElementById(link.dataset.tocLink))
+      .filter(Boolean);
+
+    function updateActive() {
+      const pos = window.scrollY + 120;
+      let current = targets[0];
+      for (const heading of targets) {
+        if (heading.offsetTop <= pos) current = heading;
+      }
+      for (const link of links) {
+        link.classList.toggle(
+          "toc-active",
+          link.dataset.tocLink === current?.id
+        );
+      }
+    }
+
+    document.addEventListener("scroll", updateActive, { passive: true });
+    updateActive();
+  }
+  initTocSpy();
 
   function attachCopyButtons() {
     const copyButtonLabel = "Copy";
