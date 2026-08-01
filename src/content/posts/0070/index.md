@@ -2,7 +2,7 @@
 lang: "zh-CN"
 pubDatetime: 2026-05-12T12:00:00+08:00
 timezone: "Asia/Shanghai"
-title: "VibeCoding 分享"
+title: "2026.05.12-Vibe Coding 组内扫盲分享"
 featured: true
 draft: false
 tags:
