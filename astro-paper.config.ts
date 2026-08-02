@@ -14,13 +14,13 @@ export default defineAstroPaperConfig({
   },
   posts: {
     perPage: 50,
-    perIndex: 50,
+    perIndex: 5,
     scheduledPostMargin: 15 * 60 * 1000,
   },
   features: {
     lightAndDarkMode: true,
     dynamicOgImage: false,
-    showArchives: true,
+    showArchives: false,
     showBackButton: true,
     editPost: {
       enabled: true,

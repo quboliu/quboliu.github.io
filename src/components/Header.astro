@@ -28,6 +28,7 @@ const isActive = (path: string) => {
 };
 
 const navItems = [
+  { path: "", label: t.nav.home },
   { path: "posts", label: t.nav.posts },
   { path: "tags", label: t.nav.tags },
   ...(features.showArchives
@@ -59,7 +60,7 @@ const navItems = [
           href={getRelativeLocaleUrl(locale, path)}
           class:list={[
             "text-accent no-underline hover:underline",
-            { "active-nav": isActive(`/${path}`) },
+            { "active-nav": isActive(path === "" ? "/" : `/${path}`) },
           ]}
         >
           {label}
