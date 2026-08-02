@@ -35,7 +35,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
   >
     <section id="hero" class="pt-4 pb-6">
       <h1 class="my-4 inline-block text-2xl font-bold">
-        你好，我是 quboliu。
+        Hi, I&apos;m quboliu.
         <a
           target="_blank"
           href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`}
@@ -52,9 +52,10 @@ const homePath = getRelativeLocaleUrl(locale, "");
         </a>
       </h1>
 
-      <p>这里是我的笔记本，写软件、工具与想法。</p>
+      <p>This is my notebook on software, tools, and ideas.</p>
       <p class="mt-2">
-        内容包括故障实录、论文精读、技术学习笔记，以及不定期的工作流总结。
+        You&apos;ll find debugging postmortems, paper deep-dives, study notes,
+        and the occasional workflow write-up.
       </p>
       {
         socials.length > 0 && (
