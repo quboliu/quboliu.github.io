@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-08-04T14:04:51+08:00
+modDatetime: 2026-08-04T15:04:59+08:00
 timezone: "Asia/Shanghai"
 title: "TimescaleDB 压缩效率分析：从模拟业务负载到布局与数据分布"
 featured: false
@@ -12,6 +13,7 @@ tags:
   - "性能测试"
 description: "基于 PostgreSQL 15.5 与 TimescaleDB 2.16.1，以 1,000 万行模拟业务数据和多组受控实验，对比原生压缩、ZSTD 与 NOOP 三条存储路径，分析布局、类型、分布和分段粒度对实际落盘效率的影响。"
 ---
+
 ## 摘要
 
 TimescaleDB 的压缩结果并不单是由数据列的压缩算法决定。从流程上看，数据先被切成 chunk，再按 `segmentby` 分组、按 `orderby` 排序，之后才进入逐列压缩；最终落盘大小还包含关系、索引、TOAST 和压缩元数据。
@@ -48,7 +50,7 @@ TimescaleDB 的压缩结果并不单是由数据列的压缩算法决定。从�
 2. 当数据来源、类型、分布和规模发生变化时，三条路径的压缩效率又会如何？
 3. chunk、`segmentby`、`orderby` 和每段行数如何改变表级容量结果？
 
-第一个问题由 `tsdb-java-bench` 主实验回答；第二个问题由 TSBS、混合分布和类型矩阵交叉检查；第三个问题由压缩参数网格和分段深度扫描回答。
+第一个问题由模拟业务负载主实验回答；第二个问题由 TSBS、混合分布和类型矩阵交叉检查；第三个问题由压缩参数网格和分段深度扫描回答。
 
 ### 1.3 术语速查
 
@@ -136,14 +138,14 @@ NOOP 相对未压缩源表的变化还包含列式化、元组结构、索引和
 
 | 编号 | 角色 | 数据与规模 | 正式测试单元 | 回答的问题 |
 | --- | --- | --- | ---: | --- |
-| M1 | 主实验 | `tsdb-java-bench camera_security` 模拟业务数据，1,000 万行 | 3 路径 × 3 次 | 固定业务形态下的主要容量排名 |
+| M1 | 主实验 | 摄像头安防场景的模拟业务数据，1,000 万行 | 3 路径 × 3 次 | 固定业务形态下的主要容量排名 |
 | S2 | 广度证据 | TSBS IoT：D4 小规模约 20 万行、D5 大规模约 300 万行 | 6 | 换数据来源并扩大规模后的结果 |
 | S1 | 广度证据 | 常见类型混合数据，30 万行 | 3 | 常见类型与分布的交叉检查 |
 | S4 | 广度证据 | 类型、分布、NULL 边界，30 万行 | 3 | 类型支持和边界行为 |
 | S3 | 深度证据 | 混合分布数据，2,000 万行 | 3 | 大规模表级容量与逐列归因 |
 | S5 | 深度证据 | 固定 30 万行，布局与分段深度矩阵 | 51 | chunk、分段、排序和批次深度 |
 
-M1 是主要工程证据。辅助实验用于检验结论能否跨数据来源、类型、分布、规模和布局成立，并解释结果为什么变化。除 M1 外，辅助实验的单个条件只有一个固定输入单元，只能做确定性容量对照，不能伪装成重复统计。
+M1 是主要工程证据。辅助实验用于检验结论能否跨数据来源、类型、分布、规模和布局成立，并解释结果为什么变化。
 
 ### 3.2 指标定义
 
@@ -181,7 +183,7 @@ hypertable parent
 - 实际保存的 datum 还可能包含 PostgreSQL TOAST 的作用；
 - 二者都不包含整表 tuple、segment 列、关系页、索引和元数据。
 
-跨 chunk 的逐列数据必须先对全部 chunk 求和，再比较不同路径。取最大 chunk、只取一个 chunk，或者按列名直接连接两组 chunk 明细，都会得到错误的全表结果。
+对于时序数据而言，跨 chunk 的逐列数据必须先对全部 chunk 求和，再比较不同路径。
 
 ### 3.4 环境与可复现对象
 
@@ -190,16 +192,16 @@ hypertable parent
 | 操作系统 | Linux 6.12，aarch64，little-endian |
 | CPU / 内存 | 7 vCPU / 15 GiB |
 | PostgreSQL | 15.5 |
-| TimescaleDB | 2.16.1，基线提交 `7c78574c4d42ec7ceb840bd9d55652182221f251` |
+| TimescaleDB | 2.16.1 |
 | 构建 | Release |
 | libzstd | 1.5.7 |
 | ZSTD level | 3，固定不调 |
-| `tsdb-java-bench` | 1.1.5，提交 `455aa6b2d604fc9accf6ada24119279ae0674cef` |
+| 模拟业务负载生成器 | 1.1.5 |
 | 正式运行编号 | `20260728T173852Z` |
 
-`tsdb-java-bench` 1.1.5 的 `camera_security` 生成器内部使用 `ThreadLocalRandom`，没有可注入的统一随机种子。本实验没有声称“重新运行生成器即可逐字节复现”。可复现对象是生成一次后冻结的未压缩数据库物理快照，以及配套的逐表行数、双指纹、关系大小和 SHA-256。
+主实验使用的 1.1.5 数据生成器内部采用 `ThreadLocalRandom`，没有可注入的统一随机种子。可复现对象是生成一次后冻结的未压缩数据库物理快照，以及配套的逐表行数、双指纹、关系大小和 SHA-256。
 
-其他数据集也遵循相同原则：生成器只运行一次，输出冻结为数据库快照或 PostgreSQL binary COPY 文件，三条路径逐字节复用同一输入。
+其他数据集也遵循相同原则：生成器只运行一次，输出冻结为数据库快照或 PostgreSQL binary COPY 文件，三条实验的压缩路径逐字节复用同一输入。
 
 ### 3.5 公平性控制
 
@@ -234,11 +236,11 @@ fc54ab2ace19f5041a820ffd8734ea577b386e74b5250532169a3c5423bb4ba7
 
 ---
 
-## 第 4 章 主实验：tsdb-java-bench 模拟业务负载
+## 第 4 章 主实验：模拟业务负载
 
 ### 4.1 数据形态
 
-主实验使用 `tsdb-java-bench` 1.1.5 的 `camera_security` 场景模拟摄像头切片记录。它用于复现字段、索引和写入形态，不代表真实生产数据。正式输入包含四张活跃 hypertable：
+主实验使用版本 1.1.5 的模拟业务负载生成器，构造摄像头切片记录场景。它用于复现字段、索引和写入形态，不代表真实生产数据。正式输入包含四张活跃 hypertable：
 
 | 表 | 行数 | 典型用途 |
 | --- | ---: | --- |
@@ -292,7 +294,7 @@ fc54ab2ace19f5041a820ffd8734ea577b386e74b5250532169a3c5423bb4ba7
 
 ![M1 主实验容量结果](./m1_main_capacity.png)
 
-*图 2　`tsdb-java-bench` 主实验的官方 before/after total 结果。左图是四表合计的空间保留比例，点表示三次独立执行；右图按表展示同一冻结输入的结果。*
+*图 2　模拟业务负载主实验的官方 before/after total 结果。左图是四表合计的空间保留比例，点表示三次独立执行；右图按表展示同一冻结输入的结果。*
 
 在这份输入上：
 
@@ -319,7 +321,7 @@ NOOP 的 `67.313%` 节省不能解释为“零压缩算法也能压掉三分之�
 
 主实验可以支持：
 
-- 对这份冻结的 `camera_security` 模拟业务数据，ZSTD 路径比 native 路径占用更少空间；
+- 对这份冻结的摄像头切片模拟业务数据，ZSTD 路径比 native 路径占用更少空间；
 - 结果在三次从同一物理快照恢复的独立执行中逐字节一致；
 - NOOP 的压缩后空间分别是 native 的 `7.89×`、ZSTD 的 `11.06×`，说明数据 payload 本身具有较高可压性。
 
@@ -543,294 +545,3 @@ SQL 类型只适合决定候选集合：
 只给表级总量无法解释来源，只给逐列 payload 又会漏掉索引和关系固定成本。
 
 ---
-
-## 第 8 章 综合结论与工程建议
-
-### 8.1 跨数据集判断
-
-| 证据 | 数据量与执行方式 | 该条件下占用最少的路径 | 关键容量结果 | 能支持的判断 |
-| --- | --- | --- | --- | --- |
-| `tsdb-java-bench camera_security` 主实验 | 1,000 万行；每条路径从同一快照独立执行 3 次 | ZSTD | 保留 2.957%；native 保留 4.144%；ZSTD after 少 28.65% | 对这份冻结模拟业务输入，ZSTD 容量小于 native，且三次结果一致 |
-| TSBS IoT 小—大规模配对 | 198,526 与 3,003,376 行；每个条件 1 个单元 | native，与 ZSTD 很接近 | native after 分别只少 0.008 与 0.367 MiB | 更换数据来源后次序可以反转；两个规模点只给出容量方向，不构成规模规律 |
-| 常见类型与边界类型 | 两套 30 万行受控数据；每个条件 1 个单元 | ZSTD | ZSTD 保留 23.681% 与 27.699%，均低于 native | 主实验的方向可在这些受控分布中复现，但不能外推到全部类型 |
-| 2,000 万行混合分布 | 19 个 chunk；28,000 个 segment；每条路径 1 个单元 | native | native、ZSTD、NOOP 分别保留 32.962%、33.841%、65.356% | 表级次序来自各列专用编码与通用编码收益的抵消，逐列归因必须覆盖全部 chunk |
-| 30 万行布局与深度扫描 | 51 个单元，只改变 chunk、分组、排序和 segment 深度 | 随布局和深度变化 | p50=1 时保留 511%–567%；p50=1,000 时保留 6.98%–60.90% | segment 太浅时固定开销主导，布局检查先于 codec 选择 |
-
-### 8.2 一期结论
-
-1. 主实验给出的最强结论是：在冻结的 1,000 万行 `tsdb-java-bench camera_security` 输入上，ZSTD 保留 `2.957%`，native 保留 `4.144%`，ZSTD 的 after 少 `28.65%`；三次从同一快照开始的独立执行得到相同字节数。这个结论限定于该输入，不代表所有时序数据。
-2. 布局是压缩收益的前置条件。每段行数 p50 为 1 时，压缩后空间达到压缩前的 `5.11–5.67×`；p50 增加到数百行后，固定成本才被充分摊薄。codec 不能补偿严重失配的 `segmentby` 和 chunk 设计。
-3. 本组证据不支持一条跨数据集不变的容量排序。TSBS IoT 中 native 略小于 ZSTD；2,000 万行混合分布中 native 保留 `32.962%`，也低于 ZSTD 的 `33.841%`；常见类型、边界类型和主实验中则是 ZSTD 更小。差异由具体列分布、排序后的相邻关系和 batch 深度共同决定。
-4. NOOP 对照表明，在主实验的布局和数据上，列式重组本身也能节省空间，但不能替代 codec 对 payload 的压缩。它适合作为结构层基线；正式容量判断仍应以官方 total 为主，以完整关系树和覆盖全部 chunk 的逐列 datum 为解释。
-5. 上线前应抽取目标表的代表性时间窗口，保留真实基数、NULL、字段长度和排序关系，用同一冻结输入比较三条完整路径。压缩时间、资源消耗、在线写入和查询表现需要独立实验设计，留到第二期。
-
-### 8.3 先做批次深度体检
-
-在替换 codec 前，先统计：
-
-- 每个 chunk 的行数；
-- 每个 chunk 的 segment 数；
-- 每个 segment 行数的最小值、p50、p95 和最大值；
-- 实际 compressed batch 数及每批行数；
-- companion、TOAST、索引和源 chunk 壳的完整大小。
-
-若每段只有几行，优先调整 chunk interval 或降低 `segmentby` 基数。codec 仍可能改变体积，但不能挽救布局失配造成的整体膨胀。
-
-### 8.4 保留路由能力
-
-本组证据更适合支持“按分布选择 codec”，而不是全局固定一种算法。可行流程是：
-
-1. 从目标表抽取具有代表性的时间窗口；
-2. 保留真实 NULL、基数、排序和字段长度；
-3. 以同一冻结输入分别运行 native、ZSTD 和 NOOP；
-4. 先比较表级 total，再检查逐列 datum；
-5. 对占总空间很小的列，不为局部倍数做复杂改造；
-6. 对 ARRAY fallback、结构化文本和 `numeric` 等大列，重点评估 ZSTD；
-7. 对规则时间、单调计数器和低基数列，保留原生专用算法作为候选。
-
-### 8.5 容量报告保留原始字节
-
-百分比适合摘要，原始字节适合审计。每个结果至少保存：
-
-```text
-rows
-before_total_bytes
-after_total_bytes
-complete_tree_bytes
-source_chunk_bytes
-companion_bytes
-index_bytes
-toast_bytes
-```
-
-图表必须从封存 CSV 自动生成，并在绘图前验证单位集合、输入哈希和恒等式：
-
-```text
-保留比例 + 节省比例 = 100%
-保留比例 × 压缩倍数 = 100%
-```
-
----
-
-## 第 9 章 有效性与外推边界
-
-### 9.1 各实验的验证深度
-
-| 实验 | 精确比较 | 重启后精确复核 | 说明 |
-| --- | --- | --- | --- |
-| M1 | 通过 | 通过 | 三条路径各执行三次，共 9 个单元 |
-| S2 | 通过（6/6）：重启前双向 `EXCEPT ALL` 为 0，行数和双指纹一致 | 通过（6/6）：重启后新连接复核，双向差异、行数和双指纹仍一致 | 两种规模、三条路径，共 6 个单元 |
-| S3 | 通过（3/3）：每单元 19 个六小时窗口覆盖 2,000 万行，重启前逐窗双向差异为 0 | 通过（3/3）：重启后由新后端重跑 19 个窗口，边界、计数和双指纹一致 | 2,000 万行、三条路径，共 3 个单元 |
-| S1 | 通过 | 通过 | 三条路径，共 3 个单元 |
-| S4 | 通过 | 通过 | 三条路径，共 3 个单元 |
-| S5 | 通过 | **未执行逐单元重启复核** | 51 个单元均完成重启前精确检查 |
-
-S5 的容量和布局结论只建立在重启前精确一致性上。不能把 S1、S4 的重启验证扩展描述为 S5 的验证结果。持久化路径另有资格测试和主实验重启证据，但它们不改变 S5 自身的证据边界。
-
-### 9.2 可以用于什么
-
-本文可以用于：
-
-- 评估相同版本、相似字段和相似布局下的容量方向；
-- 说明为什么 segment 深度必须先于 codec 选择检查；
-- 建立 native、ZSTD、NOOP 的统一对照方法；
-- 识别哪些列值得做逐列试压。
-
-### 9.3 不能直接外推什么
-
-本文不能直接用于：
-
-- 预测生产系统的压缩时长和在线资源占用；
-- 预测查询延迟、吞吐或显式解压速度；
-- 证明其他 CPU 架构、字节序和 PostgreSQL 版本的兼容性；
-- 用模拟或合成数据替代具体业务表的抽样试压；
-- 用单次受控结果做统计推断。
-
----
-
-## 附录：复现入口
-
-### A.1 源码补丁与正式运行
-
-源码补丁位于：
-
-```text
-patches/timescaledb-2.16.1-array-zstd-noop.patch
-```
-
-一期实验入口、SQL 和 validator 位于：
-
-```text
-experiments/F1-final/
-```
-
-正式运行编号：
-
-```text
-20260728T173852Z
-```
-
-主实验和辅助实验的封存结果位于：
-
-```text
-experiments/F1-final/results/20260728T173852Z/main/M1/
-experiments/F1-final/results/20260728T173852Z/auxiliary/controlled/
-experiments/F1-final/results/20260728T173852Z/auxiliary/S2/
-experiments/F1-final/results/20260728T173852Z/auxiliary/S3/
-```
-
-### A.2 自动复算与绘图
-
-统一复算命令如下：
-
-```bash
-python3 experiments/F1-final/scripts/analyze_phase1_results.py \
-  experiments/F1-final/results/20260728T173852Z \
-  --require-complete
-```
-
-派生表位于：
-
-```text
-experiments/F1-final/analysis/phase1_unit_metrics.csv
-experiments/F1-final/analysis/phase1_group_summary.csv
-experiments/F1-final/analysis/controlled_paired_effects.csv
-experiments/F1-final/analysis/m1_table_metrics.csv
-experiments/F1-final/analysis/phase1_audit.json
-```
-
-一期图表位于：
-
-```text
-figures/phase1/
-```
-
-S2 和 S3 的发布图由独立渲染器生成。完整命令显式写出分析目录和输出目录，避免依赖当前工作目录之外的默认值：
-
-```bash
-python3 experiments/F1-final/scripts/render_phase1_extension_figures.py \
-  experiments/F1-final/results/20260728T173852Z \
-  --analysis-dir experiments/F1-final/analysis \
-  --output-dir figures/phase1
-```
-
-渲染器一次生成一张 S2 合图和一张 S3 合图，并同时输出 PNG 与 SVG；它们在正文中分别编号为图 3 和图 5。完整图序为图 1 压缩框架、图 2 主实验、图 3 S2、图 4 S1/S4、图 5 S3、图 6 S5。
-
-```text
-figures/phase1/s2_tsbs_scale_capacity.png
-figures/phase1/s2_tsbs_scale_capacity.svg
-figures/phase1/s3_20m_capacity_columns.png
-figures/phase1/s3_20m_capacity_columns.svg
-figures/phase1/phase1_extension_figures_manifest.json
-```
-
-`phase1_extension_figures_manifest.json` 保存渲染脚本、完整分析审计、S2/S3 根清单、绘图输入 CSV 和四个图文件的 SHA-256。分析程序与渲染器都只接受已通过自动校验脚本、具有正式 SHA-256 清单的完整结果；不完整目录不会进入正式统计或发布图。
-
-### A.3 证据校验
-
-主要证据清单位于：
-
-```text
-experiments/F1-final/results/20260728T173852Z/main/M1-M3/FORMAL_EVIDENCE_SHA256SUMS
-experiments/F1-final/results/20260728T173852Z/auxiliary/controlled/SHA256SUMS
-experiments/F1-final/results/20260728T173852Z/auxiliary/S2/SHA256SUMS
-experiments/F1-final/results/20260728T173852Z/auxiliary/S3/SHA256SUMS
-```
-
-根清单用于验证每套实验的汇总产物。S2 根清单还封存了各测试单元自己的 `SHA256SUMS`；S3 根清单按其封存协议不包含嵌套的 `SHA256SUMS`，因此还要逐个验证单元清单。下面的命令只读取文件并计算哈希：
-
-```bash
-set -euo pipefail
-
-run_root='experiments/F1-final/results/20260728T173852Z'
-s2_root="$run_root/auxiliary/S2"
-s3_root="$run_root/auxiliary/S3"
-
-(
-  cd "$run_root/main"
-  sha256sum --check M1-M3/FORMAL_EVIDENCE_SHA256SUMS
-)
-(
-  cd "$run_root/auxiliary/controlled"
-  sha256sum --check SHA256SUMS
-)
-for suite_root in "$s2_root" "$s3_root"; do
-  (
-    cd "$suite_root"
-    sha256sum --check SHA256SUMS
-  )
-done
-for unit_root in "$s2_root"/units/* "$s3_root"/units/*; do
-  (
-    cd "$unit_root"
-    sha256sum --check SHA256SUMS
-  )
-done
-```
-
-SHA-256 证明文件没有在封存后变化；自动校验脚本还会重新计算行数、比例、算法 id、精确差异、关系树和跨单元约束。套件级只读复核命令如下：
-
-```bash
-set -euo pipefail
-
-run_root='experiments/F1-final/results/20260728T173852Z'
-input_root='experiments/F1-final/inputs/20260728T173852Z'
-s2_root="$run_root/auxiliary/S2"
-s3_root="$run_root/auxiliary/S3"
-
-python3 \
-  "$s2_root/suite-executed-sources/scripts/validate_s2_results.py" \
-  "$s2_root" "$input_root" |
-  jq -e '.status == "PASS" and .units == 6 and (.failures | length) == 0'
-
-python3 \
-  "$s3_root/executed-sources/scripts/validate_s3_results.py" \
-  "$s3_root" "$input_root" --expected-rows 20000000 |
-  jq -e '.status == "PASS" and .units == 3 and (.failures | length) == 0'
-```
-
-套件校验会检查聚合结果与封存单元是否一致；下面再直接运行每个单元的 validator，验证单元级证据：
-
-```bash
-set -euo pipefail
-
-run_root='experiments/F1-final/results/20260728T173852Z'
-input_root='experiments/F1-final/inputs/20260728T173852Z'
-s2_root="$run_root/auxiliary/S2"
-s3_root="$run_root/auxiliary/S3"
-s2_validator="$s2_root/suite-executed-sources/scripts/validate_s2_unit.py"
-s3_validator="$s3_root/executed-sources/scripts/validate_s3_results.py"
-
-for dataset in D4 D5; do
-  case "$dataset" in
-    D4)
-      dataset_lc=d4
-      min_rows=150000
-      max_rows=250000
-      ;;
-    D5)
-      dataset_lc=d5
-      min_rows=2700000
-      max_rows=3300000
-      ;;
-  esac
-  frozen_evidence="$run_root/inputs/S2/$dataset"
-  for path_name in native zstd noop; do
-    unit_root="$s2_root/units/${dataset_lc}_${path_name}"
-    python3 "$s2_validator" \
-      "$unit_root" "$input_root" "$frozen_evidence" \
-      "$dataset" "$path_name" "$min_rows" "$max_rows" |
-      jq -e '.status == "PASS" and (.failures | length) == 0'
-  done
-done
-
-for path_name in native zstd noop; do
-  unit_root="$s3_root/units/d7_${path_name}"
-  python3 "$s3_validator" \
-    "$unit_root" "$input_root" \
-    --unit-arm "$path_name" --expected-rows 20000000 |
-    jq -e '.status == "PASS" and .units == 1 and (.failures | length) == 0'
-done
-```
-
-只有根清单、嵌套单元清单、套件与单元 validator、统一复算和图表 manifest 同时通过，数字才进入正文。
