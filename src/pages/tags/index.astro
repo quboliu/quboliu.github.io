@@ -5,13 +5,28 @@ import Header from "@/components/Header.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import Main from "@/components/Main.astro";
 import Footer from "@/components/Footer.astro";
-import Tag from "@/components/Tag.astro";
+import Card from "@/components/Card.astro";
 import { getUniqueTags } from "@/utils/getUniqueTags";
+import { slugifyStr } from "@/utils/slugify";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
 
 const posts = await getCollection("posts", ({ data }) => !data.draft);
 const tags = getUniqueTags(posts);
+
+const byPubDatetimeDesc = (
+  a: (typeof posts)[number],
+  b: (typeof posts)[number]
+) =>
+  new Date(b.data.pubDatetime).getTime() - new Date(a.data.pubDatetime).getTime();
+
+const tagGroups = tags.map(({ tag, tagName }) => ({
+  tag,
+  tagName,
+  posts: posts
+    .filter(post => post.data.tags.some(t => slugifyStr(t) === tag))
+    .sort(byPubDatetimeDesc),
+}));
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
@@ -23,10 +38,82 @@ const t = useTranslations(locale);
   <Breadcrumb />
 
   <Main pageTitle={t.pages.tagsTitle} pageDesc={t.pages.tagsDesc}>
-    <ul class="flex flex-wrap gap-6">
-      {tags.map(({ tag, tagName }) => <Tag {tag} {tagName} />)}
-    </ul>
+    <a
+      id="show-all-tags"
+      href="#"
+      class="text-accent mb-4 inline-block hidden no-underline hover:underline"
+    >
+      ← 全部标签
+    </a>
+    {
+      tagGroups.map(({ tag, tagName, posts: tagPosts }) => (
+        <section id={`tag-${tag}`} data-tag-group={tag} class="mb-8">
+          <a
+            href={`#tag-${tag}`}
+            data-tag-link={tag}
+            class="text-foreground no-underline"
+          >
+            <span class="text-accent text-xl font-bold">#{tagName}</span>
+            <sup class="text-muted-foreground text-sm">{tagPosts.length}</sup>
+          </a>
+          <ul class="mt-2">
+            {tagPosts.map(data => (
+              <Card {...data} variant="h3" />
+            ))}
+          </ul>
+        </section>
+      ))
+    }
   </Main>
 
   <Footer />
 </Layout>
+
+<script>
+  function initTagFilter() {
+    const showAll = document.getElementById("show-all-tags");
+
+    function applyFilter() {
+      const hash = decodeURIComponent(window.location.hash.slice(1));
+      const groups = document.querySelectorAll("[data-tag-group]");
+      let matched = false;
+      groups.forEach(group => {
+        const active = group.id === hash;
+        const visible = !hash || active;
+        group.classList.toggle("hidden", !visible);
+        group
+          .querySelector("[data-tag-link]")
+          ?.classList.toggle("tag-filter-active", active);
+        if (active) matched = true;
+      });
+      showAll?.classList.toggle("hidden", !(hash && matched));
+    }
+
+    // Clicking the heading of the currently focused tag clears the filter.
+    document.querySelectorAll("[data-tag-link]").forEach(link => {
+      link.addEventListener("click", event => {
+        const anchor = (event.currentTarget as HTMLElement).closest(
+          "[data-tag-group]"
+        );
+        if (anchor && window.location.hash === `#${anchor.id}`) {
+          event.preventDefault();
+          history.pushState(null, "", window.location.pathname);
+          applyFilter();
+        }
+      });
+    });
+
+    window.addEventListener("hashchange", applyFilter);
+    applyFilter();
+  }
+
+  initTagFilter();
+  document.addEventListener("astro:after-swap", initTagFilter);
+</script>
+
+<style>
+  .tag-filter-active span:first-child {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+</style>
