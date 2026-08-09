@@ -1,7 +1,6 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-12-25T00:00:00+08:00
-modDatetime: 2026-08-10T00:44:15+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Amazon Aurora：如何在 I/O、提交与成员变更中避免分布式共识（中英对照全文）"
 featured: false
