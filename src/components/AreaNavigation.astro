@@ -1,0 +1,112 @@
+---
+type AreaLink = {
+  slug: string;
+  name: string;
+  count: number;
+};
+
+type Props = {
+  areas: AreaLink[];
+};
+
+const { areas } = Astro.props;
+---
+
+<nav
+  aria-label="Area navigation"
+  class="border-border bg-background/95 sticky top-0 z-20 -mx-5 min-w-0 overflow-x-auto border-y px-5 py-3 backdrop-blur lg:top-6 lg:z-10 lg:mx-0 lg:max-h-[calc(100vh-3rem)] lg:self-start lg:overflow-y-auto lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none"
+>
+  <ul class="flex min-w-max gap-2 lg:min-w-0 lg:flex-col lg:gap-1">
+    {
+      areas.map(({ slug, name, count }, index) => (
+        <li>
+          <a
+            href={`#area-${slug}`}
+            data-area-nav={slug}
+            aria-current={index === 0 ? "location" : undefined}
+            class="area-nav-link text-muted-foreground hover:text-accent flex items-baseline justify-between gap-3 rounded px-2 py-1.5 text-sm no-underline transition-colors"
+          >
+            <span>{name}</span>
+            <span class="font-mono text-xs" aria-label={`${count} 篇文章`}>
+              {count}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  let areaNavigationController: AbortController | undefined;
+
+  function initAreaNavigation() {
+    areaNavigationController?.abort();
+    areaNavigationController = new AbortController();
+
+    const links = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>("[data-area-nav]")
+    );
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-area-section]")
+    );
+
+    if (links.length === 0 || sections.length === 0) return;
+
+    const { signal } = areaNavigationController;
+
+    function setActive(slug?: string) {
+      links.forEach(link => {
+        if (link.dataset.areaNav === slug) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    }
+
+    function updateActive() {
+      const marker = window.scrollY + Math.min(window.innerHeight * 0.3, 220);
+      let current = sections[0];
+
+      for (const section of sections) {
+        if (section.offsetTop <= marker) current = section;
+      }
+
+      const atPageEnd =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+      if (atPageEnd) current = sections.at(-1) ?? current;
+
+      setActive(current.dataset.areaSection);
+    }
+
+    let animationFrame: number | undefined;
+    function requestUpdate() {
+      if (animationFrame !== undefined) return;
+      animationFrame = window.requestAnimationFrame(() => {
+        animationFrame = undefined;
+        updateActive();
+      });
+    }
+
+    links.forEach(link => {
+      link.addEventListener("click", () => setActive(link.dataset.areaNav), {
+        signal,
+      });
+    });
+    window.addEventListener("scroll", requestUpdate, { passive: true, signal });
+    window.addEventListener("resize", requestUpdate, { passive: true, signal });
+    updateActive();
+  }
+
+  document.addEventListener("astro:page-load", initAreaNavigation);
+</script>
+
+<style>
+  .area-nav-link[aria-current="location"] {
+    color: var(--accent);
+    background-color: var(--muted);
+    font-weight: 600;
+  }
+</style>

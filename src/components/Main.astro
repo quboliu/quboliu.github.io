@@ -5,10 +5,11 @@ import config from "@/config";
 type Props = {
   pageTitle: string | [string, string];
   pageDesc?: string;
+  wide?: boolean;
   class?: string;
 };
 
-const { pageTitle, pageDesc, class: className } = Astro.props;
+const { pageTitle, pageDesc, wide = false, class: className } = Astro.props;
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const backUrl = config.features.showBackButton
@@ -19,10 +20,24 @@ const backUrl = config.features.showBackButton
 <main
   data-backUrl={backUrl}
   id="main-content"
-  class:list={["app-layout pb-4", className]}
+  class:list={[
+    wide ? "mx-auto w-full max-w-[1120px] px-5 pb-4" : "app-layout pb-4",
+    className,
+  ]}
 >
-  <h1 class="text-2xl font-semibold sm:text-3xl">{pageTitle}</h1>
-  <p class="mt-2 mb-6 italic">{pageDesc}</p>
+  {
+    wide ? (
+      <div class="max-w-app mx-auto w-full sm:px-5">
+        <h1 class="text-2xl font-semibold sm:text-3xl">{pageTitle}</h1>
+        <p class="mt-2 mb-6 italic">{pageDesc}</p>
+      </div>
+    ) : (
+      <>
+        <h1 class="text-2xl font-semibold sm:text-3xl">{pageTitle}</h1>
+        <p class="mt-2 mb-6 italic">{pageDesc}</p>
+      </>
+    )
+  }
   <slot />
 </main>
 
