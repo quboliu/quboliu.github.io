@@ -19,6 +19,7 @@ import Comments from "@/components/Comments.astro";
 import TableOfContents from "./_components/TableOfContents.astro";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
+import ContentTypeBadge from "@/components/ContentTypeBadge.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -33,6 +34,7 @@ export async function getStaticPaths() {
           ? {
               id: sortedPosts[index - 1].id,
               title: sortedPosts[index - 1].data.title,
+              contentType: sortedPosts[index - 1].data.contentType,
               filePath: sortedPosts[index - 1].filePath,
             }
           : null,
@@ -41,6 +43,7 @@ export async function getStaticPaths() {
           ? {
               id: sortedPosts[index + 1].id,
               title: sortedPosts[index + 1].data.title,
+              contentType: sortedPosts[index + 1].data.contentType,
               filePath: sortedPosts[index + 1].filePath,
             }
           : null,
@@ -51,6 +54,7 @@ export async function getStaticPaths() {
 type AdjacentPost = {
   id: string;
   title: string;
+  contentType: CollectionEntry<"posts">["data"]["contentType"];
   filePath: string | undefined;
 } | null;
 
@@ -66,6 +70,7 @@ const t = useTranslations(locale);
 
 const {
   title,
+  contentType,
   area,
   lang,
   description,
@@ -120,13 +125,16 @@ const ogImage = ogImageUrl
     class:list={["app-layout", { "mt-8": !config.features.showBackButton }]}
     data-pagefind-body
   >
-    <h1
-      lang={lang}
-      style={{ viewTransitionName: toTransitionName(title) }}
-      class="text-heading inline-block max-w-full text-2xl font-bold [overflow-wrap:anywhere] sm:text-3xl"
-    >
-      {title}
-    </h1>
+    <div class="flex max-w-full flex-wrap items-center gap-x-2 gap-y-1">
+      <ContentTypeBadge {contentType} />
+      <h1
+        lang={lang}
+        style={{ viewTransitionName: toTransitionName(title) }}
+        class="text-heading inline-block max-w-full text-2xl font-bold [overflow-wrap:anywhere] sm:text-3xl"
+      >
+        {title}
+      </h1>
+    </div>
 
     <div class="my-2 flex flex-wrap items-center gap-2">
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />

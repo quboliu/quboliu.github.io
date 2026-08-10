@@ -4,6 +4,7 @@ pubDatetime: 2024-10-20T12:00:00+08:00
 modDatetime: 2026-08-10T15:33:40+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Distributed Snapshots: Determining Global States of Distributed Systems｜分布式快照：确定分布式系统的全局状态"
+contentType: "paper-translation"
 featured: false
 area: "distributed-systems"
 draft: false

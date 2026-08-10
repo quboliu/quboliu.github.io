@@ -3,6 +3,7 @@ lang: "zh-CN"
 pubDatetime: 2025-08-24T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "官方文档 | etcd API Guarantees｜etcd API 语义保证"
+contentType: "docs-translation"
 featured: false
 area: "distributed-systems"
 draft: false

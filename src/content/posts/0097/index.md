@@ -4,6 +4,7 @@ pubDatetime: 2025-06-29T12:00:00+08:00
 modDatetime: 2026-08-10T15:33:40+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Consensus in the Presence of Partial Synchrony｜部分同步环境中的共识"
+contentType: "paper-translation"
 featured: false
 area: "distributed-systems"
 draft: false

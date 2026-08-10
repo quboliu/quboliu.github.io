@@ -4,6 +4,7 @@ pubDatetime: 2025-01-12T12:00:00+08:00
 modDatetime: 2026-08-10T15:33:40+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Linearizability: A Correctness Condition for Concurrent Objects｜线性一致性：并发对象的正确性条件"
+contentType: "paper-translation"
 featured: false
 area: "distributed-systems"
 draft: false

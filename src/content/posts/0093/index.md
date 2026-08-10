@@ -4,6 +4,7 @@ pubDatetime: 2025-08-10T12:00:00+08:00
 modDatetime: 2026-08-10T15:33:40+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | In Search of an Understandable Consensus Algorithm｜寻找一种易于理解的共识算法"
+contentType: "paper-translation"
 featured: false
 area: "distributed-systems"
 draft: false

@@ -4,6 +4,7 @@ pubDatetime: 2025-07-20T12:00:00+08:00
 modDatetime: 2026-08-10T15:33:40+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Unreliable Failure Detectors for Reliable Distributed Systems｜可靠分布式系统中的不可靠故障检测器"
+contentType: "paper-translation"
 featured: false
 area: "distributed-systems"
 draft: false

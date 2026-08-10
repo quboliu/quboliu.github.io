@@ -4,6 +4,7 @@ pubDatetime: 2024-08-19T15:46:12+08:00
 modDatetime: 2024-08-19T15:46:54+08:00
 timezone: "Asia/Shanghai"
 title: "全文翻译 The Native POSIX Thread Library for Linux"
+contentType: "paper-translation"
 featured: false
 area: "operating-systems"
 draft: false

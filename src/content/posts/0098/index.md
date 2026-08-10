@@ -4,6 +4,7 @@ pubDatetime: 2025-08-31T12:00:00+08:00
 modDatetime: 2026-08-10T15:33:40+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | ZooKeeper: Wait-free Coordination for Internet-scale Systems｜ZooKeeper：面向互联网规模系统的无等待协调"
+contentType: "paper-translation"
 featured: false
 area: "distributed-systems"
 draft: false

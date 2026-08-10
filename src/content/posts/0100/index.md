@@ -4,6 +4,7 @@ pubDatetime: 2025-10-12T12:00:00+08:00
 modDatetime: 2026-08-10T15:33:40+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Conflict-free Replicated Data Types｜无冲突复制数据类型"
+contentType: "paper-translation"
 featured: false
 area: "distributed-systems"
 draft: false

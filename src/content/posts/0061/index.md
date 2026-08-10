@@ -1,9 +1,10 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-08-15T14:52:31+08:00
-modDatetime: 2024-08-15T14:56:26+08:00
+modDatetime: 2026-08-10T21:39:40+08:00
 timezone: "Asia/Shanghai"
-title: "如何阅读Go源代码-转载"
+title: "如何阅读 Go 源代码"
+contentType: "repost"
 featured: false
 area: "go"
 draft: false

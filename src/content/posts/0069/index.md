@@ -3,6 +3,7 @@ lang: "zh-CN"
 pubDatetime: 2026-01-06T16:11:16+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Transformer Explainer：通过交互式可视化讲解与实验学习 LLM Transformer"
+contentType: "paper-translation"
 featured: true
 area: "ai-and-agents"
 draft: false

@@ -4,6 +4,7 @@ pubDatetime: 2024-08-04T16:09:35+08:00
 modDatetime: 2024-08-04T16:37:25+08:00
 timezone: "Asia/Shanghai"
 title: "CNCF开源社区以及如何参与社区"
+contentType: "repost"
 featured: false
 area: "software-engineering"
 draft: false

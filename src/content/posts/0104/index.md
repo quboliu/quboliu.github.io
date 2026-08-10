@@ -3,6 +3,7 @@ lang: "zh-CN"
 pubDatetime: 2024-10-06T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "官方文档 | Kubernetes Cluster Architecture and Control Plane Communication｜Kubernetes 集群架构与控制平面通信"
+contentType: "docs-translation"
 featured: false
 area: "distributed-systems"
 draft: false

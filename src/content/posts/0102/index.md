@@ -3,6 +3,7 @@ lang: "zh-CN"
 pubDatetime: 2024-08-25T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Borg, Omega, and Kubernetes｜从 Borg、Omega 到 Kubernetes"
+contentType: "paper-translation"
 featured: false
 area: "distributed-systems"
 draft: false

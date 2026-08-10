@@ -4,6 +4,7 @@ pubDatetime: 2024-09-08T12:00:00+08:00
 modDatetime: 2026-08-10T15:33:40+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Dynamo: Amazon’s Highly Available Key-value Store｜Dynamo：亚马逊的高可用键值存储"
+contentType: "paper-translation"
 featured: false
 area: "distributed-systems"
 draft: false

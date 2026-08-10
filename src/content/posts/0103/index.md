@@ -3,6 +3,7 @@ lang: "zh-CN"
 pubDatetime: 2024-09-15T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "官方文档 | Kubernetes Resource Model and Control Loop｜Kubernetes 资源模型与控制循环"
+contentType: "docs-translation"
 featured: false
 area: "distributed-systems"
 draft: false

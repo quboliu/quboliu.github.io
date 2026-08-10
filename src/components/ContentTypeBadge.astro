@@ -1,0 +1,33 @@
+---
+import { getContentTypeMeta, type ContentType } from "@/data/contentTypes";
+
+type Props = {
+  contentType: ContentType;
+  class?: string;
+};
+
+const { contentType, class: className } = Astro.props;
+const { label, description } = getContentTypeMeta(contentType);
+---
+
+{
+  contentType !== "original" && (
+    <span
+      class:list={[
+        "inline-flex shrink-0 items-center rounded-sm border px-1.5 py-0.5 font-mono text-[11px] leading-none font-medium whitespace-nowrap",
+        className,
+        {
+          "border-orange-700/25 bg-orange-600/10 text-orange-800 dark:border-orange-300/25 dark:bg-orange-300/10 dark:text-orange-200":
+            contentType === "repost",
+          "border-violet-700/25 bg-violet-600/10 text-violet-800 dark:border-violet-300/25 dark:bg-violet-300/10 dark:text-violet-200":
+            contentType === "paper-translation",
+          "border-teal-700/25 bg-teal-600/10 text-teal-800 dark:border-teal-300/25 dark:bg-teal-300/10 dark:text-teal-200":
+            contentType === "docs-translation",
+        },
+      ]}
+      title={description}
+    >
+      {label}
+    </span>
+  )
+}

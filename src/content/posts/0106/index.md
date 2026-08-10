@@ -3,6 +3,7 @@ lang: "zh-CN"
 pubDatetime: 2024-12-08T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "官方文档 | Kubernetes API Concepts｜Kubernetes API 核心语义"
+contentType: "docs-translation"
 featured: false
 area: "distributed-systems"
 draft: false

@@ -4,6 +4,7 @@ pubDatetime: 2024-08-04T16:33:18+08:00
 modDatetime: 2024-08-04T16:37:18+08:00
 timezone: "Asia/Shanghai"
 title: "常见开源基金会"
+contentType: "repost"
 featured: false
 area: "software-engineering"
 draft: false

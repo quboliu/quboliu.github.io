@@ -3,6 +3,7 @@ lang: "zh-CN"
 pubDatetime: 2025-03-23T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "官方文档 | Kubernetes Scheduling Framework｜Kubernetes 调度框架"
+contentType: "docs-translation"
 featured: false
 area: "distributed-systems"
 draft: false

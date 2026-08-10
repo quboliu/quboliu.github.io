@@ -3,6 +3,7 @@ lang: "zh-CN"
 pubDatetime: 2025-04-13T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "官方文档 | Custom Resources and Operator Pattern｜自定义资源与 Operator 模式"
+contentType: "docs-translation"
 featured: false
 area: "distributed-systems"
 draft: false
