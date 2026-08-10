@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
-pubDatetime: 2026-08-09T12:00:00+08:00
-modDatetime: 2026-08-10T15:01:56+08:00
+pubDatetime: 2024-09-29T12:00:00+08:00
+modDatetime: 2026-08-10T15:33:40+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Time, Clocks, and the Ordering of Events in a Distributed System｜时间、时钟与分布式系统中的事件排序"
 featured: false
