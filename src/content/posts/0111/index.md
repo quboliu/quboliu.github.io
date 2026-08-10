@@ -1,0 +1,163 @@
+---
+lang: "zh-CN"
+pubDatetime: 2025-08-24T12:00:00+08:00
+timezone: "Asia/Shanghai"
+title: "官方文档 | etcd API Guarantees｜etcd API 语义保证"
+featured: false
+area: "distributed-systems"
+draft: false
+tags:
+  - "官方文档"
+  - "etcd"
+  - "一致性"
+  - "Watch"
+  - "Lease"
+  - "分布式系统"
+description: "etcd API Guarantees 官方文档中英对照精读：厘清严格可串行化、线性一致读、Revision、Watch 事件保证、Lease 与超时后的不确定结果。"
+---
+> **Source and translation basis｜来源与翻译依据**
+>
+> [etcd API guarantees](https://github.com/etcd-io/website/blob/d807822749d70b60a903ed19cc8a22634af0e527/content/en/docs/v3.5/learning/api_guarantees.md), frozen at `etcd-io/website` commit [`d807822749d7`](https://github.com/etcd-io/website/commit/d807822749d70b60a903ed19cc8a22634af0e527) (2025-01-12). The source repository is licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+>
+> 原文固定于 `etcd-io/website` 提交 [`d807822749d7`](https://github.com/etcd-io/website/commit/d807822749d70b60a903ed19cc8a22634af0e527)（2025-01-12）。本文完整保留可见原文，并在每个语义单元之后给出中文翻译；为使独立页面中的链接可用，仅将原文的相对链接展开为对应的绝对地址。源代码仓库采用 [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) 许可。
+>
+> **Reading context｜阅读背景：** 本文阅读时间安排在 2025 年 8 月，即 GTS 主备角色感知、etcd Watch 与 GTID 状态恢复工作阶段。它承接此前的 [Raft 论文精读](https://quboliu.github.io/posts/0093/)：Raft 解释共识复制为何安全，本文则说明 etcd API 实际向客户端承诺了哪些可观察语义。
+
+---
+
+etcd is a consistent and durable key value store. The key value store is exposed through [gRPC Services](https://etcd.io/docs/v3.5/learning/api/#grpc-services). etcd ensures the strongest consistency and durability guarantees for a distributed system. This specification enumerates the API guarantees made by etcd.
+
+> etcd 是一个具备一致性与持久性的键值存储，并通过 [gRPC 服务](https://etcd.io/docs/v3.5/learning/api/#grpc-services)对外提供访问。etcd 为分布式系统提供最强级别的一致性与持久性保证。本文档逐项列出 etcd API 所作的保证。
+
+## APIs to consider｜需要考察的 API
+
+* KV APIs
+  * [Range](https://etcd.io/docs/v3.5/learning/api/#range)
+  * [Put](https://etcd.io/docs/v3.5/learning/api/#put)
+  * [Delete](https://etcd.io/docs/v3.5/learning/api/#delete-range)
+  * [Transaction](https://etcd.io/docs/v3.5/learning/api/#transaction)
+* Watch APIs
+  * [Watch](https://etcd.io/docs/v3.5/learning/api/#watch-api)
+* Lease APIs
+  * [Grant](https://etcd.io/docs/v3.5/learning/api/#obtaining-leases)
+  * [Revoke]
+  * [Keep alive](https://etcd.io/docs/v3.5/learning/api/#keep-alives)
+
+> * KV API
+>   * [Range](https://etcd.io/docs/v3.5/learning/api/#range)
+>   * [Put](https://etcd.io/docs/v3.5/learning/api/#put)
+>   * [Delete](https://etcd.io/docs/v3.5/learning/api/#delete-range)
+>   * [Transaction](https://etcd.io/docs/v3.5/learning/api/#transaction)
+> * Watch API
+>   * [Watch](https://etcd.io/docs/v3.5/learning/api/#watch-api)
+> * Lease API
+>   * [Grant](https://etcd.io/docs/v3.5/learning/api/#obtaining-leases)
+>   * [Revoke]
+>   * [Keep alive](https://etcd.io/docs/v3.5/learning/api/#keep-alives)
+
+KV API allows for direct reading and manipulation of key value store. Watch API allows subscribing to key value store changes. Lease API allows assigning a time to live to a key.
+
+Both KV and Watch APIs allow access to not only the latest versions of keys, but also previous versions are accessible within a continuous history window, limited by a compaction operation.
+
+Calling KV API will take an immediate effect, while Watch API will return with some unbounded delay. In correctly working etcd cluster you should expect to see watch events to appear with 10ms delay after them happening. However, there is no limit and events in unhealthy clusters might never arrive.
+
+> KV API 用于直接读取和操作键值存储；Watch API 用于订阅键值存储的变化；Lease API 则可以为键指定生存时间。
+>
+> KV API 与 Watch API 不仅能访问键的最新版本，也能访问连续历史窗口中的旧版本；这个历史窗口的边界由压缩操作决定。
+>
+> KV API 调用会立即生效，而 Watch API 的返回可能经历无上界的延迟。在运行正常的 etcd 集群中，通常可以预期 watch 事件在实际变更发生约 10 ms 后出现；但该延迟没有硬性上限，在不健康的集群中，事件甚至可能永远无法到达。
+
+## KV APIs｜KV API
+
+etcd ensures durability and strict serializability for all KV api calls. Those are the strongest isolation guarantee of distributed transactional database systems.
+
+> etcd 保证所有 KV API 调用都具备持久性与严格可串行化。这是分布式事务数据库系统所能提供的最强隔离保证。
+
+### Durability｜持久性
+
+Any completed operations are durable. All accessible data is also durable data. A read will never return data that has not been made durable.
+
+> 任何已经完成的操作都是持久的；所有可访问的数据也都是已经持久化的数据。读操作绝不会返回尚未持久化的数据。
+
+### Strict serializability｜严格可串行化
+
+KV Service operations are atomic and occur in a total order, consistent with real-time order of those operations. Total order is implied through [revision](#revision). Read more about [strict serializability](http://jepsen.io/consistency/models/strict-serializable).
+
+Strict serializability implies other weaker guarantees that might be easier to understand:
+
+> KV 服务的操作是原子的，并且按照一个与这些操作的实时先后关系一致的全序发生；这个全序通过 [revision](#revision) 体现。关于这一模型，可进一步阅读[严格可串行化](http://jepsen.io/consistency/models/strict-serializable)。
+>
+> 严格可串行化蕴含下面这些较弱、但可能更容易理解的保证：
+
+#### Atomicity｜原子性
+
+All API requests are atomic; an operation either completes entirely or not at all. For watch requests, all events generated by one operation will be in one watch response. Watch never observes partial events for a single operation.
+
+> 所有 API 请求都是原子的：一个操作要么完整完成，要么完全不发生。对于 watch 请求，同一个操作产生的所有事件会出现在同一个 watch 响应中；Watch 绝不会只观察到某个操作的部分事件。
+
+#### Linearizability｜线性一致性
+
+From the perspective of client, linearizability provides useful properties which make reasoning easily. This is a clean description quoted from [the original paper][linearizability]: `Linearizability provides the illusion that each operation applied by concurrent processes takes effect instantaneously at some point between its invocation and its response.`
+
+> 从客户端视角看，线性一致性提供了一组便于推理的性质。[原始论文][linearizability]给出了一个简洁描述：`线性一致性营造出一种假象，仿佛并发进程执行的每个操作，都在其调用与响应之间的某个时刻瞬间生效。`
+
+For example, consider a client completing a write at time point 1 (*t1*). A client issuing a read at *t2* (for *t2* > *t1*) should receive a value at least as recent as the previous write, completed at *t1*. However, the read might actually complete only by *t3*. Linearizability guarantees the read returns the most current value. Without linearizability guarantee, the returned value, current at *t2* when the read began, might be "stale" by *t3* because a concurrent write might happen between *t2* and *t3*.
+
+> 例如，设某个客户端在时刻 1（*t1*）完成一次写入。另一个客户端在 *t2* 发起读取（*t2* > *t1*）时，至少应该读到不早于 *t1* 已完成写入的值；但这次读取可能直到 *t3* 才真正完成。线性一致性保证它返回完成时的最新值。若没有线性一致性保证，读取开始于 *t2* 时仍属最新的返回值，到 *t3* 时可能已经“陈旧”，因为 *t2* 与 *t3* 之间还可能发生并发写入。
+
+etcd ensures linearizability for all other operations by default. Linearizability comes with a cost, however, because linearized requests must go through the Raft consensus process. To obtain lower latencies and higher throughput for read requests, clients can configure a request’s consistency mode to `serializable`, which may access stale data with respect to quorum, but removes the performance penalty of linearized accesses' reliance on live consensus.
+
+> etcd 默认保证其他所有操作的线性一致性。不过，线性一致性并非没有代价：线性化请求必须经过 Raft 共识过程。为了降低读请求延迟并提高吞吐量，客户端可以把请求的一致性模式设为 `serializable`。这种模式相对于仲裁多数可能读到陈旧数据，但也消除了线性一致访问依赖实时共识所带来的性能开销。
+
+## Watch APIs｜Watch API
+
+Watches make guarantees about events:
+
+* Ordered - events are ordered by revision. An event will never appear on a watch if it precedes an event in time that has already been posted.
+* Unique - an event will never appear on a watch twice.
+* Reliable - a sequence of events will never drop any subsequence of events within the available history window. If there are events ordered in time as a < b < c, then if the watch receives events a and c, it is guaranteed to receive b as long b is in the available history window.
+* Atomic - a list of events is guaranteed to encompass complete revisions. Updates in the same revision over multiple keys will not be split over several lists of events.
+* Resumable - A broken watch can be resumed by establishing a new watch starting after the last revision received in a watch event before the break, so long as the revision is in the history window.
+* Bookmarkable - Progress notification events guarantee that all events up to a revision have been already delivered.
+
+> Watch 对事件作出以下保证：
+>
+> * **有序（Ordered）**——事件按 revision 排序。若某事件在时间上先于一个已经发布的事件，它绝不会在该已发布事件之后才出现在 watch 中。
+> * **唯一（Unique）**——同一个事件绝不会在一个 watch 中出现两次。
+> * **可靠（Reliable）**——在可用历史窗口内，事件序列不会丢失任何子序列。若事件按时间顺序满足 a < b < c，那么 watch 一旦收到了 a 和 c，只要 b 仍处于可用历史窗口内，就必然也会收到 b。
+> * **原子（Atomic）**——一个事件列表必然覆盖完整的 revision。同一 revision 中对多个键的更新不会被拆分到多个事件列表中。
+> * **可恢复（Resumable）**——只要中断前最后收到的 revision 仍在历史窗口内，就可以新建一个从该 revision 之后开始的 watch，从而恢复已中断的 watch。
+> * **可设书签（Bookmarkable）**——进度通知事件保证，截至某个 revision 的所有事件都已经交付。
+
+etcd does not ensure linearizability for watch operations. Users are expected to verify the revision of watch events to ensure correct ordering with other operations.
+
+> etcd 不保证 watch 操作具备线性一致性。用户需要核验 watch 事件的 revision，确保它与其他操作之间具有正确的顺序。
+
+## Lease APIs｜Lease API
+
+etcd provides [a lease mechanism][lease]. The primary use case of a lease is implementing distributed coordination mechanisms like distributed locks. The lease mechanism itself is simple: a lease can be created with the grant API, attached to a key with the put API, revoked with the revoke API, and will be expired by the wall clock time to live (TTL). However, users need to be aware about [the important properties of the APIs and usage][why] for implementing correct distributed coordination mechanisms.
+
+> etcd 提供了一套[租约机制][lease]，其主要用途是实现分布式锁等分布式协调机制。租约机制本身很简单：通过 grant API 创建租约，通过 put API 把租约绑定到键，通过 revoke API 撤销租约；租约还会在墙上时钟度量的生存时间（TTL）到期后失效。不过，要实现正确的分布式协调机制，用户必须了解[这些 API 及其使用方式的重要性质][why]。
+
+## etcd specific definitions｜etcd 特有定义
+
+### Operation completed｜操作完成
+
+An etcd operation is considered complete when it is committed through consensus, and therefore “executed” -- permanently stored -- by the etcd storage engine. The client knows an operation is completed when it receives a response from the etcd server. Note that the client may be uncertain about the status of an operation if it times out, or there is a network disruption between the client and the etcd member. etcd may also abort operations when there is a leader election. etcd does not send `abort` responses to  clients’ outstanding requests in this event.
+
+> 当一个 etcd 操作已经通过共识提交，因而被 etcd 存储引擎“执行”——即永久保存——时，该操作才被视为完成。客户端在收到 etcd 服务器响应时，便知道操作已经完成。需要注意的是，如果请求超时，或者客户端与 etcd 成员之间发生网络中断，客户端可能无法确定操作的状态。领导者选举期间，etcd 也可能中止操作；在这种情况下，etcd 不会向客户端尚未完成的请求发送 `abort` 响应。
+
+### Revision｜Revision
+
+An etcd operation that modifies the key value store is assigned a single increasing revision. A transaction operation might modify the key value store multiple times, but only one revision is assigned. The revision attribute of a key value pair that was modified by the operation has the same value as the revision of the operation. The revision can be used as a logical clock for key value store. A key value pair that has a larger revision is modified after a key value pair with a smaller revision. Two key value pairs that have the same revision are modified by an operation "concurrently".
+
+> 每个修改键值存储的 etcd 操作都会获得一个单调递增的 revision。一次事务操作可能多次修改键值存储，但只会被分配一个 revision。被该操作修改的键值对，其 revision 属性与操作本身的 revision 相同。revision 可以充当键值存储的逻辑时钟：revision 较大的键值对晚于 revision 较小的键值对被修改；revision 相同的两个键值对则由同一个操作“并发”修改。
+
+[grpc Services]: https://etcd.io/docs/v3.5/learning/api/#grpc-services
+[lease]: https://web.stanford.edu/class/cs240/readings/leases.pdf
+[linearizability]: https://cs.brown.edu/~mph/HerlihyW90/p463-herlihy.pdf
+[serializable_isolation]: https://en.wikipedia.org/wiki/Isolation_(database_systems)#Serializable
+[strict serializability]: http://jepsen.io/consistency/models/strict-serializable
+[txn]: https://etcd.io/docs/v3.5/learning/api/#transaction
+[why]: https://etcd.io/docs/v3.5/learning/why/#notes-on-the-usage-of-lock-and-lease
+[revision]: #revision
