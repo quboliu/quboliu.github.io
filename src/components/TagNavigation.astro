@@ -1,0 +1,132 @@
+---
+type TagLink = {
+  slug: string;
+  name: string;
+  count: number;
+};
+
+type Props = {
+  tags: TagLink[];
+};
+
+const { tags } = Astro.props;
+---
+
+<nav
+  aria-label="Tag navigation"
+  class="border-border max-h-52 min-w-0 overflow-y-auto border-y py-3 xl:sticky xl:top-6 xl:max-h-[calc(100vh-3rem)] xl:self-start xl:border-0 xl:py-0"
+>
+  <ul class="flex flex-wrap content-start gap-1.5">
+    {
+      tags.map(({ slug, name, count }, index) => (
+        <li>
+          <a
+            href={`#tag-${slug}`}
+            data-tag-nav={slug}
+            aria-current={index === 0 ? "location" : undefined}
+            aria-label={`#${name}，${count} 篇文章`}
+            title={`${count} 篇文章`}
+            class="tag-nav-link border-border text-muted-foreground hover:border-accent hover:text-accent inline-flex rounded border px-1.5 py-1 text-xs whitespace-nowrap no-underline transition-colors"
+          >
+            #{name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  let tagNavigationController: AbortController | undefined;
+
+  function initTagNavigation() {
+    tagNavigationController?.abort();
+    tagNavigationController = new AbortController();
+
+    const links = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>("[data-tag-nav]")
+    );
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-tag-section]")
+    );
+
+    if (links.length === 0 || sections.length === 0) return;
+
+    const { signal } = tagNavigationController;
+
+    function keepLinkVisible(link: HTMLAnchorElement) {
+      const navigation = link.closest("nav");
+      if (!navigation || navigation.scrollHeight <= navigation.clientHeight)
+        return;
+
+      const navigationRect = navigation.getBoundingClientRect();
+      const linkRect = link.getBoundingClientRect();
+
+      if (linkRect.top < navigationRect.top) {
+        navigation.scrollTop += linkRect.top - navigationRect.top - 4;
+      } else if (linkRect.bottom > navigationRect.bottom) {
+        navigation.scrollTop += linkRect.bottom - navigationRect.bottom + 4;
+      }
+    }
+
+    function setActive(slug?: string) {
+      links.forEach(link => {
+        if (link.dataset.tagNav === slug) {
+          link.setAttribute("aria-current", "location");
+          keepLinkVisible(link);
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    }
+
+    function updateActive() {
+      const marker = window.scrollY + 32;
+      let current = sections[0];
+
+      for (const section of sections) {
+        if (section.offsetTop <= marker) current = section;
+      }
+
+      const atPageEnd =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+      if (atPageEnd) current = sections.at(-1) ?? current;
+
+      setActive(current.dataset.tagSection);
+    }
+
+    let animationFrame: number | undefined;
+    function requestUpdate() {
+      if (animationFrame !== undefined) return;
+      animationFrame = window.requestAnimationFrame(() => {
+        animationFrame = undefined;
+        updateActive();
+      });
+    }
+
+    links.forEach(link => {
+      link.addEventListener("click", () => setActive(link.dataset.tagNav), {
+        signal,
+      });
+    });
+    window.addEventListener("scroll", requestUpdate, { passive: true, signal });
+    window.addEventListener("resize", requestUpdate, { passive: true, signal });
+    updateActive();
+  }
+
+  document.addEventListener("astro:page-load", initTagNavigation);
+</script>
+
+<style>
+  nav {
+    overflow-anchor: none;
+  }
+
+  .tag-nav-link[aria-current="location"] {
+    color: var(--accent);
+    border-color: var(--accent);
+    background-color: var(--muted);
+    font-weight: 600;
+  }
+</style>
