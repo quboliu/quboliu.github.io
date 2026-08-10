@@ -4,6 +4,7 @@ pubDatetime: 2026-05-21T14:09:14+08:00
 timezone: "Asia/Shanghai"
 title: "Vibe Coding 时的 UI 和 UX 设计开发问题"
 featured: false
+area: "ai-and-agents"
 draft: false
 tags:
   - "vibe coding"
@@ -11,6 +12,7 @@ tags:
   - "AI 辅助开发"
 description: "非设计背景的开发者用 AI 做 UI/UX 时的四条出路：学设计词汇、截图加源码积累、用先进工具开盲盒、等底层模型迭代。"
 ---
+
 用 AI 写代码（vibe coding）时，功能逻辑好办，UI 和 UX 设计是短板。自己不懂设计，AI 给出的东西往往也平庸。目前能看到四条出路：
 
 ## 1. 学设计，但不一定要亲手实现

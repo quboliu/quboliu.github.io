@@ -4,6 +4,7 @@ pubDatetime: 2026-08-09T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Distributed Snapshots: Determining Global States of Distributed Systems（中英对照全文）"
 featured: false
+area: "distributed-systems"
 draft: false
 tags:
   - "论文阅读"
@@ -13,6 +14,7 @@ tags:
   - "Chandy-Lamport"
 description: "Chandy 与 Lamport 的分布式快照经典论文中英对照全文，涵盖无全局时钟条件下的一致全局状态记录、标记算法、可达性证明与稳定性质检测。"
 ---
+
 > 分布式快照：确定分布式系统的全局状态
 
 K. MANI CHANDY<br>
@@ -59,9 +61,9 @@ Permission to copy without fee all or part of this material is granted provided 
 
 > © 1985 ACM 0734-2071/85/0200-0063 \$00.75
 
-*ACM Transactions on Computer Systems*, Vol. 3, No. 1, February 1985, Pages 63–75.
+_ACM Transactions on Computer Systems_, Vol. 3, No. 1, February 1985, Pages 63–75.
 
-> *ACM Transactions on Computer Systems*，第 3 卷第 1 期，1985 年 2 月，第 63–75 页。
+> _ACM Transactions on Computer Systems_，第 3 卷第 1 期，1985 年 2 月，第 63–75 页。
 
 ## 1. INTRODUCTION
 
@@ -75,7 +77,7 @@ The state-detection algorithm plays the role of a group of photographers observi
 
 > 状态检测算法扮演着一组摄影师的角色；他们观察的是一幅全景式的动态场景，比如布满迁徙鸟群的天空——这个场景如此辽阔，不可能由一张照片完整捕捉。摄影师必须拍摄多张快照，再把它们拼接起来，形成整个场景的图像。由于同步问题，这些快照不可能都在完全相同的时刻拍摄。此外，摄影师不应干扰被拍摄的过程；例如，他们不可能让天空中的所有鸟都在拍摄时静止不动。然而，拼合后的图像又必须有意义。摆在我们面前的问题，就是先定义何谓“有意义”，再确定应当如何拍摄这些照片。
 
-We now describe an important class of problems that can be solved with the global-state-detection algorithm. Let $y$ be a predicate function defined on the global states of a distributed system $D$; that is, $y(S)$ is true or false for a global state $S$ of $D$. The predicate $y$ is said to be a *stable property* of $D$ if $y(S)$ implies $y(S')$ for all global states $S'$ of $D$ reachable from global state $S$ of $D$. In other words, if $y$ is a stable property and $y$ is true at a point in a computation of $D$, then $y$ is true at all later points in that computation. Examples of stable properties are “computation has terminated,” “the system is deadlocked,” and “all tokens in a token ring have disappeared.”
+We now describe an important class of problems that can be solved with the global-state-detection algorithm. Let $y$ be a predicate function defined on the global states of a distributed system $D$; that is, $y(S)$ is true or false for a global state $S$ of $D$. The predicate $y$ is said to be a _stable property_ of $D$ if $y(S)$ implies $y(S')$ for all global states $S'$ of $D$ reachable from global state $S$ of $D$. In other words, if $y$ is a stable property and $y$ is true at a point in a computation of $D$, then $y$ is true at all later points in that computation. Examples of stable properties are “computation has terminated,” “the system is deadlocked,” and “all tokens in a token ring have disappeared.”
 
 > 下面说明一类可由全局状态检测算法解决的重要问题。设 $y$ 是定义在分布式系统 $D$ 的全局状态上的谓词函数；也就是说，对于 $D$ 的一个全局状态 $S$，$y(S)$ 的值为真或假。若对于从 $D$ 的全局状态 $S$ 可达的每一个全局状态 $S'$，$y(S)$ 都蕴含 $y(S')$，则称谓词 $y$ 是 $D$ 的一个*稳定性质*。换言之，若 $y$ 是稳定性质，而且在 $D$ 的一次计算中的某一点为真，那么在该次计算此后的所有点上，$y$ 都为真。稳定性质的例子包括“计算已经终止”、“系统发生了死锁”和“令牌环中的所有令牌都已消失”。
 
@@ -123,15 +125,15 @@ Channels are assumed to have infinite buffers, to be error-free, and to deliver 
 
 > 假定信道具有无限缓冲区、不会出错，并按发送顺序交付消息。（采用无限缓冲区假设只是为了便于论述；若能证明没有任何进程会试图向已满的缓冲区加入消息，也可以假定缓冲区有界。）消息在信道中经历的延迟可以任意长，但必须有限。沿一条信道接收到的消息序列，是沿该信道发送的消息序列的一个初始子序列。一条信道的状态，是沿该信道已发送的消息序列扣除已接收消息之后的序列。
 
-A process is defined by a set of states, an initial state (from this set), and a set of events. An event $e$ in a process $p$ is an atomic action that may change the state of $p$ itself and the state of at most one channel $c$ incident on $p$: the state of $c$ may be changed by the sending of a message along $c$ (if $c$ is directed away from $p$) or the receipt of a message along $c$ (if $c$ is directed towards $p$). An event $e$ is defined by (1) the process $p$ in which the event occurs, (2) the state $s$ of $p$ immediately before the event, (3) the state $s'$ of $p$ immediately after the event, (4) the channel $c$ (if any) whose state is altered by the event, and (5) the message $M$, if any, sent along $c$ (if $c$ is a channel directed away from $p$) or received along $c$ (if $c$ is directed towards $p$). We define $e$ by the 5-tuple $\langle p, s, s', M, c\rangle$, where $M$ and $c$ are a special symbol, *null*, if the occurrence of $e$ does not change the state of any channel.
+A process is defined by a set of states, an initial state (from this set), and a set of events. An event $e$ in a process $p$ is an atomic action that may change the state of $p$ itself and the state of at most one channel $c$ incident on $p$: the state of $c$ may be changed by the sending of a message along $c$ (if $c$ is directed away from $p$) or the receipt of a message along $c$ (if $c$ is directed towards $p$). An event $e$ is defined by (1) the process $p$ in which the event occurs, (2) the state $s$ of $p$ immediately before the event, (3) the state $s'$ of $p$ immediately after the event, (4) the channel $c$ (if any) whose state is altered by the event, and (5) the message $M$, if any, sent along $c$ (if $c$ is a channel directed away from $p$) or received along $c$ (if $c$ is directed towards $p$). We define $e$ by the 5-tuple $\langle p, s, s', M, c\rangle$, where $M$ and $c$ are a special symbol, _null_, if the occurrence of $e$ does not change the state of any channel.
 
-> 一个进程由一个状态集合、该集合中的一个初始状态以及一个事件集合来定义。进程 $p$ 中的事件 $e$ 是一个原子动作，它可以改变 $p$ 自身的状态，并且至多改变一条与 $p$ 相接的信道 $c$ 的状态：若 $c$ 的方向离开 $p$，则可通过沿 $c$ 发送消息来改变 $c$ 的状态；若 $c$ 的方向指向 $p$，则可通过沿 $c$ 接收消息来改变其状态。事件 $e$ 由以下五项定义：（1）事件发生所在的进程 $p$；（2）事件发生前一刻 $p$ 的状态 $s$；（3）事件发生后一刻 $p$ 的状态 $s'$；（4）其状态被事件改变的信道 $c$（如有）；（5）沿 $c$ 发送的消息 $M$（若 $c$ 是离开 $p$ 的信道），或沿 $c$ 接收的消息 $M$（若 $c$ 是指向 $p$ 的信道）（如有）。我们用五元组 $\langle p, s, s', M, c\rangle$ 定义 $e$；若 $e$ 的发生不改变任何信道的状态，则 $M$ 与 $c$ 均取特殊符号 *null*。
+> 一个进程由一个状态集合、该集合中的一个初始状态以及一个事件集合来定义。进程 $p$ 中的事件 $e$ 是一个原子动作，它可以改变 $p$ 自身的状态，并且至多改变一条与 $p$ 相接的信道 $c$ 的状态：若 $c$ 的方向离开 $p$，则可通过沿 $c$ 发送消息来改变 $c$ 的状态；若 $c$ 的方向指向 $p$，则可通过沿 $c$ 接收消息来改变其状态。事件 $e$ 由以下五项定义：（1）事件发生所在的进程 $p$；（2）事件发生前一刻 $p$ 的状态 $s$；（3）事件发生后一刻 $p$ 的状态 $s'$；（4）其状态被事件改变的信道 $c$（如有）；（5）沿 $c$ 发送的消息 $M$（若 $c$ 是离开 $p$ 的信道），或沿 $c$ 接收的消息 $M$（若 $c$ 是指向 $p$ 的信道）（如有）。我们用五元组 $\langle p, s, s', M, c\rangle$ 定义 $e$；若 $e$ 的发生不改变任何信道的状态，则 $M$ 与 $c$ 均取特殊符号 _null_。
 
-A global state of a distributed system is a set of component process and channel states: the initial global state is one in which the state of each process is its initial state and the state of each channel is the empty sequence. The occurrence of an event may change the global state. Let $e = \langle p, s, s', M, c\rangle$ we say $e$ can occur in global state $S$ if and only if (1) the state of process $p$ in global state $S$ is $s$ and (2) if $c$ is a channel directed towards $p$, then the state of $c$ in global state $S$ is a sequence of messages with $M$ at its head. We define a function *next*, where $next(S,e)$ is the global state immediately after the occurrence of event $e$ in global state $S$. The value of $next(S,e)$ is defined only if event $e$ can occur in global state $S$, in which case $next(S,e)$ is the global state identical to $S$ except that: (1) the state of $p$ in $next(S,e)$ is $s'$; (2) if $e$ is a channel directed towards $p$, then the state of $c$ in $next(S,e)$ is $c$’s state in $S$ with message $M$ deleted from its head; and (3) if $c$ is a channel directed away from $p$, then the state of $c$ in $next(S,e)$ is the same as $c$’s state in $S$ with message $M$ added to the tail.
+A global state of a distributed system is a set of component process and channel states: the initial global state is one in which the state of each process is its initial state and the state of each channel is the empty sequence. The occurrence of an event may change the global state. Let $e = \langle p, s, s', M, c\rangle$ we say $e$ can occur in global state $S$ if and only if (1) the state of process $p$ in global state $S$ is $s$ and (2) if $c$ is a channel directed towards $p$, then the state of $c$ in global state $S$ is a sequence of messages with $M$ at its head. We define a function _next_, where $next(S,e)$ is the global state immediately after the occurrence of event $e$ in global state $S$. The value of $next(S,e)$ is defined only if event $e$ can occur in global state $S$, in which case $next(S,e)$ is the global state identical to $S$ except that: (1) the state of $p$ in $next(S,e)$ is $s'$; (2) if $e$ is a channel directed towards $p$, then the state of $c$ in $next(S,e)$ is $c$’s state in $S$ with message $M$ deleted from its head; and (3) if $c$ is a channel directed away from $p$, then the state of $c$ in $next(S,e)$ is the same as $c$’s state in $S$ with message $M$ added to the tail.
 
-> 分布式系统的一个全局状态，是各组成进程与信道的状态所构成的集合：在初始全局状态中，每个进程均处于其初始状态，每条信道的状态均为空序列。事件的发生可能改变全局状态。设 $e = \langle p, s, s', M, c\rangle$；当且仅当以下条件成立时，我们说 $e$ 可以在全局状态 $S$ 中发生：（1）进程 $p$ 在全局状态 $S$ 中的状态为 $s$；（2）若 $c$ 是一条指向 $p$ 的信道，则 $c$ 在全局状态 $S$ 中的状态是一个以 $M$ 为首元素的消息序列。定义函数 *next*，其中 $next(S,e)$ 表示事件 $e$ 在全局状态 $S$ 中发生后紧接着的全局状态。只有当事件 $e$ 可以在全局状态 $S$ 中发生时，$next(S,e)$ 的值才有定义；此时，$next(S,e)$ 与 $S$ 完全相同，只有以下例外：（1）$p$ 在 $next(S,e)$ 中的状态为 $s'$；（2）若 $e$ 是一条指向 $p$ 的信道，则 $c$ 在 $next(S,e)$ 中的状态，是从 $c$ 在 $S$ 中的状态头部删除消息 $M$ 后所得的状态；（3）若 $c$ 是一条离开 $p$ 的信道，则 $c$ 在 $next(S,e)$ 中的状态，是在 $c$ 于 $S$ 中的状态尾部加入消息 $M$ 后所得的状态。
+> 分布式系统的一个全局状态，是各组成进程与信道的状态所构成的集合：在初始全局状态中，每个进程均处于其初始状态，每条信道的状态均为空序列。事件的发生可能改变全局状态。设 $e = \langle p, s, s', M, c\rangle$；当且仅当以下条件成立时，我们说 $e$ 可以在全局状态 $S$ 中发生：（1）进程 $p$ 在全局状态 $S$ 中的状态为 $s$；（2）若 $c$ 是一条指向 $p$ 的信道，则 $c$ 在全局状态 $S$ 中的状态是一个以 $M$ 为首元素的消息序列。定义函数 _next_，其中 $next(S,e)$ 表示事件 $e$ 在全局状态 $S$ 中发生后紧接着的全局状态。只有当事件 $e$ 可以在全局状态 $S$ 中发生时，$next(S,e)$ 的值才有定义；此时，$next(S,e)$ 与 $S$ 完全相同，只有以下例外：（1）$p$ 在 $next(S,e)$ 中的状态为 $s'$；（2）若 $e$ 是一条指向 $p$ 的信道，则 $c$ 在 $next(S,e)$ 中的状态，是从 $c$ 在 $S$ 中的状态头部删除消息 $M$ 后所得的状态；（3）若 $c$ 是一条离开 $p$ 的信道，则 $c$ 在 $next(S,e)$ 中的状态，是在 $c$ 于 $S$ 中的状态尾部加入消息 $M$ 后所得的状态。
 
-Let $seq = (e_i: 0 \le i \le n)$ be a sequence of events in component processes of a distributed system. We say that $seq$ is a *computation of the system* if and only if event $e_i$ can occur in global state $S_i$, $0 \le i \le n$, where $S_0$ is the initial global state and
+Let $seq = (e_i: 0 \le i \le n)$ be a sequence of events in component processes of a distributed system. We say that $seq$ is a _computation of the system_ if and only if event $e_i$ can occur in global state $S_i$, $0 \le i \le n$, where $S_0$ is the initial global state and
 
 $$S_{i+1} = next(S_i,e_i) \qquad \text{for}\qquad 0 \le i \le n.$$
 
@@ -143,9 +145,9 @@ An alternate model, based on Lamport [6], which views computations as partially 
 
 > 文献［7］给出了另一种以 Lamport［6］为基础的模型；该模型把计算视为事件的偏序集合。
 
-*Example 2.1.* To illustrate the definition of a distributed system, consider a simple system consisting of two processes $p$ and $q$, and two channels $c$ and $c'$ as shown in Figure 2.
+_Example 2.1._ To illustrate the definition of a distributed system, consider a simple system consisting of two processes $p$ and $q$, and two channels $c$ and $c'$ as shown in Figure 2.
 
-> *例 2.1。* 为说明分布式系统的定义，考虑图 2 所示的简单系统；它由两个进程 $p$、$q$ 以及两条信道 $c$、$c'$ 组成。
+> _例 2.1。_ 为说明分布式系统的定义，考虑图 2 所示的简单系统；它由两个进程 $p$、$q$ 以及两条信道 $c$、$c'$ 组成。
 
 ![The simple distributed system of Examples 2.1 and 2.2.](./fig-02.png)
 
@@ -155,7 +157,7 @@ An alternate model, based on Lamport [6], which views computations as partially 
 
 > **图表中文解读：** 两个进程 $p$、$q$ 由方向相反的两条信道连接：$c$ 从 $p$ 指向 $q$，$c'$ 从 $q$ 指向 $p$。
 
-The system contains one *token* that is passed from one process to another, and hence we call this system the “single-token conservation” system. Each process has two states, $s_0$ and $s_1$, where $s_0$ is the state in which the process does not possess the token and $s_1$ is the state in which it does. The initial state of $p$ is $s_1$ and of $q$ is $s_0$. Each process has two events: (1) a transition from $s_1$ to $s_0$ with the sending of the token, and (2) a transition from $s_0$ to $s_1$ with the receipt of the token. The state-transition diagram for a process is shown in Figure 3. The global states and transitions are shown in Figure 4.
+The system contains one _token_ that is passed from one process to another, and hence we call this system the “single-token conservation” system. Each process has two states, $s_0$ and $s_1$, where $s_0$ is the state in which the process does not possess the token and $s_1$ is the state in which it does. The initial state of $p$ is $s_1$ and of $q$ is $s_0$. Each process has two events: (1) a transition from $s_1$ to $s_0$ with the sending of the token, and (2) a transition from $s_0$ to $s_1$ with the receipt of the token. The state-transition diagram for a process is shown in Figure 3. The global states and transitions are shown in Figure 4.
 
 > 系统中含有一个在进程之间传递的*令牌*，因此我们称它为“单令牌守恒”系统。每个进程都有两个状态 $s_0$ 和 $s_1$；$s_0$ 表示进程不持有令牌，$s_1$ 表示进程持有令牌。$p$ 的初始状态为 $s_1$，$q$ 的初始状态为 $s_0$。每个进程都有两个事件：（1）发送令牌时从 $s_1$ 转移到 $s_0$；（2）接收令牌时从 $s_0$ 转移到 $s_1$。进程的状态转移图见图 3；全局状态及其转移见图 4。
 
@@ -207,9 +209,9 @@ For brevity, the four global states, in order of transition (see Figure 4), will
 
 > **图表中文解读：** 系统从 $S_0$ 开始：$p$ 为 $A$、$q$ 为 $C$，两条信道均空。随后 $p$ 发送 $M$ 得到 $S_1$；$q$ 发送 $M'$ 得到 $S_2$；最后 $p$ 接收 $M'$ 得到 $S_3$。在 $S_3$ 中，$M$ 仍在从 $p$ 到 $q$ 的信道上。
 
-*Example 2.2.* This example illustrates nondeterministic computations. Nondeterminism plays an interesting role in the snapshot algorithm.
+_Example 2.2._ This example illustrates nondeterministic computations. Nondeterminism plays an interesting role in the snapshot algorithm.
 
-> *例 2.2。* 本例说明非确定性计算。非确定性在快照算法中扮演着一个颇有意思的角色。
+> _例 2.2。_ 本例说明非确定性计算。非确定性在快照算法中扮演着一个颇有意思的角色。
 
 In Example 2.1 there is exactly one event possible in each global state. Consider a system with the same topology as Example 2.1 (see Figure 2) but where the processes $p$ and $q$ are defined by the state-transition diagrams of Figures 5 and 6.
 
@@ -239,9 +241,9 @@ We now consider an example to motivate the steps of the algorithm. In the exampl
 
 > 下面通过一个例子说明算法各步骤的动机。在该例中，我们暂且假定可以瞬时记录一条信道的状态；如何记录信道状态的问题稍后再讨论。设 $c$ 是一条从 $p$ 到 $q$ 的信道。本例旨在直观理解：记录信道 $c$ 状态的时刻，与记录进程 $p$、$q$ 状态的时刻之间存在什么关系。
 
-*Example 3.1.* Consider the single-token conservation system. Assume that the state of process $p$ is recorded in global state in-$p$. Then the state recorded for $p$ shows the token in $p$. Now assume that the global state transits to in-$c$ (because $p$ sends the token). Suppose the states of channels $c$ and $c'$ and of process $q$ were recorded in global state in-$c$, so the state recorded for channel $c$ shows it with the token and the states recorded for channel $c'$ and process $q$ show them not in possession of the token. The composite global state recorded in this fashion would show two tokens in the system, one in $p$ and the other in $c$. But a global state with two tokens is unreachable from the initial global state in a single-token conservation system! The inconsistency arises because the state of $p$ is recorded before $p$ sent a message along $c$ and the state of $c$ is recorded after $p$ sent the message. Let $n$ be the number of messages sent along $c$ before $p$’s state is recorded, and let $n'$ be the number of messages sent along $c$ before $c$’s state is recorded. Our example suggests that the recorded global state may be inconsistent if $n < n'$.
+_Example 3.1._ Consider the single-token conservation system. Assume that the state of process $p$ is recorded in global state in-$p$. Then the state recorded for $p$ shows the token in $p$. Now assume that the global state transits to in-$c$ (because $p$ sends the token). Suppose the states of channels $c$ and $c'$ and of process $q$ were recorded in global state in-$c$, so the state recorded for channel $c$ shows it with the token and the states recorded for channel $c'$ and process $q$ show them not in possession of the token. The composite global state recorded in this fashion would show two tokens in the system, one in $p$ and the other in $c$. But a global state with two tokens is unreachable from the initial global state in a single-token conservation system! The inconsistency arises because the state of $p$ is recorded before $p$ sent a message along $c$ and the state of $c$ is recorded after $p$ sent the message. Let $n$ be the number of messages sent along $c$ before $p$’s state is recorded, and let $n'$ be the number of messages sent along $c$ before $c$’s state is recorded. Our example suggests that the recorded global state may be inconsistent if $n < n'$.
 
-> *例 3.1。* 考虑单令牌守恒系统。假定在全局状态 in-$p$ 时记录进程 $p$ 的状态，那么为 $p$ 记录的状态显示令牌位于 $p$。再假定全局状态随后转移到 in-$c$（因为 $p$ 发送了令牌）。设在全局状态 in-$c$ 时记录信道 $c$、$c'$ 和进程 $q$ 的状态；于是为信道 $c$ 记录的状态显示它持有令牌，而为信道 $c'$ 与进程 $q$ 记录的状态显示它们都不持有令牌。以这种方式拼合出的全局状态会显示系统中有两个令牌：一个在 $p$ 中，另一个在 $c$ 中。但在单令牌守恒系统里，含有两个令牌的全局状态不可能从初始全局状态到达！这种不一致之所以出现，是因为 $p$ 的状态在 $p$ 沿 $c$ 发送消息之前被记录，而 $c$ 的状态却在 $p$ 发送消息之后被记录。令 $n$ 为记录 $p$ 的状态之前沿 $c$ 发送的消息数，令 $n'$ 为记录 $c$ 的状态之前沿 $c$ 发送的消息数。本例表明，若 $n < n'$，记录所得的全局状态就可能不一致。
+> _例 3.1。_ 考虑单令牌守恒系统。假定在全局状态 in-$p$ 时记录进程 $p$ 的状态，那么为 $p$ 记录的状态显示令牌位于 $p$。再假定全局状态随后转移到 in-$c$（因为 $p$ 发送了令牌）。设在全局状态 in-$c$ 时记录信道 $c$、$c'$ 和进程 $q$ 的状态；于是为信道 $c$ 记录的状态显示它持有令牌，而为信道 $c'$ 与进程 $q$ 记录的状态显示它们都不持有令牌。以这种方式拼合出的全局状态会显示系统中有两个令牌：一个在 $p$ 中，另一个在 $c$ 中。但在单令牌守恒系统里，含有两个令牌的全局状态不可能从初始全局状态到达！这种不一致之所以出现，是因为 $p$ 的状态在 $p$ 沿 $c$ 发送消息之前被记录，而 $c$ 的状态却在 $p$ 发送消息之后被记录。令 $n$ 为记录 $p$ 的状态之前沿 $c$ 发送的消息数，令 $n'$ 为记录 $c$ 的状态之前沿 $c$ 发送的消息数。本例表明，若 $n < n'$，记录所得的全局状态就可能不一致。
 
 Now consider an alternate scenario. Suppose the state of $c$ is recorded in global state in-$p$, the system then transits to global state in-$c$, and the states of $c'$, $p$, and $q$ are recorded in global state in-$c$. The recorded global state shows no tokens in the system. This example suggests that the recorded global state may be inconsistent if the state of $c$ is recorded before $p$ sends a message along $c$ and the state of $p$ is recorded after $p$ sends a message along $c$, that is, if $n > n'$. □
 
@@ -279,7 +281,7 @@ $$n \ge m. \tag{4}$$
 >
 > $$n \ge m. \tag{4}$$
 
-The state of channel $c$ that is recorded must be the sequence of messages sent along the channel before the sender’s state is recorded, excluding the sequence of messages received along the channel before the receiver’s state is recorded—that is, if $n' = m'$, the recorded state of $c$ must be the empty sequence, and if $n' > m'$, the recorded state of $c$ must be the $(m' + 1)$st, …, $n'$th messages sent by $p$ along $c$. This fact and eqs. (1)–(4) suggest a simple algorithm by which $q$ can record the state of channel $c$. Process $p$ sends a special message, called a *marker*, after the $n$th message it sends along $c$ (and before sending further messages along $c$). The marker has no effect on the underlying computation. The state of $c$ is the sequence of messages received by $q$ after $q$ records its own state and before $q$ receives the marker along $c$. To ensure eq. (4), $q$ must record its state, if it has not done so already, after receiving a marker along $c$ and before $q$ receives further messages along $c$.
+The state of channel $c$ that is recorded must be the sequence of messages sent along the channel before the sender’s state is recorded, excluding the sequence of messages received along the channel before the receiver’s state is recorded—that is, if $n' = m'$, the recorded state of $c$ must be the empty sequence, and if $n' > m'$, the recorded state of $c$ must be the $(m' + 1)$st, …, $n'$th messages sent by $p$ along $c$. This fact and eqs. (1)–(4) suggest a simple algorithm by which $q$ can record the state of channel $c$. Process $p$ sends a special message, called a _marker_, after the $n$th message it sends along $c$ (and before sending further messages along $c$). The marker has no effect on the underlying computation. The state of $c$ is the sequence of messages received by $q$ after $q$ records its own state and before $q$ receives the marker along $c$. To ensure eq. (4), $q$ must record its state, if it has not done so already, after receiving a marker along $c$ and before $q$ receives further messages along $c$.
 
 > 所记录的信道 $c$ 状态，必须是发送者状态被记录之前沿该信道发送的消息序列，扣除接收者状态被记录之前沿该信道接收的消息序列；也就是说，若 $n' = m'$，所记录的 $c$ 状态必须为空序列；若 $n' > m'$，则所记录的 $c$ 状态必须由 $p$ 沿 $c$ 发送的第 $(m' + 1)$ 条到第 $n'$ 条消息组成。这个事实以及式（1）—（4）提示出一种让 $q$ 记录信道 $c$ 状态的简单算法。进程 $p$ 在沿 $c$ 发送第 $n$ 条消息之后（并在沿 $c$ 继续发送消息之前）发送一条称为*标记*的特殊消息。该标记不影响底层计算。$c$ 的状态，就是 $q$ 记录自身状态之后、沿 $c$ 收到标记之前所接收的消息序列。为保证式（4），$q$ 若尚未记录自身状态，就必须在沿 $c$ 收到标记之后、沿 $c$ 接收更多消息之前记录其状态。
 
@@ -291,17 +293,17 @@ Our example suggests the following outline for a global state detection algorith
 
 > 3.2 全局状态检测算法纲要
 
-*Marker-Sending Rule for a Process $p$.* For each channel $c$ incident on, and directed away from $p$:
+_Marker-Sending Rule for a Process $p$._ For each channel $c$ incident on, and directed away from $p$:
 
-> *进程 $p$ 的标记发送规则。* 对于每一条与 $p$ 相接且方向离开 $p$ 的信道 $c$：
+> _进程 $p$ 的标记发送规则。_ 对于每一条与 $p$ 相接且方向离开 $p$ 的信道 $c$：
 
 > $p$ sends one marker along $c$ after $p$ records its state and before $p$ sends further messages along $c$.
 
 > > $p$ 在记录自身状态之后、沿 $c$ 继续发送消息之前，沿 $c$ 发送一个标记。
 
-*Marker-Receiving Rule for a Process $q$.* On receiving a marker along a channel $c$:
+_Marker-Receiving Rule for a Process $q$._ On receiving a marker along a channel $c$:
 
-> *进程 $q$ 的标记接收规则。* 当沿信道 $c$ 收到一个标记时：
+> _进程 $q$ 的标记接收规则。_ 当沿信道 $c$ 收到一个标记时：
 
 ```text
 if q has not recorded its state then
@@ -387,21 +389,21 @@ Specifically, we shall show that there exists a computation $seq'$ where
 > 2. $S_\iota = S^*$，或者 $S_\iota$ 先于 $S^*$ 出现；
 > 3. $S_\phi = S^*$，或者在 $seq'$ 中 $S^*$ 先于 $S_\phi$ 出现。
 
-**THEOREM 1.** *There exists a computation $seq' = (e'_i, 0 \le i)$ where*
+**THEOREM 1.** _There exists a computation $seq' = (e'_i, 0 \le i)$ where_
 
-1. *For all $i$, where $i < \iota$ or $i \ge \phi$: $e'_i = e_i$, and*
-2. *the subsequence $(e'_i, \iota \le i < \phi)$ is a permutation of the subsequence $(e_i, \iota \le i < \phi)$, and*
-3. *for all $i$ where $i \le \iota$ or $i \ge \phi$: $S'_i = S_i$, and*
-4. *there exists some $k$, $\iota \le k \le \phi$, such that $S^* = S'_k$.*
+1. _For all $i$, where $i < \iota$ or $i \ge \phi$: $e'_i = e_i$, and_
+2. _the subsequence $(e'_i, \iota \le i < \phi)$ is a permutation of the subsequence $(e_i, \iota \le i < \phi)$, and_
+3. _for all $i$ where $i \le \iota$ or $i \ge \phi$: $S'_i = S_i$, and_
+4. _there exists some $k$, $\iota \le k \le \phi$, such that $S^* = S'_k$._
 
-> **定理 1。** *存在一次计算 $seq' = (e'_i, 0 \le i)$，满足：*
+> **定理 1。** _存在一次计算 $seq' = (e'_i, 0 \le i)$，满足：_
 >
-> 1. *对所有满足 $i < \iota$ 或 $i \ge \phi$ 的 $i$，有 $e'_i = e_i$；*
-> 2. *子序列 $(e'_i, \iota \le i < \phi)$ 是子序列 $(e_i, \iota \le i < \phi)$ 的一个排列；*
-> 3. *对所有满足 $i \le \iota$ 或 $i \ge \phi$ 的 $i$，有 $S'_i = S_i$；*
-> 4. *存在某个满足 $\iota \le k \le \phi$ 的 $k$，使 $S^* = S'_k$。*
+> 1. _对所有满足 $i < \iota$ 或 $i \ge \phi$ 的 $i$，有 $e'_i = e_i$；_
+> 2. _子序列 $(e'_i, \iota \le i < \phi)$ 是子序列 $(e_i, \iota \le i < \phi)$ 的一个排列；_
+> 3. _对所有满足 $i \le \iota$ 或 $i \ge \phi$ 的 $i$，有 $S'_i = S_i$；_
+> 4. _存在某个满足 $\iota \le k \le \phi$ 的 $k$，使 $S^* = S'_k$。_
 
-**PROOF.** Event $e_i$ in $seq$ is called a *prerecording event* if and only if $e_i$ is in a process $p$ and $p$ records its state *after* $e_i$ in $seq$. Event $e_i$ in $seq$ is called a *postrecording event* if and only if it is not a prerecording event—that is, if $e_i$ is in a process $p$ and $p$ records its state *before* $e_i$ in $seq$. All events $e_i$, $i < \iota$, are prerecording events and all events $e_i$, $i \ge \phi$, are postrecording events in $seq$. There may be a postrecording event $e_{j-1}$ before a prerecording event $e_j$ for some $j$, $\iota < j < \phi$; this can occur only if $e_{j-1}$ and $e_j$ are in different processes (because if $e_{j-1}$ and $e_j$ are in the same process and $e_{j-1}$ is a postrecording event, then so is $e_j$).
+**PROOF.** Event $e_i$ in $seq$ is called a _prerecording event_ if and only if $e_i$ is in a process $p$ and $p$ records its state _after_ $e_i$ in $seq$. Event $e_i$ in $seq$ is called a _postrecording event_ if and only if it is not a prerecording event—that is, if $e_i$ is in a process $p$ and $p$ records its state _before_ $e_i$ in $seq$. All events $e_i$, $i < \iota$, are prerecording events and all events $e_i$, $i \ge \phi$, are postrecording events in $seq$. There may be a postrecording event $e_{j-1}$ before a prerecording event $e_j$ for some $j$, $\iota < j < \phi$; this can occur only if $e_{j-1}$ and $e_j$ are in different processes (because if $e_{j-1}$ and $e_j$ are in the same process and $e_{j-1}$ is a postrecording event, then so is $e_j$).
 
 > **证明。** 当且仅当 $seq$ 中的事件 $e_i$ 位于某个进程 $p$ 中，而且 $p$ 在 $seq$ 中于 $e_i$ *之后*记录自身状态时，称 $e_i$ 为*记录前事件*。当且仅当 $seq$ 中的事件 $e_i$ 不是记录前事件时，称它为*记录后事件*；也就是说，$e_i$ 位于某个进程 $p$ 中，而且 $p$ 在 $seq$ 中于 $e_i$ *之前*记录自身状态。$seq$ 中所有满足 $i < \iota$ 的事件 $e_i$ 都是记录前事件，所有满足 $i \ge \phi$ 的事件 $e_i$ 都是记录后事件。对于某个满足 $\iota < j < \phi$ 的 $j$，记录后事件 $e_{j-1}$ 可能出现在记录前事件 $e_j$ 之前；只有当 $e_{j-1}$ 和 $e_j$ 位于不同进程中时，才会出现这种情形（因为若 $e_{j-1}$ 与 $e_j$ 位于同一进程，且 $e_{j-1}$ 是记录后事件，那么 $e_j$ 也必然是记录后事件）。
 
@@ -409,7 +411,7 @@ We shall derive a computation $seq'$ by permuting $seq$, where all prerecording 
 
 > 我们将通过重排 $seq$ 得到一次计算 $seq'$，使 $seq'$ 中所有记录前事件都发生在所有记录后事件之前。我们还将证明：在 $seq'$ 中，所有记录前事件发生之后、所有记录后事件发生之前的全局状态正是 $S^*$。
 
-Assume that there is a postrecording event $e_{j-1}$ before a prerecording event $e_j$ in $seq$. We shall show that the sequence obtained by interchanging $e_{j-1}$ and $e_j$ must also be a computation. Events $e_{j-1}$ and $e_j$ must be on different processes. Let $p$ be the process in which $e_{j-1}$ occurs, and let $q$ be the process in which $e_j$ occurs. There cannot be a message sent at $e_{j-1}$ which is received at $e_j$ because (1) if a message is sent along a channel $c$ when event $e_{j-1}$ occurs, then a marker must have been sent along $c$ *before* $e_{j-1}$, since $e_{j-1}$ is a postrecording event, and (2) if the message is received along channel $c$ when $e_j$ occurs, then the marker must have been received along $c$ *before* $e_j$ occurs (since channels are first-in-first-out), in which case (by the marker-receiving rule) $e_j$ would be a postrecording event too.
+Assume that there is a postrecording event $e_{j-1}$ before a prerecording event $e_j$ in $seq$. We shall show that the sequence obtained by interchanging $e_{j-1}$ and $e_j$ must also be a computation. Events $e_{j-1}$ and $e_j$ must be on different processes. Let $p$ be the process in which $e_{j-1}$ occurs, and let $q$ be the process in which $e_j$ occurs. There cannot be a message sent at $e_{j-1}$ which is received at $e_j$ because (1) if a message is sent along a channel $c$ when event $e_{j-1}$ occurs, then a marker must have been sent along $c$ _before_ $e_{j-1}$, since $e_{j-1}$ is a postrecording event, and (2) if the message is received along channel $c$ when $e_j$ occurs, then the marker must have been received along $c$ _before_ $e_j$ occurs (since channels are first-in-first-out), in which case (by the marker-receiving rule) $e_j$ would be a postrecording event too.
 
 > 假定 $seq$ 中存在一个位于记录前事件 $e_j$ 之前的记录后事件 $e_{j-1}$。我们将证明，交换 $e_{j-1}$ 与 $e_j$ 所得的序列也必定是一次计算。事件 $e_{j-1}$ 和 $e_j$ 必须位于不同进程。设 $e_{j-1}$ 发生在进程 $p$ 中，$e_j$ 发生在进程 $q$ 中。不可能存在一条在 $e_{j-1}$ 处发送、又在 $e_j$ 处接收的消息，原因如下：（1）若事件 $e_{j-1}$ 发生时沿信道 $c$ 发送了一条消息，则由于 $e_{j-1}$ 是记录后事件，必然已有一个标记在 $e_{j-1}$ *之前*沿 $c$ 发出；（2）若该消息在 $e_j$ 发生时沿信道 $c$ 被接收，则标记必定在 $e_j$ 发生*之前*已经沿 $c$ 被接收（因为信道是先进先出的）；这样一来，根据标记接收规则，$e_j$ 也会是记录后事件。
 
@@ -453,13 +455,13 @@ Now we shall show that the global state after all prerecording events and before
 > 1. $S^*$ 中每个进程 $p$ 的状态，与由 $p$ 上记录前事件序列组成的进程计算执行后 $p$ 的状态相同；
 > 2. $S^*$ 中每条信道 $c$ 的状态等于（与 $c$ 上记录前发送相对应的消息序列）减去（与 $c$ 上记录前接收相对应的消息序列）。
 
-The proof of the first part is trivial. Now we prove part (2). Let $c$ be a channel from process $p$ to process $q$. The state of channel $c$ recorded in $S^*$ is the sequence of messages received on $c$ by $q$ *after* $q$ records its state and *before* $q$ receives a marker on $c$. The sequence of messages sent by $p$ along $c$ before $p$ sends a marker along $c$ is the sequence corresponding to prerecorded sends on $c$. Part (2) now follows. □
+The proof of the first part is trivial. Now we prove part (2). Let $c$ be a channel from process $p$ to process $q$. The state of channel $c$ recorded in $S^*$ is the sequence of messages received on $c$ by $q$ _after_ $q$ records its state and _before_ $q$ receives a marker on $c$. The sequence of messages sent by $p$ along $c$ before $p$ sends a marker along $c$ is the sequence corresponding to prerecorded sends on $c$. Part (2) now follows. □
 
 > 第一部分的证明是直接的。下面证明第（2）部分。设 $c$ 是从进程 $p$ 到进程 $q$ 的一条信道。在 $S^*$ 中记录的信道 $c$ 状态，是 $q$ 在记录自身状态*之后*、沿 $c$ 收到标记*之前*沿 $c$ 接收的消息序列。$p$ 沿 $c$ 发送标记之前沿 $c$ 发送的消息序列，正是与 $c$ 上记录前发送相对应的序列。第（2）部分由此成立。□
 
-*Example 4.1.* The purpose of this example is to show how the computation $seq'$ is derived from the computation $seq$. Consider Example 2.2. The sequence of events shown in the computation of Figure 7 is
+_Example 4.1._ The purpose of this example is to show how the computation $seq'$ is derived from the computation $seq$. Consider Example 2.2. The sequence of events shown in the computation of Figure 7 is
 
-> *例 4.1。* 本例说明如何从计算 $seq$ 导出计算 $seq'$。考察例 2.2。图 7 所示计算中的事件序列为：
+> _例 4.1。_ 本例说明如何从计算 $seq$ 导出计算 $seq'$。考察例 2.2。图 7 所示计算中的事件序列为：
 
 ```text
 e₀:  p sends M and changes state to B (a postrecording event)
@@ -509,25 +511,25 @@ A stability-detection algorithm is defined as follows:
 
 > **输入：** 一个稳定性质 $y$
 
-**Output:** A Boolean value *definite* with the property:
+**Output:** A Boolean value _definite_ with the property:
 
 $$(y(S_\iota) \Rightarrow definite) \qquad \text{and} \qquad (definite \Rightarrow y(S_\phi))$$
 
 where $S_\iota$ and $S_\phi$ are the global states of the system when the algorithm is initiated and when it terminates, respectively. (The symbol $\Rightarrow$ denotes logical implication.)
 
-> **输出：** 一个布尔值 *definite*，它满足：
+> **输出：** 一个布尔值 _definite_，它满足：
 >
 > $$(y(S_\iota) \Rightarrow definite) \qquad \text{且} \qquad (definite \Rightarrow y(S_\phi))$$
 >
 > 其中，$S_\iota$ 和 $S_\phi$ 分别是算法启动与终止时系统的全局状态。（符号 $\Rightarrow$ 表示逻辑蕴含。）
 
-The input to the algorithm is (the definition of) function $y$. During the execution of the algorithm the value $y(S)$ for some global state $S$ may be determined by a process in the system by applying the *externally defined* function $y$ to global state $S$. By the output of the algorithm being a Boolean value *definite* we mean that (1) some specially designated process (say $p$) enters and thereafter remains in some special state to symbolize an output of *definite = true*, and (2) $p$ enters and remains in some other special state to symbolize an output of *definite = false*.
+The input to the algorithm is (the definition of) function $y$. During the execution of the algorithm the value $y(S)$ for some global state $S$ may be determined by a process in the system by applying the _externally defined_ function $y$ to global state $S$. By the output of the algorithm being a Boolean value _definite_ we mean that (1) some specially designated process (say $p$) enters and thereafter remains in some special state to symbolize an output of _definite = true_, and (2) $p$ enters and remains in some other special state to symbolize an output of _definite = false_.
 
-> 算法的输入是函数 $y$（的定义）。在算法执行期间，系统中的某个进程可以把这个*外部定义的*函数 $y$ 应用于某个全局状态 $S$，从而确定 $y(S)$ 的值。所谓算法输出布尔值 *definite*，是指：（1）某个特别指定的进程（比如 $p$）进入并从此保持在某个特殊状态，以表示输出 *definite = true*；（2）$p$ 进入并保持在另一个特殊状态，以表示输出 *definite = false*。
+> 算法的输入是函数 $y$（的定义）。在算法执行期间，系统中的某个进程可以把这个*外部定义的*函数 $y$ 应用于某个全局状态 $S$，从而确定 $y(S)$ 的值。所谓算法输出布尔值 _definite_，是指：（1）某个特别指定的进程（比如 $p$）进入并从此保持在某个特殊状态，以表示输出 _definite = true_；（2）$p$ 进入并保持在另一个特殊状态，以表示输出 _definite = false_。
 
-*Definite = true* implies that the stable property holds when the algorithm terminates. However, *definite = false* implies that the stable property does not hold when the algorithm is initiated. We emphasize that *definite = true* gives us information about the state of the system at the termination of the algorithm, whereas *definite = false* gives us information about the system state at the initiation of the algorithm. In particular, we cannot deduce from *definite = false* that the stable property does not hold at termination of the algorithm.
+_Definite = true_ implies that the stable property holds when the algorithm terminates. However, _definite = false_ implies that the stable property does not hold when the algorithm is initiated. We emphasize that _definite = true_ gives us information about the state of the system at the termination of the algorithm, whereas _definite = false_ gives us information about the system state at the initiation of the algorithm. In particular, we cannot deduce from _definite = false_ that the stable property does not hold at termination of the algorithm.
 
-> *Definite = true* 蕴含该稳定性质在算法终止时成立；而 *definite = false* 蕴含该稳定性质在算法启动时不成立。需要强调的是，*definite = true* 提供的是算法终止时系统状态的信息，而 *definite = false* 提供的是算法启动时系统状态的信息。尤其不能由 *definite = false* 推断该稳定性质在算法终止时仍不成立。
+> _Definite = true_ 蕴含该稳定性质在算法终止时成立；而 _definite = false_ 蕴含该稳定性质在算法启动时不成立。需要强调的是，_definite = true_ 提供的是算法终止时系统状态的信息，而 _definite = false_ 提供的是算法启动时系统状态的信息。尤其不能由 _definite = false_ 推断该稳定性质在算法终止时仍不成立。
 
 The solution to the stability detection problem is
 
@@ -571,49 +573,49 @@ J. Misra’s contributions in defining the problem of global state detection are
 
 > 参考文献
 
-1. CHANDY, K. M., AND MISRA, J. Distributed computation on graphs: Shortest path algorithms. *Commun. ACM* 25, 11 (Nov. 1982), 833–837.
+1. CHANDY, K. M., AND MISRA, J. Distributed computation on graphs: Shortest path algorithms. _Commun. ACM_ 25, 11 (Nov. 1982), 833–837.
 
-   > CHANDY, K. M. 与 MISRA, J. 图上的分布式计算：最短路径算法。*Commun. ACM*，25 卷 11 期（1982 年 11 月），833–837 页。
+   > CHANDY, K. M. 与 MISRA, J. 图上的分布式计算：最短路径算法。_Commun. ACM_，25 卷 11 期（1982 年 11 月），833–837 页。
 
-2. CHANDY, K. M., MISRA, J., AND HAAS, L. Distributed deadlock detection. *ACM Trans. Comput. Syst.* 1, 2 (May 1983), 144–156.
+2. CHANDY, K. M., MISRA, J., AND HAAS, L. Distributed deadlock detection. _ACM Trans. Comput. Syst._ 1, 2 (May 1983), 144–156.
 
-   > CHANDY, K. M.、MISRA, J. 与 HAAS, L. 分布式死锁检测。*ACM Trans. Comput. Syst.*，1 卷 2 期（1983 年 5 月），144–156 页。
+   > CHANDY, K. M.、MISRA, J. 与 HAAS, L. 分布式死锁检测。_ACM Trans. Comput. Syst._，1 卷 2 期（1983 年 5 月），144–156 页。
 
 3. DIJKSTRA, E. W. The distributed snapshot of K. M. Chandy and L. Lamport. Tech. Rep. EWD 864a, Univ. of Texas, Austin, Tex., 1984.
 
    > DIJKSTRA, E. W. K. M. Chandy 与 L. Lamport 的分布式快照。技术报告 EWD 864a，得克萨斯大学，美国得克萨斯州奥斯汀，1984 年。
 
-4. DIJKSTRA, E. W., AND SCHOLTEN, C. S. Termination detection for diffusing computations. *Inf. Proc. Lett.* 11, 1 (Aug. 1980), 1–4.
+4. DIJKSTRA, E. W., AND SCHOLTEN, C. S. Termination detection for diffusing computations. _Inf. Proc. Lett._ 11, 1 (Aug. 1980), 1–4.
 
-   > DIJKSTRA, E. W. 与 SCHOLTEN, C. S. 扩散计算的终止检测。*Inf. Proc. Lett.*，11 卷 1 期（1980 年 8 月），1–4 页。
+   > DIJKSTRA, E. W. 与 SCHOLTEN, C. S. 扩散计算的终止检测。_Inf. Proc. Lett._，11 卷 1 期（1980 年 8 月），1–4 页。
 
-5. GLIGOR, V. D., AND SHATTUCK, S. H. Deadlock detection in distributed systems. *IEEE Trans. Softw. Eng.* SE-6, 5 (Sep. 1980), 435–440.
+5. GLIGOR, V. D., AND SHATTUCK, S. H. Deadlock detection in distributed systems. _IEEE Trans. Softw. Eng._ SE-6, 5 (Sep. 1980), 435–440.
 
-   > GLIGOR, V. D. 与 SHATTUCK, S. H. 分布式系统中的死锁检测。*IEEE Trans. Softw. Eng.*，SE-6 卷 5 期（1980 年 9 月），435–440 页。
+   > GLIGOR, V. D. 与 SHATTUCK, S. H. 分布式系统中的死锁检测。_IEEE Trans. Softw. Eng._，SE-6 卷 5 期（1980 年 9 月），435–440 页。
 
-6. LAMPORT, L. Time, clocks, and the ordering of events in a distributed system. *Commun. ACM* 21, 7 (Jul. 1978), 558–565.
+6. LAMPORT, L. Time, clocks, and the ordering of events in a distributed system. _Commun. ACM_ 21, 7 (Jul. 1978), 558–565.
 
-   > LAMPORT, L. 分布式系统中的时间、时钟和事件顺序。*Commun. ACM*，21 卷 7 期（1978 年 7 月），558–565 页。
+   > LAMPORT, L. 分布式系统中的时间、时钟和事件顺序。_Commun. ACM_，21 卷 7 期（1978 年 7 月），558–565 页。
 
 7. LAMPORT, L., AND CHANDY, K. M. On partially-ordered event models of distributed computations. Submitted for publication.
 
    > LAMPORT, L. 与 CHANDY, K. M. 论分布式计算的偏序事件模型。已投稿。
 
-8. MAHOUD, S. A., AND RIORDAN, J. S. Software controlled access to distributed databases. *INFOR* 15, 1 (Feb. 1977), 22–36.
+8. MAHOUD, S. A., AND RIORDAN, J. S. Software controlled access to distributed databases. _INFOR_ 15, 1 (Feb. 1977), 22–36.
 
-   > MAHOUD, S. A. 与 RIORDAN, J. S. 对分布式数据库的软件控制访问。*INFOR*，15 卷 1 期（1977 年 2 月），22–36 页。
+   > MAHOUD, S. A. 与 RIORDAN, J. S. 对分布式数据库的软件控制访问。_INFOR_，15 卷 1 期（1977 年 2 月），22–36 页。
 
-9. MENASCE, D., AND MUNTZ, R. Locking and deadlock detection in distributed data bases. *IEEE Trans. Softw. Eng.* SE-5, 3 (May 1979), 195–202.
+9. MENASCE, D., AND MUNTZ, R. Locking and deadlock detection in distributed data bases. _IEEE Trans. Softw. Eng._ SE-5, 3 (May 1979), 195–202.
 
-   > MENASCE, D. 与 MUNTZ, R. 分布式数据库中的加锁与死锁检测。*IEEE Trans. Softw. Eng.*，SE-5 卷 3 期（1979 年 5 月），195–202 页。
+   > MENASCE, D. 与 MUNTZ, R. 分布式数据库中的加锁与死锁检测。_IEEE Trans. Softw. Eng._，SE-5 卷 3 期（1979 年 5 月），195–202 页。
 
-10. MISRA, J., AND CHANDY, K. M. Termination detection of diffusing computations in communicating sequential processes. *ACM Trans. Program. Lang. Syst.* 4, 1 (Jan. 1982), 37–43.
+10. MISRA, J., AND CHANDY, K. M. Termination detection of diffusing computations in communicating sequential processes. _ACM Trans. Program. Lang. Syst._ 4, 1 (Jan. 1982), 37–43.
 
-    > MISRA, J. 与 CHANDY, K. M. 通信顺序进程中扩散计算的终止检测。*ACM Trans. Program. Lang. Syst.*，4 卷 1 期（1982 年 1 月），37–43 页。
+    > MISRA, J. 与 CHANDY, K. M. 通信顺序进程中扩散计算的终止检测。_ACM Trans. Program. Lang. Syst._，4 卷 1 期（1982 年 1 月），37–43 页。
 
-11. OBERMARCK, R. Distributed deadlock detection algorithm. *ACM Trans. Database Syst.* 7, 2 (Jun. 1982), 187–208.
+11. OBERMARCK, R. Distributed deadlock detection algorithm. _ACM Trans. Database Syst._ 7, 2 (Jun. 1982), 187–208.
 
-    > OBERMARCK, R. 分布式死锁检测算法。*ACM Trans. Database Syst.*，7 卷 2 期（1982 年 6 月），187–208 页。
+    > OBERMARCK, R. 分布式死锁检测算法。_ACM Trans. Database Syst._，7 卷 2 期（1982 年 6 月），187–208 页。
 
 Received January 1984; revised September 1984; accepted 7 December 1984
 

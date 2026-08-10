@@ -4,6 +4,7 @@ pubDatetime: 2026-08-09T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Paxos Made Live: An Engineering Perspective（中英对照全文）"
 featured: false
+area: "distributed-systems"
 draft: false
 tags:
   - "论文阅读"
@@ -13,6 +14,7 @@ tags:
   - "容错工程"
 description: "Paxos Made Live: An Engineering Perspective 中英对照全文，讨论 Paxos 从算法论文走向 Chubby 生产系统时的持久化、恢复、租约、成员变更、快照、测试与工程故障。"
 ---
+
 > 让 Paxos 真正运行起来：工程实践视角
 
 **Tushar Chandra · Robert Griesemer · Joshua Redstone**<br>
@@ -193,7 +195,8 @@ The reasoning why this works is subtle, but proceeds roughly as follows. The new
 
 > 这套机制为何成立，其推理颇为微妙，大致如下：新协调者必须收到多数副本对 propose 消息的回复。因此，如果之前的协调者已经达成共识，新协调者必然会从至少一个副本得知已决定的值。由归纳可知，该值在收到的全部回复中对应最高的序号，因而会被新协调者选中。
 
-[^1]: For example, in a system with $n$ replicas, assign each replica $r$ a unique id $i_r$ between $0$ and $n - 1$. Replica $r$ picks the smallest sequence number $s$ larger than any it has seen such that $s \bmod n = i_r$.
+[^1]:
+    For example, in a system with $n$ replicas, assign each replica $r$ a unique id $i_r$ between $0$ and $n - 1$. Replica $r$ picks the smallest sequence number $s$ larger than any it has seen such that $s \bmod n = i_r$.
 
     > 例如，在一个包含 $n$ 个副本的系统中，为每个副本 $r$ 分配一个介于 $0$ 与 $n-1$ 之间的唯一标识 $i_r$。副本 $r$ 选择它所见过的序号中更大的、且满足 $s \bmod n = i_r$ 的最小序号 $s$。
 
@@ -249,11 +252,13 @@ This mechanism enables the following optimization to improve the latency of the 
 
 > 这一机制还使下面这种降低系统延迟的优化成为可能。既然系统现在能够应对偶发磁盘损坏，那么在某些情况下，不立即把写入刷到磁盘也可能是可以接受的[^3]。我们曾考虑过利用这一观察的方案，但尚未实现。
 
-[^2]: This mechanism will not detect files that roll back to an old state. We believe this is an unlikely scenario and chose not to handle it explicitly. Our distributed checksum mechanism, described later, may detect this type of problem.
+[^2]:
+    This mechanism will not detect files that roll back to an old state. We believe this is an unlikely scenario and chose not to handle it explicitly. Our distributed checksum mechanism, described later, may detect this type of problem.
 
     > 这一机制无法检测回滚到旧状态的文件。我们认为这种情形不太可能发生，因此选择不作显式处理。后文介绍的分布式校验和机制可能会检测出这类问题。
 
-[^3]: For example, if the operating system and the hardware underlying each replica rarely fail and failures at different replicas are independent of each other, it is possible to modify our system so it does not need to flush writes to disk.
+[^3]:
+    For example, if the operating system and the hardware underlying each replica rarely fail and failures at different replicas are independent of each other, it is possible to modify our system so it does not need to flush writes to disk.
 
     > 例如，如果每个副本所依赖的操作系统和硬件都极少发生故障，而且不同副本的故障彼此独立，那么就可以修改系统，使其不必把写入刷到磁盘。
 
@@ -289,7 +294,8 @@ Note that it is possible to extend the concept of leases to all replicas. This w
 
 > 请注意，租约概念还可以扩展到所有副本。这样，任何持有租约的副本都可使用本地数据结构服务读请求。当读流量显著高于写流量时，这种扩展租约机制很有用。我们研究过副本租约算法，但尚未实现。
 
-[^4]: In a loaded system, under one percent of the Paxos instances run the full Paxos algorithm.
+[^4]:
+    In a loaded system, under one percent of the Paxos instances run the full Paxos algorithm.
 
     > 在有负载的系统中，运行完整 Paxos 算法的实例不足百分之一。
 
@@ -361,7 +367,8 @@ This mechanism appears straightforward at first and is mentioned briefly in the 
 
   > 我们还需要一种定位近期快照的机制。有些应用可能选择在领先副本与落后副本之间直接传输快照，另一些应用则可能要求落后副本在 GFS 上查找快照。我们实现了一种通用机制，使应用能够在领先副本与落后副本之间传递快照位置信息。
 
-[^5]: Our first implementation of the fault-tolerant database blocked the system very briefly while making an in-memory copy of the (small) database. It then stored the copied data on disk via a separate thread. Subsequently we implemented virtually pause-less snapshots. We now use a “shadow” data structure to track updates while the underlying database is serialized to disk.
+[^5]:
+    Our first implementation of the fault-tolerant database blocked the system very briefly while making an in-memory copy of the (small) database. It then stored the copied data on disk via a separate thread. Subsequently we implemented virtually pause-less snapshots. We now use a “shadow” data structure to track updates while the underlying database is serialized to disk.
 
     > 我们的第一版容错数据库实现会在内存中复制这个（较小的）数据库，并在复制期间让系统短暂阻塞，之后再由单独线程把副本写入磁盘。后来，我们实现了近乎无停顿的快照；如今会在底层数据库序列化到磁盘期间，使用“影子”数据结构跟踪更新。
 
@@ -397,7 +404,8 @@ Late in our development (and after we had implemented the database and MultiOp),
 
 > 开发后期（数据库与 MultiOp 均已实现之后），我们才意识到，为 Chubby 实现数据库操作还需要纪元编号。加上这一要求后，所有 Chubby 操作都与一个纪元编号关联；如果 Paxos 纪元编号发生变化，操作就必须失败。事实证明，MultiOp 很适合容纳这一新要求。我们把 Paxos 纪元作为数据库记录纳入之后，就能修改先前所有数据库调用，为其增加一项检查纪元编号的 `guard`。
 
-[^6]: Each MultiOp operation is serialized atomically with respect to other operations. The individual operations in the list are executed sequentially on the database.
+[^6]:
+    Each MultiOp operation is serialized atomically with respect to other operations. The individual operations in the list are executed sequentially on the database.
 
     > 每次 MultiOp 操作都相对于其他操作以原子方式串行化；列表中的各项操作则在数据库上依次执行。
 
@@ -461,7 +469,8 @@ In all three cases manual intervention appeared to resolve the problem before it
 
 > 在这三次事件中，人工干预似乎都赶在问题影响 Chubby 之前解决了它。
 
-[^7]: We use a shadow datastructure to handle database operations concurrently with the checksum computation.
+[^7]:
+    We use a shadow datastructure to handle database operations concurrently with the checksum computation.
 
     > 我们使用影子数据结构，使数据库操作能够与校验和计算并发进行。
 
@@ -505,7 +514,8 @@ In closing we point out a challenge that we faced in testing our system for whic
 
 > 最后要指出，我们在系统测试中遇到一个至今没有系统化解决方案的挑战。容错系统天生就会努力掩盖问题，因此它们可能在掩盖缺陷或配置问题的同时，暗中降低自身的容错能力。例如，我们曾观察到如下情形：我们启动过一个包含五个副本的系统，但在初始组配置中拼错了其中一个副本的名称。四个配置正确的副本仍能取得进展，因此系统看起来运行正常；而第五个副本始终在追赶模式下运行[^8]，看起来同样正常。然而，在这种配置下，系统只能容忍一个副本故障，而不是预期的两个。如今我们已有流程检测这一特定问题，但我们无法知道是否还有其他缺陷或错误配置被容错机制掩盖起来。
 
-[^8]: In our implementation, a replica that is not (yet) a group member runs in catch-up mode to stay up-to-date. This allows us to keep a future group member “warm” so it can become an active member immediately after joining the group.
+[^8]:
+    In our implementation, a replica that is not (yet) a group member runs in catch-up mode to stay up-to-date. This allows us to keep a future group member “warm” so it can become an active member immediately after joining the group.
 
     > 在我们的实现中，尚未成为组成员的副本会以追赶模式运行，以保持最新状态。这样，未来的组成员便能一直处于“热备”状态，在加入组后立即成为活跃成员。
 
@@ -595,23 +605,23 @@ The initial goal of our system was to replace 3DB with our own database. Thus ou
 
 > **表 1：我们的系统与 3DB 的比较（数值越高越好）。**
 
-| Test | # workers | file size (bytes) | Paxos-Chubby (100MB DB) | 3DB-Chubby (small database) | Comparison |
-|---|---:|---:|---:|---:|---:|
-| Ops/s Throughput | 1 | 5 | 91 ops/sec | 75 ops/sec | 1.2x |
-| Ops/s Throughput | 10 | 5 | 490 ops/sec | 134 ops/sec | 3.7x |
-| Ops/s Throughput | 20 | 5 | 640 ops/sec | 178 ops/sec | 3.6x |
-| MB/s Throughput | 1 | 8 KB | 345 KB/s | 172 KB/s | 2x |
-| MB/s Throughput | 4 | 8 KB | 777 - 949 KB/s | 217 KB/s | 3.6 - 4.4x |
-| MB/s Throughput | 1 | 32 KB | 672 - 822 KB/s | 338 KB/s | 2.0 - 2.4x |
+| Test             | # workers | file size (bytes) | Paxos-Chubby (100MB DB) | 3DB-Chubby (small database) | Comparison |
+| ---------------- | --------: | ----------------: | ----------------------: | --------------------------: | ---------: |
+| Ops/s Throughput |         1 |                 5 |              91 ops/sec |                  75 ops/sec |       1.2x |
+| Ops/s Throughput |        10 |                 5 |             490 ops/sec |                 134 ops/sec |       3.7x |
+| Ops/s Throughput |        20 |                 5 |             640 ops/sec |                 178 ops/sec |       3.6x |
+| MB/s Throughput  |         1 |              8 KB |                345 KB/s |                    172 KB/s |         2x |
+| MB/s Throughput  |         4 |              8 KB |          777 - 949 KB/s |                    217 KB/s | 3.6 - 4.4x |
+| MB/s Throughput  |         1 |             32 KB |          672 - 822 KB/s |                    338 KB/s | 2.0 - 2.4x |
 
-> | 测试 | 工作线程数 | 文件大小（字节） | Paxos-Chubby（100MB 数据库） | 3DB-Chubby（小型数据库） | 对比倍数 |
-> |---|---:|---:|---:|---:|---:|
-> | 每秒操作数吞吐量 | 1 | 5 | 91 次操作/秒 | 75 次操作/秒 | 1.2 倍 |
-> | 每秒操作数吞吐量 | 10 | 5 | 490 次操作/秒 | 134 次操作/秒 | 3.7 倍 |
-> | 每秒操作数吞吐量 | 20 | 5 | 640 次操作/秒 | 178 次操作/秒 | 3.6 倍 |
-> | MB/s 吞吐量 | 1 | 8 KB | 345 KB/s | 172 KB/s | 2 倍 |
-> | MB/s 吞吐量 | 4 | 8 KB | 777 - 949 KB/s | 217 KB/s | 3.6 - 4.4 倍 |
-> | MB/s 吞吐量 | 1 | 32 KB | 672 - 822 KB/s | 338 KB/s | 2.0 - 2.4 倍 |
+> | 测试             | 工作线程数 | 文件大小（字节） | Paxos-Chubby（100MB 数据库） | 3DB-Chubby（小型数据库） |     对比倍数 |
+> | ---------------- | ---------: | ---------------: | ---------------------------: | -----------------------: | -----------: |
+> | 每秒操作数吞吐量 |          1 |                5 |                 91 次操作/秒 |             75 次操作/秒 |       1.2 倍 |
+> | 每秒操作数吞吐量 |         10 |                5 |                490 次操作/秒 |            134 次操作/秒 |       3.7 倍 |
+> | 每秒操作数吞吐量 |         20 |                5 |                640 次操作/秒 |            178 次操作/秒 |       3.6 倍 |
+> | MB/s 吞吐量      |          1 |             8 KB |                     345 KB/s |                 172 KB/s |         2 倍 |
+> | MB/s 吞吐量      |          4 |             8 KB |               777 - 949 KB/s |                 217 KB/s | 3.6 - 4.4 倍 |
+> | MB/s 吞吐量      |          1 |            32 KB |               672 - 822 KB/s |                 338 KB/s | 2.0 - 2.4 倍 |
 
 > **图表中文解读：** Paxos-Chubby 在全部六项测试中均胜过 3DB-Chubby。单工作线程、小文件场景主要反映延迟，优势为 1.2 倍；并发工作线程使 Paxos-Chubby 能通过批处理把优势扩大到约 3.6–3.7 倍。大文件吞吐测试中，Paxos-Chubby 的优势为 2.0–4.4 倍。后两项给出区间，是因为系统每当复制日志超过 100 MB 就制作快照，快照期间性能会暂时下降。
 

@@ -12,7 +12,7 @@
 - 基于 KaTeX 的数学公式渲染
 - YouTube、哔哩哔哩延迟加载嵌入
 - 外部 MP4 与字幕轨道
-- 标签、归档、分页和全文搜索
+- Areas、标签、归档、分页和全文搜索
 - RSS、Sitemap、Open Graph 与结构化数据
 - 深色/浅色主题
 - 基于 GitHub Discussions 的 Giscus 评论接口
@@ -58,12 +58,16 @@ src/content/posts/
 lang: "zh-CN"
 pubDatetime: 2026-07-30T12:00:00-04:00
 title: "文章标题"
+area: "tools-and-workflow"
 draft: false
 tags:
   - 技术
 description: "一句话摘要"
 ---
 ```
+
+`area` 是必填的单值字段，必须使用 `src/data/areas.ts` 中定义的稳定
+slug；显示名称和描述统一在该文件中维护。
 
 本地图片使用普通 Markdown：
 
@@ -132,6 +136,7 @@ YouTube：
 ## 常用配置
 
 - 站点信息与社交链接：`astro-paper.config.ts`
+- Areas 名称、描述与顺序：`src/data/areas.ts`
 - 首页：`src/pages/index.astro`
 - 英文界面文案：`src/i18n/lang/en.ts`
 - 关于页正文：`src/content/pages/about.md`

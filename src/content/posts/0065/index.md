@@ -5,6 +5,7 @@ modDatetime: 2024-08-19T15:46:54+08:00
 timezone: "Asia/Shanghai"
 title: "全文翻译 The Native POSIX Thread Library for Linux"
 featured: false
+area: "operating-systems"
 draft: false
 tags: []
 description: "整理 Linux 原生 POSIX 线程库（NPTL）论文，涵盖设计背景、实现选择、性能结果与遗留挑战。"

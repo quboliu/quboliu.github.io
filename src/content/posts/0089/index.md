@@ -4,6 +4,7 @@ pubDatetime: 2026-08-09T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Linearizability: A Correctness Condition for Concurrent Objects（中英对照全文）"
 featured: false
+area: "distributed-systems"
 draft: false
 tags:
   - "论文阅读"
@@ -13,6 +14,7 @@ tags:
   - "正确性"
 description: "Herlihy 与 Wing 定义线性一致性、论证其局部性与非阻塞性并给出并发对象验证方法的经典论文，中英逐段对照全文。"
 ---
+
 > 线性一致性：并发对象的正确性条件
 
 MAURICE P. HERLIHY and JEANNETTE M. WING
@@ -27,9 +29,9 @@ A concurrent object is a data object shared by concurrent processes. Linearizabi
 
 > 并发对象是由并发进程共享的数据对象。线性一致性是一种利用抽象数据类型语义来判定并发对象正确性的条件。它既允许高度并发，又使程序员可以沿用顺序领域的成熟技术来规约并推理并发对象。线性一致性营造出这样一种假象：并发进程施加的每个操作，都在其调用与响应之间的某个时刻瞬间生效；这意味着并发对象各项操作的含义可以用前置条件和后置条件给出。本文定义线性一致性，将它与其他正确性条件比较，提出并演示一种证明实现正确性的方法，并说明在对象满足线性一致性的前提下如何对并发对象进行推理。
 
-Categories and Subject Descriptors: D.1.3 [Programming Techniques]: Concurrent Programming; D.2.1 [Software Engineering]: Requirements/Specifications; D.3.3 [Programming Languages]: Language Constructs—*abstract data types, concurrent programming structures, data types and structures*; F.1.2 [Computation by Abstract Devices]: Modes of Computation—*parallelism*; F.3.1 [Logics and Meanings of Programs]: Specifying and Verifying and Reasoning about Programs—*pre- and post-conditions, specification techniques*
+Categories and Subject Descriptors: D.1.3 [Programming Techniques]: Concurrent Programming; D.2.1 [Software Engineering]: Requirements/Specifications; D.3.3 [Programming Languages]: Language Constructs—_abstract data types, concurrent programming structures, data types and structures_; F.1.2 [Computation by Abstract Devices]: Modes of Computation—_parallelism_; F.3.1 [Logics and Meanings of Programs]: Specifying and Verifying and Reasoning about Programs—_pre- and post-conditions, specification techniques_
 
-> 分类与主题描述：D.1.3［编程技术］：并发编程；D.2.1［软件工程］：需求/规约；D.3.3［编程语言］：语言构造——*抽象数据类型、并发编程结构、数据类型与结构*；F.1.2［抽象设备计算］：计算模式——*并行性*；F.3.1［程序的逻辑与含义］：程序的规约、验证与推理——*前置条件与后置条件、规约技术*。
+> 分类与主题描述：D.1.3［编程技术］：并发编程；D.2.1［软件工程］：需求/规约；D.3.3［编程语言］：语言构造——_抽象数据类型、并发编程结构、数据类型与结构_；F.1.2［抽象设备计算］：计算模式——_并行性_；F.3.1［程序的逻辑与含义］：程序的规约、验证与推理——_前置条件与后置条件、规约技术_。
 
 General Terms: Theory, Verification
 
@@ -227,7 +229,7 @@ $$
 
 > （适当时省略偏序的下标。）非形式地说，&lt;<sub>H</sub> 捕捉 H 中操作的“实时”先后次序。若两个操作在 &lt;<sub>H</sub> 下无关，则称它们并发。若 H 是顺序历史，&lt;<sub>H</sub> 是全序。
 
-A history H is *linearizable* if it can be extended (by appending zero or more response events) to some history H′ such that:
+A history H is _linearizable_ if it can be extended (by appending zero or more response events) to some history H′ such that:
 
 > 若历史 H 可以通过追加零个或多个响应事件扩展为某个历史 H′，且满足以下条件，则 H 是*线性一致的*：
 
@@ -243,7 +245,7 @@ Informally, extending H to H′ captures the notion that some pending invocation
 
 > 非形式地说，把 H 扩展为 H′，表达的是某些待决调用虽然尚未向调用者返回响应，却可能已经生效（如图 1 的历史 H₃ 中待决的 Enq）。只考察 complete(H′)，表达的是其余待决调用尚未生效。L1 表明，各进程仿佛以完整操作为粒度交错执行；L2 表明，这一表观顺序交错尊重操作的实时先后次序。
 
-We call S a *linearization* of H. Nondeterminism is inherent in the notion of linearizability: (1) For each H, there may be more than one extension H′ satisfying the two conditions, L1 and L2, and (2) for each extension H′, there may be more than one linearization S. A *linearizable object* is one whose concurrent histories are linearizable with respect to some sequential specification.
+We call S a _linearization_ of H. Nondeterminism is inherent in the notion of linearizability: (1) For each H, there may be more than one extension H′ satisfying the two conditions, L1 and L2, and (2) for each extension H′, there may be more than one linearization S. A _linearizable object_ is one whose concurrent histories are linearizable with respect to some sequential specification.
 
 > 我们称 S 为 H 的一个*线性化*。线性一致性概念内在地包含非确定性：(1) 对每个 H，满足 L1、L2 两项条件的扩展 H′ 可能不止一个；(2) 对每个扩展 H′，线性化 S 也可能不止一个。若一个对象的并发历史相对于某个顺序规约都是线性一致的，则称它为*线性一致对象*。
 
@@ -330,7 +332,7 @@ is not linearizable because y is enqueued once but dequeued twice, and hence H�
 
 > 3. 线性一致性的性质
 
-This section proves that linearizability is a *local* and *nonblocking* property, and discusses the differences between it and other correctness conditions.
+This section proves that linearizability is a _local_ and _nonblocking_ property, and discusses the differences between it and other correctness conditions.
 
 > 本节证明线性一致性是一种*局部*且*非阻塞*的性质，并讨论它与其他正确性条件之间的差异。
 
@@ -338,13 +340,13 @@ This section proves that linearizability is a *local* and *nonblocking* property
 
 > 3.1 局部性
 
-A property P of a concurrent system is said to be *local* if the system as a whole satisfies P whenever each individual object satisfies P. Linearizability is a local property:
+A property P of a concurrent system is said to be _local_ if the system as a whole satisfies P whenever each individual object satisfies P. Linearizability is a local property:
 
 > 若并发系统中的每个对象分别满足性质 P 时，整个系统也满足 P，则称 P 是*局部*性质。线性一致性是一种局部性质：
 
-**THEOREM 1.** *H is linearizable if and only if, for each object x, H|x is linearizable.*
+**THEOREM 1.** _H is linearizable if and only if, for each object x, H|x is linearizable._
 
-> **定理 1.** *H 具有线性一致性，当且仅当对每个对象 x，H|x 都具有线性一致性。*
+> **定理 1.** _H 具有线性一致性，当且仅当对每个对象 x，H|x 都具有线性一致性。_
 
 **PROOF.** The “only if” part is obvious.
 
@@ -382,13 +384,13 @@ Locality is important because it allows concurrent systems to be designed and co
 
 > 3.2 阻塞与非阻塞
 
-Linearizability is a *nonblocking* property: a pending invocation of a totally-defined operation is never required to wait for another pending invocation to complete.
+Linearizability is a _nonblocking_ property: a pending invocation of a totally-defined operation is never required to wait for another pending invocation to complete.
 
 > 线性一致性是一种*非阻塞*性质：全定义操作的待决调用绝不需要等待另一个待决调用完成。
 
-**THEOREM 2.** *Let inv be an invocation of a total operation. If ⟨x inv P⟩ is a pending invocation in a linearizable history H, then there exists a response ⟨x res P⟩ such that H · ⟨x res P⟩ is linearizable.*
+**THEOREM 2.** _Let inv be an invocation of a total operation. If ⟨x inv P⟩ is a pending invocation in a linearizable history H, then there exists a response ⟨x res P⟩ such that H · ⟨x res P⟩ is linearizable._
 
-> **定理 2.** *令 inv 为一个全操作的调用。若 ⟨x inv P⟩ 是线性一致历史 H 中的待决调用，则存在响应 ⟨x res P⟩，使 H · ⟨x res P⟩ 具有线性一致性。*
+> **定理 2.** _令 inv 为一个全操作的调用。若 ⟨x inv P⟩ 是线性一致历史 H 中的待决调用，则存在响应 ⟨x res P⟩，使 H · ⟨x res P⟩ 具有线性一致性。_
 
 **PROOF.** Let S be any linearization of H. If S includes a response ⟨x res P⟩ to ⟨x inv P⟩, we are done, since S is also a linearization of H · ⟨x res P⟩. Otherwise, ⟨x inv P⟩ does not appear in S either, since linearizations, by definition, include no pending invocations. Because the operation is total, there exists a response ⟨x res P⟩ such that
 
@@ -404,7 +406,7 @@ is legal. S′, however, is a linearization of H · ⟨x res P⟩, and hence is 
 
 > 是合法的。然而，S′ 是 H · ⟨x res P⟩ 的线性化，因而也是 H 的线性化。□
 
-This theorem implies that linearizability *per se* never forces a process with a pending invocation of a total operation to block. Of course, blocking (or even deadlock) may occur as artifacts of particular implementations of linearizability, but is is not inherent to the correctness property itself. (Techniques for constructing nonblocking implementations of linearizable objects are discussed elsewhere [23].) This theorem suggests that linearizability is an appropriate correctness condition for systems where concurrency and real-time response are important. We shall see that alternative correctness conditions, such as serializability, do not share this nonblocking property.
+This theorem implies that linearizability _per se_ never forces a process with a pending invocation of a total operation to block. Of course, blocking (or even deadlock) may occur as artifacts of particular implementations of linearizability, but is is not inherent to the correctness property itself. (Techniques for constructing nonblocking implementations of linearizable objects are discussed elsewhere [23].) This theorem suggests that linearizability is an appropriate correctness condition for systems where concurrency and real-time response are important. We shall see that alternative correctness conditions, such as serializability, do not share this nonblocking property.
 
 > 该定理表明，线性一致性本身绝不会迫使一个具有全操作待决调用的进程阻塞。当然，阻塞（甚至死锁）可能作为某些具体线性一致性实现的产物出现，但它并非正确性性质本身所固有。（构造线性一致对象非阻塞实现的技术见另文 [23]。）这一结果说明，对于重视并发性与实时响应的系统，线性一致性是一种恰当的正确性条件。下文将看到，可串行化等其他正确性条件并不具备这种非阻塞性质。
 
@@ -416,7 +418,7 @@ The nonblocking property does not rule out blocking in situations where it is ex
 
 > 3.3 与其他正确性条件的比较
 
-Lamport’s notion of *sequential consistency* [31] requires that a history be equivalent to a legal sequential history. Sequential consistency is weaker than linearizability, because it does not require the original history’s precedence ordering to be preserved. For example, history H₇ is sequentially consistent, but not linearizable:
+Lamport’s notion of _sequential consistency_ [31] requires that a history be equivalent to a legal sequential history. Sequential consistency is weaker than linearizability, because it does not require the original history’s precedence ordering to be preserved. For example, history H₇ is sequentially consistent, but not linearizable:
 
 > Lamport 的*顺序一致性*概念 [31] 要求历史等价于某个合法顺序历史。顺序一致性弱于线性一致性，因为它不要求保留原历史中的先后次序。例如，历史 H₇ 具有顺序一致性，却不具有线性一致性：
 
@@ -456,11 +458,11 @@ It is easily checked that H₈|p and H₈|q are sequentially consistent, but H�
 
 > 容易验证，H₈|p 与 H₈|q 各自都具有顺序一致性，但 H₈ 本身不具有顺序一致性。
 
-Much work on databases and distributed systems uses *serializability* [40] as the basic correctness condition for concurrent computations.¹ In this model, a *transaction* is a thread of control that applies a finite sequence of primitive operations to a set of objects shared with other transactions.² A history is *serializable* if it is equivalent to one in which transactions appear to execute sequentially, i.e., without interleaving. A (partial) precedence order can be defined on non-overlapping pairs of transactions in the obvious way. A history is *strictly serializable* if the transactions’ order in the sequential history is compatible with their precedence order. Strict serializability is ensured by some synchronization mechanisms, such as two-phase locking [12], but not by others, such as multiversion timestamp schemes [41], or schemes that provide high levels of availability in the presence of network partitions [22].
+Much work on databases and distributed systems uses _serializability_ [40] as the basic correctness condition for concurrent computations.¹ In this model, a _transaction_ is a thread of control that applies a finite sequence of primitive operations to a set of objects shared with other transactions.² A history is _serializable_ if it is equivalent to one in which transactions appear to execute sequentially, i.e., without interleaving. A (partial) precedence order can be defined on non-overlapping pairs of transactions in the obvious way. A history is _strictly serializable_ if the transactions’ order in the sequential history is compatible with their precedence order. Strict serializability is ensured by some synchronization mechanisms, such as two-phase locking [12], but not by others, such as multiversion timestamp schemes [41], or schemes that provide high levels of availability in the presence of network partitions [22].
 
 > 数据库和分布式系统的许多研究都以*可串行化* [40] 作为并发计算的基本正确性条件。¹ 在这一模型中，*事务*是一条控制线程，它向一组与其他事务共享的对象施加有限的原语操作序列。² 若一个历史等价于某个事务看似顺序执行、即彼此不交错的历史，则该历史*可串行化*。可以自然地在不重叠的事务对上定义一个（偏）先后次序。若顺序历史中的事务次序与其先后次序兼容，则该历史*严格可串行化*。某些同步机制（如两阶段锁 [12]）可保证严格可串行化，而另一些机制（如多版本时间戳方案 [41]，或在网络分区存在时提供高可用性的方案 [22]）则不能。
 
-¹ In practice, serializability is almost always provided in conjunction with *failure atomicity*, ensuring that a transaction unable to execute to completion will be automatically rolled back. There is no counterpart to failure atomicity for linearizability.
+¹ In practice, serializability is almost always provided in conjunction with _failure atomicity_, ensuring that a transaction unable to execute to completion will be automatically rolled back. There is no counterpart to failure atomicity for linearizability.
 
 > ¹ 实践中，可串行化几乎总是与*故障原子性*结合提供，以确保无法执行完毕的事务会自动回滚。在线性一致性中没有与故障原子性对应的概念。
 
@@ -476,7 +478,7 @@ One important formal difference between linearizability and serializability is t
 
 > 线性一致性与可串行化之间一个重要的形式差异是：无论可串行化还是严格可串行化，都不是局部性质。例如，在上面的历史 H₈ 中，若把 A、B 解释为事务而非进程，容易看出 H₈|p 和 H₈|q 都严格可串行化，但 H₈ 并非如此。（由于 A、B 在每个对象上的操作都重叠，两个子历史中事务先后关系都无法关联二者。）此外，A、B 各自取出了由对方入队的条目，所以 H₈ 甚至不可串行化。这一观察的实践后果是：可串行化系统中的对象实现者必须依赖全局约定，确保所有对象的并发控制机制相互兼容。例如，众所周知，两阶段锁与多版本时间戳彼此不兼容 [46]。
 
-Another important formal difference is that serializability places more rigorous restrictions on concurrency. Serializability is inherently a *blocking* property: under certain circumstances, a transaction may be unable to complete a pending operation without violating serializability, even if the operation is total. Such a transaction must be rolled back and restarted, implying that additional mechanisms must be provided for that purpose. For example, consider the following history involving two register objects: x and y, and two transactions: A and B.
+Another important formal difference is that serializability places more rigorous restrictions on concurrency. Serializability is inherently a _blocking_ property: under certain circumstances, a transaction may be unable to complete a pending operation without violating serializability, even if the operation is total. Such a transaction must be rolled back and restarted, implying that additional mechanisms must be provided for that purpose. For example, consider the following history involving two register objects: x and y, and two transactions: A and B.
 
 > 另一个重要的形式差异在于，可串行化对并发施加了更严格的限制。可串行化内在地是一种*阻塞*性质：在某些情况下，即使操作是全操作，事务也可能无法在不破坏可串行化的前提下完成待决操作。这样的事务必须回滚并重启，这意味着还须提供相应的附加机制。例如，考察下面这个涉及两个寄存器对象 x、y 和两个事务 A、B 的历史。
 
@@ -511,11 +513,11 @@ In this section, we motivate and describe our method for verifying implementatio
 
 > 4.1 正确性的定义
 
-An *implementation* is a set of histories in which events of two objects, a *representation* (or *rep*) object REP of type REP and an *abstract* object ABS of type ABS, are interleaved in a constrained way: for each history H in the implementation, (1) the subhistories H|REP and H|ABS satisfy the usual well-formedness conditions; and (2) for each process P, each rep operation in H|P lies within an abstract operation in H|P. Informally, an abstract operation is implemented by the sequence of rep operations that occur within it.
+An _implementation_ is a set of histories in which events of two objects, a _representation_ (or _rep_) object REP of type REP and an _abstract_ object ABS of type ABS, are interleaved in a constrained way: for each history H in the implementation, (1) the subhistories H|REP and H|ABS satisfy the usual well-formedness conditions; and (2) for each process P, each rep operation in H|P lies within an abstract operation in H|P. Informally, an abstract operation is implemented by the sequence of rep operations that occur within it.
 
-> 一个*实现*是一组历史，其中两个对象的事件以受约束的方式交错：一个是类型为 REP 的*表示*（简称 *rep*）对象 REP，另一个是类型为 ABS 的*抽象*对象 ABS。对实现中的每个历史 H：(1) 子历史 H|REP 与 H|ABS 满足通常的良构条件；(2) 对每个进程 P，H|P 中的每个表示操作都位于 H|P 中某个抽象操作之内。非形式地说，一个抽象操作由发生在其内部的表示操作序列实现。
+> 一个*实现*是一组历史，其中两个对象的事件以受约束的方式交错：一个是类型为 REP 的*表示*（简称 _rep_）对象 REP，另一个是类型为 ABS 的*抽象*对象 ABS。对实现中的每个历史 H：(1) 子历史 H|REP 与 H|ABS 满足通常的良构条件；(2) 对每个进程 P，H|P 中的每个表示操作都位于 H|P 中某个抽象操作之内。非形式地说，一个抽象操作由发生在其内部的表示操作序列实现。
 
-An implementation is *correct* with respect to the specification of ABS if for every history H in the implementation, H|ABS is linearizable.
+An implementation is _correct_ with respect to the specification of ABS if for every history H in the implementation, H|ABS is linearizable.
 
 > 若对实现中的每个历史 H，H|ABS 都具有线性一致性，则该实现相对于 ABS 的规约是*正确的*。
 
@@ -523,17 +525,17 @@ An implementation is *correct* with respect to the specification of ABS if for e
 
 > 4.2 表示不变式与抽象函数
 
-We first review how to verify the correctness of sequential objects [18, 25]. In the sequential domain, an implementation consists of an *abstract* type ABS, the type being implemented, and a *representation* type REP, the type used to implement ABS. The subset of REP values that are legal representations is characterized by a predicate called the *rep invariant*, I: REP → BOOL. The meaning of a legal representation is given by an *abstraction function*, A: REP → ABS, defined for representation values that satisfy the invariant.
+We first review how to verify the correctness of sequential objects [18, 25]. In the sequential domain, an implementation consists of an _abstract_ type ABS, the type being implemented, and a _representation_ type REP, the type used to implement ABS. The subset of REP values that are legal representations is characterized by a predicate called the _rep invariant_, I: REP → BOOL. The meaning of a legal representation is given by an _abstraction function_, A: REP → ABS, defined for representation values that satisfy the invariant.
 
 > 我们先回顾如何验证顺序对象的正确性 [18, 25]。在顺序领域，实现由一个*抽象*类型 ABS（被实现的类型）和一个*表示*类型 REP（用于实现 ABS 的类型）组成。REP 值中构成合法表示的子集，由一个称为*表示不变式*的谓词刻画，即 I: REP → BOOL。合法表示的含义由*抽象函数* A: REP → ABS 给出；该函数定义在满足不变式的表示值上。
 
-An abstract operation α is implemented by a sequence, ρ, of rep operations that carries the rep from one legal value to another, perhaps passing through intermediate values where the abstraction function is undefined. The rep invariant is thus part of both the precondition and postcondition for each operation’s implementation; it must be satisfied between abstract operations, although it may be temporarily violated while an operation is in progress. An implementation, ρ, of an abstract operation, α, is *correct* if there exists a rep invariant, I, and abstraction function, A, such that whenever ρ carries one legal rep value r to another r′, α carries the abstract value from A(r) to A(r′).
+An abstract operation α is implemented by a sequence, ρ, of rep operations that carries the rep from one legal value to another, perhaps passing through intermediate values where the abstraction function is undefined. The rep invariant is thus part of both the precondition and postcondition for each operation’s implementation; it must be satisfied between abstract operations, although it may be temporarily violated while an operation is in progress. An implementation, ρ, of an abstract operation, α, is _correct_ if there exists a rep invariant, I, and abstraction function, A, such that whenever ρ carries one legal rep value r to another r′, α carries the abstract value from A(r) to A(r′).
 
 > 抽象操作 α 由表示操作序列 ρ 实现；该序列把表示从一个合法值带到另一个合法值，途中可能经过抽象函数无定义的中间值。因此，表示不变式既是每个操作实现的前置条件，也是其后置条件；它必须在抽象操作之间成立，但在操作进行期间可以暂时被破坏。若存在表示不变式 I 和抽象函数 A，使得每当 ρ 把一个合法表示值 r 带到另一个合法表示值 r′ 时，α 都把抽象值从 A(r) 带到 A(r′)，则抽象操作 α 的实现 ρ 是*正确的*。
 
-This verification technique must be substantially modified before it can be applied to concurrent objects: we change both the meaning of the rep invariant and the signature of the abstraction function. To help motivate these changes and to make our discussion as concrete as possible, consider the following highly concurrent implementation of a linearizable FIFO queue. The queue’s representation is a record with two components: *items* is an array having a low bound of 1 and a (conceptually) infinite high bound, and *back* is the (integer) index of the next unused position in *items*.
+This verification technique must be substantially modified before it can be applied to concurrent objects: we change both the meaning of the rep invariant and the signature of the abstraction function. To help motivate these changes and to make our discussion as concrete as possible, consider the following highly concurrent implementation of a linearizable FIFO queue. The queue’s representation is a record with two components: _items_ is an array having a low bound of 1 and a (conceptually) infinite high bound, and _back_ is the (integer) index of the next unused position in _items_.
 
-> 这种验证技术必须经过大幅修改才能用于并发对象：我们既要改变表示不变式的含义，也要改变抽象函数的签名。为了说明这些改变的缘由，并使讨论尽可能具体，考察下面这个线性一致 FIFO 队列的高并发实现。队列的表示是一个含两个分量的记录：*items* 是下界为 1、上界（概念上）无穷大的数组；*back* 是 *items* 中下一个未使用位置的（整数）下标。
+> 这种验证技术必须经过大幅修改才能用于并发对象：我们既要改变表示不变式的含义，也要改变抽象函数的签名。为了说明这些改变的缘由，并使讨论尽可能具体，考察下面这个线性一致 FIFO 队列的高并发实现。队列的表示是一个含两个分量的记录：_items_ 是下界为 1、上界（概念上）无穷大的数组；_back_ 是 _items_ 中下一个未使用位置的（整数）下标。
 
 ```text
 rep = record [back: int, items: array [item]]
@@ -541,9 +543,9 @@ rep = record [back: int, items: array [item]]
 
 > 表示记录包含整数 back 和条目数组 items。
 
-Each element of *items* is initialized to a special *null* value, and *back* is initialized to 1. Enq and Deq are implemented as follows:
+Each element of _items_ is initialized to a special _null_ value, and _back_ is initialized to 1. Enq and Deq are implemented as follows:
 
-> *items* 的每个元素初始化为特殊值 *null*，*back* 初始化为 1。Enq 与 Deq 的实现如下：
+> _items_ 的每个元素初始化为特殊值 _null_，_back_ 初始化为 1。Enq 与 Deq 的实现如下：
 
 ```text
 Enq = proc (q: queue, x: item)
@@ -564,9 +566,9 @@ Deq = proc (q: queue) returns (item)
 
 > Enq 先用原子 INC 取得并保留一个新槽位，再把 x 写入该槽位。Deq 读取搜索上界，自下标 1 起逐项用 null 原子交换；一旦交换所得 x 非 null，便返回 x，否则重新开始扫描。
 
-An Enq execution occurs in two distinct steps, which may be interleaved with steps of other concurrent operations: an array slot is reserved by atomically incrementing *back*, and the new item is stored in *items*.³ Deq traverses the array in ascending order, starting at index 1. For each element, it atomically swaps *null* with the current contents. If the value returned is not equal to *null*, Deq returns that value, otherwise it tries the next slot. If the index reaches q.back − 1 without encountering a nonnull element, the operation is restarted. (Note that there is a small chance that a dequeuing process may starve if it is continually overtaken by other dequeuing processes. Any queue item, however, will eventually be dequeued as long as there are active dequeuers.) All atomic steps can be interleaved with steps of other operations. An interesting aspect of this implementation is that there is no mutual exclusion: no process can delay other processes by halting in a critical section. As an aside, we note that this implementation could be rendered more efficient by reclaiming slots from which items have been dequeued, reducing both the overall size of the rep of the queue and the cost of dequeuing an item. Such optimizations, however, would add nothing to our discussion of verification, so we ignore them in this paper.
+An Enq execution occurs in two distinct steps, which may be interleaved with steps of other concurrent operations: an array slot is reserved by atomically incrementing _back_, and the new item is stored in _items_.³ Deq traverses the array in ascending order, starting at index 1. For each element, it atomically swaps _null_ with the current contents. If the value returned is not equal to _null_, Deq returns that value, otherwise it tries the next slot. If the index reaches q.back − 1 without encountering a nonnull element, the operation is restarted. (Note that there is a small chance that a dequeuing process may starve if it is continually overtaken by other dequeuing processes. Any queue item, however, will eventually be dequeued as long as there are active dequeuers.) All atomic steps can be interleaved with steps of other operations. An interesting aspect of this implementation is that there is no mutual exclusion: no process can delay other processes by halting in a critical section. As an aside, we note that this implementation could be rendered more efficient by reclaiming slots from which items have been dequeued, reducing both the overall size of the rep of the queue and the cost of dequeuing an item. Such optimizations, however, would add nothing to our discussion of verification, so we ignore them in this paper.
 
-> 一次 Enq 执行包含两个不同步骤，它们可以与其他并发操作的步骤交错：先原子递增 *back* 以保留一个数组槽位，再把新条目存入 *items*。³ Deq 从下标 1 开始按升序遍历数组。对每个元素，它都把 *null* 与当前内容原子交换。若返回值不等于 *null*，Deq 就返回该值，否则尝试下一个槽位。若下标到达 q.back − 1 仍未遇到非 null 元素，便重新开始该操作。（请注意，若一个出队进程不断被其他出队进程抢先，它有很小的概率会饥饿。不过，只要存在活跃的出队进程，任一队列条目最终都会被取出。）所有原子步骤都可与其他操作的步骤交错。该实现一个值得注意的方面是没有互斥：任何进程都不能通过停在临界区中而延误其他进程。顺便指出，可以回收已出队条目占用的槽位，以减小队列表示的总体大小和条目出队成本，使实现更高效。然而，这类优化对我们的验证讨论没有帮助，本文不予考虑。
+> 一次 Enq 执行包含两个不同步骤，它们可以与其他并发操作的步骤交错：先原子递增 _back_ 以保留一个数组槽位，再把新条目存入 _items_。³ Deq 从下标 1 开始按升序遍历数组。对每个元素，它都把 _null_ 与当前内容原子交换。若返回值不等于 _null_，Deq 就返回该值，否则尝试下一个槽位。若下标到达 q.back − 1 仍未遇到非 null 元素，便重新开始该操作。（请注意，若一个出队进程不断被其他出队进程抢先，它有很小的概率会饥饿。不过，只要存在活跃的出队进程，任一队列条目最终都会被取出。）所有原子步骤都可与其他操作的步骤交错。该实现一个值得注意的方面是没有互斥：任何进程都不能通过停在临界区中而延误其他进程。顺便指出，可以回收已出队条目占用的槽位，以减小队列表示的总体大小和条目出队成本，使实现更高效。然而，这类优化对我们的验证讨论没有帮助，本文不予考虑。
 
 ³ Like the FETCH-AND-ADD operation [30], INC returns the value of its argument from before the invocation, not the newly incremented value.
 
@@ -576,9 +578,9 @@ The first difficulty arises when trying to define a rep invariant for this imple
 
 > 第一个困难出现在为该实现定义表示不变式时。对顺序对象而言，表示不变式必须在每个抽象操作开始和结束时成立，但操作进行期间可以暂时被破坏。然而对并发对象而言，若认为对象表示只有在抽象操作之间才取有意义的值，就不再合理。例如，我们的队列实现允许每一时刻都有操作正在进行，因此对象可能永远不处于“操作之间”。实现队列操作时，必须准备面对反映并发操作未完成效果的表示值；顺序领域没有与此对应的问题。为了赋予这些瞬态值以含义，抽象函数必须持续有定义，而不只是在抽象操作之间有定义。相应地，实现每个抽象操作的序列中的每一个表示操作，都必须保持表示不变式。
 
-Another, more subtle difficulty arises when attempting to define an abstraction function. One natural approach is the following, proposed by Lamport [32]. A (continually defined) abstraction function A is chosen so that each abstract operation “takes effect” instantaneously at some step in its execution. In our queue example, when a process enqueues an item x, exactly one of the operations implementing the Enq would carry the rep from r to r′, where A(r′) = ins(A(r), x). Surprisingly, perhaps, this technique fails to work for our queue implementation. To see why, we assume that such a function A exists, and we derive a contradiction. Consider the following scenario. Processes A and B invoke concurrent Enq operations, respectively enqueuing x and y. By incrementing the *back* counter, A reserves array position 1 and B reserves array position 2. B stores y in the array and returns. This computation is represented by the following history, where rep operations are indented and shown in upper-case.
+Another, more subtle difficulty arises when attempting to define an abstraction function. One natural approach is the following, proposed by Lamport [32]. A (continually defined) abstraction function A is chosen so that each abstract operation “takes effect” instantaneously at some step in its execution. In our queue example, when a process enqueues an item x, exactly one of the operations implementing the Enq would carry the rep from r to r′, where A(r′) = ins(A(r), x). Surprisingly, perhaps, this technique fails to work for our queue implementation. To see why, we assume that such a function A exists, and we derive a contradiction. Consider the following scenario. Processes A and B invoke concurrent Enq operations, respectively enqueuing x and y. By incrementing the _back_ counter, A reserves array position 1 and B reserves array position 2. B stores y in the array and returns. This computation is represented by the following history, where rep operations are indented and shown in upper-case.
 
-> 另一个更微妙的困难出现在定义抽象函数时。Lamport [32] 提出过一种自然做法：选择一个（持续有定义的）抽象函数 A，使每个抽象操作都在其执行过程的某一步瞬间“生效”。在队列示例中，当一个进程将条目 x 入队时，实现 Enq 的操作中应恰有一个把表示从 r 带到 r′，其中 A(r′) = ins(A(r), x)。也许令人意外，这种技术不适用于我们的队列实现。为说明原因，假设这样的函数 A 存在，并导出矛盾。考察如下场景：进程 A、B 并发调用 Enq，分别将 x、y 入队。A 递增 *back* 计数器，保留数组位置 1；B 保留数组位置 2。B 把 y 存入数组并返回。该计算由下面的历史表示，其中表示操作缩进并以大写字母显示。
+> 另一个更微妙的困难出现在定义抽象函数时。Lamport [32] 提出过一种自然做法：选择一个（持续有定义的）抽象函数 A，使每个抽象操作都在其执行过程的某一步瞬间“生效”。在队列示例中，当一个进程将条目 x 入队时，实现 Enq 的操作中应恰有一个把表示从 r 带到 r′，其中 A(r′) = ins(A(r), x)。也许令人意外，这种技术不适用于我们的队列实现。为说明原因，假设这样的函数 A 存在，并导出矛盾。考察如下场景：进程 A、B 并发调用 Enq，分别将 x、y 入队。A 递增 _back_ 计数器，保留数组位置 1；B 保留数组位置 2。B 把 y 存入数组并返回。该计算由下面的历史表示，其中表示操作缩进并以大写字母显示。
 
 ```text
 Enq(x) A
@@ -667,7 +669,7 @@ So far, linearizability is discussed in terms of histories. This characterizatio
 
 > 到目前为止，我们一直用历史来讨论线性一致性。这种刻画便于说明该性质的动机，也便于证明局部性等性质，却不适合验证。然而，对线性一致历史而言，关于交错历史的断言可以转换为关于顺序历史集合、进而关于值集合的断言。转换后的断言可以借助为顺序程序发展出来的熟悉公理方法来陈述和证明。
 
-For a given history H, we call the value of an object at the end of a linearization of H a *linearized value*. Since a given history may have more than one linearization, an object may have more than one linearized value at the end of a history. We let Lin(H) denote the set of all linearized values of H. Informally, a history’s linearized values represent the object’s possible values from the point of view of an external observer. Figure 4 shows a queue history with its set of linearized values after each event. Initially, only the empty queue is associated with the empty history. After the invocation of Enq(x), there are two linearized values, since the enqueue may or may not have taken effect. After the invocation of Enq(y), there are five linearized values: either Enq may or may not have occurred, and if both have occurred, either ordering is possible. After the response to Enq(y), y is known to have been enqueued, and after the response to Enq(x), both x and y must have been enqueued, although their order remains ambiguous until x is dequeued.
+For a given history H, we call the value of an object at the end of a linearization of H a _linearized value_. Since a given history may have more than one linearization, an object may have more than one linearized value at the end of a history. We let Lin(H) denote the set of all linearized values of H. Informally, a history’s linearized values represent the object’s possible values from the point of view of an external observer. Figure 4 shows a queue history with its set of linearized values after each event. Initially, only the empty queue is associated with the empty history. After the invocation of Enq(x), there are two linearized values, since the enqueue may or may not have taken effect. After the invocation of Enq(y), there are five linearized values: either Enq may or may not have occurred, and if both have occurred, either ordering is possible. After the response to Enq(y), y is known to have been enqueued, and after the response to Enq(x), both x and y must have been enqueued, although their order remains ambiguous until x is dequeued.
 
 > 对给定历史 H，我们把 H 的某个线性化结束时对象的值称为*线性化值*。由于一个历史可能有多个线性化，对象在历史结束时也可能有多个线性化值。用 Lin(H) 表示 H 的全部线性化值集合。非形式地说，一个历史的线性化值表示从外部观察者视角看对象可能具有的值。图 4 给出一个队列历史，以及每个事件之后的线性化值集合。起初，空历史只与空队列关联。调用 Enq(x) 后有两个线性化值，因为入队可能已经生效，也可能尚未生效。调用 Enq(y) 后有五个线性化值：任一 Enq 都可能已经或尚未发生；若两者都已发生，则两种次序均有可能。Enq(y) 响应后，已知 y 必然入队；Enq(x) 响应后，x、y 必然都已入队，但在 x 出队前，二者次序仍不确定。
 
@@ -701,9 +703,9 @@ This condition implies that Lin(H|ABS) is nonempty, hence that H|ABS is lineariz
 
 > 4.3.3 队列示例
 
-Returning to our queue example, our verification method is applied as follows. Let H|REP be a complete history for a queue representation, REP. If r is a linearized value for H|REP, define *items(r)* to be the set of non-null items in the array r.items. Let &lt;<sub>r</sub> be the partial order such that x &lt;<sub>r</sub> y if the STORE operation for x precedes the INC operation for y in H|REP. We can encode the partial order &lt;<sub>r</sub> as auxiliary data. For a queue q, let &lt;<sub>q</sub> denote the total order on its items, and *items(q)*, the set of its items.
+Returning to our queue example, our verification method is applied as follows. Let H|REP be a complete history for a queue representation, REP. If r is a linearized value for H|REP, define _items(r)_ to be the set of non-null items in the array r.items. Let &lt;<sub>r</sub> be the partial order such that x &lt;<sub>r</sub> y if the STORE operation for x precedes the INC operation for y in H|REP. We can encode the partial order &lt;<sub>r</sub> as auxiliary data. For a queue q, let &lt;<sub>q</sub> denote the total order on its items, and _items(q)_, the set of its items.
 
-> 回到队列示例，验证方法应用如下。令 H|REP 为队列表示 REP 的一个完整历史。若 r 是 H|REP 的线性化值，定义 *items(r)* 为数组 r.items 中非 null 条目的集合。定义偏序 &lt;<sub>r</sub>：若在 H|REP 中，x 的 STORE 操作先于 y 的 INC 操作，则 x &lt;<sub>r</sub> y。可以把偏序 &lt;<sub>r</sub> 编码为辅助数据。对队列 q，令 &lt;<sub>q</sub> 表示其条目上的全序，*items(q)* 表示其条目集合。
+> 回到队列示例，验证方法应用如下。令 H|REP 为队列表示 REP 的一个完整历史。若 r 是 H|REP 的线性化值，定义 _items(r)_ 为数组 r.items 中非 null 条目的集合。定义偏序 &lt;<sub>r</sub>：若在 H|REP 中，x 的 STORE 操作先于 y 的 INC 操作，则 x &lt;<sub>r</sub> y。可以把偏序 &lt;<sub>r</sub> 编码为辅助数据。对队列 q，令 &lt;<sub>q</sub> 表示其条目上的全序，_items(q)_ 表示其条目集合。
 
 The implementation has the following rep invariant:
 
@@ -719,9 +721,9 @@ $$
 
 > 即 back 不小于 1；所有不小于 back 的数组位置均为 null；items 的最低数组下标为 1。
 
-where *lbound* is the lowest array index, and the following abstraction function:
+where _lbound_ is the lowest array index, and the following abstraction function:
 
-> 其中 *lbound* 是最低数组下标；抽象函数如下：
+> 其中 _lbound_ 是最低数组下标；抽象函数如下：
 
 $$
 A(r) = \{q \mid \operatorname{items}(r) = \operatorname{items}(q) \land {<}_{r} \subseteq {<}_{q}\}
@@ -909,9 +911,9 @@ Every value read was written, but not overwritten.
 
 > 每个被读取的值都曾被写入，并且尚未被覆盖。
 
-**THEOREM 3.** *If r is a Read( )/Ok(v) operation in H, then there exists a Write(v)/Ok( ) operation w such that r does not precede w, and there is no other Write operation w′ such that w precedes w′ and w′ precedes r.*
+**THEOREM 3.** _If r is a Read( )/Ok(v) operation in H, then there exists a Write(v)/Ok( ) operation w such that r does not precede w, and there is no other Write operation w′ such that w precedes w′ and w′ precedes r._
 
-> **定理 3.** *若 r 是 H 中的 Read( )/Ok(v) 操作，则存在 Write(v)/Ok( ) 操作 w，使 r 不先于 w；并且不存在另一个 Write 操作 w′，使 w 先于 w′ 且 w′ 先于 r。*
+> **定理 3.** _若 r 是 H 中的 Read( )/Ok(v) 操作，则存在 Write(v)/Ok( ) 操作 w，使 r 不先于 w；并且不存在另一个 Write 操作 w′，使 w 先于 w′ 且 w′ 先于 r。_
 
 **PROOF.** Let r be the kth operation in a linearization of H, and let i < k be the greatest index such that v<sub>i</sub> = v. By construction, the ith operation in H is the Write(v) operation. If w′ exists, then there exists j such that i < j < k and v<sub>j</sub> ≠ v, a contradiction. □
 
@@ -921,9 +923,9 @@ Register values are persistent in the absence of Write operations.
 
 > 在没有 Write 操作时，寄存器值保持不变。
 
-**THEOREM 4.** *An interval in a history is a sequence of contiguous events. If I is an interval that does not overlap any Write operations, then all Read operations that lie within I return the same value.*
+**THEOREM 4.** _An interval in a history is a sequence of contiguous events. If I is an interval that does not overlap any Write operations, then all Read operations that lie within I return the same value._
 
-> **定理 4.** *历史中的区间是一段连续事件序列。若区间 I 不与任何 Write 操作重叠，则位于 I 内的所有 Read 操作都返回相同的值。*
+> **定理 4.** _历史中的区间是一段连续事件序列。若区间 I 不与任何 Write 操作重叠，则位于 I 内的所有 Read 操作都返回相同的值。_
 
 **PROOF.** Pick two Read operations e<sub>i</sub> and e<sub>j</sub>, i < j, that lie within the interval I. If v<sub>i</sub> ≠ v<sub>j</sub>, then a Write operation must be linearized after e<sub>i</sub> and before e<sub>j</sub>, contradicting the assumption that no Writes overlap I. □
 
@@ -937,13 +939,13 @@ The proofs of the following properties of concurrent queues use the following fa
 
 > 下面证明并发队列的若干性质时，要用到一个由图 3 中公理 E、D 推出的事实。为简单起见，假定队列中所有条目的值互不相同。
 
-**LEMMA 5.** *In any sequential queue history where x is enqueued before y, x is not dequeued after y.*
+**LEMMA 5.** _In any sequential queue history where x is enqueued before y, x is not dequeued after y._
 
-> **引理 5.** *在任何顺序队列历史中，若 x 先于 y 入队，则 x 不会晚于 y 出队。*
+> **引理 5.** _在任何顺序队列历史中，若 x 先于 y 入队，则 x 不会晚于 y 出队。_
 
-**THEOREM 6.** *If the Enq of x, Enq of y, Deq of x, and Deq of y are complete operations of H such that x’s Enq precedes y’s Enq, then y’s Deq does not precede x’s Deq (i.e., either x’s Deq precedes y’s, or they are concurrent).*
+**THEOREM 6.** _If the Enq of x, Enq of y, Deq of x, and Deq of y are complete operations of H such that x’s Enq precedes y’s Enq, then y’s Deq does not precede x’s Deq (i.e., either x’s Deq precedes y’s, or they are concurrent)._
 
-> **定理 6.** *若 x 的 Enq、y 的 Enq、x 的 Deq 与 y 的 Deq 都是 H 中的完整操作，并且 x 的 Enq 先于 y 的 Enq，则 y 的 Deq 不先于 x 的 Deq（即要么 x 的 Deq 先于 y 的 Deq，要么二者并发）。*
+> **定理 6.** _若 x 的 Enq、y 的 Enq、x 的 Deq 与 y 的 Deq 都是 H 中的完整操作，并且 x 的 Enq 先于 y 的 Enq，则 y 的 Deq 不先于 x 的 Deq（即要么 x 的 Deq 先于 y 的 Deq，要么二者并发）。_
 
 **PROOF.** Suppose not, i.e., y’s Deq precedes x’s Deq. Pick a linearization, and let q<sub>i</sub> and q<sub>j</sub> be queue values following the Deq operations of x and y respectively. From the assumption that j < i, q<sub>j−1</sub> = [y, . . . , x, . . .], which implies that y is enqueued before x, a contradiction. □
 
@@ -957,9 +959,9 @@ Items do not spontaneously vanish from the queue.
 
 > 条目不会从队列中自发消失。
 
-**THEOREM 7.** *If the Enq of x precedes the Enq of y, and if y has been dequeued, then either x has been dequeued or there is a pending Deq concurrent with the Deq of y.*
+**THEOREM 7.** _If the Enq of x precedes the Enq of y, and if y has been dequeued, then either x has been dequeued or there is a pending Deq concurrent with the Deq of y._
 
-> **定理 7.** *若 x 的 Enq 先于 y 的 Enq，并且 y 已经出队，那么要么 x 已经出队，要么存在一个与 y 的 Deq 并发的待决 Deq。*
+> **定理 7.** _若 x 的 Enq 先于 y 的 Enq，并且 y 已经出队，那么要么 x 已经出队，要么存在一个与 y 的 Deq 并发的待决 Deq。_
 
 **PROOF.** Pick a linearization. Suppose x has not been dequeued. Let q<sub>j</sub> be the value of the queue following the Deq of y. If y has been dequeued, but x has not, q<sub>j−1</sub> = [y, . . . , x, . . .], contradicting the assumption that the Enq of x precedes the Enq of y. □
 
@@ -969,9 +971,9 @@ Items do not spontaneously appear in the queue.
 
 > 条目不会在队列中自发出现。
 
-**THEOREM 8.** *If x has been dequeued, then it was enqueued, and the Deq operation does not precede the Enq.*
+**THEOREM 8.** _If x has been dequeued, then it was enqueued, and the Deq operation does not precede the Enq._
 
-> **定理 8.** *若 x 已经出队，则它此前必已入队，而且该 Deq 操作不先于 Enq。*
+> **定理 8.** _若 x 已经出队，则它此前必已入队，而且该 Deq 操作不先于 Enq。_
 
 **PROOF.** Suppose not. Pick a linearization, and let q<sub>i</sub> and q<sub>j</sub> be the queue values after the Enq and Deq operations respectively. From our assumption, j < i. Then q<sub>j−1</sub> = [x, . . .] and q<sub>i</sub> = [. . . , x], implying by the uniqueness of the values of the items, that i ≤ j − 1 < j, a contradiction. □
 
@@ -1001,7 +1003,7 @@ One notable exception is Lamport’s work [32] in which he proposed a model and 
 
 > 一个显著例外是 Lamport 的工作 [32]；他提出一个模型和一种断言语言，用于规约并发对象的安全性与活性性质。他的方法比我们更一般，因为它既处理活性又处理安全性，既处理非线性一致行为又处理线性一致行为。不过，我们的方法专门聚焦于我们认为最有意义、最有用的一类并发计算。我们不采用强大到足以规约一切可设想并发行为的规约语言，而是把关于“行为良好”的并发计算的断言，重新解释为关于其等价顺序计算的断言。
 
-Moreover, Lamport’s technique is based on a continually defined abstraction function (called a state function) that maps the representation to a single abstract value. This abstraction function defines the instant at which each operation appears to take effect: each primitive step of each operation either leaves the function’s value unchanged, or it instantaneously causes the operation to take effect. This technique is not powerful enough to verify highly concurrent objects such as the queue implementation given in Section 4. Indeed, our linearizable queue example has since inspired Abadi and Lamport to extend Lamport’s original technique to include not only history variables, but *prophecy* variables [1]. Prophecy variables are related to hidden variables called *possibilities* which we use in our proofs in the Appendices.
+Moreover, Lamport’s technique is based on a continually defined abstraction function (called a state function) that maps the representation to a single abstract value. This abstraction function defines the instant at which each operation appears to take effect: each primitive step of each operation either leaves the function’s value unchanged, or it instantaneously causes the operation to take effect. This technique is not powerful enough to verify highly concurrent objects such as the queue implementation given in Section 4. Indeed, our linearizable queue example has since inspired Abadi and Lamport to extend Lamport’s original technique to include not only history variables, but _prophecy_ variables [1]. Prophecy variables are related to hidden variables called _possibilities_ which we use in our proofs in the Appendices.
 
 > 此外，Lamport 的技术基于一个持续有定义的抽象函数（称为状态函数），它把表示映射到单个抽象值。该抽象函数定义每项操作看似生效的瞬间：操作的每个原语步骤要么不改变函数值，要么使该操作瞬间生效。这种技术不足以验证第 4 节队列实现那样的高并发对象。事实上，我们的线性一致队列示例后来启发 Abadi 与 Lamport 扩展 Lamport 的原始技术，使之不仅包含历史变量，还包含*预言*变量 [1]。预言变量与我们在附录证明中使用、称为*可能性*的隐藏变量有关。
 
@@ -1049,7 +1051,7 @@ The proofs of the lemmas in this section are given elsewhere [45].
 
 > I.1 可能性与线性化值
 
-For each linearized value, it is sometimes useful to keep track of which invocations were completed in the linearization that yielded that value, and what their responses were. A *possibility* for a history H is a triple ⟨v, P, R⟩, where v is a linearized value of H, P is the subset of pending invocations in H not completed when forming the linearization that yielded v, and R is the set of responses appended to H to form v. We let Poss(H) denote the set of possibilities of a history H. The relationship between the set of possibilities and set of linearized values for a given history H is the following: for each ⟨v, P, R⟩ ∈ Poss(H), v ∈ Lin(H). For the example in Figure 4, the possibilities ⟨[ ], {Enq(x) A}, ∅⟩ and ⟨[x], ∅, {Ok( ) A}⟩ are in Poss(⟨Enq(x) A⟩). In the first case, the linearization is the empty history: the queue is empty, the pending Enq invocation was not completed, and no responses were appended. In the second case, the linearization is a single Enq operation: the queue holds x, no pending invocations were left incomplete, and A’s Enq was completed normally. Similarly, ⟨[x, y], ∅, {Ok( ) A, Ok( ) B}⟩ and ⟨[y, x], ∅, {Ok( ) A, Ok( ) B}⟩ are two of the possibilities (among many others) in Poss(⟨Enq(x) A⟩ · ⟨Enq(y) B⟩).
+For each linearized value, it is sometimes useful to keep track of which invocations were completed in the linearization that yielded that value, and what their responses were. A _possibility_ for a history H is a triple ⟨v, P, R⟩, where v is a linearized value of H, P is the subset of pending invocations in H not completed when forming the linearization that yielded v, and R is the set of responses appended to H to form v. We let Poss(H) denote the set of possibilities of a history H. The relationship between the set of possibilities and set of linearized values for a given history H is the following: for each ⟨v, P, R⟩ ∈ Poss(H), v ∈ Lin(H). For the example in Figure 4, the possibilities ⟨[ ], {Enq(x) A}, ∅⟩ and ⟨[x], ∅, {Ok( ) A}⟩ are in Poss(⟨Enq(x) A⟩). In the first case, the linearization is the empty history: the queue is empty, the pending Enq invocation was not completed, and no responses were appended. In the second case, the linearization is a single Enq operation: the queue holds x, no pending invocations were left incomplete, and A’s Enq was completed normally. Similarly, ⟨[x, y], ∅, {Ok( ) A, Ok( ) B}⟩ and ⟨[y, x], ∅, {Ok( ) A, Ok( ) B}⟩ are two of the possibilities (among many others) in Poss(⟨Enq(x) A⟩ · ⟨Enq(y) B⟩).
 
 > 对每个线性化值，有时需要记录：在产生该值的线性化中，哪些调用被完成，以及它们的响应是什么。历史 H 的一个*可能性*是三元组 ⟨v, P, R⟩，其中 v 是 H 的线性化值；P 是 H 中的待决调用子集，这些调用在形成产生 v 的线性化时没有完成；R 是为形成 v 而追加到 H 的响应集合。用 Poss(H) 表示历史 H 的可能性集合。给定历史 H，其可能性集合与线性化值集合的关系如下：对每个 ⟨v, P, R⟩ ∈ Poss(H)，都有 v ∈ Lin(H)。在图 4 的例子中，可能性 ⟨[ ], {Enq(x) A}, ∅⟩ 与 ⟨[x], ∅, {Ok( ) A}⟩ 属于 Poss(⟨Enq(x) A⟩)。第一种情况下，线性化为空历史：队列为空，待决 Enq 调用未被完成，也没有追加响应。第二种情况下，线性化是单个 Enq 操作：队列含 x，没有留下未完成的待决调用，A 的 Enq 正常完成。类似地，⟨[x, y], ∅, {Ok( ) A, Ok( ) B}⟩ 与 ⟨[y, x], ∅, {Ok( ) A, Ok( ) B}⟩ 是 Poss(⟨Enq(x) A⟩ · ⟨Enq(y) B⟩) 中众多可能性里的两个。
 
@@ -1061,13 +1063,13 @@ In order to carry out a formal proof of correctness for our queue example, it he
 
 > 为对队列示例进行形式正确性证明，可以借助下面四条与类型无关的公理。这些公理用于导出历史的可能性集合，进而导出其线性化值集合。
 
-Let x be the object whose operations appear in H. The following *closure axiom* states that if v is in Lin(H) and ⟨inv A⟩ is a pending invocation in H that is not completed to form v, but could be completed with a response ⟨res A⟩ to yield a legal value v′ for x, then v′ is also in Lin(H):
+Let x be the object whose operations appear in H. The following _closure axiom_ states that if v is in Lin(H) and ⟨inv A⟩ is a pending invocation in H that is not completed to form v, but could be completed with a response ⟨res A⟩ to yield a legal value v′ for x, then v′ is also in Lin(H):
 
 > 令 x 为其操作出现在 H 中的对象。下面的*闭包公理*规定：若 v ∈ Lin(H)，而 ⟨inv A⟩ 是 H 中一个未被完成以形成 v 的待决调用，但可用响应 ⟨res A⟩ 完成它，从而为 x 产生合法值 v′，则 v′ 也属于 Lin(H)：
 
-*Axiom C:*
+_Axiom C:_
 
-> *公理 C：*
+> _公理 C：_
 
 $$
 \begin{aligned}
@@ -1082,13 +1084,13 @@ We write “{x = v} inv/res {x = v′}” to indicate that the condition must be
 
 > 我们写“{x = v} inv/res {x = v′}”，表示该条件必须能够从 x 的顺序公理导出。
 
-The following *invocation axiom* states that any linearization of H is also a linearization of H · ⟨inv A⟩:
+The following _invocation axiom_ states that any linearization of H is also a linearization of H · ⟨inv A⟩:
 
 > 下面的*调用公理*规定，H 的任一线性化也是 H · ⟨inv A⟩ 的线性化：
 
-*Axiom I:*
+_Axiom I:_
 
-> *公理 I：*
+> _公理 I：_
 
 $$
 \langle v,P,R\rangle \in \operatorname{Poss}(H)
@@ -1097,13 +1099,13 @@ $$
 
 > 新调用只加入待决调用集合，不改变值和响应集合。
 
-The following *response axiom* states that any linearization of H in which the pending ⟨inv A⟩ is completed with ⟨res A⟩ is also a linearization of H · ⟨res A⟩:
+The following _response axiom_ states that any linearization of H in which the pending ⟨inv A⟩ is completed with ⟨res A⟩ is also a linearization of H · ⟨res A⟩:
 
 > 下面的*响应公理*规定，若 H 的某个线性化以 ⟨res A⟩ 完成待决的 ⟨inv A⟩，则它也是 H · ⟨res A⟩ 的线性化：
 
-*Axiom R:*
+_Axiom R:_
 
-> *公理 R：*
+> _公理 R：_
 
 $$
 \langle v,P,R\rangle \in \operatorname{Poss}(H)\ \text{and}\ \langle\mathrm{res}\ A\rangle \in R
@@ -1112,13 +1114,13 @@ $$
 
 > 当响应事件实际追加到历史后，将其从“可能响应”集合中删除。
 
-The following *initialization axiom* states that the possibility for the initial value v₀ of an object corresponds to the empty history.
+The following _initialization axiom_ states that the possibility for the initial value v₀ of an object corresponds to the empty history.
 
 > 下面的*初始化公理*规定，对象初始值 v₀ 的可能性对应空历史。
 
-*Axiom S:*
+_Axiom S:_
 
-> *公理 S：*
+> _公理 S：_
 
 $$
 \{\langle v_0,\varnothing,\varnothing\rangle\}=\operatorname{Poss}(\Lambda)
@@ -1130,7 +1132,7 @@ For each operation of a typed object, Axioms C, I, R, and S are instantiated to 
 
 > 对带类型对象的每个操作，将公理 C、I、R、S 实例化，即得到类型特定公理。
 
-For a given history H with m events, we use Poss<sub>i</sub>(H) to denote the set of possibilities for the ith prefix of H, for 0 ≤ i ≤ m. A *derivation* that shows that ⟨v, P, R⟩ ∈ Poss<sub>m</sub>(H) is a sequence of implications of the form:
+For a given history H with m events, we use Poss<sub>i</sub>(H) to denote the set of possibilities for the ith prefix of H, for 0 ≤ i ≤ m. A _derivation_ that shows that ⟨v, P, R⟩ ∈ Poss<sub>m</sub>(H) is a sequence of implications of the form:
 
 > 对含 m 个事件的给定历史 H，在 0 ≤ i ≤ m 时，用 Poss<sub>i</sub>(H) 表示 H 的第 i 个前缀的可能性集合。证明 ⟨v, P, R⟩ ∈ Poss<sub>m</sub>(H) 的一个*推导*，是如下形式的蕴含序列：
 
@@ -1154,21 +1156,21 @@ Intuitively, a derivation is like a history. Each implication in a derivation is
 
 > 直觉上，推导类似历史。推导中的每个蕴含类似证明中的一个步骤，而每个步骤都由一条公理证明。
 
-The axioms C, I, R, and S are *sound*:
+The axioms C, I, R, and S are _sound_:
 
 > 公理 C、I、R、S 是*可靠的*：
 
-**THEOREM 9.** *If there exists a derivation showing that ⟨v, P, R⟩ is a possibility for H, then v is a linearized value for H.*
+**THEOREM 9.** _If there exists a derivation showing that ⟨v, P, R⟩ is a possibility for H, then v is a linearized value for H._
 
-> **定理 9.** *若存在一个推导，证明 ⟨v, P, R⟩ 是 H 的可能性，则 v 是 H 的线性化值。*
+> **定理 9.** _若存在一个推导，证明 ⟨v, P, R⟩ 是 H 的可能性，则 v 是 H 的线性化值。_
 
-Axioms C, I, R, and S are *complete*.
+Axioms C, I, R, and S are _complete_.
 
 > 公理 C、I、R、S 是*完备的*。
 
-**THEOREM 10.** *If v ∈ Lin(H), then there exists a derivation that ⟨v, P, R⟩ ∈ Poss(H).*
+**THEOREM 10.** _If v ∈ Lin(H), then there exists a derivation that ⟨v, P, R⟩ ∈ Poss(H)._
 
-> **定理 10.** *若 v ∈ Lin(H)，则存在一个推导，证明 ⟨v, P, R⟩ ∈ Poss(H)。*
+> **定理 10.** _若 v ∈ Lin(H)，则存在一个推导，证明 ⟨v, P, R⟩ ∈ Poss(H)。_
 
 ## II. PROOF OF CORRECTNESS FOR THE QUEUE
 
@@ -1178,7 +1180,7 @@ Axioms C, I, R, and S are *complete*.
 
 > II.1 关于并发队列的两个引理
 
-In a derivation, an *Enq inference for x* is an instantiation of Axiom C of the form:
+In a derivation, an _Enq inference for x_ is an instantiation of Axiom C of the form:
 
 > 在一个推导中，*x 的 Enq 推理*是公理 C 的如下实例：
 
@@ -1191,11 +1193,11 @@ $$
 
 > 若待决集合中含 A 对 x 的 Enq，则该推理把 x 插入队列，从待决集合移除 Enq，并把正常响应加入响应集合。
 
-A *Deq inference* is defined analogously.
+A _Deq inference_ is defined analogously.
 
 > *Deq 推理*的定义与此类似。
 
-Two inferences *commute* in a derivation if their order can be reversed without invalidating the derivation. A derivation showing ⟨q, P, R⟩ ∈ Poss<sub>m</sub> is in *canonical form* if each Enq inference for an item in q occurs “as late as possible,” i.e., it does not commute with the next inference in the derivation.
+Two inferences _commute_ in a derivation if their order can be reversed without invalidating the derivation. A derivation showing ⟨q, P, R⟩ ∈ Poss<sub>m</sub> is in _canonical form_ if each Enq inference for an item in q occurs “as late as possible,” i.e., it does not commute with the next inference in the derivation.
 
 > 若推导中的两个推理可以交换次序而不使推导失效，则称二者*可交换*。若一个证明 ⟨q, P, R⟩ ∈ Poss<sub>m</sub> 的推导中，q 中每个条目的 Enq 推理都“尽可能晚”发生，即它不能与推导中的下一个推理交换，则称该推导为*规范形式*。
 
@@ -1203,17 +1205,17 @@ Lemma 11 implies that if x is in q, the event following the Enq inference for x 
 
 > 引理 11 意味着，若 x 在 q 中，则 x 的 Enq 推理之后的事件，要么是 x 的返回事件，要么是 q 中位于 x 之后某个条目的返回事件。
 
-**LEMMA 11.** *If δ is a canonical derivation showing that ⟨q, P, R⟩ ∈ Poss<sub>m</sub>, and x is an item in q, then the inference following the Enq inference for x is either the Enq inference for the item following x in q, or an application of Axiom R for the matching response to Enq(x).*
+**LEMMA 11.** _If δ is a canonical derivation showing that ⟨q, P, R⟩ ∈ Poss<sub>m</sub>, and x is an item in q, then the inference following the Enq inference for x is either the Enq inference for the item following x in q, or an application of Axiom R for the matching response to Enq(x)._
 
-> **引理 11.** *若 δ 是证明 ⟨q, P, R⟩ ∈ Poss<sub>m</sub> 的规范推导，且 x 是 q 中的条目，则紧随 x 的 Enq 推理之后的推理，要么是 q 中紧随 x 的条目的 Enq 推理，要么是针对 Enq(x) 的匹配响应应用公理 R。*
+> **引理 11.** _若 δ 是证明 ⟨q, P, R⟩ ∈ Poss<sub>m</sub> 的规范推导，且 x 是 q 中的条目，则紧随 x 的 Enq 推理之后的推理，要么是 q 中紧随 x 的条目的 Enq 推理，要么是针对 Enq(x) 的匹配响应应用公理 R。_
 
 Lemma 12 states that we can consider equivalence classes of queues rather than individual queues.
 
 > 引理 12 表明，可以考虑队列的等价类，而不必逐个考虑队列。
 
-**LEMMA 12.** *If ⟨q, P, R⟩ ∈ Poss<sub>m</sub>, and q\* is a queue value constructed by rearranging the items of q in an order consistent with the partial precedence order of their Enq operations, then ⟨q\*, P, R⟩ ∈ Poss<sub>m</sub>.*
+**LEMMA 12.** _If ⟨q, P, R⟩ ∈ Poss<sub>m</sub>, and q\* is a queue value constructed by rearranging the items of q in an order consistent with the partial precedence order of their Enq operations, then ⟨q\*, P, R⟩ ∈ Poss<sub>m</sub>._
 
-> **引理 12.** *若 ⟨q, P, R⟩ ∈ Poss<sub>m</sub>，而 q\* 是把 q 中条目按与其 Enq 操作偏先后次序一致的次序重新排列而构成的队列值，则 ⟨q\*, P, R⟩ ∈ Poss<sub>m</sub>。*
+> **引理 12.** _若 ⟨q, P, R⟩ ∈ Poss<sub>m</sub>，而 q\* 是把 q 中条目按与其 Enq 操作偏先后次序一致的次序重新排列而构成的队列值，则 ⟨q\*, P, R⟩ ∈ Poss<sub>m</sub>。_
 
 ### II.2 Main Proof
 
@@ -1255,33 +1257,33 @@ The partially ordered set of queue items (I, <), captures the nonquiescent abstr
 
 > **图表中文解读：** 图中花括号断言逐步跟踪 Poss：抽象调用把 Enq/Deq 加入待决集合 P，INC/READ 不改变 Poss；STORE 完成一个入队可能性，并要求 x 在偏序中为极大元；SWAP 若取出非 null 值，则该值为极小元；抽象响应再从可能响应集合 R 中删除相应 Ok。这样每个原子步骤前后都维持抽象值包含关系。
 
-**LEMMA 13.** *If x is a maximal element with respect to <, x ∉ I, ⟨Enq(x) A⟩ ∉ P, ⟨Ok( ) A⟩ ∈ R, and [(I, <), P ∪ {Enq(x) A}, R − {Ok( ) A}] ⊆ Poss, then [(I ∪ {x}, <), P, R] ⊆ Poss.*
+**LEMMA 13.** _If x is a maximal element with respect to <, x ∉ I, ⟨Enq(x) A⟩ ∉ P, ⟨Ok( ) A⟩ ∈ R, and [(I, <), P ∪ {Enq(x) A}, R − {Ok( ) A}] ⊆ Poss, then [(I ∪ {x}, <), P, R] ⊆ Poss._
 
-> **引理 13.** *若 x 相对于 < 是极大元，x ∉ I，⟨Enq(x) A⟩ ∉ P，⟨Ok( ) A⟩ ∈ R，且 [(I, <), P ∪ {Enq(x) A}, R − {Ok( ) A}] ⊆ Poss，则 [(I ∪ {x}, <), P, R] ⊆ Poss。*
+> **引理 13.** _若 x 相对于 < 是极大元，x ∉ I，⟨Enq(x) A⟩ ∉ P，⟨Ok( ) A⟩ ∈ R，且 [(I, <), P ∪ {Enq(x) A}, R − {Ok( ) A}] ⊆ Poss，则 [(I ∪ {x}, <), P, R] ⊆ Poss。_
 
-**LEMMA 14.** *If ⟨Deq( ) A⟩ ∉ P, ⟨Ok(x) A⟩ ∈ R, and [(I, <), P ∪ {Deq( ) A}, R − {Ok(x) A}] ⊆ Poss, then for all x such that x is a minimal element of I, [(I − {x}, <), P, R] ⊆ Poss.*
+**LEMMA 14.** _If ⟨Deq( ) A⟩ ∉ P, ⟨Ok(x) A⟩ ∈ R, and [(I, <), P ∪ {Deq( ) A}, R − {Ok(x) A}] ⊆ Poss, then for all x such that x is a minimal element of I, [(I − {x}, <), P, R] ⊆ Poss._
 
-> **引理 14.** *若 ⟨Deq( ) A⟩ ∉ P，⟨Ok(x) A⟩ ∈ R，且 [(I, <), P ∪ {Deq( ) A}, R − {Ok(x) A}] ⊆ Poss，则对 I 中作为极小元的所有 x，都有 [(I − {x}, <), P, R] ⊆ Poss。*
+> **引理 14.** _若 ⟨Deq( ) A⟩ ∉ P，⟨Ok(x) A⟩ ∈ R，且 [(I, <), P ∪ {Deq( ) A}, R − {Ok(x) A}] ⊆ Poss，则对 I 中作为极小元的所有 x，都有 [(I − {x}, <), P, R] ⊆ Poss。_
 
 Lemma 13 will allow us to show that the set of linearized queue values does not change over a STORE operation and similarly, Lemma 14, for a SWAP operation, by using &lt;<sub>r</sub> for < and by recalling that for each ⟨v, P, R⟩ ∈ Poss, v is a linearized value. We use the next two lemmas to satisfy the conditions of the previous two lemmas.
 
 > 取 &lt;<sub>r</sub> 作为 <，并回顾对每个 ⟨v, P, R⟩ ∈ Poss，v 都是线性化值，引理 13 便使我们能够证明线性化队列值集合在 STORE 操作前后不变；同理，引理 14 可用于 SWAP 操作。我们用接下来两个引理满足前两个引理的条件。
 
-**LEMMA 15.** *Enq enqueues an item x that is maximal with respect to &lt;<sub>r</sub>.*
+**LEMMA 15.** _Enq enqueues an item x that is maximal with respect to &lt;<sub>r</sub>._
 
-> **引理 15.** *Enq 入队的条目 x 相对于 &lt;<sub>r</sub> 是极大元。*
+> **引理 15.** _Enq 入队的条目 x 相对于 &lt;<sub>r</sub> 是极大元。_
 
-**LEMMA 16.** *Deq removes and returns an item x that is minimal with respect to &lt;<sub>r</sub>.*
+**LEMMA 16.** _Deq removes and returns an item x that is minimal with respect to &lt;<sub>r</sub>._
 
-> **引理 16.** *Deq 移除并返回的条目 x 相对于 &lt;<sub>r</sub> 是极小元。*
+> **引理 16.** _Deq 移除并返回的条目 x 相对于 &lt;<sub>r</sub> 是极小元。_
 
 Here is a proof of correctness.
 
 > 下面给出正确性证明。
 
-**THEOREM 17.** *The queue implementation is correct.*
+**THEOREM 17.** _The queue implementation is correct._
 
-> **定理 17.** *该队列实现是正确的。*
+> **定理 17.** _该队列实现是正确的。_
 
 **PROOF.** Assuming every rep history is linearizable, we need to show that every queue history, H|q, is linearizable. It suffices to show that the “subset” property, ⋃<sub>r∈Lin(H|r)</sub> A(r) ⊆ Lin(H|q), remains invariant over abstract invocation and responses and over complete rep operations. Thus, it can be conjoined to the pre- and postconditions of Figure 6 as justified by the Owicki-Gries proof method [38]. Axioms I and R give us the result for abstract invocation and response events. INC and READ leave the abstraction function the same. Thus, we are left with two cases, STORE and SWAP. By Lemma 15 we know that STORE adds a maximal item and thus, we can apply Lemma 13 to show that the subset property is preserved. Similarly, by Lemma 16 we know that SWAP removes a minimal item and thus, we can apply Lemma 14 to show that the subset property is preserved. □
 
@@ -1303,63 +1305,63 @@ The authors thank Jim Horning, Leslie Lamport, Larry Rudolph, and William Weihl 
 
 > 1. ABADI, M. 与 LAMPORT, L. 精化映射的存在性。DEC 系统研究中心技术报告 29，1988 年 8 月。
 
-2. GOGUEN, J. A., THATCHER, J. W., WAGNER, E. G., AND WRIGHT, J. B. Abstract data types as initial algebras and correctness of data representations. In *Proceedings of the Conference on Computer Graphics, Pattern Recognition and Data Structures* (May 1975). ACM, New York, 1975, 89–93.
+2. GOGUEN, J. A., THATCHER, J. W., WAGNER, E. G., AND WRIGHT, J. B. Abstract data types as initial algebras and correctness of data representations. In _Proceedings of the Conference on Computer Graphics, Pattern Recognition and Data Structures_ (May 1975). ACM, New York, 1975, 89–93.
 
 > 2. GOGUEN, J. A.、THATCHER, J. W.、WAGNER, E. G. 与 WRIGHT, J. B. 抽象数据类型作为初始代数，以及数据表示的正确性。载《计算机图形、模式识别与数据结构会议论文集》（1975 年 5 月）。ACM，纽约，1975，89–93。
 
-3. APT, K. R., FRANCEZ, N., AND DEROEVER, W. P. A proof system for communicating sequential processes. *ACM Trans. Program. Lang. Syst.* 2, 3 (July 1980), 359–385.
+3. APT, K. R., FRANCEZ, N., AND DEROEVER, W. P. A proof system for communicating sequential processes. _ACM Trans. Program. Lang. Syst._ 2, 3 (July 1980), 359–385.
 
 > 3. APT, K. R.、FRANCEZ, N. 与 DEROEVER, W. P. 通信顺序进程的证明系统。《ACM 编程语言与系统汇刊》2 卷 3 期（1980 年 7 月），359–385。
 
-4. BAYER, R., AND SCHKOLNICK, M. Concurrency of operations on B-trees. *Acta Inf.* 1, 1 (1977), 1–21.
+4. BAYER, R., AND SCHKOLNICK, M. Concurrency of operations on B-trees. _Acta Inf._ 1, 1 (1977), 1–21.
 
 > 4. BAYER, R. 与 SCHKOLNICK, M. B 树操作的并发性。《Acta Informatica》1 卷 1 期（1977），1–21。
 
-5. BIRKHOFF, G., AND LIPSON, J. D. Heterogeneous algebras. *J. Comb. Theor.* 8 (1970), 115–133.
+5. BIRKHOFF, G., AND LIPSON, J. D. Heterogeneous algebras. _J. Comb. Theor._ 8 (1970), 115–133.
 
 > 5. BIRKHOFF, G. 与 LIPSON, J. D. 异构代数。《组合理论杂志》8（1970），115–133。
 
-6. BISWAS, J., AND BROWNE, J. C. Simultaneous update of priority structures. In *Proceedings of the 1987 International Conference on Parallel Processing* (St. Charles, Ill., 1987). 124–131.
+6. BISWAS, J., AND BROWNE, J. C. Simultaneous update of priority structures. In _Proceedings of the 1987 International Conference on Parallel Processing_ (St. Charles, Ill., 1987). 124–131.
 
 > 6. BISWAS, J. 与 BROWNE, J. C. 优先级结构的同步更新。载《1987 年国际并行处理会议论文集》（伊利诺伊州圣查尔斯，1987），124–131。
 
-7. BROOKES, S. D. An axiomatic treatment of a parallel language. In *Proceedings of Conference on Logics of Programs. Lecture Notes in Computer Science. Vol. 193.* Springer-Verlag, Berlin, 1985.
+7. BROOKES, S. D. An axiomatic treatment of a parallel language. In _Proceedings of Conference on Logics of Programs. Lecture Notes in Computer Science. Vol. 193._ Springer-Verlag, Berlin, 1985.
 
 > 7. BROOKES, S. D. 并行语言的公理化处理。载《程序逻辑会议论文集》，计算机科学讲义第 193 卷。Springer-Verlag，柏林，1985。
 
-8. BURSTALL, R. M., AND GOGUEN, J. A. Putting theories together to make specifications. In *Fifth International Joint Conference on Artificial Intelligence* (Cambridge, Mass., Aug. 1977). 1045–1058. Invited paper.
+8. BURSTALL, R. M., AND GOGUEN, J. A. Putting theories together to make specifications. In _Fifth International Joint Conference on Artificial Intelligence_ (Cambridge, Mass., Aug. 1977). 1045–1058. Invited paper.
 
 > 8. BURSTALL, R. M. 与 GOGUEN, J. A. 组合理论以构造规约。载《第五届国际人工智能联合会议》（马萨诸塞州剑桥，1977 年 8 月），1045–1058。特邀论文。
 
-9. DEPARTMENT OF DEFENSE. *Reference Manual for the ADA Programming Language.* ANSI/MIL-STD-1815A-1983, 1983.
+9. DEPARTMENT OF DEFENSE. _Reference Manual for the ADA Programming Language._ ANSI/MIL-STD-1815A-1983, 1983.
 
 > 9. 美国国防部。《ADA 编程语言参考手册》。ANSI/MIL-STD-1815A-1983，1983。
 
-10. EHRIG, H., AND MAHR, B. *Fundamentals of Algebraic Specification 1.* Springer-Verlag, Berlin, 1985.
+10. EHRIG, H., AND MAHR, B. _Fundamentals of Algebraic Specification 1._ Springer-Verlag, Berlin, 1985.
 
 > 10. EHRIG, H. 与 MAHR, B.《代数规约基础 1》。Springer-Verlag，柏林，1985。
 
-11. ELLIS, C. S. Concurrent search and insertion in 2-3 trees. *Acta Inf.* 14 (1980), 63–86.
+11. ELLIS, C. S. Concurrent search and insertion in 2-3 trees. _Acta Inf._ 14 (1980), 63–86.
 
 > 11. ELLIS, C. S. 2-3 树中的并发搜索与插入。《Acta Informatica》14（1980），63–86。
 
-12. ESWARAN, K. P., GRAY, J. N., LORIE, R. A., AND TRAIGER, I. L. The notion of consistency and predicate locks in a database system. *Commun. ACM* 19, 11 (Nov. 1976), 624–633.
+12. ESWARAN, K. P., GRAY, J. N., LORIE, R. A., AND TRAIGER, I. L. The notion of consistency and predicate locks in a database system. _Commun. ACM_ 19, 11 (Nov. 1976), 624–633.
 
 > 12. ESWARAN, K. P.、GRAY, J. N.、LORIE, R. A. 与 TRAIGER, I. L. 数据库系统中的一致性概念与谓词锁。《ACM 通讯》19 卷 11 期（1976 年 11 月），624–633。
 
-13. FORD, R., AND CALHOUN, J. Concurrency control mechanisms and the serializability of concurrent tree algorithms. In *3rd ACM Symposium on Principles of Database Systems* (1984). ACM, New York, 1984, 51–60.
+13. FORD, R., AND CALHOUN, J. Concurrency control mechanisms and the serializability of concurrent tree algorithms. In _3rd ACM Symposium on Principles of Database Systems_ (1984). ACM, New York, 1984, 51–60.
 
 > 13. FORD, R. 与 CALHOUN, J. 并发控制机制与并发树算法的可串行化。载《第三届 ACM 数据库系统原理研讨会》（1984）。ACM，纽约，1984，51–60。
 
-14. GERTH, R., AND DEROEVER, W. P. Proving monitors revisited: A first step towards verifying object oriented systems. *Fundamental Inf.* 9 (1986), 371–400.
+14. GERTH, R., AND DEROEVER, W. P. Proving monitors revisited: A first step towards verifying object oriented systems. _Fundamental Inf._ 9 (1986), 371–400.
 
 > 14. GERTH, R. 与 DEROEVER, W. P. 重访监视器证明：迈向验证面向对象系统的第一步。《Fundamental Informaticae》9（1986），371–400。
 
-15. GOTTLIEB, A., LUBACHEVSKY, B. D., AND RUDOLPH, L. Basic techniques for the efficient coordination of very large numbers of cooperating sequential processors. *ACM Trans. Program. Lang. Syst.* 5, 2 (April 1983), 164–189.
+15. GOTTLIEB, A., LUBACHEVSKY, B. D., AND RUDOLPH, L. Basic techniques for the efficient coordination of very large numbers of cooperating sequential processors. _ACM Trans. Program. Lang. Syst._ 5, 2 (April 1983), 164–189.
 
 > 15. GOTTLIEB, A.、LUBACHEVSKY, B. D. 与 RUDOLPH, L. 高效协调大量协作顺序处理器的基本技术。《ACM 编程语言与系统汇刊》5 卷 2 期（1983 年 4 月），164–189。
 
-16. GUIBAS, L., AND SEDGEWICK, R. A dichromatic framework for balanced trees. In *19th ACM Symposium on Foundations of Computer Science* (Providence, R.I., 1978). ACM, New York, 1978, 8–21.
+16. GUIBAS, L., AND SEDGEWICK, R. A dichromatic framework for balanced trees. In _19th ACM Symposium on Foundations of Computer Science_ (Providence, R.I., 1978). ACM, New York, 1978, 8–21.
 
 > 16. GUIBAS, L. 与 SEDGEWICK, R. 平衡树的二色框架。载《第 19 届 ACM 计算机科学基础研讨会》（罗得岛州普罗维登斯，1978）。ACM，纽约，1978，8–21。
 
@@ -1367,7 +1369,7 @@ The authors thank Jim Horning, Leslie Lamport, Larry Rudolph, and William Weihl 
 
 > 17. GUTTAG, J. V. 抽象数据类型的规约及其在程序设计中的应用。博士论文，多伦多大学，多伦多，1975 年 9 月。
 
-18. GUTTAG, J. V., HOROWITZ, E., AND MUSSER, D. R. Abstract data types and software validation. *Commun. ACM* 21, 12 (Dec. 1978), 1048–1064.
+18. GUTTAG, J. V., HOROWITZ, E., AND MUSSER, D. R. Abstract data types and software validation. _Commun. ACM_ 21, 12 (Dec. 1978), 1048–1064.
 
 > 18. GUTTAG, J. V.、HOROWITZ, E. 与 MUSSER, D. R. 抽象数据类型与软件验证。《ACM 通讯》21 卷 12 期（1978 年 12 月），1048–1064。
 
@@ -1375,59 +1377,59 @@ The authors thank Jim Horning, Leslie Lamport, Larry Rudolph, and William Weihl 
 
 > 19. GUTTAG, J. V.、HORNING, J. J. 与 WING, J. M. 五个简单部分讲解 Larch。DEC 系统研究中心技术报告 5，1985 年 7 月。
 
-20. GUTTAG, J. V., HORNING, J. J., AND WING, J. M. The Larch family of specification languages. *IEEE Softw.* 2, 5 (Sept. 1985), 24–36.
+20. GUTTAG, J. V., HORNING, J. J., AND WING, J. M. The Larch family of specification languages. _IEEE Softw._ 2, 5 (Sept. 1985), 24–36.
 
 > 20. GUTTAG, J. V.、HORNING, J. J. 与 WING, J. M. Larch 规约语言家族。《IEEE Software》2 卷 5 期（1985 年 9 月），24–36。
 
-21. HERLIHY, M., AND WING, J. Axioms for concurrent objects. In *14th ACM Symposium on Principles of Programming Languages* (Jan. 1987). ACM, New York, 1987, 13–26.
+21. HERLIHY, M., AND WING, J. Axioms for concurrent objects. In _14th ACM Symposium on Principles of Programming Languages_ (Jan. 1987). ACM, New York, 1987, 13–26.
 
 > 21. HERLIHY, M. 与 WING, J. 并发对象的公理。载《第 14 届 ACM 编程语言原理研讨会》（1987 年 1 月）。ACM，纽约，1987，13–26。
 
-22. HERLIHY, M. P. Dynamic quorum adjustment for partitioned data. *ACM Trans. Database Syst.* 12, 2 (June 1987), 170–194.
+22. HERLIHY, M. P. Dynamic quorum adjustment for partitioned data. _ACM Trans. Database Syst._ 12, 2 (June 1987), 170–194.
 
 > 22. HERLIHY, M. P. 分区数据的动态仲裁调整。《ACM 数据库系统汇刊》12 卷 2 期（1987 年 6 月），170–194。
 
-23. HERLIHY, M. P. Impossibility and universality results for wait-free synchronization. In *Seventh ACM SIGACT-SIGOPS Symposium on Principles of Distributed Computing (PODC)* (Toronto, Ont., Aug. 1988). ACM, New York, 1988, 276–290.
+23. HERLIHY, M. P. Impossibility and universality results for wait-free synchronization. In _Seventh ACM SIGACT-SIGOPS Symposium on Principles of Distributed Computing (PODC)_ (Toronto, Ont., Aug. 1988). ACM, New York, 1988, 276–290.
 
 > 23. HERLIHY, M. P. 无等待同步的不可能性与通用性结果。载《第七届 ACM SIGACT-SIGOPS 分布式计算原理研讨会（PODC）》（安大略省多伦多，1988 年 8 月）。ACM，纽约，1988，276–290。
 
-24. HOARE, C. A. R. An axiomatic basis for computer programming. *Commun. ACM* 12, 10 (Oct. 1969), 576–583.
+24. HOARE, C. A. R. An axiomatic basis for computer programming. _Commun. ACM_ 12, 10 (Oct. 1969), 576–583.
 
 > 24. HOARE, C. A. R. 计算机程序设计的公理基础。《ACM 通讯》12 卷 10 期（1969 年 10 月），576–583。
 
-25. HOARE, C. A. R. Proof of correctness of data representations. *Acta Inf.* 1, 1 (1972), 271–281.
+25. HOARE, C. A. R. Proof of correctness of data representations. _Acta Inf._ 1, 1 (1972), 271–281.
 
 > 25. HOARE, C. A. R. 数据表示的正确性证明。《Acta Informatica》1 卷 1 期（1972），271–281。
 
-26. HOARE, C. A. R. Monitors: An operating system structuring concept. *Commun. ACM* 17, 10 (Oct. 1974), 549–557.
+26. HOARE, C. A. R. Monitors: An operating system structuring concept. _Commun. ACM_ 17, 10 (Oct. 1974), 549–557.
 
 > 26. HOARE, C. A. R. 监视器：一种操作系统结构化概念。《ACM 通讯》17 卷 10 期（1974 年 10 月），549–557。
 
-27. HOARE, C. A. R. Communicating sequential processes. *Commun. ACM* 21, 8 (Aug. 1978), 666–677.
+27. HOARE, C. A. R. Communicating sequential processes. _Commun. ACM_ 21, 8 (Aug. 1978), 666–677.
 
 > 27. HOARE, C. A. R. 通信顺序进程。《ACM 通讯》21 卷 8 期（1978 年 8 月），666–677。
 
-28. HOWARD, J. H. Proving monitors. *Commun. ACM* 19, 5 (May 1976), 273–279.
+28. HOWARD, J. H. Proving monitors. _Commun. ACM_ 19, 5 (May 1976), 273–279.
 
 > 28. HOWARD, J. H. 证明监视器。《ACM 通讯》19 卷 5 期（1976 年 5 月），273–279。
 
-29. JONES, C. B. *Software Development: A Rigorous Approach.* Prentice-Hall, Englewood Cliffs, N.J., 1980.
+29. JONES, C. B. _Software Development: A Rigorous Approach._ Prentice-Hall, Englewood Cliffs, N.J., 1980.
 
 > 29. JONES, C. B.《软件开发：一种严谨方法》。Prentice-Hall，新泽西州恩格尔伍德克利夫斯，1980。
 
-30. KRUSKAL, C. P., RUDOLPH, L., AND SNIR, M. Efficient synchronization on multiprocessors with shared memory. In *Fifth ACM SIGACT-SIGOPS Symposium on Principles of Distributed Computing* (Aug. 1986). ACM, New York, 1986.
+30. KRUSKAL, C. P., RUDOLPH, L., AND SNIR, M. Efficient synchronization on multiprocessors with shared memory. In _Fifth ACM SIGACT-SIGOPS Symposium on Principles of Distributed Computing_ (Aug. 1986). ACM, New York, 1986.
 
 > 30. KRUSKAL, C. P.、RUDOLPH, L. 与 SNIR, M. 共享内存多处理器上的高效同步。载《第五届 ACM SIGACT-SIGOPS 分布式计算原理研讨会》（1986 年 8 月）。ACM，纽约，1986。
 
-31. LAMPORT, L. How to make a multiprocessor computer that correctly executes multiprocess programs. *IEEE Trans. Comput.* C-28, 9 (Sept. 1979), 690–691.
+31. LAMPORT, L. How to make a multiprocessor computer that correctly executes multiprocess programs. _IEEE Trans. Comput._ C-28, 9 (Sept. 1979), 690–691.
 
 > 31. LAMPORT, L. 如何构造正确执行多进程程序的多处理器计算机。《IEEE 计算机汇刊》C-28 卷 9 期（1979 年 9 月），690–691。
 
-32. LAMPORT, L. Specifying concurrent program modules. *ACM Trans. Program. Lang. Syst.* 5, 2 (April 1983), 190–222.
+32. LAMPORT, L. Specifying concurrent program modules. _ACM Trans. Program. Lang. Syst._ 5, 2 (April 1983), 190–222.
 
 > 32. LAMPORT, L. 规约并发程序模块。《ACM 编程语言与系统汇刊》5 卷 2 期（1983 年 4 月），190–222。
 
-33. LEHMAN, P. L., AND YAO, S. B. Efficient locking for concurrent operations on B-trees. *ACM Trans. Database Syst.* 6, 4 (Dec. 1981), 650–670.
+33. LEHMAN, P. L., AND YAO, S. B. Efficient locking for concurrent operations on B-trees. _ACM Trans. Database Syst._ 6, 4 (Dec. 1981), 650–670.
 
 > 33. LEHMAN, P. L. 与 YAO, S. B. B 树并发操作的高效加锁。《ACM 数据库系统汇刊》6 卷 4 期（1981 年 12 月），650–670。
 
@@ -1435,35 +1437,35 @@ The authors thank Jim Horning, Leslie Lamport, Larry Rudolph, and William Weihl 
 
 > 34. MANNA, Z. 与 PNUELI, A. 并发程序验证，第一部分：时序框架。技术报告 STAN-CS-81-836，斯坦福大学计算机科学系，1981 年 6 月。
 
-35. MISRA, J. Axioms for memory access in asynchronous hardware systems. *ACM Trans. Program. Lang. Syst.* 8, 1 (Jan. 1986), 142–153.
+35. MISRA, J. Axioms for memory access in asynchronous hardware systems. _ACM Trans. Program. Lang. Syst._ 8, 1 (Jan. 1986), 142–153.
 
 > 35. MISRA, J. 异步硬件系统中内存访问的公理。《ACM 编程语言与系统汇刊》8 卷 1 期（1986 年 1 月），142–153。
 
-36. NAKAJIMA, R., HONDA, M., AND NAKAHARA, H. Hierarchical program specification and verification—A many-sorted logical approach. *Acta Inf.* 14 (1980), 135–155.
+36. NAKAJIMA, R., HONDA, M., AND NAKAHARA, H. Hierarchical program specification and verification—A many-sorted logical approach. _Acta Inf._ 14 (1980), 135–155.
 
 > 36. NAKAJIMA, R.、HONDA, M. 与 NAKAHARA, H. 分层程序规约与验证——一种多类逻辑方法。《Acta Informatica》14（1980），135–155。
 
-37. OWICKI, S., AND GRIES, D. Verifying properties of parallel programs: An axiomatic approach. *Commun. ACM* 19, 5 (May 1976), 279–285.
+37. OWICKI, S., AND GRIES, D. Verifying properties of parallel programs: An axiomatic approach. _Commun. ACM_ 19, 5 (May 1976), 279–285.
 
 > 37. OWICKI, S. 与 GRIES, D. 验证并行程序的性质：一种公理方法。《ACM 通讯》19 卷 5 期（1976 年 5 月），279–285。
 
-38. OWICKI, S., AND GRIES, D. An axiomatic proof technique for parallel programs. *Acta Inf.* 6, 4 (1976), 319–340.
+38. OWICKI, S., AND GRIES, D. An axiomatic proof technique for parallel programs. _Acta Inf._ 6, 4 (1976), 319–340.
 
 > 38. OWICKI, S. 与 GRIES, D. 并行程序的公理证明技术。《Acta Informatica》6 卷 4 期（1976），319–340。
 
-39. OWICKI, S., AND LAMPORT, L. Proving liveness properties of concurrent programs. *ACM Trans. Program. Lang. Syst.* 4, 3 (July 1982), 455–495.
+39. OWICKI, S., AND LAMPORT, L. Proving liveness properties of concurrent programs. _ACM Trans. Program. Lang. Syst._ 4, 3 (July 1982), 455–495.
 
 > 39. OWICKI, S. 与 LAMPORT, L. 证明并发程序的活性性质。《ACM 编程语言与系统汇刊》4 卷 3 期（1982 年 7 月），455–495。
 
-40. PAPADIMITRIOU, C. H. The serializability of concurrent database updates. *J. ACM* 26, 4 (Oct. 1979), 631–653.
+40. PAPADIMITRIOU, C. H. The serializability of concurrent database updates. _J. ACM_ 26, 4 (Oct. 1979), 631–653.
 
 > 40. PAPADIMITRIOU, C. H. 并发数据库更新的可串行化。《ACM 杂志》26 卷 4 期（1979 年 10 月），631–653。
 
-41. REED, D. P. Implementing atomic actions on decentralized data. *ACM Trans. Comput. Syst.* 1, 1 (Feb. 1983), 3–23.
+41. REED, D. P. Implementing atomic actions on decentralized data. _ACM Trans. Comput. Syst._ 1, 1 (Feb. 1983), 3–23.
 
 > 41. REED, D. P. 在去中心化数据上实现原子动作。《ACM 计算机系统汇刊》1 卷 1 期（1983 年 2 月），3–23。
 
-42. SAGIV, Y. Concurrent operations on B-trees with overtaking. In *Symposium on Principles of Database Systems* (Waterloo, Ont., Jan. 1985). ACM, New York, 1985, 28–37.
+42. SAGIV, Y. Concurrent operations on B-trees with overtaking. In _Symposium on Principles of Database Systems_ (Waterloo, Ont., Jan. 1985). ACM, New York, 1985, 28–37.
 
 > 42. SAGIV, Y. 允许超越的 B 树并发操作。载《数据库系统原理研讨会》（安大略省滑铁卢，1985 年 1 月）。ACM，纽约，1985，28–37。
 
@@ -1479,7 +1481,7 @@ The authors thank Jim Horning, Leslie Lamport, Larry Rudolph, and William Weihl 
 
 > 45. HERLIHY, M. P. 与 WING, J. M. 并发对象的公理。技术报告 CMU-CS-86-154，卡内基梅隆大学计算机科学系，1986。
 
-46. WEIHL, W. E. Local atomicity properties: Modular concurrent control for abstract data types. *ACM Trans. Program. Lang. Syst.* 11, 2 (April 1989), 249–283.
+46. WEIHL, W. E. Local atomicity properties: Modular concurrent control for abstract data types. _ACM Trans. Program. Lang. Syst._ 11, 2 (April 1989), 249–283.
 
 > 46. WEIHL, W. E. 局部原子性性质：抽象数据类型的模块化并发控制。《ACM 编程语言与系统汇刊》11 卷 2 期（1989 年 4 月），249–283。
 

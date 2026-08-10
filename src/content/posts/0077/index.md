@@ -4,6 +4,7 @@ pubDatetime: 2026-08-06T13:51:44+08:00
 timezone: "Asia/Shanghai"
 title: "SwiftUI 页面卡顿排查：两处全表扫描的根因与修复"
 featured: false
+area: "software-engineering"
 draft: false
 tags:
   - "SwiftUI"
@@ -12,6 +13,7 @@ tags:
   - "故障排查"
 description: "晷迹 Mac App 年度数据规模下切换页面卡顿数秒。根因是引擎层 O(n²) 全表扫描叠加视图层重复全量计算；修复为预分组与按版本备忘，切换耗时降到 79-205ms。"
 ---
+
 ## 摘要
 
 晷迹（Noonmark）是一个 SwiftUI 写的 macOS 待办应用。在年度数据规模（460 条已完成任务链、1569 条轨迹记录、1083 条子任务）下，点击切换到「已完成」页面时主线程卡死 5-6 秒，其他页面切换和滚动也有可感知延迟。

@@ -4,6 +4,7 @@ pubDatetime: 2026-08-09T01:24:20+08:00
 timezone: "Asia/Shanghai"
 title: "Go 项目要不要依赖注入框架：一个 30 包单体项目的实践答案"
 featured: false
+area: "go"
 draft: false
 tags:
   - "Golang"
@@ -12,6 +13,7 @@ tags:
   - "单元测试"
 description: "v2ex 上一个 81 回复的经典争论：Go 项目该不该用 wire/dig/fx？不用的话单元测试怎么 mock？本文用一个真实的模块化单体项目（30 个领域包、零 mock 框架）作答：注入靠构造函数、接口定义..."
 ---
+
 ## 摘要
 
 v2ex 上有个经典月经贴：[《做个调查：你们的 Go 项目中会用到依赖注入吗？》](https://v2ex.com/t/1131027)，81 个回复吵成两派——一派说 Go 用 DI 框架是「把简单问题复杂化」，另一派说「项目大了手动注入必然崩溃」。帖子里最尖锐的追问是：不用依赖注入，单元测试怎么 mock 各种依赖？

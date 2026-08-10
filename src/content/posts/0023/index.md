@@ -5,6 +5,7 @@ modDatetime: 2024-08-12T09:08:17+08:00
 timezone: "Asia/Shanghai"
 title: "bash和tty的关系"
 featured: false
+area: "operating-systems"
 draft: false
 tags: []
 description: "从本地终端与远程 SSH 两个场景，梳理 TTY、PTY、Shell 和命令执行之间的关系。"

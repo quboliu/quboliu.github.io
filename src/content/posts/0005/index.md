@@ -5,6 +5,7 @@ modDatetime: 2024-07-31T22:33:22+08:00
 timezone: "Asia/Shanghai"
 title: "关于本地搭建一个leetcode-go的刷题项目框架"
 featured: false
+area: "algorithms"
 draft: false
 tags: []
 description: "记录 LeetCode Go 刷题项目的目录组织、包内测试选择与表驱动测试写法。"

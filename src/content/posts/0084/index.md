@@ -4,6 +4,7 @@ pubDatetime: 2026-08-09T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Disaggregated Data Systems – State-of-the-Art and Open Challenges（中英对照全文）"
 featured: false
+area: "databases"
 draft: false
 tags:
   - "论文阅读"
@@ -12,6 +13,7 @@ tags:
   - "CXL"
 description: "一篇梳理解耦式数据系统研究现状的 EDBT 2026 教程论文，覆盖 CXL、远程内存、RDMA、数据路径计算与解耦税，中英逐段对照全文。"
 ---
+
 > 解耦式数据系统——研究现状与开放挑战
 
 **Alexander Krause**<br>
@@ -186,11 +188,13 @@ CXL is a key enabler for true hardware disaggregation, but its cost may not offs
 
 > CXL 是实现真正硬件解耦的关键推动因素，但其易用性带来的收益未必足以抵消成本。即使是 Google 这样的主要参与者，对 CXL 的成本—收益权衡也没有形成一致看法：有人视其为天赐良机[^1],[^2]，也有人直言它成本过高，难以成为云服务提供商真正的救星 [16]。对于 CXL 挂接内存，附加卡直接插入 PCIe 插槽，与把多个内存扩展设备接在 CXL 交换机之后，二者带来的延迟惩罚差异很大。这构成一项关键的内存访问与数据放置优化准则，对分层内存配置尤其如此。译注：原文“its cost may not offset its usability”的主客体及否定关系与上下文疑似倒置；本句按疑似本意翻译，英文照录。原文“do not share a harmonic vision”亦非自然英语搭配，译为“没有形成一致看法”。
 
-[^1]: https://www.linkedin.com/posts/laurie-kirk_prediction-2026-is-going-to-be-the-year-activity-7412947514267598848-_PEf [accessed 03-Mar-2026]
+[^1]:
+    https://www.linkedin.com/posts/laurie-kirk_prediction-2026-is-going-to-be-the-year-activity-7412947514267598848-_PEf [accessed 03-Mar-2026]
 
     > https://www.linkedin.com/posts/laurie-kirk_prediction-2026-is-going-to-be-the-year-activity-7412947514267598848-_PEf [访问于 2026-03-03]
 
-[^2]: https://www.linkedin.com/posts/laurie-kirk_outside-of-the-datacenter-world-no-one-realizes-activity-7413329701861154816-QVwe [accessed 03-Mar-2026]
+[^2]:
+    https://www.linkedin.com/posts/laurie-kirk_outside-of-the-datacenter-world-no-one-realizes-activity-7413329701861154816-QVwe [accessed 03-Mar-2026]
 
     > https://www.linkedin.com/posts/laurie-kirk_outside-of-the-datacenter-world-no-one-realizes-activity-7413329701861154816-QVwe [访问于 2026-03-03]
 

@@ -5,6 +5,7 @@ modDatetime: 2024-08-10T15:37:39+08:00
 timezone: "Asia/Shanghai"
 title: "解密黑话之上下文"
 featured: false
+area: "notes-and-thoughts"
 draft: false
 tags: []
 description: "从 CPU 与自然语言处理两个层面，辨析“上下文”在不同技术语境中的含义。"

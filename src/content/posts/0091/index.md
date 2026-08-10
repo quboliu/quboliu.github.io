@@ -4,6 +4,7 @@ pubDatetime: 2026-08-09T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Implementing Fault-Tolerant Services Using the State Machine Approach: A Tutorial（中英对照全文）"
 featured: false
+area: "distributed-systems"
 draft: false
 tags:
   - "论文阅读"
@@ -13,6 +14,7 @@ tags:
   - "拜占庭故障"
 description: "Schneider 状态机复制经典教程中英对照全文，系统讲解副本一致性与顺序、故障模型、时钟与稳定性测试、客户端和输出容错，以及动态重配置。"
 ---
+
 > 使用状态机方法实现容错服务：教程
 
 **FRED B. SCHNEIDER**
@@ -119,9 +121,9 @@ Services, servers, and most programming language structures for supporting modul
 
 > 服务、服务器以及大多数支持模块化的编程语言结构，都定义了状态机。状态机由编码其状态的状态变量，以及变换其状态的命令组成。每条命令都由一个确定性程序实现；相对于其他命令，命令执行是原子的，并会修改状态变量和／或产生某种输出。状态机的客户端通过请求来执行命令。请求指明状态机、要执行的命令，并包含该命令所需的任何信息。处理请求得到的输出可以发往执行器（例如过程控制系统中的执行器）、其他外围设备（例如磁盘或终端），也可以发往正在等待先前请求响应的客户端。
 
-In this tutorial, we will describe a state machine simply by listing its state variables and commands. As an example, state machine *memory* of Figure 1 implements a time-varying mapping from locations to values. A *read* command permits a client to determine the value currently associated with a location, and a *write* command associates a new value with a location.
+In this tutorial, we will describe a state machine simply by listing its state variables and commands. As an example, state machine _memory_ of Figure 1 implements a time-varying mapping from locations to values. A _read_ command permits a client to determine the value currently associated with a location, and a _write_ command associates a new value with a location.
 
-> 在本教程中，我们只需列出状态变量和命令来描述状态机。例如，图 1 中的状态机 *memory* 实现了一个随时间变化的“位置到值”的映射。*read* 命令让客户端能够确定某个位置当前对应的值；*write* 命令则把一个新值与某个位置关联起来。
+> 在本教程中，我们只需列出状态变量和命令来描述状态机。例如，图 1 中的状态机 _memory_ 实现了一个随时间变化的“位置到值”的映射。_read_ 命令让客户端能够确定某个位置当前对应的值；_write_ 命令则把一个新值与某个位置关联起来。
 
 ![Figure 1. A memory.](./figure-1-memory.png)
 
@@ -363,7 +365,7 @@ If requests are distributed to all state machine replicas by using a protocol th
 
 > 3.2 顺序与稳定性
 
-The Order requirement can be satisfied by assigning unique identifiers to requests and having state machine replicas process requests according to a total ordering relation on these unique identifiers. This is equivalent to requiring the following, where a request is defined to be *stable* at `sm_i` once no request from a correct client and bearing a lower unique identifier can be subsequently delivered to state machine replica `sm_i`:
+The Order requirement can be satisfied by assigning unique identifiers to requests and having state machine replicas process requests according to a total ordering relation on these unique identifiers. This is equivalent to requiring the following, where a request is defined to be _stable_ at `sm_i` once no request from a correct client and bearing a lower unique identifier can be subsequently delivered to state machine replica `sm_i`:
 
 > 可以通过给请求分配唯一标识符，并让状态机副本按照这些标识符上的全序关系处理请求，来满足“顺序”要求。这等价于要求下述做法。这里，如果此后再也不可能把一个来自正确客户端、且唯一标识符更小的请求递交给状态机副本 `sm_i`，就称某请求在 `sm_i` 上已经*稳定*。
 
@@ -521,7 +523,7 @@ The advantage of this approach to computing unique identifiers is that communica
 
 > ⁶ 这项关于通信成本的论证，说明了让客户端先把请求转交给单个状态机副本，再由该副本充当发送者传播请求的一个优势。实际上，该状态机副本成为状态机的客户端，于是通信只需涉及运行状态机副本的那些处理器。
 
-By constraining the possible candidates proposed in phase 1 for a request’s unique identifier, it is possible to obtain a simple stability test. To describe this stability test, some terminology is required. We say that a state machine replica `sm_i` has *seen* a request `r` once `sm_i` has received `r` and proposed a candidate unique identifier for `r`. We say that `sm_i` has *accepted* `r` once that replica knows the ultimate choice of unique identifier for `r`. Define `cuid(sm_i, r)` to be the candidate unique identifier proposed by replica `sm_i` for request `r`. Two constraints that lead to a simple stability test are:
+By constraining the possible candidates proposed in phase 1 for a request’s unique identifier, it is possible to obtain a simple stability test. To describe this stability test, some terminology is required. We say that a state machine replica `sm_i` has _seen_ a request `r` once `sm_i` has received `r` and proposed a candidate unique identifier for `r`. We say that `sm_i` has _accepted_ `r` once that replica knows the ultimate choice of unique identifier for `r`. Define `cuid(sm_i, r)` to be the candidate unique identifier proposed by replica `sm_i` for request `r`. Two constraints that lead to a simple stability test are:
 
 > 通过约束第一阶段可为请求唯一标识符提出的候选值，可以得到一个简单的稳定性测试。描述该测试需要一些术语。当状态机副本 `sm_i` 已收到请求 `r` 并为 `r` 提出候选唯一标识符时，称 `sm_i` 已经*见过* `r`。当副本 `sm_i` 已经知道最终选定的 `r` 的唯一标识符时，称 `sm_i` 已经*接受* `r`。定义 `cuid(sm_i, r)` 为副本 `sm_i` 对请求 `r` 提出的候选唯一标识符。下列两个约束可导出一个简单的稳定性测试：
 
@@ -730,7 +732,7 @@ schedule ⟨REQUEST⟩ for +τ
 
 > 即把请求 `⟨REQUEST⟩` 调度到相对当前请求至少晚 `τ` 的位置。
 
-to specify scheduling `⟨REQUEST⟩` with a unique identifier at least `τ` greater than the identifier on the request being processed. Such a request is called a *timeout request* and becomes stable at some time in the future, according to the stability test being used for client-generated requests. Unlike requests from clients, requests that result from executing `schedule` need not be distributed to all state machine replicas of the ensemble. This is because each state machine replica will independently schedule its own (identical) copy of the request.
+to specify scheduling `⟨REQUEST⟩` with a unique identifier at least `τ` greater than the identifier on the request being processed. Such a request is called a _timeout request_ and becomes stable at some time in the future, according to the stability test being used for client-generated requests. Unlike requests from clients, requests that result from executing `schedule` need not be distributed to all state machine replicas of the ensemble. This is because each state machine replica will independently schedule its own (identical) copy of the request.
 
 > 它表示：为 `⟨REQUEST⟩` 安排一个唯一标识符，该标识符至少比当前正在处理的请求标识符大 `τ`。这种请求称为*超时请求*；按照客户端生成请求所使用的稳定性测试，它将在未来某一时刻变得稳定。与客户端请求不同，执行 `schedule` 得到的请求无须分发给集合中的所有状态机副本，因为每个副本都会独立调度自己那份相同的请求副本。
 
@@ -875,7 +877,7 @@ There are various ways to make configuration information available to the client
 
 > 有多种办法可把配置信息提供给系统的客户端和输出设备。（状态机已经拥有这些信息。）一种办法是让客户端和输出设备周期性查询状态机，获取与自己有关、尚待生效的配置变更信息。如果客户端和输出设备与状态机副本共享处理器，这种方案的通信成本显然会降低。另一种办法是，让状态机在正常处理期间发给客户端和输出设备的消息中附带配置变更信息。这要求状态机与客户端之间、状态机与输出设备之间都存在周期性通信。
 
-Requests to change the configuration of the system are made by a failure/recovery detection mechanism. It is convenient to think of this mechanism as a collection of clients, one for each element of `C`, `S`, or `O`. Each of these *configurators* is responsible for detecting the failure or repair of the single object it manages and, when such an event is detected, for making a request to alter the configuration. A configurator is likely to be part of an existing client or state machine replica and might be implemented in a variety of ways.
+Requests to change the configuration of the system are made by a failure/recovery detection mechanism. It is convenient to think of this mechanism as a collection of clients, one for each element of `C`, `S`, or `O`. Each of these _configurators_ is responsible for detecting the failure or repair of the single object it manages and, when such an event is detected, for making a request to alter the configuration. A configurator is likely to be part of an existing client or state machine replica and might be implemented in a variety of ways.
 
 > 系统配置变更请求由故障／恢复检测机制发出。可以方便地把这一机制视为一组客户端：`C`、`S` 或 `O` 中每个元素各对应一个。这些*配置器*各自负责检测所管理对象的故障或修复，并在检测到这类事件时发出变更配置的请求。配置器很可能是某个既有客户端或状态机副本的一部分，而且可以用多种方式实现。
 
@@ -911,7 +913,7 @@ Not only must an element being added to a configuration be nonfaulty, it also mu
 
 > 加入配置的元素不仅必须无故障，还必须具有正确状态，才能让它的动作与系统其余部分一致。定义 `e[r_i]` 为非故障系统元素 `e` 处理请求 `r_0` 至 `r_i` 后应处于的状态。元素 `e` 如果紧接请求 `r_join` 之后加入配置，就必须先进入状态 `e[r_join]`，才能参与正在运行的系统。
 
-An element is *self-stabilizing* [Dijkstra 1974] if its current state is completely defined by the previous `k` inputs it has processed for some fixed `k`. Running such an element long enough to ensure that it has processed `k` inputs is all that is required to put it in state `e[r_join]`. Unfortunately, the design of self-stabilizing state machines is not always possible.
+An element is _self-stabilizing_ [Dijkstra 1974] if its current state is completely defined by the previous `k` inputs it has processed for some fixed `k`. Running such an element long enough to ensure that it has processed `k` inputs is all that is required to put it in state `e[r_join]`. Unfortunately, the design of self-stabilizing state machines is not always possible.
 
 > 如果存在某个固定的 `k`，使元素当前状态完全由它此前处理的 `k` 个输入决定，就称该元素是*自稳定的*［Dijkstra 1974］。只需让这种元素运行足够久，确保它已经处理 `k` 个输入，就能使它进入状态 `e[r_join]`。遗憾的是，并非总能设计出自稳定状态机。
 
@@ -1039,9 +1041,9 @@ Primitives to support the Agreement and Order requirements for Replica Coordinat
 
 > 两个操作系统工具包都纳入了支持“副本协调”之“一致性”和“顺序”要求的原语。ISIS Toolkit［Birman 1985］提供 ABCAST 和 CBCAST，让应用程序员控制消息向进程组成员（即状态机副本集合）的递交顺序。ABCAST 保证所有状态机副本按同一顺序处理请求；CBCAST 允许更灵活的消息排序，同时保证有因果关系的请求以正确的相对顺序递交。ISIS 已用于实现多个原型应用。一个例子是 RNFS（复制式 NFS）文件系统：它运行在 NFS 之上，是一个能容忍失效停止故障、使用状态机方法设计的网络文件系统［Marzullo and Schmuck 1988］。
 
-The Psync primitive [Peterson et al. 1989], which has been implemented in the *x*-kernel [Hutchinson and Peterson 1988], is similar to the CBCAST of ISIS. Psync, however, makes available to the programmer the graph of the message “potential causality” relation, whereas CBCAST does not. Psync is intended to be a low-level protocol that can be used to implement protocols like ABCAST and CBCAST; the ISIS primitives are intended for use by applications programmers and, therefore, hide the “potential causality” relation while at the same time include support for group management and failure reporting.
+The Psync primitive [Peterson et al. 1989], which has been implemented in the _x_-kernel [Hutchinson and Peterson 1988], is similar to the CBCAST of ISIS. Psync, however, makes available to the programmer the graph of the message “potential causality” relation, whereas CBCAST does not. Psync is intended to be a low-level protocol that can be used to implement protocols like ABCAST and CBCAST; the ISIS primitives are intended for use by applications programmers and, therefore, hide the “potential causality” relation while at the same time include support for group management and failure reporting.
 
-> 已在 *x*-kernel［Hutchinson and Peterson 1988］中实现的 Psync 原语［Peterson et al. 1989］，与 ISIS 的 CBCAST 相似。不过，Psync 会把消息“潜在因果”关系图提供给程序员，CBCAST 则不会。Psync 定位为一种底层协议，可用于实现 ABCAST、CBCAST 之类的协议；ISIS 原语面向应用程序员，因此隐藏“潜在因果”关系，同时纳入对组管理与故障报告的支持。
+> 已在 _x_-kernel［Hutchinson and Peterson 1988］中实现的 Psync 原语［Peterson et al. 1989］，与 ISIS 的 CBCAST 相似。不过，Psync 会把消息“潜在因果”关系图提供给程序员，CBCAST 则不会。Psync 定位为一种底层协议，可用于实现 ABCAST、CBCAST 之类的协议；ISIS 原语面向应用程序员，因此隐藏“潜在因果”关系，同时纳入对组管理与故障报告的支持。
 
 ## ACKNOWLEDGMENTS
 
@@ -1051,9 +1053,9 @@ This material is based on work supported in part by the Office of Naval Research
 
 > 本材料所依据的工作，部分得到美国海军研究办公室合同 N00014-86-K-0092、美国国家科学基金会项目 DCR-8320274 与 CCR-8701103，以及数字设备公司的资助。本出版物中表达的任何观点、发现、结论或建议均属于作者本人，不代表上述机构的立场。
 
-Discussions with O. Babaoglu, K. Birman, and L. Lamport over the past 5 years have helped me formulate the ideas in this paper. Useful comments on drafts of this paper were provided by J. Aizikowitz, O. Babaoglu, A. Bernstein, K. Birman, R. Brown, D. Gries, K. Marzullo, and B. Simons. I am very grateful to Sal March, managing editor of *ACM Computing Surveys*, for his thorough reading of this paper and many helpful comments.
+Discussions with O. Babaoglu, K. Birman, and L. Lamport over the past 5 years have helped me formulate the ideas in this paper. Useful comments on drafts of this paper were provided by J. Aizikowitz, O. Babaoglu, A. Bernstein, K. Birman, R. Brown, D. Gries, K. Marzullo, and B. Simons. I am very grateful to Sal March, managing editor of _ACM Computing Surveys_, for his thorough reading of this paper and many helpful comments.
 
-> 过去五年中与 O. Babaoglu、K. Birman 和 L. Lamport 的讨论，帮助我形成了本文的思想。J. Aizikowitz、O. Babaoglu、A. Bernstein、K. Birman、R. Brown、D. Gries、K. Marzullo 和 B. Simons 对本文草稿提出了有益意见。我非常感谢 *ACM Computing Surveys* 执行编辑 Sal March，他细致通读了本文并提出许多有帮助的意见。
+> 过去五年中与 O. Babaoglu、K. Birman 和 L. Lamport 的讨论，帮助我形成了本文的思想。J. Aizikowitz、O. Babaoglu、A. Bernstein、K. Birman、R. Brown、D. Gries、K. Marzullo 和 B. Simons 对本文草稿提出了有益意见。我非常感谢 _ACM Computing Surveys_ 执行编辑 Sal March，他细致通读了本文并提出许多有帮助的意见。
 
 ## REFERENCES
 
@@ -1063,79 +1065,79 @@ AIZIKOWITZ, J. 1989. Designing distributed services using refinement mappings. P
 
 > AIZIKOWITZ, J. 1989。《使用精化映射设计分布式服务》。博士学位论文，康奈尔大学计算机科学系，纽约州伊萨卡；亦作为技术报告 TR 89-1040 提供。
 
-BERNSTEIN, A. J. 1985. A loosely coupled system for reliably storing data. *IEEE Trans. Softw. Eng.* SE-11, 5 (May), 446–454.
+BERNSTEIN, A. J. 1985. A loosely coupled system for reliably storing data. _IEEE Trans. Softw. Eng._ SE-11, 5 (May), 446–454.
 
-> BERNSTEIN, A. J. 1985。《可靠存储数据的松耦合系统》。*IEEE 软件工程汇刊*，SE-11 卷第 5 期（5 月），446–454。
+> BERNSTEIN, A. J. 1985。《可靠存储数据的松耦合系统》。_IEEE 软件工程汇刊_，SE-11 卷第 5 期（5 月），446–454。
 
-BIRMAN, K. P. 1985. Replication and fault tolerance in the ISIS system. In *Proceedings of the 10th ACM Symposium on Operating Systems Principles* (Orcas Island, Washington, Dec. 1985), ACM, pp. 79–86.
+BIRMAN, K. P. 1985. Replication and fault tolerance in the ISIS system. In _Proceedings of the 10th ACM Symposium on Operating Systems Principles_ (Orcas Island, Washington, Dec. 1985), ACM, pp. 79–86.
 
 > BIRMAN, K. P. 1985。《ISIS 系统中的复制与容错》。载第 10 届 ACM 操作系统原理研讨会论文集（华盛顿州奥卡斯岛，1985 年 12 月），ACM，第 79–86 页。
 
-BIRMAN, K. P., AND JOSEPH, T. 1987. Reliable communication in the presence of failures. *ACM TOCS* 5, 1 (Feb. 1987), 47–76.
+BIRMAN, K. P., AND JOSEPH, T. 1987. Reliable communication in the presence of failures. _ACM TOCS_ 5, 1 (Feb. 1987), 47–76.
 
-> BIRMAN, K. P.、JOSEPH, T. 1987。《存在故障时的可靠通信》。*ACM TOCS*，5 卷第 1 期（1987 年 2 月），47–76。
+> BIRMAN, K. P.、JOSEPH, T. 1987。《存在故障时的可靠通信》。_ACM TOCS_，5 卷第 1 期（1987 年 2 月），47–76。
 
-CRISTIAN, F., AGHILI, H., STRONG, H. R., AND DOLEV, D. 1985. Atomic broadcast: From simple message diffusion to Byzantine agreement. In *Proceedings of the 15th International Conference on Fault-tolerant Computing* (Ann Arbor, Mich., June 1985), IEEE Computer Society.
+CRISTIAN, F., AGHILI, H., STRONG, H. R., AND DOLEV, D. 1985. Atomic broadcast: From simple message diffusion to Byzantine agreement. In _Proceedings of the 15th International Conference on Fault-tolerant Computing_ (Ann Arbor, Mich., June 1985), IEEE Computer Society.
 
 > CRISTIAN, F.、AGHILI, H.、STRONG, H. R.、DOLEV, D. 1985。《原子广播：从简单消息扩散到拜占庭一致》。载第 15 届国际容错计算会议论文集（密歇根州安娜堡，1985 年 6 月），IEEE Computer Society。
 
-DIJKSTRA, E. W. 1974. Self stabilization in spite of distributed control. *Commun. ACM* 17, 11 (Nov.), 643–644.
+DIJKSTRA, E. W. 1974. Self stabilization in spite of distributed control. _Commun. ACM_ 17, 11 (Nov.), 643–644.
 
-> DIJKSTRA, E. W. 1974。《尽管采用分布式控制仍能自稳定》。*Communications of the ACM*，17 卷第 11 期（11 月），643–644。
+> DIJKSTRA, E. W. 1974。《尽管采用分布式控制仍能自稳定》。_Communications of the ACM_，17 卷第 11 期（11 月），643–644。
 
-FISCHER, M., LYNCH, N., AND PATERSON, M. 1985. Impossibility of distributed consensus with one faulty process. *J. ACM* 32, 2 (Apr. 1986), 374–382.
+FISCHER, M., LYNCH, N., AND PATERSON, M. 1985. Impossibility of distributed consensus with one faulty process. _J. ACM_ 32, 2 (Apr. 1986), 374–382.
 
-> FISCHER, M.、LYNCH, N.、PATERSON, M. 1985。《一个进程故障时分布式一致的不可能性》。*Journal of the ACM*，32 卷第 2 期（1986 年 4 月），374–382。
+> FISCHER, M.、LYNCH, N.、PATERSON, M. 1985。《一个进程故障时分布式一致的不可能性》。_Journal of the ACM_，32 卷第 2 期（1986 年 4 月），374–382。
 
-GARCIA-MOLINA, H., PITTELLI, F., AND DAVIDSON, S. 1986. Application of Byzantine agreement in database systems. *ACM TODS* 11, 1 (Mar. 1986), 27–47.
+GARCIA-MOLINA, H., PITTELLI, F., AND DAVIDSON, S. 1986. Application of Byzantine agreement in database systems. _ACM TODS_ 11, 1 (Mar. 1986), 27–47.
 
-> GARCIA-MOLINA, H.、PITTELLI, F.、DAVIDSON, S. 1986。《拜占庭一致在数据库系统中的应用》。*ACM TODS*，11 卷第 1 期（1986 年 3 月），27–47。
+> GARCIA-MOLINA, H.、PITTELLI, F.、DAVIDSON, S. 1986。《拜占庭一致在数据库系统中的应用》。_ACM TODS_，11 卷第 1 期（1986 年 3 月），27–47。
 
-GOPAL, A., STRONG, R., TOUEG, S., AND CRISTIAN, F., 1990. Early-delivery atomic broadcast. To appear in *Proceedings of the 9th ACM SIGACT-SIGOPS Symposium on Principles of Distributed Computing* (Quebec City, Quebec, Aug. 1990).
+GOPAL, A., STRONG, R., TOUEG, S., AND CRISTIAN, F., 1990. Early-delivery atomic broadcast. To appear in _Proceedings of the 9th ACM SIGACT-SIGOPS Symposium on Principles of Distributed Computing_ (Quebec City, Quebec, Aug. 1990).
 
 > GOPAL, A.、STRONG, R.、TOUEG, S.、CRISTIAN, F.，1990。《早递交原子广播》。将刊于第 9 届 ACM SIGACT-SIGOPS 分布式计算原理研讨会论文集（魁北克省魁北克市，1990 年 8 月）。
 
-GRAY, J. 1978. Notes on data base operating systems. In *Operating Systems: An Advanced Course*, *Lecture Notes in Computer Science*. Vol. 60. Springer-Verlag, New York, pp. 393–481.
+GRAY, J. 1978. Notes on data base operating systems. In _Operating Systems: An Advanced Course_, _Lecture Notes in Computer Science_. Vol. 60. Springer-Verlag, New York, pp. 393–481.
 
 > GRAY, J. 1978。《数据库操作系统札记》。载《操作系统：高级课程》，*计算机科学讲义*第 60 卷，Springer-Verlag，纽约，第 393–481 页。
 
-HALPERN, J., SIMONS, B., STRONG, R., AND DOLEV, D. 1984. Fault-tolerant clock synchronization. In *Proceedings of the 3rd ACM SIGACT-SIGOPS Symposium on Principles of Distributed Computing* (Vancouver, Canada, Aug.), pp. 89–102.
+HALPERN, J., SIMONS, B., STRONG, R., AND DOLEV, D. 1984. Fault-tolerant clock synchronization. In _Proceedings of the 3rd ACM SIGACT-SIGOPS Symposium on Principles of Distributed Computing_ (Vancouver, Canada, Aug.), pp. 89–102.
 
 > HALPERN, J.、SIMONS, B.、STRONG, R.、DOLEV, D. 1984。《容错时钟同步》。载第 3 届 ACM SIGACT-SIGOPS 分布式计算原理研讨会论文集（加拿大温哥华，8 月），第 89–102 页。
 
-HUTCHINSON, N., AND PETERSON, L. 1988. Design of the *x*-kernel. In *Proceedings of SIGCOMM ’88—Symposium on Communication Architectures and Protocols* (Stanford, Calif., Aug.), pp. 65–75.
+HUTCHINSON, N., AND PETERSON, L. 1988. Design of the _x_-kernel. In _Proceedings of SIGCOMM ’88—Symposium on Communication Architectures and Protocols_ (Stanford, Calif., Aug.), pp. 65–75.
 
-> HUTCHINSON, N.、PETERSON, L. 1988。《*x*-kernel 的设计》。载 SIGCOMM ’88——通信体系结构与协议研讨会论文集（加利福尼亚州斯坦福，8 月），第 65–75 页。
+> HUTCHINSON, N.、PETERSON, L. 1988。《_x_-kernel 的设计》。载 SIGCOMM ’88——通信体系结构与协议研讨会论文集（加利福尼亚州斯坦福，8 月），第 65–75 页。
 
-LAMPORT, L. 1978a. Time, clocks and the ordering of events in a distributed system. *Commun. ACM* 21, 7 (July), 558–565.
+LAMPORT, L. 1978a. Time, clocks and the ordering of events in a distributed system. _Commun. ACM_ 21, 7 (July), 558–565.
 
-> LAMPORT, L. 1978a。《分布式系统中的时间、时钟和事件顺序》。*Communications of the ACM*，21 卷第 7 期（7 月），558–565。
+> LAMPORT, L. 1978a。《分布式系统中的时间、时钟和事件顺序》。_Communications of the ACM_，21 卷第 7 期（7 月），558–565。
 
-LAMPORT, L. 1979b. The implementation of reliable distributed multiprocess systems. *Comput. Networks* 2, 95–114.
+LAMPORT, L. 1979b. The implementation of reliable distributed multiprocess systems. _Comput. Networks_ 2, 95–114.
 
-> LAMPORT, L. 1979b。《可靠分布式多处理系统的实现》。*Computer Networks*，第 2 卷，95–114。
+> LAMPORT, L. 1979b。《可靠分布式多处理系统的实现》。_Computer Networks_，第 2 卷，95–114。
 
-LAMPORT, L. 1984. Using time instead of timeout for fault-tolerance in distributed systems. *ACM TOPLAS* 6, 2 (Apr.), 254–280.
+LAMPORT, L. 1984. Using time instead of timeout for fault-tolerance in distributed systems. _ACM TOPLAS_ 6, 2 (Apr.), 254–280.
 
-> LAMPORT, L. 1984。《在分布式系统容错中用时间代替超时》。*ACM TOPLAS*，6 卷第 2 期（4 月），254–280。
+> LAMPORT, L. 1984。《在分布式系统容错中用时间代替超时》。_ACM TOPLAS_，6 卷第 2 期（4 月），254–280。
 
 LAMPORT, L. 1989. The part-time parliament. Tech. Rep. 49. Digital Equipment Corporation Systems Research Center, Palo Alto, Calif.
 
 > LAMPORT, L. 1989。《兼职议会》。技术报告 49，数字设备公司系统研究中心，加利福尼亚州帕洛阿尔托。
 
-LAMPORT, L., AND MELLIAR-SMITH, P. M. 1984. Byzantine clock synchronization. In *Proceedings of the 3rd ACM SIGACT-SIGOPS Symposium on Principles of Distributed Computing* (Vancouver, Canada, Aug.), 68–74.
+LAMPORT, L., AND MELLIAR-SMITH, P. M. 1984. Byzantine clock synchronization. In _Proceedings of the 3rd ACM SIGACT-SIGOPS Symposium on Principles of Distributed Computing_ (Vancouver, Canada, Aug.), 68–74.
 
 > LAMPORT, L.、MELLIAR-SMITH, P. M. 1984。《拜占庭时钟同步》。载第 3 届 ACM SIGACT-SIGOPS 分布式计算原理研讨会论文集（加拿大温哥华，8 月），68–74。
 
-LAMPORT, L., SHOSTAK, R., AND PEASE, M. 1982. The Byzantine generals problem. *ACM TOPLAS* 4, 3 (July), 382–401.
+LAMPORT, L., SHOSTAK, R., AND PEASE, M. 1982. The Byzantine generals problem. _ACM TOPLAS_ 4, 3 (July), 382–401.
 
-> LAMPORT, L.、SHOSTAK, R.、PEASE, M. 1982。《拜占庭将军问题》。*ACM TOPLAS*，4 卷第 3 期（7 月），382–401。
+> LAMPORT, L.、SHOSTAK, R.、PEASE, M. 1982。《拜占庭将军问题》。_ACM TOPLAS_，4 卷第 3 期（7 月），382–401。
 
-LISKOV, B., AND LADIN, R. 1986. Highly available distributed services and fault-tolerant distributed garbage collection. In *Proceedings of the 5th ACM Symposium on Principles of Distributed Computing* (Calgary, Alberta, Canada, Aug.), ACM, pp. 29–39.
+LISKOV, B., AND LADIN, R. 1986. Highly available distributed services and fault-tolerant distributed garbage collection. In _Proceedings of the 5th ACM Symposium on Principles of Distributed Computing_ (Calgary, Alberta, Canada, Aug.), ACM, pp. 29–39.
 
 > LISKOV, B.、LADIN, R. 1986。《高可用分布式服务与容错分布式垃圾收集》。载第 5 届 ACM 分布式计算原理研讨会论文集（加拿大阿尔伯塔省卡尔加里，8 月），ACM，第 29–39 页。
 
-MANCINI, L., AND PAPPALARDO, G. 1988. Towards a theory of replicated processing. *Formal Techniques in Real-Time and Fault-Tolerant Systems*. *Lecture Notes in Computer Science*, Vol. 331. Springer-Verlag, New York, pp. 175–192.
+MANCINI, L., AND PAPPALARDO, G. 1988. Towards a theory of replicated processing. _Formal Techniques in Real-Time and Fault-Tolerant Systems_. _Lecture Notes in Computer Science_, Vol. 331. Springer-Verlag, New York, pp. 175–192.
 
 > MANCINI, L.、PAPPALARDO, G. 1988。《走向复制处理理论》。载《实时与容错系统中的形式化技术》，*计算机科学讲义*第 331 卷，Springer-Verlag，纽约，第 175–192 页。
 
@@ -1143,47 +1145,47 @@ MARZULLO, K. 1989. Implementing fault-tolerant sensors. Tech. Rep. TR 89-997. Co
 
 > MARZULLO, K. 1989。《实现容错传感器》。技术报告 TR 89-997，康奈尔大学计算机科学系，纽约州伊萨卡。
 
-MARZULLO, K., AND SCHMUCK, F. 1988. Supplying high availability with a standard network file system. In *Proceedings of the 8th International Conference on Distributed Computing Systems* (San Jose, CA, June), IEEE Computer Society, pp. 447–455.
+MARZULLO, K., AND SCHMUCK, F. 1988. Supplying high availability with a standard network file system. In _Proceedings of the 8th International Conference on Distributed Computing Systems_ (San Jose, CA, June), IEEE Computer Society, pp. 447–455.
 
 > MARZULLO, K.、SCHMUCK, F. 1988。《用标准网络文件系统提供高可用性》。载第 8 届分布式计算系统国际会议论文集（加利福尼亚州圣何塞，6 月），IEEE Computer Society，第 447–455 页。
 
-PETERSON, L. L., BUCHOLZ, N. C., AND SCHLICHTING, R. D. 1989. Preserving and using context information in interprocess communication. *ACM TOCS* 7, 3 (Aug.), 217–246.
+PETERSON, L. L., BUCHOLZ, N. C., AND SCHLICHTING, R. D. 1989. Preserving and using context information in interprocess communication. _ACM TOCS_ 7, 3 (Aug.), 217–246.
 
-> PETERSON, L. L.、BUCHOLZ, N. C.、SCHLICHTING, R. D. 1989。《在进程间通信中保存并使用上下文信息》。*ACM TOCS*，7 卷第 3 期（8 月），217–246。
+> PETERSON, L. L.、BUCHOLZ, N. C.、SCHLICHTING, R. D. 1989。《在进程间通信中保存并使用上下文信息》。_ACM TOCS_，7 卷第 3 期（8 月），217–246。
 
-PITTELLI, F. M., AND GARCIA-MOLINA, H. 1989. Reliable scheduling in a TMR database system. *ACM TOCS* 7, 1 (Feb.), 25–60.
+PITTELLI, F. M., AND GARCIA-MOLINA, H. 1989. Reliable scheduling in a TMR database system. _ACM TOCS_ 7, 1 (Feb.), 25–60.
 
-> PITTELLI, F. M.、GARCIA-MOLINA, H. 1989。《TMR 数据库系统中的可靠调度》。*ACM TOCS*，7 卷第 1 期（2 月），25–60。
+> PITTELLI, F. M.、GARCIA-MOLINA, H. 1989。《TMR 数据库系统中的可靠调度》。_ACM TOCS_，7 卷第 1 期（2 月），25–60。
 
-SCHLICHTING, R. D., AND SCHNEIDER, F. B. 1983. Fail-Stop processors: An approach to designing fault-tolerant computing systems. *ACM TOCS* 1, 3 (Aug.), 222–238.
+SCHLICHTING, R. D., AND SCHNEIDER, F. B. 1983. Fail-Stop processors: An approach to designing fault-tolerant computing systems. _ACM TOCS_ 1, 3 (Aug.), 222–238.
 
-> SCHLICHTING, R. D.、SCHNEIDER, F. B. 1983。《失效停止处理器：设计容错计算系统的一种方法》。*ACM TOCS*，1 卷第 3 期（8 月），222–238。
+> SCHLICHTING, R. D.、SCHNEIDER, F. B. 1983。《失效停止处理器：设计容错计算系统的一种方法》。_ACM TOCS_，1 卷第 3 期（8 月），222–238。
 
-SCHNEIDER, F. B. 1980. Ensuring consistency on a distributed database system by use of distributed semaphores. In *Proceedings of International Symposium on Distributed Data Bases* (Paris, France, Mar.), INRIA, pp. 183–189.
+SCHNEIDER, F. B. 1980. Ensuring consistency on a distributed database system by use of distributed semaphores. In _Proceedings of International Symposium on Distributed Data Bases_ (Paris, France, Mar.), INRIA, pp. 183–189.
 
 > SCHNEIDER, F. B. 1980。《使用分布式信号量保证分布式数据库系统的一致性》。载分布式数据库国际研讨会论文集（法国巴黎，3 月），INRIA，第 183–189 页。
 
-SCHNEIDER, F. B. 1982. Synchronization in distributed programs. *ACM TOPLAS* 4, 2 (Apr.), 179–195.
+SCHNEIDER, F. B. 1982. Synchronization in distributed programs. _ACM TOPLAS_ 4, 2 (Apr.), 179–195.
 
-> SCHNEIDER, F. B. 1982。《分布式程序中的同步》。*ACM TOPLAS*，4 卷第 2 期（4 月），179–195。
+> SCHNEIDER, F. B. 1982。《分布式程序中的同步》。_ACM TOPLAS_，4 卷第 2 期（4 月），179–195。
 
-SCHNEIDER, F. B. 1984. Byzantine generals in action: Implementing fail-stop processors. *ACM TOCS* 2, 2 (May), 145–154.
+SCHNEIDER, F. B. 1984. Byzantine generals in action: Implementing fail-stop processors. _ACM TOCS_ 2, 2 (May), 145–154.
 
-> SCHNEIDER, F. B. 1984。《行动中的拜占庭将军：实现失效停止处理器》。*ACM TOCS*，2 卷第 2 期（5 月），145–154。
+> SCHNEIDER, F. B. 1984。《行动中的拜占庭将军：实现失效停止处理器》。_ACM TOCS_，2 卷第 2 期（5 月），145–154。
 
-SCHNEIDER, F. B. 1985. Paradigms for distributed programs. *Distributed Systems. Methods and Tools for Specification*. *Lecture Notes in Computer Science*, Vol. 190. Springer-Verlag, New York, pp. 343–430.
+SCHNEIDER, F. B. 1985. Paradigms for distributed programs. _Distributed Systems. Methods and Tools for Specification_. _Lecture Notes in Computer Science_, Vol. 190. Springer-Verlag, New York, pp. 343–430.
 
 > SCHNEIDER, F. B. 1985。《分布式程序范式》。载《分布式系统：规范的方法与工具》，*计算机科学讲义*第 190 卷，Springer-Verlag，纽约，第 343–430 页。
 
-SCHNEIDER, F. B. 1986. A paradigm for reliable clock synchronization. In *Proceedings of the Advanced Seminar on Real-Time Local Area Networks* (Bandol, France, Apr.), INRIA, pp. 85–104.
+SCHNEIDER, F. B. 1986. A paradigm for reliable clock synchronization. In _Proceedings of the Advanced Seminar on Real-Time Local Area Networks_ (Bandol, France, Apr.), INRIA, pp. 85–104.
 
 > SCHNEIDER, F. B. 1986。《可靠时钟同步的一种范式》。载实时局域网高级研讨会论文集（法国邦多勒，4 月），INRIA，第 85–104 页。
 
-SCHNEIDER, F. B., GRIES, D., AND SCHLICHTING, R. D. 1984. Fault-tolerant broadcasts. *Sci. Comput. Program.* 4, 1–15.
+SCHNEIDER, F. B., GRIES, D., AND SCHLICHTING, R. D. 1984. Fault-tolerant broadcasts. _Sci. Comput. Program._ 4, 1–15.
 
-> SCHNEIDER, F. B.、GRIES, D.、SCHLICHTING, R. D. 1984。《容错广播》。*Science of Computer Programming*，第 4 卷，1–15。
+> SCHNEIDER, F. B.、GRIES, D.、SCHLICHTING, R. D. 1984。《容错广播》。_Science of Computer Programming_，第 4 卷，1–15。
 
-SIEWIOREK, D. P., AND SWARZ, R. S. 1982. *The Theory and Practice of Reliable System Design*. Digital Press, Bedford, Mass.
+SIEWIOREK, D. P., AND SWARZ, R. S. 1982. _The Theory and Practice of Reliable System Design_. Digital Press, Bedford, Mass.
 
 > SIEWIOREK, D. P.、SWARZ, R. S. 1982。《可靠系统设计的理论与实践》。Digital Press，马萨诸塞州贝德福德。
 
@@ -1191,18 +1193,18 @@ SKEEN, D. 1982. Crash recovery in a distributed database system. Ph.D. dissertat
 
 > SKEEN, D. 1982。《分布式数据库系统中的崩溃恢复》。博士学位论文，加利福尼亚大学伯克利分校，5 月。
 
-STRONG, H. R., AND DOLEV, D. 1983. Byzantine agreement. *Intellectual Leverage for the Information Society, Digest of Papers*. (Compcon 83, IEEE Computer Society, Mar.), IEEE Computer Society, pp. 77–82.
+STRONG, H. R., AND DOLEV, D. 1983. Byzantine agreement. _Intellectual Leverage for the Information Society, Digest of Papers_. (Compcon 83, IEEE Computer Society, Mar.), IEEE Computer Society, pp. 77–82.
 
 > STRONG, H. R.、DOLEV, D. 1983。《拜占庭一致》。载《信息社会的智力杠杆：论文摘要集》（Compcon 83，IEEE Computer Society，3 月），IEEE Computer Society，第 77–82 页。
 
-WENSLEY, J., WENSKY, J. H., LAMPORT, L., GOLDBERG, J., GREEN, M. W., LEVITT, K. N., MELLIAR-SMITH, P. M., SHOSTAK, R. E., and WEINSTOCK, C. B. 1978. SIFT: Design and analysis of a fault-tolerant computer for aircraft control. *Proc. IEEE* 66, 10 (Oct.), 1240–1255.
+WENSLEY, J., WENSKY, J. H., LAMPORT, L., GOLDBERG, J., GREEN, M. W., LEVITT, K. N., MELLIAR-SMITH, P. M., SHOSTAK, R. E., and WEINSTOCK, C. B. 1978. SIFT: Design and analysis of a fault-tolerant computer for aircraft control. _Proc. IEEE_ 66, 10 (Oct.), 1240–1255.
 
-> WENSLEY, J.、WENSKY, J. H.、LAMPORT, L.、GOLDBERG, J.、GREEN, M. W.、LEVITT, K. N.、MELLIAR-SMITH, P. M.、SHOSTAK, R. E.、WEINSTOCK, C. B. 1978。《SIFT：用于飞机控制的容错计算机之设计与分析》。*Proceedings of the IEEE*，66 卷第 10 期（10 月），1240–1255。
+> WENSLEY, J.、WENSKY, J. H.、LAMPORT, L.、GOLDBERG, J.、GREEN, M. W.、LEVITT, K. N.、MELLIAR-SMITH, P. M.、SHOSTAK, R. E.、WEINSTOCK, C. B. 1978。《SIFT：用于飞机控制的容错计算机之设计与分析》。_Proceedings of the IEEE_，66 卷第 10 期（10 月），1240–1255。
 
 Received November 1987; final revision accepted January 1990.
 
 > 1987 年 11 月收到；最终修订稿于 1990 年 1 月接受。
 
-*ACM Computing Surveys*, Vol. 22, No. 4, December 1990, pp. 299–319.
+_ACM Computing Surveys_, Vol. 22, No. 4, December 1990, pp. 299–319.
 
-> *ACM Computing Surveys*，第 22 卷第 4 期，1990 年 12 月，第 299–319 页。
+> _ACM Computing Surveys_，第 22 卷第 4 期，1990 年 12 月，第 299–319 页。

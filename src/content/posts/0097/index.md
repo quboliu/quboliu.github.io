@@ -4,6 +4,7 @@ pubDatetime: 2026-08-09T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Consensus in the Presence of Partial Synchrony（中英对照全文）"
 featured: false
+area: "distributed-systems"
 draft: false
 tags:
   - "论文阅读"
@@ -13,15 +14,16 @@ tags:
   - "容错"
 description: "Dwork、Lynch 与 Stockmeyer 的部分同步经典论文完整中英对照译文，涵盖 GST、容错共识、分布式时钟及同步性下界。"
 ---
+
 > 部分同步环境中的共识
 
 **CYNTHIA DWORK AND NANCY LYNCH**
 
 > **辛西娅·德沃克、南希·林奇**
 
-*Massachusetts Institute of Technology, Cambridge, Massachusetts*
+_Massachusetts Institute of Technology, Cambridge, Massachusetts_
 
-> *马萨诸塞理工学院，马萨诸塞州剑桥市*
+> _马萨诸塞理工学院，马萨诸塞州剑桥市_
 
 **AND**
 
@@ -31,17 +33,17 @@ description: "Dwork、Lynch 与 Stockmeyer 的部分同步经典论文完整中�
 
 > **拉里·斯托克迈耶**
 
-*IBM Almaden Research Center, San Jose, California*
+_IBM Almaden Research Center, San Jose, California_
 
-> *IBM 阿尔马登研究中心，加利福尼亚州圣何塞市*
+> _IBM 阿尔马登研究中心，加利福尼亚州圣何塞市_
 
 **Abstract.** The concept of partial synchrony in a distributed system is introduced. Partial synchrony lies between the cases of a synchronous system and an asynchronous system. In a synchronous system, there is a known fixed upper bound $\Delta$ on the time required for a message to be sent from one processor to another and a known fixed upper bound $\Phi$ on the relative speeds of different processors. In an asynchronous system no fixed upper bounds $\Delta$ and $\Phi$ exist. In one version of partial synchrony, fixed bounds $\Delta$ and $\Phi$ exist, but they are not known a priori. The problem is to design protocols that work correctly in the partially synchronous system regardless of the actual values of the bounds $\Delta$ and $\Phi$. In another version of partial synchrony, the bounds are known, but are only guaranteed to hold starting at some unknown time $T$, and protocols must be designed to work correctly regardless of when time $T$ occurs. Fault-tolerant consensus protocols are given for various cases of partial synchrony and various fault models. Lower bounds that show in most cases that our protocols are optimal with respect to the number of faults tolerated are also given. Our consensus protocols for partially synchronous processors use new protocols for fault-tolerant “distributed clocks” that allow partially synchronous processors to reach some approximately common notion of time.
 
 > **摘要。** 本文引入分布式系统中的部分同步概念。部分同步介于同步系统与异步系统之间。在同步系统中，消息从一个处理器传到另一个处理器所需的时间有一个已知的固定上界 $\Delta$，不同处理器相对速度也有一个已知的固定上界 $\Phi$。在异步系统中，则不存在固定上界 $\Delta$ 和 $\Phi$。部分同步的一种形式是：固定界 $\Delta$ 和 $\Phi$ 确实存在，但事先未知。此时的问题是，无论 $\Delta$ 和 $\Phi$ 的实际取值为何，都要设计出能在部分同步系统中正确工作的协议。另一种形式是：这些界已知，但只保证从某个未知时刻 $T$ 起成立；无论 $T$ 何时出现，协议都必须正确工作。本文针对部分同步的多种情形和多种故障模型给出容错共识协议，并给出下界，表明在大多数情形中，这些协议就可容忍的故障数而言是最优的。我们面向部分同步处理器的共识协议采用新的容错“分布式时钟”协议，使部分同步处理器能够获得某种近似共同的时间观念。
 
-**Categories and Subject Descriptors:** C.2.4 [Computer-Communication Networks]: Distributed Systems—*distributed applications; distributed databases; network operating systems*; C.4 [Computer Systems Organization]: Performance of Systems—*reliability, availability, and serviceability*; H.2.4 [Database Management]: Systems—*distributed systems*
+**Categories and Subject Descriptors:** C.2.4 [Computer-Communication Networks]: Distributed Systems—_distributed applications; distributed databases; network operating systems_; C.4 [Computer Systems Organization]: Performance of Systems—_reliability, availability, and serviceability_; H.2.4 [Database Management]: Systems—_distributed systems_
 
-> **类别与主题描述符：** C.2.4［计算机通信网络］：分布式系统——*分布式应用；分布式数据库；网络操作系统*；C.4［计算机系统组织］：系统性能——*可靠性、可用性与可维护性*；H.2.4［数据库管理］：系统——*分布式系统*
+> **类别与主题描述符：** C.2.4［计算机通信网络］：分布式系统——_分布式应用；分布式数据库；网络操作系统_；C.4［计算机系统组织］：系统性能——_可靠性、可用性与可维护性_；H.2.4［数据库管理］：系统——_分布式系统_
 
 **General Terms:** Algorithms, Performance, Reliability, Theory, Verification
 
@@ -51,9 +53,9 @@ description: "Dwork、Lynch 与 Stockmeyer 的部分同步经典论文完整中�
 
 > **附加关键词与短语：** 一致性问题、拜占庭将军问题、提交问题、共识问题、分布式时钟、分布式计算、容错、部分同步系统
 
-A preliminary version of this paper appears in *Proceedings of the 3rd ACM Symposium on Principles of Distributed Computing* (Vancouver, B.C., Canada, Aug. 27–29). ACM, New York, 1984, pp. 103–118.
+A preliminary version of this paper appears in _Proceedings of the 3rd ACM Symposium on Principles of Distributed Computing_ (Vancouver, B.C., Canada, Aug. 27–29). ACM, New York, 1984, pp. 103–118.
 
-> 本文的初步版本发表于 *第三届 ACM 分布式计算原理研讨会论文集*（加拿大不列颠哥伦比亚省温哥华，8 月 27—29 日）。ACM，纽约，1984 年，第 103—118 页。
+> 本文的初步版本发表于 _第三届 ACM 分布式计算原理研讨会论文集_（加拿大不列颠哥伦比亚省温哥华，8 月 27—29 日）。ACM，纽约，1984 年，第 103—118 页。
 
 The work of C. Dwork was supported by a Bantrell postdoctoral Fellowship. The work of N. Lynch was supported in part by the Defense Advance Research Projects Agency under contract N00014-83-K-0125, the National Science Foundation under grants DCR 83-02391 and MCS 83-06854, the Office of Army Research under Contract DAAG29-84-K-0058, and the Office of Naval Research under contract N00014-85-K-0168.
 
@@ -83,13 +85,13 @@ The role of synchronism in distributed computing has recently received considera
 
 > 同步性在分布式计算中的作用近来受到广泛关注［1, 4, 10］。比较同步程度或同步类型不同的两个模型，一种方法是在两个模型中考察同一个具体问题。由于达成一致在分布式计算中地位根本，所选问题往往就是一致性问题。（综述见［8］；例子另见［6］、［11］、［12］和［18］。）该问题的一种形式考察 $N$ 个处理器 $p_1, \ldots, p_N$；它们通过相互发送消息通信。起初，每个处理器 $p_i$ 都持有取自值域 $V$ 的值 $v_i$，所有正确处理器必须决定同一个值；而且，如果所有初始值都相同，例如都是 $v$，则共同决定必须是 $v$。此外，即使某些处理器发生故障，共识协议也应正确运行；例如处理器可能崩溃（停机故障）、未在应当发送或接收消息时这样做（遗漏故障），或者发送错误消息（拜占庭故障）。
 
-Fix a particular type of fault. Given assumptions about the synchronism of the message system and the processors, one can characterize the model by its *resiliency*, the maximum number of faults that can be tolerated in any protocol in the given model. For example, it might be assumed that there is a fixed upper bound $\Delta$ on the time for messages to be delivered (*communication is synchronous*) and a fixed upper bound $\Phi$ on the rate at which one processor’s clock can run faster than another’s (*processors are synchronous*), and that these bounds are known a priori and can be “built into” the protocol. In this case $N$-resilient consensus protocols exist for Byzantine failures with authentication [3, 15] and, therefore, also for fail-stop and omission failures; in other words, any number of faults can be tolerated. For Byzantine faults without authentication, $t$-resilient consensus is possible iff $N \geq 3t + 1$ [14, 15].
+Fix a particular type of fault. Given assumptions about the synchronism of the message system and the processors, one can characterize the model by its _resiliency_, the maximum number of faults that can be tolerated in any protocol in the given model. For example, it might be assumed that there is a fixed upper bound $\Delta$ on the time for messages to be delivered (_communication is synchronous_) and a fixed upper bound $\Phi$ on the rate at which one processor’s clock can run faster than another’s (_processors are synchronous_), and that these bounds are known a priori and can be “built into” the protocol. In this case $N$-resilient consensus protocols exist for Byzantine failures with authentication [3, 15] and, therefore, also for fail-stop and omission failures; in other words, any number of faults can be tolerated. For Byzantine faults without authentication, $t$-resilient consensus is possible iff $N \geq 3t + 1$ [14, 15].
 
-> 固定一种特定的故障类型。在给定消息系统与处理器同步性假设后，可以用模型的*弹性*来刻画它，即该模型中任一协议能够容忍的最大故障数。例如，可以假设消息递送时间有固定上界 $\Delta$（*通信是同步的*），一个处理器的时钟相对另一个处理器快出的比例有固定上界 $\Phi$（*处理器是同步的*），并且这些界事先已知，能够“内置”进协议。在这种情况下，对带认证的拜占庭故障存在 $N$-弹性共识协议［3, 15］，因而对停机故障和遗漏故障也存在；换言之，可以容忍任意数量的故障。对于不带认证的拜占庭故障，当且仅当 $N \geq 3t + 1$ 时，$t$-弹性共识才有可能［14, 15］。
+> 固定一种特定的故障类型。在给定消息系统与处理器同步性假设后，可以用模型的*弹性*来刻画它，即该模型中任一协议能够容忍的最大故障数。例如，可以假设消息递送时间有固定上界 $\Delta$（_通信是同步的_），一个处理器的时钟相对另一个处理器快出的比例有固定上界 $\Phi$（_处理器是同步的_），并且这些界事先已知，能够“内置”进协议。在这种情况下，对带认证的拜占庭故障存在 $N$-弹性共识协议［3, 15］，因而对停机故障和遗漏故障也存在；换言之，可以容忍任意数量的故障。对于不带认证的拜占庭故障，当且仅当 $N \geq 3t + 1$ 时，$t$-弹性共识才有可能［14, 15］。
 
-Recent work has shown that the existence of both bounds $\Delta$ and $\Phi$ is necessary to achieve any resiliency, even under the weakest type of faults. Dolev et al. [4], building on earlier work of Fischer et al. [10], prove that if either a fixed upper bound $\Delta$ on message delivery time does not exist (*communication is asynchronous*) or a fixed upper bound $\Phi$ on relative processor speeds does not exist (*processors are asynchronous*), then there is no consensus protocol resilient to even one fail-stop fault.
+Recent work has shown that the existence of both bounds $\Delta$ and $\Phi$ is necessary to achieve any resiliency, even under the weakest type of faults. Dolev et al. [4], building on earlier work of Fischer et al. [10], prove that if either a fixed upper bound $\Delta$ on message delivery time does not exist (_communication is asynchronous_) or a fixed upper bound $\Phi$ on relative processor speeds does not exist (_processors are asynchronous_), then there is no consensus protocol resilient to even one fail-stop fault.
 
-> 最近的工作表明，即使面对最弱的一类故障，要获得任何弹性，$\Delta$ 和 $\Phi$ 两个界都必须存在。Dolev 等人［4］在 Fischer 等人［10］早期工作的基础上证明：如果消息递送时间不存在固定上界 $\Delta$（*通信是异步的*），或者处理器相对速度不存在固定上界 $\Phi$（*处理器是异步的*），那么连容忍一个停机故障的共识协议也不存在。
+> 最近的工作表明，即使面对最弱的一类故障，要获得任何弹性，$\Delta$ 和 $\Phi$ 两个界都必须存在。Dolev 等人［4］在 Fischer 等人［10］早期工作的基础上证明：如果消息递送时间不存在固定上界 $\Delta$（_通信是异步的_），或者处理器相对速度不存在固定上界 $\Phi$（_处理器是异步的_），那么连容忍一个停机故障的共识协议也不存在。
 
 In this paper we define and study practically motivated models that lie between the completely synchronous and completely asynchronous cases.
 
@@ -107,7 +109,7 @@ One reasonable situation could be that an upper bound $\Delta$ on message delive
 
 > 一种合理情形是：消息递送时间的上界 $\Delta$ 存在，但我们事先不知道它是多少。一方面，因为通信事实上是同步的，［4］和［10］的不可能性结果并不适用。另一方面，在已知的共识协议中，参与处理器需要知道 $\Delta$，才能知道每轮消息交换中应等待多久。当然，也可以任意选择一个 $\Delta$ 来设计协议，并规定凡消息耗时超过该 $\Delta$，就把发送方或接收方视为故障。但这不是可接受的解决方案，因为如果所选 $\Delta$ 太小，所有处理器很快都可能被视为故障；而按照定义，故障处理器的决定无须与任何其他处理器的决定一致。我们希望得到的是不把 $\Delta$“内置”其中的协议。只要系统中存在某个固定上界 $\Delta$，这样的协议便能在该系统中正确运行。还应指出，我们不对消息传输时间假设任何可供实验估计 $\Delta$ 的概率分布。
 
-Another situation could be that we know $\Delta$, but the message system is sometimes unreliable, delivering messages late or not at all. As noted above, we do not want to consider a late or lost message as a processor fault. However, without any further constraint on the message system, this “unreliable” message system is at least as bad as a completely asynchronous one, and the impossibility results of [4] apply. Therefore, we impose an additional constraint: For each execution there is a *global stabilization time* (GST), unknown to the processors, such that the message system respects the upper bound $\Delta$ from time GST onward.
+Another situation could be that we know $\Delta$, but the message system is sometimes unreliable, delivering messages late or not at all. As noted above, we do not want to consider a late or lost message as a processor fault. However, without any further constraint on the message system, this “unreliable” message system is at least as bad as a completely asynchronous one, and the impossibility results of [4] apply. Therefore, we impose an additional constraint: For each execution there is a _global stabilization time_ (GST), unknown to the processors, such that the message system respects the upper bound $\Delta$ from time GST onward.
 
 > 另一种情形是：我们知道 $\Delta$，但消息系统有时并不可靠，会延迟递送消息，甚至完全不递送。如前所述，我们不愿把迟到或丢失的消息视为处理器故障。然而，若不再对消息系统施加任何约束，这种“不可靠”消息系统至少与完全异步系统一样糟，［4］的不可能性结果便会适用。因此，我们增加一个约束：对每次执行，都存在处理器未知的一个*全局稳定时间*（GST），从 GST 起，消息系统遵守上界 $\Delta$。
 
@@ -115,7 +117,7 @@ This constraint might at first seem too strong: In realistic situations, the upp
 
 > 这个约束乍看之下或许过强：在现实情形中，不能合理指望该上界在 GST 之后永远成立，也许只能维持有限时间。然而，本模型中任何良好的共识问题解法，都应当有一个上界 $L$，限制 GST 后达成共识所需的时间；如此一来，上界 $\Delta$ 实际无须在 GST 之后永远成立，只须持续到 $\mathrm{GST} + L$。出于技术上的便利，我们在模型中避免显式提及区间长度 $L$，而改为给出各算法相应的时间上界。
 
-Instead of requiring that the consensus problem be solvable in the GST model, we might think of separating the correctness conditions into *safety* and *termination* properties. The safety conditions are that no two correct processors should ever reach disagreement, and that no correct processor should ever make a decision that is contrary to the specified validity conditions. The termination property is just that each correct processor should eventually make a decision. Then we might require an algorithm to satisfy the safety conditions no matter how asynchronously the message system behaves, that is, even if $\Delta$ does not hold eventually. On the other hand, we might only require termination in case $\Delta$ holds eventually. It is easy to see that these safety and termination conditions are equivalent to our GST condition: If an algorithm solves the consensus problem when $\Delta$ holds from time GST onward, then that algorithm cannot possibly violate a safety property even if the message system is completely asynchronous. This is because safety violations must occur at some finite point in time, and there would be some continuation of the violating execution in which $\Delta$ eventually holds.
+Instead of requiring that the consensus problem be solvable in the GST model, we might think of separating the correctness conditions into _safety_ and _termination_ properties. The safety conditions are that no two correct processors should ever reach disagreement, and that no correct processor should ever make a decision that is contrary to the specified validity conditions. The termination property is just that each correct processor should eventually make a decision. Then we might require an algorithm to satisfy the safety conditions no matter how asynchronously the message system behaves, that is, even if $\Delta$ does not hold eventually. On the other hand, we might only require termination in case $\Delta$ holds eventually. It is easy to see that these safety and termination conditions are equivalent to our GST condition: If an algorithm solves the consensus problem when $\Delta$ holds from time GST onward, then that algorithm cannot possibly violate a safety property even if the message system is completely asynchronous. This is because safety violations must occur at some finite point in time, and there would be some continuation of the violating execution in which $\Delta$ eventually holds.
 
 > 与其要求 GST 模型中的共识问题可解，我们也可以把正确性条件拆分为*安全性*与*终止性*。安全性条件是：任何两个正确处理器都绝不能产生分歧，任何正确处理器都绝不能作出违背指定有效性条件的决定。终止性则只是每个正确处理器最终都应作出决定。于是，可以要求算法无论消息系统表现得多么异步都满足安全性，即使 $\Delta$ 最终也不成立；另一方面，只在 $\Delta$ 最终成立时要求终止。不难看出，这些安全性和终止性条件与我们的 GST 条件等价：如果算法能在 $\Delta$ 从 GST 起成立时解决共识问题，那么即使消息系统完全异步，该算法也不可能违反安全性。这是因为安全性违规必然发生在某个有限时刻，而该违规执行总能有一个后续延伸，使 $\Delta$ 最终成立。
 
@@ -123,7 +125,7 @@ Thus, the condition that $\Delta$ holds from some time GST onward provides a sec
 
 > 因此，$\Delta$ 从某个 GST 时刻起成立这一条件，为通信的部分同步提供了第二种合理定义。同样，如何把既有共识协议用于这个模型并不明显。例如，与上界未知情形相同的论证表明，我们不能把丢失或延迟的消息当作处理器故障来处理。
 
-For succinctness, we say that communication is *partially synchronous* if one of these two situations holds: $\Delta$ exists but is not known, or $\Delta$ is known and has to hold from some unknown point on.
+For succinctness, we say that communication is _partially synchronous_ if one of these two situations holds: $\Delta$ exists but is not known, or $\Delta$ is known and has to hold from some unknown point on.
 
 > 简言之，如果下列两种情形之一成立，我们就称通信是*部分同步的*：$\Delta$ 存在但未知；或者 $\Delta$ 已知，但只须从某个未知时刻起成立。
 
@@ -137,19 +139,19 @@ Our results determine precisely, for four interesting fault models, the maximum 
 
 ![TABLE I. Smallest Number of Processors N_min for Which a t-Resilient Consensus Protocol Exists](./table-1.png)
 
-| Failure type | Synchronous | Asynchronous | Partially synchronous communication and synchronous processors | Partially synchronous communication and processors | Partially synchronous processors and synchronous communication |
-|---|---:|---:|---:|---:|---:|
-| Fail-stop | $t$ | $\infty$ | $2t + 1$ | $2t + 1$ | $t$ |
-| Omission | $t$ | $\infty$ | $2t + 1$ | $2t + 1$ | $[2t, 2t + 1]$ |
-| Authenticated Byzantine | $t$ | $\infty$ | $3t + 1$ | $3t + 1$ | $2t + 1$ |
-| Byzantine | $3t + 1$ | $\infty$ | $3t + 1$ | $3t + 1$ | $3t + 1$ |
+| Failure type            | Synchronous | Asynchronous | Partially synchronous communication and synchronous processors | Partially synchronous communication and processors | Partially synchronous processors and synchronous communication |
+| ----------------------- | ----------: | -----------: | -------------------------------------------------------------: | -------------------------------------------------: | -------------------------------------------------------------: |
+| Fail-stop               |         $t$ |     $\infty$ |                                                       $2t + 1$ |                                           $2t + 1$ |                                                            $t$ |
+| Omission                |         $t$ |     $\infty$ |                                                       $2t + 1$ |                                           $2t + 1$ |                                                 $[2t, 2t + 1]$ |
+| Authenticated Byzantine |         $t$ |     $\infty$ |                                                       $3t + 1$ |                                           $3t + 1$ |                                                       $2t + 1$ |
+| Byzantine               |    $3t + 1$ |     $\infty$ |                                                       $3t + 1$ |                                           $3t + 1$ |                                                       $3t + 1$ |
 
-> | 故障类型 | 同步 | 异步 | 部分同步通信与同步处理器 | 部分同步通信与处理器 | 部分同步处理器与同步通信 |
-> |---|---:|---:|---:|---:|---:|
-> | 停机 | $t$ | $\infty$ | $2t + 1$ | $2t + 1$ | $t$ |
-> | 遗漏 | $t$ | $\infty$ | $2t + 1$ | $2t + 1$ | $[2t, 2t + 1]$ |
-> | 带认证的拜占庭 | $t$ | $\infty$ | $3t + 1$ | $3t + 1$ | $2t + 1$ |
-> | 拜占庭 | $3t + 1$ | $\infty$ | $3t + 1$ | $3t + 1$ | $3t + 1$ |
+> | 故障类型       |     同步 |     异步 | 部分同步通信与同步处理器 | 部分同步通信与处理器 | 部分同步处理器与同步通信 |
+> | -------------- | -------: | -------: | -----------------------: | -------------------: | -----------------------: |
+> | 停机           |      $t$ | $\infty$ |                 $2t + 1$ |             $2t + 1$ |                      $t$ |
+> | 遗漏           |      $t$ | $\infty$ |                 $2t + 1$ |             $2t + 1$ |           $[2t, 2t + 1]$ |
+> | 带认证的拜占庭 |      $t$ | $\infty$ |                 $3t + 1$ |             $3t + 1$ |                 $2t + 1$ |
+> | 拜占庭         | $3t + 1$ | $\infty$ |                 $3t + 1$ |             $3t + 1$ |                 $3t + 1$ |
 
 > **图表中文解读：** 表中每个单元给出相应模型存在 $t$-弹性协议时所需的最小处理器数。完全异步列均为 $\infty$，表示任意有限规模都不能容忍哪怕一个所述故障；部分同步通信下，停机和遗漏故障的门槛为 $2t+1$，两类拜占庭故障均为 $3t+1$。当通信同步而只有处理器部分同步时，停机与带认证拜占庭情形的弹性有所提高。
 
@@ -173,7 +175,7 @@ It is easy to extend the models described in Section 1.2 to allow processors, as
 
 > 很容易扩展第 1.2 节的模型，使处理器和通信都可以是部分同步的。也就是说，$\Phi$（处理器相对速度的上界）可能存在但未知，或者 $\Phi$ 已知但实际上只从某个 GST 时刻起成立。对于四类故障，我们得到的结果完整刻画了通信与处理器都部分同步时的弹性。在这些情形中，我们假设通信与处理器具有同一种部分同步性：要么 $\Phi$ 和 $\Delta$ 都未知，要么二者都从某个 GST 时刻起成立。
 
-Surprisingly, the bounds we obtain are exactly the same as for the case in which communication alone is partially synchronous; see column 4 of Table I. (The only difference is that in this case the polynomial bounds on time depend on $N$, $\Delta$, and $\Phi$.) In the earlier case the fact that $\Phi$ was equal to 1 implied that each processor could maintain a local time that was guaranteed to be perfectly synchronized with the local times of other processors. In this case no such notion of time is available. We give two new protocols allowing processors to simulate *distributed clocks*. (These are fault-tolerant variations on the clock used by Lamport in [13].) One uses $2t + 1$ processors and tolerates $t$ fail-stop, omission, or authenticated Byzantine faults, while the other uses $3t + 1$ processors and tolerates $t$ unauthenticated Byzantine faults. When the appropriate clock is combined with each of our protocols for the case where only communication is partially synchronous, the result is a new protocol for the case in which both communication and processors are partially synchronous.
+Surprisingly, the bounds we obtain are exactly the same as for the case in which communication alone is partially synchronous; see column 4 of Table I. (The only difference is that in this case the polynomial bounds on time depend on $N$, $\Delta$, and $\Phi$.) In the earlier case the fact that $\Phi$ was equal to 1 implied that each processor could maintain a local time that was guaranteed to be perfectly synchronized with the local times of other processors. In this case no such notion of time is available. We give two new protocols allowing processors to simulate _distributed clocks_. (These are fault-tolerant variations on the clock used by Lamport in [13].) One uses $2t + 1$ processors and tolerates $t$ fail-stop, omission, or authenticated Byzantine faults, while the other uses $3t + 1$ processors and tolerates $t$ unauthenticated Byzantine faults. When the appropriate clock is combined with each of our protocols for the case where only communication is partially synchronous, the result is a new protocol for the case in which both communication and processors are partially synchronous.
 
 > 出人意料的是，我们得到的界与仅通信部分同步时完全相同，见表 I 第 4 列。（唯一差别是，此时时间的多项式界依赖于 $N$、$\Delta$ 和 $\Phi$。）在先前情形中，$\Phi=1$ 意味着每个处理器都能维护一个本地时间，并保证它与其他处理器的本地时间完全同步；而此时没有这样的时间观念可用。我们给出两个新协议，使处理器能够模拟*分布式时钟*。（它们是 Lamport 在［13］中所用时钟的容错变体。）其中一个使用 $2t+1$ 个处理器，可容忍 $t$ 个停机、遗漏或带认证拜占庭故障；另一个使用 $3t+1$ 个处理器，可容忍 $t$ 个不带认证拜占庭故障。把适当的时钟同我们针对“仅通信部分同步”情形的各个协议结合起来，便得到通信与处理器都部分同步时的新协议。
 
@@ -185,9 +187,9 @@ In analogy to our treatment of partial communication synchrony, it is easy to de
 
 > 仿照我们对部分通信同步性的处理，很容易定义处理器部分同步而通信同步（$\Delta$ 存在且事先已知）的模型。表 I 最后一列概括了这种情形的结果。时间仍为多项式（这次是 $N$、$\Delta$ 和 $\Phi$ 的多项式）。构造此类协议的基本策略同样是，把假设处理器同步的共识协议与分布式时钟协议结合起来。对于停机故障和带认证的拜占庭故障，分布式时钟或共识协议能容忍的故障数高于通信与处理器都部分同步时所用的对应时钟或共识协议，因此我们获得了更好的弹性。
 
-*Technical Remarks*
+_Technical Remarks_
 
-> *技术说明*
+> _技术说明_
 
 (1) Our protocols assume that an atomic step of a processor is either to receive messages or to send a message to a single processor, but not both; there is neither an atomic receive/send operation nor an atomic broadcast operation. We adopt this rather weak definition of a processor’s atomic step in this paper because it is realistic in practice and seems consistent with assumptions made in much of the previous work on distributed agreement. However, our lower bound arguments are still valid if a processor can receive messages and broadcast a message to all processors in a single atomic step.
 
@@ -213,7 +215,7 @@ The remainder of this paper is organized as follows: Section 2 contains definiti
 
 > 2.1 计算模型
 
-Our formal model of computation is based on the models of [4] and [10]. Here we review the basic features of the model informally. The communication system is modeled as a collection of $N$ sets of messages, called *buffers*, one for each processor. The buffer of $p_i$ represents messages that have been sent to $p_i$, but not yet received. Each processor follows a deterministic protocol involving the receipt and sending of messages. Each processor $p_i$ can perform one of the following instructions in each step of its protocol:
+Our formal model of computation is based on the models of [4] and [10]. Here we review the basic features of the model informally. The communication system is modeled as a collection of $N$ sets of messages, called _buffers_, one for each processor. The buffer of $p_i$ represents messages that have been sent to $p_i$, but not yet received. Each processor follows a deterministic protocol involving the receipt and sending of messages. Each processor $p_i$ can perform one of the following instructions in each step of its protocol:
 
 > 我们的形式计算模型以［4］和［10］的模型为基础。这里先非正式地回顾模型的基本特征。通信系统被建模为 $N$ 个消息集合，称为*缓冲区*，每个处理器一个。$p_i$ 的缓冲区表示已发送给 $p_i$、但尚未接收的消息。每个处理器遵循一个涉及消息收发的确定性协议。处理器 $p_i$ 在协议的每一步可执行下列指令之一：
 
@@ -231,7 +233,7 @@ In the $\operatorname{Send}(m,p_j)$ instruction, $p_j$ can be any processor; tha
 
 > 在 $\operatorname{Send}(m,p_j)$ 指令中，$p_j$ 可以是任意处理器；也就是说，通信网络完全连通。处理器协议由状态转移图指定，状态数可以是无限的。下一条执行指令取决于当前状态，执行会引起状态转移。对于 Send 指令，下一状态只依赖当前状态；而对于 Receive 指令，下一状态还依赖所递送的消息集合 $S$。处理器 $p_i$ 的初始状态由其取自 $V$ 的初始值 $v_i$ 决定。在计算的某个时刻，处理器可以不可逆地决定 $V$ 中的一个值。
 
-For subsequent definitions, it is useful to imagine that there is a real-time clock outside the system that measures time in discrete integer-numbered steps. At each tick of real time, some processors take one step of their protocols. A *run* of the system is described by specifying the initial states for all processors and by specifying, for each real-time step,
+For subsequent definitions, it is useful to imagine that there is a real-time clock outside the system that measures time in discrete integer-numbered steps. At each tick of real time, some processors take one step of their protocols. A _run_ of the system is described by specifying the initial states for all processors and by specifying, for each real-time step,
 
 > 为了后续定义，不妨设想系统外有一个实时时钟，以离散、整数编号的步来度量时间。实时时钟每跳动一次，某些处理器就执行协议的一步。系统的一次*运行*由所有处理器的初始状态，以及每个实时步中的下列事项来描述：
 
@@ -247,7 +249,7 @@ For subsequent definitions, it is useful to imagine that there is a real-time cl
 
 > （3）对每条 Receive 指令，递送哪一消息集合。
 
-Runs can be finite or infinite. Given an infinite run $R$, the message $m$ is *lost* in run $R$ if $m$ is sent by some $\operatorname{Send}(m,p_j)$, $p_j$ executes infinitely many Receive instructions in $R$, and $m$ is never delivered by any $\operatorname{Receive}(p_j)$.
+Runs can be finite or infinite. Given an infinite run $R$, the message $m$ is _lost_ in run $R$ if $m$ is sent by some $\operatorname{Send}(m,p_j)$, $p_j$ executes infinitely many Receive instructions in $R$, and $m$ is never delivered by any $\operatorname{Receive}(p_j)$.
 
 > 运行可以是有限的，也可以是无限的。给定无限运行 $R$，若消息 $m$ 由某个 $\operatorname{Send}(m,p_j)$ 发出，$p_j$ 在 $R$ 中执行了无穷多条 Receive 指令，但任何 $\operatorname{Receive}(p_j)$ 都从未递送 $m$，则称消息 $m$ 在运行 $R$ 中*丢失*。
 
@@ -255,59 +257,59 @@ Runs can be finite or infinite. Given an infinite run $R$, the message $m$ is *l
 
 > 2.2 故障
 
-A processor *executes correctly* if it always performs instructions of its protocol (transition diagram) correctly. A processor is *correct* if it executes correctly and takes infinitely many steps in any infinite run. We consider four types of increasingly destructive faulty behavior of processor $p_i$:
+A processor _executes correctly_ if it always performs instructions of its protocol (transition diagram) correctly. A processor is _correct_ if it executes correctly and takes infinitely many steps in any infinite run. We consider four types of increasingly destructive faulty behavior of processor $p_i$:
 
 > 若处理器始终正确执行其协议（转移图）的指令，就称它*正确执行*。若处理器正确执行，并在任一无限运行中执行无穷多个步骤，就称它是*正确处理器*。我们考察处理器 $p_i$ 四种破坏性依次增强的故障行为：
 
-*Fail-stop:* Processor $p_i$ executes correctly, but can stop at any time. Once stopped it cannot restart.
+_Fail-stop:_ Processor $p_i$ executes correctly, but can stop at any time. Once stopped it cannot restart.
 
-> *停机：* 处理器 $p_i$ 正确执行，但可在任何时刻停止；一旦停止便不能重启。
+> _停机：_ 处理器 $p_i$ 正确执行，但可在任何时刻停止；一旦停止便不能重启。
 
-*Omission:* Faulty processor $p_i$ follows its protocol correctly, but $\operatorname{Send}(m,p_j)$, when executed by $p_i$, might not place $m$ in $p_j$’s buffer and $\operatorname{Receive}(p_i)$ might cause only a subset of the delivered messages to be actually received by $p_i$. In other words, an omission fault on reception occurs when some set $S$ of messages is delivered to $p_i$ and all messages in $S$ are removed from $p_i$’s buffer, but $p_i$ follows a state transition as though some (possibly empty) subset $S'$ of $S$ were delivered.
+_Omission:_ Faulty processor $p_i$ follows its protocol correctly, but $\operatorname{Send}(m,p_j)$, when executed by $p_i$, might not place $m$ in $p_j$’s buffer and $\operatorname{Receive}(p_i)$ might cause only a subset of the delivered messages to be actually received by $p_i$. In other words, an omission fault on reception occurs when some set $S$ of messages is delivered to $p_i$ and all messages in $S$ are removed from $p_i$’s buffer, but $p_i$ follows a state transition as though some (possibly empty) subset $S'$ of $S$ were delivered.
 
-> *遗漏：* 故障处理器 $p_i$ 正确遵循其协议，但当 $p_i$ 执行 $\operatorname{Send}(m,p_j)$ 时，可能没有把 $m$ 放入 $p_j$ 的缓冲区；$\operatorname{Receive}(p_i)$ 也可能只让 $p_i$ 实际收到已递送消息的一个子集。换言之，接收遗漏故障是指：某个消息集合 $S$ 被递送给 $p_i$，$S$ 中所有消息都从 $p_i$ 的缓冲区移除，但 $p_i$ 所遵循的状态转移却如同只递送了 $S$ 的某个（可能为空的）子集 $S'$。
+> _遗漏：_ 故障处理器 $p_i$ 正确遵循其协议，但当 $p_i$ 执行 $\operatorname{Send}(m,p_j)$ 时，可能没有把 $m$ 放入 $p_j$ 的缓冲区；$\operatorname{Receive}(p_i)$ 也可能只让 $p_i$ 实际收到已递送消息的一个子集。换言之，接收遗漏故障是指：某个消息集合 $S$ 被递送给 $p_i$，$S$ 中所有消息都从 $p_i$ 的缓冲区移除，但 $p_i$ 所遵循的状态转移却如同只递送了 $S$ 的某个（可能为空的）子集 $S'$。
 
-*Authenticated Byzantine:* Arbitrary behavior, but messages can be signed with the name of the sending processor in such a way that this signature cannot be forged by any other processor.
+_Authenticated Byzantine:_ Arbitrary behavior, but messages can be signed with the name of the sending processor in such a way that this signature cannot be forged by any other processor.
 
-> *带认证的拜占庭：* 行为可以任意，但消息能够以发送处理器之名签名，且任何其他处理器都不能伪造该签名。
+> _带认证的拜占庭：_ 行为可以任意，但消息能够以发送处理器之名签名，且任何其他处理器都不能伪造该签名。
 
-*Byzantine:* Arbitrary behavior and no mechanism for signatures, but we assume that the receiver of a message knows the identity of the sender.
+_Byzantine:_ Arbitrary behavior and no mechanism for signatures, but we assume that the receiver of a message knows the identity of the sender.
 
-> *拜占庭：* 行为可以任意，且没有签名机制，但我们假设消息接收者知道发送者的身份。
+> _拜占庭：_ 行为可以任意，且没有签名机制，但我们假设消息接收者知道发送者的身份。
 
 ### 2.3 Partial Synchrony
 
 > 2.3 部分同步
 
-Let $I$ be an interval of real time and $R$ be a run. We say that the communication bound $\Delta$ *holds in $I$ for run $R$* provided that, if message $m$ is placed in $p_j$’s buffer by some $\operatorname{Send}(m,p_j)$ at a time $s_1$ in $I$, and if $p_j$ executes a $\operatorname{Receive}(p_j)$ at a time $s_2$ in $I$ with $s_2 \geq s_1 + \Delta$, then $m$ must be delivered to $p_j$ at time $s_2$ or earlier. This says intuitively that $\Delta$ is an upper bound on message transmission time in the interval $I$. The processor bound $\Phi$ *holds in $I$ for $R$* provided that, in any contiguous subinterval of $I$ containing $\Phi$ real-time steps, every correct processor must take at least one step. This implies that no correct processor can run more than $\Phi$ times slower than another in the interval $I$.
+Let $I$ be an interval of real time and $R$ be a run. We say that the communication bound $\Delta$ _holds in $I$ for run $R$_ provided that, if message $m$ is placed in $p_j$’s buffer by some $\operatorname{Send}(m,p_j)$ at a time $s_1$ in $I$, and if $p_j$ executes a $\operatorname{Receive}(p_j)$ at a time $s_2$ in $I$ with $s_2 \geq s_1 + \Delta$, then $m$ must be delivered to $p_j$ at time $s_2$ or earlier. This says intuitively that $\Delta$ is an upper bound on message transmission time in the interval $I$. The processor bound $\Phi$ _holds in $I$ for $R$_ provided that, in any contiguous subinterval of $I$ containing $\Phi$ real-time steps, every correct processor must take at least one step. This implies that no correct processor can run more than $\Phi$ times slower than another in the interval $I$.
 
-> 令 $I$ 为一个实时时间区间，$R$ 为一次运行。若消息 $m$ 在 $I$ 中的时刻 $s_1$ 由某个 $\operatorname{Send}(m,p_j)$ 放入 $p_j$ 的缓冲区，且 $p_j$ 在 $I$ 中满足 $s_2 \geq s_1+\Delta$ 的时刻 $s_2$ 执行 $\operatorname{Receive}(p_j)$ 时，$m$ 必须在 $s_2$ 或更早递送给 $p_j$，我们就称通信界 $\Delta$ *在运行 $R$ 的区间 $I$ 中成立*。直观而言，这表示 $\Delta$ 是区间 $I$ 内消息传输时间的上界。若在 $I$ 的任一包含 $\Phi$ 个实时步的连续子区间中，每个正确处理器都至少执行一步，则称处理器界 $\Phi$ *在 $R$ 的区间 $I$ 中成立*。这意味着在区间 $I$ 中，任一正确处理器都不会比另一处理器慢超过 $\Phi$ 倍。
+> 令 $I$ 为一个实时时间区间，$R$ 为一次运行。若消息 $m$ 在 $I$ 中的时刻 $s_1$ 由某个 $\operatorname{Send}(m,p_j)$ 放入 $p_j$ 的缓冲区，且 $p_j$ 在 $I$ 中满足 $s_2 \geq s_1+\Delta$ 的时刻 $s_2$ 执行 $\operatorname{Receive}(p_j)$ 时，$m$ 必须在 $s_2$ 或更早递送给 $p_j$，我们就称通信界 $\Delta$ _在运行 $R$ 的区间 $I$ 中成立_。直观而言，这表示 $\Delta$ 是区间 $I$ 内消息传输时间的上界。若在 $I$ 的任一包含 $\Phi$ 个实时步的连续子区间中，每个正确处理器都至少执行一步，则称处理器界 $\Phi$ _在 $R$ 的区间 $I$ 中成立_。这意味着在区间 $I$ 中，任一正确处理器都不会比另一处理器慢超过 $\Phi$ 倍。
 
 The following conditions, which define varying degrees of communication synchrony, place constraints on the kinds of runs that are allowed. In these definitions, $\Delta$ denotes some particular positive integer:
 
 > 下列条件定义不同程度的通信同步性，并对允许的运行类型施加约束。在这些定义中，$\Delta$ 表示某个特定正整数：
 
-(1) $\Delta$ *is known:* The communication bound $\Delta$ holds in $[1,\infty)$ for every run $R$.
+(1) $\Delta$ _is known:_ The communication bound $\Delta$ holds in $[1,\infty)$ for every run $R$.
 
-> （1）$\Delta$ *已知：* 对每次运行 $R$，通信界 $\Delta$ 都在 $[1,\infty)$ 中成立。
+> （1）$\Delta$ _已知：_ 对每次运行 $R$，通信界 $\Delta$ 都在 $[1,\infty)$ 中成立。
 
-*Delta is known:* $\Delta$ is known for some fixed $\Delta$. This is the usual definition of *synchronous communication*.
+_Delta is known:_ $\Delta$ is known for some fixed $\Delta$. This is the usual definition of _synchronous communication_.
 
-> *$\Delta$ 已知：* 对某个固定的 $\Delta$，$\Delta$ 已知。这就是*同步通信*的通常定义。
+> _$\Delta$ 已知：_ 对某个固定的 $\Delta$，$\Delta$ 已知。这就是*同步通信*的通常定义。
 
-(2) *Delta is unknown:* For every run $R$, there is a $\Delta$ that holds in $[1,\infty)$.
+(2) _Delta is unknown:_ For every run $R$, there is a $\Delta$ that holds in $[1,\infty)$.
 
-> （2）*$\Delta$ 未知：* 对每次运行 $R$，都存在一个在 $[1,\infty)$ 中成立的 $\Delta$。
+> （2）_$\Delta$ 未知：_ 对每次运行 $R$，都存在一个在 $[1,\infty)$ 中成立的 $\Delta$。
 
-(3) $\Delta$ *holds eventually:* For every run $R$, there is a time $T$ such that $\Delta$ holds in $[T,\infty)$. Such a time $T$ is called the *Global Stabilization Time* (GST).
+(3) $\Delta$ _holds eventually:_ For every run $R$, there is a time $T$ such that $\Delta$ holds in $[T,\infty)$. Such a time $T$ is called the _Global Stabilization Time_ (GST).
 
-> （3）$\Delta$ *最终成立：* 对每次运行 $R$，都存在时刻 $T$，使 $\Delta$ 在 $[T,\infty)$ 中成立。这样的时刻 $T$ 称为*全局稳定时间*（GST）。
+> （3）$\Delta$ _最终成立：_ 对每次运行 $R$，都存在时刻 $T$，使 $\Delta$ 在 $[T,\infty)$ 中成立。这样的时刻 $T$ 称为*全局稳定时间*（GST）。
 
-*Delta holds eventually:* $\Delta$ holds eventually for some fixed $\Delta$.
+_Delta holds eventually:_ $\Delta$ holds eventually for some fixed $\Delta$.
 
-> *$\Delta$ 最终成立：* 对某个固定的 $\Delta$，$\Delta$ 最终成立。
+> _$\Delta$ 最终成立：_ 对某个固定的 $\Delta$，$\Delta$ 最终成立。
 
-If either (2) or (3) holds, we say that *communication is partially synchronous*.
+If either (2) or (3) holds, we say that _communication is partially synchronous_.
 
 > 若（2）或（3）成立，我们称*通信是部分同步的*。
 
@@ -315,7 +317,7 @@ It is helpful to view each situation as a game between a protocol designer and a
 
 > 把每种情形看成协议设计者与对手之间的博弈会很有帮助。如果 $\Delta$ 已知，对手先指定一个整数 $\Delta$，协议设计者必须提供一个在 $\Delta$ 始终成立时正确的共识协议。如果 $\Delta$ 未知，协议设计者先提供共识协议，然后对手指定 $\Delta$，而只要该 $\Delta$ 始终成立，协议就必须正确。如果 $\Delta$ 最终成立，对手选择 $\Delta$，设计者在知道 $\Delta$ 的情况下提供共识协议，随后对手再选择 $\Delta$ 必须开始成立的时刻 $T$。
 
-By replacing $\Delta$ by $\Phi$ and “delta” by “phi” above, (1) defines *synchronous processors*, and (2) and (3) define two types of *partially synchronous processors*.
+By replacing $\Delta$ by $\Phi$ and “delta” by “phi” above, (1) defines _synchronous processors_, and (2) and (3) define two types of _partially synchronous processors_.
 
 > 在以上定义中用 $\Phi$ 替换 $\Delta$、用“$\Phi$”替换“$\Delta$”，则（1）定义*同步处理器*，（2）和（3）定义两类*部分同步处理器*。
 
@@ -331,25 +333,25 @@ For any set $C$ containing at least $N-t$ processors and any run $R$ satisfying 
 
 > 对任何至少包含 $N-t$ 个处理器的集合 $C$，以及任何满足 $A$、其中 $C$ 内处理器正确且 $C$ 外处理器行为为故障类型 $F$ 所允许的运行 $R$，协议都达到：
 
-—*Consistency.* No two different processors in $C$ decide differently.
+—_Consistency._ No two different processors in $C$ decide differently.
 
-> ——*一致性。* $C$ 中任意两个不同处理器都不会作出不同决定。
+> ——_一致性。_ $C$ 中任意两个不同处理器都不会作出不同决定。
 
-—*Termination.* If $R$ is infinite, then every processor in $C$ makes a decision.
+—_Termination._ If $R$ is infinite, then every processor in $C$ makes a decision.
 
-> ——*终止性。* 若 $R$ 是无限运行，则 $C$ 中每个处理器都作出决定。
+> ——_终止性。_ 若 $R$ 是无限运行，则 $C$ 中每个处理器都作出决定。
 
-—*Unanimity.* There are two types:
+—_Unanimity._ There are two types:
 
-> ——*全体一致。* 有两种类型：
+> ——_全体一致。_ 有两种类型：
 
-*Strong unanimity:* If all initial values are $v$ and if any processor in $C$ decides, then it decides $v$.
+_Strong unanimity:_ If all initial values are $v$ and if any processor in $C$ decides, then it decides $v$.
 
-> *强全体一致：* 若所有初始值都是 $v$，且 $C$ 中任何处理器作出决定，则其决定为 $v$。
+> _强全体一致：_ 若所有初始值都是 $v$，且 $C$ 中任何处理器作出决定，则其决定为 $v$。
 
-*Weak unanimity:* If all initial values are $v$, if $C$ contains all processors, and if any processor decides, then it decides $v$.
+_Weak unanimity:_ If all initial values are $v$, if $C$ contains all processors, and if any processor decides, then it decides $v$.
 
-> *弱全体一致：* 若所有初始值都是 $v$，$C$ 包含全部处理器，且任何处理器作出决定，则其决定为 $v$。
+> _弱全体一致：_ 若所有初始值都是 $v$，$C$ 包含全部处理器，且任何处理器作出决定，则其决定为 $v$。
 
 In models where messages cannot be lost, such as the models where delta is unknown, our protocols can be easily modified so that all correct processors can halt soon after sufficiently many correct processors have decided. However, we do not require halting explicitly in the termination condition because, as can be easily shown, if messages can be lost before GST in the model where delta holds eventually and if the protocol is 1-resilient to fail-stop faults, then there is some execution in which some correct processor does not halt. Further discussion of the issue of halting is given in Section 4.2, Remark 2, after the protocols have been described.
 
@@ -367,7 +369,7 @@ In this section we define the basic round model and present preliminary versions
 
 > 3.1 模型定义
 
-In the basic round model, processing is divided into synchronous *rounds* of message exchange. Each round consists of a *Send subround*, a *Receive subround*, and a *computation subround*. In a Send subround, each processor sends messages to any subset of the processors. In a Receive subround, some subset of the messages sent to the processor during the corresponding Send subround is delivered. In a computation subround, each processor executes a state transition based on the set of messages just received. Not all messages that are sent need arrive; some can be lost. However, we assume that there is some round GST, such that all messages sent from correct processors to correct processors at round GST or afterward are delivered during the round at which they were sent. As explained in the Introduction, loss of a message *before* GST does not necessarily make the sender or the receiver faulty. Although all processors have a common numbering for the rounds, they do not know when round GST occurs. The various kinds of faults are defined for the basic model as for the earlier models.
+In the basic round model, processing is divided into synchronous _rounds_ of message exchange. Each round consists of a _Send subround_, a _Receive subround_, and a _computation subround_. In a Send subround, each processor sends messages to any subset of the processors. In a Receive subround, some subset of the messages sent to the processor during the corresponding Send subround is delivered. In a computation subround, each processor executes a state transition based on the set of messages just received. Not all messages that are sent need arrive; some can be lost. However, we assume that there is some round GST, such that all messages sent from correct processors to correct processors at round GST or afterward are delivered during the round at which they were sent. As explained in the Introduction, loss of a message _before_ GST does not necessarily make the sender or the receiver faulty. Although all processors have a common numbering for the rounds, they do not know when round GST occurs. The various kinds of faults are defined for the basic model as for the earlier models.
 
 > 在基本轮次模型中，处理被划分为同步的消息交换*轮次*。每轮由一个*发送子轮次*、一个*接收子轮次*和一个*计算子轮次*组成。在发送子轮次中，每个处理器向处理器的任意子集发送消息；在接收子轮次中，对应发送子轮次内发给该处理器的消息有某个子集被递送；在计算子轮次中，每个处理器根据刚收到的消息集合执行状态转移。发出的消息不必全部到达，有些可以丢失。不过，我们假设存在某一轮 GST，使得在 GST 轮或以后由正确处理器发给正确处理器的所有消息，都在其发送轮次内递送。如引言所述，消息在 GST *之前*丢失，并不一定意味着发送者或接收者发生故障。尽管所有处理器共用同一轮次编号，但它们不知道 GST 轮何时出现。基本模型中的各类故障定义与前述模型相同。
 
@@ -375,7 +377,7 @@ In the basic round model, processing is divided into synchronous *rounds* of mes
 
 > 3.2 基本轮次模型中的协议
 
-In the remainder of this section, we show how the consensus problem can be solved for the basic model, for each of the fault types. To argue that our protocols achieve strong unanimity, we use the notion of a *proper value* defined as follows: If all processors start with the same value $v$, then $v$ is the only proper value; if there are at least two different initial values, then all values in $V$ are proper. In all protocols, each processor will maintain a local variable PROPER, which contains a set of values that the processor knows to be proper. Processors will always piggyback their current PROPER sets on all messages. The way of updating the PROPER sets will vary from algorithm to algorithm. If only weak unanimity is desired, the PROPER sets are not needed, and the protocols can be simplified somewhat; we leave these simplifications to the interested reader.
+In the remainder of this section, we show how the consensus problem can be solved for the basic model, for each of the fault types. To argue that our protocols achieve strong unanimity, we use the notion of a _proper value_ defined as follows: If all processors start with the same value $v$, then $v$ is the only proper value; if there are at least two different initial values, then all values in $V$ are proper. In all protocols, each processor will maintain a local variable PROPER, which contains a set of values that the processor knows to be proper. Processors will always piggyback their current PROPER sets on all messages. The way of updating the PROPER sets will vary from algorithm to algorithm. If only weak unanimity is desired, the PROPER sets are not needed, and the protocols can be simplified somewhat; we leave these simplifications to the interested reader.
 
 > 本节余下部分说明如何针对每种故障类型，在基本模型中解决共识问题。为了论证协议达到强全体一致，我们使用如下定义的*合宜值*概念：如果所有处理器以同一值 $v$ 开始，则 $v$ 是唯一合宜值；如果至少有两个不同的初始值，则 $V$ 中所有值都是合宜值。在所有协议中，每个处理器都维护一个局部变量 PROPER，其中包含该处理器已知为合宜的一组值。处理器总在所有消息上捎带其当前 PROPER 集。不同算法更新 PROPER 集的方式有所不同。若只要求弱全体一致，则不需要 PROPER 集，协议也可有所简化；这些简化留给感兴趣的读者。
 
@@ -387,21 +389,21 @@ The first algorithm is used for either fail-stop or omission faults. It achieves
 
 > 第一个算法可用于停机故障或遗漏故障，并对任意值域 $V$ 达到强全体一致。
 
-*Algorithm 1. $N \geq 2t + 1$*
+_Algorithm 1. $N \geq 2t + 1$_
 
-> *算法 1．$N \geq 2t + 1$*
+> _算法 1．$N \geq 2t + 1$_
 
 Initially, each processor’s set PROPER contains just its own initial value. Each processor attaches its current value of PROPER to every message that it sends. Whenever a processor $p$ receives a PROPER set from another processor that contains a particular value $v$, then $p$ puts $v$ into its own PROPER set. It is easy to check that each PROPER set always contains only proper values.
 
 > 初始时，每个处理器的 PROPER 集只包含自己的初始值。每个处理器在发送的每条消息上附带当前 PROPER 值。处理器 $p$ 每当从另一处理器收到一个含有特定值 $v$ 的 PROPER 集，便把 $v$ 加入自己的 PROPER 集。不难验证，每个 PROPER 集始终只含合宜值。
 
-The rounds are organized into alternating *trying* and *lock-release* phases, where each trying phase consists of three rounds and each lock-release phase consists of one round. Each pair of corresponding phases is assigned an integer, starting with 1. We say that phase $h$ *belongs to* processor $p_i$ if $h \equiv i \pmod N$.
+The rounds are organized into alternating _trying_ and _lock-release_ phases, where each trying phase consists of three rounds and each lock-release phase consists of one round. Each pair of corresponding phases is assigned an integer, starting with 1. We say that phase $h$ _belongs to_ processor $p_i$ if $h \equiv i \pmod N$.
 
 > 轮次被组织为交替出现的*尝试*阶段和*解锁*阶段；每个尝试阶段含三轮，每个解锁阶段含一轮。从 1 开始，每一对相应阶段都赋予一个整数。若 $h \equiv i \pmod N$，则称阶段 $h$ *属于*处理器 $p_i$。
 
-At various times during the algorithm, a processor may *lock* a value $v$. A *phase number* is associated with every lock. If $p$ locks $v$ with associated phase number $k \equiv i \pmod N$, it means that $p$ thinks that processor $p_i$ might decide $v$ at phase $k$. Processor $p$ only releases a lock if it learns its supposition was false. A value $v$ is *acceptable* to $p$ if $p$ does not have a lock on any value except possibly $v$. Initially, no value is locked.
+At various times during the algorithm, a processor may _lock_ a value $v$. A _phase number_ is associated with every lock. If $p$ locks $v$ with associated phase number $k \equiv i \pmod N$, it means that $p$ thinks that processor $p_i$ might decide $v$ at phase $k$. Processor $p$ only releases a lock if it learns its supposition was false. A value $v$ is _acceptable_ to $p$ if $p$ does not have a lock on any value except possibly $v$. Initially, no value is locked.
 
-> 算法运行期间，处理器可在不同时间*锁定*值 $v$。每个锁都关联一个*阶段号*。若 $p$ 锁定 $v$，关联阶段号为 $k \equiv i \pmod N$，就表示 $p$ 认为处理器 $p_i$ 可能在阶段 $k$ 决定 $v$。只有得知这一推测不成立时，处理器 $p$ 才释放锁。若 $p$ 除了可能锁定 $v$ 以外没有锁定任何值，则称 $v$ 对 $p$ *可接受*。初始时没有值被锁定。
+> 算法运行期间，处理器可在不同时间*锁定*值 $v$。每个锁都关联一个*阶段号*。若 $p$ 锁定 $v$，关联阶段号为 $k \equiv i \pmod N$，就表示 $p$ 认为处理器 $p_i$ 可能在阶段 $k$ 决定 $v$。只有得知这一推测不成立时，处理器 $p$ 才释放锁。若 $p$ 除了可能锁定 $v$ 以外没有锁定任何值，则称 $v$ 对 $p$ _可接受_。初始时没有值被锁定。
 
 We now describe the processing during a particular trying phase $k$. Let $s = 4k - 3$ be the number of the first round in phase $k$, and assume $k \equiv i \pmod N$. At round $s$ each processor (including $p_i$) sends a list of all its acceptable values that are also in its proper set to processor $p_i$ (in the form of a $(\mathrm{list},k)$ message). (If $V$ is very large, it is more efficient to send a list of proper values and a list of unacceptable values. Given these lists, the proper acceptable values are easily deduced.) Just after round $s$, that is, during the computation subround between rounds $s$ and $s+1$, processor $p_i$ attempts to choose a value to propose. In order for processor $p_i$ to propose $v$, it must have heard that at least $N-t$ processors (possibly including itself) find value $v$ acceptable and proper at the beginning of phase $k$. There might be more than one possible value that processor $p_i$ might propose; in this case processor $p_i$ will choose one arbitrarily. Processor $p_i$ then broadcasts a message $(\mathrm{lock}\ v,k)$ at round $s+1$.
 
@@ -419,33 +421,33 @@ Lock-release phase $k$ occurs at round $s+3=4k$. At round $s+3$, each processor 
 
 > 解锁阶段 $k$ 出现在第 $s+3=4k$ 轮。在第 $s+3$ 轮，每个处理器 $p$ 对所有满足“$p$ 锁定 $v$ 且关联阶段为 $h$”的 $v,h$ 广播消息 $(v,h)$。如果某处理器锁定某个值 $v$、关联阶段为 $h$，并收到满足 $w\neq v$ 且 $h'\geq h$ 的消息 $(w,h')$，则该处理器释放对 $v$ 的锁。
 
-**LEMMA 3.1.** *It is impossible for two distinct values to acquire locks with the same associated phase.*
+**LEMMA 3.1.** _It is impossible for two distinct values to acquire locks with the same associated phase._
 
-> **引理 3.1。** *两个不同的值不可能获得关联阶段相同的锁。*
+> **引理 3.1。** _两个不同的值不可能获得关联阶段相同的锁。_
 
 **PROOF.** In order for two values $v$ and $w$ to acquire a lock at trying phase $k$, the processor to which phase $k$ belongs must send conflicting $(\mathrm{lock}\ v,k)$ and $(\mathrm{lock}\ w,k)$ messages, which it will never do in this fault model. $\square$
 
 > **证明。** 要让值 $v$ 和 $w$ 在尝试阶段 $k$ 获得锁，阶段 $k$ 所属的处理器必须发送相互冲突的 $(\mathrm{lock}\ v,k)$ 和 $(\mathrm{lock}\ w,k)$ 消息；在本故障模型中它绝不会这样做。$\square$
 
-**LEMMA 3.2.** *Suppose that some processor decides $v$ at phase $k$, and $k$ is the smallest numbered phase at which a decision is made. Then at least $t+1$ processors lock $v$ at phase $k$. Moreover, each of the processors that locks $v$ at phase $k$ will, from that time onward, always have a lock on $v$ with associated phase number at least $k$.*
+**LEMMA 3.2.** _Suppose that some processor decides $v$ at phase $k$, and $k$ is the smallest numbered phase at which a decision is made. Then at least $t+1$ processors lock $v$ at phase $k$. Moreover, each of the processors that locks $v$ at phase $k$ will, from that time onward, always have a lock on $v$ with associated phase number at least $k$._
 
-> **引理 3.2。** *假设某处理器在阶段 $k$ 决定 $v$，且 $k$ 是作出决定的最小编号阶段。则至少 $t+1$ 个处理器在阶段 $k$ 锁定 $v$。而且，从那时起，每个在阶段 $k$ 锁定 $v$ 的处理器都将始终持有一个对 $v$ 的锁，其关联阶段号至少为 $k$。*
+> **引理 3.2。** _假设某处理器在阶段 $k$ 决定 $v$，且 $k$ 是作出决定的最小编号阶段。则至少 $t+1$ 个处理器在阶段 $k$ 锁定 $v$。而且，从那时起，每个在阶段 $k$ 锁定 $v$ 的处理器都将始终持有一个对 $v$ 的锁，其关联阶段号至少为 $k$。_
 
 **PROOF.** It is clear that at least $t+1$ processors lock $v$ at phase $k$. Assume that the second conclusion is false. Then let $l$ be the first phase at which one of the locks on $v$ set at phase $k$ is released without immediately being replaced by another, higher numbered lock on $v$. In this case the lock is released during lock-release phase $l$, when it is learned that some processor has a lock on some $w \neq v$ with associated phase $h$, where $k \leq h \leq l$. Lemma 3.1 implies that no processor has a lock on any $w \neq v$ with associated phase $k$. Therefore, some processor has a lock on $w$ with associated phase $h$, where $k<h\leq l$. Thus, it must be that $w$ is found acceptable to at least $N-t$ processors at the first round of some phase numbered $h$, $k<h\leq l$, which means that at least $N-t$ processors do not have $v$ locked at the beginning of that phase. Since $t+1$ processors have $v$ locked at least through the first round of $l$, this is impossible. $\square$
 
 > **证明。** 显然至少 $t+1$ 个处理器在阶段 $k$ 锁定 $v$。假设第二个结论不成立。令 $l$ 为这样的第一个阶段：某个在阶段 $k$ 设置的 $v$ 锁被释放，却没有立即被另一个阶段号更高的 $v$ 锁取代。在这种情况下，该锁在解锁阶段 $l$ 被释放；处理器此时得知某个处理器锁定了某个 $w\neq v$，其关联阶段 $h$ 满足 $k\leq h\leq l$。引理 3.1 表明，没有处理器持有任何关联阶段为 $k$ 的 $w\neq v$ 锁。因此，某个处理器持有 $w$ 锁，其关联阶段 $h$ 满足 $k<h\leq l$。于是必有：在某个编号为 $h$、$k<h\leq l$ 的阶段首轮，至少 $N-t$ 个处理器认为 $w$ 可接受；这意味着该阶段开始时至少 $N-t$ 个处理器没有锁定 $v$。但至少到阶段 $l$ 的第一轮为止，仍有 $t+1$ 个处理器锁定 $v$，故不可能如此。$\square$
 
-**LEMMA 3.3.** *Immediately after any lock-release phase that occurs at or after GST, the set of values locked by correct processors contains at most one value.*
+**LEMMA 3.3.** _Immediately after any lock-release phase that occurs at or after GST, the set of values locked by correct processors contains at most one value._
 
-> **引理 3.3。** *在 GST 时或之后发生的任何解锁阶段刚结束时，正确处理器所锁定的值至多有一个。*
+> **引理 3.3。** _在 GST 时或之后发生的任何解锁阶段刚结束时，正确处理器所锁定的值至多有一个。_
 
 **PROOF.** Straightforward from the lock-release rule. $\square$
 
 > **证明。** 直接由解锁规则可得。$\square$
 
-**THEOREM 3.1.** *Assume the basic model with fail-stop or omission faults. Assume $N \geq 2t+1$. Then Algorithm 1 achieves consistency, strong unanimity, and termination for an arbitrary value domain.*
+**THEOREM 3.1.** _Assume the basic model with fail-stop or omission faults. Assume $N \geq 2t+1$. Then Algorithm 1 achieves consistency, strong unanimity, and termination for an arbitrary value domain._
 
-> **定理 3.1。** *假设采用带停机故障或遗漏故障的基本模型，并假设 $N\geq 2t+1$。则算法 1 对任意值域达到一致性、强全体一致和终止性。*
+> **定理 3.1。** _假设采用带停机故障或遗漏故障的基本模型，并假设 $N\geq 2t+1$。则算法 1 对任意值域达到一致性、强全体一致和终止性。_
 
 **PROOF.** First, we show consistency. Suppose that some correct processor $p_i$ decides $v$ at phase $k$, and this is the smallest numbered phase at which a decision is made. Then Lemma 3.2 implies that, at all times after phase $k$, at least $t+1$ processors have $v$ locked. Consequently, at no later phase can any value other than $v$ ever be acceptable to $N-t$ processors, so no processor will ever decide any value other than $v$.
 
@@ -471,9 +473,9 @@ The second algorithm achieves strong unanimity for an arbitrary value set $V$, i
 
 > 在带认证拜占庭故障的情形下，第二个算法对任意值集 $V$ 达到强全体一致。
 
-*Algorithm 2. $N \geq 3t+1$*
+_Algorithm 2. $N \geq 3t+1$_
 
-> *算法 2．$N \geq 3t+1$*
+> _算法 2．$N \geq 3t+1$_
 
 Initially, each processor’s PROPER set contains just its own initial value. Each processor attaches its PROPER set and its initial value to every message it sends. If a processor $p$ ever receives $2t+1$ initial values from different processors, among which there are not $t+1$ with the same value, then $p$ puts all of $V$ (the total value domain) into its PROPER set. (Of course, $p$ would actually just set a bit indicating that PROPER contains all of $V$.) When a processor $p$ receives claims from at least $t+1$ other processors that a particular value $v$ is in their PROPER sets, then $p$ puts $v$ into its own PROPER set. It is not difficult to check that each PROPER set for a correct processor always contains only proper values.
 
@@ -487,7 +489,7 @@ We now describe the processing during a particular trying phase $k$. Let $s=4k-3
 
 > 下面说明特定尝试阶段 $k$ 的处理。令 $s=4k-3$ 为阶段 $k$ 的第一轮，并假设 $k\equiv i\pmod N$。在第 $s$ 轮，每个处理器 $p_j$（包括 $p_i$）以 $E_j(\mathrm{list},k)$ 的形式，把既可接受又位于其 PROPER 集中的所有值组成列表发送给 $p_i$，其中 $E_j$ 是认证函数。第 $s$ 轮刚结束，$p_i$ 尝试选择一个提议值。要提议 $v$，$p_i$ 必须获悉至少 $N-t$ 个处理器在阶段 $k$ 认为 $v$ 可接受且合宜。若有多个可提议值，仍任意选择一个。随后 $p_i$ 广播消息 $E_i(\mathrm{lock}\ v,k,\mathrm{proof})$；其中证明由来自那 $N-t$ 个认为 $v$ 可接受且合宜的处理器的签名消息 $E_j(\mathrm{list},k)$ 构成。
 
-If any processor receives an $E_i(\mathrm{lock}\ v,k,\mathrm{proof})$ message at round $s+1$, it decodes the proof to check that $N-t$ processors find $v$ acceptable and proper at phase $k$. If the proof is valid, it locks $v$, associating the phase number $k$ and the message $E_i(\mathrm{lock}\ v,k,\mathrm{proof})$ with the lock, and sends an acknowledgment to processor $p_i$. In this case any earlier lock on $v$ is released. (Any locks on other values are not released at this time.) If the processor should receive such messages for more than one value $v$, it handles each one similarly. The entire message $E_i(\mathrm{lock}\ v,k,\mathrm{proof})$ is said to be a *valid lock* on $v$ at phase $k$.
+If any processor receives an $E_i(\mathrm{lock}\ v,k,\mathrm{proof})$ message at round $s+1$, it decodes the proof to check that $N-t$ processors find $v$ acceptable and proper at phase $k$. If the proof is valid, it locks $v$, associating the phase number $k$ and the message $E_i(\mathrm{lock}\ v,k,\mathrm{proof})$ with the lock, and sends an acknowledgment to processor $p_i$. In this case any earlier lock on $v$ is released. (Any locks on other values are not released at this time.) If the processor should receive such messages for more than one value $v$, it handles each one similarly. The entire message $E_i(\mathrm{lock}\ v,k,\mathrm{proof})$ is said to be a _valid lock_ on $v$ at phase $k$.
 
 > 若任一处理器在第 $s+1$ 轮收到消息 $E_i(\mathrm{lock}\ v,k,\mathrm{proof})$，它就解码证明，核验是否有 $N-t$ 个处理器在阶段 $k$ 认为 $v$ 可接受且合宜。若证明有效，它就锁定 $v$，把阶段号 $k$ 和消息 $E_i(\mathrm{lock}\ v,k,\mathrm{proof})$ 与该锁关联，并向 $p_i$ 发送确认。此时释放先前对 $v$ 的任何锁。（此时不释放对其他值的锁。）若处理器收到针对多个值 $v$ 的此类消息，则逐一作同样处理。完整消息 $E_i(\mathrm{lock}\ v,k,\mathrm{proof})$ 称为阶段 $k$ 对 $v$ 的一个*有效锁*。
 
@@ -499,33 +501,33 @@ Lock-release phase $k$ occurs at round $s+3=4k$. Processors broadcast messages o
 
 > 解锁阶段 $k$ 出现在第 $s+3=4k$ 轮。处理器广播形如 $E_i(\mathrm{lock}\ v,h,\mathrm{proof})$ 的消息，表明发送者持有一个对 $v$ 的锁，关联阶段为 $h$ 并附带给定证明，而且处理器 $p_i$ 在阶段 $h$ 发送了导致该锁建立的消息。如果某处理器持有对 $v$ 的锁、关联阶段为 $h$，并收到正确签名的消息 $E_{i'}(\mathrm{lock}\ w,h',\mathrm{proof}')$，其中 $w\neq v$ 且 $h'\geq h$，则释放对 $v$ 的锁。
 
-**LEMMA 3.4.** *It is impossible for two distinct values to acquire valid locks at the same trying phase if that phase belongs to a correct processor.*
+**LEMMA 3.4.** _It is impossible for two distinct values to acquire valid locks at the same trying phase if that phase belongs to a correct processor._
 
-> **引理 3.4。** *如果某尝试阶段属于正确处理器，则两个不同值不可能在该阶段获得有效锁。*
+> **引理 3.4。** _如果某尝试阶段属于正确处理器，则两个不同值不可能在该阶段获得有效锁。_
 
 **PROOF.** In order for different values $v$ and $w$ to acquire valid locks at trying phase $k$, the processor $p_i$ to which phase $k$ belongs must send conflicting $E_i(\mathrm{lock}\ v,k,\mathrm{proof})$ and $E_i(\mathrm{lock}\ w,k,\mathrm{proof}')$ messages, which correct processors can never do. $\square$
 
 > **证明。** 要让不同值 $v$ 和 $w$ 在尝试阶段 $k$ 获得有效锁，阶段 $k$ 所属的处理器 $p_i$ 必须发送相互冲突的消息 $E_i(\mathrm{lock}\ v,k,\mathrm{proof})$ 和 $E_i(\mathrm{lock}\ w,k,\mathrm{proof}')$；正确处理器绝不会这样做。$\square$
 
-**LEMMA 3.5.** *Suppose that some correct processor decides $v$ at phase $k$, and $k$ is the smallest numbered phase at which a decision is made by a correct processor. Then at least $t+1$ correct processors lock $v$ at phase $k$. Moreover, each of the correct processors that locks $v$ at phase $k$ will, from that time onward, always have a lock on $v$ with associated phase number at least $k$.*
+**LEMMA 3.5.** _Suppose that some correct processor decides $v$ at phase $k$, and $k$ is the smallest numbered phase at which a decision is made by a correct processor. Then at least $t+1$ correct processors lock $v$ at phase $k$. Moreover, each of the correct processors that locks $v$ at phase $k$ will, from that time onward, always have a lock on $v$ with associated phase number at least $k$._
 
-> **引理 3.5。** *假设某个正确处理器在阶段 $k$ 决定 $v$，且 $k$ 是正确处理器作出决定的最小编号阶段。则至少 $t+1$ 个正确处理器在阶段 $k$ 锁定 $v$。而且从那时起，每个在阶段 $k$ 锁定 $v$ 的正确处理器都始终持有一个对 $v$ 的锁，其关联阶段号至少为 $k$。*
+> **引理 3.5。** _假设某个正确处理器在阶段 $k$ 决定 $v$，且 $k$ 是正确处理器作出决定的最小编号阶段。则至少 $t+1$ 个正确处理器在阶段 $k$ 锁定 $v$。而且从那时起，每个在阶段 $k$ 锁定 $v$ 的正确处理器都始终持有一个对 $v$ 的锁，其关联阶段号至少为 $k$。_
 
 **PROOF.** Since at least $2t+1$ processors send an acknowledgment that they locked $v$ at phase $k$, it is clear that at least $t+1$ correct processors lock $v$ at phase $k$. Assuming that the second conclusion is false, the remaining proof by contradiction is identical to the proof of Lemma 3.2. $\square$
 
 > **证明。** 至少 $2t+1$ 个处理器发送确认，表示它们在阶段 $k$ 锁定了 $v$，故显然至少 $t+1$ 个正确处理器在该阶段锁定 $v$。若假设第二个结论不成立，余下的反证与引理 3.2 的证明相同。$\square$
 
-**LEMMA 3.6.** *Immediately after any lock-release phase that occurs at or after GST, the set of values locked by correct processors contains at most one value.*
+**LEMMA 3.6.** _Immediately after any lock-release phase that occurs at or after GST, the set of values locked by correct processors contains at most one value._
 
-> **引理 3.6。** *在 GST 时或之后发生的任何解锁阶段刚结束时，正确处理器所锁定的值至多有一个。*
+> **引理 3.6。** _在 GST 时或之后发生的任何解锁阶段刚结束时，正确处理器所锁定的值至多有一个。_
 
 **PROOF.** Straightforward from the lock-release rule. $\square$
 
 > **证明。** 直接由解锁规则可得。$\square$
 
-**THEOREM 3.2.** *Assume the basic model with Byzantine faults and authentication. Assume $N\geq 3t+1$. Then Algorithm 2 achieves consistency, strong unanimity, and termination for an arbitrary value domain.*
+**THEOREM 3.2.** _Assume the basic model with Byzantine faults and authentication. Assume $N\geq 3t+1$. Then Algorithm 2 achieves consistency, strong unanimity, and termination for an arbitrary value domain._
 
-> **定理 3.2。** *假设采用带认证拜占庭故障的基本模型，并假设 $N\geq 3t+1$。则算法 2 对任意值域达到一致性、强全体一致和终止性。*
+> **定理 3.2。** _假设采用带认证拜占庭故障的基本模型，并假设 $N\geq 3t+1$。则算法 2 对任意值域达到一致性、强全体一致和终止性。_
 
 **PROOF.** The proofs of consistency and strong unanimity are as in the proof of Theorem 3.1. To argue termination, consider any trying phase $k$ belonging to a correct processor $p_i$ that is executed after a lock-release phase, both occurring at or after GST. We claim that processor $p_i$ will reach a decision at trying phase $k$ (if it has not done so already). By Lemma 3.6, there is at most one value locked by correct processors at the start of trying phase $k$. If there is such a locked value $v$, then $v$ was found to be proper to at least $N-t$ processors, of which $N-2t\geq t+1$ must be correct. Therefore, by the beginning of trying phase $k$, these $t+1$ correct processors have communicated to all correct processors that $v$ is proper, so by the way the set PROPER is augmented every correct processor will have $v$ in its PROPER set by the beginning of trying phase $k$. Next, consider the case in which no value is locked at the beginning of trying phase $k$ (so all values are acceptable). If there are at least $t+1$ correct processors with the same initial value $v$, then $v$ is in the PROPER set of each correct processor at the beginning of trying phase $k$. On the other hand, if this is not the case, then all values in the value set are in the PROPER set of all correct processors at the beginning of trying phase $k$. It follows that a proper, acceptable value will be found for processor $p_i$ to propose, and that the proposed value will be decided on by processor $p_i$ at trying phase $k$. $\square$
 
@@ -543,21 +545,21 @@ In this section we modify Algorithm 2 to handle Byzantine faults without authent
 
 > 本节修改算法 2，使其处理不带认证的拜占庭故障，同时保持处理器数要求 $N\geq 3t+1$、多项式时间复杂度和多项式消息长度不变。修改采用 Srikanth 和 Toueg［20］提出的一个广播原语的小变体，以模拟认证的关键性质。我们先陈述这些性质，再给出广播原语，最后介绍新的协议。
 
-The broadcast primitive (and hence the agreement algorithm that uses the broadcast primitive) is defined in terms of *superrounds*, where each superround consists of two normal Send-Receive rounds. Superround GST occurs at the earliest superround, when both of its Send-Receive rounds occur at or after round GST. The primitive gives an algorithm for a processor $p$ to BROADCAST a message $m$ at superround $k$ and also gives conditions under which a processor will *accept* a message $m$ from $p$ (which is not to be confused with our definition of an “acceptable value”). The crucial properties of broadcasting that are used in the (authenticated) Algorithm 2 are as follows:
+The broadcast primitive (and hence the agreement algorithm that uses the broadcast primitive) is defined in terms of _superrounds_, where each superround consists of two normal Send-Receive rounds. Superround GST occurs at the earliest superround, when both of its Send-Receive rounds occur at or after round GST. The primitive gives an algorithm for a processor $p$ to BROADCAST a message $m$ at superround $k$ and also gives conditions under which a processor will _accept_ a message $m$ from $p$ (which is not to be confused with our definition of an “acceptable value”). The crucial properties of broadcasting that are used in the (authenticated) Algorithm 2 are as follows:
 
 > 广播原语（因而使用它的一致算法）以*超级轮次*定义，每个超级轮次由两个普通收发轮次组成。超级轮次 GST 是最早满足其两个收发轮次均发生在 GST 轮或之后的超级轮次。该原语给出处理器 $p$ 在超级轮次 $k$ 广播消息 $m$ 的算法，也给出处理器从 $p$ *接受*消息 $m$ 的条件（请勿与“可接受值”的定义混淆）。带认证算法 2 所用广播的关键性质如下：
 
-(1) *Correctness.* If a correct processor $p$ BROADCASTS $m$ in superround $k\geq\mathrm{GST}$, then every correct processor accepts $m$ from $p$ in superround $k$.
+(1) _Correctness._ If a correct processor $p$ BROADCASTS $m$ in superround $k\geq\mathrm{GST}$, then every correct processor accepts $m$ from $p$ in superround $k$.
 
-> （1）*正确性。* 如果正确处理器 $p$ 在超级轮次 $k\geq\mathrm{GST}$ 广播 $m$，则每个正确处理器都在超级轮次 $k$ 接受来自 $p$ 的 $m$。
+> （1）_正确性。_ 如果正确处理器 $p$ 在超级轮次 $k\geq\mathrm{GST}$ 广播 $m$，则每个正确处理器都在超级轮次 $k$ 接受来自 $p$ 的 $m$。
 
-(2) *Unforgeability.* If a correct processor $p$ does not BROADCAST $m$, then no correct processor ever accepts $m$ from $p$.
+(2) _Unforgeability._ If a correct processor $p$ does not BROADCAST $m$, then no correct processor ever accepts $m$ from $p$.
 
-> （2）*不可伪造性。* 如果正确处理器 $p$ 没有广播 $m$，则任何正确处理器都绝不会接受来自 $p$ 的 $m$。
+> （2）_不可伪造性。_ 如果正确处理器 $p$ 没有广播 $m$，则任何正确处理器都绝不会接受来自 $p$ 的 $m$。
 
-(3) *Relay.* If a correct processor accepts $m$ from $p$ in superround $r$, then every other correct processor accepts $m$ from $p$ in superround $\max(r+1,\mathrm{GST})$ or earlier.
+(3) _Relay._ If a correct processor accepts $m$ from $p$ in superround $r$, then every other correct processor accepts $m$ from $p$ in superround $\max(r+1,\mathrm{GST})$ or earlier.
 
-> （3）*中继性。* 如果一个正确处理器在超级轮次 $r$ 接受来自 $p$ 的 $m$，则其他每个正确处理器最迟在超级轮次 $\max(r+1,\mathrm{GST})$ 接受来自 $p$ 的 $m$。
+> （3）_中继性。_ 如果一个正确处理器在超级轮次 $r$ 接受来自 $p$ 的 $m$，则其他每个正确处理器最迟在超级轮次 $\max(r+1,\mathrm{GST})$ 接受来自 $p$ 的 $m$。
 
 The description of the BROADCAST primitive is given in Figure 1. The proof that the primitive has the Correctness and Unforgeability properties is identical to the proof of Srikanth and Toueg [20]. We give the proof of the Relay property since it is slightly different than in [20].
 
@@ -608,9 +610,9 @@ Next follows the new algorithm for the unauthenticated Byzantine case in the bas
 
 > **图表中文解读：** 该原语以两轮为一个超级轮次。发送者先发 init，其他处理器用 echo 传播；收到 $N-t$ 个 echo 即接受，收到 $N-2t$ 个 echo 则持续中继。两个阈值在 $N\geq3t+1$ 下保证正确消息能扩散，而故障发送者又不能让两个冲突值被正确处理器共同接受。
 
-*Algorithm 3. $N\geq 3t+1$*
+_Algorithm 3. $N\geq 3t+1$_
 
-> *算法 3．$N\geq 3t+1$*
+> _算法 3．$N\geq 3t+1$_
 
 Processing is again divided into trying and lock-release phases, with phases numbered as before. Each trying phase takes three superrounds, that is, six ordinary rounds. Lock-release phase $k$ is done during the third superround of trying phase $k$. As before, a value $v$ is acceptable to $p$ if $p$ does not have a lock on any value except possibly $v$.
 
@@ -620,7 +622,7 @@ We now describe the processing during a particular trying phase $k$. Let $s=3k-2
 
 > 下面说明特定尝试阶段 $k$ 的处理。令 $s=3k-2$ 为阶段 $k$ 的第一个超级轮次，并假设 $k\equiv i\pmod N$。在超级轮次 $s$，每个处理器 $p_j$（包括 $p_i$）以 $(\mathrm{list},k)$ 的形式广播其既可接受又位于 PROPER 集中的所有值。超级轮次 $s$ 刚结束，$p_i$ 尝试选择提议值。要提议 $v$，$p_i$ 必须已接受至少 $N-t$ 个处理器的消息，表明它们在阶段 $k$ 认为 $v$ 可接受且合宜。若有多个可能值，仍任意选择。随后，$p_i$ 在超级轮次 $s+1$ 广播 $(\mathrm{lock}\ v,k)$。
 
-If any processor $q$ has by superround $s+1$ accepted a message $(\mathrm{lock}\ v,k)$ from $p_i$ and also accepted messages $(\mathrm{list},k)$ from $N-t$ processors stating that they find $v$ acceptable and proper at the first superround of phase $k$, then $q$ locks $v$, associating the phase number $k$ with the lock, and sends an acknowledgment $(\mathrm{ack},k)$ to processor $p_i$. In this case any earlier lock on $v$ is released. (Any locks on other values are not released at this time.) If the processor should receive such messages for more than one value $v$, it handles each one similarly. We say that $q$ *accepts a valid lock* on $v$ with phase $k$ if it has accepted a message $(\mathrm{lock}\ v,k)$ from $p_i$ and accepted $N-t$ messages $(\mathrm{list},k)$ as just described. These messages do not all have to be accepted at the same round.
+If any processor $q$ has by superround $s+1$ accepted a message $(\mathrm{lock}\ v,k)$ from $p_i$ and also accepted messages $(\mathrm{list},k)$ from $N-t$ processors stating that they find $v$ acceptable and proper at the first superround of phase $k$, then $q$ locks $v$, associating the phase number $k$ with the lock, and sends an acknowledgment $(\mathrm{ack},k)$ to processor $p_i$. In this case any earlier lock on $v$ is released. (Any locks on other values are not released at this time.) If the processor should receive such messages for more than one value $v$, it handles each one similarly. We say that $q$ _accepts a valid lock_ on $v$ with phase $k$ if it has accepted a message $(\mathrm{lock}\ v,k)$ from $p_i$ and accepted $N-t$ messages $(\mathrm{list},k)$ as just described. These messages do not all have to be accepted at the same round.
 
 > 如果截至超级轮次 $s+1$，处理器 $q$ 已接受来自 $p_i$ 的 $(\mathrm{lock}\ v,k)$，并已接受 $N-t$ 个处理器的 $(\mathrm{list},k)$，表明它们在阶段 $k$ 的第一个超级轮次认为 $v$ 可接受且合宜，那么 $q$ 锁定 $v$，将阶段号 $k$ 与锁关联，并向 $p_i$ 发送确认 $(\mathrm{ack},k)$。此时释放先前对 $v$ 的锁，但不释放对其他值的锁。若收到针对多个值的此类消息，则分别处理。若 $q$ 已接受来自 $p_i$ 的 $(\mathrm{lock}\ v,k)$，并接受上述 $N-t$ 条 $(\mathrm{list},k)$，就称 $q$ *接受了*阶段 $k$ 对 $v$ 的*有效锁*。这些消息不必在同一轮被接受。
 
@@ -632,33 +634,33 @@ Lock-release phase $k$ occurs at the end of the third superround of phase $k$. I
 
 > 解锁阶段 $k$ 发生在阶段 $k$ 第三个超级轮次结束时。本算法的解锁阶段不发送任何消息。如果处理器 $q$ 持有一个对 $v$ 的锁，关联阶段为 $h$，且 $q$ 在本轮或此前接受了一个对 $w$ 的有效锁，关联阶段为 $h'$，并且 $w\neq v$、$h'\geq h$，则 $q$ 释放对 $v$ 的锁。
 
-**LEMMA 3.7.** *It is impossible for correct processors to accept valid locks on two distinct values with associated phase $k$ if phase $k$ belongs to a correct processor.*
+**LEMMA 3.7.** _It is impossible for correct processors to accept valid locks on two distinct values with associated phase $k$ if phase $k$ belongs to a correct processor._
 
-> **引理 3.7。** *若阶段 $k$ 属于正确处理器，则正确处理器不可能接受两个不同值上关联阶段均为 $k$ 的有效锁。*
+> **引理 3.7。** _若阶段 $k$ 属于正确处理器，则正确处理器不可能接受两个不同值上关联阶段均为 $k$ 的有效锁。_
 
 **PROOF.** Suppose that the lemma is false. By the Unforgeability property, the processor $p_i$ to which phase $k$ belongs must BROADCAST conflicting $(\mathrm{lock}\ v,k)$ and $(\mathrm{lock}\ w,k)$ messages, which correct processors can never do. $\square$
 
 > **证明。** 假设引理不成立。由不可伪造性，阶段 $k$ 所属的处理器 $p_i$ 必须广播相互冲突的 $(\mathrm{lock}\ v,k)$ 与 $(\mathrm{lock}\ w,k)$，而正确处理器绝不会这样做。$\square$
 
-**LEMMA 3.8.** *Suppose that some correct processor decides $v$ at phase $k$, and $k$ is the smallest numbered phase at which a decision is made by a correct processor. Then at least $t+1$ correct processors lock $v$ at phase $k$. Moreover, each of the correct processors that locks $v$ at phase $k$ will, from that time onward, always have a lock on $v$ with associated phase number at least $k$.*
+**LEMMA 3.8.** _Suppose that some correct processor decides $v$ at phase $k$, and $k$ is the smallest numbered phase at which a decision is made by a correct processor. Then at least $t+1$ correct processors lock $v$ at phase $k$. Moreover, each of the correct processors that locks $v$ at phase $k$ will, from that time onward, always have a lock on $v$ with associated phase number at least $k$._
 
-> **引理 3.8。** *假设某个正确处理器在阶段 $k$ 决定 $v$，且 $k$ 是正确处理器作出决定的最小编号阶段。则至少 $t+1$ 个正确处理器在阶段 $k$ 锁定 $v$。而且从那时起，每个在阶段 $k$ 锁定 $v$ 的正确处理器都始终持有一个对 $v$ 的锁，其关联阶段号至少为 $k$。*
+> **引理 3.8。** _假设某个正确处理器在阶段 $k$ 决定 $v$，且 $k$ 是正确处理器作出决定的最小编号阶段。则至少 $t+1$ 个正确处理器在阶段 $k$ 锁定 $v$。而且从那时起，每个在阶段 $k$ 锁定 $v$ 的正确处理器都始终持有一个对 $v$ 的锁，其关联阶段号至少为 $k$。_
 
 **PROOF.** Since at least $2t+1$ processors send an acknowledgment that they locked $v$ at phase $k$, it is clear that at least $t+1$ correct processors lock $v$ at phase $k$. The rest of the proof is similar to the proofs of Lemmas 3.2 and 3.5, using the Unforgeability property to argue that, if a correct processor $q$ accepts a valid lock on value $w\neq v$ with associated phase $h$, then $w$ is found acceptable to all but at most $t$ of the correct processors at the first round of phase $h$. $\square$
 
 > **证明。** 至少 $2t+1$ 个处理器确认其在阶段 $k$ 锁定 $v$，故至少 $t+1$ 个正确处理器锁定 $v$。余下证明类似引理 3.2 和 3.5；利用不可伪造性可知，若正确处理器 $q$ 接受了对 $w\neq v$、关联阶段为 $h$ 的有效锁，则在阶段 $h$ 的第一轮，除至多 $t$ 个正确处理器外，其余都认为 $w$ 可接受。$\square$
 
-**LEMMA 3.9.** *Immediately after any lock-release phase that occurs at or after GST, the set of values locked by correct processors contains at most one value.*
+**LEMMA 3.9.** _Immediately after any lock-release phase that occurs at or after GST, the set of values locked by correct processors contains at most one value._
 
-> **引理 3.9。** *在 GST 时或之后发生的任何解锁阶段刚结束时，正确处理器所锁定的值至多有一个。*
+> **引理 3.9。** _在 GST 时或之后发生的任何解锁阶段刚结束时，正确处理器所锁定的值至多有一个。_
 
 **PROOF.** Straightforward from the lock-release rule and the Relay property. $\square$
 
 > **证明。** 直接由解锁规则和中继性可得。$\square$
 
-**THEOREM 3.3.** *Assume the basic model with Byzantine faults without authentication. Assume $N\geq 3t+1$. Then Algorithm 3 achieves consistency, strong unanimity, and termination for an arbitrary value domain.*
+**THEOREM 3.3.** _Assume the basic model with Byzantine faults without authentication. Assume $N\geq 3t+1$. Then Algorithm 3 achieves consistency, strong unanimity, and termination for an arbitrary value domain._
 
-> **定理 3.3。** *假设采用不带认证拜占庭故障的基本模型，并假设 $N\geq3t+1$。则算法 3 对任意值域达到一致性、强全体一致和终止性。*
+> **定理 3.3。** _假设采用不带认证拜占庭故障的基本模型，并假设 $N\geq3t+1$。则算法 3 对任意值域达到一致性、强全体一致和终止性。_
 
 **PROOF.** The proof is virtually identical to the proof of Theorem 3.2, using the Correctness and Relay properties after GST to argue termination. $\square$
 
@@ -668,9 +670,9 @@ An upper bound on the number of rounds required is $\mathrm{GST}+6(N+1)$.
 
 > 所需轮数的上界为 $\mathrm{GST}+6(N+1)$。
 
-*Remark 1.* Algorithms 1–3 have the property that all correct processors make a decision within $O(N)$ rounds after GST. The time to reach agreement after GST can be improved to $O(t)$ rounds by some simple modifications. The bound $O(t)$ is optimal to within a constant factor, since $t+1$ rounds are necessary even if communication and processors are both synchronous and failures are fail-stop [7, 9]. A modification to all the algorithms is to have a processor repeatedly broadcast the message “Decide $v$” after it decides $v$. For Algorithm 1 (fail-stop and omission faults), a processor can decide $v$ when it receives any “Decide $v$” message. For Algorithms 2 and 3 (Byzantine faults), a processor can decide $v$ when it receives $t+1$ “Decide $v$” messages from different sources. Easy arguments show that the modified algorithms are still correct and that all correct processors make a decision within $O(t)$ rounds after GST; these arguments are left to the reader.
+_Remark 1._ Algorithms 1–3 have the property that all correct processors make a decision within $O(N)$ rounds after GST. The time to reach agreement after GST can be improved to $O(t)$ rounds by some simple modifications. The bound $O(t)$ is optimal to within a constant factor, since $t+1$ rounds are necessary even if communication and processors are both synchronous and failures are fail-stop [7, 9]. A modification to all the algorithms is to have a processor repeatedly broadcast the message “Decide $v$” after it decides $v$. For Algorithm 1 (fail-stop and omission faults), a processor can decide $v$ when it receives any “Decide $v$” message. For Algorithms 2 and 3 (Byzantine faults), a processor can decide $v$ when it receives $t+1$ “Decide $v$” messages from different sources. Easy arguments show that the modified algorithms are still correct and that all correct processors make a decision within $O(t)$ rounds after GST; these arguments are left to the reader.
 
-> *注 1。* 算法 1—3 都具有这样的性质：所有正确处理器都在 GST 后 $O(N)$ 轮内作出决定。通过一些简单修改，可把 GST 后达成一致的时间改进为 $O(t)$ 轮。$O(t)$ 界在常数因子内最优，因为即使通信与处理器都同步且故障为停机故障，也必须有 $t+1$ 轮［7, 9］。对所有算法的一项修改是：处理器决定 $v$ 后反复广播“Decide $v$”。对于算法 1（停机与遗漏故障），处理器收到任意一条“Decide $v$”即可决定 $v$；对于算法 2 和 3（拜占庭故障），处理器从不同来源收到 $t+1$ 条“Decide $v$”时可决定 $v$。简单论证即可表明，修改后的算法仍然正确，且所有正确处理器都在 GST 后 $O(t)$ 轮内作出决定；这些论证留给读者。
+> _注 1。_ 算法 1—3 都具有这样的性质：所有正确处理器都在 GST 后 $O(N)$ 轮内作出决定。通过一些简单修改，可把 GST 后达成一致的时间改进为 $O(t)$ 轮。$O(t)$ 界在常数因子内最优，因为即使通信与处理器都同步且故障为停机故障，也必须有 $t+1$ 轮［7, 9］。对所有算法的一项修改是：处理器决定 $v$ 后反复广播“Decide $v$”。对于算法 1（停机与遗漏故障），处理器收到任意一条“Decide $v$”即可决定 $v$；对于算法 2 和 3（拜占庭故障），处理器从不同来源收到 $t+1$ 条“Decide $v$”时可决定 $v$。简单论证即可表明，修改后的算法仍然正确，且所有正确处理器都在 GST 后 $O(t)$ 轮内作出决定；这些论证留给读者。
 
 ## 4. Partially Synchronous Communication and Synchronous Processors
 
@@ -724,21 +726,21 @@ By applying the transformation just described to Algorithms 1–3, we obtain Alg
 
 > 把上述变换分别用于算法 1—3，得到算法 $1^1$—$3^1$，并立即得到如下结果：
 
-**THEOREM 4.1.** *Assume that processors are completely synchronous ($\Phi=1$) and communication is partially synchronous ($\Delta$ holds eventually).*
+**THEOREM 4.1.** _Assume that processors are completely synchronous ($\Phi=1$) and communication is partially synchronous ($\Delta$ holds eventually)._
 
-> **定理 4.1。** *假设处理器完全同步（$\Phi=1$），通信部分同步（$\Delta$ 最终成立）。*
+> **定理 4.1。** _假设处理器完全同步（$\Phi=1$），通信部分同步（$\Delta$ 最终成立）。_
 
-(a) *For the fail-stop or omission fault model, if $N\geq 2t+1$, then Algorithm $1^1$ achieves consistency, strong unanimity, and termination for an arbitrary value domain.*
+(a) _For the fail-stop or omission fault model, if $N\geq 2t+1$, then Algorithm $1^1$ achieves consistency, strong unanimity, and termination for an arbitrary value domain._
 
-> （a）*对于停机或遗漏故障模型，若 $N\geq2t+1$，则算法 $1^1$ 对任意值域达到一致性、强全体一致和终止性。*
+> （a）_对于停机或遗漏故障模型，若 $N\geq2t+1$，则算法 $1^1$ 对任意值域达到一致性、强全体一致和终止性。_
 
-(b) *For the authenticated Byzantine fault model, if $N\geq 3t+1$, then Algorithm $2^1$ achieves consistency, strong unanimity, and termination for an arbitrary value domain.*
+(b) _For the authenticated Byzantine fault model, if $N\geq 3t+1$, then Algorithm $2^1$ achieves consistency, strong unanimity, and termination for an arbitrary value domain._
 
-> （b）*对于带认证拜占庭故障模型，若 $N\geq3t+1$，则算法 $2^1$ 对任意值域达到一致性、强全体一致和终止性。*
+> （b）_对于带认证拜占庭故障模型，若 $N\geq3t+1$，则算法 $2^1$ 对任意值域达到一致性、强全体一致和终止性。_
 
-(c) *For the unauthenticated Byzantine fault model, if $N\geq 3t+1$, then Algorithm $3^1$ achieves consistency, strong unanimity, and termination for an arbitrary value domain.*
+(c) _For the unauthenticated Byzantine fault model, if $N\geq 3t+1$, then Algorithm $3^1$ achieves consistency, strong unanimity, and termination for an arbitrary value domain._
 
-> （c）*对于不带认证拜占庭故障模型，若 $N\geq3t+1$，则算法 $3^1$ 对任意值域达到一致性、强全体一致和终止性。*
+> （c）_对于不带认证拜占庭故障模型，若 $N\geq3t+1$，则算法 $3^1$ 对任意值域达到一致性、强全体一致和终止性。_
 
 It is easy to see that Algorithms $1^1$ and $2^1$ guarantee that decisions are reached by all correct processors within time $4(N+1)(N+\Delta)$ after GST. The corresponding bound for Algorithm $3^1$ is $6(N+1)(N+\Delta)$. Thus, the time for Algorithms $1^1$–$3^1$ is bounded above by GST plus a polynomial in $N$ and $\Delta$. Remark 1 at the end of Section 3 shows how these time bounds can be improved. As mentioned in the Introduction, these bounds also give the time after GST when $\Delta$ can stop holding again.
 
@@ -764,21 +766,21 @@ By applying this transformation to Algorithms 1–3, we obtain Algorithms $1^2$�
 
 > 把该变换分别用于算法 1—3，得到算法 $1^2$—$3^2$，并立即得到如下结果：
 
-**THEOREM 4.2.** *In the model in which processors are completely synchronous ($\Phi=1$) and communication is partially synchronous (delta is unknown), claims (a)–(c) of Theorem 4.1 hold for Algorithms $1^2$–$3^2$, respectively.*
+**THEOREM 4.2.** _In the model in which processors are completely synchronous ($\Phi=1$) and communication is partially synchronous (delta is unknown), claims (a)–(c) of Theorem 4.1 hold for Algorithms $1^2$–$3^2$, respectively._
 
-> **定理 4.2。** *在处理器完全同步（$\Phi=1$）、通信部分同步（$\Delta$ 未知）的模型中，定理 4.1 的（a）—（c）分别对算法 $1^2$—$3^2$ 成立。*
+> **定理 4.2。** _在处理器完全同步（$\Phi=1$）、通信部分同步（$\Delta$ 未知）的模型中，定理 4.1 的（a）—（c）分别对算法 $1^2$—$3^2$ 成立。_
 
 We now bound the time required by Algorithms $1^2$–$3^2$. Consider Algorithm $1^2$, for example, and fix any execution $e$ with corresponding message bound $\Delta$. Then round $\Delta$ is the GST for the execution of Algorithm 1 simulated by $e$. It requires at most time $\Delta(N+\Delta)$ for processors to complete their simulations of the first $\Delta$ rounds of Algorithm 1 ($\Delta$ rounds, with $N+\Delta$ as the maximum time to simulate a single round). Then an additional $4(N+1)$ rounds, at most, must be simulated. These additional rounds require at most time $4(N+1)(N+\Delta+4(N+1))$, where the term $(N+\Delta+4(N+1))$ represents the maximum time to simulate one of these rounds (the last and largest one). Thus the total time is bounded by $\Delta(N+\Delta)+4(N+1)(N+\Delta+4(N+1))$, or $O(N^2+\Delta^2)$. The same bound holds for Algorithm $2^2$. The corresponding bound for Algorithm $3^2$ is $\Delta(N+\Delta)+6(N+1)(N+\Delta+6(N+1))$. Thus the time for Algorithms $1^2$–$3^2$ is bounded above by a polynomial in $N$ and $\Delta$. Again, these bounds can be improved using the ideas in Remark 1 at the end of Section 3.
 
 > 下面界定算法 $1^2$—$3^2$ 所需时间。以算法 $1^2$ 为例，固定任一对应消息界为 $\Delta$ 的执行 $e$。则 $e$ 所模拟算法 1 执行的 GST 是第 $\Delta$ 轮。处理器完成算法 1 前 $\Delta$ 轮的模拟至多需要 $\Delta(N+\Delta)$ 时间（共 $\Delta$ 轮，单轮模拟最长为 $N+\Delta$）。此后至多还须模拟 $4(N+1)$ 轮，至多耗时 $4(N+1)(N+\Delta+4(N+1))$；其中 $N+\Delta+4(N+1)$ 是这些轮中最后、最大一轮的最长模拟时间。故总时间由 $\Delta(N+\Delta)+4(N+1)(N+\Delta+4(N+1))$，即 $O(N^2+\Delta^2)$ 界定。算法 $2^2$ 也有相同界；算法 $3^2$ 的对应界为 $\Delta(N+\Delta)+6(N+1)(N+\Delta+6(N+1))$。所以算法 $1^2$—$3^2$ 的时间由 $N$ 和 $\Delta$ 的多项式从上方界定。仍可用第 3 节末注 1 的思想改进这些界。
 
-*Remark 2.* If we strengthen the model where delta holds eventually to require that no messages are ever lost, but that messages sent before GST can arrive late, then we can modify Algorithms $1^1$–$3^1$ to allow processors to terminate. Specifically, we use the ideas described in Remark 1 at the end of Section 3. In the present case, however, each processor need only broadcast a single “Decide $v$” message, at the time when it decides $v$. This message is not tagged with a round number, and other processors should accept a “Decide $v$” message at any time. For fail-stop or omission faults, a processor can stop participating in the algorithm immediately after it broadcasts its “Decide $v$” message. Further, it can decide $v$ immediately after receiving a “Decide $v$” message. For Byzantine faults, a processor can decide $v$ after receiving $t+1$ “Decide $v$” messages, but it cannot stop participating in the algorithm until after it has broadcast its “Decide $v$” message and received “Decide $v$” messages from a total of $2t+1$ processors. If messages can be lost before GST, it is not hard to argue that, in any consensus protocol resilient to one fail-stop fault, there is some execution in which at least one correct processor must continue sending messages forever. The argument is similar to those for Theorems 4.3 and 4.4 in the next subsection. All that is needed to ensure halting in practice, however, is that each correct processor be able to reliably deliver a “Decide $v$” message to every other correct processor; in the absence of network partition, this could be done by repeated sending.
+_Remark 2._ If we strengthen the model where delta holds eventually to require that no messages are ever lost, but that messages sent before GST can arrive late, then we can modify Algorithms $1^1$–$3^1$ to allow processors to terminate. Specifically, we use the ideas described in Remark 1 at the end of Section 3. In the present case, however, each processor need only broadcast a single “Decide $v$” message, at the time when it decides $v$. This message is not tagged with a round number, and other processors should accept a “Decide $v$” message at any time. For fail-stop or omission faults, a processor can stop participating in the algorithm immediately after it broadcasts its “Decide $v$” message. Further, it can decide $v$ immediately after receiving a “Decide $v$” message. For Byzantine faults, a processor can decide $v$ after receiving $t+1$ “Decide $v$” messages, but it cannot stop participating in the algorithm until after it has broadcast its “Decide $v$” message and received “Decide $v$” messages from a total of $2t+1$ processors. If messages can be lost before GST, it is not hard to argue that, in any consensus protocol resilient to one fail-stop fault, there is some execution in which at least one correct processor must continue sending messages forever. The argument is similar to those for Theorems 4.3 and 4.4 in the next subsection. All that is needed to ensure halting in practice, however, is that each correct processor be able to reliably deliver a “Decide $v$” message to every other correct processor; in the absence of network partition, this could be done by repeated sending.
 
-> *注 2。* 若加强 $\Delta$ 最终成立模型，要求消息绝不丢失但 GST 前发送的消息可以迟到，则可修改算法 $1^1$—$3^1$，使处理器能够终止。具体采用第 3 节末注 1 的思想；但此时每个处理器只须在决定 $v$ 时广播一条“Decide $v$”。该消息不带轮次号，其他处理器应随时接受它。对于停机或遗漏故障，处理器广播该消息后即可立即停止参与算法，收到任意一条该消息也可立即决定 $v$。对于拜占庭故障，收到 $t+1$ 条该消息后可决定 $v$，但只有在自己广播该消息并总共从 $2t+1$ 个处理器收到该消息后，才可停止参与。若消息可在 GST 前丢失，不难论证：任何能容忍一个停机故障的共识协议都存在某次执行，使至少一个正确处理器必须永远继续发送消息；论证类似下一小节定理 4.3 和 4.4。实践中，要保证停机，只须让每个正确处理器能可靠地把“Decide $v$”递送给其他所有正确处理器；在没有网络分区时，可用反复发送做到。
+> _注 2。_ 若加强 $\Delta$ 最终成立模型，要求消息绝不丢失但 GST 前发送的消息可以迟到，则可修改算法 $1^1$—$3^1$，使处理器能够终止。具体采用第 3 节末注 1 的思想；但此时每个处理器只须在决定 $v$ 时广播一条“Decide $v$”。该消息不带轮次号，其他处理器应随时接受它。对于停机或遗漏故障，处理器广播该消息后即可立即停止参与算法，收到任意一条该消息也可立即决定 $v$。对于拜占庭故障，收到 $t+1$ 条该消息后可决定 $v$，但只有在自己广播该消息并总共从 $2t+1$ 个处理器收到该消息后，才可停止参与。若消息可在 GST 前丢失，不难论证：任何能容忍一个停机故障的共识协议都存在某次执行，使至少一个正确处理器必须永远继续发送消息；论证类似下一小节定理 4.3 和 4.4。实践中，要保证停机，只须让每个正确处理器能可靠地把“Decide $v$”递送给其他所有正确处理器；在没有网络分区时，可用反复发送做到。
 
-*Remark 3.* All the results of this section have assumed $\Phi=1$. If processors are synchronous with $\Phi>1$ and communication is partially synchronous, we would hope to obtain the same results. We show that this extension holds by proving a more general set of results: In Section 5 we show that the resiliency achieved by the protocols of this section can also be achieved if both processors and communication are partially synchronous. These stronger results imply that the same resiliency is achievable if communication is partially synchronous and processors are synchronous with $\Phi>1$.
+_Remark 3._ All the results of this section have assumed $\Phi=1$. If processors are synchronous with $\Phi>1$ and communication is partially synchronous, we would hope to obtain the same results. We show that this extension holds by proving a more general set of results: In Section 5 we show that the resiliency achieved by the protocols of this section can also be achieved if both processors and communication are partially synchronous. These stronger results imply that the same resiliency is achievable if communication is partially synchronous and processors are synchronous with $\Phi>1$.
 
-> *注 3。* 本节所有结果都假设 $\Phi=1$。若处理器以 $\Phi>1$ 同步而通信部分同步，我们希望得到相同结果。我们通过证明一组更一般的结果来说明该扩展成立：第 5 节证明，即使处理器与通信都部分同步，本节协议的弹性仍可达到。这些更强结果意味着，当通信部分同步、处理器以 $\Phi>1$ 同步时，也可达到相同弹性。
+> _注 3。_ 本节所有结果都假设 $\Phi=1$。若处理器以 $\Phi>1$ 同步而通信部分同步，我们希望得到相同结果。我们通过证明一组更一般的结果来说明该扩展成立：第 5 节证明，即使处理器与通信都部分同步，本节协议的弹性仍可达到。这些更强结果意味着，当通信部分同步、处理器以 $\Phi>1$ 同步时，也可达到相同弹性。
 
 ### 4.3 Lower Bounds
 
@@ -788,9 +790,9 @@ In this section we give our lower bound results for partially synchronous commun
 
 > 本节给出通信部分同步、处理器完全同步时的下界。第一个下界表明，即使只要求弱全体一致且值域为二元，定理 4.1 和 4.2（a）的弹性也不能提高。
 
-**THEOREM 4.3.** *Assume the model with fail-stop or omission faults, where the processors are synchronous and communication is partially synchronous (either delta holds eventually or delta is unknown). Assume $2\leq N\leq2t$. Then there is no $t$-resilient consensus protocol that achieves weak unanimity for binary values.*
+**THEOREM 4.3.** _Assume the model with fail-stop or omission faults, where the processors are synchronous and communication is partially synchronous (either delta holds eventually or delta is unknown). Assume $2\leq N\leq2t$. Then there is no $t$-resilient consensus protocol that achieves weak unanimity for binary values._
 
-> **定理 4.3。** *假设采用停机或遗漏故障模型，处理器同步而通信部分同步（$\Delta$ 最终成立或 $\Delta$ 未知）。若 $2\leq N\leq2t$，则不存在对二元值达到弱全体一致的 $t$-弹性共识协议。*
+> **定理 4.3。** _假设采用停机或遗漏故障模型，处理器同步而通信部分同步（$\Delta$ 最终成立或 $\Delta$ 未知）。若 $2\leq N\leq2t$，则不存在对二元值达到弱全体一致的 $t$-弹性共识协议。_
 
 **PROOF.** The proof is the same for both definitions of partially synchronous communication. Assume the contrary, that there is an algorithm immune to fail-stop faults satisfying the required properties. We shall derive a contradiction.
 
@@ -812,9 +814,9 @@ The following lower bound result again applies in the case of weak unanimity and
 
 > 下一个下界同样适用于弱全体一致和二元值域。它表明，即使在这一较弱情形下，定理 4.1 和 4.2（b）的弹性也不能提高。
 
-**THEOREM 4.4.** *Assume the model with Byzantine faults and authentication, in which the processors are synchronous and communication is partially synchronous (either delta holds eventually or delta is unknown). Assume $2\leq N\leq3t$. Then there is no $t$-resilient consensus protocol that achieves weak unanimity for binary values.*
+**THEOREM 4.4.** _Assume the model with Byzantine faults and authentication, in which the processors are synchronous and communication is partially synchronous (either delta holds eventually or delta is unknown). Assume $2\leq N\leq3t$. Then there is no $t$-resilient consensus protocol that achieves weak unanimity for binary values._
 
-> **定理 4.4。** *假设采用带认证拜占庭故障模型，处理器同步而通信部分同步（$\Delta$ 最终成立或 $\Delta$ 未知）。若 $2\leq N\leq3t$，则不存在对二元值达到弱全体一致的 $t$-弹性共识协议。*
+> **定理 4.4。** _假设采用带认证拜占庭故障模型，处理器同步而通信部分同步（$\Delta$ 最终成立或 $\Delta$ 未知）。若 $2\leq N\leq3t$，则不存在对二元值达到弱全体一致的 $t$-弹性共识协议。_
 
 **PROOF.** Again, the proof is the same for both definitions of partially synchronous communication. Assume the contrary. We shall derive a contradiction.
 
@@ -844,7 +846,7 @@ In this section we consider the case in which both communication and processors 
 
 > 本节考察通信与处理器都部分同步的情形。我们证明存在与上一节“仅通信部分同步”时具有相同弹性的协议，而且对应算法所需时间仍与先前情形相近，具体说仍为多项式时间。我们仍通过说明本节模型如何模拟第 3 节基本模型来展开。
 
-In the previous section, the processors had a common notion of time that allowed time to be divided into rounds. In this case, where phi does not always hold or is unknown, no such common notion of time is available. Therefore, our first task is to describe protocols that give the processors some approximately common notion of time. We call such protocols *distributed clocks*.
+In the previous section, the processors had a common notion of time that allowed time to be divided into rounds. In this case, where phi does not always hold or is unknown, no such common notion of time is available. Therefore, our first task is to describe protocols that give the processors some approximately common notion of time. We call such protocols _distributed clocks_.
 
 > 上一节中，处理器拥有共同的时间观念，因而可把时间划分为轮次。在 $\Phi$ 不总成立或未知的当前情形中，没有这样的共同时间观念。因此首要任务是给出让处理器获得某种近似共同时间观念的协议，我们称之为*分布式时钟*。
 
@@ -868,17 +870,17 @@ In this section we describe what happens during the clock maintenance steps for 
 
 > 5.1 面向不带认证拜占庭故障的分布式时钟
 
-Throughout this section we assume that $N\geq3t+1$. We again assume that real times are numbered $0,1,2,\ldots$. Processors participate in our distributed clock protocols by sending ticks to one another. As an expositional convenience, we define a master clock whose value at any time $s$ depends on the past global behavior of the system and is a function of the ticks that have been sent before $s$. Even approximating the value of the master clock requires global information about what ticks have been sent to which processors. We therefore introduce a second type of message, called a *claim*, in which processors make assertions about the ticks they have sent.
+Throughout this section we assume that $N\geq3t+1$. We again assume that real times are numbered $0,1,2,\ldots$. Processors participate in our distributed clock protocols by sending ticks to one another. As an expositional convenience, we define a master clock whose value at any time $s$ depends on the past global behavior of the system and is a function of the ticks that have been sent before $s$. Even approximating the value of the master clock requires global information about what ticks have been sent to which processors. We therefore introduce a second type of message, called a _claim_, in which processors make assertions about the ticks they have sent.
 
 > 本节始终假设 $N\geq3t+1$，并再次假设实时时刻编号为 $0,1,2,\ldots$。处理器通过相互发送滴答参与分布式时钟协议。为便于说明，我们定义一只主时钟；它在任意时刻 $s$ 的值依赖系统过去的全局行为，是 $s$ 之前已发送滴答的函数。即便近似主时钟值，也需要知道哪些滴答发给了哪些处理器的全局信息。因此引入第二类消息，称为*声明*，由处理器对自己发送过的滴答作出断言。
 
-An $i$-tick is the message $i$. An $i^+$-tick is a $j$-tick for any $j\geq i$. We say $p$ has *broadcast an $i$-tick* if it has sent an $i^+$-tick to all $N$ processors.
+An $i$-tick is the message $i$. An $i^+$-tick is a $j$-tick for any $j\geq i$. We say $p$ has _broadcast an $i$-tick_ if it has sent an $i^+$-tick to all $N$ processors.
 
-> $i$-滴答就是消息 $i$；对任意 $j\geq i$，$j$-滴答都是 $i^+$-滴答。若 $p$ 向全部 $N$ 个处理器发送了一个 $i^+$-滴答，则称 $p$ *广播了一个 $i$-滴答*。
+> $i$-滴答就是消息 $i$；对任意 $j\geq i$，$j$-滴答都是 $i^+$-滴答。若 $p$ 向全部 $N$ 个处理器发送了一个 $i^+$-滴答，则称 $p$ _广播了一个 $i$-滴答_。
 
-An $i$-claim is the message “I have broadcast an $i$-tick.” An $i^+$-claim is a $j$-claim for any $j\geq i$. We say $p$ has *broadcast an $i$-claim* if it has sent an $i^+$-claim to all $N$ processors.
+An $i$-claim is the message “I have broadcast an $i$-tick.” An $i^+$-claim is a $j$-claim for any $j\geq i$. We say $p$ has _broadcast an $i$-claim_ if it has sent an $i^+$-claim to all $N$ processors.
 
-> $i$-声明是消息“我已经广播了一个 $i$-滴答”。对任意 $j\geq i$，$j$-声明都是 $i^+$-声明。若 $p$ 向全部 $N$ 个处理器发送了一个 $i^+$-声明，则称 $p$ *广播了一个 $i$-声明*。
+> $i$-声明是消息“我已经广播了一个 $i$-滴答”。对任意 $j\geq i$，$j$-声明都是 $i^+$-声明。若 $p$ 向全部 $N$ 个处理器发送了一个 $i^+$-声明，则称 $p$ _广播了一个 $i$-声明_。
 
 We adopt the convention that all processors have exchanged ticks and claims of size 0 before time 0. These messages are not actually sent, but they are considered to have been sent and received. When we say that a certain event, such as the receipt of a certain message, has occurred “by time $s$,” we mean that the event has occurred at some real-time step $\leq s$.
 
@@ -957,9 +959,9 @@ The following lemmas describe limitations on the rates of the master clock and t
 
 > 下列引理描述主时钟和本地时钟速率的限制。前三个引理不涉及 $\Delta$ 和 $\Phi$，因而适用于两种部分同步模型。
 
-**LEMMA 5.1.** *For all $s\geq0$ and for all $i$ such that $p_i$ is correct, $c_i(s)\leq C(s)$.*
+**LEMMA 5.1.** _For all $s\geq0$ and for all $i$ such that $p_i$ is correct, $c_i(s)\leq C(s)$._
 
-> **引理 5.1。** *对所有 $s\geq0$ 及所有正确的 $p_i$，$c_i(s)\leq C(s)$。*
+> **引理 5.1。** _对所有 $s\geq0$ 及所有正确的 $p_i$，$c_i(s)\leq C(s)$。_
 
 **PROOF.** The proof is by induction on $s$. The basis $s=0$ is obvious since $c_i(0)=C(0)=0$ by definition.
 
@@ -983,17 +985,17 @@ $$
 
 > 即私有时钟值不超过当时主时钟值，而主时钟又非递减。$\square$
 
-**LEMMA 5.2.** *For all $s\geq0$, the largest tick sent by a correct processor at real time $s$ has size at most $C(s)+1$.*
+**LEMMA 5.2.** _For all $s\geq0$, the largest tick sent by a correct processor at real time $s$ has size at most $C(s)+1$._
 
-> **引理 5.2。** *对所有 $s\geq0$，正确处理器在实时时刻 $s$ 发送的最大滴答至多为 $C(s)+1$。*
+> **引理 5.2。** _对所有 $s\geq0$，正确处理器在实时时刻 $s$ 发送的最大滴答至多为 $C(s)+1$。_
 
 **PROOF.** This proof is immediate from the protocol and Lemma 5.1. $\square$
 
 > **证明。** 直接由协议和引理 5.1 可得。$\square$
 
-**LEMMA 5.3.** *For all $s,x\geq0$, $C(s+x)\leq C(s)+x$.*
+**LEMMA 5.3.** _For all $s,x\geq0$, $C(s+x)\leq C(s)+x$._
 
-> **引理 5.3。** *对所有 $s,x\geq0$，$C(s+x)\leq C(s)+x$。*
+> **引理 5.3。** _对所有 $s,x\geq0$，$C(s+x)\leq C(s)+x$。_
 
 **PROOF.** The proof is by induction on $x$. For the basis, let $x=1$. By Lemma 5.2 the largest tick sent by a correct processor by time $s$ has size at most $C(s)+1$, so the maximum tick that can be broadcast by $t+1$ processors by time $s+1$ is a $(C(s)+1)$-tick. Thus, $C(s+1)\leq C(s)+1$. Assume the lemma holds for some $x$. Then
 
@@ -1020,41 +1022,41 @@ Let $D=\Delta+3\Phi$. Note that, if a message is sent to a correct processor $p$
 
 > 令 $D=\Delta+3\Phi$。若在 $s\geq\mathrm{GST}$ 时向正确处理器 $p$ 发送消息，则 $p$ 最迟在 $s+D$ 收到：消息在 $s+\Delta$ 前递送，再过至多 $3\Phi$ 时间，$p$ 会在时钟协议中执行一次 Receive。
 
-**LEMMA 5.4.** *Assume $s\geq\mathrm{GST}$, and let $s'=s+12N\Phi+D$. Let $j$ be such that $c_i(s)\geq j$ for all correct $p_i$. Then $c_i(s')\geq j+1$ for all correct $p_i$.*
+**LEMMA 5.4.** _Assume $s\geq\mathrm{GST}$, and let $s'=s+12N\Phi+D$. Let $j$ be such that $c_i(s)\geq j$ for all correct $p_i$. Then $c_i(s')\geq j+1$ for all correct $p_i$._
 
-> **引理 5.4。** *假设 $s\geq\mathrm{GST}$，令 $s'=s+12N\Phi+D$。若对所有正确 $p_i$ 都有 $c_i(s)\geq j$，则对所有正确 $p_i$ 都有 $c_i(s')\geq j+1$。*
+> **引理 5.4。** _假设 $s\geq\mathrm{GST}$，令 $s'=s+12N\Phi+D$。若对所有正确 $p_i$ 都有 $c_i(s)\geq j$，则对所有正确 $p_i$ 都有 $c_i(s')\geq j+1$。_
 
 **PROOF.** At time $s$, $p_i$ could be executing TICK($b$) for some $b<j$. However, within time $6N\Phi$ after $s$, $p_i$ will call TICK($b'$) or CLAIM($b'$) for some $b'\geq j$, and within an additional $6N\Phi$ steps, $p_i$ will broadcast a $(j+1)$-claim. Therefore, every correct processor will broadcast a $(j+1)$-claim by time $s+12N\Phi$. By time $s'$, each correct $p_i$ will receive at least $2t+1$ $(j+1)^+$-claims, so $c_i(s')\geq j+1$. $\square$
 
 > **证明。** 时刻 $s$，$p_i$ 可能正在执行某个 $b<j$ 的 TICK($b$)。但在其后 $6N\Phi$ 时间内，$p_i$ 会对某个 $b'\geq j$ 调用 TICK($b'$) 或 CLAIM($b'$)；再过 $6N\Phi$ 步内，它会广播 $(j+1)$-声明。因此每个正确处理器都在 $s+12N\Phi$ 前广播该声明；到 $s'$，每个正确 $p_i$ 都会收到至少 $2t+1$ 个 $(j+1)^+$-声明，故 $c_i(s')\geq j+1$。$\square$
 
-**LEMMA 5.5.** *Assume $s\geq\mathrm{GST}$, and let $s'=s+39N\Phi+4D$. Then $C(s')\geq C(s)+2$.*
+**LEMMA 5.5.** _Assume $s\geq\mathrm{GST}$, and let $s'=s+39N\Phi+4D$. Then $C(s')\geq C(s)+2$._
 
-> **引理 5.5。** *假设 $s\geq\mathrm{GST}$，令 $s'=s+39N\Phi+4D$。则 $C(s')\geq C(s)+2$。*
+> **引理 5.5。** _假设 $s\geq\mathrm{GST}$，令 $s'=s+39N\Phi+4D$。则 $C(s')\geq C(s)+2$。_
 
 **PROOF.** Let $j=C(s)$. By definition of the master clock, $t+1$ correct processors have broadcast a $j$-tick by time $s$. These $t+1$ processors send a tick or claim of size at least $j$ to every processor within the first $3N\Phi$ steps after time $s$. Since these messages are sent after GST, they are received within $D$ steps, so $c_i(s+3N\Phi+D)\geq j-1$ for all correct $p_i$. By three applications of Lemma 5.4, $c_i(s')\geq j+2$. So $C(s')\geq j+2$ by Lemma 5.1. $\square$
 
 > **证明。** 令 $j=C(s)$。按主时钟定义，截至 $s$ 已有 $t+1$ 个正确处理器广播 $j$-滴答。它们在 $s$ 后前 $3N\Phi$ 步内向每个处理器发送大小至少为 $j$ 的滴答或声明。因消息在 GST 后发送，$D$ 步内可收到，故对所有正确 $p_i$，$c_i(s+3N\Phi+D)\geq j-1$。连续三次应用引理 5.4 得 $c_i(s')\geq j+2$，再由引理 5.1 得 $C(s')\geq j+2$。$\square$
 
-**LEMMA 5.6.** *Let $s_0$ be the minimum time such that $C(s_0)\geq C(\mathrm{GST})+2$. (Time $s_0$ exists by Lemma 5.5.) Let $s\geq s_0+D$. Then $c_i(s)\geq C(s-D)-1$ for all correct $p_i$.*
+**LEMMA 5.6.** _Let $s_0$ be the minimum time such that $C(s_0)\geq C(\mathrm{GST})+2$. (Time $s_0$ exists by Lemma 5.5.) Let $s\geq s_0+D$. Then $c_i(s)\geq C(s-D)-1$ for all correct $p_i$._
 
-> **引理 5.6。** *令 $s_0$ 为满足 $C(s_0)\geq C(\mathrm{GST})+2$ 的最早时刻（由引理 5.5，该时刻存在）。若 $s\geq s_0+D$，则对所有正确 $p_i$，$c_i(s)\geq C(s-D)-1$。*
+> **引理 5.6。** _令 $s_0$ 为满足 $C(s_0)\geq C(\mathrm{GST})+2$ 的最早时刻（由引理 5.5，该时刻存在）。若 $s\geq s_0+D$，则对所有正确 $p_i$，$c_i(s)\geq C(s-D)-1$。_
 
 **PROOF.** Let $j=C(s-D)$. Then $t+1$ correct processors broadcast a $j$-tick by $s-D$. By Lemma 5.2, the largest tick sent by a correct processor by GST is a $(C(\mathrm{GST})+1)$-tick. Since $j\geq C(\mathrm{GST})+2$, the $j$-ticks from correct processors are broadcast entirely after GST, so they are received by time $s$. Thus, for all correct $p_i$, $c_i(s)\geq j-1$. $\square$
 
 > **证明。** 令 $j=C(s-D)$，则截至 $s-D$，$t+1$ 个正确处理器已广播 $j$-滴答。由引理 5.2，正确处理器截至 GST 发送的最大滴答是 $(C(\mathrm{GST})+1)$-滴答。因 $j\geq C(\mathrm{GST})+2$，正确处理器的 $j$-滴答全都在 GST 后广播，故在 $s$ 前收到。因此所有正确 $p_i$ 都有 $c_i(s)\geq j-1$。$\square$
 
-**LEMMA 5.7.** *Let $s_0$ be the minimum time such that $C(s_0)\geq C(\mathrm{GST})+2$.*
+**LEMMA 5.7.** _Let $s_0$ be the minimum time such that $C(s_0)\geq C(\mathrm{GST})+2$._
 
-> **引理 5.7。** *令 $s_0$ 为满足 $C(s_0)\geq C(\mathrm{GST})+2$ 的最早时刻。*
+> **引理 5.7。** _令 $s_0$ 为满足 $C(s_0)\geq C(\mathrm{GST})+2$ 的最早时刻。_
 
-(a) *For all $s\geq s_0+D$ and for all correct processors $p_i$, $c_i(s)\geq C(s)-D-1$.*
+(a) _For all $s\geq s_0+D$ and for all correct processors $p_i$, $c_i(s)\geq C(s)-D-1$._
 
-> （a）*对所有 $s\geq s_0+D$ 和所有正确 $p_i$，$c_i(s)\geq C(s)-D-1$。*
+> （a）_对所有 $s\geq s_0+D$ 和所有正确 $p_i$，$c_i(s)\geq C(s)-D-1$。_
 
-(b) *For all $s\geq s_0$ and for $s'=s+24N\Phi+3D$, $C(s')\geq C(s)+1$.*
+(b) _For all $s\geq s_0$ and for $s'=s+24N\Phi+3D$, $C(s')\geq C(s)+1$._
 
-> （b）*对所有 $s\geq s_0$，令 $s'=s+24N\Phi+3D$，则 $C(s')\geq C(s)+1$。*
+> （b）_对所有 $s\geq s_0$，令 $s'=s+24N\Phi+3D$，则 $C(s')\geq C(s)+1$。_
 
 **PROOF.**
 
@@ -1076,7 +1078,7 @@ The new clock is very similar to the one just described. We only explain the dif
 
 > 新时钟与刚才的时钟非常相似，只说明差异。这里假设 $N\geq2t+1$。
 
-An $i$-claim is a signed message “I have broadcast an $i$-tick.” An $i^+$-claim is a $j$-claim for any $j\geq i$. For $i\geq1$, an $i$-tick is the message “$(i,i\text{-proof})$,” where a 1-proof is the empty string and where an $i$-proof ($i>1$) is a list of $t+1$ $(i-1)^+$-claims each signed by a different processor. An $i^+$-tick is a $j$-tick for any $j\geq i$. The definitions of *broadcast an $i$-tick* and *broadcast an $i$-claim* are the same as before.
+An $i$-claim is a signed message “I have broadcast an $i$-tick.” An $i^+$-claim is a $j$-claim for any $j\geq i$. For $i\geq1$, an $i$-tick is the message “$(i,i\text{-proof})$,” where a 1-proof is the empty string and where an $i$-proof ($i>1$) is a list of $t+1$ $(i-1)^+$-claims each signed by a different processor. An $i^+$-tick is a $j$-tick for any $j\geq i$. The definitions of _broadcast an $i$-tick_ and _broadcast an $i$-claim_ are the same as before.
 
 > $i$-声明是签名消息“我已经广播了一个 $i$-滴答”；对任意 $j\geq i$，$j$-声明是 $i^+$-声明。对 $i\geq1$，$i$-滴答是消息“$(i,i\text{-proof})$”；其中 1-proof 为空串，而当 $i>1$ 时，$i$-proof 是由 $t+1$ 个分别由不同处理器签名的 $(i-1)^+$-声明组成的列表。对任意 $j\geq i$，$j$-滴答是 $i^+$-滴答。“广播 $i$-滴答”和“广播 $i$-声明”的定义同前。
 
@@ -1104,9 +1106,9 @@ The definition of the clock protocol is the same as before with the addition tha
 
 > 时钟协议定义同前，但增加一点：处理器在 CLAIM($b$) 中发送 $(b+1)$-声明时，附上它能构造的最大滴答（总是一个 $(b+1)^+$-滴答）。若收到的 $j$-声明未附 $j^+$-滴答，正确处理器会忽略它。这样可防止正确处理器接受故障处理器给出的过大声明，并把它们纳入证明。
 
-**LEMMA 5.8.** *Lemmas 5.1–5.7 hold for the authenticated Byzantine clock.*
+**LEMMA 5.8.** _Lemmas 5.1–5.7 hold for the authenticated Byzantine clock._
 
-> **引理 5.8。** *引理 5.1—5.7 对带认证拜占庭时钟成立。*
+> **引理 5.8。** _引理 5.1—5.7 对带认证拜占庭时钟成立。_
 
 **PROOF.** The proofs are virtually identical to the proofs for the unauthenticated Byzantine clock, and most details are omitted. The major differences are the following:
 
@@ -1136,9 +1138,9 @@ We need one more lemma to support our claim that the number of message bits sent
 
 > 还需一个引理支持如下主张：正确处理器发送的消息比特数由 GST、$N$、$\Delta$ 和 $\Phi$ 的多项式从上方界定。
 
-**LEMMA 5.9.** *For all $s\geq0$, the largest tick sent by any processor (correct or faulty) at real time $s$ has size at most $C(s)+2$.*
+**LEMMA 5.9.** _For all $s\geq0$, the largest tick sent by any processor (correct or faulty) at real time $s$ has size at most $C(s)+2$._
 
-> **引理 5.9。** *对所有 $s\geq0$，任意处理器（正确或故障）在实时时刻 $s$ 发送的最大滴答至多为 $C(s)+2$。*
+> **引理 5.9。** _对所有 $s\geq0$，任意处理器（正确或故障）在实时时刻 $s$ 发送的最大滴答至多为 $C(s)+2$。_
 
 **PROOF.** A $j$-tick sent at time $s$ contains $t+1$ $(j-1)^+$-claims, at least one of which was sent by a correct processor. The conclusion now follows from Lemma 5.2. $\square$
 
@@ -1148,9 +1150,9 @@ From this lemma and the definition of the protocol, it follows easily that any t
 
 > 由该引理和协议定义，不难得到：正确处理器在时刻 $s$ 发送的任一滴答或声明都可用 $O(t\log C(s))$ 比特编码。
 
-*Remark 4.* The clocks of Sections 5.1 and 5.2 are similar to the one discovered independently by Attiya et al. [1].
+_Remark 4._ The clocks of Sections 5.1 and 5.2 are similar to the one discovered independently by Attiya et al. [1].
 
-> *注 4。* 第 5.1 和 5.2 节的时钟类似 Attiya 等人［1］独立发现的时钟。
+> _注 4。_ 第 5.1 和 5.2 节的时钟类似 Attiya 等人［1］独立发现的时钟。
 
 ### 5.3 Upper Bounds When Delta and Phi Hold Eventually
 
@@ -1234,21 +1236,21 @@ By applying the transformation just described to Algorithms 1–3, we obtain Alg
 
 > 把上述变换分别用于算法 1—3，得到算法 $1^3$—$3^3$，并立即有：
 
-**THEOREM 5.1.** *Assume that communication and processors are partially synchronous (delta and phi hold eventually).*
+**THEOREM 5.1.** _Assume that communication and processors are partially synchronous (delta and phi hold eventually)._
 
-> **定理 5.1。** *假设通信与处理器部分同步（$\Delta$ 与 $\Phi$ 最终成立）。*
+> **定理 5.1。** _假设通信与处理器部分同步（$\Delta$ 与 $\Phi$ 最终成立）。_
 
-(a) *For the fail-step or omission fault model, if $N\geq2t+1$, then Algorithm $1^3$ achieves consistency, strong unanimity, and termination for an arbitrary value domain.*
+(a) _For the fail-step or omission fault model, if $N\geq2t+1$, then Algorithm $1^3$ achieves consistency, strong unanimity, and termination for an arbitrary value domain._
 
-> （a）*对停机或遗漏故障模型，若 $N\geq2t+1$，则算法 $1^3$ 对任意值域达到一致性、强全体一致和终止性。*
+> （a）_对停机或遗漏故障模型，若 $N\geq2t+1$，则算法 $1^3$ 对任意值域达到一致性、强全体一致和终止性。_
 
-(b) *For the authenticated Byzantine fault model, if $N\geq3t+1$, then Algorithm $2^3$ achieves consistency, strong unanimity, and termination for an arbitrary value domain.*
+(b) _For the authenticated Byzantine fault model, if $N\geq3t+1$, then Algorithm $2^3$ achieves consistency, strong unanimity, and termination for an arbitrary value domain._
 
-> （b）*对带认证拜占庭故障模型，若 $N\geq3t+1$，则算法 $2^3$ 对任意值域达到一致性、强全体一致和终止性。*
+> （b）_对带认证拜占庭故障模型，若 $N\geq3t+1$，则算法 $2^3$ 对任意值域达到一致性、强全体一致和终止性。_
 
-(c) *For the unauthenticated Byzantine fault model, if $N\geq3t+1$, then Algorithm $3^3$ achieves consistency, strong unanimity, and termination for an arbitrary value domain.*
+(c) _For the unauthenticated Byzantine fault model, if $N\geq3t+1$, then Algorithm $3^3$ achieves consistency, strong unanimity, and termination for an arbitrary value domain._
 
-> （c）*对不带认证拜占庭故障模型，若 $N\geq3t+1$，则算法 $3^3$ 对任意值域达到一致性、强全体一致和终止性。*
+> （c）_对不带认证拜占庭故障模型，若 $N\geq3t+1$，则算法 $3^3$ 对任意值域达到一致性、强全体一致和终止性。_
 
 As before, we claim that Algorithms $1^3$–$3^3$ reach agreement within a polynomial (in $N$, $\Delta$, and $\Phi$) amount of time after GST. Our claims of polynomial-time performance follow from the fact that the master clock, a short time after GST, runs at a rate no slower than $1/(24N\Phi+3(\Delta+3\Phi))$ times real time (see Lemma 5.7(b)). Finally, the total number of message bits sent by correct processors is polynomially bounded in $N$, $\Delta$, $\Phi$, and GST, since the number of bits in each message sent by a correct processor is polynomially bounded in these quantities.
 
@@ -1262,17 +1264,17 @@ Next, we present our upper bound results for partially synchronous communication
 
 > 下面给出通信与处理器部分同步、$\Delta$ 与 $\Phi$ 未知模型的上界，其思想只是第 4.2 与 5.3 节的结合。从基本模型共识协议到本模型协议的变换与第 5.3 节相同，唯一区别是用 $R_r=3Nr+8r+2$ 表示模拟第 $r$ 轮所用滴答数。（该界由前一界同时以 $r$ 替换 $\Delta$ 和 $\Phi$ 得到。）当 $r$ 超过运行中成立的未知 $\Delta,\Phi$ 时即到达 GST，故正确性证明同前。把变换用于算法 1—3，分别得到算法 $1^4$—$3^4$。
 
-**THEOREM 5.2.** *Assume that communication and processors are partially synchronous (delta and phi are unknown). Then claims (a)–(c) of Theorem 5.1 hold for Algorithms $1^4$–$3^4$, respectively.*
+**THEOREM 5.2.** _Assume that communication and processors are partially synchronous (delta and phi are unknown). Then claims (a)–(c) of Theorem 5.1 hold for Algorithms $1^4$–$3^4$, respectively._
 
-> **定理 5.2。** *假设通信与处理器部分同步（$\Delta$ 与 $\Phi$ 未知），则定理 5.1 的（a）—（c）分别对算法 $1^4$—$3^4$ 成立。*
+> **定理 5.2。** _假设通信与处理器部分同步（$\Delta$ 与 $\Phi$ 未知），则定理 5.1 的（a）—（c）分别对算法 $1^4$—$3^4$ 成立。_
 
 As before, it is easy to see that Algorithms $1^4$–$3^4$ reach agreement within a polynomial (in $N$, $\Delta$, and $\Phi$) amount of time.
 
 > 与前面一样，不难看出算法 $1^4$—$3^4$ 在 $N,\Delta,\Phi$ 的多项式时间内达成一致。
 
-*Remark 5.* In the simulation of the basic model described in Sections 5.3 and 5.4, if the round number of processor $p_i$’s last algorithm simulation step was $h$ and processor $p_i$ updates its clock and finds that it is now simulating some round $k>h$, then all state transitions in rounds $h$ through $k-1$ are simulated (except that no messages are sent). For a general simulation of the basic model, these transitions must all be simulated, since they may involve state transitions that processor $p_i$ must make in order that the simulation of the algorithm in the basic model be correct. However, it is not hard to see that, for the particular Algorithms 1–3 designed for the basic model in Section 3.2, processor $p_i$ can just simulate the state transition for round $h$ and continue the simulation at round $k$, without simulating the “missed” transitions in rounds $h+1$ through $k-1$. This can be done since the state information in Algorithms 1–3 (not including the current round number) consists of the PROPER sets, the values which are locked, and other information associated with each lock. Changes in this state information are caused only by the receipt of certain messages. Since we have shown consistency for Algorithms 1–3 even if messages are lost before GST, it follows that the algorithms remain consistent if processors, including correct ones, skip state transitions before GST.
+_Remark 5._ In the simulation of the basic model described in Sections 5.3 and 5.4, if the round number of processor $p_i$’s last algorithm simulation step was $h$ and processor $p_i$ updates its clock and finds that it is now simulating some round $k>h$, then all state transitions in rounds $h$ through $k-1$ are simulated (except that no messages are sent). For a general simulation of the basic model, these transitions must all be simulated, since they may involve state transitions that processor $p_i$ must make in order that the simulation of the algorithm in the basic model be correct. However, it is not hard to see that, for the particular Algorithms 1–3 designed for the basic model in Section 3.2, processor $p_i$ can just simulate the state transition for round $h$ and continue the simulation at round $k$, without simulating the “missed” transitions in rounds $h+1$ through $k-1$. This can be done since the state information in Algorithms 1–3 (not including the current round number) consists of the PROPER sets, the values which are locked, and other information associated with each lock. Changes in this state information are caused only by the receipt of certain messages. Since we have shown consistency for Algorithms 1–3 even if messages are lost before GST, it follows that the algorithms remain consistent if processors, including correct ones, skip state transitions before GST.
 
-> *注 5。* 在第 5.3、5.4 节的基本模型模拟中，若 $p_i$ 上一个算法模拟步骤的轮次为 $h$，更新时钟后发现当前模拟 $k>h$，则会模拟第 $h$ 至 $k-1$ 轮所有状态转移（但不发送消息）。一般模拟必须如此，因为这些转移可能是保证基本模型算法模拟正确所必需的。然而，对第 3.2 节特定算法 1—3，不难看出 $p_i$ 可只模拟第 $h$ 轮转移，随后直接从第 $k$ 轮继续，而不模拟第 $h+1$ 至 $k-1$ 轮“错过”的转移。这是因为算法 1—3 的状态信息（不含当前轮次号）由 PROPER 集、被锁值及各锁关联信息组成，只在收到特定消息时改变。我们已证明，即使 GST 前消息丢失，算法 1—3 仍一致，故包括正确处理器在内的处理器即使跳过 GST 前状态转移，算法仍一致。
+> _注 5。_ 在第 5.3、5.4 节的基本模型模拟中，若 $p_i$ 上一个算法模拟步骤的轮次为 $h$，更新时钟后发现当前模拟 $k>h$，则会模拟第 $h$ 至 $k-1$ 轮所有状态转移（但不发送消息）。一般模拟必须如此，因为这些转移可能是保证基本模型算法模拟正确所必需的。然而，对第 3.2 节特定算法 1—3，不难看出 $p_i$ 可只模拟第 $h$ 轮转移，随后直接从第 $k$ 轮继续，而不模拟第 $h+1$ 至 $k-1$ 轮“错过”的转移。这是因为算法 1—3 的状态信息（不含当前轮次号）由 PROPER 集、被锁值及各锁关联信息组成，只在收到特定消息时改变。我们已证明，即使 GST 前消息丢失，算法 1—3 仍一致，故包括正确处理器在内的处理器即使跳过 GST 前状态转移，算法仍一致。
 
 ## 6. Partially Synchronous Processors and Synchronous Communication
 
@@ -1282,7 +1284,7 @@ In this section we consider models where processors are partially synchronous an
 
 > 本节考察处理器部分同步而通信同步的模型；也就是说，消息传输时间存在一个始终成立的固定上界 $\Delta$（尤其没有消息丢失）。上一节协议及其弹性当然适用，但利用通信现已同步这一事实，在某些情形下可以取得更高弹性。
 
-It is convenient to base our consensus algorithms on another basic model, which we call the *basic model with signals*. In Section 6.1 we define this new basic model and give consensus algorithms that are designed to work in the basic model with signals. We then show how to use the eventual phi and unknown phi models to simulate the basic model with signals. As in Section 5, we use distributed clocks to give the processors some approximately common notion of time. The clocks are discussed in Section 6.2. Section 6.3 contains algorithms for the case in which phi holds eventually, and Section 6.4 contains algorithms for phi unknown. Section 6.5 contains lower bounds.
+It is convenient to base our consensus algorithms on another basic model, which we call the _basic model with signals_. In Section 6.1 we define this new basic model and give consensus algorithms that are designed to work in the basic model with signals. We then show how to use the eventual phi and unknown phi models to simulate the basic model with signals. As in Section 5, we use distributed clocks to give the processors some approximately common notion of time. The clocks are discussed in Section 6.2. Section 6.3 contains algorithms for the case in which phi holds eventually, and Section 6.4 contains algorithms for phi unknown. Section 6.5 contains lower bounds.
 
 > 共识算法适宜建立在另一基本模型之上，我们称之为*带信号的基本模型*。第 6.1 节定义该模型并给出为其设计的共识算法；随后说明如何用 $\Phi$ 最终成立和 $\Phi$ 未知模型模拟它。与第 5 节一样，使用分布式时钟赋予处理器某种近似共同的时间观念。第 6.2 节讨论时钟，第 6.3 节给出 $\Phi$ 最终成立时的算法，第 6.4 节给出 $\Phi$ 未知时的算法，第 6.5 节给出下界。
 
@@ -1290,7 +1292,7 @@ It is convenient to base our consensus algorithms on another basic model, which 
 
 > 6.1 带信号的基本模型
 
-The basic model with signals is just like the basic model, except that the Receive subround also includes the possible receipt of a *signal* by each processor. In any round $r$, the receipt of a signal by processor $p_i$ implies that all correct processors receive the round $r$ messages sent to them by processor $p_i$. The nonreceipt of a signal does not imply anything. At round GST and afterward, we assume that all correct processors receive signals at each round. The next two subsections, 6.1.1 and 6.1.2, give consensus protocols for the basic model with signals that are resilient to two types of faults.
+The basic model with signals is just like the basic model, except that the Receive subround also includes the possible receipt of a _signal_ by each processor. In any round $r$, the receipt of a signal by processor $p_i$ implies that all correct processors receive the round $r$ messages sent to them by processor $p_i$. The nonreceipt of a signal does not imply anything. At round GST and afterward, we assume that all correct processors receive signals at each round. The next two subsections, 6.1.1 and 6.1.2, give consensus protocols for the basic model with signals that are resilient to two types of faults.
 
 > 带信号基本模型与基本模型相同，唯一区别是每个处理器在 Receive 子轮次还可能收到一个*信号*。任一轮 $r$ 中，若处理器 $p_i$ 收到信号，就意味着所有正确处理器都收到 $p_i$ 在第 $r$ 轮发给它们的消息。未收到信号则不蕴含任何事情。假设从 GST 轮起，所有正确处理器每轮都收到信号。下面 6.1.1、6.1.2 节给出分别容忍两类故障的协议。
 
@@ -1302,9 +1304,9 @@ The next algorithm achieves strong unanimity for an arbitrary value domain $V$.
 
 > 下一个算法对任意值域 $V$ 达到强全体一致。
 
-*Algorithm 4. $N\geq t$*
+_Algorithm 4. $N\geq t$_
 
-> *算法 4．$N\geq t$*
+> _算法 4．$N\geq t$_
 
 Each processor has a local variable VALUE, initialized at its initial value. We say that each round $k\equiv i\pmod N$ belongs to processor $p_i$. Processing in an arbitrary round $k$ is as follows:
 
@@ -1327,9 +1329,9 @@ Each processor has a local variable VALUE, initialized at its initial value. We 
 
 > 若收到内容为 $v$ 的消息，则设置 $\mathrm{VALUE}:=v$。
 
-**LEMMA 6.1.** *Assume that processor $p_i$ decides $v$ at round $k$, and that this is the smallest numbered round at which a decision is made. Then no message containing value $w\neq v$ is ever sent at any round $\geq k$.*
+**LEMMA 6.1.** _Assume that processor $p_i$ decides $v$ at round $k$, and that this is the smallest numbered round at which a decision is made. Then no message containing value $w\neq v$ is ever sent at any round $\geq k$._
 
-> **引理 6.1。** *假设处理器 $p_i$ 在第 $k$ 轮决定 $v$，且这是作出决定的最小编号轮次。则任何 $\geq k$ 的轮次都绝不会发送含 $w\neq v$ 的消息。*
+> **引理 6.1。** _假设处理器 $p_i$ 在第 $k$ 轮决定 $v$，且这是作出决定的最小编号轮次。则任何 $\geq k$ 的轮次都绝不会发送含 $w\neq v$ 的消息。_
 
 **PROOF.** Assume for the sake of contradiction that the lemma is false, and let $h$ be the smallest numbered round $\geq k$ when a message containing value $w\neq v$ is sent. It is clear that $h\neq k$, since faults are fail-stop. Let $p_j$ be the processor that owns round $h$.
 
@@ -1339,9 +1341,9 @@ Since processor $p_i$ receives a signal at round $k$, it must be the case that p
 
 > 因 $p_i$ 在第 $k$ 轮收到信号，$p_j$ 必在该轮收到 $p_i$ 的值 $v$，并把 VALUE 设为 $v$。按假设，第 $k$ 轮之后、第 $h$ 轮之前没有发送异于 $v$ 的消息，故 $p_j$ 的 VALUE 到第 $h$ 轮开始时仍为 $v$。这与 $p_j$ 在第 $h$ 轮发送 $w$ 的假设矛盾。$\square$
 
-**THEOREM 6.1.** *Assume the basic model with signals, with fail-stop faults. Assume $N\geq t$. Then Algorithm 4 achieves consistency, strong unanimity, and termination for an arbitrary value domain.*
+**THEOREM 6.1.** _Assume the basic model with signals, with fail-stop faults. Assume $N\geq t$. Then Algorithm 4 achieves consistency, strong unanimity, and termination for an arbitrary value domain._
 
-> **定理 6.1。** *假设采用带信号且有停机故障的基本模型，并假设 $N\geq t$。则算法 4 对任意值域达到一致性、强全体一致和终止性。*
+> **定理 6.1。** _假设采用带信号且有停机故障的基本模型，并假设 $N\geq t$。则算法 4 对任意值域达到一致性、强全体一致和终止性。_
 
 **PROOF.** First, we show consistency. Suppose that some correct processor $p_i$ decides $v$ at round $k$, and this is the smallest numbered round at which a decision is made. Then Lemma 6.1 implies that no message containing value $w\neq v$ is ever sent at any round $\geq k$. But a processor can decide on a value $w$ only if it first sends out messages containing $w$. Therefore, no processor ever decides on a value $w\neq v$.
 
@@ -1363,9 +1365,9 @@ The next algorithm, Algorithm 5, achieves weak unanimity for an arbitrary value 
 
 > 下一个算法 5 对任意值域达到弱全体一致。
 
-*Algorithm 5. $N\geq2t+1$*
+_Algorithm 5. $N\geq2t+1$_
 
-> *算法 5．$N\geq2t+1$*
+> _算法 5．$N\geq2t+1$_
 
 The protocol is similar to Algorithm 2 of Section 3.2.2, with a few changes as indicated below. Because we are only dealing with weak unanimity, the PROPER sets are not used. This time, the rounds are divided into trying phases of two rounds each and lock-release phases of one round each. A trying phase of Algorithm 5 is the same as the first two rounds of the corresponding trying phase of Algorithm 2, except that, if a processor, during one of its trying phases, is choosing a value to propose and if several values are acceptable, the processor chooses its own initial value if that value is acceptable or chooses arbitrarily otherwise. The third round is omitted; processor $p_i$ does not wait for messages from others claiming that they have responded to a message $E_i(\mathrm{lock}\ v,k,\mathrm{proof})$ by locking $v$. Instead, it checks that a signal has been received at the second round of the trying phase. If a signal is received, then processor $p_i$ decides $v$.
 
@@ -1379,9 +1381,9 @@ The proof of the following theorem is very similar to that of Theorem 3.2 (the r
 
 > 下述定理的证明与定理 3.2（关于算法 2 的结果）非常相似，细节留给读者。
 
-**THEOREM 6.2.** *Assume the basic model with signals, with authenticated Byzantine faults. Assume $N\geq2t+1$. Then Algorithm 5 achieves consistency, weak unanimity, and termination for an arbitrary value domain.*
+**THEOREM 6.2.** _Assume the basic model with signals, with authenticated Byzantine faults. Assume $N\geq2t+1$. Then Algorithm 5 achieves consistency, weak unanimity, and termination for an arbitrary value domain._
 
-> **定理 6.2。** *假设采用带信号且有带认证拜占庭故障的基本模型，并假设 $N\geq2t+1$。则算法 5 对任意值域达到一致性、弱全体一致和终止性。*
+> **定理 6.2。** _假设采用带信号且有带认证拜占庭故障的基本模型，并假设 $N\geq2t+1$。则算法 5 对任意值域达到一致性、弱全体一致和终止性。_
 
 One version of the consensus problem studied in the literature supposes that a distinguished processor, called the “general,” gives the initial values $v_i$ to all processors. In the case of Byzantine faults with authentication, it is usually assumed that the general signs these initial values with its own unforgeable signature. Thus, if the general is correct, there is a single value $v$ such that the general gives a signed $v$ to every processor; in this case, strong unanimity requires that $v$ is the value decided by all correct processors. If the general is faulty, the general can give out different values and can even give two different values, both signed, to the same processor; in this case, strong unanimity does not require any particular value to be the decision value. This issue was not raised earlier because it is irrelevant to the results of Sections 3–5; that is, our protocols for the authenticated Byzantine case are designed to work even if the general does not sign the initial values, and our lower bound Theorem 4.4 is still valid if the general does sign the initial values. (If the general does sign the initial values, updating to the PROPER sets in Algorithm 2 can be simplified.) This distinction is important in the completely synchronous case: $N$-resilient strong unanimity is possible in the authenticated Byzantine case (column 1, row 3 of Table I) only if the general signs the initial values.
 
@@ -1391,9 +1393,9 @@ This distinction also matters in this section of the paper. Consider the basic m
 
 > 本节中这一差别同样重要。考虑带信号、有带认证拜占庭故障的基本模型，假设将军签署初始值且 $N\geq2t+1$。算法 5 的一个小变体可对任意值域达到一致性、强全体一致和终止性。
 
-*Algorithm 6. $N\geq2t+1$*
+_Algorithm 6. $N\geq2t+1$_
 
-> *算法 6．$N\geq2t+1$*
+> _算法 6．$N\geq2t+1$_
 
 The algorithm is identical to Algorithm 5, except that PROPER sets are used. Initially, the PROPER set of processor $p_i$ contains its initial value $v_i$, which is signed by the general. Each processor piggybacks its initial value, signed by the general, on all messages. If $p_i$ ever receives a value different from $v_i$ that is also signed by the general, then $p_i$ puts all of $V$ in its PROPER set. It is clear that a correct processor’s PROPER set always contains proper values.
 
@@ -1407,7 +1409,7 @@ Recall that in this section there is some known communication bound $\Delta$ tha
 
 > 回顾本节存在某个已知且始终成立的通信界 $\Delta$。因先前时钟弹性有限，先给出可容忍任意数量停机故障的分布式时钟。其一般形式类似第 5.1、5.2 节的时钟。
 
-As in Section 5.1, an $i$-tick is the message $i$, and an $i$-claim is the message “I have broadcast an $i$-tick.” The definitions of $i^+$-tick, $i^+$-claim, *broadcast an $i$-tick*, and *broadcast an $i$-claim* are also the same as in Section 5.1. The clock protocol is given by TICK($b$) and CLAIM($b$), as in Figure 2.
+As in Section 5.1, an $i$-tick is the message $i$, and an $i$-claim is the message “I have broadcast an $i$-tick.” The definitions of $i^+$-tick, $i^+$-claim, _broadcast an $i$-tick_, and _broadcast an $i$-claim_ are also the same as in Section 5.1. The clock protocol is given by TICK($b$) and CLAIM($b$), as in Figure 2.
 
 > 与第 5.1 节相同，$i$-滴答是消息 $i$，$i$-声明是“我已经广播了一个 $i$-滴答”。$i^+$-滴答、$i^+$-声明、“广播 $i$-滴答”和“广播 $i$-声明”的定义也相同。时钟协议仍由图 2 的 TICK($b$) 和 CLAIM($b$) 给出。
 
@@ -1473,9 +1475,9 @@ For the authenticated Byzantine clock, we have already proved (A1), (A2), and (A
 
 > 对带认证拜占庭时钟，我们已分别在引理 5.1、5.3、5.7 中证明（A1）、（A2）、（A3），修改见引理 5.8 的证明。对停机时钟，先注意引理 5.1—5.4 成立；证明与第 5.1 节非常相似，留给读者。无需引理 5.5。因 $\Delta$ 始终成立，可对停机时钟证明更强版引理 5.6。
 
-**LEMMA 5.6′.** *For all $s\geq\mathrm{GST}+D$ and all correct $p_i$, $c_i(s)\geq C(s-D)-1$.*
+**LEMMA 5.6′.** _For all $s\geq\mathrm{GST}+D$ and all correct $p_i$, $c_i(s)\geq C(s-D)-1$._
 
-> **引理 5.6′。** *对所有 $s\geq\mathrm{GST}+D$ 和所有正确 $p_i$，$c_i(s)\geq C(s-D)-1$。*
+> **引理 5.6′。** _对所有 $s\geq\mathrm{GST}+D$ 和所有正确 $p_i$，$c_i(s)\geq C(s-D)-1$。_
 
 **PROOF.** Let $j=C(s-D)$. By definition of the master clock, some processor has broadcast a $j$-tick by time $s-D$, so every correct processor will receive a $j^+$-tick by time $s$. Therefore, $c_i(s)\geq j-1$, by definition of the private clock. $\square$
 
@@ -1599,21 +1601,21 @@ By applying this transformation to Algorithms 4, 5, and 6, we obtain Algorithms 
 
 > 把该变换分别用于算法 4、5、6，得到算法 $4^1$、$5^1$、$6^1$。
 
-**THEOREM 6.3.** *Assume that communication is synchronous and processors are partially synchronous (phi holds eventually).*
+**THEOREM 6.3.** _Assume that communication is synchronous and processors are partially synchronous (phi holds eventually)._
 
-> **定理 6.3。** *假设通信同步而处理器部分同步（$\Phi$ 最终成立）。*
+> **定理 6.3。** _假设通信同步而处理器部分同步（$\Phi$ 最终成立）。_
 
-(a) *For the fail-stop model, if $N\geq t$, then Algorithm $4^1$ achieves consistency, strong unanimity, and termination for an arbitrary value domain.*
+(a) _For the fail-stop model, if $N\geq t$, then Algorithm $4^1$ achieves consistency, strong unanimity, and termination for an arbitrary value domain._
 
-> （a）*对停机模型，若 $N\geq t$，则算法 $4^1$ 对任意值域达到一致性、强全体一致和终止性。*
+> （a）_对停机模型，若 $N\geq t$，则算法 $4^1$ 对任意值域达到一致性、强全体一致和终止性。_
 
-(b) *For Byzantine faults with authentication, if $N\geq2t+1$, then Algorithm $5^1$ achieves consistency, weak unanimity, and termination for an arbitrary value domain.*
+(b) _For Byzantine faults with authentication, if $N\geq2t+1$, then Algorithm $5^1$ achieves consistency, weak unanimity, and termination for an arbitrary value domain._
 
-> （b）*对带认证拜占庭故障，若 $N\geq2t+1$，则算法 $5^1$ 对任意值域达到一致性、弱全体一致和终止性。*
+> （b）_对带认证拜占庭故障，若 $N\geq2t+1$，则算法 $5^1$ 对任意值域达到一致性、弱全体一致和终止性。_
 
-(c) *For Byzantine faults with authentication, if $N\geq2t+1$ and if the general signs the initial values, then Algorithm $6^1$ achieves consistency, strong unanimity, and termination for an arbitrary value domain.*
+(c) _For Byzantine faults with authentication, if $N\geq2t+1$ and if the general signs the initial values, then Algorithm $6^1$ achieves consistency, strong unanimity, and termination for an arbitrary value domain._
 
-> （c）*对带认证拜占庭故障，若 $N\geq2t+1$ 且将军签署初始值，则算法 $6^1$ 对任意值域达到一致性、强全体一致和终止性。*
+> （c）_对带认证拜占庭故障，若 $N\geq2t+1$ 且将军签署初始值，则算法 $6^1$ 对任意值域达到一致性、强全体一致和终止性。_
 
 ### 6.4 Upper Bounds for Phi Unknown
 
@@ -1623,9 +1625,9 @@ The strategy is the same as in Sections 4.2 and 5.4. Namely, we use the algorith
 
 > 策略与第 4.2、5.4 节相同：使用第 6.3 节算法，但允许 $R_r=3Nr+6r+3\Delta+3$ 步模拟第 $r$ 轮；$R_r$ 由第 6.3 节的 $R$ 以 $r$ 替换 $\Phi$ 得到。须注意，第 6.3 节对（a）的验证完全不依赖 $\Phi$：即 $p_i$ 在第 $r$ 轮收到信号时，它在该轮发给正确处理器的全部消息都在对方开始大于 $r$ 的轮次前到达。因此，即使 $r$ 小于运行中成立的实际未知 $\Phi$，（a）仍成立。把变换用于算法 4、5、6，分别得到 $4^2$、$5^2$、$6^2$。
 
-**THEOREM 6.4.** *Assume that communication is synchronous and processors are partially synchronous (phi is unknown). Then claims (a), (b), and (c) of Theorem 6.3 hold for Algorithms $4^2$, $5^2$, and $6^2$, respectively.*
+**THEOREM 6.4.** _Assume that communication is synchronous and processors are partially synchronous (phi is unknown). Then claims (a), (b), and (c) of Theorem 6.3 hold for Algorithms $4^2$, $5^2$, and $6^2$, respectively._
 
-> **定理 6.4。** *假设通信同步而处理器部分同步（$\Phi$ 未知），则定理 6.3 的（a）、（b）、（c）分别对算法 $4^2$、$5^2$、$6^2$ 成立。*
+> **定理 6.4。** _假设通信同步而处理器部分同步（$\Phi$ 未知），则定理 6.3 的（a）、（b）、（c）分别对算法 $4^2$、$5^2$、$6^2$ 成立。_
 
 Our claim of a polynomial time bound (after GST) for the algorithms of Sections 6.3 and 6.4 follows from clock property (A3.2), which states that the master clock runs fast enough after GST.
 
@@ -1643,13 +1645,13 @@ The following lower bound shows that the resiliency of Theorems 6.3 and 6.4, par
 
 > 下述下界表明，定理 6.3、6.4 的（b）、（c）弹性不能提高。证明方法由 Dolev 建议（私人交流）。
 
-**THEOREM 6.5.** *Assume the model with Byzantine faults with authentication, synchronous communication, and partially synchronous processors. Assume $4\leq N\leq2t$. Then there is no $t$-resilient consensus protocol that achieves weak unanimity for binary values, even if the general signs the initial values.*
+**THEOREM 6.5.** _Assume the model with Byzantine faults with authentication, synchronous communication, and partially synchronous processors. Assume $4\leq N\leq2t$. Then there is no $t$-resilient consensus protocol that achieves weak unanimity for binary values, even if the general signs the initial values._
 
-> **定理 6.5。** *假设模型有带认证拜占庭故障、同步通信和部分同步处理器。若 $4\leq N\leq2t$，则即使将军签署初始值，也不存在对二元值达到弱全体一致的 $t$-弹性共识协议。*
+> **定理 6.5。** _假设模型有带认证拜占庭故障、同步通信和部分同步处理器。若 $4\leq N\leq2t$，则即使将军签署初始值，也不存在对二元值达到弱全体一致的 $t$-弹性共识协议。_
 
-**PROOF.** Assume, to the contrary, that a consensus algorithm exists. The proof is identical for both variations of partially synchronous processors. In the following we assume, without loss of generality, that all messages are delivered in one real-time step. Divide the processors into four groups $P$, $Q$, $\{b\}$, and $\{r\}$, where groups $P$ and $Q$ each contain at least 1 and at most $t-1$ processors and where $b$ and $r$ are single processors. We say that a processor *wakes up* at real time $s$ if it takes the first step of its protocol at real time $s$. We say that a processor *runs fast* in the real-time interval $[s_1,s_2]$ if it takes a step of its protocol at each real-time step in the interval.
+**PROOF.** Assume, to the contrary, that a consensus algorithm exists. The proof is identical for both variations of partially synchronous processors. In the following we assume, without loss of generality, that all messages are delivered in one real-time step. Divide the processors into four groups $P$, $Q$, $\{b\}$, and $\{r\}$, where groups $P$ and $Q$ each contain at least 1 and at most $t-1$ processors and where $b$ and $r$ are single processors. We say that a processor _wakes up_ at real time $s$ if it takes the first step of its protocol at real time $s$. We say that a processor _runs fast_ in the real-time interval $[s_1,s_2]$ if it takes a step of its protocol at each real-time step in the interval.
 
-> **证明。** 反设存在共识算法。对两种部分同步处理器变体，证明相同。不失一般性，假设所有消息在一个实时步内递送。把处理器分成四组 $P,Q,\{b\},\{r\}$；$P,Q$ 各至少 1 个、至多 $t-1$ 个，$b,r$ 各为单个处理器。若处理器在实时时刻 $s$ 执行协议第一步，称它在 $s$ *唤醒*；若它在实时区间 $[s_1,s_2]$ 的每个实时步都执行协议一步，称它在该区间*快速运行*。
+> **证明。** 反设存在共识算法。对两种部分同步处理器变体，证明相同。不失一般性，假设所有消息在一个实时步内递送。把处理器分成四组 $P,Q,\{b\},\{r\}$；$P,Q$ 各至少 1 个、至多 $t-1$ 个，$b,r$ 各为单个处理器。若处理器在实时时刻 $s$ 执行协议第一步，称它在 $s$ _唤醒_；若它在实时区间 $[s_1,s_2]$ 的每个实时步都执行协议一步，称它在该区间*快速运行*。
 
 Consider Scenario CP, where the processors in $P\cup\{b\}$ have initial values 0, wake up at time 1, and run fast in the interval $[1,\infty)$, and where the other processors are initially dead. By $t$-resiliency, the processors in $P$ make some decision within some finite time $T_P$. We claim the decision must be 0. For if it were 1, we could modify the scenario to one in which all initial values are 0, and the processors in $Q\cup\{r\}$ are correct but do not wake up until after time $T_P$. The processors in $P$ still decide 1 in the modified scenario, which contradicts weak unanimity.
 
@@ -1671,17 +1673,17 @@ In the preceding proof, note that the processors in $P$ and $Q$ exhibit only omi
 
 > 前述证明中，$P,Q$ 仅表现遗漏故障：场景 BP 中 $P$ 不向 $Q$ 发送，场景 BQ 中 $Q$ 不接收 $P$ 的消息；只有 $b$ 表现出强于遗漏的拜占庭行为。因此可验证，同一证明可用于遗漏故障，只需三组 $P,Q,\{r\}$，其中 $P,Q$ 各至少 1 个、至多 $t-1$ 个处理器。这证明下述结果：定理 5.1、5.2（a）用于遗漏故障和部分同步处理器时，其弹性最多只能再改进 1。
 
-**THEOREM 6.6.** *Assume the model with omission faults, synchronous communication, and partially synchronous processors. Assume $3\leq N\leq2t-1$. Then there is no $t$-resilient consensus algorithm that achieves weak unanimity for binary values.*
+**THEOREM 6.6.** _Assume the model with omission faults, synchronous communication, and partially synchronous processors. Assume $3\leq N\leq2t-1$. Then there is no $t$-resilient consensus algorithm that achieves weak unanimity for binary values._
 
-> **定理 6.6。** *假设模型有遗漏故障、同步通信和部分同步处理器。若 $3\leq N\leq2t-1$，则不存在对二元值达到弱全体一致的 $t$-弹性共识算法。*
+> **定理 6.6。** _假设模型有遗漏故障、同步通信和部分同步处理器。若 $3\leq N\leq2t-1$，则不存在对二元值达到弱全体一致的 $t$-弹性共识算法。_
 
 For the case of strong unanimity and Byzantine faults with authentication, but where the initial values are not signed by a general, Theorems 5.1 and 5.2, part (b), give consensus algorithms if $N\geq3t+1$. The following shows that this resiliency is the best possible for this case.
 
 > 对带认证拜占庭故障下的强全体一致，若初始值没有将军签名，定理 5.1、5.2（b）在 $N\geq3t+1$ 时给出共识算法。下述结果表明该弹性已是最优。
 
-**THEOREM 6.7.** *Assume the model with Byzantine faults with authentication, synchronous communication, and partially synchronous processors. Assume $3\leq N\leq3t$. If the general does not sign the initial values, there is no $t$-resilient consensus protocol that achieves strong unanimity for binary values.*
+**THEOREM 6.7.** _Assume the model with Byzantine faults with authentication, synchronous communication, and partially synchronous processors. Assume $3\leq N\leq3t$. If the general does not sign the initial values, there is no $t$-resilient consensus protocol that achieves strong unanimity for binary values._
 
-> **定理 6.7。** *假设模型有带认证拜占庭故障、同步通信和部分同步处理器。若 $3\leq N\leq3t$，且将军不签署初始值，则不存在对二元值达到强全体一致的 $t$-弹性共识协议。*
+> **定理 6.7。** _假设模型有带认证拜占庭故障、同步通信和部分同步处理器。若 $3\leq N\leq3t$，且将军不签署初始值，则不存在对二元值达到强全体一致的 $t$-弹性共识协议。_
 
 **PROOF.** Assume $N\leq3t$. Divide the processors into three groups, $P$, $Q$, and $R$, each containing at least 1 and at most $t$ processors.
 
@@ -1715,33 +1717,33 @@ Consider Scenario B: All processors have initial values 0, processors in $R$ are
 
 > 参考文献
 
-1. ATTIYA, A., DOLEV, D., AND GIL, J. Asynchronous Byzantine consensus. In *Proceedings of the 3rd ACM Symposium on Principles of Distributed Computing* (Vancouver, B.C., Canada, Aug. 27–29). ACM, New York, 1984, pp. 119–133.
+1. ATTIYA, A., DOLEV, D., AND GIL, J. Asynchronous Byzantine consensus. In _Proceedings of the 3rd ACM Symposium on Principles of Distributed Computing_ (Vancouver, B.C., Canada, Aug. 27–29). ACM, New York, 1984, pp. 119–133.
 
-> 1. ATTIYA, A.、DOLEV, D.、GIL, J. 异步拜占庭共识。载 *第三届 ACM 分布式计算原理研讨会论文集*（加拿大不列颠哥伦比亚省温哥华，8 月 27—29 日）。ACM，纽约，1984 年，第 119—133 页。
+> 1. ATTIYA, A.、DOLEV, D.、GIL, J. 异步拜占庭共识。载 _第三届 ACM 分布式计算原理研讨会论文集_（加拿大不列颠哥伦比亚省温哥华，8 月 27—29 日）。ACM，纽约，1984 年，第 119—133 页。
 
-2. BRACHA, G., AND TOUEG, S. Asynchronous consensus and broadcast protocols. *J. ACM* 32, 4 (Oct. 1985), 824–840.
+2. BRACHA, G., AND TOUEG, S. Asynchronous consensus and broadcast protocols. _J. ACM_ 32, 4 (Oct. 1985), 824–840.
 
-> 2. BRACHA, G.、TOUEG, S. 异步共识与广播协议。*J. ACM* 32 卷 4 期（1985 年 10 月），第 824—840 页。
+> 2. BRACHA, G.、TOUEG, S. 异步共识与广播协议。_J. ACM_ 32 卷 4 期（1985 年 10 月），第 824—840 页。
 
-3. DOLEV, D., AND STRONG, H. R. Authenticated algorithms for Byzantine agreement. *SIAM J. Comput.* 12 (1983), 656–666.
+3. DOLEV, D., AND STRONG, H. R. Authenticated algorithms for Byzantine agreement. _SIAM J. Comput._ 12 (1983), 656–666.
 
-> 3. DOLEV, D.、STRONG, H. R. 拜占庭一致的认证算法。*SIAM J. Comput.* 12（1983），第 656—666 页。
+> 3. DOLEV, D.、STRONG, H. R. 拜占庭一致的认证算法。_SIAM J. Comput._ 12（1983），第 656—666 页。
 
-4. DOLEV, D., DWORK, C., AND STOCKMEYER, L. On the minimal synchronism needed for distributed consensus. *J. ACM* 34, 1 (Jan. 1987), 77–97.
+4. DOLEV, D., DWORK, C., AND STOCKMEYER, L. On the minimal synchronism needed for distributed consensus. _J. ACM_ 34, 1 (Jan. 1987), 77–97.
 
-> 4. DOLEV, D.、DWORK, C.、STOCKMEYER, L. 分布式共识所需的最小同步性。*J. ACM* 34 卷 1 期（1987 年 1 月），第 77—97 页。
+> 4. DOLEV, D.、DWORK, C.、STOCKMEYER, L. 分布式共识所需的最小同步性。_J. ACM_ 34 卷 1 期（1987 年 1 月），第 77—97 页。
 
-5. DOLEV, D., FISCHER, M. J., FOWLER, R., LYNCH, N. A., AND STRONG, H. R. Efficient Byzantine agreement without authentication. *Inf. Control* 52 (1982), 257–274.
+5. DOLEV, D., FISCHER, M. J., FOWLER, R., LYNCH, N. A., AND STRONG, H. R. Efficient Byzantine agreement without authentication. _Inf. Control_ 52 (1982), 257–274.
 
-> 5. DOLEV, D.、FISCHER, M. J.、FOWLER, R.、LYNCH, N. A.、STRONG, H. R. 无认证的高效拜占庭一致。*Inf. Control* 52（1982），第 257—274 页。
+> 5. DOLEV, D.、FISCHER, M. J.、FOWLER, R.、LYNCH, N. A.、STRONG, H. R. 无认证的高效拜占庭一致。_Inf. Control_ 52（1982），第 257—274 页。
 
-6. DOLEV, D., LYNCH, N. A., PINTER, S. S., STARK, E. W., AND WEIHL, W. E. Reaching approximate agreement in the presence of faults. *J. ACM* 33, 3 (July 1986), 499–516.
+6. DOLEV, D., LYNCH, N. A., PINTER, S. S., STARK, E. W., AND WEIHL, W. E. Reaching approximate agreement in the presence of faults. _J. ACM_ 33, 3 (July 1986), 499–516.
 
-> 6. DOLEV, D.、LYNCH, N. A.、PINTER, S. S.、STARK, E. W.、WEIHL, W. E. 存在故障时达成近似一致。*J. ACM* 33 卷 3 期（1986 年 7 月），第 499—516 页。
+> 6. DOLEV, D.、LYNCH, N. A.、PINTER, S. S.、STARK, E. W.、WEIHL, W. E. 存在故障时达成近似一致。_J. ACM_ 33 卷 3 期（1986 年 7 月），第 499—516 页。
 
-7. DWORK, C., AND MOSES, Y. Knowledge and common knowledge in a Byzantine environment I: Crash failures. In *Proceedings of the 1986 Conference on Theoretical Aspects of Reasoning about Knowledge* (Monterey, Calif., Mar. 19–22). Kaufmann, Los Altos, Calif., 1986, pp. 149–169.
+7. DWORK, C., AND MOSES, Y. Knowledge and common knowledge in a Byzantine environment I: Crash failures. In _Proceedings of the 1986 Conference on Theoretical Aspects of Reasoning about Knowledge_ (Monterey, Calif., Mar. 19–22). Kaufmann, Los Altos, Calif., 1986, pp. 149–169.
 
-> 7. DWORK, C.、MOSES, Y. 拜占庭环境中的知识与共同知识 I：崩溃故障。载 *1986 年知识推理理论方面会议论文集*（加利福尼亚州蒙特雷，3 月 19—22 日）。Kaufmann，加利福尼亚州洛斯阿尔托斯，1986 年，第 149—169 页。
+> 7. DWORK, C.、MOSES, Y. 拜占庭环境中的知识与共同知识 I：崩溃故障。载 _1986 年知识推理理论方面会议论文集_（加利福尼亚州蒙特雷，3 月 19—22 日）。Kaufmann，加利福尼亚州洛斯阿尔托斯，1986 年，第 149—169 页。
 
 8. FISCHER, M. J. The consensus problem in unreliable distributed systems (a brief survey). Rep. YALEU/DCS/RR-273. Dept. of Computer Science, Yale Univ., New Haven, Conn., June 1983.
 
@@ -1751,41 +1753,41 @@ Consider Scenario B: All processors have initial values 0, processors in $R$ are
 
 > 9. FISCHER, M. J.、LAMPORT, L. 拜占庭将军与事务提交协议。技术报告 Op. 62，SRI International，加利福尼亚州门洛帕克，1982 年。
 
-10. FISCHER, M. J., LYNCH, N. A., AND PATERSON, M. S. Impossibility of distributed consensus with one faulty process. *J. ACM* 32, 2 (Apr. 1985), 374–382.
+10. FISCHER, M. J., LYNCH, N. A., AND PATERSON, M. S. Impossibility of distributed consensus with one faulty process. _J. ACM_ 32, 2 (Apr. 1985), 374–382.
 
-> 10. FISCHER, M. J.、LYNCH, N. A.、PATERSON, M. S. 存在一个故障进程时分布式共识的不可能性。*J. ACM* 32 卷 2 期（1985 年 4 月），第 374—382 页。
+> 10. FISCHER, M. J.、LYNCH, N. A.、PATERSON, M. S. 存在一个故障进程时分布式共识的不可能性。_J. ACM_ 32 卷 2 期（1985 年 4 月），第 374—382 页。
 
-11. GARCIA-MOLINA, H., PITTELLI, F., AND DAVIDSON, S. Is Byzantine agreement useful in a distributed database? In *Proceedings of the 3rd SIGACT-SIGMOD Symposium on Principles of Database Systems* (Waterloo, Ont., Canada, Apr. 2–4). ACM, New York, 1984, pp. 61–69.
+11. GARCIA-MOLINA, H., PITTELLI, F., AND DAVIDSON, S. Is Byzantine agreement useful in a distributed database? In _Proceedings of the 3rd SIGACT-SIGMOD Symposium on Principles of Database Systems_ (Waterloo, Ont., Canada, Apr. 2–4). ACM, New York, 1984, pp. 61–69.
 
-> 11. GARCIA-MOLINA, H.、PITTELLI, F.、DAVIDSON, S. 拜占庭一致对分布式数据库有用吗？载 *第三届 SIGACT-SIGMOD 数据库系统原理研讨会论文集*（加拿大安大略省滑铁卢，4 月 2—4 日）。ACM，纽约，1984 年，第 61—69 页。
+> 11. GARCIA-MOLINA, H.、PITTELLI, F.、DAVIDSON, S. 拜占庭一致对分布式数据库有用吗？载 _第三届 SIGACT-SIGMOD 数据库系统原理研讨会论文集_（加拿大安大略省滑铁卢，4 月 2—4 日）。ACM，纽约，1984 年，第 61—69 页。
 
-12. GRAY, J. N. Notes on database operating systems. In *Operating Systems: An Advanced Course*. Lecture Notes in Computer Science, vol. 60. Springer-Verlag, New York, 1978, pp. 393–481.
+12. GRAY, J. N. Notes on database operating systems. In _Operating Systems: An Advanced Course_. Lecture Notes in Computer Science, vol. 60. Springer-Verlag, New York, 1978, pp. 393–481.
 
-> 12. GRAY, J. N. 数据库操作系统札记。载 *操作系统：高级课程*，计算机科学讲义第 60 卷。Springer-Verlag，纽约，1978 年，第 393—481 页。
+> 12. GRAY, J. N. 数据库操作系统札记。载 _操作系统：高级课程_，计算机科学讲义第 60 卷。Springer-Verlag，纽约，1978 年，第 393—481 页。
 
-13. LAMPORT, L. Time, clocks, and the ordering of events in a distributed system. *Commun. ACM* 21, 7 (July 1978), 558–565.
+13. LAMPORT, L. Time, clocks, and the ordering of events in a distributed system. _Commun. ACM_ 21, 7 (July 1978), 558–565.
 
-> 13. LAMPORT, L. 分布式系统中的时间、时钟与事件次序。*Commun. ACM* 21 卷 7 期（1978 年 7 月），第 558—565 页。
+> 13. LAMPORT, L. 分布式系统中的时间、时钟与事件次序。_Commun. ACM_ 21 卷 7 期（1978 年 7 月），第 558—565 页。
 
-14. LAMPORT, L. The weak Byzantine generals problem. *J. ACM* 30, 3 (July 1983), 668–676.
+14. LAMPORT, L. The weak Byzantine generals problem. _J. ACM_ 30, 3 (July 1983), 668–676.
 
-> 14. LAMPORT, L. 弱拜占庭将军问题。*J. ACM* 30 卷 3 期（1983 年 7 月），第 668—676 页。
+> 14. LAMPORT, L. 弱拜占庭将军问题。_J. ACM_ 30 卷 3 期（1983 年 7 月），第 668—676 页。
 
-15. LAMPORT, L., SHOSTAK, R., AND PEASE, M. The Byzantine generals problem. *ACM Trans. Program. Lang. Syst.* 4, 3 (July 1982), 382–401.
+15. LAMPORT, L., SHOSTAK, R., AND PEASE, M. The Byzantine generals problem. _ACM Trans. Program. Lang. Syst._ 4, 3 (July 1982), 382–401.
 
-> 15. LAMPORT, L.、SHOSTAK, R.、PEASE, M. 拜占庭将军问题。*ACM Trans. Program. Lang. Syst.* 4 卷 3 期（1982 年 7 月），第 382—401 页。
+> 15. LAMPORT, L.、SHOSTAK, R.、PEASE, M. 拜占庭将军问题。_ACM Trans. Program. Lang. Syst._ 4 卷 3 期（1982 年 7 月），第 382—401 页。
 
 16. PINTER, S. Distributed computation systems: Modelling, verification and algorithms. Ph.D. dissertation. Dept. of Computer Science, Boston Univ., Boston, Mass., 1984.
 
 > 16. PINTER, S. 分布式计算系统：建模、验证与算法。博士学位论文，波士顿大学计算机科学系，马萨诸塞州波士顿，1984 年。
 
-17. REISCHUK, R. A new solution for the Byzantine generals problem. *Inf. Control* 64 (1985), 23–42.
+17. REISCHUK, R. A new solution for the Byzantine generals problem. _Inf. Control_ 64 (1985), 23–42.
 
-> 17. REISCHUK, R. 拜占庭将军问题的一种新解法。*Inf. Control* 64（1985），第 23—42 页。
+> 17. REISCHUK, R. 拜占庭将军问题的一种新解法。_Inf. Control_ 64（1985），第 23—42 页。
 
-18. SCHNEIDER, F. B. Byzantine generals in action: Implementing fail-stop processors. *ACM Trans. Comput. Syst.* 2, 2 (May 1984), 145–154.
+18. SCHNEIDER, F. B. Byzantine generals in action: Implementing fail-stop processors. _ACM Trans. Comput. Syst._ 2, 2 (May 1984), 145–154.
 
-> 18. SCHNEIDER, F. B. 实践中的拜占庭将军：实现停机故障处理器。*ACM Trans. Comput. Syst.* 2 卷 2 期（1984 年 5 月），第 145—154 页。
+> 18. SCHNEIDER, F. B. 实践中的拜占庭将军：实现停机故障处理器。_ACM Trans. Comput. Syst._ 2 卷 2 期（1984 年 5 月），第 145—154 页。
 
 19. SKEEN, D. A quorum based commit protocol. Tech. Rep. TR 82-483, Computer Science Dept., Cornell Univ., Ithaca, N.Y., Feb. 1982.
 

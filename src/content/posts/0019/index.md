@@ -5,6 +5,7 @@ modDatetime: 2024-08-04T17:36:52+08:00
 timezone: "Asia/Shanghai"
 title: "二叉搜索树(BST)"
 featured: false
+area: "algorithms"
 draft: false
 tags: []
 description: "梳理二叉搜索树的定义、查找、插入、删除，以及树高对操作效率的影响。"

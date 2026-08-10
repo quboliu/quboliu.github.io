@@ -11,7 +11,8 @@
   --color-visited: var(--visited);
   --font-app: var(--font-main);
   --font-mono:
-    ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
+    monospace;
 }
 
 /* Light theme values (Bear default) */

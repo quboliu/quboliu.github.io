@@ -5,6 +5,7 @@ modDatetime: 2024-08-12T13:53:20+08:00
 timezone: "Asia/Shanghai"
 title: "详解上下文切换"
 featured: false
+area: "operating-systems"
 draft: false
 tags: []
 description: "对比进程、线程与协程的上下文切换，重点追问寄存器保存为何可以在用户态完成。"

@@ -18,7 +18,8 @@ const byPubDatetimeDesc = (
   a: (typeof posts)[number],
   b: (typeof posts)[number]
 ) =>
-  new Date(b.data.pubDatetime).getTime() - new Date(a.data.pubDatetime).getTime();
+  new Date(b.data.pubDatetime).getTime() -
+  new Date(a.data.pubDatetime).getTime();
 
 const tagGroups = tags.map(({ tag, tagName }) => ({
   tag,
@@ -41,7 +42,7 @@ const t = useTranslations(locale);
     <a
       id="show-all-tags"
       href="#"
-      class="text-accent mb-4 inline-block hidden no-underline hover:underline"
+      class="text-accent mb-4 hidden inline-block no-underline hover:underline"
     >
       ← 全部标签
     </a>

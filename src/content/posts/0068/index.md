@@ -5,6 +5,7 @@ modDatetime: 2024-08-25T18:59:06+08:00
 timezone: "Asia/Shanghai"
 title: "一个简单的知识库构建流"
 featured: false
+area: "tools-and-workflow"
 draft: false
 tags: []
 description: "以上所有内容，皆围绕两个SiYuan笔记的笔记本展开。一个知识库笔记本，一个技术空间。 知识库用于输入，技术空间用于输出。"

@@ -5,6 +5,7 @@ modDatetime: 2024-07-30T14:50:59+08:00
 timezone: "Asia/Shanghai"
 title: "Piclist+缤纷云=个人图床"
 featured: false
+area: "tools-and-workflow"
 draft: false
 tags: []
 description: "使用缤纷云对象存储和 PicList 搭建个人图床，并将图片嵌入博客文章。"

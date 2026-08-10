@@ -5,6 +5,7 @@ modDatetime: 2024-08-12T09:06:07+08:00
 timezone: "Asia/Shanghai"
 title: "详解IPC"
 featured: false
+area: "operating-systems"
 draft: false
 tags: []
 description: "IPC: Inter-Process Communication"

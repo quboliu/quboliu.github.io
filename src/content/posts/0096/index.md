@@ -4,6 +4,7 @@ pubDatetime: 2026-08-09T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | The Google File System（中英对照全文）"
 featured: false
+area: "distributed-systems"
 draft: false
 tags:
   - "论文阅读"
@@ -13,6 +14,7 @@ tags:
   - "存储系统"
 description: "The Google File System 中英对照全文，涵盖 GFS 的单主控架构、块与租约、原子记录追加、一致性模型、容错恢复及真实集群测量。"
 ---
+
 > Google 文件系统
 
 Sanjay Ghemawat, Howard Gobioff, and Shun-Tak Leung<br>
@@ -789,27 +791,27 @@ We now examine two clusters in use within Google that are representative of seve
 
 > 下面考察 Google 内部正在使用的两个集群，它们可以代表其他几个类似集群。集群 A 供一百多名工程师日常研发使用。典型任务由用户发起，最长运行数小时；它读取数 MB 到数 TB 数据，对其转换或分析，再把结果写回集群。集群 B 主要用于生产数据处理，任务持续时间更长，不断生成和处理数 TB 的数据集，只偶尔需要人工干预。在两种情形中，单个“任务”都由许多机器上的许多进程组成，同时读写许多文件。
 
-| Cluster | A | B |
-|---|---:|---:|
-| Chunkservers | 342 | 227 |
-| Available disk space | 72 TB | 180 TB |
-| Used disk space | 55 TB | 155 TB |
-| Number of Files | 735 k | 737 k |
-| Number of Dead files | 22 k | 232 k |
-| Number of Chunks | 992 k | 1550 k |
-| Metadata at chunkservers | 13 GB | 21 GB |
-| Metadata at master | 48 MB | 60 MB |
+| Cluster                  |     A |      B |
+| ------------------------ | ----: | -----: |
+| Chunkservers             |   342 |    227 |
+| Available disk space     | 72 TB | 180 TB |
+| Used disk space          | 55 TB | 155 TB |
+| Number of Files          | 735 k |  737 k |
+| Number of Dead files     |  22 k |  232 k |
+| Number of Chunks         | 992 k | 1550 k |
+| Metadata at chunkservers | 13 GB |  21 GB |
+| Metadata at master       | 48 MB |  60 MB |
 
-> | 集群 | A | B |
-> |---|---:|---:|
-> | 块服务器数 | 342 | 227 |
-> | 可用磁盘空间 | 72 TB | 180 TB |
-> | 已用磁盘空间 | 55 TB | 155 TB |
-> | 文件数 | 735 k | 737 k |
-> | 已删除文件数 | 22 k | 232 k |
-> | 块数 | 992 k | 1550 k |
-> | 块服务器上的元数据 | 13 GB | 21 GB |
-> | 主控节点上的元数据 | 48 MB | 60 MB |
+> | 集群               |     A |      B |
+> | ------------------ | ----: | -----: |
+> | 块服务器数         |   342 |    227 |
+> | 可用磁盘空间       | 72 TB | 180 TB |
+> | 已用磁盘空间       | 55 TB | 155 TB |
+> | 文件数             | 735 k |  737 k |
+> | 已删除文件数       |  22 k |  232 k |
+> | 块数               | 992 k | 1550 k |
+> | 块服务器上的元数据 | 13 GB |  21 GB |
+> | 主控节点上的元数据 | 48 MB |  60 MB |
 
 **Table 2: Characteristics of two GFS clusters**
 
@@ -865,26 +867,26 @@ The average write rate was less than 30 MB/s since the restart. When we took the
 
 > **图表中文解读：** (a) 聚合读吞吐随客户端数上升而接近跨交换机链路上限，16 客户端时约 94 MB/s；(b) 聚合写吞吐同样上升，但受三副本传播与网络栈流水线效率影响，只有理论上限约一半；(c) 所有客户端追加同一文件时，瓶颈固定在最后一块的副本网络带宽，吞吐约为 4.8—6.0 MB/s，增加客户端并不会提高总吞吐。细小误差棒反映测量结果较稳定。
 
-| Cluster | A | B |
-|---|---:|---:|
-| Read rate (last minute) | 583 MB/s | 380 MB/s |
-| Read rate (last hour) | 562 MB/s | 384 MB/s |
-| Read rate (since restart) | 589 MB/s | 49 MB/s |
-| Write rate (last minute) | 1 MB/s | 101 MB/s |
-| Write rate (last hour) | 2 MB/s | 117 MB/s |
-| Write rate (since restart) | 25 MB/s | 13 MB/s |
-| Master ops (last minute) | 325 Ops/s | 533 Ops/s |
-| Master ops (last hour) | 381 Ops/s | 518 Ops/s |
+| Cluster                    |         A |         B |
+| -------------------------- | --------: | --------: |
+| Read rate (last minute)    |  583 MB/s |  380 MB/s |
+| Read rate (last hour)      |  562 MB/s |  384 MB/s |
+| Read rate (since restart)  |  589 MB/s |   49 MB/s |
+| Write rate (last minute)   |    1 MB/s |  101 MB/s |
+| Write rate (last hour)     |    2 MB/s |  117 MB/s |
+| Write rate (since restart) |   25 MB/s |   13 MB/s |
+| Master ops (last minute)   | 325 Ops/s | 533 Ops/s |
+| Master ops (last hour)     | 381 Ops/s | 518 Ops/s |
 | Master ops (since restart) | 202 Ops/s | 347 Ops/s |
 
-> | 集群 | A | B |
-> |---|---:|---:|
-> | 读取速率（最近一分钟） | 583 MB/s | 380 MB/s |
-> | 读取速率（最近一小时） | 562 MB/s | 384 MB/s |
-> | 读取速率（自重启以来） | 589 MB/s | 49 MB/s |
-> | 写入速率（最近一分钟） | 1 MB/s | 101 MB/s |
-> | 写入速率（最近一小时） | 2 MB/s | 117 MB/s |
-> | 写入速率（自重启以来） | 25 MB/s | 13 MB/s |
+> | 集群                   |         A |         B |
+> | ---------------------- | --------: | --------: |
+> | 读取速率（最近一分钟） |  583 MB/s |  380 MB/s |
+> | 读取速率（最近一小时） |  562 MB/s |  384 MB/s |
+> | 读取速率（自重启以来） |  589 MB/s |   49 MB/s |
+> | 写入速率（最近一分钟） |    1 MB/s |  101 MB/s |
+> | 写入速率（最近一小时） |    2 MB/s |  117 MB/s |
+> | 写入速率（自重启以来） |   25 MB/s |   13 MB/s |
 > | 主控操作（最近一分钟） | 325 次/秒 | 533 次/秒 |
 > | 主控操作（最近一小时） | 381 次/秒 | 518 次/秒 |
 > | 主控操作（自重启以来） | 202 次/秒 | 347 次/秒 |
@@ -1065,23 +1067,23 @@ As expected, our data mutation workload is dominated by appending rather than ov
 
 > 不出所料，我们的数据变更工作负载由追加而非覆盖主导。我们测量了主副本上被覆盖的数据量，它近似代表客户端故意覆盖先前写入数据、而不是追加新数据的情形。对集群 X，覆盖占变更字节数不到 0.0001%，占变更操作数不到 0.0003%；对集群 Y，两项比例都是 0.05%。这些比例虽极低，却仍高于预期。事实证明，大多数覆盖源于客户端因错误或超时而重试；严格说来，它们并非工作负载本身的一部分，而是重试机制的结果。
 
-| Cluster | X | Y |
-|---|---:|---:|
-| Open | 26.1 | 16.3 |
-| Delete | 0.7 | 1.5 |
-| FindLocation | 64.3 | 65.8 |
-| FindLeaseHolder | 7.8 | 13.4 |
-| FindMatchingFiles | 0.6 | 2.2 |
-| All other combined | 0.5 | 0.8 |
+| Cluster            |    X |    Y |
+| ------------------ | ---: | ---: |
+| Open               | 26.1 | 16.3 |
+| Delete             |  0.7 |  1.5 |
+| FindLocation       | 64.3 | 65.8 |
+| FindLeaseHolder    |  7.8 | 13.4 |
+| FindMatchingFiles  |  0.6 |  2.2 |
+| All other combined |  0.5 |  0.8 |
 
-> | 集群 | X | Y |
-> |---|---:|---:|
-> | Open | 26.1 | 16.3 |
-> | Delete | 0.7 | 1.5 |
-> | FindLocation | 64.3 | 65.8 |
-> | FindLeaseHolder | 7.8 | 13.4 |
-> | FindMatchingFiles | 0.6 | 2.2 |
-> | 其他请求合计 | 0.5 | 0.8 |
+> | 集群              |    X |    Y |
+> | ----------------- | ---: | ---: |
+> | Open              | 26.1 | 16.3 |
+> | Delete            |  0.7 |  1.5 |
+> | FindLocation      | 64.3 | 65.8 |
+> | FindLeaseHolder   |  7.8 | 13.4 |
+> | FindMatchingFiles |  0.6 |  2.2 |
+> | 其他请求合计      |  0.5 |  0.8 |
 
 **Table 6: Master Requests Breakdown by Type (%)**
 
@@ -1205,23 +1207,23 @@ We wish to thank the following people for their contributions to the system or t
 
 > 参考文献
 
-1. Thomas Anderson, Michael Dahlin, Jeanna Neefe, David Patterson, Drew Roselli, and Randolph Wang. Serverless network file systems. In *Proceedings of the 15th ACM Symposium on Operating System Principles*, pages 109–126, Copper Mountain Resort, Colorado, December 1995.
+1. Thomas Anderson, Michael Dahlin, Jeanna Neefe, David Patterson, Drew Roselli, and Randolph Wang. Serverless network file systems. In _Proceedings of the 15th ACM Symposium on Operating System Principles_, pages 109–126, Copper Mountain Resort, Colorado, December 1995.
 
    > Thomas Anderson、Michael Dahlin、Jeanna Neefe、David Patterson、Drew Roselli 与 Randolph Wang。无服务器网络文件系统。载于《第 15 届 ACM 操作系统原理研讨会论文集》，第 109—126 页，美国科罗拉多州 Copper Mountain Resort，1995 年 12 月。
 
-2. Remzi H. Arpaci-Dusseau, Eric Anderson, Noah Treuhaft, David E. Culler, Joseph M. Hellerstein, David Patterson, and Kathy Yelick. Cluster I/O with River: Making the fast case common. In *Proceedings of the Sixth Workshop on Input/Output in Parallel and Distributed Systems (IOPADS ’99)*, pages 10–22, Atlanta, Georgia, May 1999.
+2. Remzi H. Arpaci-Dusseau, Eric Anderson, Noah Treuhaft, David E. Culler, Joseph M. Hellerstein, David Patterson, and Kathy Yelick. Cluster I/O with River: Making the fast case common. In _Proceedings of the Sixth Workshop on Input/Output in Parallel and Distributed Systems (IOPADS ’99)_, pages 10–22, Atlanta, Georgia, May 1999.
 
    > Remzi H. Arpaci-Dusseau、Eric Anderson、Noah Treuhaft、David E. Culler、Joseph M. Hellerstein、David Patterson 与 Kathy Yelick。使用 River 的集群 I/O：让快速情形成为常态。载于《第六届并行与分布式系统输入／输出研讨会（IOPADS ’99）论文集》，第 10—22 页，美国佐治亚州亚特兰大，1999 年 5 月。
 
-3. Luis-Felipe Cabrera and Darrell D. E. Long. Swift: Using distributed disk striping to provide high I/O data rates. *Computer Systems*, 4(4):405–436, 1991.
+3. Luis-Felipe Cabrera and Darrell D. E. Long. Swift: Using distributed disk striping to provide high I/O data rates. _Computer Systems_, 4(4):405–436, 1991.
 
    > Luis-Felipe Cabrera 与 Darrell D. E. Long。Swift：利用分布式磁盘条带化提供高 I/O 数据速率。《Computer Systems》，4(4):405—436，1991。
 
-4. Garth A. Gibson, David F. Nagle, Khalil Amiri, Jeff Butler, Fay W. Chang, Howard Gobioff, Charles Hardin, Erik Riedel, David Rochberg, and Jim Zelenka. A cost-effective, high-bandwidth storage architecture. In *Proceedings of the 8th Architectural Support for Programming Languages and Operating Systems*, pages 92–103, San Jose, California, October 1998.
+4. Garth A. Gibson, David F. Nagle, Khalil Amiri, Jeff Butler, Fay W. Chang, Howard Gobioff, Charles Hardin, Erik Riedel, David Rochberg, and Jim Zelenka. A cost-effective, high-bandwidth storage architecture. In _Proceedings of the 8th Architectural Support for Programming Languages and Operating Systems_, pages 92–103, San Jose, California, October 1998.
 
    > Garth A. Gibson、David F. Nagle、Khalil Amiri、Jeff Butler、Fay W. Chang、Howard Gobioff、Charles Hardin、Erik Riedel、David Rochberg 与 Jim Zelenka。一种高性价比、高带宽的存储架构。载于《第 8 届编程语言与操作系统体系结构支持会议论文集》，第 92—103 页，美国加利福尼亚州圣何塞，1998 年 10 月。
 
-5. John Howard, Michael Kazar, Sherri Menees, David Nichols, Mahadev Satyanarayanan, Robert Sidebotham, and Michael West. Scale and performance in a distributed file system. *ACM Transactions on Computer Systems*, 6(1):51–81, February 1988.
+5. John Howard, Michael Kazar, Sherri Menees, David Nichols, Mahadev Satyanarayanan, Robert Sidebotham, and Michael West. Scale and performance in a distributed file system. _ACM Transactions on Computer Systems_, 6(1):51–81, February 1988.
 
    > John Howard、Michael Kazar、Sherri Menees、David Nichols、Mahadev Satyanarayanan、Robert Sidebotham 与 Michael West。分布式文件系统中的规模与性能。《ACM Transactions on Computer Systems》，6(1):51—81，1988 年 2 月。
 
@@ -1229,7 +1231,7 @@ We wish to thank the following people for their contributions to the system or t
 
    > InterMezzo。http://www.inter-mezzo.org，2003。
 
-7. Barbara Liskov, Sanjay Ghemawat, Robert Gruber, Paul Johnson, Liuba Shrira, and Michael Williams. Replication in the Harp file system. In *13th Symposium on Operating System Principles*, pages 226–238, Pacific Grove, CA, October 1991.
+7. Barbara Liskov, Sanjay Ghemawat, Robert Gruber, Paul Johnson, Liuba Shrira, and Michael Williams. Replication in the Harp file system. In _13th Symposium on Operating System Principles_, pages 226–238, Pacific Grove, CA, October 1991.
 
    > Barbara Liskov、Sanjay Ghemawat、Robert Gruber、Paul Johnson、Liuba Shrira 与 Michael Williams。Harp 文件系统中的复制。载于《第 13 届操作系统原理研讨会》，第 226—238 页，美国加利福尼亚州 Pacific Grove，1991 年 10 月。
 
@@ -1237,18 +1239,18 @@ We wish to thank the following people for their contributions to the system or t
 
    > Lustre。http://www.lustreorg，2003。
 
-9. David A. Patterson, Garth A. Gibson, and Randy H. Katz. A case for redundant arrays of inexpensive disks (RAID). In *Proceedings of the 1988 ACM SIGMOD International Conference on Management of Data*, pages 109–116, Chicago, Illinois, September 1988.
+9. David A. Patterson, Garth A. Gibson, and Randy H. Katz. A case for redundant arrays of inexpensive disks (RAID). In _Proceedings of the 1988 ACM SIGMOD International Conference on Management of Data_, pages 109–116, Chicago, Illinois, September 1988.
 
    > David A. Patterson、Garth A. Gibson 与 Randy H. Katz。廉价磁盘冗余阵列（RAID）的论证。载于《1988 ACM SIGMOD 数据管理国际会议论文集》，第 109—116 页，美国伊利诺伊州芝加哥，1988 年 9 月。
 
-10. Frank Schmuck and Roger Haskin. GPFS: A shared-disk file system for large computing clusters. In *Proceedings of the First USENIX Conference on File and Storage Technologies*, pages 231–244, Monterey, California, January 2002.
+10. Frank Schmuck and Roger Haskin. GPFS: A shared-disk file system for large computing clusters. In _Proceedings of the First USENIX Conference on File and Storage Technologies_, pages 231–244, Monterey, California, January 2002.
 
     > Frank Schmuck 与 Roger Haskin。GPFS：面向大型计算集群的共享磁盘文件系统。载于《第一届 USENIX 文件与存储技术会议论文集》，第 231—244 页，美国加利福尼亚州蒙特雷，2002 年 1 月。
 
-11. Steven R. Soltis, Thomas M. Ruwart, and Matthew T. O’Keefe. The Gobal File System. In *Proceedings of the Fifth NASA Goddard Space Flight Center Conference on Mass Storage Systems and Technologies*, College Park, Maryland, September 1996.
+11. Steven R. Soltis, Thomas M. Ruwart, and Matthew T. O’Keefe. The Gobal File System. In _Proceedings of the Fifth NASA Goddard Space Flight Center Conference on Mass Storage Systems and Technologies_, College Park, Maryland, September 1996.
 
     > Steven R. Soltis、Thomas M. Ruwart 与 Matthew T. O’Keefe。Gobal 文件系统。载于《第五届 NASA 戈达德航天飞行中心大容量存储系统与技术会议论文集》，美国马里兰州 College Park，1996 年 9 月。
 
-12. Chandramohan A. Thekkath, Timothy Mann, and Edward K. Lee. Frangipani: A scalable distributed file system. In *Proceedings of the 16th ACM Symposium on Operating System Principles*, pages 224–237, Saint-Malo, France, October 1997.
+12. Chandramohan A. Thekkath, Timothy Mann, and Edward K. Lee. Frangipani: A scalable distributed file system. In _Proceedings of the 16th ACM Symposium on Operating System Principles_, pages 224–237, Saint-Malo, France, October 1997.
 
     > Chandramohan A. Thekkath、Timothy Mann 与 Edward K. Lee。Frangipani：一种可扩展的分布式文件系统。载于《第 16 届 ACM 操作系统原理研讨会论文集》，第 224—237 页，法国圣马洛，1997 年 10 月。

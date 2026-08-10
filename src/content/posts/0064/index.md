@@ -5,6 +5,7 @@ modDatetime: 2024-08-17T21:42:00+08:00
 timezone: "Asia/Shanghai"
 title: "一个hexo一键推送的脚本"
 featured: false
+area: "tools-and-workflow"
 draft: false
 tags: []
 description: "该脚本由ChatGPT、Claude联合调整而成，目前还是好用的。 运行于Win11下, .ps1后缀。"

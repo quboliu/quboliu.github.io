@@ -12,7 +12,7 @@ The visual design is inspired by [Herman's blog](https://herman.bearblog.dev/) (
 - Markdown and MDX
 - Local images and responsive output
 - YouTube, Bilibili, and hosted video
-- Full-text search, tags, archives, and RSS
+- Full-text search, Areas, tags, archives, and RSS
 - Light and dark mode
 - Comments powered by GitHub Discussions
 

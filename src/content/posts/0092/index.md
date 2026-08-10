@@ -4,6 +4,7 @@ pubDatetime: 2026-08-09T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Paxos Made Simple（中英对照全文）"
 featured: false
+area: "distributed-systems"
 draft: false
 tags:
   - "论文阅读"
@@ -13,6 +14,7 @@ tags:
   - "状态机复制"
 description: "Leslie Lamport 的 Paxos 经典论文中英对照全文，从安全性约束逐步推导两阶段共识算法，并说明学习者、活性、稳定存储与多实例状态机复制。"
 ---
+
 > Paxos 简明论
 
 Leslie Lamport
@@ -219,7 +221,7 @@ To maintain the invariance of P2ᶜ, a proposer that wants to issue a proposal n
 
    > （b）它已接受的、编号小于 $n$ 的提案中编号最高的一个（如果有）。
 
-   I will call such a request a *prepare* request with number $n$.
+   I will call such a request a _prepare_ request with number $n$.
 
    > 我把这种请求称为编号为 $n$ 的*准备*请求。
 
@@ -227,11 +229,11 @@ To maintain the invariance of P2ᶜ, a proposer that wants to issue a proposal n
 
    > 如果提议者收到了多数接受者按要求作出的响应，那么它就可以发出一个编号为 $n$、值为 $v$ 的提案；其中，$v$ 是各响应所报告的提案中编号最高者的值；如果响应者没有报告任何提案，则 $v$ 可以是提议者选定的任意值。
 
-A proposer issues a proposal by sending, to some set of acceptors, a request that the proposal be accepted. (This need not be the same set of acceptors that responded to the initial requests.) Let’s call this an *accept* request.
+A proposer issues a proposal by sending, to some set of acceptors, a request that the proposal be accepted. (This need not be the same set of acceptors that responded to the initial requests.) Let’s call this an _accept_ request.
 
 > 提议者通过向某个接受者集合发送要求接受该提案的请求来发出提案。（这个接受者集合不必与响应最初请求的集合相同。）我们把这种请求称为*接受*请求。
 
-This describes a proposer’s algorithm. What about an acceptor? It can receive two kinds of requests from proposers: *prepare* requests and *accept* requests. An acceptor can ignore any request without compromising safety. So, we need to say only when it is allowed to respond to a request. It can always respond to a *prepare* request. It can respond to an *accept* request, accepting the proposal, iff it has not promised not to. In other words:
+This describes a proposer’s algorithm. What about an acceptor? It can receive two kinds of requests from proposers: _prepare_ requests and _accept_ requests. An acceptor can ignore any request without compromising safety. So, we need to say only when it is allowed to respond to a request. It can always respond to a _prepare_ request. It can respond to an _accept_ request, accepting the proposal, iff it has not promised not to. In other words:
 
 > 以上描述了提议者的算法。那么接受者呢？它可能从提议者那里收到两类请求：*准备*请求和*接受*请求。接受者忽略任何请求都不会损害安全性。因此，我们只需说明它在什么时候可以响应请求。它总是可以响应*准备*请求。它可以响应*接受*请求并接受提案，当且仅当它没有承诺不这样做。换言之：
 
@@ -247,7 +249,7 @@ We now have a complete algorithm for choosing a value that satisfies the require
 
 > 现在，假定提案编号唯一，我们已经有了一套满足所要求安全性质的完整选值算法。再作一个小小的优化，就得到最终算法。
 
-Suppose an acceptor receives a *prepare* request numbered $n$, but it has already responded to a *prepare* request numbered greater than $n$, thereby promising not to accept any new proposal numbered $n$. There is then no reason for the acceptor to respond to the new *prepare* request, since it will not accept the proposal numbered $n$ that the proposer wants to issue. So we have the acceptor ignore such a *prepare* request. We also have it ignore a *prepare* request for a proposal it has already accepted.
+Suppose an acceptor receives a _prepare_ request numbered $n$, but it has already responded to a _prepare_ request numbered greater than $n$, thereby promising not to accept any new proposal numbered $n$. There is then no reason for the acceptor to respond to the new _prepare_ request, since it will not accept the proposal numbered $n$ that the proposer wants to issue. So we have the acceptor ignore such a _prepare_ request. We also have it ignore a _prepare_ request for a proposal it has already accepted.
 
 > 假设一个接受者收到了编号为 $n$ 的*准备*请求，但它此前已经响应过编号大于 $n$ 的*准备*请求，因而承诺不接受任何新的编号为 $n$ 的提案。此时它没有理由响应这个新的*准备*请求，因为它不会接受提议者想要发出的编号为 $n$ 的提案。因此，我们让接受者忽略这种*准备*请求。对于它已经接受过的提案所对应的*准备*请求，我们也让它忽略。
 
@@ -259,23 +261,23 @@ Putting the actions of the proposer and acceptor together, we see that the algor
 
 > 把提议者和接受者的动作合在一起，可以看到该算法分以下两个阶段运行。
 
-**Phase 1.** (a) A proposer selects a proposal number $n$ and sends a *prepare* request with number $n$ to a majority of acceptors.
+**Phase 1.** (a) A proposer selects a proposal number $n$ and sends a _prepare_ request with number $n$ to a majority of acceptors.
 
 > **阶段 1。**（a）提议者选择一个提案编号 $n$，并向多数接受者发送编号为 $n$ 的*准备*请求。
 
-(b) If an acceptor receives a *prepare* request with number $n$ greater than that of any *prepare* request to which it has already responded, then it responds to the request with a promise not to accept any more proposals numbered less than $n$ and with the highest-numbered proposal (if any) that it has accepted.
+(b) If an acceptor receives a _prepare_ request with number $n$ greater than that of any _prepare_ request to which it has already responded, then it responds to the request with a promise not to accept any more proposals numbered less than $n$ and with the highest-numbered proposal (if any) that it has accepted.
 
 > （b）如果接受者收到的*准备*请求的编号 $n$ 大于它已响应过的任何*准备*请求的编号，那么它响应这个请求，承诺不再接受编号小于 $n$ 的提案，并附上它已接受的最高编号提案（如果有）。
 
-**Phase 2.** (a) If the proposer receives a response to its *prepare* requests (numbered $n$) from a majority of acceptors, then it sends an *accept* request to each of those acceptors for a proposal numbered $n$ with a value $v$, where $v$ is the value of the highest-numbered proposal among the responses, or is any value if the responses reported no proposals.
+**Phase 2.** (a) If the proposer receives a response to its _prepare_ requests (numbered $n$) from a majority of acceptors, then it sends an _accept_ request to each of those acceptors for a proposal numbered $n$ with a value $v$, where $v$ is the value of the highest-numbered proposal among the responses, or is any value if the responses reported no proposals.
 
 > **阶段 2。**（a）如果提议者从多数接受者那里收到了对其（编号为 $n$ 的）*准备*请求的响应，那么它就向这些接受者逐一发送*接受*请求，请它们接受编号为 $n$、值为 $v$ 的提案；其中，$v$ 是各响应所报告提案中编号最高者的值；如果响应没有报告任何提案，$v$ 则可以是任意值。
 
-(b) If an acceptor receives an *accept* request for a proposal numbered $n$, it accepts the proposal unless it has already responded to a *prepare* request having a number greater than $n$.
+(b) If an acceptor receives an _accept_ request for a proposal numbered $n$, it accepts the proposal unless it has already responded to a _prepare_ request having a number greater than $n$.
 
 > （b）如果接受者收到一个针对编号为 $n$ 的提案的*接受*请求，它就接受该提案，除非它此前已经响应过编号大于 $n$ 的*准备*请求。
 
-A proposer can make multiple proposals, so long as it follows the algorithm for each one. It can abandon a proposal in the middle of the protocol at any time. (Correctness is maintained, even though requests and/or responses for the proposal may arrive at their destinations long after the proposal was abandoned.) It is probably a good idea to abandon a proposal if some proposer has begun trying to issue a higher-numbered one. Therefore, if an acceptor ignores a *prepare* or *accept* request because it has already received a *prepare* request with a higher number, then it should probably inform the proposer, who should then abandon its proposal. This is a performance optimization that does not affect correctness.
+A proposer can make multiple proposals, so long as it follows the algorithm for each one. It can abandon a proposal in the middle of the protocol at any time. (Correctness is maintained, even though requests and/or responses for the proposal may arrive at their destinations long after the proposal was abandoned.) It is probably a good idea to abandon a proposal if some proposer has begun trying to issue a higher-numbered one. Therefore, if an acceptor ignores a _prepare_ or _accept_ request because it has already received a _prepare_ request with a higher number, then it should probably inform the proposer, who should then abandon its proposal. This is a performance optimization that does not affect correctness.
 
 > 只要对每个提案都遵循这一算法，提议者就可以提出多个提案。它可以在协议进行到一半时随时放弃某个提案。（即使该提案的请求和/或响应可能在它被放弃很久之后才抵达目的地，正确性仍能得到保持。）如果某个提议者已经开始尝试发出编号更高的提案，放弃当前提案大概是明智之举。因此，如果接受者因为已经收到编号更高的*准备*请求而忽略某个*准备*请求或*接受*请求，它或许应当通知提议者，后者随即应当放弃自己的提案。这是一项不影响正确性的性能优化。
 
@@ -391,22 +393,22 @@ If the set of servers can change, then there must be some way of determining wha
 
 > 参考文献
 
-[1] Michael J. Fischer, Nancy Lynch, and Michael S. Paterson. Impossibility of distributed consensus with one faulty process. *Journal of the ACM*, 32(2):374–382, April 1985.
+[1] Michael J. Fischer, Nancy Lynch, and Michael S. Paterson. Impossibility of distributed consensus with one faulty process. _Journal of the ACM_, 32(2):374–382, April 1985.
 
-> [1] Michael J. Fischer、Nancy Lynch 与 Michael S. Paterson。《单个故障进程条件下分布式共识的不可能性》。*Journal of the ACM*，32(2):374–382，1985 年 4 月。
+> [1] Michael J. Fischer、Nancy Lynch 与 Michael S. Paterson。《单个故障进程条件下分布式共识的不可能性》。_Journal of the ACM_，32(2):374–382，1985 年 4 月。
 
-[2] Idit Keidar and Sergio Rajsbaum. On the cost of fault-tolerant consensus when there are no faults—a tutorial. Technical Report MIT-LCS-TR-821, Laboratory for Computer Science, Massachusetts Institute Technology, Cambridge, MA, 02139, May 2001. also published in *SIGACT News* 32(2) (June 2001).
+[2] Idit Keidar and Sergio Rajsbaum. On the cost of fault-tolerant consensus when there are no faults—a tutorial. Technical Report MIT-LCS-TR-821, Laboratory for Computer Science, Massachusetts Institute Technology, Cambridge, MA, 02139, May 2001. also published in _SIGACT News_ 32(2) (June 2001).
 
-> [2] Idit Keidar 与 Sergio Rajsbaum。《无故障时容错共识的成本——教程》。技术报告 MIT-LCS-TR-821，计算机科学实验室，麻省理工学院，马萨诸塞州剑桥市 02139，2001 年 5 月；另发表于 *SIGACT News* 32(2)（2001 年 6 月）。
+> [2] Idit Keidar 与 Sergio Rajsbaum。《无故障时容错共识的成本——教程》。技术报告 MIT-LCS-TR-821，计算机科学实验室，麻省理工学院，马萨诸塞州剑桥市 02139，2001 年 5 月；另发表于 _SIGACT News_ 32(2)（2001 年 6 月）。
 
-[3] Leslie Lamport. The implementation of reliable distributed multiprocess systems. *Computer Networks*, 2:95–114, 1978.
+[3] Leslie Lamport. The implementation of reliable distributed multiprocess systems. _Computer Networks_, 2:95–114, 1978.
 
-> [3] Leslie Lamport。《可靠分布式多进程系统的实现》。*Computer Networks*，2:95–114，1978 年。
+> [3] Leslie Lamport。《可靠分布式多进程系统的实现》。_Computer Networks_，2:95–114，1978 年。
 
-[4] Leslie Lamport. Time, clocks, and the ordering of events in a distributed system. *Communications of the ACM*, 21(7):558–565, July 1978.
+[4] Leslie Lamport. Time, clocks, and the ordering of events in a distributed system. _Communications of the ACM_, 21(7):558–565, July 1978.
 
-> [4] Leslie Lamport。《分布式系统中的时间、时钟与事件排序》。*Communications of the ACM*，21(7):558–565，1978 年 7 月。
+> [4] Leslie Lamport。《分布式系统中的时间、时钟与事件排序》。_Communications of the ACM_，21(7):558–565，1978 年 7 月。
 
-[5] Leslie Lamport. The part-time parliament. *ACM Transactions on Computer Systems*, 16(2):133–169, May 1998.
+[5] Leslie Lamport. The part-time parliament. _ACM Transactions on Computer Systems_, 16(2):133–169, May 1998.
 
-> [5] Leslie Lamport。《兼职议会》。*ACM Transactions on Computer Systems*，16(2):133–169，1998 年 5 月。
+> [5] Leslie Lamport。《兼职议会》。_ACM Transactions on Computer Systems_，16(2):133–169，1998 年 5 月。

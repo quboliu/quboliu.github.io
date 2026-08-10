@@ -5,6 +5,7 @@ modDatetime: 2024-07-30T23:33:54+08:00
 timezone: "Asia/Shanghai"
 title: "关于go测试概念：测试代码放置的位置——包内测试和包外测试"
 featured: false
+area: "go"
 draft: false
 tags: []
 description: "比较 Go 包内测试与包外测试的优缺点，并介绍 export_test.go 在测试覆盖中的作用。"

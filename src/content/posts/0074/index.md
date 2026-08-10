@@ -4,6 +4,7 @@ pubDatetime: 2026-05-15T15:19:28+08:00
 timezone: "Asia/Shanghai"
 title: "声明式接口的约束、选择与代价：关系数据库管理系统、Kubernetes 与 Agent"
 featured: true
+area: "software-engineering"
 draft: false
 tags:
   - "计算机系统"
@@ -11,15 +12,14 @@ description: "声明式接口如何分配控制权：从计算理论与编程范
 ---
 
 > 声明式接口把一部分控制权交给执行系统：调用者说明结果和约束，系统选择执行路径。关系型 DBMS（Database Management System，数据库管理系统）接收 SQL（Structured Query Language，结构化查询语言）查询，由内部优化器搜索物理计划；Kubernetes Controller 持续调和；Agent Runtime 组织 LLM（Large Language Model，大语言模型）、上下文和工具，由 LLM 理解意图并提出候选行动。判断一个接口有多“声明式”，要看调用者交出了哪些决定；判断它是否好用，还要看这些决定能否观察、检查和撤销。
->
 
 声明式的接口就是，调用者说“要什么”，执行层决定“怎么做”。搞懂一个真实系统中的声明式接口，需要梳理清楚如下三个问题：
 
-| 调用者提交什么 | 谁接收并执行 | 执行层替调用者决定什么 |
-| --- | --- | --- |
-| SQL 查询 | 关系型 DBMS | 访问路径、连接顺序和物理算子 |
-| Kubernetes API（Application Programming Interface，应用程序编程接口）对象 | Kubernetes 控制面 | 每轮需要创建、修改或删除哪些资源 |
-| 目标、约束与上下文 | LLM + Agent Runtime | LLM 生成和选择候选动作；Runtime 按规则执行、重试或停止 |
+| 调用者提交什么                                                            | 谁接收并执行        | 执行层替调用者决定什么                                 |
+| ------------------------------------------------------------------------- | ------------------- | ------------------------------------------------------ |
+| SQL 查询                                                                  | 关系型 DBMS         | 访问路径、连接顺序和物理算子                           |
+| Kubernetes API（Application Programming Interface，应用程序编程接口）对象 | Kubernetes 控制面   | 每轮需要创建、修改或删除哪些资源                       |
+| 目标、约束与上下文                                                        | LLM + Agent Runtime | LLM 生成和选择候选动作；Runtime 按规则执行、重试或停止 |
 
 继续追问下去就是**调用者交出了哪些决定？谁来做这些决定？系统怎样说明自己做了什么，结果是否可信？**
 
@@ -42,47 +42,47 @@ description: "声明式接口如何分配控制权：从计算理论与编程范
 
 先定义后文会反复出现的概念。表中的“关系”只表示影响或借用，不表示两者相等，也不表示只有这一条发展路线。正文中的英文缩写在首次出现时统一写成“缩写（English Full Name，规范中文名）”；后文不再重复展开。代码标识符、命令名和产品正式名称保持原样。
 
-| 概念 | 所在层次 | 定义（人话） | 与相邻概念的准确关系 | 权威参考 |
-| --- | --- | --- | --- | --- |
-| 计算理论、可计算性、可判定性与复杂度 | 理论领域与问题性质 | 计算理论研究哪些问题能被计算；可计算性问“是否存在算法”，可判定性问“算法能否对所有输入停机并给出是/否答案”，复杂度再问需要多少时间和空间。 | 三者约束所有计算系统，但不直接规定一种语言或工程架构应怎样设计。 | [Stanford Encyclopedia of Philosophy：Computability and Complexity](https://plato.stanford.edu/entries/computability/) |
-| 自动机 | 形式计算模型 | 用状态、输入和转移规则描述计算。有限自动机至少包含状态集合、初始状态、输入字母表和转移函数。 | 自动机提供了描述状态变化的工具。但通用程序还需要存储等能力，不能把命令式语言简单说成“自动机的产物”。 | [NIST（National Institute of Standards and Technology，美国国家标准与技术研究院）：Finite State Machine](https://xlinux.nist.gov/dads/HTML/finiteStateMachine.html) |
-| 图灵机 | 通用形式计算模型 | 用读写头按规则在一条抽象纸带上读、写和移动，以此描述算法步骤。 | 它比有限自动机多了无界存储能力，是研究一般可计算性的模型；它不是现实计算机的硬件设计图。 | [Turing 1936/1937](https://doi.org/10.1112/plms/s2-42.1.230) |
-| 命令式语言 | 程序设计范式 | 程序由命令或语句组成；执行会改变存储状态，语句次序和控制流会影响结果。 | 它使用状态转移的思路，也更直接地继承了冯·诺依曼机器模型：程序通过顺序指令读写可变存储。 | [Backus 1978](https://research.ibm.com/publications/can-programming-be-liberated-from-the-von-neumann-style-a-functional-style-and-its-algebra-of-programs) |
-| Lambda 演算 | 形式演算 | 用变量、函数抽象和函数应用表示计算，并通过替换与归约求值。 | 它为许多函数式语言提供核心模型，但不是包含类型、数据结构、模块和 I/O（Input/Output，输入/输出）的完整语言。 | [Stanford Encyclopedia of Philosophy：The Lambda Calculus](https://plato.stanford.edu/entries/lambda-calculus/) |
-| 函数式语言 | 程序设计范式 | 主要用函数求值和函数组合来组织程序；纯函数式编程还会限制可变赋值和其他副作用。 | 它源自 Lambda 演算的思想，但实际语言还要处理类型、数据、I/O 和运行时。 | [Hudak 1989](https://doi.org/10.1145/72551.72554)、[Software Foundations：Functional Programming](https://www.cs.yale.edu/flint/cs430/coq/sf/Preface.html#lab6) |
-| 逻辑、证明论与模型论 | 形式系统与研究视角 | 逻辑用形式语言和规则说明哪些表达与推导有效；证明论研究形式推导本身，模型论研究表达式在不同解释下何时为真。 | 它们可以规定“什么结论成立”，但不一定规定机器怎样找到证明。 | [Stanford Encyclopedia of Philosophy：Classical Logic](https://plato.stanford.edu/entries/logic-classical/) |
-| 逻辑式语言 | 程序设计范式 | 把事实、规则或公理当作程序，把查询当作待证明的目标，由系统完成推导和搜索。 | 逻辑规定程序的含义，执行器仍要选择搜索策略；所以 Kowalski 把算法写成“逻辑 + 控制”。 | [Kowalski 1974](https://www.doc.ic.ac.uk/~rak/papers/IFIP74.pdf)、[Kowalski 1979](https://doi.org/10.1145/359131.359136) |
-| 声明式编程 | 程序设计范式 | 程序主要描述要成立的关系或要得到的结果，不逐条规定完整执行过程。 | 它说的是程序表达方式。逻辑式、函数式、关系查询和约束求解都可具有声明性，但机制并不相同。 | [Lloyd 1994](https://research-information.bris.ac.uk/en/publications/practical-advantages-of-declarative-programming)、[Lampson 2010](https://www.microsoft.com/en-us/research/publication/declarative-programming-light-end-tunnel/) |
-| 声明式接口 | 接口属性 | 调用者提交可接受的结果、约束或不变量，执行层保留选择具体步骤的权力。 | 这是本文的主概念。它不要求整个系统都“声明式”；同一系统可以对外声明、对内命令执行。可观察和可验证是实用要求，不是定义本身。 | 本文基于上述声明式编程文献给出的操作定义 |
-| 关系模型、关系代数与关系演算 | 数据模型与查询形式 | 关系模型用关系表示数据；关系代数用选择、投影、连接等算子计算新关系；关系演算用谓词描述结果应满足什么条件。 | 三者不是 SQL 的别名。它们为关系查询提供语义基础，也给 DBMS 的等价重写留下空间。 | [Codd 1970](https://research.ibm.com/publications/a-relational-model-of-data-for-large-shared-data-banks)、[Codd 1971](https://doi.org/10.1145/1734714.1734718) |
-| SQL（Structured Query Language，结构化查询语言） | 数据库语言 | 用来定义、查询和修改关系数据的一族标准化语言。本文主要讨论其中不指定页面、索引和连接算法的查询表达式与集合式 DML（Data Manipulation Language，数据操纵语言）。 | SQL 负责表达逻辑请求，不负责自己优化或执行。具体 DBMS 解析 SQL，并决定支持哪些方言、事务语义和执行能力。 | [Chamberlin 与 Boyce 1974](https://research.ibm.com/publications/sequel-a-struciured-english-query-language)、[PostgreSQL SQL Language](https://www.postgresql.org/docs/18/sql.html) |
-| 关系型 DBMS（Database Management System，数据库管理系统） | 数据管理系统 | 保存和管理关系数据，并负责 SQL 解析、查询重写、计划选择、执行、并发控制、恢复和权限等工作。 | SQL 是它可以提供的外部语言；查询优化器和执行器是它的内部部件。并非所有 DBMS 都使用 SQL，也不能把 SQL 写成会“选计划”的系统。 | [Codd 1970](https://research.ibm.com/publications/a-relational-model-of-data-for-large-shared-data-banks)、[PostgreSQL Internals](https://www.postgresql.org/docs/18/overview.html) |
-| PostgreSQL、MySQL Server / InnoDB 与 SQLite | 具体数据管理软件 | PostgreSQL 是服务器式关系型 DBMS；MySQL Server 提供 SQL、连接和执行等服务器层，InnoDB 是它可使用的一种存储引擎；SQLite 是嵌入应用进程的数据库库。 | 三者都能执行 SQL，但部署边界和内部分层不同。不能把 InnoDB 写成整个 MySQL，也不能把 SQLite 强行套进独立服务器进程模型。 | [PostgreSQL 18 Internals](https://www.postgresql.org/docs/18/overview.html)、[MySQL 8.4 Pluggable Storage Engine Architecture](https://dev.mysql.com/doc/refman/8.4/en/pluggable-storage-overview.html)、[About SQLite](https://www.sqlite.org/about.html) |
-| 查询优化器 | DBMS 内部部件 | 把逻辑查询映射为可执行计划，在可行候选中选择预计成本较低的一条。 | 它利用 SQL/关系语义、统计、索引和成本模型，但不属于 SQL 语言本身；它通常只求合理的好计划，不保证全局最优。 | [Selinger 等 1979](https://research.ibm.com/publications/access-path-selection-in-a-relational-database-management-system)、[PostgreSQL Planner/Optimizer](https://www.postgresql.org/docs/18/planner-optimizer.html) |
-| 查询计划与 `EXPLAIN` | DBMS 内部表示与诊断接口 | 查询计划是执行器将要运行的算子树。逻辑计划表示关系运算，物理计划进一步选定扫描、连接、排序等算法。`EXPLAIN` 展示所选计划和估计值；加入 `ANALYZE` 后还会实际执行并记录现场数据。 | 计划说明 DBMS 准备怎样执行，不等于计划最优，也不单独证明业务结果正确。 | [PostgreSQL：Using EXPLAIN](https://www.postgresql.org/docs/18/using-explain.html) |
-| API（Application Programming Interface，应用程序编程接口） | 软件接口 | 一组供其他程序调用的操作、数据结构和约定。 | API 可以是命令式，也可以具有声明性；关键仍是调用者提交步骤，还是提交结果与约束。 | [NIST：Application Programming Interface](https://csrc.nist.gov/glossary/term/application_programming_interface) |
-| Schema（模式） | 接口数据约束 | 规定对象或消息可以有哪些字段、字段类型、必填项和结构关系。 | 本文说的 API/Tool Schema 是接口数据结构，不是关系型 DBMS 中由表、视图等组成的数据库 Schema。Schema 能检查形状，不能单独证明业务结果正确。 | [JSON Schema Core 2020-12](https://json-schema.org/draft/2020-12/json-schema-core.html) |
-| 幂等性 | 操作性质 | 同一个请求成功执行一次后，再重复执行不会继续改变目标状态。 | 幂等不表示每次调用都没有成本、日志或错误；它使超时后的安全重试更容易，是调和循环和 Agent 工具的重要属性。 | [RFC 9110：Idempotent Methods](https://www.rfc-editor.org/rfc/rfc9110#section-9.2.2) |
-| IaC（Infrastructure as Code，基础设施即代码） | 工程实践与工具类别 | 用可版本化的配置文件管理基础设施，而不是主要靠控制台点击或人工命令。 | IaC 不是形式演算，也不是单个系统。Terraform 用 Configuration、State 和 Plan/Apply 实现这种工作方式。 | [HashiCorp：What is infrastructure as code](https://developer.hashicorp.com/well-architected-framework/define-and-automate-processes/define/as-code/infrastructure) |
-| YAML（YAML Ain’t Markup Language，YAML 不是标记语言） | 数据序列化语言 | 用缩进等语法表示标量、序列和映射。 | 它只负责编码数据，不决定 Kubernetes 对象采用 Create、Replace、Apply 还是 Controller 调和。 | [YAML 1.2.2 Specification](https://yaml.org/spec/1.2.2/) |
-| JSON（JavaScript Object Notation，JavaScript 对象表示法） | 数据交换格式 | 用对象、数组和基本值表示结构化数据。 | 它和 YAML 一样只是载体；同一个 Kubernetes 对象可以用两者表达。 | [RFC（Request for Comments，请求评议）8259](https://www.rfc-editor.org/rfc/rfc8259) |
-| HCL（HashiCorp Configuration Language，HashiCorp 配置语言） | 配置语言 | 用块、属性和表达式描述供工具读取的配置。 | Terraform 主要用 HCL 表达配置，但其声明性来自 Configuration、State 与 Plan/Apply 的整体语义，不只来自语法。 | [HCL Native Syntax Specification](https://github.com/hashicorp/hcl/blob/main/hclsyntax/spec.md) |
-| Kubernetes | 分布式工程系统 | API 对象记录期望状态，控制面持续观察实际状态，Controller 负责缩小两者的差距。 | 声明性来自 API 对象、`spec/status` 和控制循环，不来自 YAML。 | [Kubernetes：Objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/)、[Kubernetes：Controllers](https://kubernetes.io/docs/concepts/architecture/controller/) |
-| Kubernetes API Object、`spec`、`status` 与 Condition | Kubernetes 状态模型 | API Object 是保存在控制面中的资源记录；`spec` 保存调用者期望，`status` 保存系统观察；Condition 用带原因和时间的状态项表达 Ready（就绪）、Available（可用）等关键判断。 | 对象被 API 接受不表示现实已经达到目标，要结合 `status`、Condition 和实际资源判断。 | [Kubernetes：Objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/)、[API Conventions](https://github.com/kubernetes/community/blob/main/contributors/devel/sig-architecture/api-conventions.md) |
-| Controller、Reconcile 与 Controller Loop | Kubernetes 控制机制 | Controller 是持续观察资源并发起修正的控制器；Reconcile 是读取期望状态与当前状态、执行一次调和；Controller Loop（控制循环）就是反复触发这个过程。 | Controller 最终仍调用命令式 API；声明性来自它按状态差异反复工作，而不是把一次事件脚本永久执行下去。 | [Kubernetes：Controllers](https://kubernetes.io/docs/concepts/architecture/controller/)、[API Conventions](https://github.com/kubernetes/community/blob/main/contributors/devel/sig-architecture/api-conventions.md) |
-| Terraform | 基础设施管理工具 | 读取配置、State 和远端资源，生成 Plan，并在 Apply 时执行变更。 | 它只在运行 Plan/Apply 时检查和修正漂移，不像 Kubernetes Controller 那样常驻调和。 | [Terraform Language](https://developer.hashicorp.com/terraform/language)、[Terraform State](https://developer.hashicorp.com/terraform/language/state) |
-| Terraform Configuration、Provider、State、Plan 与 Apply | Terraform 核心机制 | Configuration（配置）描述目标资源；Provider 是把 Terraform 资源模型接到云或其他远端 API 的插件；State 保存配置地址与远端对象身份及属性的对应；Plan 给出拟执行的变更；Apply 执行获准的 Plan。 | Configuration 只描述目标，Provider、State 与 Plan/Apply 共同决定 Terraform 实际认识和修改哪些对象。 | [Terraform Configuration Language](https://developer.hashicorp.com/terraform/language)、[Terraform Providers](https://developer.hashicorp.com/terraform/language/providers)、[Terraform State](https://developer.hashicorp.com/terraform/language/state)、[`terraform plan`](https://developer.hashicorp.com/terraform/cli/commands/plan) |
-| LLM（Large Language Model，大语言模型） | 统计学习模型 | 根据上下文对后续词元（Token）的概率分布建模，并据此生成文本或结构化输出。 | LLM 可以提出候选步骤，但不天然拥有当前环境状态，也不保证目标、动作和结果正确。 | [Brown 等 2020](https://proceedings.neurips.cc/paper/2020/hash/1457c0d6bfcb4967418bfb8ac142f64a-Abstract.html) |
-| Prompt | 模型输入与应用接口 | 提供给模型的指令、上下文、示例和约束。 | Prompt 可以写目标，也可以写死步骤；是否声明式取决于控制权分配，不取决于是否使用自然语言。 | [Reynolds 与 McDonell 2021](https://arxiv.org/abs/2102.07350) |
-| Agent（智能体） | 软件系统 | 围绕目标反复获取观察、选择动作并作用于环境的系统；本文特指由大语言模型参与决策、能够调用工具的 Agent。 | 本文所说的 Agent 以 LLM 为语义理解和候选决策核心，但完整系统还需要运行时、工具、状态、权限和验证。 | [Anthropic：Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents) |
-| Agent Runtime（智能体运行时） | 运行系统 | 把 LLM、上下文、工具、状态、循环、权限和验证器组织起来，推进多轮行动。 | LLM 负责理解意图、提出候选动作并选择下一步；Runtime 负责提供上下文和工具、执行动作、维护状态、重试与停止。 | [OpenAI Agents SDK（Software Development Kit，软件开发工具包）](https://openai.github.io/openai-agents-python/) |
-| Tool、Observation、Retrieval 与 Grounding | Agent 获取和作用于环境的机制 | Tool 是模型可请求调用的类型化操作；Observation 是工具或环境返回的结果；Retrieval（检索）从外部来源取回上下文；Grounding（事实锚定）用这些外部事实约束模型判断。 | LLM 的参数不等于当前环境状态。Agent 必须通过这些机制读取现实并执行动作。 | [ReAct](https://arxiv.org/abs/2210.03629)、[Toolformer](https://ai.meta.com/research/publications/toolformer-language-models-can-teach-themselves-to-use-tools/) |
-| Trace、Validator、Evaluator 与 Eval（Evaluation，评测） | Agent 证据与验收机制 | Trace（轨迹）记录上下文、模型输出、工具调用和结果；Validator（验证器）用确定性规则检查可形式化条件；Evaluator（评测器）按测试、评分规则或人工标准给结果打分；Eval 是反复运行并分析这些评测的过程。 | Trace 说明发生了什么，Validator 和 Eval 才分别检查规则与结果；它们都不能自动覆盖未知风险。 | [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/)、[Anthropic：Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents) |
-| STRIPS（Stanford Research Institute Problem Solver，斯坦福研究所问题求解器） | 经典自动规划系统与表示方法 | 把初始状态、目标以及动作的前提和效果分开表示，由规划器搜索能使目标成立的动作序列。 | 名称最初指规划器，后来也指其状态—动作表示方法。它依赖人工给出相对封闭、准确的世界模型。 | [Fikes 与 Nilsson 1971](https://doi.org/10.1016/0004-3702(71)90010-5) |
-| PDDL（Planning Domain Definition Language，规划领域定义语言） | 自动规划输入语言 | 分开描述领域（Domain）中的谓词与动作，以及问题（Problem）中的对象、初始状态和目标，供规划器读取。 | PDDL 是问题描述语言，不是规划算法；不同规划器可以读取同一类 PDDL 问题并搜索计划。 | [PDDL 1.2](https://www.isi.edu/results/publications/19837/pddl-the-planning-domain-definition-language-version-1-2/) |
-| HTN（Hierarchical Task Network，分层任务网络） | 经典自动规划方法 | 用分解方法（Method）把抽象任务逐层分解为更具体的子任务，直到得到可以执行的原子任务。 | 它用领域分解知识缩小搜索空间；得到的计划不仅要达到目标，还要符合允许的分解方法。 | [Erol、Nau 与 Hendler 1993](https://cdn.aaai.org/Symposia/Spring/1993/SS-93-03/SS93-03-005.pdf) |
-| SAT（Boolean Satisfiability Problem，布尔可满足性问题） | 逻辑判定问题 | 判断是否存在一组真假赋值，使给定布尔公式成立；求解器还可以返回一组满足赋值。 | SAT 不直接理解“动作”；要用它做规划，必须先把时间步、动作和目标编码成布尔约束。 | [Cook 1971](https://doi.org/10.1145/800157.805047) |
-| SMT（Satisfiability Modulo Theories，可满足性模理论） | 带背景理论的可满足性问题 | 判断公式在整数、实数、数组、位向量等背景理论约束下是否存在模型。 | SMT 扩展了纯布尔 SAT 的表达范围，但仍依赖明确建模；它返回可满足性与模型，不会自动理解开放世界任务。 | [SMT-LIB（Satisfiability Modulo Theories Library，可满足性模理论标准库）](https://smt-lib.org/) |
+| 概念                                                                         | 所在层次                     | 定义（人话）                                                                                                                                                                                       | 与相邻概念的准确关系                                                                                                                      | 权威参考                                                                                                                                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 计算理论、可计算性、可判定性与复杂度                                         | 理论领域与问题性质           | 计算理论研究哪些问题能被计算；可计算性问“是否存在算法”，可判定性问“算法能否对所有输入停机并给出是/否答案”，复杂度再问需要多少时间和空间。                                                          | 三者约束所有计算系统，但不直接规定一种语言或工程架构应怎样设计。                                                                          | [Stanford Encyclopedia of Philosophy：Computability and Complexity](https://plato.stanford.edu/entries/computability/)                                                                                                                                                                                                                    |
+| 自动机                                                                       | 形式计算模型                 | 用状态、输入和转移规则描述计算。有限自动机至少包含状态集合、初始状态、输入字母表和转移函数。                                                                                                       | 自动机提供了描述状态变化的工具。但通用程序还需要存储等能力，不能把命令式语言简单说成“自动机的产物”。                                      | [NIST（National Institute of Standards and Technology，美国国家标准与技术研究院）：Finite State Machine](https://xlinux.nist.gov/dads/HTML/finiteStateMachine.html)                                                                                                                                                                       |
+| 图灵机                                                                       | 通用形式计算模型             | 用读写头按规则在一条抽象纸带上读、写和移动，以此描述算法步骤。                                                                                                                                     | 它比有限自动机多了无界存储能力，是研究一般可计算性的模型；它不是现实计算机的硬件设计图。                                                  | [Turing 1936/1937](https://doi.org/10.1112/plms/s2-42.1.230)                                                                                                                                                                                                                                                                              |
+| 命令式语言                                                                   | 程序设计范式                 | 程序由命令或语句组成；执行会改变存储状态，语句次序和控制流会影响结果。                                                                                                                             | 它使用状态转移的思路，也更直接地继承了冯·诺依曼机器模型：程序通过顺序指令读写可变存储。                                                   | [Backus 1978](https://research.ibm.com/publications/can-programming-be-liberated-from-the-von-neumann-style-a-functional-style-and-its-algebra-of-programs)                                                                                                                                                                               |
+| Lambda 演算                                                                  | 形式演算                     | 用变量、函数抽象和函数应用表示计算，并通过替换与归约求值。                                                                                                                                         | 它为许多函数式语言提供核心模型，但不是包含类型、数据结构、模块和 I/O（Input/Output，输入/输出）的完整语言。                               | [Stanford Encyclopedia of Philosophy：The Lambda Calculus](https://plato.stanford.edu/entries/lambda-calculus/)                                                                                                                                                                                                                           |
+| 函数式语言                                                                   | 程序设计范式                 | 主要用函数求值和函数组合来组织程序；纯函数式编程还会限制可变赋值和其他副作用。                                                                                                                     | 它源自 Lambda 演算的思想，但实际语言还要处理类型、数据、I/O 和运行时。                                                                    | [Hudak 1989](https://doi.org/10.1145/72551.72554)、[Software Foundations：Functional Programming](https://www.cs.yale.edu/flint/cs430/coq/sf/Preface.html#lab6)                                                                                                                                                                           |
+| 逻辑、证明论与模型论                                                         | 形式系统与研究视角           | 逻辑用形式语言和规则说明哪些表达与推导有效；证明论研究形式推导本身，模型论研究表达式在不同解释下何时为真。                                                                                         | 它们可以规定“什么结论成立”，但不一定规定机器怎样找到证明。                                                                                | [Stanford Encyclopedia of Philosophy：Classical Logic](https://plato.stanford.edu/entries/logic-classical/)                                                                                                                                                                                                                               |
+| 逻辑式语言                                                                   | 程序设计范式                 | 把事实、规则或公理当作程序，把查询当作待证明的目标，由系统完成推导和搜索。                                                                                                                         | 逻辑规定程序的含义，执行器仍要选择搜索策略；所以 Kowalski 把算法写成“逻辑 + 控制”。                                                       | [Kowalski 1974](https://www.doc.ic.ac.uk/~rak/papers/IFIP74.pdf)、[Kowalski 1979](https://doi.org/10.1145/359131.359136)                                                                                                                                                                                                                  |
+| 声明式编程                                                                   | 程序设计范式                 | 程序主要描述要成立的关系或要得到的结果，不逐条规定完整执行过程。                                                                                                                                   | 它说的是程序表达方式。逻辑式、函数式、关系查询和约束求解都可具有声明性，但机制并不相同。                                                  | [Lloyd 1994](https://research-information.bris.ac.uk/en/publications/practical-advantages-of-declarative-programming)、[Lampson 2010](https://www.microsoft.com/en-us/research/publication/declarative-programming-light-end-tunnel/)                                                                                                     |
+| 声明式接口                                                                   | 接口属性                     | 调用者提交可接受的结果、约束或不变量，执行层保留选择具体步骤的权力。                                                                                                                               | 这是本文的主概念。它不要求整个系统都“声明式”；同一系统可以对外声明、对内命令执行。可观察和可验证是实用要求，不是定义本身。                | 本文基于上述声明式编程文献给出的操作定义                                                                                                                                                                                                                                                                                                  |
+| 关系模型、关系代数与关系演算                                                 | 数据模型与查询形式           | 关系模型用关系表示数据；关系代数用选择、投影、连接等算子计算新关系；关系演算用谓词描述结果应满足什么条件。                                                                                         | 三者不是 SQL 的别名。它们为关系查询提供语义基础，也给 DBMS 的等价重写留下空间。                                                           | [Codd 1970](https://research.ibm.com/publications/a-relational-model-of-data-for-large-shared-data-banks)、[Codd 1971](https://doi.org/10.1145/1734714.1734718)                                                                                                                                                                           |
+| SQL（Structured Query Language，结构化查询语言）                             | 数据库语言                   | 用来定义、查询和修改关系数据的一族标准化语言。本文主要讨论其中不指定页面、索引和连接算法的查询表达式与集合式 DML（Data Manipulation Language，数据操纵语言）。                                     | SQL 负责表达逻辑请求，不负责自己优化或执行。具体 DBMS 解析 SQL，并决定支持哪些方言、事务语义和执行能力。                                  | [Chamberlin 与 Boyce 1974](https://research.ibm.com/publications/sequel-a-struciured-english-query-language)、[PostgreSQL SQL Language](https://www.postgresql.org/docs/18/sql.html)                                                                                                                                                      |
+| 关系型 DBMS（Database Management System，数据库管理系统）                    | 数据管理系统                 | 保存和管理关系数据，并负责 SQL 解析、查询重写、计划选择、执行、并发控制、恢复和权限等工作。                                                                                                        | SQL 是它可以提供的外部语言；查询优化器和执行器是它的内部部件。并非所有 DBMS 都使用 SQL，也不能把 SQL 写成会“选计划”的系统。               | [Codd 1970](https://research.ibm.com/publications/a-relational-model-of-data-for-large-shared-data-banks)、[PostgreSQL Internals](https://www.postgresql.org/docs/18/overview.html)                                                                                                                                                       |
+| PostgreSQL、MySQL Server / InnoDB 与 SQLite                                  | 具体数据管理软件             | PostgreSQL 是服务器式关系型 DBMS；MySQL Server 提供 SQL、连接和执行等服务器层，InnoDB 是它可使用的一种存储引擎；SQLite 是嵌入应用进程的数据库库。                                                  | 三者都能执行 SQL，但部署边界和内部分层不同。不能把 InnoDB 写成整个 MySQL，也不能把 SQLite 强行套进独立服务器进程模型。                    | [PostgreSQL 18 Internals](https://www.postgresql.org/docs/18/overview.html)、[MySQL 8.4 Pluggable Storage Engine Architecture](https://dev.mysql.com/doc/refman/8.4/en/pluggable-storage-overview.html)、[About SQLite](https://www.sqlite.org/about.html)                                                                                |
+| 查询优化器                                                                   | DBMS 内部部件                | 把逻辑查询映射为可执行计划，在可行候选中选择预计成本较低的一条。                                                                                                                                   | 它利用 SQL/关系语义、统计、索引和成本模型，但不属于 SQL 语言本身；它通常只求合理的好计划，不保证全局最优。                                | [Selinger 等 1979](https://research.ibm.com/publications/access-path-selection-in-a-relational-database-management-system)、[PostgreSQL Planner/Optimizer](https://www.postgresql.org/docs/18/planner-optimizer.html)                                                                                                                     |
+| 查询计划与 `EXPLAIN`                                                         | DBMS 内部表示与诊断接口      | 查询计划是执行器将要运行的算子树。逻辑计划表示关系运算，物理计划进一步选定扫描、连接、排序等算法。`EXPLAIN` 展示所选计划和估计值；加入 `ANALYZE` 后还会实际执行并记录现场数据。                    | 计划说明 DBMS 准备怎样执行，不等于计划最优，也不单独证明业务结果正确。                                                                    | [PostgreSQL：Using EXPLAIN](https://www.postgresql.org/docs/18/using-explain.html)                                                                                                                                                                                                                                                        |
+| API（Application Programming Interface，应用程序编程接口）                   | 软件接口                     | 一组供其他程序调用的操作、数据结构和约定。                                                                                                                                                         | API 可以是命令式，也可以具有声明性；关键仍是调用者提交步骤，还是提交结果与约束。                                                          | [NIST：Application Programming Interface](https://csrc.nist.gov/glossary/term/application_programming_interface)                                                                                                                                                                                                                          |
+| Schema（模式）                                                               | 接口数据约束                 | 规定对象或消息可以有哪些字段、字段类型、必填项和结构关系。                                                                                                                                         | 本文说的 API/Tool Schema 是接口数据结构，不是关系型 DBMS 中由表、视图等组成的数据库 Schema。Schema 能检查形状，不能单独证明业务结果正确。 | [JSON Schema Core 2020-12](https://json-schema.org/draft/2020-12/json-schema-core.html)                                                                                                                                                                                                                                                   |
+| 幂等性                                                                       | 操作性质                     | 同一个请求成功执行一次后，再重复执行不会继续改变目标状态。                                                                                                                                         | 幂等不表示每次调用都没有成本、日志或错误；它使超时后的安全重试更容易，是调和循环和 Agent 工具的重要属性。                                 | [RFC 9110：Idempotent Methods](https://www.rfc-editor.org/rfc/rfc9110#section-9.2.2)                                                                                                                                                                                                                                                      |
+| IaC（Infrastructure as Code，基础设施即代码）                                | 工程实践与工具类别           | 用可版本化的配置文件管理基础设施，而不是主要靠控制台点击或人工命令。                                                                                                                               | IaC 不是形式演算，也不是单个系统。Terraform 用 Configuration、State 和 Plan/Apply 实现这种工作方式。                                      | [HashiCorp：What is infrastructure as code](https://developer.hashicorp.com/well-architected-framework/define-and-automate-processes/define/as-code/infrastructure)                                                                                                                                                                       |
+| YAML（YAML Ain’t Markup Language，YAML 不是标记语言）                        | 数据序列化语言               | 用缩进等语法表示标量、序列和映射。                                                                                                                                                                 | 它只负责编码数据，不决定 Kubernetes 对象采用 Create、Replace、Apply 还是 Controller 调和。                                                | [YAML 1.2.2 Specification](https://yaml.org/spec/1.2.2/)                                                                                                                                                                                                                                                                                  |
+| JSON（JavaScript Object Notation，JavaScript 对象表示法）                    | 数据交换格式                 | 用对象、数组和基本值表示结构化数据。                                                                                                                                                               | 它和 YAML 一样只是载体；同一个 Kubernetes 对象可以用两者表达。                                                                            | [RFC（Request for Comments，请求评议）8259](https://www.rfc-editor.org/rfc/rfc8259)                                                                                                                                                                                                                                                       |
+| HCL（HashiCorp Configuration Language，HashiCorp 配置语言）                  | 配置语言                     | 用块、属性和表达式描述供工具读取的配置。                                                                                                                                                           | Terraform 主要用 HCL 表达配置，但其声明性来自 Configuration、State 与 Plan/Apply 的整体语义，不只来自语法。                               | [HCL Native Syntax Specification](https://github.com/hashicorp/hcl/blob/main/hclsyntax/spec.md)                                                                                                                                                                                                                                           |
+| Kubernetes                                                                   | 分布式工程系统               | API 对象记录期望状态，控制面持续观察实际状态，Controller 负责缩小两者的差距。                                                                                                                      | 声明性来自 API 对象、`spec/status` 和控制循环，不来自 YAML。                                                                              | [Kubernetes：Objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/)、[Kubernetes：Controllers](https://kubernetes.io/docs/concepts/architecture/controller/)                                                                                                                                                        |
+| Kubernetes API Object、`spec`、`status` 与 Condition                         | Kubernetes 状态模型          | API Object 是保存在控制面中的资源记录；`spec` 保存调用者期望，`status` 保存系统观察；Condition 用带原因和时间的状态项表达 Ready（就绪）、Available（可用）等关键判断。                             | 对象被 API 接受不表示现实已经达到目标，要结合 `status`、Condition 和实际资源判断。                                                        | [Kubernetes：Objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/)、[API Conventions](https://github.com/kubernetes/community/blob/main/contributors/devel/sig-architecture/api-conventions.md)                                                                                                                    |
+| Controller、Reconcile 与 Controller Loop                                     | Kubernetes 控制机制          | Controller 是持续观察资源并发起修正的控制器；Reconcile 是读取期望状态与当前状态、执行一次调和；Controller Loop（控制循环）就是反复触发这个过程。                                                   | Controller 最终仍调用命令式 API；声明性来自它按状态差异反复工作，而不是把一次事件脚本永久执行下去。                                       | [Kubernetes：Controllers](https://kubernetes.io/docs/concepts/architecture/controller/)、[API Conventions](https://github.com/kubernetes/community/blob/main/contributors/devel/sig-architecture/api-conventions.md)                                                                                                                      |
+| Terraform                                                                    | 基础设施管理工具             | 读取配置、State 和远端资源，生成 Plan，并在 Apply 时执行变更。                                                                                                                                     | 它只在运行 Plan/Apply 时检查和修正漂移，不像 Kubernetes Controller 那样常驻调和。                                                         | [Terraform Language](https://developer.hashicorp.com/terraform/language)、[Terraform State](https://developer.hashicorp.com/terraform/language/state)                                                                                                                                                                                     |
+| Terraform Configuration、Provider、State、Plan 与 Apply                      | Terraform 核心机制           | Configuration（配置）描述目标资源；Provider 是把 Terraform 资源模型接到云或其他远端 API 的插件；State 保存配置地址与远端对象身份及属性的对应；Plan 给出拟执行的变更；Apply 执行获准的 Plan。       | Configuration 只描述目标，Provider、State 与 Plan/Apply 共同决定 Terraform 实际认识和修改哪些对象。                                       | [Terraform Configuration Language](https://developer.hashicorp.com/terraform/language)、[Terraform Providers](https://developer.hashicorp.com/terraform/language/providers)、[Terraform State](https://developer.hashicorp.com/terraform/language/state)、[`terraform plan`](https://developer.hashicorp.com/terraform/cli/commands/plan) |
+| LLM（Large Language Model，大语言模型）                                      | 统计学习模型                 | 根据上下文对后续词元（Token）的概率分布建模，并据此生成文本或结构化输出。                                                                                                                          | LLM 可以提出候选步骤，但不天然拥有当前环境状态，也不保证目标、动作和结果正确。                                                            | [Brown 等 2020](https://proceedings.neurips.cc/paper/2020/hash/1457c0d6bfcb4967418bfb8ac142f64a-Abstract.html)                                                                                                                                                                                                                            |
+| Prompt                                                                       | 模型输入与应用接口           | 提供给模型的指令、上下文、示例和约束。                                                                                                                                                             | Prompt 可以写目标，也可以写死步骤；是否声明式取决于控制权分配，不取决于是否使用自然语言。                                                 | [Reynolds 与 McDonell 2021](https://arxiv.org/abs/2102.07350)                                                                                                                                                                                                                                                                             |
+| Agent（智能体）                                                              | 软件系统                     | 围绕目标反复获取观察、选择动作并作用于环境的系统；本文特指由大语言模型参与决策、能够调用工具的 Agent。                                                                                             | 本文所说的 Agent 以 LLM 为语义理解和候选决策核心，但完整系统还需要运行时、工具、状态、权限和验证。                                        | [Anthropic：Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents)                                                                                                                                                                                                                                   |
+| Agent Runtime（智能体运行时）                                                | 运行系统                     | 把 LLM、上下文、工具、状态、循环、权限和验证器组织起来，推进多轮行动。                                                                                                                             | LLM 负责理解意图、提出候选动作并选择下一步；Runtime 负责提供上下文和工具、执行动作、维护状态、重试与停止。                                | [OpenAI Agents SDK（Software Development Kit，软件开发工具包）](https://openai.github.io/openai-agents-python/)                                                                                                                                                                                                                           |
+| Tool、Observation、Retrieval 与 Grounding                                    | Agent 获取和作用于环境的机制 | Tool 是模型可请求调用的类型化操作；Observation 是工具或环境返回的结果；Retrieval（检索）从外部来源取回上下文；Grounding（事实锚定）用这些外部事实约束模型判断。                                    | LLM 的参数不等于当前环境状态。Agent 必须通过这些机制读取现实并执行动作。                                                                  | [ReAct](https://arxiv.org/abs/2210.03629)、[Toolformer](https://ai.meta.com/research/publications/toolformer-language-models-can-teach-themselves-to-use-tools/)                                                                                                                                                                          |
+| Trace、Validator、Evaluator 与 Eval（Evaluation，评测）                      | Agent 证据与验收机制         | Trace（轨迹）记录上下文、模型输出、工具调用和结果；Validator（验证器）用确定性规则检查可形式化条件；Evaluator（评测器）按测试、评分规则或人工标准给结果打分；Eval 是反复运行并分析这些评测的过程。 | Trace 说明发生了什么，Validator 和 Eval 才分别检查规则与结果；它们都不能自动覆盖未知风险。                                                | [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/)、[Anthropic：Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents)                                                                                                                                                              |
+| STRIPS（Stanford Research Institute Problem Solver，斯坦福研究所问题求解器） | 经典自动规划系统与表示方法   | 把初始状态、目标以及动作的前提和效果分开表示，由规划器搜索能使目标成立的动作序列。                                                                                                                 | 名称最初指规划器，后来也指其状态—动作表示方法。它依赖人工给出相对封闭、准确的世界模型。                                                   | [Fikes 与 Nilsson 1971](<https://doi.org/10.1016/0004-3702(71)90010-5>)                                                                                                                                                                                                                                                                   |
+| PDDL（Planning Domain Definition Language，规划领域定义语言）                | 自动规划输入语言             | 分开描述领域（Domain）中的谓词与动作，以及问题（Problem）中的对象、初始状态和目标，供规划器读取。                                                                                                  | PDDL 是问题描述语言，不是规划算法；不同规划器可以读取同一类 PDDL 问题并搜索计划。                                                         | [PDDL 1.2](https://www.isi.edu/results/publications/19837/pddl-the-planning-domain-definition-language-version-1-2/)                                                                                                                                                                                                                      |
+| HTN（Hierarchical Task Network，分层任务网络）                               | 经典自动规划方法             | 用分解方法（Method）把抽象任务逐层分解为更具体的子任务，直到得到可以执行的原子任务。                                                                                                               | 它用领域分解知识缩小搜索空间；得到的计划不仅要达到目标，还要符合允许的分解方法。                                                          | [Erol、Nau 与 Hendler 1993](https://cdn.aaai.org/Symposia/Spring/1993/SS-93-03/SS93-03-005.pdf)                                                                                                                                                                                                                                           |
+| SAT（Boolean Satisfiability Problem，布尔可满足性问题）                      | 逻辑判定问题                 | 判断是否存在一组真假赋值，使给定布尔公式成立；求解器还可以返回一组满足赋值。                                                                                                                       | SAT 不直接理解“动作”；要用它做规划，必须先把时间步、动作和目标编码成布尔约束。                                                            | [Cook 1971](https://doi.org/10.1145/800157.805047)                                                                                                                                                                                                                                                                                        |
+| SMT（Satisfiability Modulo Theories，可满足性模理论）                        | 带背景理论的可满足性问题     | 判断公式在整数、实数、数组、位向量等背景理论约束下是否存在模型。                                                                                                                                   | SMT 扩展了纯布尔 SAT 的表达范围，但仍依赖明确建模；它返回可满足性与模型，不会自动理解开放世界任务。                                       | [SMT-LIB（Satisfiability Modulo Theories Library，可满足性模理论标准库）](https://smt-lib.org/)                                                                                                                                                                                                                                           |
 
 ## 一、计算理论、语言范式与工程系统的关系
 
@@ -241,27 +241,26 @@ GROUP BY c.id, c.name;
 本文采用下面这个定义：
 
 > 调用者描述可接受的结果、约束或不变量，不绑定具体物理步骤；执行系统自己选择满足要求的动作。只要要求不变，系统可以换实现，调用者不用跟着改。
->
 
 这个定义不保证系统总能判断目标能否完成，也不保证执行一定终止。一阶逻辑（可以量化个体及其关系的形式逻辑）整体不可判定，Prolog 的搜索也可能不终止；Kubernetes 和 Agent 的业务目标同样未必有自动判定方法。工程系统通常只能检查局部规则，例如 SQL 类型、Kubernetes Schema 与 Condition（状态条件），或 Agent 工具参数。
 
 还要区分声明式与普通封装，否则函数调用、RPC（Remote Procedure Call，远程过程调用）和编译都能被算成声明式：
 
-| 层次 | 调用者仍固定什么 | 系统自己决定什么 | 例子 |
-| --- | --- | --- | --- |
-| 封装 | 操作及其先后顺序 | 单个操作内部的实现 | C 函数、普通 RPC |
-| 声明式契约 | 结果、约束、模型或不变量 | 满足契约的控制流与物理路径 | SQL 查询接口、约束求解、Terraform Configuration |
-| 自适应声明式控制 | 持久目标与风险边界 | 随统计、现实状态或新观察反复重选路径 | DBMS 的重新规划、Kubernetes、Agent Runtime |
+| 层次             | 调用者仍固定什么         | 系统自己决定什么                     | 例子                                            |
+| ---------------- | ------------------------ | ------------------------------------ | ----------------------------------------------- |
+| 封装             | 操作及其先后顺序         | 单个操作内部的实现                   | C 函数、普通 RPC                                |
+| 声明式契约       | 结果、约束、模型或不变量 | 满足契约的控制流与物理路径           | SQL 查询接口、约束求解、Terraform Configuration |
+| 自适应声明式控制 | 持久目标与风险边界       | 随统计、现实状态或新观察反复重选路径 | DBMS 的重新规划、Kubernetes、Agent Runtime      |
 
 编译器也会选择指令、分配寄存器，但源程序通常已经写定了主要算法和控制流。编译器是否反复优化、是否提供诊断信息，都不是关键。关键是：**上层交付的是一套步骤，还是一个允许下层自行选步骤的结果范围。**
 
 不同系统替调用者做的决定不同，需要提供的证据也不同：
 
-| 调用者不再决定什么 | 系统怎样接手 | 典型接口与执行系统 |
-| --- | --- | --- |
-| 不固定等价查询的物理路径 | 语义保持的重写、候选计划与成本比较 | SQL 查询 / 关系型 DBMS |
-| 不亲自追踪现实漂移 | 持久状态、观察、幂等调和和重试 | Kubernetes |
-| 不预先穷举开放任务的步骤 | 概率规划、类型化工具、验证器、预算与审批 | Agent |
+| 调用者不再决定什么       | 系统怎样接手                             | 典型接口与执行系统     |
+| ------------------------ | ---------------------------------------- | ---------------------- |
+| 不固定等价查询的物理路径 | 语义保持的重写、候选计划与成本比较       | SQL 查询 / 关系型 DBMS |
+| 不亲自追踪现实漂移       | 持久状态、观察、幂等调和和重试           | Kubernetes             |
+| 不预先穷举开放任务的步骤 | 概率规划、类型化工具、验证器、预算与审批 | Agent                  |
 
 没有 `EXPLAIN`、Trace 或状态页，接口仍可能是声明式的，只是很难运维。实用的声明式系统必须按风险提供解释、监控、验收和恢复手段。
 
@@ -324,20 +323,20 @@ flowchart LR
 
 先比较它们各自保留什么、选择什么、承诺什么：
 
-| 接口与执行系统 | 调用者主要保留什么 | 执行层实际选择什么 | 系统承诺 | 主要证据 |
-| --- | --- | --- | --- | --- |
-| SQL 查询 / 关系型 DBMS | 查询结果语义与事务要求 | 访问路径、连接顺序、物理算子 | 在 SQL 语义和 DBMS 事务语义内，通常规划并执行一次请求 | Plan、实际行数、Buffer（缓冲区访问计数）、提交状态 |
-| Kubernetes API / 控制面 | API 对象中的期望特征 | 每轮需要创建、更新或删除的资源 | 通过异步循环达到暂时收敛 | `status`、Condition、Event（事件记录）、实际资源 |
-| Prompt / LLM | 当前上下文中的任务说明 | 下一段 Token 的生成分布 | 输出不稳定，能否执行要靠外部检查 | 输出文本与统计 Eval |
-| 目标与上下文 / Agent Runtime | 目标、权限、预算和停止条件 | 多轮工具调用和候选路径 | 正确性与停止条件依赖外部验收、策略和验证器 | Tool Result（工具结果）、测试、Trace、审批 |
+| 接口与执行系统               | 调用者主要保留什么         | 执行层实际选择什么             | 系统承诺                                              | 主要证据                                           |
+| ---------------------------- | -------------------------- | ------------------------------ | ----------------------------------------------------- | -------------------------------------------------- |
+| SQL 查询 / 关系型 DBMS       | 查询结果语义与事务要求     | 访问路径、连接顺序、物理算子   | 在 SQL 语义和 DBMS 事务语义内，通常规划并执行一次请求 | Plan、实际行数、Buffer（缓冲区访问计数）、提交状态 |
+| Kubernetes API / 控制面      | API 对象中的期望特征       | 每轮需要创建、更新或删除的资源 | 通过异步循环达到暂时收敛                              | `status`、Condition、Event（事件记录）、实际资源   |
+| Prompt / LLM                 | 当前上下文中的任务说明     | 下一段 Token 的生成分布        | 输出不稳定，能否执行要靠外部检查                      | 输出文本与统计 Eval                                |
+| 目标与上下文 / Agent Runtime | 目标、权限、预算和停止条件 | 多轮工具调用和候选路径         | 正确性与停止条件依赖外部验收、策略和验证器            | Tool Result（工具结果）、测试、Trace、审批         |
 
 真正的区别有三项：何时决策、根据什么决策、能保证到什么程度。
 
-| 接口与执行系统 | 决策时机 | 决策依据 | 保证强度 |
-| --- | --- | --- | --- |
-| SQL 查询 / 关系型 DBMS | 请求规划时；计划也可能被缓存复用 | SQL/关系语义、统计、索引、代价与资源参数 | 候选计划必须保持查询语义；不保证全局最优 |
-| Kubernetes API / 控制面 | 对象存续期间持续执行 | 持久 `spec`、最新观察状态和控制器规则 | 异步逼近期望状态；不保证世界永久收敛 |
-| 目标与上下文 / Agent Runtime | 每轮或收到工具结果后 | 模型、上下文、工具观察、策略和预算 | 只提出候选行动；正确性和停止依赖外部验收 |
+| 接口与执行系统               | 决策时机                         | 决策依据                                 | 保证强度                                 |
+| ---------------------------- | -------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| SQL 查询 / 关系型 DBMS       | 请求规划时；计划也可能被缓存复用 | SQL/关系语义、统计、索引、代价与资源参数 | 候选计划必须保持查询语义；不保证全局最优 |
+| Kubernetes API / 控制面      | 对象存续期间持续执行             | 持久 `spec`、最新观察状态和控制器规则    | 异步逼近期望状态；不保证世界永久收敛     |
+| 目标与上下文 / Agent Runtime | 每轮或收到工具结果后             | 模型、上下文、工具观察、策略和预算       | 只提出候选行动；正确性和停止依赖外部验收 |
 
 第四节会用 Terraform 对比“一次规划”和“持续控制”。再次强调：文件格式不决定声明性；执行层能决定什么、何时决定、承诺什么，才是关键。
 
@@ -370,12 +369,12 @@ Agent 正好暴露了这条限制。DBMS 的目录和统计系统记录关系、
 
 “看见系统做了什么”和“证明它做对了”是两件事。下面四类证据各有用途，不能互相替代：
 
-| 层次 | 例子 | 能回答什么 | 不能单独证明什么 |
-| --- | --- | --- | --- |
-| 计划或提议 | DBMS 的 `EXPLAIN`、Terraform Plan | 执行层准备做什么 | 动作已经发生、结果正确或计划最优 |
-| 运行记录 | Buffer（缓冲区访问计数）、Kubernetes `status`、Agent Tool Trace | 实际看到了哪些状态和动作 | 业务目标已经满足 |
-| 规则检查 | 类型、Schema、Policy（策略规则）、Condition | 写进规则的局部条件是否成立 | 没写进规则的性质 |
-| 结果验收 | 数据不变量、测试、统计 Eval、人工审批 | 在测试和样本范围内是否可接受 | 未覆盖输入、未来变化或审批者不知道的事实 |
+| 层次       | 例子                                                            | 能回答什么                   | 不能单独证明什么                         |
+| ---------- | --------------------------------------------------------------- | ---------------------------- | ---------------------------------------- |
+| 计划或提议 | DBMS 的 `EXPLAIN`、Terraform Plan                               | 执行层准备做什么             | 动作已经发生、结果正确或计划最优         |
+| 运行记录   | Buffer（缓冲区访问计数）、Kubernetes `status`、Agent Tool Trace | 实际看到了哪些状态和动作     | 业务目标已经满足                         |
+| 规则检查   | 类型、Schema、Policy（策略规则）、Condition                     | 写进规则的局部条件是否成立   | 没写进规则的性质                         |
+| 结果验收   | 数据不变量、测试、统计 Eval、人工审批                           | 在测试和样本范围内是否可接受 | 未覆盖输入、未来变化或审批者不知道的事实 |
 
 DBMS 提供的 `EXPLAIN ANALYZE` 和 Agent Trace 都只能帮助诊断，不能自动证明结果正确。Agent 更难，因为开放任务往往没有能自动判断对错的标准：Trace 可以完整记录一条错误路径，错误答案也可以符合 Schema。系统自由度越高，越要把计划、运行记录、规则检查和结果验收分开设计。
 
@@ -412,7 +411,6 @@ SEQUEL（Structured English Query Language，结构化英语查询语言）随�
 SQL 的类英语写法提高了可读性，但真正重要的是接口变了：
 
 > 用户不再提交一条物理导航程序，而是用 SQL 提交逻辑问题；关系型 DBMS 因此可以根据当前数据、索引和资源重新选择物理计划。
->
 
 ### 2. 声明式 SQL 查询接口为何需要 DBMS 优化器
 
@@ -531,14 +529,14 @@ SQL 成为主流还有历史原因。System R 不仅把 SQL 和代价优化器�
 
 数据管理领域一直有命令式接口，但下面的例子横跨关系型 DBMS、键值存储和嵌入式存储引擎。Berkeley DB 和 RocksDB 是由应用直接调用的嵌入式存储引擎；Redis 是通过网络命令操作键和数据结构的数据系统。尾延迟指最慢的一小部分请求所经历的延迟。比较时要先说清楚：调用者控制的是物理导航、逻辑算子、事务过程，还是系统内部执行：
 
-| 控制权层次 | 例子 | 调用者固定什么 | 适合什么情况 | 调用者失去什么 |
-| --- | --- | --- | --- | --- |
-| 物理/记录导航 | CODASYL DML、Berkeley DB Cursor（游标，即保存扫描当前位置的对象） | 路径、当前位置、扫描方向 | 固定访问模式、嵌入式边界、低框架开销 | 物理数据独立性与跨查询优化 |
-| 逻辑算子流水线 | 聚合 Pipeline（处理流水线）、关系算子 API | 阶段与部分算子顺序 | 数据流天然分阶段、需要局部控制 | 优化器的重排空间 |
-| 键/数据结构命令 | RocksDB `Get/Put/Iterator`、Redis 命令 | 键、数据结构操作及命令顺序 | 已知主键访问、低尾延迟、简单事务 | 跨键的声明查询与全局计划 |
-| 过程式事务程序 | PL/pgSQL（Procedural Language/PostgreSQL，PostgreSQL 过程式语言）、PL/SQL（Procedural Language/SQL，SQL 过程式语言）、T-SQL（Transact-SQL，事务 SQL） | 分支、循环、异常和副作用顺序 | 顺序本身就是业务语义 | 代数重写与可移植性 |
-| 声明查询 + 物理约束 | 厂商 Hint、Plan Guide | 结果语义外再固定部分访问/连接策略 | 需要保留 SQL 又要避免极端慢计划 | 版本适应性与跨厂商移植 |
-| 关系型 DBMS 内部物理计划 | Scan（扫描）、Join（连接）、Sort（排序）、Aggregate（聚合）节点 | 由优化器或内部规则产生 | 执行实现 | 属于系统内部实现层 |
+| 控制权层次               | 例子                                                                                                                                                  | 调用者固定什么                    | 适合什么情况                         | 调用者失去什么             |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ------------------------------------ | -------------------------- |
+| 物理/记录导航            | CODASYL DML、Berkeley DB Cursor（游标，即保存扫描当前位置的对象）                                                                                     | 路径、当前位置、扫描方向          | 固定访问模式、嵌入式边界、低框架开销 | 物理数据独立性与跨查询优化 |
+| 逻辑算子流水线           | 聚合 Pipeline（处理流水线）、关系算子 API                                                                                                             | 阶段与部分算子顺序                | 数据流天然分阶段、需要局部控制       | 优化器的重排空间           |
+| 键/数据结构命令          | RocksDB `Get/Put/Iterator`、Redis 命令                                                                                                                | 键、数据结构操作及命令顺序        | 已知主键访问、低尾延迟、简单事务     | 跨键的声明查询与全局计划   |
+| 过程式事务程序           | PL/pgSQL（Procedural Language/PostgreSQL，PostgreSQL 过程式语言）、PL/SQL（Procedural Language/SQL，SQL 过程式语言）、T-SQL（Transact-SQL，事务 SQL） | 分支、循环、异常和副作用顺序      | 顺序本身就是业务语义                 | 代数重写与可移植性         |
+| 声明查询 + 物理约束      | 厂商 Hint、Plan Guide                                                                                                                                 | 结果语义外再固定部分访问/连接策略 | 需要保留 SQL 又要避免极端慢计划      | 版本适应性与跨厂商移植     |
+| 关系型 DBMS 内部物理计划 | Scan（扫描）、Join（连接）、Sort（排序）、Aggregate（聚合）节点                                                                                       | 由优化器或内部规则产生            | 执行实现                             | 属于系统内部实现层         |
 
 Berkeley DB 的 C API 直接暴露 `DB->get/put`、游标和 B 树比较器；RocksDB 官方概览把 `Get`、`Put`、`Delete`、`NewIterator` 列为常用操作，并说明迭代器可以从指定键开始正向或反向扫描；Redis 客户端则发送一串针对键和数据类型的命令。[Berkeley DB C API 18.1](https://docs.oracle.com/database/bdb181/html/api_reference/C/index.html)、[RocksDB Overview](https://github.com/facebook/rocksdb/wiki/RocksDB-Overview)、[Using Redis Commands](https://redis.io/docs/latest/develop/use/)
 
@@ -549,7 +547,6 @@ JDBC（Java Database Connectivity，Java 数据库连接）与 ODBC（Open Datab
 支持 SQL 的关系型 DBMS 仍然执行具体步骤，其分层关系可以概括为：
 
 > 人写逻辑程序，优化器生成物理程序，执行器运行物理程序。
->
 
 ### 5. SQL 不是一块均匀的“纯声明式语言”
 
@@ -611,16 +608,14 @@ image: example/checkout:1.4.2
 {
   "apiVersion": "apps/v1",
   "kind": "Deployment",
-  "metadata": {"name": "checkout"},
+  "metadata": { "name": "checkout" },
   "spec": {
     "replicas": 3,
-    "selector": {"matchLabels": {"app": "checkout"}},
+    "selector": { "matchLabels": { "app": "checkout" } },
     "template": {
-      "metadata": {"labels": {"app": "checkout"}},
+      "metadata": { "labels": { "app": "checkout" } },
       "spec": {
-        "containers": [
-          {"name": "app", "image": "example/checkout:1.4.2"}
-        ]
+        "containers": [{ "name": "app", "image": "example/checkout:1.4.2" }]
       }
     }
   }
@@ -637,11 +632,11 @@ YAML/JSON 只负责把对象写成文本。对同一份对象，官方文档区�
 
 Server-Side Apply（服务端应用）在 Kubernetes API 的统一读写入口 API Server 端完成字段合并；Field Manager（字段管理者）标识哪个客户端或控制器负责哪些字段。这里其实有三层机制：
 
-| 层 | 负责什么 | 不负责什么 |
-| --- | --- | --- |
-| YAML / JSON 序列化 | 把 API Object 编码成可传输文本 | 不决定创建、替换、合并或调和语义 |
-| `apply` / Server-Side Apply | 合并字段、记录 Field Manager、检测字段所有权冲突 | 不替代具体资源的 Controller Loop |
-| Resource Controller | 解释该 Kind（资源类型）的 `spec`，观察现实并更新下级资源与 `status` | 不要求对象必须由 `apply` 创建 |
+| 层                          | 负责什么                                                            | 不负责什么                       |
+| --------------------------- | ------------------------------------------------------------------- | -------------------------------- |
+| YAML / JSON 序列化          | 把 API Object 编码成可传输文本                                      | 不决定创建、替换、合并或调和语义 |
+| `apply` / Server-Side Apply | 合并字段、记录 Field Manager、检测字段所有权冲突                    | 不替代具体资源的 Controller Loop |
+| Resource Controller         | 解释该 Kind（资源类型）的 `spec`，观察现实并更新下级资源与 `status` | 不要求对象必须由 `apply` 创建    |
 
 `apply` 处理字段合并，Controller 处理运行状态，两者不是一回事。Deployment 即使用命令式客户端创建，之后仍会被 Controller 调和；反过来，用 `apply` 管理的对象也未必有 Controller 负责它的业务状态。
 
@@ -755,14 +750,14 @@ Kubernetes 官方 API 约定要求 Controller 按当前状态工作（level-base
 
 这个选择带来的后果是：结果只能异步收敛，状态可能滞后，多写者可能冲突，删除也可能跨越很长时间。Kubernetes 再用 Condition、Generation、字段所有权、OwnerReference、Finalizer、重试与限流等机制补偿这些问题。
 
-| 必须接受的后果 | 可见证据 | 补偿机制 |
-| --- | --- | --- |
-| 提交 Manifest 不等于 Workload 已经 Ready（就绪） | `metadata.generation`、`status`、Condition | `observedGeneration`、Readiness（就绪检查）、Rollout Status（发布状态） |
-| 多个写入者会修改同一对象 | `managedFields`、Apply Conflict | Server-Side Apply 的字段所有权 |
-| Watch 可能断开、事件可能合并 | Resource Version、Relist、Requeue | 按当前 Level 重建，而非依赖完整事件历史 |
-| 创建外部资源后 Controller 可能崩溃 | 云端残留资源、重复调用日志 | 幂等 API、稳定外部标识符、状态重读 |
-| 删除不是瞬时动作 | `deletionTimestamp`、对象长期 `Terminating` | Finalizer 先清理再移除 |
-| 多个循环可能振荡或形成热点 | Work Queue、重试次数、API 每秒请求数、事件风暴 | Backoff、Rate Limit、职责边界和稳定判定 |
+| 必须接受的后果                                   | 可见证据                                       | 补偿机制                                                                |
+| ------------------------------------------------ | ---------------------------------------------- | ----------------------------------------------------------------------- |
+| 提交 Manifest 不等于 Workload 已经 Ready（就绪） | `metadata.generation`、`status`、Condition     | `observedGeneration`、Readiness（就绪检查）、Rollout Status（发布状态） |
+| 多个写入者会修改同一对象                         | `managedFields`、Apply Conflict                | Server-Side Apply 的字段所有权                                          |
+| Watch 可能断开、事件可能合并                     | Resource Version、Relist、Requeue              | 按当前 Level 重建，而非依赖完整事件历史                                 |
+| 创建外部资源后 Controller 可能崩溃               | 云端残留资源、重复调用日志                     | 幂等 API、稳定外部标识符、状态重读                                      |
+| 删除不是瞬时动作                                 | `deletionTimestamp`、对象长期 `Terminating`    | Finalizer 先清理再移除                                                  |
+| 多个循环可能振荡或形成热点                       | Work Queue、重试次数、API 每秒请求数、事件风暴 | Backoff、Rate Limit、职责边界和稳定判定                                 |
 
 Server-Side Apply 记录每个字段由哪个 Manager 管理，用来协调多个写入者。[Server-Side Apply](https://kubernetes.io/docs/reference/using-api/server-side-apply/)
 
@@ -770,20 +765,19 @@ Finalizer 表达的是待完成的删除责任，而非“删除前执行此函�
 
 ### 4. SQL 查询接口与 Kubernetes API 的共同结构和机制差异
 
-| 维度 | SQL 查询 / 关系型 DBMS | Kubernetes API / 控制面 |
-| --- | --- | --- |
-| 声明对象 | 结果关系或一次状态变换 | 应长期维持的资源状态 |
-| 中间表示 | DBMS 内部的查询树、逻辑计划和物理计划 | API 对象、下级资源图和工作队列项 |
-| 执行系统 | DBMS 的查询优化器与执行器 | 多个控制器、调度器与 Kubelet |
-| 世界是否封闭 | 事务与 DBMS 管理的数据边界相对封闭 | 外部云、网络、进程持续变化 |
-| 语义等价 | 计划必须保持查询结果语义 | 多种动作只需逐步接近目标，不一定瞬时等价 |
-| 完成条件 | 查询结束或事务提交 | 通常没有永久完成，只有暂时收敛 |
-| 主要不确定性 | 数据分布与代价估计 | 故障、延迟、多写者与外部状态 |
+| 维度         | SQL 查询 / 关系型 DBMS                | Kubernetes API / 控制面                  |
+| ------------ | ------------------------------------- | ---------------------------------------- |
+| 声明对象     | 结果关系或一次状态变换                | 应长期维持的资源状态                     |
+| 中间表示     | DBMS 内部的查询树、逻辑计划和物理计划 | API 对象、下级资源图和工作队列项         |
+| 执行系统     | DBMS 的查询优化器与执行器             | 多个控制器、调度器与 Kubelet             |
+| 世界是否封闭 | 事务与 DBMS 管理的数据边界相对封闭    | 外部云、网络、进程持续变化               |
+| 语义等价     | 计划必须保持查询结果语义              | 多种动作只需逐步接近目标，不一定瞬时等价 |
+| 完成条件     | 查询结束或事务提交                    | 通常没有永久完成，只有暂时收敛           |
+| 主要不确定性 | 数据分布与代价估计                    | 故障、延迟、多写者与外部状态             |
 
 两类接口都让执行系统选择做法，但运行方式不同：
 
 > 关系型 DBMS 把 SQL 逻辑查询编译成一次物理计划；Kubernetes 控制面则不断观察现实、修正偏差，从不假设环境会保持不变。
->
 
 ### 5. Terraform：只在 Plan/Apply 时纠偏
 
@@ -793,12 +787,12 @@ Terraform 正好处于 DBMS 的请求时规划和 Kubernetes 的持续调和之�
 
 三者的差别如下：
 
-| 维度 | SQL 查询 / 关系型 DBMS | Terraform | Kubernetes |
-| --- | --- | --- | --- |
-| 触发 | 每次查询或计划缓存边界 | 人或自动化触发一次 Run | Watch、重入队与周期性重同步 |
-| 比较对象 | 逻辑查询与候选物理计划 | 配置、State 与远端观察 | 持久 `spec` 与持续变化的现实 |
-| 执行前证据 | `EXPLAIN` | Plan / Saved Plan | Diff、Dry-run、对象版本 |
-| 发现和修复漂移 | 重新规划下一次请求 | 下次 Plan 或独立健康评估才发现 | Controller 持续观察并修复 |
+| 维度           | SQL 查询 / 关系型 DBMS | Terraform                      | Kubernetes                   |
+| -------------- | ---------------------- | ------------------------------ | ---------------------------- |
+| 触发           | 每次查询或计划缓存边界 | 人或自动化触发一次 Run         | Watch、重入队与周期性重同步  |
+| 比较对象       | 逻辑查询与候选物理计划 | 配置、State 与远端观察         | 持久 `spec` 与持续变化的现实 |
+| 执行前证据     | `EXPLAIN`              | Plan / Saved Plan              | Diff、Dry-run、对象版本      |
+| 发现和修复漂移 | 重新规划下一次请求     | 下次 Plan 或独立健康评估才发现 | Controller 持续观察并修复    |
 
 Terraform 不是常驻 Controller：`apply` 结束后，CLI（Command-Line Interface，命令行界面）不会在后台继续纠正漂移。它也不能只靠“配置与现实做差”。仅靠配置和云 API，往往无法确定配置地址对应哪个远端对象，因此**逻辑地址与物理身份的绑定必须被持久保存**。
 
@@ -811,7 +805,6 @@ Plan 只表示“根据刚才读到的状态，Terraform 准备做什么”，�
 ## 五、Prompt 在什么意义上是 LLM 的编程接口
 
 > Prompt 可以看作 LLM 的编程接口：它用文本说明目标、输入、约束和示例。与传统程序不同，同一个 Prompt 未必每次得到相同结果，换模型或版本后行为也可能明显变化。
->
 
 Prompt 是否声明式，取决于它把多少步骤选择权交给模型，与是否使用自然语言无关。
 
@@ -831,11 +824,11 @@ GPT-3（Generative Pre-trained Transformer 3，第三代生成式预训练变换
 
 Prompt 也可以很命令式。“产出包含证据的比较报告”主要规定结果；“先检索、再逐项比较、最后按模板生成”则规定步骤。实际 Prompt 往往混合两者：
 
-| Prompt 内容 | 更接近哪一侧 | Runtime/模型仍保留什么 |
-| --- | --- | --- |
-| 目标、约束、验收标准、禁止事项 | 声明式 | 分解、顺序、工具与重试路径 |
-| 明确步骤、循环次数、工具顺序 | 命令式 | 每一步内部的语言理解与生成 |
-| Few-shot（少样本）示例 | 示范式约束 | 从示例归纳何种规则并不稳定 |
+| Prompt 内容                    | 更接近哪一侧 | Runtime/模型仍保留什么     |
+| ------------------------------ | ------------ | -------------------------- |
+| 目标、约束、验收标准、禁止事项 | 声明式       | 分解、顺序、工具与重试路径 |
+| 明确步骤、循环次数、工具顺序   | 命令式       | 每一步内部的语言理解与生成 |
+| Few-shot（少样本）示例         | 示范式约束   | 从示例归纳何种规则并不稳定 |
 
 只有当 Prompt 主要写目标、约束和验收标准，而模型或 Runtime 自己选步骤时，它才和 SQL 查询接口、Kubernetes API 有可比性。自然语言只是载体，控制权怎么分才是关键。
 
@@ -862,16 +855,16 @@ y ~ p_{θ,runtime}(
 
 其中 `θ` 表示模型参数；模型版本、解码设置（例如温度和采样方式）、上下文裁剪（超长时保留或舍弃哪些内容）、工具策略和供应商实现都属于 `runtime`。用户写的 Prompt 也只是 `messages` 的一部分。
 
-| 检验维度 | 传统程序语言 | 自然语言 Prompt |
-| --- | --- | --- |
-| 语法 | 有明确 Grammar（语法规则），错误通常可判定 | 大多数文本都能输入，错误难在输入时判断 |
-| 静态语义（运行前可检查的规则） | 类型、名字绑定、作用域可检查 | 约束常靠模型解释 |
-| 动态语义（程序运行时的含义） | 实现规范相对稳定 | 依赖模型、版本、上下文和采样 |
-| 组合性（局部组合能否推导整体行为） | 局部构件通常有可推理的组合规则 | 加一句话可能非局部改变行为 |
-| 等价性（改写是否保持行为） | 可以严格定义两个程序是否等价 | Prompt 改写通常没有等价保证 |
-| 错误模型 | Exception（异常）、Error Code（错误码）和 Undefined Behavior（未定义行为）有边界 | 可能流畅地产生错误结果 |
-| 可移植性 | 受标准和 Runtime 约束 | 跨模型、跨版本表现可能显著漂移 |
-| 验证 | 编译器、类型、测试、证明、监控 | 主要依赖统计 Eval、Schema、外部验证 |
+| 检验维度                           | 传统程序语言                                                                     | 自然语言 Prompt                        |
+| ---------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------- |
+| 语法                               | 有明确 Grammar（语法规则），错误通常可判定                                       | 大多数文本都能输入，错误难在输入时判断 |
+| 静态语义（运行前可检查的规则）     | 类型、名字绑定、作用域可检查                                                     | 约束常靠模型解释                       |
+| 动态语义（程序运行时的含义）       | 实现规范相对稳定                                                                 | 依赖模型、版本、上下文和采样           |
+| 组合性（局部组合能否推导整体行为） | 局部构件通常有可推理的组合规则                                                   | 加一句话可能非局部改变行为             |
+| 等价性（改写是否保持行为）         | 可以严格定义两个程序是否等价                                                     | Prompt 改写通常没有等价保证            |
+| 错误模型                           | Exception（异常）、Error Code（错误码）和 Undefined Behavior（未定义行为）有边界 | 可能流畅地产生错误结果                 |
+| 可移植性                           | 受标准和 Runtime 约束                                                            | 跨模型、跨版本表现可能显著漂移         |
+| 验证                               | 编译器、类型、测试、证明、监控                                                   | 主要依赖统计 Eval、Schema、外部验证    |
 
 分层来看：
 
@@ -881,16 +874,16 @@ y ~ p_{θ,runtime}(
 
 ### 3. Agent 之前：经典规划与约束求解的声明传统
 
-“给出目标，让系统搜索步骤”早在 LLM 之前就存在。STRIPS 在 1971 年把初始状态、目标和操作规则分开：规划器搜索一串操作，让结果状态满足目标；论文还区分了规划模型中的算子（Operator）与真实执行动作（Action Routine）。[Fikes 与 Nilsson 1971](https://doi.org/10.1016/0004-3702(71)90010-5)
+“给出目标，让系统搜索步骤”早在 LLM 之前就存在。STRIPS 在 1971 年把初始状态、目标和操作规则分开：规划器搜索一串操作，让结果状态满足目标；论文还区分了规划模型中的算子（Operator）与真实执行动作（Action Routine）。[Fikes 与 Nilsson 1971](<https://doi.org/10.1016/0004-3702(71)90010-5>)
 
 PDDL 在 1998 年标准化了领域和问题的写法，让不同规划器能读取同类问题并输出可检查的计划。HTN 则用分解方法把大任务逐层拆成小任务，以领域知识缩小搜索范围。[PDDL 1.2](https://www.isi.edu/results/publications/19837/pddl-the-planning-domain-definition-language-version-1-2/)、[Erol、Nau 与 Hendler 1993](https://cdn.aaai.org/Symposia/Spring/1993/SS-93-03/SS93-03-005.pdf)
 
-| 机制 | 调用者声明 | 求解器或运行系统搜索 | 怎样检查 |
-| --- | --- | --- | --- |
-| STRIPS / PDDL | 初始状态、目标、动作前提与效果 | 满足目标的动作序列 | 在给定符号模型内检查计划 |
-| HTN | 初始任务网络、算子与分解方法 | 合法的任务分解 | 是否符合分解方法与任务约束 |
-| SAT / SMT | 布尔公式，或带背景理论的公式 | 满足公式的赋值或模型 | 把返回模型代入约束检查 |
-| LLM Agent | 自然语言目标、工具契约、权限与观察 | 下一步候选动作和动态修订 | 外部测试、策略规则、评测器或人 |
+| 机制          | 调用者声明                         | 求解器或运行系统搜索     | 怎样检查                       |
+| ------------- | ---------------------------------- | ------------------------ | ------------------------------ |
+| STRIPS / PDDL | 初始状态、目标、动作前提与效果     | 满足目标的动作序列       | 在给定符号模型内检查计划       |
+| HTN           | 初始任务网络、算子与分解方法       | 合法的任务分解           | 是否符合分解方法与任务约束     |
+| SAT / SMT     | 布尔公式，或带背景理论的公式       | 满足公式的赋值或模型     | 把返回模型代入约束检查         |
+| LLM Agent     | 自然语言目标、工具契约、权限与观察 | 下一步候选动作和动态修订 | 外部测试、策略规则、评测器或人 |
 
 不能简单地说“经典规划失败了，LLM 接班”。经典规划要求人先写清状态变量、动作前提和动作效果，建模成本高，但计划可以在模型内自动检查。LLM 通过预训练（先在大规模语料上学习）获得语言和常识，生成候选步骤更便宜，却不天然掌握当前状态，也不保证动作模型和结果正确。
 
@@ -1021,14 +1014,14 @@ Agent
 
 当任务需要版本管理、回归测试和模型迁移时，只保存最终 Prompt 远远不够。至少要分开维护：
 
-| 层 | 负责什么 |
-| --- | --- |
-| 任务规格 | 目标、输入输出契约、不变量、风险边界 |
-| 上下文策略 | 检索什么、保留什么、信息优先级与生命周期 |
-| Agent 策略 | 何时规划、调用工具、并行、停止、转交人工 |
-| 工具契约 | 类型、前置条件、副作用、幂等性、权限和错误 |
-| 验收器 | 什么结果算正确，怎样抽样、回归和在线监控 |
-| Prompt | 把上述部分编排成当前模型可有效解释的上下文 |
+| 层         | 负责什么                                   |
+| ---------- | ------------------------------------------ |
+| 任务规格   | 目标、输入输出契约、不变量、风险边界       |
+| 上下文策略 | 检索什么、保留什么、信息优先级与生命周期   |
+| Agent 策略 | 何时规划、调用工具、并行、停止、转交人工   |
+| 工具契约   | 类型、前置条件、副作用、幂等性、权限和错误 |
+| 验收器     | 什么结果算正确，怎样抽样、回归和在线监控   |
+| Prompt     | 把上述部分编排成当前模型可有效解释的上下文 |
 
 可维护的 Agent 资产更接近：
 
@@ -1150,7 +1143,6 @@ flowchart LR
 更可靠的分工是：
 
 > Agent 负责理解含糊目标并提出候选计划；传统程序负责精确执行、强制规则和控制权限。
->
 
 ---
 
@@ -1169,19 +1161,19 @@ flowchart LR
 
 第一张表回答前五问，其中“现实问题与边界”同时回答第 1、2 问。第二张表回答后三问。
 
-| 接口与执行系统 | 现实问题与边界 | 绕不过去的问题 | 可选方案与取舍 | 本文讨论的具体选择 |
-| --- | --- | --- | --- | --- |
-| SQL 查询 / 关系型 DBMS | 多应用共享长期数据；索引、分布、内存与硬件变化 | 逻辑请求不能永久绑定物理导航路径 | 导航 API 最可控但耦合布局；逻辑处理流水线保留部分顺序；规则式、代价式、自适应规划逐步增加自由度与模型风险 | 关系模型 + SQL 查询接口 + DBMS 内部代价优化器；具体 PostgreSQL 选择见下一节实验 |
-| Kubernetes API / 控制面 | 分布式动作非原子，观察滞后，节点、控制器与外部系统会失败 | 部署必须可安全重试，未来漂移后仍能修复 | 一次性脚本简单但不持续；中心编排器控制强但故障风险集中；分布式 Controller 可扩展但异步且可能冲突 | 持久 API Object + `spec/status` + Controller Loop |
-| 目标与上下文 / Agent Runtime | 开放任务难以预先穷举，目标含糊，工具有真实副作用 | 含糊意图必须逐步落到可授权、可检查动作 | 固定 Workflow 可预测但覆盖窄；模型动态规划适应性高但不稳定；人工介入降低风险但增加延迟 | Instructions + LLM + 类型化工具 + Runtime + 验收器 + 人工检查点 |
+| 接口与执行系统               | 现实问题与边界                                           | 绕不过去的问题                         | 可选方案与取舍                                                                                            | 本文讨论的具体选择                                                              |
+| ---------------------------- | -------------------------------------------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| SQL 查询 / 关系型 DBMS       | 多应用共享长期数据；索引、分布、内存与硬件变化           | 逻辑请求不能永久绑定物理导航路径       | 导航 API 最可控但耦合布局；逻辑处理流水线保留部分顺序；规则式、代价式、自适应规划逐步增加自由度与模型风险 | 关系模型 + SQL 查询接口 + DBMS 内部代价优化器；具体 PostgreSQL 选择见下一节实验 |
+| Kubernetes API / 控制面      | 分布式动作非原子，观察滞后，节点、控制器与外部系统会失败 | 部署必须可安全重试，未来漂移后仍能修复 | 一次性脚本简单但不持续；中心编排器控制强但故障风险集中；分布式 Controller 可扩展但异步且可能冲突          | 持久 API Object + `spec/status` + Controller Loop                               |
+| 目标与上下文 / Agent Runtime | 开放任务难以预先穷举，目标含糊，工具有真实副作用         | 含糊意图必须逐步落到可授权、可检查动作 | 固定 Workflow 可预测但覆盖窄；模型动态规划适应性高但不稳定；人工介入降低风险但增加延迟                    | Instructions + LLM + 类型化工具 + Runtime + 验收器 + 人工检查点                 |
 
 第二张表回答这个选择带来什么、怎样补偿、去哪里看证据：
 
-| 接口与执行系统 | 选择带来的后果 | 补偿机制 | 可核验的物理证据 |
-| --- | --- | --- | --- |
-| SQL 查询 / 关系型 DBMS | 调用者不直接指定物理性能路径，统计误差会引起计划漂移 | `ANALYZE`、扩展统计、索引、`EXPLAIN`、计划回归检查 | 查询计划、估计/实际行数、Buffer、I/O、临时文件、WAL、锁等待、提交状态 |
-| Kubernetes API / 控制面 | 异步收敛、多写者冲突、状态滞后、删除清理复杂 | Condition、Generation、字段所有权、OwnerReference、Finalizer、Backoff | Live Object（当前对象）、`managedFields`、Event（事件记录）、Queue（队列）、Audit Log（审计日志）、实际 Pod/云资源 |
-| 目标与上下文 / Agent Runtime | 行为漂移、Prompt Injection、不收敛、成本与错误累积 | Schema、Sandbox、最小权限、Approval（人工审批）、预算、Trace、Eval、确定性验证器 | 完整上下文版本、Tool Call/Result（工具调用/结果）、状态快照、测试、Eval 分布、人工决策和副作用审计 |
+| 接口与执行系统               | 选择带来的后果                                       | 补偿机制                                                                         | 可核验的物理证据                                                                                                   |
+| ---------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| SQL 查询 / 关系型 DBMS       | 调用者不直接指定物理性能路径，统计误差会引起计划漂移 | `ANALYZE`、扩展统计、索引、`EXPLAIN`、计划回归检查                               | 查询计划、估计/实际行数、Buffer、I/O、临时文件、WAL、锁等待、提交状态                                              |
+| Kubernetes API / 控制面      | 异步收敛、多写者冲突、状态滞后、删除清理复杂         | Condition、Generation、字段所有权、OwnerReference、Finalizer、Backoff            | Live Object（当前对象）、`managedFields`、Event（事件记录）、Queue（队列）、Audit Log（审计日志）、实际 Pod/云资源 |
+| 目标与上下文 / Agent Runtime | 行为漂移、Prompt Injection、不收敛、成本与错误累积   | Schema、Sandbox、最小权限、Approval（人工审批）、预算、Trace、Eval、确定性验证器 | 完整上下文版本、Tool Call/Result（工具调用/结果）、状态快照、测试、Eval 分布、人工决策和副作用审计                 |
 
 这些具体选择都不是现实约束唯一允许的答案。现实会缩小可选范围，但关系型 DBMS 的 SQL 接口、Kubernetes 控制面和各类 Agent Runtime，仍然是各自时代在多种可行方案中形成的工程选择。
 
@@ -1196,7 +1188,6 @@ flowchart LR
 因此：
 
 > 系统获得的选择权越多，就越要提供观察、验证和撤销手段。
->
 
 可以粗略比较这笔交易的收益和成本：
 
@@ -1229,16 +1220,16 @@ flowchart LR
 
 先说明实验中会反复出现的 PostgreSQL 术语：
 
-| 术语 | 本文中的含义 | 官方参考 |
-| --- | --- | --- |
-| Page / Block / Buffer | Page（页）是 PostgreSQL 存储数据的固定大小单位，Block（块）在本实验中指 8 KiB 数据页；`EXPLAIN` 的 Buffer 计数记录共享缓冲区或本地缓冲区中的块访问，不是去重后的文件页数量。 | [Database Page Layout](https://www.postgresql.org/docs/18/storage-page-layout.html)、[`EXPLAIN`](https://www.postgresql.org/docs/18/sql-explain.html) |
-| Heap | 表数据本体所在的堆文件，不表示“堆数据结构”。索引项通常仍指向 Heap 中的行版本。 | [Database Page Layout](https://www.postgresql.org/docs/18/storage-page-layout.html) |
-| Seq Scan、Index Scan 与 Index Only Scan | Seq Scan（顺序扫描）逐页读表；Index Scan（索引扫描）先读索引，再按需访问 Heap；Index Only Scan（仅索引扫描）在索引含有所需列且可见性条件满足时，可以不读 Heap。 | [Index-Only Scans and Covering Indexes](https://www.postgresql.org/docs/18/indexes-index-only-scans.html) |
-| Heap Fetch | Index Only Scan 仍需回到 Heap 检查或取行的次数。数值为 0 才表示这次执行没有为这些索引项读取 Heap 行。 | [Index-Only Scans and Covering Indexes](https://www.postgresql.org/docs/18/indexes-index-only-scans.html) |
-| GroupAggregate 与 HashAggregate | GroupAggregate（有序分组聚合）利用已按分组键排列的输入；HashAggregate（哈希聚合）用哈希表维护各组状态。它们是 DBMS 选出的物理算子，不是 SQL 语法。 | [Using `EXPLAIN`](https://www.postgresql.org/docs/18/using-explain.html) |
-| `ANALYZE`、`VACUUM` 与 Autovacuum | `ANALYZE` 采集规划器统计；`VACUUM` 回收或标记可复用空间并维护可见性信息；Autovacuum（自动清理）在后台按阈值自动执行 Vacuum/Analyze 工作。 | [Routine Vacuuming](https://www.postgresql.org/docs/18/routine-vacuuming.html) |
-| Visibility Map / All-Visible | Visibility Map（可见性映射）记录哪些 Heap Page 对所有事务都可见；All-Visible 是其中的全可见标记，Index Only Scan 据此判断能否跳过 Heap。 | [Visibility Map](https://www.postgresql.org/docs/18/storage-vm.html)、[Index-Only Scans](https://www.postgresql.org/docs/18/indexes-index-only-scans.html) |
-| Estimated / Actual Rows 与 Execution Time | Estimated Rows 是优化器估计的行数，Actual Rows 是实际执行得到的行数；Execution Time 是本次执行耗时，容易受缓存、硬件和运行顺序影响。 | [Using `EXPLAIN`](https://www.postgresql.org/docs/18/using-explain.html) |
+| 术语                                      | 本文中的含义                                                                                                                                                                 | 官方参考                                                                                                                                                   |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Page / Block / Buffer                     | Page（页）是 PostgreSQL 存储数据的固定大小单位，Block（块）在本实验中指 8 KiB 数据页；`EXPLAIN` 的 Buffer 计数记录共享缓冲区或本地缓冲区中的块访问，不是去重后的文件页数量。 | [Database Page Layout](https://www.postgresql.org/docs/18/storage-page-layout.html)、[`EXPLAIN`](https://www.postgresql.org/docs/18/sql-explain.html)      |
+| Heap                                      | 表数据本体所在的堆文件，不表示“堆数据结构”。索引项通常仍指向 Heap 中的行版本。                                                                                               | [Database Page Layout](https://www.postgresql.org/docs/18/storage-page-layout.html)                                                                        |
+| Seq Scan、Index Scan 与 Index Only Scan   | Seq Scan（顺序扫描）逐页读表；Index Scan（索引扫描）先读索引，再按需访问 Heap；Index Only Scan（仅索引扫描）在索引含有所需列且可见性条件满足时，可以不读 Heap。              | [Index-Only Scans and Covering Indexes](https://www.postgresql.org/docs/18/indexes-index-only-scans.html)                                                  |
+| Heap Fetch                                | Index Only Scan 仍需回到 Heap 检查或取行的次数。数值为 0 才表示这次执行没有为这些索引项读取 Heap 行。                                                                        | [Index-Only Scans and Covering Indexes](https://www.postgresql.org/docs/18/indexes-index-only-scans.html)                                                  |
+| GroupAggregate 与 HashAggregate           | GroupAggregate（有序分组聚合）利用已按分组键排列的输入；HashAggregate（哈希聚合）用哈希表维护各组状态。它们是 DBMS 选出的物理算子，不是 SQL 语法。                           | [Using `EXPLAIN`](https://www.postgresql.org/docs/18/using-explain.html)                                                                                   |
+| `ANALYZE`、`VACUUM` 与 Autovacuum         | `ANALYZE` 采集规划器统计；`VACUUM` 回收或标记可复用空间并维护可见性信息；Autovacuum（自动清理）在后台按阈值自动执行 Vacuum/Analyze 工作。                                    | [Routine Vacuuming](https://www.postgresql.org/docs/18/routine-vacuuming.html)                                                                             |
+| Visibility Map / All-Visible              | Visibility Map（可见性映射）记录哪些 Heap Page 对所有事务都可见；All-Visible 是其中的全可见标记，Index Only Scan 据此判断能否跳过 Heap。                                     | [Visibility Map](https://www.postgresql.org/docs/18/storage-vm.html)、[Index-Only Scans](https://www.postgresql.org/docs/18/indexes-index-only-scans.html) |
+| Estimated / Actual Rows 与 Execution Time | Estimated Rows 是优化器估计的行数，Actual Rows 是实际执行得到的行数；Execution Time 是本次执行耗时，容易受缓存、硬件和运行顺序影响。                                         | [Using `EXPLAIN`](https://www.postgresql.org/docs/18/using-explain.html)                                                                                   |
 
 实验使用本地官方源码标签 `REL_18_4`、提交 `f5cc81719e6da4cbdb1f797c48b693e91018153a` 临时构建，运行于 64 位 Arm Linux。除关闭并行以让计划易读外，使用默认成本常量：8 KiB（kibibyte，二进制千字节）Page、`shared_buffers=128MB`、`work_mem=4MB`、`seq_page_cost=1`、`random_page_cost=4`；配置中的 MB（megabyte，兆字节）是 PostgreSQL 接受的内存单位。
 
@@ -1349,13 +1340,13 @@ FROM generate_series(1, 50000) AS g;
 
 把两个基线和三个变化阶段放在一起，共有五次运行。Buffer 列是 `EXPLAIN` 汇总的 Buffer Usage，单位是 8 KiB Block 的访问次数，不是去重后的页面数；Estimated/Actual Rows 取过滤后的 `orders` 路径；ms（millisecond，毫秒）是执行时间单位。
 
-| 编号 | 过滤日期 | 物理/统计现场 | Estimated / Actual Rows | Join / Aggregate | Heap Fetches | 总 Buffers | Execution Time |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| S1 | 2026-12-31 | 无日期索引 | 997 / 1,000 | Hash Join / GroupAggregate | — | 2,335 | 11.670 ms |
-| S2 | 2026-12-31 | 覆盖索引 + `VACUUM (ANALYZE)` | 995 / 1,000 | Merge Join / GroupAggregate | 0 | 19 | 0.581 ms |
-| S3 | 2027-01-01 | 插入后、统计过期 | 1,131 / 50,000 | Merge Join / GroupAggregate | 50,000 | 50,260 | 10.806 ms |
-| S4 | 2027-01-01 | `ANALYZE orders` 后 | 50,672 / 50,000 | Hash Join / HashAggregate | 50,000 | 50,259 | 12.975 ms |
-| S5 | 2027-01-01 | `VACUUM (ANALYZE) orders` 后 | 48,721 / 50,000 | Hash Join / HashAggregate | 0 | 259 | 7.032 ms |
+| 编号 | 过滤日期   | 物理/统计现场                 | Estimated / Actual Rows | Join / Aggregate            | Heap Fetches | 总 Buffers | Execution Time |
+| ---- | ---------- | ----------------------------- | ----------------------- | --------------------------- | ------------ | ---------- | -------------- |
+| S1   | 2026-12-31 | 无日期索引                    | 997 / 1,000             | Hash Join / GroupAggregate  | —            | 2,335      | 11.670 ms      |
+| S2   | 2026-12-31 | 覆盖索引 + `VACUUM (ANALYZE)` | 995 / 1,000             | Merge Join / GroupAggregate | 0            | 19         | 0.581 ms       |
+| S3   | 2027-01-01 | 插入后、统计过期              | 1,131 / 50,000          | Merge Join / GroupAggregate | 50,000       | 50,260     | 10.806 ms      |
+| S4   | 2027-01-01 | `ANALYZE orders` 后           | 50,672 / 50,000         | Hash Join / HashAggregate   | 50,000       | 50,259     | 12.975 ms      |
+| S5   | 2027-01-01 | `VACUUM (ANALYZE) orders` 后  | 48,721 / 50,000         | Hash Join / HashAggregate   | 0            | 259        | 7.032 ms       |
 
 `ANALYZE` 更新选择率估计后，计划从 Merge/Group 改为 Hash/Hash。新 Heap Page 还不是 All-Visible，所以 Index Only Scan 仍做了 50,000 次 Heap Fetch。`VACUUM` 更新 Visibility Map 后，Heap Fetch 归零，Buffer 从五万级降到 259。三种手段解决不同问题：统计影响行数估计，索引提供访问路径，Visibility Map 决定能否跳过 Heap。
 
@@ -1468,7 +1459,7 @@ LLM/Agent 把这种分工扩展到自然语言和开放任务。工程上必须�
 
 ### 经典规划与约束求解
 
-- Richard E. Fikes, Nils J. Nilsson, [STRIPS: A New Approach to the Application of Theorem Proving to Problem Solving](https://doi.org/10.1016/0004-3702(71)90010-5), 1971.
+- Richard E. Fikes, Nils J. Nilsson, [STRIPS: A New Approach to the Application of Theorem Proving to Problem Solving](<https://doi.org/10.1016/0004-3702(71)90010-5>), 1971.
 - Drew McDermott et al., [PDDL — The Planning Domain Definition Language, Version 1.2](https://www.isi.edu/results/publications/19837/pddl-the-planning-domain-definition-language-version-1-2/), 1998.
 - Kutluhan Erol, Dana Nau, James Hendler, [Toward a General Framework for Hierarchical Task-Network Planning](https://cdn.aaai.org/Symposia/Spring/1993/SS-93-03/SS93-03-005.pdf), 1993.
 - Stephen A. Cook, [The Complexity of Theorem-Proving Procedures](https://doi.org/10.1145/800157.805047), 1971.

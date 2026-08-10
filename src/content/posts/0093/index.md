@@ -4,6 +4,7 @@ pubDatetime: 2026-08-09T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | In Search of an Understandable Consensus Algorithm（中英对照全文）"
 featured: false
+area: "distributed-systems"
 draft: false
 tags:
   - "论文阅读"
@@ -13,6 +14,7 @@ tags:
   - "状态机复制"
 description: "Raft 经典论文中英对照全文，系统讲解领导者选举、日志复制、安全性、成员变更、快照、线性一致读取及可理解性评估。"
 ---
+
 > 本文严格依照所给 18 页 PDF 的可见内容，按论文阅读顺序逐块转录并翻译。英文中的拼写、标点和疑误均按原文保留；图表后的“图表中文解读”为辅助说明，不属于论文原文。
 
 > 寻找一种易于理解的共识算法
@@ -235,30 +237,30 @@ After presenting the consensus algorithm, this section discusses the issue of av
 
 > （响应 RPC 之前在稳定存储上更新）
 
-| English field | English description |
-| --- | --- |
-| `currentTerm` | latest term server has seen (initialized to 0 on first boot, increases monotonically) |
-| `votedFor` | candidateId that received vote in current term (or null if none) |
-| `log[]` | log entries; each entry contains command for state machine, and term when entry was received by leader (first index is 1) |
+| English field | English description                                                                                                       |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `currentTerm` | latest term server has seen (initialized to 0 on first boot, increases monotonically)                                     |
+| `votedFor`    | candidateId that received vote in current term (or null if none)                                                          |
+| `log[]`       | log entries; each entry contains command for state machine, and term when entry was received by leader (first index is 1) |
 
-> | 字段 | 说明 |
-> | --- | --- |
-> | `currentTerm` | 服务器见过的最新任期（首次启动时初始化为 0，单调递增） |
-> | `votedFor` | 在当前任期内获得选票的 `candidateId`（若无则为 `null`） |
-> | `log[]` | 日志条目；每个条目包含状态机命令以及领导者收到该条目时的任期（首个索引为 1） |
+> | 字段          | 说明                                                                         |
+> | ------------- | ---------------------------------------------------------------------------- |
+> | `currentTerm` | 服务器见过的最新任期（首次启动时初始化为 0，单调递增）                       |
+> | `votedFor`    | 在当前任期内获得选票的 `candidateId`（若无则为 `null`）                      |
+> | `log[]`       | 日志条目；每个条目包含状态机命令以及领导者收到该条目时的任期（首个索引为 1） |
 
 **Volatile state on all servers:**
 
 > **所有服务器上的易失状态：**
 
-| English field | English description |
-| --- | --- |
-| `commitIndex` | index of highest log entry known to be committed (initialized to 0, increases monotonically) |
+| English field | English description                                                                             |
+| ------------- | ----------------------------------------------------------------------------------------------- |
+| `commitIndex` | index of highest log entry known to be committed (initialized to 0, increases monotonically)    |
 | `lastApplied` | index of highest log entry applied to state machine (initialized to 0, increases monotonically) |
 
-> | 字段 | 说明 |
-> | --- | --- |
-> | `commitIndex` | 已知已提交的最高日志条目索引（初始化为 0，单调递增） |
+> | 字段          | 说明                                                     |
+> | ------------- | -------------------------------------------------------- |
+> | `commitIndex` | 已知已提交的最高日志条目索引（初始化为 0，单调递增）     |
 > | `lastApplied` | 已应用于状态机的最高日志条目索引（初始化为 0，单调递增） |
 
 **Volatile state on leaders:**
@@ -269,15 +271,15 @@ After presenting the consensus algorithm, this section discusses the issue of av
 
 > （选举后重新初始化）
 
-| English field | English description |
-| --- | --- |
-| `nextIndex[]` | for each server, index of the next log entry to send to that server (initialized to leader last log index + 1) |
+| English field  | English description                                                                                                      |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `nextIndex[]`  | for each server, index of the next log entry to send to that server (initialized to leader last log index + 1)           |
 | `matchIndex[]` | for each server, index of highest log entry known to be replicated on server (initialized to 0, increases monotonically) |
 
-> | 字段 | 说明 |
-> | --- | --- |
-> | `nextIndex[]` | 对每台服务器而言，下一条要发送给它的日志条目索引（初始化为领导者最后日志索引 + 1） |
-> | `matchIndex[]` | 对每台服务器而言，已知已复制到该服务器的最高日志条目索引（初始化为 0，单调递增） |
+> | 字段           | 说明                                                                               |
+> | -------------- | ---------------------------------------------------------------------------------- |
+> | `nextIndex[]`  | 对每台服务器而言，下一条要发送给它的日志条目索引（初始化为领导者最后日志索引 + 1） |
+> | `matchIndex[]` | 对每台服务器而言，已知已复制到该服务器的最高日志条目索引（初始化为 0，单调递增）   |
 
 ### RequestVote RPC
 
@@ -291,33 +293,33 @@ Invoked by candidates to gather votes (§5.2).
 
 > **参数：**
 
-| English field | English description |
-| --- | --- |
-| `term` | candidate’s term |
-| `candidateId` | candidate requesting vote |
+| English field  | English description                        |
+| -------------- | ------------------------------------------ |
+| `term`         | candidate’s term                           |
+| `candidateId`  | candidate requesting vote                  |
 | `lastLogIndex` | index of candidate’s last log entry (§5.4) |
-| `lastLogTerm` | term of candidate’s last log entry (§5.4) |
+| `lastLogTerm`  | term of candidate’s last log entry (§5.4)  |
 
-> | 字段 | 说明 |
-> | --- | --- |
-> | `term` | 候选者的任期 |
-> | `candidateId` | 请求选票的候选者 |
+> | 字段           | 说明                                 |
+> | -------------- | ------------------------------------ |
+> | `term`         | 候选者的任期                         |
+> | `candidateId`  | 请求选票的候选者                     |
 > | `lastLogIndex` | 候选者最后一条日志条目的索引（§5.4） |
-> | `lastLogTerm` | 候选者最后一条日志条目的任期（§5.4） |
+> | `lastLogTerm`  | 候选者最后一条日志条目的任期（§5.4） |
 
 **Results:**
 
 > **结果：**
 
-| English field | English description |
-| --- | --- |
-| `term` | currentTerm, for candidate to update itself |
-| `voteGranted` | true means candidate received vote |
+| English field | English description                         |
+| ------------- | ------------------------------------------- |
+| `term`        | currentTerm, for candidate to update itself |
+| `voteGranted` | true means candidate received vote          |
 
-> | 字段 | 说明 |
-> | --- | --- |
-> | `term` | `currentTerm`，供候选者更新自身 |
-> | `voteGranted` | `true` 表示候选者获得选票 |
+> | 字段          | 说明                            |
+> | ------------- | ------------------------------- |
+> | `term`        | `currentTerm`，供候选者更新自身 |
+> | `voteGranted` | `true` 表示候选者获得选票       |
 
 **Receiver implementation:**
 
@@ -341,36 +343,36 @@ Invoked by leader to replicate log entries (§5.3); also used as heartbeat (§5.
 
 > **参数：**
 
-| English field | English description |
-| --- | --- |
-| `term` | leader’s term |
-| `leaderId` | so follower can redirect clients |
-| `prevLogIndex` | index of log entry immediately preceding new ones |
-| `prevLogTerm` | term of `prevLogIndex` entry |
-| `entries[]` | log entries to store (empty for heartbeat; may send more than one for efficiency) |
-| `leaderCommit` | leader’s `commitIndex` |
+| English field  | English description                                                               |
+| -------------- | --------------------------------------------------------------------------------- |
+| `term`         | leader’s term                                                                     |
+| `leaderId`     | so follower can redirect clients                                                  |
+| `prevLogIndex` | index of log entry immediately preceding new ones                                 |
+| `prevLogTerm`  | term of `prevLogIndex` entry                                                      |
+| `entries[]`    | log entries to store (empty for heartbeat; may send more than one for efficiency) |
+| `leaderCommit` | leader’s `commitIndex`                                                            |
 
-> | 字段 | 说明 |
-> | --- | --- |
-> | `term` | 领导者的任期 |
-> | `leaderId` | 使跟随者能够重定向客户端 |
-> | `prevLogIndex` | 紧邻新条目之前的日志条目索引 |
-> | `prevLogTerm` | `prevLogIndex` 条目的任期 |
-> | `entries[]` | 要保存的日志条目（心跳时为空；为提高效率可一次发送多个） |
-> | `leaderCommit` | 领导者的 `commitIndex` |
+> | 字段           | 说明                                                     |
+> | -------------- | -------------------------------------------------------- |
+> | `term`         | 领导者的任期                                             |
+> | `leaderId`     | 使跟随者能够重定向客户端                                 |
+> | `prevLogIndex` | 紧邻新条目之前的日志条目索引                             |
+> | `prevLogTerm`  | `prevLogIndex` 条目的任期                                |
+> | `entries[]`    | 要保存的日志条目（心跳时为空；为提高效率可一次发送多个） |
+> | `leaderCommit` | 领导者的 `commitIndex`                                   |
 
 **Results:**
 
 > **结果：**
 
-| English field | English description |
-| --- | --- |
-| `term` | currentTerm, for leader to update itself |
-| `success` | true if follower contained entry matching `prevLogIndex` and `prevLogTerm` |
+| English field | English description                                                        |
+| ------------- | -------------------------------------------------------------------------- |
+| `term`        | currentTerm, for leader to update itself                                   |
+| `success`     | true if follower contained entry matching `prevLogIndex` and `prevLogTerm` |
 
-> | 字段 | 说明 |
-> | --- | --- |
-> | `term` | `currentTerm`，供领导者更新自身 |
+> | 字段      | 说明                                                                   |
+> | --------- | ---------------------------------------------------------------------- |
+> | `term`    | `currentTerm`，供领导者更新自身                                        |
 > | `success` | 若跟随者含有与 `prevLogIndex` 和 `prevLogTerm` 匹配的条目，则为 `true` |
 
 **Receiver implementation:**
@@ -911,36 +913,36 @@ Invoked by leader to send chunks of a snapshot to a follower. Leaders always sen
 
 > **参数：**
 
-| English field | English description |
-| --- | --- |
-| `term` | leader’s term |
-| `leaderId` | so follower can redirect clients |
+| English field       | English description                                                   |
+| ------------------- | --------------------------------------------------------------------- |
+| `term`              | leader’s term                                                         |
+| `leaderId`          | so follower can redirect clients                                      |
 | `lastIncludedIndex` | the snapshot replaces all entries up through and including this index |
-| `lastIncludedTerm` | term of `lastIncludedIndex` |
-| `offset` | byte offset where chunk is positioned in the snapshot file |
-| `data[]` | raw bytes of the snapshot chunk, starting at offset |
-| `done` | true if this is the last chunk |
+| `lastIncludedTerm`  | term of `lastIncludedIndex`                                           |
+| `offset`            | byte offset where chunk is positioned in the snapshot file            |
+| `data[]`            | raw bytes of the snapshot chunk, starting at offset                   |
+| `done`              | true if this is the last chunk                                        |
 
-> | 字段 | 说明 |
-> | --- | --- |
-> | `term` | 领导者任期 |
-> | `leaderId` | 使跟随者能够重定向客户端 |
+> | 字段                | 说明                                   |
+> | ------------------- | -------------------------------------- |
+> | `term`              | 领导者任期                             |
+> | `leaderId`          | 使跟随者能够重定向客户端               |
 > | `lastIncludedIndex` | 快照替换直至并包括该索引在内的全部条目 |
-> | `lastIncludedTerm` | `lastIncludedIndex` 的任期 |
-> | `offset` | 分块在快照文件中的字节偏移 |
-> | `data[]` | 从 `offset` 开始的快照分块原始字节 |
-> | `done` | 若为最后一个分块则为 `true` |
+> | `lastIncludedTerm`  | `lastIncludedIndex` 的任期             |
+> | `offset`            | 分块在快照文件中的字节偏移             |
+> | `data[]`            | 从 `offset` 开始的快照分块原始字节     |
+> | `done`              | 若为最后一个分块则为 `true`            |
 
 **Results:**
 
 > **结果：**
 
-| English field | English description |
-| --- | --- |
-| `term` | currentTerm, for leader to update itself |
+| English field | English description                      |
+| ------------- | ---------------------------------------- |
+| `term`        | currentTerm, for leader to update itself |
 
-> | 字段 | 说明 |
-> | --- | --- |
+> | 字段   | 说明                            |
+> | ------ | ------------------------------- |
 > | `term` | `currentTerm`，供领导者更新自身 |
 
 **Receiver implementation:**
@@ -1081,17 +1083,17 @@ A detailed discussion of the Raft user study is available at [31].
 
 ![Bias mitigation table](./table-01.png)
 
-| Concern | Steps taken to mitigate bias | Materials for review [28, 31] |
-| --- | --- | --- |
-| Equal lecture quality | Same lecturer for both. Paxos lecture based on and improved from existing materials used in several universities. Paxos lecture is 14% longer. | videos |
-| Equal quiz difficulty | Questions grouped in difficulty and paired across exams. | quizzes |
-| Fair grading | Used rubric. Graded in random order, alternating between quizzes. | rubric |
+| Concern               | Steps taken to mitigate bias                                                                                                                   | Materials for review [28, 31] |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| Equal lecture quality | Same lecturer for both. Paxos lecture based on and improved from existing materials used in several universities. Paxos lecture is 14% longer. | videos                        |
+| Equal quiz difficulty | Questions grouped in difficulty and paired across exams.                                                                                       | quizzes                       |
+| Fair grading          | Used rubric. Graded in random order, alternating between quizzes.                                                                              | rubric                        |
 
-> | 关注点 | 为缓解偏差所采取的措施 | 供审阅的材料 [28, 31] |
-> | --- | --- | --- |
-> | 讲座质量相同 | 两者由同一位讲师授课。Paxos 讲座以多所大学使用的现有材料为基础并加以改进。Paxos 讲座长 14%。 | 视频 |
-> | 测验难度相同 | 按难度分组问题，并在两份试卷之间配对。 | 测验 |
-> | 评分公平 | 使用评分细则。以随机次序评分，在两份测验之间交替。 | 评分细则 |
+> | 关注点       | 为缓解偏差所采取的措施                                                                       | 供审阅的材料 [28, 31] |
+> | ------------ | -------------------------------------------------------------------------------------------- | --------------------- |
+> | 讲座质量相同 | 两者由同一位讲师授课。Paxos 讲座以多所大学使用的现有材料为基础并加以改进。Paxos 讲座长 14%。 | 视频                  |
+> | 测验难度相同 | 按难度分组问题，并在两份试卷之间配对。                                                       | 测验                  |
+> | 评分公平     | 使用评分细则。以随机次序评分，在两份测验之间交替。                                           | 评分细则              |
 
 **Table 1: Concerns of possible bias against Paxos in the study, steps taken to counter each, and additional materials available.**
 
@@ -1371,6 +1373,6 @@ The user study would not have been possible without the support of Ali Ghodsi, D
 
 > [39] VAN RENESSE, R.《Paxos：适度复杂版》。技术报告，康奈尔大学，2012。
 
-*1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18*
+_1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18_
 
-> *PDF 可见页脚页码依次为 1–18。*
+> _PDF 可见页脚页码依次为 1–18。_

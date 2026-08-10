@@ -38,7 +38,7 @@
     }
 
     a {
-      @apply text-accent no-underline wrap-break-word hover:underline focus-visible:underline;
+      @apply text-accent wrap-break-word no-underline hover:underline focus-visible:underline;
     }
 
     ol,

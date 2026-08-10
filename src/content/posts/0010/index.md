@@ -5,6 +5,7 @@ modDatetime: 2024-07-30T16:45:49+08:00
 timezone: "Asia/Shanghai"
 title: "win11下hexo+github+vscode+piclist+缤纷云搭建博客工作流"
 featured: false
+area: "tools-and-workflow"
 draft: false
 tags: []
 description: "记录 Windows 11 下使用 Hexo、GitHub、VS Code、PicList 与缤纷云组织博客写作和图片上传的工作流。"

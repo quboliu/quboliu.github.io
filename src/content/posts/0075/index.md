@@ -4,12 +4,14 @@ pubDatetime: 2026-08-03T15:45:47+08:00
 timezone: "Asia/Shanghai"
 title: "Coding Agent 运行时的四个核心：状态、流式传输、可中断执行与副作用治理"
 featured: false
+area: "ai-and-agents"
 draft: false
 tags:
   - "Agent"
   - "计算机系统"
 description: "从状态所有权、SSE/WebSocket 传输、可中断异步执行与副作用治理四个维度，对照 Claude Code、Pi、Codex 等实现，拆解生产级 Coding Agent 运行时。"
 ---
+
 > 这是一篇跨实现的总览。它讨论的不是某个产品的 UI，而是 coding agent 为什么必然需要一个模型之外的运行时，以及这个运行时如何管理状态、网络流、工具副作用、中断和恢复。
 >
 > 对照源码快照：Claude Code `2.1.88`、Pi `0.83.0`、Codex `0.130.0`、OpenCode `1.14.35`、mini-SWE-agent `2.4.6`、Hermes Agent `0.12.0`、HiClaw `1.1.1`。
@@ -74,13 +76,13 @@ agent_state'' = append(agent_state', observations)
 
 把模型类比成 CPU 里的计算单元很有启发，但“模型完全无状态”容易掩盖五种不同状态：
 
-| 层 | 典型内容 | 谁持有 | 是否跨调用自然保留 |
-|---|---|---|---|
-| 参数状态 | 模型权重、词表、架构 | 模型服务 | 保留，但推理时通常只读 |
-| 推理状态 | 当前 token、位置、KV cache、采样器状态 | 推理引擎 | 通常只在一次流式生成或可复用推理会话内 |
-| Provider 状态 | response ID、服务端缓存、sticky routing、可能保存的响应链 | API 服务 | 取决于协议与配置 |
-| Agent 会话状态 | 历史消息、工具调用/结果、审批、预算、队列、当前 phase | Agent runtime | 必须由 runtime 明确管理 |
-| 外部持久状态 | 文件、Git、数据库、事件日志、子进程、远端资源 | 环境与存储 | 独立于模型调用 |
+| 层             | 典型内容                                                  | 谁持有        | 是否跨调用自然保留                     |
+| -------------- | --------------------------------------------------------- | ------------- | -------------------------------------- |
+| 参数状态       | 模型权重、词表、架构                                      | 模型服务      | 保留，但推理时通常只读                 |
+| 推理状态       | 当前 token、位置、KV cache、采样器状态                    | 推理引擎      | 通常只在一次流式生成或可复用推理会话内 |
+| Provider 状态  | response ID、服务端缓存、sticky routing、可能保存的响应链 | API 服务      | 取决于协议与配置                       |
+| Agent 会话状态 | 历史消息、工具调用/结果、审批、预算、队列、当前 phase     | Agent runtime | 必须由 runtime 明确管理                |
+| 外部持久状态   | 文件、Git、数据库、事件日志、子进程、远端资源             | 环境与存储    | 独立于模型调用                         |
 
 因此，更精确的结论是：
 
@@ -92,15 +94,15 @@ Claude Code 和 Codex 都能说明这一区别。Claude Code 的 `QueryEngine` �
 
 [MemGPT](https://arxiv.org/abs/2310.08560) 明确采用操作系统式的虚拟内存、层级存储与中断类比。这个类比适合解释“有限上下文如何服务长任务”：
 
-| 操作系统概念 | Agent 中的对应物 |
-|---|---|
-| 进程控制块 | session / run state |
+| 操作系统概念   | Agent 中的对应物                     |
+| -------------- | ------------------------------------ |
+| 进程控制块     | session / run state                  |
 | 虚拟内存与换页 | 上下文选择、摘要、检索、prompt cache |
-| 系统调用 | 结构化 tool call |
-| 调度器 | turn loop / task runner |
-| 中断与信号 | cancel、steer、timeout、shutdown |
-| 权限边界 | approval、sandbox、tool policy |
-| 日志与文件系统 | event log、checkpoint、Git、数据库 |
+| 系统调用       | 结构化 tool call                     |
+| 调度器         | turn loop / task runner              |
+| 中断与信号     | cancel、steer、timeout、shutdown     |
+| 权限边界       | approval、sandbox、tool policy       |
+| 日志与文件系统 | event log、checkpoint、Git、数据库   |
 
 但它不是严格同构：
 
@@ -174,14 +176,14 @@ Claude Code 更能说明“按链路选协议”：本文观察到的 Anthropic 
 
 ### 2.4 实际选型
 
-| 条件 | 更自然的选择 |
-|---|---|
-| 单次 POST，主要是服务器持续下行 | streaming HTTP / SSE framing |
-| 浏览器只需订阅 runtime 事件 | SSE，命令另走 HTTP POST |
-| 双向消息高频交错、realtime 音频 | WebSocket |
-| 极度依赖普通 HTTP 基础设施与可重放请求 | SSE/streaming HTTP |
-| 连接级增量缓存和 response chain 是协议核心 | WebSocket 可能更省开销 |
-| 本地 CLI 内部模块通信 | 内存队列/channel，通常无需网络协议 |
+| 条件                                       | 更自然的选择                       |
+| ------------------------------------------ | ---------------------------------- |
+| 单次 POST，主要是服务器持续下行            | streaming HTTP / SSE framing       |
+| 浏览器只需订阅 runtime 事件                | SSE，命令另走 HTTP POST            |
+| 双向消息高频交错、realtime 音频            | WebSocket                          |
+| 极度依赖普通 HTTP 基础设施与可重放请求     | SSE/streaming HTTP                 |
+| 连接级增量缓存和 response chain 是协议核心 | WebSocket 可能更省开销             |
+| 本地 CLI 内部模块通信                      | 内存队列/channel，通常无需网络协议 |
 
 一个稳健的经验法则是：
 
@@ -238,14 +240,14 @@ steering 通常不应该在任意机器指令处“闯入”并修改历史。�
 
 ### 3.3 六个经常被混为一谈的动作
 
-| 动作 | 真正语义 | 典型机制 |
-|---|---|---|
-| cancel | 停止当前请求/任务，进入已知终止态 | cancellation token / AbortSignal / task cancel |
-| steer | 给仍在运行的任务增加新输入 | mailbox / channel / queue，在安全边界消费 |
-| pause | 暂停一个仍在内存中的 continuation | suspended Future/Promise/task；进程退出即丢失 |
-| resume | 从已提交事实重建并继续 | checkpoint/event log + reducer + 新任务 |
-| retry | 再执行一次失败步骤 | retry policy + 幂等键 + 去重/对账 |
-| interrupt | 上述动作的用户界面统称 | 具体语义必须由 runtime 定义 |
+| 动作      | 真正语义                          | 典型机制                                       |
+| --------- | --------------------------------- | ---------------------------------------------- |
+| cancel    | 停止当前请求/任务，进入已知终止态 | cancellation token / AbortSignal / task cancel |
+| steer     | 给仍在运行的任务增加新输入        | mailbox / channel / queue，在安全边界消费      |
+| pause     | 暂停一个仍在内存中的 continuation | suspended Future/Promise/task；进程退出即丢失  |
+| resume    | 从已提交事实重建并继续            | checkpoint/event log + reducer + 新任务        |
+| retry     | 再执行一次失败步骤                | retry policy + 幂等键 + 去重/对账              |
+| interrupt | 上述动作的用户界面统称            | 具体语义必须由 runtime 定义                    |
 
 其中最重要的一句话是：
 
@@ -364,14 +366,14 @@ Hermes 的 Gemini adapter 就用 `asyncio.to_thread` 包装同步请求及同步
 
 ### 4.5 对照表
 
-| 运行时概念 | Go | Rust/Tokio | TypeScript | Python/asyncio |
-|---|---|---|---|---|
-| 轻量任务 | goroutine | task / Future | Promise continuation | Task / coroutine |
-| 增量流 | channel | Stream / mpsc | AsyncIterable / ReadableStream | async generator / Queue |
-| 多路等待 | `select` | `tokio::select!` | `Promise.race` + queue/event | `asyncio.wait` / Queue |
-| 取消 | `context.Context` | CancellationToken / abort handle | AbortSignal | task cancel / Event |
-| 生命周期 | errgroup + context | JoinSet/scope/guards | structured-concurrency library / `finally` | TaskGroup / async context manager |
-| 持久恢复 | 显式事件/checkpoint | 显式事件/checkpoint | 显式事件/checkpoint | 显式事件/checkpoint |
+| 运行时概念 | Go                  | Rust/Tokio                       | TypeScript                                 | Python/asyncio                    |
+| ---------- | ------------------- | -------------------------------- | ------------------------------------------ | --------------------------------- |
+| 轻量任务   | goroutine           | task / Future                    | Promise continuation                       | Task / coroutine                  |
+| 增量流     | channel             | Stream / mpsc                    | AsyncIterable / ReadableStream             | async generator / Queue           |
+| 多路等待   | `select`            | `tokio::select!`                 | `Promise.race` + queue/event               | `asyncio.wait` / Queue            |
+| 取消       | `context.Context`   | CancellationToken / abort handle | AbortSignal                                | task cancel / Event               |
+| 生命周期   | errgroup + context  | JoinSet/scope/guards             | structured-concurrency library / `finally` | TaskGroup / async context manager |
+| 持久恢复   | 显式事件/checkpoint | 显式事件/checkpoint              | 显式事件/checkpoint                        | 显式事件/checkpoint               |
 
 ---
 

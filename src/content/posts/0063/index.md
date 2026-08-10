@@ -5,6 +5,7 @@ modDatetime: 2024-08-18T12:35:17+08:00
 timezone: "Asia/Shanghai"
 title: "阅读归纳-Go领域那些年我们一起追过的大佬"
 featured: false
+area: "go"
 draft: false
 tags: []
 description: "整理 Go 领域开发者、博客、书籍与项目资源，作为持续补充的学习索引。"

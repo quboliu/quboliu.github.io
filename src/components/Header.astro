@@ -30,6 +30,7 @@ const isActive = (path: string) => {
 const navItems = [
   { path: "", label: t.nav.home },
   { path: "posts", label: t.nav.posts },
+  { path: "areas", label: t.nav.areas },
   { path: "tags", label: t.nav.tags },
   ...(features.showArchives
     ? [{ path: "archives", label: t.nav.archives }]
@@ -51,16 +52,16 @@ const navItems = [
     href={getRelativeLocaleUrl(locale, "")}
     class="text-foreground inline-flex items-center gap-2 text-xl font-bold no-underline"
   >
-    <svg
-      viewBox="0 0 64 64"
-      class="size-6"
-      role="img"
-      aria-label="orange logo"
-    >
-      <path d="M33 13c0-6 5-10 11-10 0 6-5 10-11 10z" fill="#22c55e" />
-      <path d="M32 18v-6" stroke="#92400e" stroke-width="3" stroke-linecap="round" />
-      <circle cx="32" cy="38" r="19" fill="#f97316" />
-      <ellipse cx="26" cy="31" rx="6" ry="4" fill="#fdba74" opacity="0.7" />
+    <svg viewBox="0 0 64 64" class="size-6" role="img" aria-label="orange logo">
+      <path d="M33 13c0-6 5-10 11-10 0 6-5 10-11 10z" fill="#22c55e"></path>
+      <path
+        d="M32 18v-6"
+        stroke="#92400e"
+        stroke-width="3"
+        stroke-linecap="round"></path>
+      <circle cx="32" cy="38" r="19" fill="#f97316"></circle>
+      <ellipse cx="26" cy="31" rx="6" ry="4" fill="#fdba74" opacity="0.7"
+      ></ellipse>
     </svg>
     {site.title}
   </a>

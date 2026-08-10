@@ -4,6 +4,7 @@ pubDatetime: 2026-08-09T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Dynamo: Amazon’s Highly Available Key-value Store（中英对照全文）"
 featured: false
+area: "distributed-systems"
 draft: false
 tags:
   - "论文阅读"
@@ -13,6 +14,7 @@ tags:
   - "键值存储"
 description: "Amazon Dynamo 经典论文中英对照全文，系统讲解一致性哈希、向量时钟、宽松法定人数、提示移交、Merkle 树、gossip 与生产经验。"
 ---
+
 > Dynamo：亚马逊的高可用键值存储
 
 Giuseppe DeCandia, Deniz Hastorun, Madan Jampani, Gunavardhan Kakulapati, Avinash Lakshman, Alex Pilchin, Swaminathan Sivasubramanian, Peter Vosshall and Werner Vogels
@@ -289,20 +291,20 @@ Table 1 presents a summary of the list of techniques Dynamo uses and their respe
 
 > **表 1：Dynamo 所用技术及其优势概览。**
 
-| Problem | Technique | Advantage |
-|---|---|---|
-| Partitioning | Consistent Hashing | Incremental Scalability |
-| High Availability for writes | Vector clocks with reconciliation during reads | Version size is decoupled from update rates. |
-| Handling temporary failures | Sloppy Quorum and hinted handoff | Provides high availability and durability guarantee when some of the replicas are not available. |
-| Recovering from permanent failures | Anti-entropy using Merkle trees | Synchronizes divergent replicas in the background. |
-| Membership and failure detection | Gossip-based membership protocol and failure detection. | Preserves symmetry and avoids having a centralized registry for storing membership and node liveness information. |
+| Problem                            | Technique                                               | Advantage                                                                                                         |
+| ---------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Partitioning                       | Consistent Hashing                                      | Incremental Scalability                                                                                           |
+| High Availability for writes       | Vector clocks with reconciliation during reads          | Version size is decoupled from update rates.                                                                      |
+| Handling temporary failures        | Sloppy Quorum and hinted handoff                        | Provides high availability and durability guarantee when some of the replicas are not available.                  |
+| Recovering from permanent failures | Anti-entropy using Merkle trees                         | Synchronizes divergent replicas in the background.                                                                |
+| Membership and failure detection   | Gossip-based membership protocol and failure detection. | Preserves symmetry and avoids having a centralized registry for storing membership and node liveness information. |
 
-> | 问题 | 技术 | 优势 |
-> |---|---|---|
-> | 分区 | 一致性哈希 | 增量可扩展性 |
-> | 写入高可用 | 向量时钟，并在读取时协调 | 版本大小与更新速率解耦。 |
-> | 处理临时故障 | 宽松法定人数与提示移交 | 部分副本不可用时仍提供高可用和持久性保证。 |
-> | 从永久故障恢复 | 使用 Merkle 树的反熵 | 在后台同步产生分歧的副本。 |
+> | 问题           | 技术                             | 优势                                                     |
+> | -------------- | -------------------------------- | -------------------------------------------------------- |
+> | 分区           | 一致性哈希                       | 增量可扩展性                                             |
+> | 写入高可用     | 向量时钟，并在读取时协调         | 版本大小与更新速率解耦。                                 |
+> | 处理临时故障   | 宽松法定人数与提示移交           | 部分副本不可用时仍提供高可用和持久性保证。               |
+> | 从永久故障恢复 | 使用 Merkle 树的反熵             | 在后台同步产生分歧的副本。                               |
 > | 成员与故障检测 | 基于 gossip 的成员协议和故障检测 | 保持对称性，并避免用集中式注册表存储成员与节点存活信息。 |
 
 > **图表中文解读：** 表中把 Dynamo 的五类核心问题与机制逐项对应：一致性哈希负责增量扩展，向量时钟与读时协调支持始终可写，宽松法定人数和提示移交跨越短暂故障，Merkle 树修复长期副本分歧，gossip 则在不引入中心注册表的前提下维护成员与存活视图。
@@ -349,15 +351,15 @@ Using virtual nodes has the following advantages:
 
 > 使用虚拟节点有以下优势：
 
-* If a node becomes unavailable (due to failures or routine maintenance), the load handled by this node is evenly dispersed across the remaining available nodes.
+- If a node becomes unavailable (due to failures or routine maintenance), the load handled by this node is evenly dispersed across the remaining available nodes.
 
 > 节点因故障或日常维护不可用时，其负载会均匀分散到其余可用节点。
 
-* When a node becomes available again, or a new node is added to the system, the newly available node accepts a roughly equivalent amount of load from each of the other available nodes.
+- When a node becomes available again, or a new node is added to the system, the newly available node accepts a roughly equivalent amount of load from each of the other available nodes.
 
 > 节点重新可用或新节点加入系统时，这个新可用节点从其他各可用节点接收大致等量的负载。
 
-* The number of virtual nodes that a node is responsible can decided based on its capacity, accounting for heterogeneity in the physical infrastructure.
+- The number of virtual nodes that a node is responsible can decided based on its capacity, accounting for heterogeneity in the physical infrastructure.
 
 > 可依据节点容量决定其负责的虚拟节点数量，从而考虑物理基础设施的异构性。
 
@@ -593,15 +595,15 @@ Dynamo is used by several services with different configurations. These instance
 
 > 多项服务以不同配置使用 Dynamo，各实例的版本协调逻辑和读写法定人数特性不同。主要模式如下：
 
-* **Business logic specific reconciliation:** This is a popular use case for Dynamo. Each data object is replicated across multiple nodes. In case of divergent versions, the client application performs its own reconciliation logic. The shopping cart service discussed earlier is a prime example of this category. Its business logic reconciles objects by merging different versions of a customer’s shopping cart.
+- **Business logic specific reconciliation:** This is a popular use case for Dynamo. Each data object is replicated across multiple nodes. In case of divergent versions, the client application performs its own reconciliation logic. The shopping cart service discussed earlier is a prime example of this category. Its business logic reconciles objects by merging different versions of a customer’s shopping cart.
 
 > **业务逻辑专用协调：** 常见模式。每个对象跨多节点复制，出现分歧版本时客户端执行自身协调逻辑；购物车服务通过合并客户购物车不同版本来协调，是典型例子。
 
-* **Timestamp based reconciliation:** This case differs from the previous one only in the reconciliation mechanism. In case of divergent versions, Dynamo performs simple timestamp based reconciliation logic of “last write wins”; i.e., the object with the largest physical timestamp value is chosen as the correct version. The service that maintains customer’s session information is a good example of a service that uses this mode.
+- **Timestamp based reconciliation:** This case differs from the previous one only in the reconciliation mechanism. In case of divergent versions, Dynamo performs simple timestamp based reconciliation logic of “last write wins”; i.e., the object with the largest physical timestamp value is chosen as the correct version. The service that maintains customer’s session information is a good example of a service that uses this mode.
 
 > **基于时间戳的协调：** 仅协调机制不同。Dynamo 对分歧版本执行简单的“最后写入者胜”，选择物理时间戳最大的对象为正确版本；维护客户会话信息的服务使用此模式。
 
-* **High performance read engine:** While Dynamo is built to be an “always writeable” data store, a few services are tuning its quorum characteristics and using it as a high performance read engine. Typically, these services have a high read request rate and only a small number of updates. In this configuration, typically R is set to be 1 and W to be N. For these services, Dynamo provides the ability to partition and replicate their data across multiple nodes thereby offering incremental scalability. Some of these instances function as the authoritative persistence cache for data stored in more heavy weight backing stores. Services that maintain product catalog and promotional items fit in this category.
+- **High performance read engine:** While Dynamo is built to be an “always writeable” data store, a few services are tuning its quorum characteristics and using it as a high performance read engine. Typically, these services have a high read request rate and only a small number of updates. In this configuration, typically R is set to be 1 and W to be N. For these services, Dynamo provides the ability to partition and replicate their data across multiple nodes thereby offering incremental scalability. Some of these instances function as the authoritative persistence cache for data stored in more heavy weight backing stores. Services that maintain product catalog and promotional items fit in this category.
 
 > **高性能读引擎：** 尽管 Dynamo 为“始终可写”而建，少数服务调节法定人数特性，把它用作高性能读引擎。这些服务通常读取率高、更新少，常设 R=1、W=N。Dynamo 将数据跨节点分区复制，提供增量扩展；一些实例充当更重量级后备存储中数据的权威持久缓存。商品目录与促销项目服务属此类。
 
@@ -781,15 +783,15 @@ Table 2 shows the latency improvements at the 99.9th percentile and averages tha
 
 > **表 2：客户端驱动与服务器驱动协调方法的性能。**
 
-|  | 99.9th percentile read latency (ms) | 99.9th percentile write latency (ms) | Average read latency (ms) | Average write latency (ms) |
-|---|---:|---:|---:|---:|
-| Server-driven | 68.9 | 68.5 | 3.9 | 4.02 |
-| Client-driven | 30.4 | 30.4 | 1.55 | 1.9 |
+|               | 99.9th percentile read latency (ms) | 99.9th percentile write latency (ms) | Average read latency (ms) | Average write latency (ms) |
+| ------------- | ----------------------------------: | -----------------------------------: | ------------------------: | -------------------------: |
+| Server-driven |                                68.9 |                                 68.5 |                       3.9 |                       4.02 |
+| Client-driven |                                30.4 |                                 30.4 |                      1.55 |                        1.9 |
 
-> |  | 第 99.9 百分位读延迟（ms） | 第 99.9 百分位写延迟（ms） | 平均读延迟（ms） | 平均写延迟（ms） |
-> |---|---:|---:|---:|---:|
-> | 服务器驱动 | 68.9 | 68.5 | 3.9 | 4.02 |
-> | 客户端驱动 | 30.4 | 30.4 | 1.55 | 1.9 |
+> |            | 第 99.9 百分位读延迟（ms） | 第 99.9 百分位写延迟（ms） | 平均读延迟（ms） | 平均写延迟（ms） |
+> | ---------- | -------------------------: | -------------------------: | ---------------: | ---------------: |
+> | 服务器驱动 |                       68.9 |                       68.5 |              3.9 |             4.02 |
+> | 客户端驱动 |                       30.4 |                       30.4 |             1.55 |              1.9 |
 
 > **图表中文解读：** 客户端驱动将读写尾延迟从约 69 ms 降到 30.4 ms，平均延迟也分别从 3.9/4.02 ms 降到 1.55/1.9 ms，尾延迟改善尤为明显。
 

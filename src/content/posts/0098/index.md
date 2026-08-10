@@ -4,6 +4,7 @@ pubDatetime: 2026-08-09T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | ZooKeeper: Wait-free Coordination for Internet-scale Systems（中英对照全文）"
 featured: false
+area: "distributed-systems"
 draft: false
 tags:
   - "论文阅读"
@@ -13,6 +14,7 @@ tags:
   - "一致性"
 description: "逐段中英对照精读 ZooKeeper 经典论文，涵盖无等待协调原语、顺序保证、watch、会话、Zab 原子广播、模糊快照、故障恢复与性能评估。"
 ---
+
 > ZooKeeper：面向互联网规模系统的无等待协调
 
 **Patrick Hunt and Mahadev Konar**<br>
@@ -109,7 +111,7 @@ In this section, we first provide a high-level view of the ZooKeeper service. We
 
 **Terminology.** In this paper, we use client to denote a user of the ZooKeeper service, server to denote a process providing the ZooKeeper service, and znode to denote an in-memory data node in the ZooKeeper data, which is organized in a hierarchical namespace referred to as the data tree. We also use the terms update and write to refer to any operation that modifies the state of the data tree. Clients establish a session when they connect to ZooKeeper and obtain a session handle through which they issue requests.
 
-> **术语。** 本文以 *client*（客户端）指代 ZooKeeper 服务的使用者，以 *server*（服务器）指代提供 ZooKeeper 服务的进程，以 *znode* 指代 ZooKeeper 数据中的内存数据节点。这些节点组织在一个称为数据树的层次化命名空间中。我们还用 *update*（更新）和 *write*（写）指代任何修改数据树状态的操作。客户端连接 ZooKeeper 时建立会话，并取得一个会话句柄，通过它发出请求。
+> **术语。** 本文以 _client_（客户端）指代 ZooKeeper 服务的使用者，以 _server_（服务器）指代提供 ZooKeeper 服务的进程，以 _znode_ 指代 ZooKeeper 数据中的内存数据节点。这些节点组织在一个称为数据树的层次化命名空间中。我们还用 _update_（更新）和 _write_（写）指代任何修改数据树状态的操作。客户端连接 ZooKeeper 时建立会话，并取得一个会话句柄，通过它发出请求。
 
 ### 2.1 Service overview
 
@@ -121,9 +123,9 @@ ZooKeeper provides to its clients the abstraction of a set of data nodes (znodes
 
 ![ZooKeeper hierarchical namespace](./figure-01-hierarchical-namespace.png)
 
-*Figure 1: Illustration of ZooKeeper hierarchical name space.*
+_Figure 1: Illustration of ZooKeeper hierarchical name space._
 
-> *图 1：ZooKeeper 层次化命名空间示意图。*
+> _图 1：ZooKeeper 层次化命名空间示意图。_
 
 > **图表中文解读：** 根节点 `/` 下划分出应用各自的子树，如 `/app1` 与 `/app2`；应用 1 的成员进程分别创建 `/app1/p_1`、`/app1/p_2`、`/app1/p_3`。这说明 ZooKeeper 用类似文件系统的路径把不同应用的协调元数据隔离开来，并可自然表达组成员关系。
 
@@ -413,9 +415,9 @@ We now describe some applications that use ZooKeeper, and explain briefly how th
 
 ![Workload for one ZK server with the Fetching Service](./figure-02-fetching-service-workload.png)
 
-*Figure 2: Workload for one ZK server with the Fetching Service. Each point represents a one-second sample.*
+_Figure 2: Workload for one ZK server with the Fetching Service. Each point represents a one-second sample._
 
-> *图 2：一台供抓取服务使用的 ZK 服务器的工作负载。每个点代表一秒采样值。*
+> _图 2：一台供抓取服务使用的 ZK 服务器的工作负载。每个点代表一秒采样值。_
 
 > **图表中文解读：** 横轴为三天内的时间，纵轴为每秒操作数。红色读流量长期显著高于黑色写流量，并呈现强烈波动；该生产轨迹印证了 ZooKeeper 面向“读多写少”协调元数据负载进行优化的必要性。
 
@@ -433,9 +435,9 @@ Figure 2 shows the read and write traffic for a ZooKeeper server used by FS thro
 
 ![The layout of YMB structures in ZooKeeper](./figure-03-ymb-znode-layout.png)
 
-*Figure 3: The layout of Yahoo! Message Broker (YMB) structures in ZooKeeper*
+_Figure 3: The layout of Yahoo! Message Broker (YMB) structures in ZooKeeper_
 
-> *图 3：Yahoo! Message Broker（YMB）结构在 ZooKeeper 中的布局。*
+> _图 3：Yahoo! Message Broker（YMB）结构在 ZooKeeper 中的布局。_
 
 > **图表中文解读：** 每个 broker domain 下分设 `shutdown`、`nodes`、`migration_prohibited`、`topics` 与 `broker_disabled` 等 znode。`nodes` 的临时子节点记录活跃服务器及负载；`topics` 的子树记录各主题及其 primary/backup 主机。这一棵树同时承载成员状态、运维控制、主题配置和主备选举信息。
 
@@ -453,9 +455,9 @@ ZooKeeper provides high availability by replicating the ZooKeeper data on each s
 
 ![The components of the ZooKeeper service](./figure-04-zookeeper-components.png)
 
-*Figure 4: The components of the ZooKeeper service.*
+_Figure 4: The components of the ZooKeeper service._
 
-> *图 4：ZooKeeper 服务的组成部分。*
+> _图 4：ZooKeeper 服务的组成部分。_
 
 > **图表中文解读：** 写请求先进入请求处理器，转化为事务（txn），再经原子广播达成副本间一致并写入复制数据库；响应从数据库返回。读请求则绕过原子广播，直接访问本地复制数据库。该分流正是 ZooKeeper 写有序、读高吞吐架构的核心。
 
@@ -585,23 +587,23 @@ We have a Java implementation of the ZooKeeper server, and both Java and C clien
 
 ![Throughput performance of a saturated system](./figure-05-saturated-throughput.png)
 
-*Figure 5: The throughput performance of a saturated system as the ratio of reads to writes vary.*
+_Figure 5: The throughput performance of a saturated system as the ratio of reads to writes vary._
 
-> *图 5：读写比变化时，饱和系统的吞吐性能。*
+> _图 5：读写比变化时，饱和系统的吞吐性能。_
 
 > **图表中文解读：** 横轴为读请求百分比，纵轴为每秒操作数；曲线分别对应 3、5、7、9、13 台服务器。读占比越高，吞吐量越大，因为本地读取不走原子广播；但写占比较高时，副本数增多会加重广播成本。3 节点曲线约在读占比 60% 后被更多节点配置反超，体现本地读并行度开始主导。
 
 | Servers | 100% Reads | 0% Reads |
-|---:|---:|---:|
-| 13 | 460k | 8k |
-| 9 | 296k | 12k |
-| 7 | 257k | 14k |
-| 5 | 165k | 18k |
-| 3 | 87k | 21k |
+| ------: | ---------: | -------: |
+|      13 |       460k |       8k |
+|       9 |       296k |      12k |
+|       7 |       257k |      14k |
+|       5 |       165k |      18k |
+|       3 |        87k |      21k |
 
-*Table 1: The throughput performance of the extremes of a saturated system.*
+_Table 1: The throughput performance of the extremes of a saturated system._
 
-> *表 1：饱和系统在两种极端读负载下的吞吐性能。*
+> _表 1：饱和系统在两种极端读负载下的吞吐性能。_
 
 > **图表中文解读：** 纯读时，服务器越多，总吞吐越高（13 台达到 460k）；纯写时，趋势相反（3 台达到 21k，而 13 台仅 8k）。原因是读可由每个副本本地并行处理，而写必须跨副本执行原子广播，副本越多协调开销越大。
 
@@ -619,9 +621,9 @@ ZooKeeper is able to achieve such high throughput by distributing load across th
 
 ![Throughput when all clients connect to the leader](./figure-06-leader-only-throughput.png)
 
-*Figure 6: Throughput of a saturated system, varying the ratio of reads to writes when all clients connect to the leader.*
+_Figure 6: Throughput of a saturated system, varying the ratio of reads to writes when all clients connect to the leader._
 
-> *图 6：所有客户端都连接领导者时，饱和系统随读写比例变化的吞吐量。*
+> _图 6：所有客户端都连接领导者时，饱和系统随读写比例变化的吞吐量。_
 
 > **图表中文解读：** 横轴为读请求百分比，纵轴为每秒操作数，五条曲线对应 3、5、7、9、13 台服务器。与图 5 相比，所有客户端集中连接领导者后，各配置的吞吐量都明显受限，尤其无法随读比例提高而充分利用跟随者的本地读取能力；客户端服务开销还会争用领导者用于协调写广播的 CPU 和网络资源。
 
@@ -631,9 +633,9 @@ The atomic broadcast protocol does most of the work of the system and thus limit
 
 ![Atomic broadcast throughput](./figure-07-atomic-broadcast-throughput.png)
 
-*Figure 7: Average throughput of the atomic broadcast component in isolation. Error bars denote the minimum and maximum values.*
+_Figure 7: Average throughput of the atomic broadcast component in isolation. Error bars denote the minimum and maximum values._
 
-> *图 7：原子广播组件独立运行时的平均吞吐量。误差棒表示最小值与最大值。*
+> _图 7：原子广播组件独立运行时的平均吞吐量。误差棒表示最小值与最大值。_
 
 > **图表中文解读：** 横轴为集合规模，纵轴为每秒请求数。集合从 3 台扩大到 13 台时，平均吞吐量整体下降，说明参与副本越多，广播达成多数确认的通信与处理成本越高；各点误差棒给出了测试期间的吞吐波动范围。
 
@@ -657,9 +659,9 @@ To show the behavior of the system over time as failures are injected we ran a Z
 
 ![Throughput upon failures](./figure-08-failure-throughput.png)
 
-*Figure 8: Throughput upon failures.*
+_Figure 8: Throughput upon failures._
 
-> *图 8：发生故障时的吞吐量。*
+> _图 8：发生故障时的吞吐量。_
 
 > **图表中文解读：** 横轴为实验开始后的秒数，纵轴为每秒操作数。单个跟随者故障（事件 1、2）只造成与其原先承担读流量大致相当的吞吐损失；领导者故障（事件 3、5）会触发快速选举，但在秒级采样下未出现可见的零吞吐；两台跟随者相继故障（4a、4b）时吞吐继续下降，恢复（4c、6）后又明显回升。
 
@@ -676,14 +678,14 @@ To assess the latency of requests, we created a benchmark modeled after the Chub
 > 为评估请求延迟，我们仿照 Chubby 基准测试 [6] 创建了一个基准。工作进程只需发送一次创建请求，等待请求完成，再异步发送对新节点的删除请求，然后开始下一次创建。我们相应改变工作进程数量；每轮测试中，每个工作进程创建 50,000 个节点。吞吐量以完成的创建请求数除以所有工作进程完成操作所用的总时间计算。
 
 | Workers | 3 servers | 5 servers | 7 servers | 9 servers |
-|---:|---:|---:|---:|---:|
-| 1 | 776 | 748 | 758 | 711 |
-| 10 | 2,074 | 1,832 | 1,572 | 1,540 |
-| 20 | 2,740 | 2,336 | 1,934 | 1,890 |
+| ------: | --------: | --------: | --------: | --------: |
+|       1 |       776 |       748 |       758 |       711 |
+|      10 |     2,074 |     1,832 |     1,572 |     1,540 |
+|      20 |     2,740 |     2,336 |     1,934 |     1,890 |
 
-*Table 2: Create requests processed per second.*
+_Table 2: Create requests processed per second._
 
-> *表 2：每秒处理的创建请求数。*
+> _表 2：每秒处理的创建请求数。_
 
 > **图表中文解读：** 增加工作进程可通过并发提高吞吐量，但服务器集合越大，创建请求的处理速率越低，因为每次创建都是需要原子广播的写操作。20 个工作进程、3 台服务器时最高达到每秒 2,740 次创建；同等并发下，9 台服务器为每秒 1,890 次。
 
@@ -704,15 +706,15 @@ We report the results of our experiments in Table 3. In this experiment, we have
 > 表 3 给出了实验结果。实验分别使用 50、100 和 200 个客户端，依次进入 $b$ 个屏障，其中 $b \in \{200, 400, 800, 1600\}$。一个应用虽然可以拥有数千个 ZooKeeper 客户端，但每次协调操作通常只有小得多的一个子集参与，因为客户端往往会依照应用的具体情况分组。
 
 | # of barriers | 50 clients | 100 clients | 200 clients |
-|---:|---:|---:|---:|
-| 200 | 9.4 | 19.8 | 41.0 |
-| 400 | 16.4 | 34.1 | 62.0 |
-| 800 | 28.9 | 55.9 | 112.1 |
-| 1,600 | 54.0 | 102.7 | 234.4 |
+| ------------: | ---------: | ----------: | ----------: |
+|           200 |        9.4 |        19.8 |        41.0 |
+|           400 |       16.4 |        34.1 |        62.0 |
+|           800 |       28.9 |        55.9 |       112.1 |
+|         1,600 |       54.0 |       102.7 |       234.4 |
 
-*Table 3: Barrier experiment with time in seconds. Each point is the average of the time for each client to finish over five runs.*
+_Table 3: Barrier experiment with time in seconds. Each point is the average of the time for each client to finish over five runs._
 
-> *表 3：屏障实验的耗时，单位为秒。每个数据点是五轮运行中各客户端完成时间的平均值。*
+> _表 3：屏障实验的耗时，单位为秒。每个数据点是五轮运行中各客户端完成时间的平均值。_
 
 > **图表中文解读：** 屏障总数翻倍时，完成时间大致随之线性增加；客户端从 50 增至 100、200 时，耗时也近似成比例增长。即使许多客户端同步访问数据树的同一部分，也未出现超线性的异常延迟。
 
@@ -780,126 +782,126 @@ We would like to thank Andrew Kornev and Runping Qi for their contributions to Z
 
 > 参考文献
 
-[1] M. Abd-El-Malek, G. R. Ganger, G. R. Goodson, M. K. Reiter, and J. J. Wylie. Fault-scalable byzantine fault-tolerant services. In *SOSP ’05: Proceedings of the twentieth ACM symposium on Operating systems principles*, pages 59–74, New York, NY, USA, 2005. ACM.
+[1] M. Abd-El-Malek, G. R. Ganger, G. R. Goodson, M. K. Reiter, and J. J. Wylie. Fault-scalable byzantine fault-tolerant services. In _SOSP ’05: Proceedings of the twentieth ACM symposium on Operating systems principles_, pages 59–74, New York, NY, USA, 2005. ACM.
 
-> [1] M. Abd-El-Malek、G. R. Ganger、G. R. Goodson、M. K. Reiter 与 J. J. Wylie。《可随故障数扩展的拜占庭容错服务》。载于 *SOSP ’05：第 20 届 ACM 操作系统原理研讨会论文集*，第 59–74 页，美国纽约州纽约市，2005 年。ACM。
+> [1] M. Abd-El-Malek、G. R. Ganger、G. R. Goodson、M. K. Reiter 与 J. J. Wylie。《可随故障数扩展的拜占庭容错服务》。载于 _SOSP ’05：第 20 届 ACM 操作系统原理研讨会论文集_，第 59–74 页，美国纽约州纽约市，2005 年。ACM。
 
-[2] M. Aguilera, A. Merchant, M. Shah, A. Veitch, and C. Karamanolis. Sinfonia: A new paradigm for building scalable distributed systems. In *SOSP ’07: Proceedings of the 21st ACM symposium on Operating systems principles*, New York, NY, 2007.
+[2] M. Aguilera, A. Merchant, M. Shah, A. Veitch, and C. Karamanolis. Sinfonia: A new paradigm for building scalable distributed systems. In _SOSP ’07: Proceedings of the 21st ACM symposium on Operating systems principles_, New York, NY, 2007.
 
-> [2] M. Aguilera、A. Merchant、M. Shah、A. Veitch 与 C. Karamanolis。《Sinfonia：构建可扩展分布式系统的新范式》。载于 *SOSP ’07：第 21 届 ACM 操作系统原理研讨会论文集*，美国纽约州纽约市，2007 年。
+> [2] M. Aguilera、A. Merchant、M. Shah、A. Veitch 与 C. Karamanolis。《Sinfonia：构建可扩展分布式系统的新范式》。载于 _SOSP ’07：第 21 届 ACM 操作系统原理研讨会论文集_，美国纽约州纽约市，2007 年。
 
 [3] Amazon. Amazon simple queue service. <http://aws.amazon.com/sqs/>, 2008.
 
 > [3] Amazon。《Amazon 简单队列服务》。<http://aws.amazon.com/sqs/>，2008 年。
 
-[4] A. N. Bessani, E. P. Alchieri, M. Correia, and J. da Silva Fraga. Depspace: A byzantine fault-tolerant coordination service. In *Proceedings of the 3rd ACM SIGOPS/EuroSys European Systems Conference - EuroSys 2008*, Apr. 2008.
+[4] A. N. Bessani, E. P. Alchieri, M. Correia, and J. da Silva Fraga. Depspace: A byzantine fault-tolerant coordination service. In _Proceedings of the 3rd ACM SIGOPS/EuroSys European Systems Conference - EuroSys 2008_, Apr. 2008.
 
-> [4] A. N. Bessani、E. P. Alchieri、M. Correia 与 J. da Silva Fraga。《DepSpace：一种拜占庭容错协调服务》。载于 *第 3 届 ACM SIGOPS/EuroSys 欧洲系统会议——EuroSys 2008 论文集*，2008 年 4 月。
+> [4] A. N. Bessani、E. P. Alchieri、M. Correia 与 J. da Silva Fraga。《DepSpace：一种拜占庭容错协调服务》。载于 _第 3 届 ACM SIGOPS/EuroSys 欧洲系统会议——EuroSys 2008 论文集_，2008 年 4 月。
 
-[5] K. P. Birman. Replication and fault-tolerance in the ISIS system. In *SOSP ’85: Proceedings of the 10th ACM symposium on Operating systems principles*, New York, USA, 1985. ACM Press.
+[5] K. P. Birman. Replication and fault-tolerance in the ISIS system. In _SOSP ’85: Proceedings of the 10th ACM symposium on Operating systems principles_, New York, USA, 1985. ACM Press.
 
-> [5] K. P. Birman。《ISIS 系统中的复制与容错》。载于 *SOSP ’85：第 10 届 ACM 操作系统原理研讨会论文集*，美国纽约，1985 年。ACM Press。
+> [5] K. P. Birman。《ISIS 系统中的复制与容错》。载于 _SOSP ’85：第 10 届 ACM 操作系统原理研讨会论文集_，美国纽约，1985 年。ACM Press。
 
-[6] M. Burrows. The Chubby lock service for loosely-coupled distributed systems. In *Proceedings of the 7th ACM/USENIX Symposium on Operating Systems Design and Implementation (OSDI)*, 2006.
+[6] M. Burrows. The Chubby lock service for loosely-coupled distributed systems. In _Proceedings of the 7th ACM/USENIX Symposium on Operating Systems Design and Implementation (OSDI)_, 2006.
 
-> [6] M. Burrows。《面向松耦合分布式系统的 Chubby 锁服务》。载于 *第 7 届 ACM/USENIX 操作系统设计与实现研讨会（OSDI）论文集*，2006 年。
+> [6] M. Burrows。《面向松耦合分布式系统的 Chubby 锁服务》。载于 _第 7 届 ACM/USENIX 操作系统设计与实现研讨会（OSDI）论文集_，2006 年。
 
-[7] M. Castro and B. Liskov. Practical byzantine fault tolerance and proactive recovery. *ACM Transactions on Computer Systems*, 20(4), 2002.
+[7] M. Castro and B. Liskov. Practical byzantine fault tolerance and proactive recovery. _ACM Transactions on Computer Systems_, 20(4), 2002.
 
-> [7] M. Castro 与 B. Liskov。《实用拜占庭容错与主动恢复》。*ACM 计算机系统汇刊*，20(4)，2002 年。
+> [7] M. Castro 与 B. Liskov。《实用拜占庭容错与主动恢复》。_ACM 计算机系统汇刊_，20(4)，2002 年。
 
-[8] T. Chandra, R. Griesemer, and J. Redstone. Paxos made live: An engineering perspective. In *Proceedings of the 26th annual ACM symposium on Principles of distributed computing (PODC)*, Aug. 2007.
+[8] T. Chandra, R. Griesemer, and J. Redstone. Paxos made live: An engineering perspective. In _Proceedings of the 26th annual ACM symposium on Principles of distributed computing (PODC)_, Aug. 2007.
 
-> [8] T. Chandra、R. Griesemer 与 J. Redstone。《让 Paxos 真正运行起来：工程视角》。载于 *第 26 届 ACM 分布式计算原理年度研讨会（PODC）论文集*，2007 年 8 月。
+> [8] T. Chandra、R. Griesemer 与 J. Redstone。《让 Paxos 真正运行起来：工程视角》。载于 _第 26 届 ACM 分布式计算原理年度研讨会（PODC）论文集_，2007 年 8 月。
 
-[9] A. Clement, M. Kapritsos, S. Lee, Y. Wang, L. Alvisi, M. Dahlin, and T. Riche. UpRight cluster services. In *Proceedings of the 22nd ACM Symposium on Operating Systems Principles (SOSP)*, Oct. 2009.
+[9] A. Clement, M. Kapritsos, S. Lee, Y. Wang, L. Alvisi, M. Dahlin, and T. Riche. UpRight cluster services. In _Proceedings of the 22nd ACM Symposium on Operating Systems Principles (SOSP)_, Oct. 2009.
 
-> [9] A. Clement、M. Kapritsos、S. Lee、Y. Wang、L. Alvisi、M. Dahlin 与 T. Riche。《UpRight 集群服务》。载于 *第 22 届 ACM 操作系统原理研讨会（SOSP）论文集*，2009 年 10 月。
+> [9] A. Clement、M. Kapritsos、S. Lee、Y. Wang、L. Alvisi、M. Dahlin 与 T. Riche。《UpRight 集群服务》。载于 _第 22 届 ACM 操作系统原理研讨会（SOSP）论文集_，2009 年 10 月。
 
-[10] J. Cowling, D. Myers, B. Liskov, R. Rodrigues, and L. Shira. Hq replication: A hybrid quorum protocol for byzantine fault tolerance. In *SOSP ’07: Proceedings of the 21st ACM symposium on Operating systems principles*, New York, NY, USA, 2007. ACM Press.
+[10] J. Cowling, D. Myers, B. Liskov, R. Rodrigues, and L. Shira. Hq replication: A hybrid quorum protocol for byzantine fault tolerance. In _SOSP ’07: Proceedings of the 21st ACM symposium on Operating systems principles_, New York, NY, USA, 2007. ACM Press.
 
-> [10] J. Cowling、D. Myers、B. Liskov、R. Rodrigues 与 L. Shira。《HQ 复制：用于拜占庭容错的混合法定人数协议》。载于 *SOSP ’07：第 21 届 ACM 操作系统原理研讨会论文集*，美国纽约州纽约市，2007 年。ACM Press。
+> [10] J. Cowling、D. Myers、B. Liskov、R. Rodrigues 与 L. Shira。《HQ 复制：用于拜占庭容错的混合法定人数协议》。载于 _SOSP ’07：第 21 届 ACM 操作系统原理研讨会论文集_，美国纽约州纽约市，2007 年。ACM Press。
 
-[11] G. DeCandia, D. Hastorun, M. Jampani, G. Kakulapati, A. Lakshman, A. Pilchin, S. Sivasubramanian, P. Vosshall, and W. Vogels. Dynamo: Amazons highly available key-value store. In *SOSP ’07: Proceedings of the 21st ACM symposium on Operating systems principles*, New York, NY, USA, 2007. ACM Press.
+[11] G. DeCandia, D. Hastorun, M. Jampani, G. Kakulapati, A. Lakshman, A. Pilchin, S. Sivasubramanian, P. Vosshall, and W. Vogels. Dynamo: Amazons highly available key-value store. In _SOSP ’07: Proceedings of the 21st ACM symposium on Operating systems principles_, New York, NY, USA, 2007. ACM Press.
 
-> [11] G. DeCandia、D. Hastorun、M. Jampani、G. Kakulapati、A. Lakshman、A. Pilchin、S. Sivasubramanian、P. Vosshall 与 W. Vogels。《Dynamo：Amazon 的高可用键值存储》。载于 *SOSP ’07：第 21 届 ACM 操作系统原理研讨会论文集*，美国纽约州纽约市，2007 年。ACM Press。
+> [11] G. DeCandia、D. Hastorun、M. Jampani、G. Kakulapati、A. Lakshman、A. Pilchin、S. Sivasubramanian、P. Vosshall 与 W. Vogels。《Dynamo：Amazon 的高可用键值存储》。载于 _SOSP ’07：第 21 届 ACM 操作系统原理研讨会论文集_，美国纽约州纽约市，2007 年。ACM Press。
 
-[12] J. Gray, P. Helland, P. O’Neil, and D. Shasha. The dangers of replication and a solution. In *Proceedings of SIGMOD ’96*, pages 173–182, New York, NY, USA, 1996. ACM.
+[12] J. Gray, P. Helland, P. O’Neil, and D. Shasha. The dangers of replication and a solution. In _Proceedings of SIGMOD ’96_, pages 173–182, New York, NY, USA, 1996. ACM.
 
-> [12] J. Gray、P. Helland、P. O’Neil 与 D. Shasha。《复制的危险及一种解决方案》。载于 *SIGMOD ’96 论文集*，第 173–182 页，美国纽约州纽约市，1996 年。ACM。
+> [12] J. Gray、P. Helland、P. O’Neil 与 D. Shasha。《复制的危险及一种解决方案》。载于 _SIGMOD ’96 论文集_，第 173–182 页，美国纽约州纽约市，1996 年。ACM。
 
-[13] A. Hastings. Distributed lock management in a transaction processing environment. In *Proceedings of IEEE 9th Symposium on Reliable Distributed Systems*, Oct. 1990.
+[13] A. Hastings. Distributed lock management in a transaction processing environment. In _Proceedings of IEEE 9th Symposium on Reliable Distributed Systems_, Oct. 1990.
 
-> [13] A. Hastings。《事务处理环境中的分布式锁管理》。载于 *IEEE 第 9 届可靠分布式系统研讨会论文集*，1990 年 10 月。
+> [13] A. Hastings。《事务处理环境中的分布式锁管理》。载于 _IEEE 第 9 届可靠分布式系统研讨会论文集_，1990 年 10 月。
 
-[14] M. Herlihy. Wait-free synchronization. *ACM Transactions on Programming Languages and Systems*, 13(1), 1991.
+[14] M. Herlihy. Wait-free synchronization. _ACM Transactions on Programming Languages and Systems_, 13(1), 1991.
 
-> [14] M. Herlihy。《无等待同步》。*ACM 程序设计语言与系统汇刊*，13(1)，1991 年。
+> [14] M. Herlihy。《无等待同步》。_ACM 程序设计语言与系统汇刊_，13(1)，1991 年。
 
-[15] M. Herlihy and J. Wing. Linearizability: A correctness condition for concurrent objects. *ACM Transactions on Programming Languages and Systems*, 12(3), July 1990.
+[15] M. Herlihy and J. Wing. Linearizability: A correctness condition for concurrent objects. _ACM Transactions on Programming Languages and Systems_, 12(3), July 1990.
 
-> [15] M. Herlihy 与 J. Wing。《线性一致性：并发对象的正确性条件》。*ACM 程序设计语言与系统汇刊*，12(3)，1990 年 7 月。
+> [15] M. Herlihy 与 J. Wing。《线性一致性：并发对象的正确性条件》。_ACM 程序设计语言与系统汇刊_，12(3)，1990 年 7 月。
 
-[16] J. H. Howard, M. L. Kazar, S. G. Menees, D. A. Nichols, M. Satyanarayanan, R. N. Sidebotham, and M. J. West. Scale and performance in a distributed file system. *ACM Trans. Comput. Syst.*, 6(1), 1988.
+[16] J. H. Howard, M. L. Kazar, S. G. Menees, D. A. Nichols, M. Satyanarayanan, R. N. Sidebotham, and M. J. West. Scale and performance in a distributed file system. _ACM Trans. Comput. Syst._, 6(1), 1988.
 
-> [16] J. H. Howard、M. L. Kazar、S. G. Menees、D. A. Nichols、M. Satyanarayanan、R. N. Sidebotham 与 M. J. West。《分布式文件系统的规模与性能》。*ACM 计算机系统汇刊*，6(1)，1988 年。
+> [16] J. H. Howard、M. L. Kazar、S. G. Menees、D. A. Nichols、M. Satyanarayanan、R. N. Sidebotham 与 M. J. West。《分布式文件系统的规模与性能》。_ACM 计算机系统汇刊_，6(1)，1988 年。
 
 [17] Katta. Katta - distribute lucene indexes in a grid. <http://katta.wiki.sourceforge.net/>, 2008.
 
 > [17] Katta。《Katta——在网格中分布 Lucene 索引》。<http://katta.wiki.sourceforge.net/>，2008 年。
 
-[18] R. Kotla, L. Alvisi, M. Dahlin, A. Clement, and E. Wong. Zyzzyva: speculative byzantine fault tolerance. *SIGOPS Oper. Syst. Rev.*, 41(6):45–58, 2007.
+[18] R. Kotla, L. Alvisi, M. Dahlin, A. Clement, and E. Wong. Zyzzyva: speculative byzantine fault tolerance. _SIGOPS Oper. Syst. Rev._, 41(6):45–58, 2007.
 
-> [18] R. Kotla、L. Alvisi、M. Dahlin、A. Clement 与 E. Wong。《Zyzzyva：推测式拜占庭容错》。*SIGOPS 操作系统评论*，41(6)：45–58，2007 年。
+> [18] R. Kotla、L. Alvisi、M. Dahlin、A. Clement 与 E. Wong。《Zyzzyva：推测式拜占庭容错》。_SIGOPS 操作系统评论_，41(6)：45–58，2007 年。
 
-[19] N. P. Kronenberg, H. M. Levy, and W. D. Strecker. Vaxclusters (extended abstract): a closely-coupled distributed system. *SIGOPS Oper. Syst. Rev.*, 19(5), 1985.
+[19] N. P. Kronenberg, H. M. Levy, and W. D. Strecker. Vaxclusters (extended abstract): a closely-coupled distributed system. _SIGOPS Oper. Syst. Rev._, 19(5), 1985.
 
-> [19] N. P. Kronenberg、H. M. Levy 与 W. D. Strecker。《VAXcluster（扩展摘要）：一种紧耦合分布式系统》。*SIGOPS 操作系统评论*，19(5)，1985 年。
+> [19] N. P. Kronenberg、H. M. Levy 与 W. D. Strecker。《VAXcluster（扩展摘要）：一种紧耦合分布式系统》。_SIGOPS 操作系统评论_，19(5)，1985 年。
 
-[20] L. Lamport. The part-time parliament. *ACM Transactions on Computer Systems*, 16(2), May 1998.
+[20] L. Lamport. The part-time parliament. _ACM Transactions on Computer Systems_, 16(2), May 1998.
 
-> [20] L. Lamport。《兼职议会》。*ACM 计算机系统汇刊*，16(2)，1998 年 5 月。
+> [20] L. Lamport。《兼职议会》。_ACM 计算机系统汇刊_，16(2)，1998 年 5 月。
 
-[21] J. MacCormick, N. Murphy, M. Najork, C. A. Thekkath, and L. Zhou. Boxwood: Abstractions as the foundation for storage infrastructure. In *Proceedings of the 6th ACM/USENIX Symposium on Operating Systems Design and Implementation (OSDI)*, 2004.
+[21] J. MacCormick, N. Murphy, M. Najork, C. A. Thekkath, and L. Zhou. Boxwood: Abstractions as the foundation for storage infrastructure. In _Proceedings of the 6th ACM/USENIX Symposium on Operating Systems Design and Implementation (OSDI)_, 2004.
 
-> [21] J. MacCormick、N. Murphy、M. Najork、C. A. Thekkath 与 L. Zhou。《Boxwood：以抽象作为存储基础设施的根基》。载于 *第 6 届 ACM/USENIX 操作系统设计与实现研讨会（OSDI）论文集*，2004 年。
+> [21] J. MacCormick、N. Murphy、M. Najork、C. A. Thekkath 与 L. Zhou。《Boxwood：以抽象作为存储基础设施的根基》。载于 _第 6 届 ACM/USENIX 操作系统设计与实现研讨会（OSDI）论文集_，2004 年。
 
-[22] L. Moser, P. Melliar-Smith, D. Agarwal, R. Budhia, C. Lingley-Papadopoulos, and T. Archambault. The totem system. In *Proceedings of the 25th International Symposium on Fault-Tolerant Computing*, June 1995.
+[22] L. Moser, P. Melliar-Smith, D. Agarwal, R. Budhia, C. Lingley-Papadopoulos, and T. Archambault. The totem system. In _Proceedings of the 25th International Symposium on Fault-Tolerant Computing_, June 1995.
 
-> [22] L. Moser、P. Melliar-Smith、D. Agarwal、R. Budhia、C. Lingley-Papadopoulos 与 T. Archambault。《Totem 系统》。载于 *第 25 届国际容错计算研讨会论文集*，1995 年 6 月。
+> [22] L. Moser、P. Melliar-Smith、D. Agarwal、R. Budhia、C. Lingley-Papadopoulos 与 T. Archambault。《Totem 系统》。载于 _第 25 届国际容错计算研讨会论文集_，1995 年 6 月。
 
-[23] S. Mullender, editor. *Distributed Systems, 2nd edition*. ACM Press, New York, NY, USA, 1993.
+[23] S. Mullender, editor. _Distributed Systems, 2nd edition_. ACM Press, New York, NY, USA, 1993.
 
-> [23] S. Mullender，编。*《分布式系统（第 2 版）》*。ACM Press，美国纽约州纽约市，1993 年。
+> [23] S. Mullender，编。_《分布式系统（第 2 版）》_。ACM Press，美国纽约州纽约市，1993 年。
 
-[24] B. Reed and F. P. Junqueira. A simple totally ordered broadcast protocol. In *LADIS ’08: Proceedings of the 2nd Workshop on Large-Scale Distributed Systems and Middleware*, pages 1–6, New York, NY, USA, 2008. ACM.
+[24] B. Reed and F. P. Junqueira. A simple totally ordered broadcast protocol. In _LADIS ’08: Proceedings of the 2nd Workshop on Large-Scale Distributed Systems and Middleware_, pages 1–6, New York, NY, USA, 2008. ACM.
 
-> [24] B. Reed 与 F. P. Junqueira。《一种简单的全序广播协议》。载于 *LADIS ’08：第 2 届大规模分布式系统与中间件研讨会论文集*，第 1–6 页，美国纽约州纽约市，2008 年。ACM。
+> [24] B. Reed 与 F. P. Junqueira。《一种简单的全序广播协议》。载于 _LADIS ’08：第 2 届大规模分布式系统与中间件研讨会论文集_，第 1–6 页，美国纽约州纽约市，2008 年。ACM。
 
-[25] N. Schiper and S. Toueg. A robust and lightweight stable leader election service for dynamic systems. In *DSN*, 2008.
+[25] N. Schiper and S. Toueg. A robust and lightweight stable leader election service for dynamic systems. In _DSN_, 2008.
 
-> [25] N. Schiper 与 S. Toueg。《面向动态系统的健壮轻量级稳定领导者选举服务》。载于 *DSN*，2008 年。
+> [25] N. Schiper 与 S. Toueg。《面向动态系统的健壮轻量级稳定领导者选举服务》。载于 _DSN_，2008 年。
 
-[26] F. B. Schneider. Implementing fault-tolerant services using the state machine approach: A tutorial. *ACM Computing Surveys*, 22(4), 1990.
+[26] F. B. Schneider. Implementing fault-tolerant services using the state machine approach: A tutorial. _ACM Computing Surveys_, 22(4), 1990.
 
-> [26] F. B. Schneider。《使用状态机方法实现容错服务：教程》。*ACM 计算综述*，22(4)，1990 年。
+> [26] F. B. Schneider。《使用状态机方法实现容错服务：教程》。_ACM 计算综述_，22(4)，1990 年。
 
-[27] A. Sherman, P. A. Lisiecki, A. Berkheimer, and J. Wein. ACMS: The Akamai configuration management system. In *NSDI*, 2005.
+[27] A. Sherman, P. A. Lisiecki, A. Berkheimer, and J. Wein. ACMS: The Akamai configuration management system. In _NSDI_, 2005.
 
-> [27] A. Sherman、P. A. Lisiecki、A. Berkheimer 与 J. Wein。《ACMS：Akamai 配置管理系统》。载于 *NSDI*，2005 年。
+> [27] A. Sherman、P. A. Lisiecki、A. Berkheimer 与 J. Wein。《ACMS：Akamai 配置管理系统》。载于 _NSDI_，2005 年。
 
-[28] A. Singh, P. Fonseca, P. Kuznetsov, R. Rodrigues, and P. Maniatis. Zeno: eventually consistent byzantine-fault tolerance. In *NSDI’09: Proceedings of the 6th USENIX symposium on Networked systems design and implementation*, pages 169–184, Berkeley, CA, USA, 2009. USENIX Association.
+[28] A. Singh, P. Fonseca, P. Kuznetsov, R. Rodrigues, and P. Maniatis. Zeno: eventually consistent byzantine-fault tolerance. In _NSDI’09: Proceedings of the 6th USENIX symposium on Networked systems design and implementation_, pages 169–184, Berkeley, CA, USA, 2009. USENIX Association.
 
-> [28] A. Singh、P. Fonseca、P. Kuznetsov、R. Rodrigues 与 P. Maniatis。《Zeno：最终一致的拜占庭容错》。载于 *NSDI’09：第 6 届 USENIX 网络系统设计与实现研讨会论文集*，第 169–184 页，美国加利福尼亚州伯克利，2009 年。USENIX Association。
+> [28] A. Singh、P. Fonseca、P. Kuznetsov、R. Rodrigues 与 P. Maniatis。《Zeno：最终一致的拜占庭容错》。载于 _NSDI’09：第 6 届 USENIX 网络系统设计与实现研讨会论文集_，第 169–184 页，美国加利福尼亚州伯克利，2009 年。USENIX Association。
 
 [29] Y. J. Song, F. Junqueira, and B. Reed. BFT for the skeptics. <http://www.net.t-labs.tu-berlin.de/~petr/BFTW3/abstracts/talk-abstract.pdf>.
 
 > [29] Y. J. Song、F. Junqueira 与 B. Reed。《写给怀疑者的 BFT》。<http://www.net.t-labs.tu-berlin.de/~petr/BFTW3/abstracts/talk-abstract.pdf>。
 
-[30] R. van Renesse and K. Birman. Horus, a flexible group communication systems. *Communications of the ACM*, 39(16), Apr. 1996.
+[30] R. van Renesse and K. Birman. Horus, a flexible group communication systems. _Communications of the ACM_, 39(16), Apr. 1996.
 
-> [30] R. van Renesse 与 K. Birman。《Horus：灵活的组通信系统》。*ACM 通讯*，39(16)，1996 年 4 月。
+> [30] R. van Renesse 与 K. Birman。《Horus：灵活的组通信系统》。_ACM 通讯_，39(16)，1996 年 4 月。
 
-[31] R. van Renesse, K. Birman, M. Hayden, A. Vaysburd, and D. Karr. Building adaptive systems using ensemble. *Software - Practice and Experience*, 28(5), July 1998.
+[31] R. van Renesse, K. Birman, M. Hayden, A. Vaysburd, and D. Karr. Building adaptive systems using ensemble. _Software - Practice and Experience_, 28(5), July 1998.
 
-> [31] R. van Renesse、K. Birman、M. Hayden、A. Vaysburd 与 D. Karr。《使用 Ensemble 构建自适应系统》。*软件：实践与经验*，28(5)，1998 年 7 月。
+> [31] R. van Renesse、K. Birman、M. Hayden、A. Vaysburd 与 D. Karr。《使用 Ensemble 构建自适应系统》。_软件：实践与经验_，28(5)，1998 年 7 月。

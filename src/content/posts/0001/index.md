@@ -5,6 +5,7 @@ modDatetime: 2024-08-05T11:12:03+08:00
 timezone: "Asia/Shanghai"
 title: "楔子"
 featured: false
+area: "notes-and-thoughts"
 draft: false
 tags:
   - "生活"

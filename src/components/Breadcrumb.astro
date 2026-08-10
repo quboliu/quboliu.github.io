@@ -2,6 +2,7 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { stripBase, stripLocale } from "@/utils/withBase";
 import { useTranslations } from "@/i18n";
+import { getAreaBySlug } from "@/data/areas";
 import config from "@/config";
 
 const locale = Astro.currentLocale ?? config.site.lang;
@@ -26,6 +27,7 @@ const decodeSegment = (value: string) => {
 
 const navLabels: Record<string, string> = {
   posts: t.nav.posts,
+  areas: t.nav.areas,
   tags: t.nav.tags,
   about: t.nav.about,
   archives: t.nav.archives,
@@ -55,6 +57,27 @@ if (breadcrumbList[0] === "tags" && !isNaN(Number(breadcrumbList[2]))) {
     }`
   );
 }
+
+// if breadcrumb is Home > Areas > [area] > [page] <etc>
+// replace the stable slug with its configured display name.
+if (breadcrumbList[0] === "areas") {
+  const area = getAreaBySlug(breadcrumbList[1]);
+  if (area) {
+    if (!isNaN(Number(breadcrumbList[2]))) {
+      breadcrumbList.splice(
+        1,
+        3,
+        `${area.name} ${
+          Number(breadcrumbList[2]) === 1
+            ? ""
+            : `(${t.pagination.page.toLowerCase()} ${breadcrumbList[2]})`
+        }`
+      );
+    } else {
+      breadcrumbList[1] = area.name;
+    }
+  }
+}
 ---
 
 <nav class="app-layout mt-8 mb-1" aria-label="breadcrumb">
@@ -72,7 +95,12 @@ if (breadcrumbList[0] === "tags" && !isNaN(Number(breadcrumbList[2]))) {
         index + 1 === breadcrumbList.length ? (
           <li>
             <span
-              class:list={["capitalize opacity-75", { lowercase: index > 0 }]}
+              class:list={[
+                "capitalize opacity-75",
+                {
+                  lowercase: breadcrumbList[0] === "tags" && index > 0,
+                },
+              ]}
               aria-current="page"
             >
               {/* make the last part lowercase in Home > Tags > some-tag */}

@@ -4,6 +4,7 @@ pubDatetime: 2026-08-06T16:30:00+08:00
 timezone: "Asia/Shanghai"
 title: "iCloud 同步反复失败：一处改了，另一处没跟着改"
 featured: false
+area: "software-engineering"
 draft: false
 tags:
   - "故障排查"

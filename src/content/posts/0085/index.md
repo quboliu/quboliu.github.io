@@ -4,6 +4,7 @@ pubDatetime: 2026-08-09T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | CloudyBench: A Testbed for A Comprehensive Evaluation of Cloud-Native Databases（中英对照全文）"
 featured: false
+area: "databases"
 draft: false
 tags:
   - "论文阅读"
@@ -12,6 +13,7 @@ tags:
   - "ICDE 2025"
 description: "CloudyBench 对五种商业云数据库的弹性、多租户、成本与故障恢复进行综合评测；本文为中英逐段对照全文。"
 ---
+
 > CloudyBench：用于全面评估云原生数据库的测试平台
 
 Chao Zhang<sup>§</sup>, Guoliang Li<sup>∗</sup>, Leyao Liu<sup>†</sup>, Tao Lv<sup>‡</sup>, Ju Fan<sup>§</sup>
@@ -40,7 +42,7 @@ In this paper, we propose a new testbed for cloud-native databases, named Cloudy
 
 > I. 引言
 
-Recently, we have witnessed a proliferation of cloud-native databases (CDB) that seek for higher elasticity and lower cost by developing new database techniques in the cloud [8], [45]. CDBs own the *disaggregation of compute and storage* architecture [38], [39], [16], [41], [18], which decouples the storage from the compute nodes, and then connects the compute nodes to the shared storage through a high-speed network. The compute layer consists of a primary read-write (RW) node and multiple secondary read-only (RO) nodes, where each node has a local cache. Further, the disaggregated memory architecture decouples the memory from the local instance to a remote buffer pool. Consequently, CDB claims to provide better elasticity and multi-tenancy service, higher cost-efficiency, and superior transaction processing performance.
+Recently, we have witnessed a proliferation of cloud-native databases (CDB) that seek for higher elasticity and lower cost by developing new database techniques in the cloud [8], [45]. CDBs own the _disaggregation of compute and storage_ architecture [38], [39], [16], [41], [18], which decouples the storage from the compute nodes, and then connects the compute nodes to the shared storage through a high-speed network. The compute layer consists of a primary read-write (RW) node and multiple secondary read-only (RO) nodes, where each node has a local cache. Further, the disaggregated memory architecture decouples the memory from the local instance to a remote buffer pool. Consequently, CDB claims to provide better elasticity and multi-tenancy service, higher cost-efficiency, and superior transaction processing performance.
 
 > 近年来，云原生数据库（CDB）大量涌现；它们通过在云上发展新的数据库技术，追求更高的弹性和更低的成本 [8], [45]。CDB 采用*存算分离*架构 [38], [39], [16], [41], [18]，将存储与计算节点解耦，再通过高速网络把计算节点连接到共享存储。计算层由一个主读写（RW）节点和多个从只读（RO）节点组成，每个节点均配有本地缓存。进一步地，内存解耦架构把内存从本地实例中分离出来，形成远程缓冲池。因此，CDB 宣称可以提供更好的弹性与多租户服务、更高的成本效率，以及更优的事务处理性能。
 
@@ -78,15 +80,15 @@ Database benchmarking [12], [35], [36], [5], [9], [22], [44], [47], [46], [4], [
 > **表 I**<br>
 > **CLOUDYBENCH 与现有 OLTP 基准的比较**
 
-| Features / 特性 | SysBench | YCSB | TPC-C | CDSBen[48] | Stitcher[40] | CloudyBench |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|
-| Domain-Specific Cloud-Native Application / 面向特定领域的云原生应用 | × | × | × | × | × | √ |
-| OLTP Evaluation with ACID / 支持 ACID 的 OLTP 评估 | √ | √ | √ | × | × | √ |
-| Elasticity Evaluation with Peaks and Valleys / 采用峰谷模式的弹性评估 | × | × | × | √ | √ | √ |
-| Multi-Tenancy Evaluation with Contention Patterns / 采用争用模式的多租户评估 | × | × | × | × | × | √ |
-| Fail-Over Evaluation with Built-in Module / 采用内置模块的故障转移评估 | × | × | × | × | × | √ |
-| Replication Lag Time Evaluation / 复制延迟时间评估 | × | × | × | × | × | √ |
-| Cloud-Native Metrics with Performance and Cost / 综合性能与成本的云原生指标 | × | × | × | × | × | √ |
+| Features / 特性                                                              | SysBench | YCSB | TPC-C | CDSBen[48] | Stitcher[40] | CloudyBench |
+| ---------------------------------------------------------------------------- | :------: | :--: | :---: | :--------: | :----------: | :---------: |
+| Domain-Specific Cloud-Native Application / 面向特定领域的云原生应用          |    ×     |  ×   |   ×   |     ×      |      ×       |      √      |
+| OLTP Evaluation with ACID / 支持 ACID 的 OLTP 评估                           |    √     |  √   |   √   |     ×      |      ×       |      √      |
+| Elasticity Evaluation with Peaks and Valleys / 采用峰谷模式的弹性评估        |    ×     |  ×   |   ×   |     √      |      √       |      √      |
+| Multi-Tenancy Evaluation with Contention Patterns / 采用争用模式的多租户评估 |    ×     |  ×   |   ×   |     ×      |      ×       |      √      |
+| Fail-Over Evaluation with Built-in Module / 采用内置模块的故障转移评估       |    ×     |  ×   |   ×   |     ×      |      ×       |      √      |
+| Replication Lag Time Evaluation / 复制延迟时间评估                           |    ×     |  ×   |   ×   |     ×      |      ×       |      √      |
+| Cloud-Native Metrics with Performance and Cost / 综合性能与成本的云原生指标  |    ×     |  ×   |   ×   |     ×      |      ×       |      √      |
 
 **图表中文解读：** 表 I 按七项能力比较 CloudyBench 与五种既有 OLTP 或云工作负载基准。SysBench、YCSB 和 TPC-C 能够评估符合 ACID 的 OLTP，却不覆盖弹性、多租户、故障转移和复制延迟；CDSBen 与 Stitcher 能生成峰谷型弹性负载，但不具备事务、多租户及故障评估能力。CloudyBench 是表中唯一覆盖全部七项能力的基准。
 
@@ -98,21 +100,21 @@ The main contributions are summarised as follows:
 
 > 主要贡献总结如下：
 
-1) We made an in-depth investigation on the key features of various state-of-the-art cloud-native databases.
+1. We made an in-depth investigation on the key features of various state-of-the-art cloud-native databases.
 
-> 1) 我们深入研究了多种先进云原生数据库的关键特性。
+> 1. 我们深入研究了多种先进云原生数据库的关键特性。
 
-2) We designed an end-to-end benchmark and a testbed to evaluate the key features of cloud-native databases, including elasticity, multi-tenancy, and cost-efficiency. The code is open-sourced at Github.
+2. We designed an end-to-end benchmark and a testbed to evaluate the key features of cloud-native databases, including elasticity, multi-tenancy, and cost-efficiency. The code is open-sourced at Github.
 
-> 2) 我们设计了一项端到端基准和一套测试平台，用于评估云原生数据库的弹性、多租户和成本效率等关键特性。代码已在 Github 上开源。
+> 2. 我们设计了一项端到端基准和一套测试平台，用于评估云原生数据库的弹性、多租户和成本效率等关键特性。代码已在 Github 上开源。
 
-3) We proposed a unified metric to quantify the service quality of cloud-native databases by considering the performance, cost, elasticity, multi-tenancy, lag time, and fail-over.
+3. We proposed a unified metric to quantify the service quality of cloud-native databases by considering the performance, cost, elasticity, multi-tenancy, lag time, and fail-over.
 
-> 3) 我们提出了一项统一指标，综合性能、成本、弹性、多租户、延迟时间和故障转移，量化云原生数据库的服务质量。
+> 3. 我们提出了一项统一指标，综合性能、成本、弹性、多租户、延迟时间和故障转移，量化云原生数据库的服务质量。
 
-4) We obtained a number of insights by leveraging CloudyBench to evaluate five cloud data services.
+4. We obtained a number of insights by leveraging CloudyBench to evaluate five cloud data services.
 
-> 4) 我们使用 CloudyBench 评估五种云数据服务，并由此获得了若干洞见。
+> 4. 我们使用 CloudyBench 评估五种云数据服务，并由此获得了若干洞见。
 
 ## II. CLOUDYBENCH BENCHMARK
 
@@ -134,9 +136,9 @@ Figure 1 depicts an overview of CloudyBench, including the data generation, work
 
 **图表中文解读：** 配置文件驱动数据生成和工作负载管理。T1–T4 与延迟评估构成云 OLTP 评估器，并进一步派生四种弹性模式和四种多租户模式。故障转移评估器、性能收集器和数据库共同向指标层提供数据，最终计算 P、E1、E2、R、F、C、T 与 O 八种分数，其中 O-Score 是七个分项的统一汇总指标。
 
-CloudyBench is extensible for adding new patterns and OLTP workloads. To extend elasticity and multi-tenancy patterns, users can simply modify the length of *elastic_testTime* (e.g., 4) and add corresponding concurrency in the *props* file. (e.g., *fourth_con*), then modify the *CloudyBench* class to launch the new patterns. For fail-over pattern, it supports to add more replicas in the *props* file, then it can pose fail-over test on any node. Since the framework has decoupled the SQL statements, new workload can also be readily incorporated by adding the statements in *stmt_db.toml* and modifying the classes of *SqlReader* and *Sqlstmts*.
+CloudyBench is extensible for adding new patterns and OLTP workloads. To extend elasticity and multi-tenancy patterns, users can simply modify the length of _elastic_testTime_ (e.g., 4) and add corresponding concurrency in the _props_ file. (e.g., _fourth_con_), then modify the _CloudyBench_ class to launch the new patterns. For fail-over pattern, it supports to add more replicas in the _props_ file, then it can pose fail-over test on any node. Since the framework has decoupled the SQL statements, new workload can also be readily incorporated by adding the statements in _stmt_db.toml_ and modifying the classes of _SqlReader_ and _Sqlstmts_.
 
-> CloudyBench 具有可扩展性，可以添加新的模式和 OLTP 工作负载。要扩展弹性与多租户模式，用户只需修改 *elastic_testTime* 的长度（例如 4），并在 *props* 文件中加入相应的并发度（例如 *fourth_con*），随后修改 *CloudyBench* 类以启动新模式。对于故障转移模式，可以在 *props* 文件中增加更多副本，继而对任意节点进行故障转移测试。由于该框架已将 SQL 语句解耦，只需向 *stmt_db.toml* 添加语句并修改 *SqlReader* 与 *Sqlstmts* 类，即可便捷地纳入新的工作负载。
+> CloudyBench 具有可扩展性，可以添加新的模式和 OLTP 工作负载。要扩展弹性与多租户模式，用户只需修改 _elastic_testTime_ 的长度（例如 4），并在 _props_ 文件中加入相应的并发度（例如 _fourth_con_），随后修改 _CloudyBench_ 类以启动新模式。对于故障转移模式，可以在 _props_ 文件中增加更多副本，继而对任意节点进行故障转移测试。由于该框架已将 SQL 语句解耦，只需向 _stmt_db.toml_ 添加语句并修改 _SqlReader_ 与 _Sqlstmts_ 类，即可便捷地纳入新的工作负载。
 
 ### A. MicroService Schema and Data Generation
 
@@ -164,11 +166,11 @@ Existing benchmarks [35], [15] generate the transactions based on the uniform or
 
 #### 1) Throughput Evaluation.
 
-> 1) 吞吐量评估。
+> 1. 吞吐量评估。
 
-The workload covers the most common transactions in a sales microservice of ODOO [11]. As shown in Table II, T1 (New Orderline) is a write-only transaction that inserts a new orderline; T2 (Order Payment) is a read-write transaction that finds a target order, and then it updates the customer’s credit and order’s status. T3 (Order Status) is a read-only transaction that checks the status of a given order; T4 (Orderline Deletion) is to delete a given orderline. The workload manager will launch a worker for each transaction based on the concurrency number and transaction ratio. We support two types of distributions, *uniform* and *latest*. For the former one, the substitution parameters are chosen uniformly. For the latter one, we generate the skewed access distribution by controlling the access range of O_ID. For instance, concerning the *latest-10* distribution, T2 will update 10 specific items, and T3 will read these items randomly. As a result, the more skewed the distribution is, the more likely the fresh data is read.
+The workload covers the most common transactions in a sales microservice of ODOO [11]. As shown in Table II, T1 (New Orderline) is a write-only transaction that inserts a new orderline; T2 (Order Payment) is a read-write transaction that finds a target order, and then it updates the customer’s credit and order’s status. T3 (Order Status) is a read-only transaction that checks the status of a given order; T4 (Orderline Deletion) is to delete a given orderline. The workload manager will launch a worker for each transaction based on the concurrency number and transaction ratio. We support two types of distributions, _uniform_ and _latest_. For the former one, the substitution parameters are chosen uniformly. For the latter one, we generate the skewed access distribution by controlling the access range of O_ID. For instance, concerning the _latest-10_ distribution, T2 will update 10 specific items, and T3 will read these items randomly. As a result, the more skewed the distribution is, the more likely the fresh data is read.
 
-> 该工作负载涵盖 ODOO 销售微服务中最常见的事务 [11]。如表 II 所示，T1（新建订单行）是插入新订单行的只写事务；T2（订单支付）是读写事务，它先查找目标订单，随后更新客户信用额与订单状态；T3（订单状态）是查询给定订单状态的只读事务；T4（删除订单行）用于删除给定订单行。工作负载管理器根据并发数与事务比例，为每类事务启动工作线程。我们支持 *uniform* 和 *latest* 两种分布：前者均匀选择替换参数；后者通过控制 O_ID 的访问范围生成偏斜访问分布。例如，在 *latest-10* 分布下，T2 会更新 10 个特定条目，T3 则随机读取这些条目。因此，分布越偏斜，读到新鲜数据的可能性就越高。
+> 该工作负载涵盖 ODOO 销售微服务中最常见的事务 [11]。如表 II 所示，T1（新建订单行）是插入新订单行的只写事务；T2（订单支付）是读写事务，它先查找目标订单，随后更新客户信用额与订单状态；T3（订单状态）是查询给定订单状态的只读事务；T4（删除订单行）用于删除给定订单行。工作负载管理器根据并发数与事务比例，为每类事务启动工作线程。我们支持 _uniform_ 和 _latest_ 两种分布：前者均匀选择替换参数；后者通过控制 O_ID 的访问范围生成偏斜访问分布。例如，在 _latest-10_ 分布下，T2 会更新 10 个特定条目，T3 则随机读取这些条目。因此，分布越偏斜，读到新鲜数据的可能性就越高。
 
 **TABLE II**<br>
 **CLOUDYBENCH’S OLTP WORKLOAD**
@@ -192,7 +194,7 @@ The workload covers the most common transactions in a sales microservice of ODOO
 
 #### 2) Lag Time Evaluation.
 
-> 2) 延迟时间评估。
+> 2. 延迟时间评估。
 
 To evaluate the log-replaying efficiency, we design three patterns to evaluate the replication lag time. Namely, (a) insert lag time; (b) update lag time; (c) delete lag time. The basic idea is to measure the lag time synchronizing the data changes from the RW node to the RO node with varied concurrency. Specifically, we run T1, T2, T4 with varied ratio to measure the latency that a replica has synchronized the data changes. For each pattern, once the primary RW node commits the transaction, the client will try to read the data change from the replica until the data is consistent between the RW node and RO nodes.
 
@@ -246,9 +248,9 @@ Existing benchmarks do not support automatic fail-over evaluation and DBAs have 
 
 > 现有基准不支持自动故障转移评估，数据库管理员必须手动制造故障并分析性能 [3], [6]。为支持故障转移评估，我们在测试平台中开发了一个模块，它能够注入节点故障，并自动报告故障转移表现。
 
-We design basic fail-over patterns to evaluate the recovery performance of various CDBs, namely, (a) RO failure; (b) RW failure. The basic idea is to inject the node failure during workload processing, then evaluate how fast the CDB can recover the service and throughput, respectively. By investigating the existing APIs of CDBs, we develop a *restart model* [20] to simulate the node failure and evaluate the fail-over performance. This is because the kill or stop API will lead to the unavailable service, and we have to start the service manually. To evaluate the recovery time, we invoke the *restart* API and record the TPS before the failure, then calculate the duration in two phases. In phase one, we measure how long the TPS is greater than zero after the node failure. In phase two, we continually check if the current TPS is recovered to the original TPS in a given interval.
+We design basic fail-over patterns to evaluate the recovery performance of various CDBs, namely, (a) RO failure; (b) RW failure. The basic idea is to inject the node failure during workload processing, then evaluate how fast the CDB can recover the service and throughput, respectively. By investigating the existing APIs of CDBs, we develop a _restart model_ [20] to simulate the node failure and evaluate the fail-over performance. This is because the kill or stop API will lead to the unavailable service, and we have to start the service manually. To evaluate the recovery time, we invoke the _restart_ API and record the TPS before the failure, then calculate the duration in two phases. In phase one, we measure how long the TPS is greater than zero after the node failure. In phase two, we continually check if the current TPS is recovered to the original TPS in a given interval.
 
-> 我们设计了两种基础故障转移模式来评估不同 CDB 的恢复性能，即：（a）RO 故障；（b）RW 故障。其基本思路是在处理工作负载期间注入节点故障，然后分别评估 CDB 恢复服务和吞吐量的速度。通过研究现有 CDB API，我们开发了一个 *restart model* [20]，用于模拟节点故障并评估故障转移表现。之所以采用这种方式，是因为 kill 或 stop API 会使服务不可用，之后还必须手动启动服务。为评估恢复时间，我们调用 *restart* API，记录故障前的 TPS，再分两个阶段计算持续时间。第一阶段测量节点故障发生后，TPS 恢复为大于零需要多长时间；第二阶段在给定间隔内持续检查当前 TPS 是否已恢复至原始 TPS。
+> 我们设计了两种基础故障转移模式来评估不同 CDB 的恢复性能，即：（a）RO 故障；（b）RW 故障。其基本思路是在处理工作负载期间注入节点故障，然后分别评估 CDB 恢复服务和吞吐量的速度。通过研究现有 CDB API，我们开发了一个 _restart model_ [20]，用于模拟节点故障并评估故障转移表现。之所以采用这种方式，是因为 kill 或 stop API 会使服务不可用，之后还必须手动启动服务。为评估恢复时间，我们调用 _restart_ API，记录故障前的 TPS，再分两个阶段计算持续时间。第一阶段测量节点故障发生后，TPS 恢复为大于零需要多长时间；第二阶段在给定间隔内持续检查当前 TPS 是否已恢复至原始 TPS。
 
 ### F. Resource Unit Cost
 
@@ -268,14 +270,14 @@ According to the existing settings, we set the resource unit separately for reso
 > **表 III**<br>
 > **每小时资源单位成本**
 
-| Resource Unit / 资源单位 | Cost / 成本 | Reference / 参考依据 |
-|---|---:|---|
-| CPU (vCore) | &#36;0.1847/h | Aurora/PolarDB/HyperScale/Neon |
-| Memory (GB) | &#36;0.0095/h | Aurora/PolarDB/HyperScale/Neon |
-| Storage (GB) | &#36;0.000853/h | Aurora/PolarDB/HyperScale/Neon |
-| IOPS (100) | &#36;0.00015/h | AWS RDS IOPS Pricing / AWS RDS IOPS 定价 |
-| TCP/IP Network (Gbps) | &#36;0.07696/h | Huawei S1730S-S24T4X-QA2 10G |
-| RDMA Network (Gbps) | &#36;0.23088/h | MELLANOX MSB7890-ES2F 100G |
+| Resource Unit / 资源单位 |     Cost / 成本 | Reference / 参考依据                     |
+| ------------------------ | --------------: | ---------------------------------------- |
+| CPU (vCore)              |   &#36;0.1847/h | Aurora/PolarDB/HyperScale/Neon           |
+| Memory (GB)              |   &#36;0.0095/h | Aurora/PolarDB/HyperScale/Neon           |
+| Storage (GB)             | &#36;0.000853/h | Aurora/PolarDB/HyperScale/Neon           |
+| IOPS (100)               |  &#36;0.00015/h | AWS RDS IOPS Pricing / AWS RDS IOPS 定价 |
+| TCP/IP Network (Gbps)    |  &#36;0.07696/h | Huawei S1730S-S24T4X-QA2 10G             |
+| RDMA Network (Gbps)      |  &#36;0.23088/h | MELLANOX MSB7890-ES2F 100G               |
 
 **图表中文解读：** 表 III 给出统一 RUC 模型中六类资源的每小时单位成本及定价参考。CPU、内存、存储和 IOPS 分别按 1 vCore、1 GB、1 GB 和 100 IOPS 计量，网络按 1 Gbps 计量。表中 RDMA 单位成本 &#36;0.23088/h，约为 TCP/IP 的三倍，这一差异会直接影响后文 CDB4 的成本分数。
 
@@ -291,7 +293,7 @@ To measure CDB’s performance holistically, we propose a framework of ”PERFEC
 
 > 为整体衡量 CDB 的表现，我们提出了“PERFECT”框架。其基本思想是在兼顾性能与成本的前提下，反映最重要的几个方面。具体而言，“P”表示生产力，衡量吞吐量与 RUC 之比；第一个“E”（即 E1）表示纵向扩缩容弹性，第二个“E”（即 E2）表示横向扩缩容弹性；“R”表示吞吐量恢复效率；“F”表示故障转移速度；“C”表示一致性相关的复制延迟时间；“T”表示租户性能。最后，我们将七项指标合并为一项反映整体性能的统一指标，称为 O-Score。下面详细介绍每一项云指标：
 
-***P-Score.*** To consider the performance and cost together, we define the Productivity (P-Score) as the average transaction performance per RUC as follows:
+_**P-Score.**_ To consider the performance and cost together, we define the Productivity (P-Score) as the average transaction performance per RUC as follows:
 
 > ***P-Score。***为同时考虑性能与成本，我们将生产力（P-Score）定义为每单位 RUC 对应的平均事务性能：
 
@@ -304,7 +306,7 @@ where $\overline{TPS}$ is the average TPS and we consider the average resource c
 
 > 其中，$\overline{TPS}$ 为平均 TPS；我们计入 CPU、内存、存储、IOPS 和网络每分钟的平均资源成本。
 
-***E1-Score.*** To quantify the scaling up/down elasticity, we define E1-Score as follows:
+_**E1-Score.**_ To quantify the scaling up/down elasticity, we define E1-Score as follows:
 
 > ***E1-Score。***为量化纵向扩缩容弹性，我们将 E1-Score 定义如下：
 
@@ -317,7 +319,7 @@ where $\overline{TPS}$ is the average TPS and we consider the resource cost of C
 
 > 其中，$\overline{TPS}$ 为平均 TPS；我们计入与弹性最为相关的 CPU、内存和 IOPS 资源成本。
 
-***F-Score.*** Concerning node failure, we calculate the time range starting from failure injection to the point where databases resume the throughput. The definition is as follows:
+_**F-Score.**_ Concerning node failure, we calculate the time range starting from failure injection to the point where databases resume the throughput. The definition is as follows:
 
 > ***F-Score。***对于节点故障，我们计算从注入故障开始，到数据库恢复吞吐量为止的时间范围。定义如下：
 
@@ -330,7 +332,7 @@ where $t_f^i$ and $t_s^i$ is the timing of injecting node failure and the timing
 
 > 其中，$t_f^i$ 和 $t_s^i$ 分别为第 $i$ 个恢复阶段中注入节点故障的时刻与服务恢复的时刻。
 
-***R-Score.*** We evaluate the CDB’s recovery speed for recovering the TPS after the service recovery with R-Score. Since CDBs have different TPS for a given concurrency, we set the same target TPS for recovery. The definition is as follows:
+_**R-Score.**_ We evaluate the CDB’s recovery speed for recovering the TPS after the service recovery with R-Score. Since CDBs have different TPS for a given concurrency, we set the same target TPS for recovery. The definition is as follows:
 
 > ***R-Score。***我们使用 R-Score 评估 CDB 在服务恢复之后恢复 TPS 的速度。由于不同 CDB 在给定并发度下具有不同 TPS，我们为恢复过程设定相同的目标 TPS。定义如下：
 
@@ -343,7 +345,7 @@ where $t_s^i$ and $t_r^i$ is the epoch timestamp of service recovery and the epo
 
 > 其中，$t_s^i$ 和 $t_r^i$ 分别是第 $i$ 个恢复阶段中服务恢复的纪元时间戳，以及 TPS 恢复到故障前水平的纪元时间戳。
 
-***E2-Score.*** To evaluate the scalability, we add RO nodes and quantify the CDB’s improved performance per node. The definition of E2-Score is as follows:
+_**E2-Score.**_ To evaluate the scalability, we add RO nodes and quantify the CDB’s improved performance per node. The definition of E2-Score is as follows:
 
 > ***E2-Score。***为评估可扩展性，我们增加 RO 节点，并量化 CDB 每增加一个节点所获得的性能提升。E2-Score 定义如下：
 
@@ -356,7 +358,7 @@ where $\lambda$ is the number of RO node and $\delta$ is the scaling factor; $TP
 
 > 其中，$\lambda$ 为 RO 节点数，$\delta$ 为缩放因子；$TPS_i$ 是使用 $i$ 个节点时的吞吐量。
 
-***C-Score.*** To evaluate the replication lag time with DML operations, we define C-Score as follows:
+_**C-Score.**_ To evaluate the replication lag time with DML operations, we define C-Score as follows:
 
 > ***C-Score。***为评估 DML 操作的复制延迟时间，我们将 C-Score 定义如下：
 
@@ -369,7 +371,7 @@ where $|\lambda|$ is the number of replicas; $T_i$, $T_u$, and $T_d$ is the aver
 
 > 其中，$|\lambda|$ 为副本数量；$T_i$、$T_u$ 和 $T_d$ 分别为插入、更新和删除的平均延迟时间。需要注意的是，C-Score 越小，数据复制越快。
 
-***T-Score.*** We define T-Score as follows:
+_**T-Score.**_ We define T-Score as follows:
 
 > ***T-Score。***我们将 T-Score 定义如下：
 
@@ -382,7 +384,7 @@ where the numerator calculates the geometric mean of the overall TPS and $TPS_i$
 
 > 其中，分子计算总体 TPS 的几何平均值，$TPS_i$ 是第 $i$ 个租户的平均 TPS；$Cost_i$ 是第 $i$ 个租户消耗的资源单位成本；
 
-***O-Score.*** Having a unified metric is beneficial for comparing the performance of cloud databases holistically. Solely relying on one aspect cannot reflect the overall performance. Given that the serven components (cost-aware performance (P-Score), multi-tenancy (T-Score), scale-up elasticity (E1-Score), scale-out elasticity (E2-Score), fail-over time (F-Score), recovery time (R-Score) and replication latency (C-Score) are widely recognized as the most important factors for quantifying the service quality of cloud-native databases, we design a unified metric to quantify the overall performance. By multiplying all the seven scores and adding the logarithm, we propose O-Score defined as follows:
+_**O-Score.**_ Having a unified metric is beneficial for comparing the performance of cloud databases holistically. Solely relying on one aspect cannot reflect the overall performance. Given that the serven components (cost-aware performance (P-Score), multi-tenancy (T-Score), scale-up elasticity (E1-Score), scale-out elasticity (E2-Score), fail-over time (F-Score), recovery time (R-Score) and replication latency (C-Score) are widely recognized as the most important factors for quantifying the service quality of cloud-native databases, we design a unified metric to quantify the overall performance. By multiplying all the seven scores and adding the logarithm, we propose O-Score defined as follows:
 
 > ***O-Score。***统一指标有助于从整体上比较云数据库的表现，单凭某一方面无法反映整体性能。鉴于七个组成部分——成本感知性能（P-Score）、多租户（T-Score）、纵向扩展弹性（E1-Score）、横向扩展弹性（E2-Score）、故障转移时间（F-Score）、恢复时间（R-Score）和复制延迟（C-Score）——被广泛认为是量化云原生数据库服务质量最重要的因素，我们设计了一项统一指标来量化整体性能。通过将七项分数相乘并取对数，我们提出 O-Score，定义如下：
 
@@ -415,9 +417,9 @@ where SF is the scale factor; the numerator computes the multiplication of P-Sco
 
 > (2) CDB2 将存储分为两部分：用于日志管理的日志服务，以及用于页面管理的页面服务。日志服务采用高速存储设备，页面服务采用通用存储设备。在弹性方面，它可以依据工作负载需求和负载预测 [28]，分别自动扩缩 CPU 与内存资源。它为多租户开发了弹性池，使多个租户能够共享计算和日志服务；池内各租户实例可以共享 vCore、内存、SSD 缓存以及日志服务。
 
-(3) CDB3 develops a disaggregated compute-log-storage architecture based on PostgreSQL codebase. Its compute nodes are scheduled by Kubernetes [21] ; WAL is handled by the SafeKeeper procedures; the page servers replay the logs to serve the materialized pages; the hot data is cached in the compute nodes and the cold data is persisted to the cloud object storage. On elasticity, CDB3 defines that a capacity unit (CU) is 1 vCore and 2 GB, where the minimum setting could be 0.25*CU. For both scaling up and scaling down, it will immediately adapt the CU usage to the workload pattern. It implements a *git-style* multi-tenancy model, where each project has a primary branch and each child branch is a copy-on-write clone of the parent branch. In this case, each branch is regarded as a tenant with a pre-allocated and isolated resource configuration. It supports the pause-and-resume mechanism, meaning that it can scale to zero and resume the service once a workload comes in.
+(3) CDB3 develops a disaggregated compute-log-storage architecture based on PostgreSQL codebase. Its compute nodes are scheduled by Kubernetes [21] ; WAL is handled by the SafeKeeper procedures; the page servers replay the logs to serve the materialized pages; the hot data is cached in the compute nodes and the cold data is persisted to the cloud object storage. On elasticity, CDB3 defines that a capacity unit (CU) is 1 vCore and 2 GB, where the minimum setting could be 0.25*CU. For both scaling up and scaling down, it will immediately adapt the CU usage to the workload pattern. It implements a _git-style_ multi-tenancy model, where each project has a primary branch and each child branch is a copy-on-write clone of the parent branch. In this case, each branch is regarded as a tenant with a pre-allocated and isolated resource configuration. It supports the pause-and-resume mechanism, meaning that it can scale to zero and resume the service once a workload comes in.
 
-> (3) CDB3 基于 PostgreSQL 代码库开发了计算—日志—存储解耦架构。其计算节点由 Kubernetes [21] 调度；WAL 由 SafeKeeper 进程处理；页面服务器通过重放日志提供物化页面；热数据缓存在计算节点中，冷数据持久化到云对象存储。在弹性方面，CDB3 把一个容量单位（CU）定义为 1 vCore 和 2 GB，最小配置可为 0.25*CU。无论扩容还是缩容，它都会立即根据工作负载模式调整 CU 用量。它实现了 *git-style* 多租户模型：每个项目都有一个主分支，每个子分支都是父分支的写时复制克隆。在这种情况下，每个分支被视为一个租户，并具有预先分配且彼此隔离的资源配置。它支持暂停—恢复机制，即可以缩容到零，并在工作负载到来时恢复服务。
+> (3) CDB3 基于 PostgreSQL 代码库开发了计算—日志—存储解耦架构。其计算节点由 Kubernetes [21] 调度；WAL 由 SafeKeeper 进程处理；页面服务器通过重放日志提供物化页面；热数据缓存在计算节点中，冷数据持久化到云对象存储。在弹性方面，CDB3 把一个容量单位（CU）定义为 1 vCore 和 2 GB，最小配置可为 0.25*CU。无论扩容还是缩容，它都会立即根据工作负载模式调整 CU 用量。它实现了 _git-style_ 多租户模型：每个项目都有一个主分支，每个子分支都是父分支的写时复制克隆。在这种情况下，每个分支被视为一个租户，并具有预先分配且彼此隔离的资源配置。它支持暂停—恢复机制，即可以缩容到零，并在工作负载到来时恢复服务。
 
 (4) CDB4 develops a memory disaggregation architecture which relies a distributed storage service, and employs a shared remote buffer pool with a high-speed RDMA network. To ensure cache coherency, it utilizes cache invalidation to synchronize the updates between the local cache and the remote cache. It adopts an ARIES-style recovery algorithm with a remote buffer pool [49]. When a node failure occurs, the cluster manager initiates an auto switch-over process by promoting a RO node to a RW node. Then the new RW node distributes the redo logs with the checkpoint version from the storage service to the page server for log replaying.
 
@@ -433,13 +435,13 @@ where SF is the scale factor; the numerator computes the multiplication of P-Sco
 > **表 IV**<br>
 > **云原生数据库的实验设置**
 
-| Databases / 数据库 | Engine / 引擎 | CPU & Memory & Storage / CPU、内存与存储 | Network / 网络 | Serverless | Buffer Size / 缓冲区大小 |
-|---|---|---|---|:---:|---:|
-| AWS RDS | PostgreSQL 15 | 4 vCores, 16GB RAM, 150GB NVMe SSD | 10 Gbps TCP/IP | × | 128MB |
-| CDB1 | PostgreSQL 15 | 1 vCore, 2GB RAM – 4 vCores, 8GB RAM | 10 Gbps TCP/IP | √ | 128MB |
-| CDB2 | SQL Server 12 | 0.5 vCores, 2GB RAM – 4 vCores, 12GB RAM | 10 Gbps TCP/IP | √ | 44MB |
-| CDB3 | PostgreSQL 15 | 1 vCore, 2GB RAM – 4 vCores, 16GB RAM | 10 Gbps TCP/IP | √ | 128MB |
-| CDB4 | MySQL 8 | 4 vCores, 16GB local RAM and 24GB remote RAM | 10 Gbps RDMA | × | 10GB |
+| Databases / 数据库 | Engine / 引擎 | CPU & Memory & Storage / CPU、内存与存储     | Network / 网络 | Serverless | Buffer Size / 缓冲区大小 |
+| ------------------ | ------------- | -------------------------------------------- | -------------- | :--------: | -----------------------: |
+| AWS RDS            | PostgreSQL 15 | 4 vCores, 16GB RAM, 150GB NVMe SSD           | 10 Gbps TCP/IP |     ×      |                    128MB |
+| CDB1               | PostgreSQL 15 | 1 vCore, 2GB RAM – 4 vCores, 8GB RAM         | 10 Gbps TCP/IP |     √      |                    128MB |
+| CDB2               | SQL Server 12 | 0.5 vCores, 2GB RAM – 4 vCores, 12GB RAM     | 10 Gbps TCP/IP |     √      |                     44MB |
+| CDB3               | PostgreSQL 15 | 1 vCore, 2GB RAM – 4 vCores, 16GB RAM        | 10 Gbps TCP/IP |     √      |                    128MB |
+| CDB4               | MySQL 8       | 4 vCores, 16GB local RAM and 24GB remote RAM | 10 Gbps RDMA   |     ×      |                     10GB |
 
 **图表中文解读：** 五个 SUT 的引擎、资源形态和弹性能力并不相同。AWS RDS 与 CDB4 采用固定配置且不支持 Serverless；CDB1–3 支持 Serverless 并具有资源范围。CDB4 还同时拥有 16GB 本地内存、24GB 远程内存、10GB 缓冲区和 RDMA 网络，这些差异是后续性能与成本结果的重要背景。
 
@@ -653,18 +655,18 @@ As presented in Table IX, different cloud databases have their pros and cons. Fi
 > 如表 IX 所示，不同云数据库各有所长。第一，AWS RDS 的 P-Score 最高，是 CDB2 的 3.6 倍。此外，增加一个 RO 节点后，它具有最高的 T-Score 和 E2-Score；借助本地 SSD 存储，其 TPS 从 17003 提高到 36198。然而，由于脏页刷写，它的恢复速度最慢。第二，CDB3 的 E1-Score 最高，比 CDB1 高一个数量级，其他分数也相对均衡。第三，CDB4 在恢复速度方面表现出色，R-Score 和 F-Score 分别为 3.5s 和 2.5s；借助支持 RDMA 的内存解耦，它还取得最低的 C-Score 1.5ms。CDB2 依靠共享弹性池，在 CDB 的多租户模式中表现最佳，得到最高的 T-score 79484。将所有分数合并为统一指标后，可以看到 CDB4 最终胜出，拥有最高的 O-Score 17.7。
 
 **TABLE IX**<br>
-**OVERALL PERFORMANCE OF CLOUD-NATIVE DATABASES. (X-SCORE)* DENOTES THE SCORE IS CALCULATED WITH THE ACTUAL COST**
+_*OVERALL PERFORMANCE OF CLOUD-NATIVE DATABASES. (X-SCORE)* DENOTES THE SCORE IS CALCULATED WITH THE ACTUAL COST_*
 
 > **表 IX**<br>
-> **云原生数据库的整体性能。（X-SCORE）* 表示该分数按实际成本计算**
+> _*云原生数据库的整体性能。（X-SCORE）* 表示该分数按实际成本计算_*
 
-| System / 系统 | P-Score | P-Score* | E1-Score | E1-Score* | R-Score | F-Score | E2-Score | C-Score | T-Score | T-Score* | O-Score | O-Score* |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| AWS RDS | **359735** | 359 | 59430 | 1052 | 24 | 15 | **20** | 14 | **80619** | 104 | 15.82 | 8.18 |
-| CDB1 | 131906 | 14369 | 16024 | 16311 | 9 | 6 | 3 | 178 | 52705 | 5326 | 13.48 | 11.53 |
-| CDB2 | 99212 | 2737 | 139933 | 70241 | 27 | 6 | 7 | 1082 | 79484 | 1923 | 13.64 | 10.17 |
-| CDB3 | 217002 | **480660** | **286643** | **401643** | 18 | 9 | 4 | 14 | 75377 | **45540** | 15.92 | **16.19** |
-| CDB4 | 153566 | 19124 | 80565 | 52241 | **3.5** | **2.5** | 10 | **1.5** | 75305 | 13806 | **17.7** | 15.87 |
+| System / 系统 |    P-Score |   P-Score* |   E1-Score |  E1-Score* | R-Score | F-Score | E2-Score | C-Score |   T-Score |  T-Score* |  O-Score |  O-Score* |
+| ------------- | ---------: | ---------: | ---------: | ---------: | ------: | ------: | -------: | ------: | --------: | --------: | -------: | --------: |
+| AWS RDS       | **359735** |        359 |      59430 |       1052 |      24 |      15 |   **20** |      14 | **80619** |       104 |    15.82 |      8.18 |
+| CDB1          |     131906 |      14369 |      16024 |      16311 |       9 |       6 |        3 |     178 |     52705 |      5326 |    13.48 |     11.53 |
+| CDB2          |      99212 |       2737 |     139933 |      70241 |      27 |       6 |        7 |    1082 |     79484 |      1923 |    13.64 |     10.17 |
+| CDB3          |     217002 | **480660** | **286643** | **401643** |      18 |       9 |        4 |      14 |     75377 | **45540** |    15.92 | **16.19** |
+| CDB4          |     153566 |      19124 |      80565 |      52241 | **3.5** | **2.5** |       10 | **1.5** |     75305 |     13806 | **17.7** |     15.87 |
 
 **图表中文解读：** 不带星号的列使用统一 RUC，带星号的列使用厂商实际收费。原表粗体保留各维度突出值：AWS RDS 的 P、E2、T 分数最高；CDB3 在实际价格下的 P*、E1*、T* 和 O* 最具优势，且统一成本下 E1 最高；CDB4 的恢复、故障转移和复制延迟最低，最终统一成本 O-Score 最高（17.7）。实际价格会显著改变排名，因此论文主张统一资源成本更适合横向比较。
 
@@ -772,137 +774,137 @@ In this work, we propose a new benchmark CloudyBench, for evaluating the key fea
 
 > [1] Amazon Web Service。关系数据库服务。https://aws.amazon.com/rds/，2024。
 
-[2] C. Binnig, D. Kossmann, T. Kraska, and S. Loesing. How is the weather tomorrow? towards a benchmark for the cloud. In *Proceedings of the Second International Workshop on Testing Database Systems*, pages 1–6, 2009.
+[2] C. Binnig, D. Kossmann, T. Kraska, and S. Loesing. How is the weather tomorrow? towards a benchmark for the cloud. In _Proceedings of the Second International Workshop on Testing Database Systems_, pages 1–6, 2009.
 
-> [2] C. Binnig、D. Kossmann、T. Kraska 和 S. Loesing。明天天气如何？迈向云基准。载于 *Proceedings of the Second International Workshop on Testing Database Systems*，第 1–6 页，2009。
+> [2] C. Binnig、D. Kossmann、T. Kraska 和 S. Loesing。明天天气如何？迈向云基准。载于 _Proceedings of the Second International Workshop on Testing Database Systems_，第 1–6 页，2009。
 
-[3] W. Cao, Y. Zhang, X. Yang, et al. PolarDB Serverless: A Cloud Native Database for Disaggregated Data Centers. In *SIGMOD*, pages 2477–2489, 2021.
+[3] W. Cao, Y. Zhang, X. Yang, et al. PolarDB Serverless: A Cloud Native Database for Disaggregated Data Centers. In _SIGMOD_, pages 2477–2489, 2021.
 
-> [3] W. Cao、Y. Zhang、X. Yang 等。PolarDB Serverless：面向解耦数据中心的云原生数据库。载于 *SIGMOD*，第 2477–2489 页，2021。
+> [3] W. Cao、Y. Zhang、X. Yang 等。PolarDB Serverless：面向解耦数据中心的云原生数据库。载于 _SIGMOD_，第 2477–2489 页，2021。
 
-[4] Y. Chen, A. Pan, H. Lei, A. Ye, S. Han, Y. Tang, W. Lu, Y. Chai, F. Zhang, and X. Du. Tdsql: Tencent distributed database system. *Proceedings of the VLDB Endowment*, 17(12):3869–3882, 2024.
+[4] Y. Chen, A. Pan, H. Lei, A. Ye, S. Han, Y. Tang, W. Lu, Y. Chai, F. Zhang, and X. Du. Tdsql: Tencent distributed database system. _Proceedings of the VLDB Endowment_, 17(12):3869–3882, 2024.
 
-> [4] Y. Chen、A. Pan、H. Lei、A. Ye、S. Han、Y. Tang、W. Lu、Y. Chai、F. Zhang 和 X. Du。Tdsql：腾讯分布式数据库系统。*Proceedings of the VLDB Endowment*，17(12):3869–3882，2024。
+> [4] Y. Chen、A. Pan、H. Lei、A. Ye、S. Han、Y. Tang、W. Lu、Y. Chai、F. Zhang 和 X. Du。Tdsql：腾讯分布式数据库系统。_Proceedings of the VLDB Endowment_，17(12):3869–3882，2024。
 
-[5] B. F. Cooper, A. Silberstein, E. Tam, R. Ramakrishnan, and R. Sears. Benchmarking cloud serving systems with ycsb. In *Proceedings of the 1st ACM symposium on Cloud computing*, pages 143–154, 2010.
+[5] B. F. Cooper, A. Silberstein, E. Tam, R. Ramakrishnan, and R. Sears. Benchmarking cloud serving systems with ycsb. In _Proceedings of the 1st ACM symposium on Cloud computing_, pages 143–154, 2010.
 
-> [5] B. F. Cooper、A. Silberstein、E. Tam、R. Ramakrishnan 和 R. Sears。使用 ycsb 对云服务系统进行基准测试。载于 *Proceedings of the 1st ACM symposium on Cloud computing*，第 143–154 页，2010。
+> [5] B. F. Cooper、A. Silberstein、E. Tam、R. Ramakrishnan 和 R. Sears。使用 ycsb 对云服务系统进行基准测试。载于 _Proceedings of the 1st ACM symposium on Cloud computing_，第 143–154 页，2010。
 
-[6] A. Depoutovitch, C. Chen, J. Chen, et al. Taurus Database: How to be Fast, Available, and Frugal in the Cloud. In *SIGMOD*, pages 1463–1478, 2020.
+[6] A. Depoutovitch, C. Chen, J. Chen, et al. Taurus Database: How to be Fast, Available, and Frugal in the Cloud. In _SIGMOD_, pages 1463–1478, 2020.
 
-> [6] A. Depoutovitch、C. Chen、J. Chen 等。Taurus 数据库：如何在云中做到快速、可用且节俭。载于 *SIGMOD*，第 1463–1478 页，2020。
+> [6] A. Depoutovitch、C. Chen、J. Chen 等。Taurus 数据库：如何在云中做到快速、可用且节俭。载于 _SIGMOD_，第 1463–1478 页，2020。
 
-[7] D. E. Difallah, A. Pavlo, C. Curino, and P. Cudre-Mauroux. Oltp-bench: An extensible testbed for benchmarking relational databases. *Proceedings of the VLDB Endowment*, 7(4):277–288, 2013.
+[7] D. E. Difallah, A. Pavlo, C. Curino, and P. Cudre-Mauroux. Oltp-bench: An extensible testbed for benchmarking relational databases. _Proceedings of the VLDB Endowment_, 7(4):277–288, 2013.
 
-> [7] D. E. Difallah、A. Pavlo、C. Curino 和 P. Cudre-Mauroux。Oltp-bench：用于关系数据库基准测试的可扩展测试平台。*Proceedings of the VLDB Endowment*，7(4):277–288，2013。
+> [7] D. E. Difallah、A. Pavlo、C. Curino 和 P. Cudre-Mauroux。Oltp-bench：用于关系数据库基准测试的可扩展测试平台。_Proceedings of the VLDB Endowment_，7(4):277–288，2013。
 
-[8] H. Dong, C. Zhang, G. Li, and H. Zhang. Cloud-native databases: A survey. *IEEE Transactions on Knowledge and Data Engineering*, 2024.
+[8] H. Dong, C. Zhang, G. Li, and H. Zhang. Cloud-native databases: A survey. _IEEE Transactions on Knowledge and Data Engineering_, 2024.
 
-> [8] H. Dong、C. Zhang、G. Li 和 H. Zhang。云原生数据库：综述。*IEEE Transactions on Knowledge and Data Engineering*，2024。
+> [8] H. Dong、C. Zhang、G. Li 和 H. Zhang。云原生数据库：综述。_IEEE Transactions on Knowledge and Data Engineering_，2024。
 
-[9] O. Erling, A. Averbuch, J. Larriba-Pey, H. Chafi, A. Gubichev, A. Prat, M.-D. Pham, and P. Boncz. The LDBC social network benchmark: Interactive workload. In *SIGMOD*, pages 619–630, 2015.
+[9] O. Erling, A. Averbuch, J. Larriba-Pey, H. Chafi, A. Gubichev, A. Prat, M.-D. Pham, and P. Boncz. The LDBC social network benchmark: Interactive workload. In _SIGMOD_, pages 619–630, 2015.
 
-> [9] O. Erling、A. Averbuch、J. Larriba-Pey、H. Chafi、A. Gubichev、A. Prat、M.-D. Pham 和 P. Boncz。LDBC 社交网络基准：交互式工作负载。载于 *SIGMOD*，第 619–630 页，2015。
+> [9] O. Erling、A. Averbuch、J. Larriba-Pey、H. Chafi、A. Gubichev、A. Prat、M.-D. Pham 和 P. Boncz。LDBC 社交网络基准：交互式工作负载。载于 _SIGMOD_，第 619–630 页，2015。
 
-[10] S. K. Garg, S. Versteeg, and R. Buyya. A framework for ranking of cloud computing services. *Future Generation Computer Systems*, 29(4):1012–1023, 2013.
+[10] S. K. Garg, S. Versteeg, and R. Buyya. A framework for ranking of cloud computing services. _Future Generation Computer Systems_, 29(4):1012–1023, 2013.
 
-> [10] S. K. Garg、S. Versteeg 和 R. Buyya。云计算服务排名框架。*Future Generation Computer Systems*，29(4):1012–1023，2013。
+> [10] S. K. Garg、S. Versteeg 和 R. Buyya。云计算服务排名框架。_Future Generation Computer Systems_，29(4):1012–1023，2013。
 
-[11] C. Y. Gómez-Llanez, N. R. Diaz-Leal, and C. R. Angarita Sanguino. A comparative analysis of the ERP tools, ODOO and Openbravo, for business management. *Aibi Revista de Investigación*, 8(3 (2020)):145–153, 2020.
+[11] C. Y. Gómez-Llanez, N. R. Diaz-Leal, and C. R. Angarita Sanguino. A comparative analysis of the ERP tools, ODOO and Openbravo, for business management. _Aibi Revista de Investigación_, 8(3 (2020)):145–153, 2020.
 
-> [11] C. Y. Gómez-Llanez、N. R. Diaz-Leal 和 C. R. Angarita Sanguino。用于企业管理的 ERP 工具 ODOO 与 Openbravo 的比较分析。*Aibi Revista de Investigación*，8(3 (2020)):145–153，2020。
+> [11] C. Y. Gómez-Llanez、N. R. Diaz-Leal 和 C. R. Angarita Sanguino。用于企业管理的 ERP 工具 ODOO 与 Openbravo 的比较分析。_Aibi Revista de Investigación_，8(3 (2020)):145–153，2020。
 
 [12] J. Gray. Database and transaction processing performance handbook., 1993.
 
 > [12] J. Gray。数据库与事务处理性能手册。，1993。
 
-[13] K. Hwang, X. Bai, Y. Shi, M. Li, W.-G. Chen, and Y. Wu. Cloud performance modeling with benchmark evaluation of elastic scaling strategies. *IEEE Transactions on parallel and distributed systems*, 27(1):130–143, 2015.
+[13] K. Hwang, X. Bai, Y. Shi, M. Li, W.-G. Chen, and Y. Wu. Cloud performance modeling with benchmark evaluation of elastic scaling strategies. _IEEE Transactions on parallel and distributed systems_, 27(1):130–143, 2015.
 
-> [13] K. Hwang、X. Bai、Y. Shi、M. Li、W.-G. Chen 和 Y. Wu。通过弹性扩缩策略的基准评估进行云性能建模。*IEEE Transactions on parallel and distributed systems*，27(1):130–143，2015。
+> [13] K. Hwang、X. Bai、Y. Shi、M. Li、W.-G. Chen 和 Y. Wu。通过弹性扩缩策略的基准评估进行云性能建模。_IEEE Transactions on parallel and distributed systems_，27(1):130–143，2015。
 
-[14] S. Islam, K. Lee, A. Fekete, and A. Liu. How a consumer can measure elasticity for cloud platforms. In *Proceedings of the 3rd ACM/SPEC International Conference on Performance Engineering*, pages 85–96, 2012.
+[14] S. Islam, K. Lee, A. Fekete, and A. Liu. How a consumer can measure elasticity for cloud platforms. In _Proceedings of the 3rd ACM/SPEC International Conference on Performance Engineering_, pages 85–96, 2012.
 
-> [14] S. Islam、K. Lee、A. Fekete 和 A. Liu。消费者如何衡量云平台的弹性。载于 *Proceedings of the 3rd ACM/SPEC International Conference on Performance Engineering*，第 85–96 页，2012。
+> [14] S. Islam、K. Lee、A. Fekete 和 A. Liu。消费者如何衡量云平台的弹性。载于 _Proceedings of the 3rd ACM/SPEC International Conference on Performance Engineering_，第 85–96 页，2012。
 
 [15] A. Kopytov. SysBench: a system performance benchmark. http://sysbench. sourceforge. net/, 2004.
 
 > [15] A. Kopytov。SysBench：系统性能基准。http://sysbench. sourceforge. net/，2004。
 
-[16] G. Li, H. Dong, and C. Zhang. Cloud databases: New techniques, challenges, and opportunities. *Proc. VLDB Endow.*, 15(12):3758–3761, 2022.
+[16] G. Li, H. Dong, and C. Zhang. Cloud databases: New techniques, challenges, and opportunities. _Proc. VLDB Endow._, 15(12):3758–3761, 2022.
 
-> [16] G. Li、H. Dong 和 C. Zhang。云数据库：新技术、挑战与机遇。*Proc. VLDB Endow.*，15(12):3758–3761，2022。
+> [16] G. Li、H. Dong 和 C. Zhang。云数据库：新技术、挑战与机遇。_Proc. VLDB Endow._，15(12):3758–3761，2022。
 
-[17] G. Li, H. Dong, and C. Zhang. Cloud databases: New techniques, challenges, and opportunities. *Proceedings of the VLDB Endowment*, 15(12):3758–3761, 2022.
+[17] G. Li, H. Dong, and C. Zhang. Cloud databases: New techniques, challenges, and opportunities. _Proceedings of the VLDB Endowment_, 15(12):3758–3761, 2022.
 
-> [17] G. Li、H. Dong 和 C. Zhang。云数据库：新技术、挑战与机遇。*Proceedings of the VLDB Endowment*，15(12):3758–3761，2022。
+> [17] G. Li、H. Dong 和 C. Zhang。云数据库：新技术、挑战与机遇。_Proceedings of the VLDB Endowment_，15(12):3758–3761，2022。
 
-[18] G. Li, W. Tian, J. Zhang, R. Grosman, Z. Liu, and S. Li. Gaussdb: A cloud-native multi-primary database with compute-memory-storage disaggregation. *Proc. VLDB Endow.*, 17, 2024.
+[18] G. Li, W. Tian, J. Zhang, R. Grosman, Z. Liu, and S. Li. Gaussdb: A cloud-native multi-primary database with compute-memory-storage disaggregation. _Proc. VLDB Endow._, 17, 2024.
 
-> [18] G. Li、W. Tian、J. Zhang、R. Grosman、Z. Liu 和 S. Li。Gaussdb：采用计算—内存—存储解耦的云原生多主数据库。*Proc. VLDB Endow.*，17，2024。
+> [18] G. Li、W. Tian、J. Zhang、R. Grosman、Z. Liu 和 S. Li。Gaussdb：采用计算—内存—存储解耦的云原生多主数据库。_Proc. VLDB Endow._，17，2024。
 
-[19] G. Li, W. Tian, J. Zhang, R. Grosman, Z. Liu, and L. Sihao. GaussDB: A Cloud-Native Multi-Primary Database with Compute-Memory-Storage Disaggregation. *Proceedings of the VLDB Endowment*, 17(5):1–12, 2024.
+[19] G. Li, W. Tian, J. Zhang, R. Grosman, Z. Liu, and L. Sihao. GaussDB: A Cloud-Native Multi-Primary Database with Compute-Memory-Storage Disaggregation. _Proceedings of the VLDB Endowment_, 17(5):1–12, 2024.
 
-> [19] G. Li、W. Tian、J. Zhang、R. Grosman、Z. Liu 和 L. Sihao。GaussDB：采用计算—内存—存储解耦的云原生多主数据库。*Proceedings of the VLDB Endowment*，17(5):1–12，2024。
+> [19] G. Li、W. Tian、J. Zhang、R. Grosman、Z. Liu 和 L. Sihao。GaussDB：采用计算—内存—存储解耦的云原生多主数据库。_Proceedings of the VLDB Endowment_，17(5):1–12，2024。
 
-[20] T. Li, B. Chandramouli, S. Burckhardt, and S. Madden. Darq matter binds everything: Performant and composable cloud programming via resilient steps. *Proceedings of the ACM on Management of Data*, 1(2):1–27, 2023.
+[20] T. Li, B. Chandramouli, S. Burckhardt, and S. Madden. Darq matter binds everything: Performant and composable cloud programming via resilient steps. _Proceedings of the ACM on Management of Data_, 1(2):1–27, 2023.
 
-> [20] T. Li、B. Chandramouli、S. Burckhardt 和 S. Madden。Darq 物质连接一切：通过弹性步骤实现高性能且可组合的云编程。*Proceedings of the ACM on Management of Data*，1(2):1–27，2023。
+> [20] T. Li、B. Chandramouli、S. Burckhardt 和 S. Madden。Darq 物质连接一切：通过弹性步骤实现高性能且可组合的云编程。_Proceedings of the ACM on Management of Data_，1(2):1–27，2023。
 
-[21] M. Luksa. *Kubernetes in action*. Simon and Schuster, 2017.
+[21] M. Luksa. _Kubernetes in action_. Simon and Schuster, 2017.
 
-> [21] M. Luksa。*Kubernetes 实战*。Simon and Schuster，2017。
+> [21] M. Luksa。_Kubernetes 实战_。Simon and Schuster，2017。
 
-[22] E. Milkai, Y. Chronis, K. P. Gaffney, Z. Guo, J. M. Patel, and X. Yu. How good is my HTAP system? In *SIGMOD*, pages 1810–1824. ACM, 2022.
+[22] E. Milkai, Y. Chronis, K. P. Gaffney, Z. Guo, J. M. Patel, and X. Yu. How good is my HTAP system? In _SIGMOD_, pages 1810–1824. ACM, 2022.
 
-> [22] E. Milkai、Y. Chronis、K. P. Gaffney、Z. Guo、J. M. Patel 和 X. Yu。我的 HTAP 系统有多好？载于 *SIGMOD*，第 1810–1824 页。ACM，2022。
+> [22] E. Milkai、Y. Chronis、K. P. Gaffney、Z. Guo、J. M. Patel 和 X. Yu。我的 HTAP 系统有多好？载于 _SIGMOD_，第 1810–1824 页。ACM，2022。
 
-[23] C. Mohan, D. Haderle, B. Lindsay, H. Pirahesh, and P. Schwarz. Aries: A transaction recovery method supporting fine-granularity locking and partial rollbacks using write-ahead logging. *ACM Transactions on Database Systems (TODS)*, 17(1):94–162, 1992.
+[23] C. Mohan, D. Haderle, B. Lindsay, H. Pirahesh, and P. Schwarz. Aries: A transaction recovery method supporting fine-granularity locking and partial rollbacks using write-ahead logging. _ACM Transactions on Database Systems (TODS)_, 17(1):94–162, 1992.
 
-> [23] C. Mohan、D. Haderle、B. Lindsay、H. Pirahesh 和 P. Schwarz。Aries：一种利用预写日志、支持细粒度锁与部分回滚的事务恢复方法。*ACM Transactions on Database Systems (TODS)*，17(1):94–162，1992。
+> [23] C. Mohan、D. Haderle、B. Lindsay、H. Pirahesh 和 P. Schwarz。Aries：一种利用预写日志、支持细粒度锁与部分回滚的事务恢复方法。_ACM Transactions on Database Systems (TODS)_，17(1):94–162，1992。
 
-[24] V. Narasayya, S. Chaudhuri, et al. Cloud data services: Workloads, architectures and multi-tenancy. *Foundations and Trends® in Databases*, 10(1):1–107, 2021.
+[24] V. Narasayya, S. Chaudhuri, et al. Cloud data services: Workloads, architectures and multi-tenancy. _Foundations and Trends® in Databases_, 10(1):1–107, 2021.
 
-> [24] V. Narasayya、S. Chaudhuri 等。云数据服务：工作负载、架构与多租户。*Foundations and Trends® in Databases*，10(1):1–107，2021。
+> [24] V. Narasayya、S. Chaudhuri 等。云数据服务：工作负载、架构与多租户。_Foundations and Trends® in Databases_，10(1):1–107，2021。
 
 [25] Neon. Local File Cache (LFC). https://neon.tech/docs/extensions/neon/, 2024.
 
 > [25] Neon。本地文件缓存（LFC）。https://neon.tech/docs/extensions/neon/，2024。
 
-[26] X. Pang and J. Wang. Understanding the performance implications of the design principles in storage-disaggregated databases. In *SIGMOD*, pages 1–26, 2024.
+[26] X. Pang and J. Wang. Understanding the performance implications of the design principles in storage-disaggregated databases. In _SIGMOD_, pages 1–26, 2024.
 
-> [26] X. Pang 和 J. Wang。理解存储解耦数据库设计原则的性能影响。载于 *SIGMOD*，第 1–26 页，2024。
+> [26] X. Pang 和 J. Wang。理解存储解耦数据库设计原则的性能影响。载于 _SIGMOD_，第 1–26 页，2024。
 
-[27] S. Patil, M. Polte, K. Ren, W. Tantisiriroj, L. Xiao, J. López, G. Gibson, A. Fuchs, and B. Rinaldi. Ycsb++ benchmarking and performance debugging advanced features in scalable table stores. In *Proceedings of the 2nd ACM Symposium on Cloud Computing*, pages 1–14, 2011.
+[27] S. Patil, M. Polte, K. Ren, W. Tantisiriroj, L. Xiao, J. López, G. Gibson, A. Fuchs, and B. Rinaldi. Ycsb++ benchmarking and performance debugging advanced features in scalable table stores. In _Proceedings of the 2nd ACM Symposium on Cloud Computing_, pages 1–14, 2011.
 
-> [27] S. Patil、M. Polte、K. Ren、W. Tantisiriroj、L. Xiao、J. López、G. Gibson、A. Fuchs 和 B. Rinaldi。Ycsb++：对可扩展表存储中的高级功能进行基准测试与性能调试。载于 *Proceedings of the 2nd ACM Symposium on Cloud Computing*，第 1–14 页，2011。
+> [27] S. Patil、M. Polte、K. Ren、W. Tantisiriroj、L. Xiao、J. López、G. Gibson、A. Fuchs 和 B. Rinaldi。Ycsb++：对可扩展表存储中的高级功能进行基准测试与性能调试。载于 _Proceedings of the 2nd ACM Symposium on Cloud Computing_，第 1–14 页，2011。
 
-[28] O. Poppe, T. Amuneke, D. Banda, A. De, A. Green, M. Knoertzer, E. Nosakhare, K. Rajendran, D. Shankargouda, M. Wang, et al. Seagull: An infrastructure for load prediction and optimized resource allocation. *arXiv preprint arXiv:2009.12922*, 2020.
+[28] O. Poppe, T. Amuneke, D. Banda, A. De, A. Green, M. Knoertzer, E. Nosakhare, K. Rajendran, D. Shankargouda, M. Wang, et al. Seagull: An infrastructure for load prediction and optimized resource allocation. _arXiv preprint arXiv:2009.12922_, 2020.
 
-> [28] O. Poppe、T. Amuneke、D. Banda、A. De、A. Green、M. Knoertzer、E. Nosakhare、K. Rajendran、D. Shankargouda、M. Wang 等。Seagull：用于负载预测与优化资源分配的基础设施。*arXiv preprint arXiv:2009.12922*，2020。
+> [28] O. Poppe、T. Amuneke、D. Banda、A. De、A. Green、M. Knoertzer、E. Nosakhare、K. Rajendran、D. Shankargouda、M. Wang 等。Seagull：用于负载预测与优化资源分配的基础设施。_arXiv preprint arXiv:2009.12922_，2020。
 
-[29] O. Poppe, Q. Guo, W. Lang, P. Arora, M. Oslake, S. Xu, and A. Kalhan. Moneyball: proactive auto-scaling in Microsoft Azure SQL database serverless. *Proceedings of the VLDB Endowment*, 15(6):1279–1287, 2022.
+[29] O. Poppe, Q. Guo, W. Lang, P. Arora, M. Oslake, S. Xu, and A. Kalhan. Moneyball: proactive auto-scaling in Microsoft Azure SQL database serverless. _Proceedings of the VLDB Endowment_, 15(6):1279–1287, 2022.
 
-> [29] O. Poppe、Q. Guo、W. Lang、P. Arora、M. Oslake、S. Xu 和 A. Kalhan。Moneyball：Microsoft Azure SQL database serverless 中的主动自动扩缩容。*Proceedings of the VLDB Endowment*，15(6):1279–1287，2022。
+> [29] O. Poppe、Q. Guo、W. Lang、P. Arora、M. Oslake、S. Xu 和 A. Kalhan。Moneyball：Microsoft Azure SQL database serverless 中的主动自动扩缩容。_Proceedings of the VLDB Endowment_，15(6):1279–1287，2022。
 
-[30] J. Schad, J. Dittrich, and J.-A. Quiané-Ruiz. Runtime measurements in the cloud: observing, analyzing, and reducing variance. *Proceedings of the VLDB Endowment*, 3(1-2):460–471, 2010.
+[30] J. Schad, J. Dittrich, and J.-A. Quiané-Ruiz. Runtime measurements in the cloud: observing, analyzing, and reducing variance. _Proceedings of the VLDB Endowment_, 3(1-2):460–471, 2010.
 
-> [30] J. Schad、J. Dittrich 和 J.-A. Quiané-Ruiz。云中的运行时测量：观察、分析并降低方差。*Proceedings of the VLDB Endowment*，3(1-2):460–471，2010。
+> [30] J. Schad、J. Dittrich 和 J.-A. Quiané-Ruiz。云中的运行时测量：观察、分析并降低方差。_Proceedings of the VLDB Endowment_，3(1-2):460–471，2010。
 
-[31] A. Skendzic and B. Kovacic. Microsoft office 365-cloud in business environment. In *2012 Proceedings of the 35th International Convention MIPRO*, pages 1434–1439. IEEE, 2012.
+[31] A. Skendzic and B. Kovacic. Microsoft office 365-cloud in business environment. In _2012 Proceedings of the 35th International Convention MIPRO_, pages 1434–1439. IEEE, 2012.
 
-> [31] A. Skendzic 和 B. Kovacic。商业环境中的 Microsoft office 365-cloud。载于 *2012 Proceedings of the 35th International Convention MIPRO*，第 1434–1439 页。IEEE，2012。
+> [31] A. Skendzic 和 B. Kovacic。商业环境中的 Microsoft office 365-cloud。载于 _2012 Proceedings of the 35th International Convention MIPRO_，第 1434–1439 页。IEEE，2012。
 
-[32] R. Su and X. Li. Modular monolith: Is this the trend in software architecture? *arXiv preprint arXiv:2401.11867*, 2024.
+[32] R. Su and X. Li. Modular monolith: Is this the trend in software architecture? _arXiv preprint arXiv:2401.11867_, 2024.
 
-> [32] R. Su 和 X. Li。模块化单体：这是软件架构的趋势吗？*arXiv preprint arXiv:2401.11867*，2024。
+> [32] R. Su 和 X. Li。模块化单体：这是软件架构的趋势吗？_arXiv preprint arXiv:2401.11867_，2024。
 
-[33] S. Sunkari. A brief review on crm, salesforce and reasons stating salesforce as one of the top crm’s. *Salesforce and Reasons Stating Salesforce as One of the Top CRM’s (June 18, 2022)*, 2022.
+[33] S. Sunkari. A brief review on crm, salesforce and reasons stating salesforce as one of the top crm’s. _Salesforce and Reasons Stating Salesforce as One of the Top CRM’s (June 18, 2022)_, 2022.
 
-> [33] S. Sunkari。对 crm、salesforce 以及 salesforce 成为顶级 crm 之一的原因作简要回顾。*Salesforce and Reasons Stating Salesforce as One of the Top CRM’s (June 18, 2022)*，2022。
+> [33] S. Sunkari。对 crm、salesforce 以及 salesforce 成为顶级 crm 之一的原因作简要回顾。_Salesforce and Reasons Stating Salesforce as One of the Top CRM’s (June 18, 2022)_，2022。
 
-[34] J. Tan, T. Ghanem, M. Perron, X. Yu, M. Stonebraker, D. DeWitt, M. Serafini, A. Aboulnaga, and T. Kraska. Choosing a cloud DBMS: architectures and tradeoffs. *Proceedings of the VLDB Endowment*, 12(12):2170–2182, 2019.
+[34] J. Tan, T. Ghanem, M. Perron, X. Yu, M. Stonebraker, D. DeWitt, M. Serafini, A. Aboulnaga, and T. Kraska. Choosing a cloud DBMS: architectures and tradeoffs. _Proceedings of the VLDB Endowment_, 12(12):2170–2182, 2019.
 
-> [34] J. Tan、T. Ghanem、M. Perron、X. Yu、M. Stonebraker、D. DeWitt、M. Serafini、A. Aboulnaga 和 T. Kraska。选择云 DBMS：架构与权衡。*Proceedings of the VLDB Endowment*，12(12):2170–2182，2019。
+> [34] J. Tan、T. Ghanem、M. Perron、X. Yu、M. Stonebraker、D. DeWitt、M. Serafini、A. Aboulnaga 和 T. Kraska。选择云 DBMS：架构与权衡。_Proceedings of the VLDB Endowment_，12(12):2170–2182，2019。
 
 [35] Transaction Processing Performance Council. TPC-C, 2021.
 
@@ -912,54 +914,54 @@ In this work, we propose a new benchmark CloudyBench, for evaluating the key fea
 
 > [36] Transaction Processing Performance Council。TPC-H，2021。
 
-[37] A. Van Renen and V. Leis. Cloud Analytics Benchmark. *Proceedings of the VLDB Endowment*, 16(6):1413–1425, 2023.
+[37] A. Van Renen and V. Leis. Cloud Analytics Benchmark. _Proceedings of the VLDB Endowment_, 16(6):1413–1425, 2023.
 
-> [37] A. Van Renen 和 V. Leis。云分析基准。*Proceedings of the VLDB Endowment*，16(6):1413–1425，2023。
+> [37] A. Van Renen 和 V. Leis。云分析基准。_Proceedings of the VLDB Endowment_，16(6):1413–1425，2023。
 
-[38] A. Verbitski, A. Gupta, D. Saha, et al. Amazon Aurora: Design Considerations for High Throughput Cloud-Native Relational Databases. In *SIGMOD*, pages 1041–1052, 2017.
+[38] A. Verbitski, A. Gupta, D. Saha, et al. Amazon Aurora: Design Considerations for High Throughput Cloud-Native Relational Databases. In _SIGMOD_, pages 1041–1052, 2017.
 
-> [38] A. Verbitski、A. Gupta、D. Saha 等。Amazon Aurora：高吞吐云原生关系数据库的设计考量。载于 *SIGMOD*，第 1041–1052 页，2017。
+> [38] A. Verbitski、A. Gupta、D. Saha 等。Amazon Aurora：高吞吐云原生关系数据库的设计考量。载于 _SIGMOD_，第 1041–1052 页，2017。
 
-[39] M. Vuppalapati, J. Miron, R. Agarwal, et al. Building An Elastic Query Engine on Disaggregated Storage. In *NSDI*, pages 449–462, 2020.
+[39] M. Vuppalapati, J. Miron, R. Agarwal, et al. Building An Elastic Query Engine on Disaggregated Storage. In _NSDI_, pages 449–462, 2020.
 
-> [39] M. Vuppalapati、J. Miron、R. Agarwal 等。在解耦存储上构建弹性查询引擎。载于 *NSDI*，第 449–462 页，2020。
+> [39] M. Vuppalapati、J. Miron、R. Agarwal 等。在解耦存储上构建弹性查询引擎。载于 _NSDI_，第 449–462 页，2020。
 
-[40] C. Wan, Y. Zhu, J. Cahoon, W. Wang, K. Lin, S. Liu, R. Truong, N. Singh, A. M. Ciortea, K. Karanasos, et al. Stitcher: Learned workload synthesis from historical performance footprints. In *EDBT*, pages 417–423, 2023.
+[40] C. Wan, Y. Zhu, J. Cahoon, W. Wang, K. Lin, S. Liu, R. Truong, N. Singh, A. M. Ciortea, K. Karanasos, et al. Stitcher: Learned workload synthesis from historical performance footprints. In _EDBT_, pages 417–423, 2023.
 
-> [40] C. Wan、Y. Zhu、J. Cahoon、W. Wang、K. Lin、S. Liu、R. Truong、N. Singh、A. M. Ciortea、K. Karanasos 等。Stitcher：从历史性能足迹中学习工作负载合成。载于 *EDBT*，第 417–423 页，2023。
+> [40] C. Wan、Y. Zhu、J. Cahoon、W. Wang、K. Lin、S. Liu、R. Truong、N. Singh、A. M. Ciortea、K. Karanasos 等。Stitcher：从历史性能足迹中学习工作负载合成。载于 _EDBT_，第 417–423 页，2023。
 
-[41] J. Wang and Q. Zhang. Disaggregated database systems. In *Companion of the 2023 International Conference on Management of Data*, pages 37–44, 2023.
+[41] J. Wang and Q. Zhang. Disaggregated database systems. In _Companion of the 2023 International Conference on Management of Data_, pages 37–44, 2023.
 
-> [41] J. Wang 和 Q. Zhang。解耦数据库系统。载于 *Companion of the 2023 International Conference on Management of Data*，第 37–44 页，2023。
+> [41] J. Wang 和 Q. Zhang。解耦数据库系统。载于 _Companion of the 2023 International Conference on Management of Data_，第 37–44 页，2023。
 
 [42] Wikipedia. David dewitt, 2023.
 
 > [42] Wikipedia。David dewitt，2023。
 
-[43] X. Yang, Y. Zhang, H. Chen, C. Sun, F. Li, and W. Zhou. Polardb-scc: A cloud-native database ensuring low latency for strongly consistent reads. *Proceedings of the VLDB Endowment*, 16(12):3754–3767, 2023.
+[43] X. Yang, Y. Zhang, H. Chen, C. Sun, F. Li, and W. Zhou. Polardb-scc: A cloud-native database ensuring low latency for strongly consistent reads. _Proceedings of the VLDB Endowment_, 16(12):3754–3767, 2023.
 
-> [43] X. Yang、Y. Zhang、H. Chen、C. Sun、F. Li 和 W. Zhou。Polardb-scc：保障强一致读取低延迟的云原生数据库。*Proceedings of the VLDB Endowment*，16(12):3754–3767，2023。
+> [43] X. Yang、Y. Zhang、H. Chen、C. Sun、F. Li 和 W. Zhou。Polardb-scc：保障强一致读取低延迟的云原生数据库。_Proceedings of the VLDB Endowment_，16(12):3754–3767，2023。
 
-[44] C. Zhang, G. Li, and T. Lv. HyBench: A New Benchmark for HTAP Databases. *Proceedings of the VLDB Endowment*, 17(5):939–951, 2024.
+[44] C. Zhang, G. Li, and T. Lv. HyBench: A New Benchmark for HTAP Databases. _Proceedings of the VLDB Endowment_, 17(5):939–951, 2024.
 
-> [44] C. Zhang、G. Li 和 T. Lv。HyBench：面向 HTAP 数据库的新基准。*Proceedings of the VLDB Endowment*，17(5):939–951，2024。
+> [44] C. Zhang、G. Li 和 T. Lv。HyBench：面向 HTAP 数据库的新基准。_Proceedings of the VLDB Endowment_，17(5):939–951，2024。
 
-[45] C. Zhang, G. Li, J. Zhang, X. Zhang, and J. Feng. HTAP Databases: A Survey. *IEEE Transactions on Knowledge and Data Engineering*, pages 1–20, 2024.
+[45] C. Zhang, G. Li, J. Zhang, X. Zhang, and J. Feng. HTAP Databases: A Survey. _IEEE Transactions on Knowledge and Data Engineering_, pages 1–20, 2024.
 
-> [45] C. Zhang、G. Li、J. Zhang、X. Zhang 和 J. Feng。HTAP 数据库：综述。*IEEE Transactions on Knowledge and Data Engineering*，第 1–20 页，2024。
+> [45] C. Zhang、G. Li、J. Zhang、X. Zhang 和 J. Feng。HTAP 数据库：综述。_IEEE Transactions on Knowledge and Data Engineering_，第 1–20 页，2024。
 
-[46] C. Zhang and J. Lu. Holistic evaluation in multi-model databases benchmarking. *Distributed and Parallel Databases*, 39(1):1–33, 2021.
+[46] C. Zhang and J. Lu. Holistic evaluation in multi-model databases benchmarking. _Distributed and Parallel Databases_, 39(1):1–33, 2021.
 
-> [46] C. Zhang 和 J. Lu。多模型数据库基准测试中的整体评估。*Distributed and Parallel Databases*，39(1):1–33，2021。
+> [46] C. Zhang 和 J. Lu。多模型数据库基准测试中的整体评估。_Distributed and Parallel Databases_，39(1):1–33，2021。
 
-[47] C. Zhang, J. Lu, P. Xu, and Y. Chen. Unibench: a benchmark for multi-model database management systems. In *Performance Evaluation and Benchmarking for the Era of Artificial Intelligence: 10th TPC Technology Conference, TPCTC 2018, Rio de Janeiro, Brazil, August 27–31, 2018, Revised Selected Papers 10*, pages 7–23. Springer, 2019.
+[47] C. Zhang, J. Lu, P. Xu, and Y. Chen. Unibench: a benchmark for multi-model database management systems. In _Performance Evaluation and Benchmarking for the Era of Artificial Intelligence: 10th TPC Technology Conference, TPCTC 2018, Rio de Janeiro, Brazil, August 27–31, 2018, Revised Selected Papers 10_, pages 7–23. Springer, 2019.
 
-> [47] C. Zhang、J. Lu、P. Xu 和 Y. Chen。Unibench：多模型数据库管理系统基准。载于 *Performance Evaluation and Benchmarking for the Era of Artificial Intelligence: 10th TPC Technology Conference, TPCTC 2018, Rio de Janeiro, Brazil, August 27–31, 2018, Revised Selected Papers 10*，第 7–23 页。Springer，2019。
+> [47] C. Zhang、J. Lu、P. Xu 和 Y. Chen。Unibench：多模型数据库管理系统基准。载于 _Performance Evaluation and Benchmarking for the Era of Artificial Intelligence: 10th TPC Technology Conference, TPCTC 2018, Rio de Janeiro, Brazil, August 27–31, 2018, Revised Selected Papers 10_，第 7–23 页。Springer，2019。
 
-[48] J. Zhang, W. Jiang, B. Tang, H. Ma, L. Cao, Z. Jiang, Y. Nie, F. Wang, L. Zhang, and Y. Liang. CDSBen: Benchmarking the Performance of Storage Services in Cloud-Native Database System at ByteDance. *Proceedings of the VLDB Endowment*, 16(12):3584–3596, 2023.
+[48] J. Zhang, W. Jiang, B. Tang, H. Ma, L. Cao, Z. Jiang, Y. Nie, F. Wang, L. Zhang, and Y. Liang. CDSBen: Benchmarking the Performance of Storage Services in Cloud-Native Database System at ByteDance. _Proceedings of the VLDB Endowment_, 16(12):3584–3596, 2023.
 
-> [48] J. Zhang、W. Jiang、B. Tang、H. Ma、L. Cao、Z. Jiang、Y. Nie、F. Wang、L. Zhang 和 Y. Liang。CDSBen：对字节跳动云原生数据库系统中的存储服务性能进行基准测试。*Proceedings of the VLDB Endowment*，16(12):3584–3596，2023。
+> [48] J. Zhang、W. Jiang、B. Tang、H. Ma、L. Cao、Z. Jiang、Y. Nie、F. Wang、L. Zhang 和 Y. Liang。CDSBen：对字节跳动云原生数据库系统中的存储服务性能进行基准测试。_Proceedings of the VLDB Endowment_，16(12):3584–3596，2023。
 
-[49] Y. Zhang, C. Ruan, C. Li, X. Yang, W. Cao, F. Li, B. Wang, J. Fang, Y. Wang, J. Huo, et al. Towards cost-effective and elastic cloud database deployment via memory disaggregation. *Proceedings of the VLDB Endowment*, 14(10):1900–1912, 2021.
+[49] Y. Zhang, C. Ruan, C. Li, X. Yang, W. Cao, F. Li, B. Wang, J. Fang, Y. Wang, J. Huo, et al. Towards cost-effective and elastic cloud database deployment via memory disaggregation. _Proceedings of the VLDB Endowment_, 14(10):1900–1912, 2021.
 
-> [49] Y. Zhang、C. Ruan、C. Li、X. Yang、W. Cao、F. Li、B. Wang、J. Fang、Y. Wang、J. Huo 等。通过内存解耦实现成本高效且富有弹性的云数据库部署。*Proceedings of the VLDB Endowment*，14(10):1900–1912，2021。
+> [49] Y. Zhang、C. Ruan、C. Li、X. Yang、W. Cao、F. Li、B. Wang、J. Fang、Y. Wang、J. Huo 等。通过内存解耦实现成本高效且富有弹性的云数据库部署。_Proceedings of the VLDB Endowment_，14(10):1900–1912，2021。

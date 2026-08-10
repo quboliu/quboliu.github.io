@@ -5,6 +5,7 @@ modDatetime: 2024-08-15T14:56:26+08:00
 timezone: "Asia/Shanghai"
 title: "如何阅读Go源代码-转载"
 featured: false
+area: "go"
 draft: false
 tags: []
 description: "转载并整理阅读 Go 源码的方法，包括标准库追踪、汇编分析和 Delve 调试。"

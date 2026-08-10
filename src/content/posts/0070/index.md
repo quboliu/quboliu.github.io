@@ -4,6 +4,7 @@ pubDatetime: 2026-05-12T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "2026.05.12-Vibe Coding 组内扫盲分享"
 featured: true
+area: "ai-and-agents"
 draft: false
 tags:
   - "Vibe Coding"
@@ -110,18 +111,18 @@ description: "一次 Vibe Coding 分享：Agent 的软件形态与本质结构�
 
 ##### 总览矩阵
 
-|机制|Claude Code|Codex|OpenCode|Cursor|Trae|
-| ------| -----------------------------------| ------------------------------------------| ---------------------------------------------| -----------------------------------------------------| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|**持久知识**|`CLAUDE.md`<br />项目/用户/企业三级|`AGENTS.md`<br />+`AGENTS.override.md`子目录覆盖|`AGENTS.md`<br />向下兼容`CLAUDE.md`|`AGENTS.md`<br />项目根，纯 Markdown|`.trae/rules/project_rules.md`<br />+`user_rules.md`|
-|**Skills**|`.claude/skills/<name>/SKILL.md`<br />遵循 Agent Skills 开放标准|`.agents/skills/<name>/SKILL.md`<br />frontmatter 必需`name`+`description`|同时识别`.opencode/`、`.claude/`、`.agents/`三套路径|`.cursor/skills/<name>/SKILL.md`<br />+`~/.cursor/skills/`|项目技能：项目所在路径下的 .trae/skills/ 目录。<br />全局技能：<br />macOS/Linux：本地根目录 ~/.trae/skills。<br />Windows：本地根目录 %userprofile%/.trae/skills。|
-|**Rules**|`.claude/rules/*.md`<br />frontmatter`paths:`glob 触发|无独立 Rules，靠 AGENTS.md + Skills|无独立 Rules，文档里的 "Rules" 即 AGENTS.md|`.cursor/rules/*.mdc`<br />**四种触发模式**：always / globs / agent-requested / manual`@`|`.trae/rules/`（与持久知识同源）|
-|**Hooks**|`settings.json`<br />**30+ 事件**，五种 hook 类型|`~/.codex/hooks.json`或 TOML<br />6 个事件，需 feature flag`codex_hooks=true`|`.opencode/plugins/*.ts`<br />20+ 事件，TS/JS 插件|`.cursor/hooks.json`<br />~18 事件，**唯一覆盖 Tab 补全**||
-|**Slash Commands**|`.claude/commands/*.md`<br />已并入 Skills，老路径仍兼容|`~/.codex/prompts/`<br />**已 deprecated**，官方推荐迁向 Skills|`.opencode/commands/*.md`<br />支持`$ARGUMENTS`、`!`cmd \``、`@file\`|`.cursor/commands/*.md`<br />v1.6+ 起支持|命令目录<br />项目命令：项目所在路径下的 .trae/commands 目录。<br />全局命令：<br />macOS/Linux：本地根目录 ~/.trae/commands。<br />Windows：本地根目录 %userprofile%/.trae/commands。|
-|**SPEC 模板**|无官方模板|无官方模板|无官方模板|无官方模板|无官方模板|
+| 机制               | Claude Code                                                      | Codex                                                                         | OpenCode                                                              | Cursor                                                                                    | Trae                                                                                                                                                                                   |
+| ------------------ | ---------------------------------------------------------------- | ----------------------------------------------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **持久知识**       | `CLAUDE.md`<br />项目/用户/企业三级                              | `AGENTS.md`<br />+`AGENTS.override.md`子目录覆盖                              | `AGENTS.md`<br />向下兼容`CLAUDE.md`                                  | `AGENTS.md`<br />项目根，纯 Markdown                                                      | `.trae/rules/project_rules.md`<br />+`user_rules.md`                                                                                                                                   |
+| **Skills**         | `.claude/skills/<name>/SKILL.md`<br />遵循 Agent Skills 开放标准 | `.agents/skills/<name>/SKILL.md`<br />frontmatter 必需`name`+`description`    | 同时识别`.opencode/`、`.claude/`、`.agents/`三套路径                  | `.cursor/skills/<name>/SKILL.md`<br />+`~/.cursor/skills/`                                | 项目技能：项目所在路径下的 .trae/skills/ 目录。<br />全局技能：<br />macOS/Linux：本地根目录 ~/.trae/skills。<br />Windows：本地根目录 %userprofile%/.trae/skills。                    |
+| **Rules**          | `.claude/rules/*.md`<br />frontmatter`paths:`glob 触发           | 无独立 Rules，靠 AGENTS.md + Skills                                           | 无独立 Rules，文档里的 "Rules" 即 AGENTS.md                           | `.cursor/rules/*.mdc`<br />**四种触发模式**：always / globs / agent-requested / manual`@` | `.trae/rules/`（与持久知识同源）                                                                                                                                                       |
+| **Hooks**          | `settings.json`<br />**30+ 事件**，五种 hook 类型                | `~/.codex/hooks.json`或 TOML<br />6 个事件，需 feature flag`codex_hooks=true` | `.opencode/plugins/*.ts`<br />20+ 事件，TS/JS 插件                    | `.cursor/hooks.json`<br />~18 事件，**唯一覆盖 Tab 补全**                                 |                                                                                                                                                                                        |
+| **Slash Commands** | `.claude/commands/*.md`<br />已并入 Skills，老路径仍兼容         | `~/.codex/prompts/`<br />**已 deprecated**，官方推荐迁向 Skills               | `.opencode/commands/*.md`<br />支持`$ARGUMENTS`、`!`cmd \``、`@file\` | `.cursor/commands/*.md`<br />v1.6+ 起支持                                                 | 命令目录<br />项目命令：项目所在路径下的 .trae/commands 目录。<br />全局命令：<br />macOS/Linux：本地根目录 ~/.trae/commands。<br />Windows：本地根目录 %userprofile%/.trae/commands。 |
+| **SPEC 模板**      | 无官方模板                                                       | 无官方模板                                                                    | 无官方模板                                                            | 无官方模板                                                                                | 无官方模板                                                                                                                                                                             |
 
 ##### 说明
 
-1. **AGENTS.md 已经是跨工具公约**。由 Linux Foundation 旗下的 Agentic AI Foundation 托管，agents.md 官方列出的支持方包括 OpenAI Codex、OpenCode、Cursor、Aider、Zed、VS Code、Devin、JetBrains Junie、GitHub Copilot Coding Agent、Windsurf、Augment 等。**Claude Code 不直接读 AGENTS.md，但官方文档明确推荐**  **`@AGENTS.md`** **导入或建符号链接互通**。
+1. **AGENTS.md 已经是跨工具公约**。由 Linux Foundation 旗下的 Agentic AI Foundation 托管，agents.md 官方列出的支持方包括 OpenAI Codex、OpenCode、Cursor、Aider、Zed、VS Code、Devin、JetBrains Junie、GitHub Copilot Coding Agent、Windsurf、Augment 等。**Claude Code 不直接读 AGENTS.md，但官方文档明确推荐** **`@AGENTS.md`** **导入或建符号链接互通**。
 2. **没有任何一家提供"官方 SPEC 文档模板"** 。kiro、openspec 都是社区方案。各家 `/init` 只生成持久知识文件（CLAUDE.md / AGENTS.md）的脚手架，不涉及需求规范。
 
 ## 下篇 · 工程与实践

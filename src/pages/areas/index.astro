@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import { AREAS } from "@/data/areas";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+const posts = getSortedPosts(await getCollection("posts"));
+
+const areas = [...AREAS]
+  .sort((areaA, areaB) => areaA.order - areaB.order)
+  .map(area => ({
+    ...area,
+    count: posts.filter(post => post.data.area === area.slug).length,
+  }));
+---
+
+<Layout title={`${t.pages.areasTitle} | ${config.site.title}`}>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main pageTitle={t.pages.areasTitle} pageDesc={t.pages.areasDesc}>
+    <ul class="space-y-7">
+      {
+        areas.map(area => (
+          <li>
+            <h2 class="text-lg font-semibold">
+              <a
+                href={getRelativeLocaleUrl(locale, `areas/${area.slug}/`)}
+                class="text-accent no-underline hover:underline"
+                transition:name={`area-${area.slug}`}
+              >
+                {area.name}
+              </a>
+              <sup class="text-muted-foreground ms-1 text-sm font-normal">
+                {area.count}
+              </sup>
+            </h2>
+            <p class="mt-1">{area.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Main>
+
+  <Footer />
+</Layout>

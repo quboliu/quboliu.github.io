@@ -5,6 +5,7 @@ modDatetime: 2024-08-05T11:05:43+08:00
 timezone: "Asia/Shanghai"
 title: "局域网扫描一个网段中的可用ip-用于配置虚拟机的静态ip"
 featured: false
+area: "tools-and-workflow"
 draft: false
 tags:
   - "计算机网络"

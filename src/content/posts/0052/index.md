@@ -5,6 +5,7 @@ modDatetime: 2024-08-15T00:15:37+08:00
 timezone: "Asia/Shanghai"
 title: "从Go源代码看goroutine的切换"
 featured: false
+area: "go"
 draft: false
 tags: []
 description: "从 Go 运行时角度理解 goroutine 切换时的寄存器保存，以及为何无需切换到内核态。"

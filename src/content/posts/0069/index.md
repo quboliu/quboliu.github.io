@@ -4,6 +4,7 @@ pubDatetime: 2026-01-06T16:11:16+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Transformer Explainer：通过交互式可视化讲解与实验学习 LLM Transformer"
 featured: true
+area: "ai-and-agents"
 draft: false
 tags:
   - "论文阅读"
@@ -460,14 +461,14 @@ As the blog post and video contained content irrelevant to Transformer learning 
 
 > **表 1 原表（PDF 裁剪图）；下方为便于阅读重排的双语表格，内容一致。**
 
-| Learning Objective (LO) 学习目标 | Quiz Question 测验问题 |
-|---|---|
-| LO1: How GPT-2 generates text one token at a time<br>LO1：GPT-2 如何逐 token 生成文本 | Q1: How does a Transformer generate text?<br>Q1：Transformer 如何生成文本？ |
-| LO2: The overall Transformer architecture<br>LO2：Transformer 整体架构 | Q2: Which structure matches a text-generation Transformer?<br>Q2：哪种结构符合文本生成 Transformer？ |
-| LO3: Text to Embedding transformation<br>LO3：文本到嵌入的转换 | Q3: Which is the best description of tokens and embeddings?<br>Q3：哪一项最准确地描述了 token 和嵌入？ |
-| LO4: Multi-head Self-Attention mechanism<br>LO4：多头自注意力机制 | Q4-1: In self-attention, what do Query, Key, and Value do?<br>Q4-1：在自注意力中，查询、键、值分别做什么？<br>Q4-2: Why use multiple heads in attention?<br>Q4-2：为什么注意力要使用多个头？ |
-| LO5: MLP (feed-forward network)<br>LO5：MLP（前馈网络） | Q5: Why add a MLP (feed-forward) layer after attention?<br>Q5：为什么在注意力之后加 MLP（前馈）层？ |
-| LO6: Final probabilities and sampling parameters<br>LO6：最终概率与采样参数 | Q6: How do "top-k" or "temperature" affect text generation?<br>Q6："top-k"或"温度"如何影响文本生成？ |
+| Learning Objective (LO) 学习目标                                                      | Quiz Question 测验问题                                                                                                                                                                       |
+| ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| LO1: How GPT-2 generates text one token at a time<br>LO1：GPT-2 如何逐 token 生成文本 | Q1: How does a Transformer generate text?<br>Q1：Transformer 如何生成文本？                                                                                                                  |
+| LO2: The overall Transformer architecture<br>LO2：Transformer 整体架构                | Q2: Which structure matches a text-generation Transformer?<br>Q2：哪种结构符合文本生成 Transformer？                                                                                         |
+| LO3: Text to Embedding transformation<br>LO3：文本到嵌入的转换                        | Q3: Which is the best description of tokens and embeddings?<br>Q3：哪一项最准确地描述了 token 和嵌入？                                                                                       |
+| LO4: Multi-head Self-Attention mechanism<br>LO4：多头自注意力机制                     | Q4-1: In self-attention, what do Query, Key, and Value do?<br>Q4-1：在自注意力中，查询、键、值分别做什么？<br>Q4-2: Why use multiple heads in attention?<br>Q4-2：为什么注意力要使用多个头？ |
+| LO5: MLP (feed-forward network)<br>LO5：MLP（前馈网络）                               | Q5: Why add a MLP (feed-forward) layer after attention?<br>Q5：为什么在注意力之后加 MLP（前馈）层？                                                                                          |
+| LO6: Final probabilities and sampling parameters<br>LO6：最终概率与采样参数           | Q6: How do "top-k" or "temperature" affect text generation?<br>Q6："top-k"或"温度"如何影响文本生成？                                                                                         |
 
 **Table 1:** Learning objectives (LO) and their corresponding multiple-choice quiz questions.
 
@@ -930,4 +931,3 @@ This work was supported in part by NSF awards 2403297 and 2502793, the IITP (MSI
 [91] Zeping Yu and Sophia Ananiadou. 2023. Neuron-level knowledge attribution in large language models. arXiv preprint arXiv:2312.12141 (2023).
 
 [92] Li Yuan, Yunpeng Chen, Tao Wang, Weihao Yu, Yujun Shi, Zi-Hang Jiang, Francis EH Tay, Jiashi Feng, and Shuicheng Yan. 2021. Tokens-to-token vit: Training vision transformers from scratch on imagenet. In Proceedings of the IEEE/CVF international conference on computer vision. 558–567.
-

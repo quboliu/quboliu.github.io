@@ -4,6 +4,7 @@ export default {
   nav: {
     home: "Home",
     posts: "Posts",
+    areas: "Areas",
     tags: "Tags",
     about: "About",
     archives: "Archives",
@@ -16,6 +17,7 @@ export default {
     sharePostOn: "Share this post on {{platform}}",
     sharePostViaEmail: "Share this post via email",
     tagLabel: "Tags",
+    areaLabel: "Area",
     backToTop: "Back to top",
     goBack: "Go back",
     editPage: "Edit page",
@@ -46,6 +48,9 @@ export default {
 
     postsTitle: "Posts",
     postsDesc: "All the articles I've posted.",
+
+    areasTitle: "Areas",
+    areasDesc: "Browse posts by their primary subject area.",
 
     archivesTitle: "Archives",
     archivesDesc: "All the articles I've archived.",

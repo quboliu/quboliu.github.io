@@ -4,6 +4,7 @@ pubDatetime: 2026-08-09T12:00:00+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Disaggregation: A New Architecture for Cloud Databases（中英对照全文）"
 featured: false
+area: "databases"
 draft: false
 tags:
   - "论文阅读"
@@ -11,6 +12,7 @@ tags:
   - "数据库架构"
 description: "Xiangyao Yu 关于云数据库从存算分离走向广义模块解耦与服务化的 2025 年论文，中英逐段对照全文。"
 ---
+
 > 解耦：云数据库的一种新架构
 
 **Xiangyao Yu**<br>
@@ -65,7 +67,7 @@ Proceedings of the VLDB Endowment, Vol. 18, No. 12 ISSN 2150-8097. doi:10.14778/
 
 > 2 解耦架构的演进
 
-A key advantage of the cloud over on-premises systems is *on-demand scalability*—the capability for users to dynamically allocate and release resources and pay only for what they use. Classic database architectures, such as shared-nothing, struggle to fully exploit this feature. As a result, cloud-native databases have begun to adopt a new disaggregation architecture.
+A key advantage of the cloud over on-premises systems is _on-demand scalability_—the capability for users to dynamically allocate and release resources and pay only for what they use. Classic database architectures, such as shared-nothing, struggle to fully exploit this feature. As a result, cloud-native databases have begun to adopt a new disaggregation architecture.
 
 > 与本地系统相比，云的一项关键优势是*按需伸缩能力*——用户可以动态分配和释放资源，并且只为实际使用量付费。无共享（shared-nothing）等经典数据库架构很难充分利用这一特性。因此，云原生数据库开始采用新的解耦架构。
 
@@ -73,7 +75,7 @@ A key advantage of the cloud over on-premises systems is *on-demand scalability*
 
 > 2.1 存储解耦
 
-Early cloud-native databases, such as Snowflake [9, 22] and Aurora [20, 21], adopt a storage-disaggregation architecture, where *compute* and *storage* clusters are physically separated. The two clusters can scale independently and often use different cluster sizes and machine types.
+Early cloud-native databases, such as Snowflake [9, 22] and Aurora [20, 21], adopt a storage-disaggregation architecture, where _compute_ and _storage_ clusters are physically separated. The two clusters can scale independently and often use different cluster sizes and machine types.
 
 > Snowflake [9, 22] 和 Aurora [20, 21] 等早期云原生数据库采用存储解耦（即存算分离）架构，其中*计算*集群与*存储*集群在物理上相互分离。两个集群可以独立伸缩，且往往采用不同的集群规模和机器类型。
 
@@ -101,7 +103,7 @@ Besides enabling independent scalability, disaggregation can also improve the mo
 
 > **计算下推。**：Redshift Spectrum [6] 和 S3 Select [1] 都在靠近存储服务的位置引入无服务器层，用于处理过滤、聚合等一部分查询算子。RocksDB 的远程压实（Remote Compaction）[11] 则把 LSM 树的压实操作下推到专用主机。下推层可以无服务器方式执行这些算子，获得大规模并行能力和较高的成本效率；它能够显著减少发送到计算层的网络流量，从而改善整体性能。（译注：原文小标题句点后又接冒号，写作 “Pushdown.:”；此处照录其标点结构。）
 
-**Intermediate Data Caching.**: Snowflake introduces a *Distributed Ephemeral Storage* layer for spilling intermediate results [22]; the insight is that intermediate query results do not require strong durability but prefer lower access latency. Instead of using S3, a storage service specifically designed for intermediate results can make better performance and cost tradeoff.
+**Intermediate Data Caching.**: Snowflake introduces a _Distributed Ephemeral Storage_ layer for spilling intermediate results [22]; the insight is that intermediate query results do not require strong durability but prefer lower access latency. Instead of using S3, a storage service specifically designed for intermediate results can make better performance and cost tradeoff.
 
 > **中间数据缓存。**：Snowflake 引入了一个*分布式临时存储*层，用于溢写中间结果 [22]；其洞见是，中间查询结果不需要强持久性，却更看重较低的访问延迟。与使用 S3 相比，专为中间结果设计的存储服务可以在性能与成本之间作出更好的权衡。（译注：原文小标题句点后又接冒号，写作 “Caching.:”；末句 “make better performance and cost tradeoff” 的单复数和搭配也略显不规则，译文按其语义处理。）
 
@@ -145,7 +147,7 @@ Many foundational protocols in database systems were designed with the assumptio
 
 > **Cornus。**2PC 是一种协议，使分布式事务能够在各参与服务器之间达成最终决定（即提交或中止）。每个参与者在本地记录自己的投票（即 VOTE-YES 或 VOTE-NO），协调者则记录决定事务结果的最终决议。只要有任何参与者投反对票，事务就必须中止。即使所有参与者都投赞成票，在某些故障场景下结果仍可能是中止——例如协调者在等待投票时超时。
 
-A well-known limitation of 2PC is the *blocking problem*, which occurs when the coordinator fails before broadcasting the final decision. In a shared-nothing architecture, where compute and storage are tightly coupled, the coordinator’s log becomes inaccessible after a failure. As a result, the system cannot determine the transaction’s outcome or even whether a decision was made. This uncertainty forces all participants of the pending transaction to hold their locks, potentially blocking other transactions indefinitely until the failed coordinator recovers and replays its log.
+A well-known limitation of 2PC is the _blocking problem_, which occurs when the coordinator fails before broadcasting the final decision. In a shared-nothing architecture, where compute and storage are tightly coupled, the coordinator’s log becomes inaccessible after a failure. As a result, the system cannot determine the transaction’s outcome or even whether a decision was made. This uncertainty forces all participants of the pending transaction to hold their locks, potentially blocking other transactions indefinitely until the failed coordinator recovers and replays its log.
 
 > 2PC 一个广为人知的局限是*阻塞问题*：协调者在广播最终决定之前发生故障时，就会出现这一问题。在计算与存储紧密耦合的无共享架构中，协调者故障后，其日志将无法访问。因此，系统既不能确定事务结果，甚至也无法知道是否已经作出决定。这种不确定性迫使待决事务的所有参与者继续持有锁，可能无限期阻塞其他事务，直至故障协调者恢复并重放其日志。
 
@@ -153,7 +155,7 @@ Fundamentally, the blocking problem exists because a failed node’s log cannot 
 
 > 从根本上说，阻塞问题之所以存在，是因为系统中的其他服务器无法访问故障节点的日志。这在无共享系统中确实如此；但在存储解耦架构中，存储由独立的高可用服务提供，情况已不再相同。即使计算服务器发生故障，其日志仍保存在存储服务中，系统内其他活跃服务器依然可以访问。
 
-Cornus [13] is a 2PC protocol specifically optimized for storage disaggregation, leveraging the insight above. While the full protocol is described in detail in the original paper, its core idea is simple: Cornus allows active nodes to vote NO on behalf of failed nodes by directly writing to the failed node’s log in the disaggregated storage service. It uses a compare-and-swap-like API to ensure that only one decision can be recorded, preserving correctness. Another benefit of Cornus is that the critical execution path of 2PC is reduced from two logging events to one logging event. This optimization is viable because the ground truth of a distributed transaction is no longer determined by the coordinator’s log but the *collective votes from all participants’ log files*; this allows the removal of the coordinator’s log which reduces latency.
+Cornus [13] is a 2PC protocol specifically optimized for storage disaggregation, leveraging the insight above. While the full protocol is described in detail in the original paper, its core idea is simple: Cornus allows active nodes to vote NO on behalf of failed nodes by directly writing to the failed node’s log in the disaggregated storage service. It uses a compare-and-swap-like API to ensure that only one decision can be recorded, preserving correctness. Another benefit of Cornus is that the critical execution path of 2PC is reduced from two logging events to one logging event. This optimization is viable because the ground truth of a distributed transaction is no longer determined by the coordinator’s log but the _collective votes from all participants’ log files_; this allows the removal of the coordinator’s log which reduces latency.
 
 > Cornus [13] 是专门针对存储解耦优化的 2PC 协议，它利用了上述洞见。完整协议在原论文中有详细描述，但其核心思想很简单：Cornus 允许活跃节点直接写入故障节点在解耦存储服务中的日志，从而代表故障节点投 NO 票。它使用一种类似比较并交换（compare-and-swap）的 API，确保只能记录一个决定，以维持正确性。Cornus 的另一个好处，是把 2PC 的关键执行路径从两次日志记录缩减为一次。之所以能这样优化，是因为分布式事务的事实依据不再由协调者日志决定，而是由*所有参与者日志文件中的集体投票*决定；因此可以移除协调者日志，降低延迟。
 
@@ -185,11 +187,11 @@ Computation pushdown is a well-established technique to reduce data traffic to t
 
 > **PushdownDB。**我们开发了 PushdownDB [28]。该数据库引擎使用位于 S3 前端的无服务器层 S3 Select [1]，下推 S3 Select 原生支持的基本算子（例如过滤、聚合），并借助现有的过滤和聚合支持，实现并下推更高级的算子（例如分组、Top-K、哈希连接中的探测）。PushdownDB 可将查询运行时间缩短 6.7 倍、成本降低 30%，验证了这一思路的潜力。
 
-**FlexPushdownDB (FPDB).** One issue of pushdown is its inherent tension with data caching in the compute layer—another technique to reduce network traffic; most systems implement only one of these two ideas. In FlexPushdownDB (FPDB) [24], we aim to combine these two techniques in a single design. The key observation is that many common operators—such as filtering, aggregation, hash probe, etc.—can execute on both cached data locally and use pushdown to process remote data simultaneously; the results of the two execution paths can then be merged. FPDB employs a *fine-grained hybrid execution mode* to combine the benefits of caching and pushdown, and outperforms both techniques alone by 2.2×.
+**FlexPushdownDB (FPDB).** One issue of pushdown is its inherent tension with data caching in the compute layer—another technique to reduce network traffic; most systems implement only one of these two ideas. In FlexPushdownDB (FPDB) [24], we aim to combine these two techniques in a single design. The key observation is that many common operators—such as filtering, aggregation, hash probe, etc.—can execute on both cached data locally and use pushdown to process remote data simultaneously; the results of the two execution paths can then be merged. FPDB employs a _fine-grained hybrid execution mode_ to combine the benefits of caching and pushdown, and outperforms both techniques alone by 2.2×.
 
 > **FlexPushdownDB（FPDB）。**下推的一个问题，是它与计算层数据缓存之间存在内在张力；数据缓存是另一种减少网络流量的技术，而大多数系统只实现这两种思路中的一种。在 FlexPushdownDB（FPDB）[24] 中，我们试图把两种技术结合在同一个设计中。关键观察是，许多常用算子——例如过滤、聚合、哈希探测等——既可以在本地缓存数据上执行，又可以同时通过下推处理远程数据；随后再合并两条执行路径的结果。FPDB 采用*细粒度混合执行模式*，综合缓存与下推的优势，性能比单独使用任一技术高 2.2 倍。
 
-**Adaptive Pushdown.** By default, a pushdown request does not consider the pushdown layer’s computational capacity, which can sometimes be scarce (e.g., due to multi-tenancy), causing pushdown to underperform. With adaptive pushdown [25], the pushdown layer can choose to *push back* the task if it has no resource to execute it, and the compute layer can directly read the remote data to execute the task locally. This work also identifies two more operators that are amenable to pushdown, *selection bitmap* and *distributed data shuffle*, which are common in distributed columnar databases. These techniques lead to 1.7–3× further speedup.
+**Adaptive Pushdown.** By default, a pushdown request does not consider the pushdown layer’s computational capacity, which can sometimes be scarce (e.g., due to multi-tenancy), causing pushdown to underperform. With adaptive pushdown [25], the pushdown layer can choose to _push back_ the task if it has no resource to execute it, and the compute layer can directly read the remote data to execute the task locally. This work also identifies two more operators that are amenable to pushdown, _selection bitmap_ and _distributed data shuffle_, which are common in distributed columnar databases. These techniques lead to 1.7–3× further speedup.
 
 > **自适应下推。**默认情况下，下推请求不会考虑下推层的计算容量；该容量有时可能不足（例如受多租户影响），从而导致下推表现不佳。采用自适应下推 [25] 后，如果下推层没有资源执行任务，它可以选择把任务*推回*，由计算层直接读取远程数据并在本地执行。这项工作还识别出另外两种适合下推、且常见于分布式列式数据库的算子：*选择位图*与*分布式数据混洗*。这些技术进一步带来 1.7–3 倍加速。（译注：原文使用单数表达 “has no resource”；英文按原样保留，译文依语义译为“没有资源”。）
 
@@ -197,15 +199,15 @@ Computation pushdown is a well-established technique to reduce data traffic to t
 
 > 3.3 赋予系统新能力
 
-Modern applications increasingly demand *real-time analytics* so that the most up-to-date insights can be extracted from the data. Hybrid Transactional/Analytical Processing (HTAP) addresses this need by integrating TP and AP into a single engine. However, existing HTAP solutions require a compulsory migration—users need to migrate from existing TP and AP databases to a new HTAP engine, incurring extra migration cost and complexity.
+Modern applications increasingly demand _real-time analytics_ so that the most up-to-date insights can be extracted from the data. Hybrid Transactional/Analytical Processing (HTAP) addresses this need by integrating TP and AP into a single engine. However, existing HTAP solutions require a compulsory migration—users need to migrate from existing TP and AP databases to a new HTAP engine, incurring extra migration cost and complexity.
 
 > 现代应用对*实时分析*的需求日益增长，以便从数据中提取最新洞见。混合事务／分析处理（HTAP）通过把事务处理（TP）与分析处理（AP）集成进单一引擎来满足这一需求。然而，现有 HTAP 方案要求强制迁移——用户需要从既有 TP 和 AP 数据库迁移到新的 HTAP 引擎，由此产生额外的迁移成本与复杂性。
 
-**Hermes.** We aim to achieve *off-the-shelf* real-time analytics on top of existing TP and AP engines, so that users can enjoy real-time analytics without migrating away from their existing databases running in the cloud. The key idea is to introduce a new *Hermes layer* [17] that sits between compute and storage, that intercepts the logging events in the TP engine(s) and the read requests in the AP engine(s). Hermes will replay the recent transactional logs from TP engines and merge the updates into the analytical reads from the AP engines, such that each analytical query can see the latest updates. In the background, Hermes will merge updates in batches into the stable analytical storage.
+**Hermes.** We aim to achieve _off-the-shelf_ real-time analytics on top of existing TP and AP engines, so that users can enjoy real-time analytics without migrating away from their existing databases running in the cloud. The key idea is to introduce a new _Hermes layer_ [17] that sits between compute and storage, that intercepts the logging events in the TP engine(s) and the read requests in the AP engine(s). Hermes will replay the recent transactional logs from TP engines and merge the updates into the analytical reads from the AP engines, such that each analytical query can see the latest updates. In the background, Hermes will merge updates in batches into the stable analytical storage.
 
-> **Hermes。**我们的目标是在现有 TP 与 AP 引擎之上实现*开箱即用*的实时分析，使用户无须迁离正在云中运行的现有数据库，便可获得实时分析能力。核心思路是在计算与存储之间引入新的 *Hermes 层* [17]，拦截 TP 引擎中的日志事件和 AP 引擎中的读取请求。Hermes 会重放 TP 引擎最近的事务日志，并把其中的更新合并到来自 AP 引擎的分析读取中，使每个分析查询都能看到最新更新。在后台，Hermes 会分批将更新合并进稳定的分析存储。
+> **Hermes。**我们的目标是在现有 TP 与 AP 引擎之上实现*开箱即用*的实时分析，使用户无须迁离正在云中运行的现有数据库，便可获得实时分析能力。核心思路是在计算与存储之间引入新的 _Hermes 层_ [17]，拦截 TP 引擎中的日志事件和 AP 引擎中的读取请求。Hermes 会重放 TP 引擎最近的事务日志，并把其中的更新合并到来自 AP 引擎的分析读取中，使每个分析查询都能看到最新更新。在后台，Hermes 会分批将更新合并进稳定的分析存储。
 
-Hermes also supports *True HTAP transactions* [18], which are transactions that contain long-running analytical queries within. We refer to this capability as *Transactional Analytics*. Hermes allows the analytical query within a transaction to run in the AP side of the system, thereby reducing the overall execution time. Hermes can support different isolation levels for these cross-engine transactions, such as read committed, snapshot isolation, and serializability.
+Hermes also supports _True HTAP transactions_ [18], which are transactions that contain long-running analytical queries within. We refer to this capability as _Transactional Analytics_. Hermes allows the analytical query within a transaction to run in the AP side of the system, thereby reducing the overall execution time. Hermes can support different isolation levels for these cross-engine transactions, such as read committed, snapshot isolation, and serializability.
 
 > Hermes 还支持*真正的 HTAP 事务* [18]，即内部包含长时间运行的分析查询的事务。我们把这种能力称为*事务分析（Transactional Analytics）*。Hermes 允许事务内的分析查询在系统的 AP 侧运行，从而缩短整体执行时间。对于这类跨引擎事务，Hermes 可以支持不同隔离级别，例如读已提交、快照隔离和可串行化。
 
@@ -221,7 +223,7 @@ We are still in the early stage in exploring the design space of disaggregation 
 
 > **解耦更多数据库功能。**如前文所述，尽管许多数据库功能的解耦已经得到研究，但索引、并发控制、查询优化、统计信息管理、物化视图等许多其他数据库功能仍缺乏探索。此外，其中多种功能可以整合进统一的解耦组件；例如，下推层、湖仓元数据层和 Hermes 层都是位于计算与存储之间的中间层。这一设计空间带来了丰富的研究机会。（译注：原文 “the disaggregation ... have been studied” 存在主谓不一致；英文按原样保留。）
 
-**Multi-Cloud Database.** Disaggregation architecture today largely focuses on a single cloud. When databases expand to a multi-cloud environment (e.g., multiple public clouds or hybrid public/private clouds), the cross-cloud communication overhead can be significant. This calls for the design of *multi-disaggregated systems*, where components are disaggregated within each cloud but the communication between clouds must be a first-class design consideration.
+**Multi-Cloud Database.** Disaggregation architecture today largely focuses on a single cloud. When databases expand to a multi-cloud environment (e.g., multiple public clouds or hybrid public/private clouds), the cross-cloud communication overhead can be significant. This calls for the design of _multi-disaggregated systems_, where components are disaggregated within each cloud but the communication between clouds must be a first-class design consideration.
 
 > **多云数据库。**当前的解耦架构主要聚焦于单一云。当数据库扩展到多云环境（例如多个公有云，或公有云／私有云混合环境）时，跨云通信开销可能十分显著。这就要求设计*多重解耦系统*：组件在每个云内部彼此解耦，同时必须把云间通信作为一等设计考量。
 

@@ -40,7 +40,7 @@
 }
 
 @utility toc-active {
-  @apply border-accent font-medium text-accent;
+  @apply border-accent text-accent font-medium;
 }
 
 /* Bear-style post list: monospace date + title link */
