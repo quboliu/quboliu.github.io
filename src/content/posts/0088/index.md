@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-08-09T12:00:00+08:00
+modDatetime: 2026-08-10T15:01:56+08:00
 timezone: "Asia/Shanghai"
-title: "论文阅读 | Cloud-Native Databases: A Survey（中英对照全文）"
+title: "论文阅读 | Cloud-Native Databases: A Survey｜云原生数据库：综述"
 featured: false
 area: "databases"
 draft: false
@@ -12,53 +13,51 @@ tags:
   - "数据库系统"
   - "OLTP"
   - "OLAP"
-description: "系统梳理云原生 OLTP 与 OLAP 数据库架构、关键技术、挑战与研究方向的综述论文，中英逐段对照全文。"
+description: "系统梳理云原生 OLTP 与 OLAP 数据库架构、关键技术、挑战与研究方向的综述论文，按语义单元编排的中英对照全文。"
 ---
 
-> 云原生数据库：综述
+**Cloud-Native Databases: A Survey｜云原生数据库：综述**
 
 Haowen Dong, Chao Zhang, Guoliang Li, Fellow, IEEE, and Huanchen Zhang
 
-> 董浩文、张超、李国良（IEEE Fellow）和张焕晨
-
 (Survey Paper)
-
-> （综述论文）
 
 Abstract—Cloud databases have been widely accepted and deployed due to their unique advantages, such as high elasticity, high availability, and low cost. Many new techniques, such as compute-storage disaggregation and the log is the database, have been proposed recently to seek for higher elasticity and lower cost. To better harness the power of cloud databases, it is crucial to study and compare the pros and cons of their key techniques. In this paper, we offer a comprehensive survey of cloud-native databases. Particularly, we investigate and summarize the state-of-the-art cloud-native OLTP and OLAP databases, respectively. In the first part, we discuss three types of architectures of cloud-native OLTP database. Then we introduce their key techniques including data placement strategy, storage layer consistency, compute layer consistency, multi-layer recovery, and HTAP optimization. In the second part, we present two kinds of architectures of cloud-native OLAP databases. Then we take a deep dive into their key techniques regarding storage management, query processing, serverless computing, data protection, and machine learning in databases. Finally, we discuss the research challenges and opportunities.
 
+> 董浩文、张超、李国良（IEEE Fellow）和张焕晨
+>
+> （综述论文）
+>
 > 摘要——云数据库凭借高弹性、高可用性和低成本等独特优势，已得到广泛采用和部署。近年来，为追求更高弹性与更低成本，研究者提出了计算与存储分离、“日志即数据库”等许多新技术。为了更充分地发挥云数据库的能力，有必要研究并比较其关键技术的优缺点。本文对云原生数据库作全面综述，分别考察并总结最新的云原生 OLTP 与 OLAP 数据库。第一部分讨论云原生 OLTP 数据库的三类架构，并介绍其数据放置策略、存储层一致性、计算层一致性、多层恢复和 HTAP 优化等关键技术。第二部分介绍云原生 OLAP 数据库的两类架构，再深入分析存储管理、查询处理、无服务器计算、数据保护和数据库机器学习等关键技术。最后，本文讨论相关研究挑战与机遇。
 
 Index Terms—Cloud-native databases, database architecture, disaggregation, log is data, serverless.
 
-> 索引术语——云原生数据库、数据库架构、解耦、日志即数据、无服务器。
-
 Manuscript received 28 February 2023; revised 26 April 2024; accepted 29 April 2024. Date of publication 27 June 2024; date of current version 13 November 2024. This paper was supported in part by the National Key R&D Program of China under Grant 2023YFB4503600, in part by the NSF of China under Grant 61925205, under Grant 62232009, and under Grant 62102215, in part by Zhongguancun Lab, CCF-Huawei Populus Grove Challenge Fund under Grant CCF-HuaweiDBC202309. Recommended for acceptance by A. Bonifati. (Corresponding author: Haowen Dong.)
-
-> 稿件于 2023 年 2 月 28 日收到，2024 年 4 月 26 日修订，2024 年 4 月 29 日录用；2024 年 6 月 27 日在线发表，当前版本日期为 2024 年 11 月 13 日。本文部分受国家重点研发计划（2023YFB4503600）、国家自然科学基金（61925205、62232009、62102215）、中关村实验室以及 CCF—华为胡杨林挑战基金（CCF-HuaweiDBC202309）资助。A. Bonifati 推荐录用。（通讯作者：Haowen Dong。）
 
 The authors are with Tsinghua University, Beijing 100084, China (e-mail: dt.dtech.dhw@gmail.com).
 
+> 索引术语——云原生数据库、数据库架构、解耦、日志即数据、无服务器。
+>
+> 稿件于 2023 年 2 月 28 日收到，2024 年 4 月 26 日修订，2024 年 4 月 29 日录用；2024 年 6 月 27 日在线发表，当前版本日期为 2024 年 11 月 13 日。本文部分受国家重点研发计划（2023YFB4503600）、国家自然科学基金（61925205、62232009、62102215）、中关村实验室以及 CCF—华为胡杨林挑战基金（CCF-HuaweiDBC202309）资助。A. Bonifati 推荐录用。（通讯作者：Haowen Dong。）
+>
 > 作者来自清华大学，北京 100084（电子邮件：dt.dtech.dhw@gmail.com）。
 
 Digital Object Identifier 10.1109/TKDE.2024.3397508
 
-> 数字对象标识符 10.1109/TKDE.2024.3397508
-
 1041-4347 © 2024 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See https://www.ieee.org/publications/rights/index.html for more information.
 
+> 数字对象标识符 10.1109/TKDE.2024.3397508
+>
 > 1041-4347 © 2024 IEEE。允许个人使用，但重新发布/重新分发需要 IEEE 许可。请参阅 https://www.ieee.org/publications/rights/index.html 了解更多信息。
 
-## I. INTRODUCTION
-
-> 一、引言
+## I. INTRODUCTION｜引言
 
 Traditional database vendors provide service-level objective (SLO), e.g., 99.99% high availability, and signs Service Level Agreement (SLA) with database customers. Nowadays, cloud database vendors [12], [22], [25], [27], [94] are increasingly proliferating because of their better SLOs, such as high elasticity, high availability, and cost-efficient services [1], [50], [75]. As a result, many on-premise databases are moving toward cloud data service.
 
-> 传统数据库厂商会给出服务级别目标（SLO），例如 99.99% 的高可用性，并与数据库客户签订服务级别协议（SLA）。如今，能够提供更优 SLO——例如高弹性、高可用性和高性价比服务 [1], [50], [75]——的云数据库供应商 [12], [22], [25], [27], [94] 日益增多。因此，许多本地部署数据库正在迁移到云数据服务。
-
 Both customers and cloud vendors can benefit from cloud databases. From the perspective of customers, cloud databases own four main advantages as follows.
 
+> 传统数据库厂商会给出服务级别目标（SLO），例如 99.99% 的高可用性，并与数据库客户签订服务级别协议（SLA）。如今，能够提供更优 SLO——例如高弹性、高可用性和高性价比服务 [1], [50], [75]——的云数据库供应商 [12], [22], [25], [27], [94] 日益增多。因此，许多本地部署数据库正在迁移到云数据服务。
+>
 > 客户和云供应商都能从云数据库中受益。对客户而言，云数据库主要有以下四项优势。
 
 1. Elasticity: The workloads of the cloud customers usually change periodically (e.g., peaks and valleys), and the cloud customers do not need to worry about the computing resources and the cloud databases can dynamically schedule the resources by benefiting from the underlying cloud services.
@@ -95,14 +94,14 @@ In terms of cloud vendors, cloud databases also bring three merits as follows.
 
 The development of cloud databases can be divided into two stages: 1) the stage of cloud-hosting databases and 2) the stage of the cloud-native databases.
 
-> 云数据库的发展可分为两个阶段：1）云托管数据库阶段；2）云原生数据库阶段。
-
 At the stage of cloud-hosting databases, customers can choose the offered data service by the cloud vendors (i.e., databases as a service (DBaaS)), then pay for the on-demand resource fee based on the service level agreement (SLA) [65], [67]. However, those providers regard the deployed databases as a general kind of software without any underlying optimizations, and customers must provision the resources and tune the database performance on their own. Moreover, the elastic scheduling capability of cloud services cannot be fully utilized as the resources are scheduled at an instance level.
-
-> 在云托管数据库阶段，客户选择云厂商提供的数据服务，即数据库即服务（DBaaS），再根据服务级别协议（SLA）[65], [67] 按需支付资源费用。不过，服务商只是把部署的数据库当作通用软件，并未针对底层环境作优化；客户仍须自行预配资源并调优数据库性能。资源又只在实例级调度，云服务的弹性调度能力无法充分发挥。
 
 Cloud-native databases are proposed to improve the elasticity and reduce the cost of cloud-hosting databases. The foremost innovation is the disaggregation of compute and storage architecture [94], [96], which decouples the storage from the compute nodes, then connects the compute nodes to shared cloud storage through a high-speed network. On the one hand, the disaggregation architecture enables customers to scale the compute and storage resources independently, thereby bringing more elasticity for the customers. On the other hand, providers can alleviate the write amplification problem by only writing the log (without writing dirty pages) to the storage layer and the dirty pages are replayed based on the log in the storage layer (i.e., the log is the database).
 
+> 云数据库的发展可分为两个阶段：1）云托管数据库阶段；2）云原生数据库阶段。
+>
+> 在云托管数据库阶段，客户选择云厂商提供的数据服务，即数据库即服务（DBaaS），再根据服务级别协议（SLA）[65], [67] 按需支付资源费用。不过，服务商只是把部署的数据库当作通用软件，并未针对底层环境作优化；客户仍须自行预配资源并调优数据库性能。资源又只在实例级调度，云服务的弹性调度能力无法充分发挥。
+>
 > 云原生数据库旨在提高云托管数据库的弹性并降低成本。其首要创新是计算与存储分离式架构 [94], [96]：存储与计算节点解耦，计算节点再通过高速网络连接共享云存储。一方面，客户可以独立扩展计算与存储资源，获得更强弹性；另一方面，云提供商只需把日志而非脏页写入存储层，再由存储层依据日志重放页面（即“日志就是数据库”），从而缓解写放大。
 
 As shown in Fig. 1, compared with cloud-hosting architectures, the computing and storage resources coupled in the virtual machine can be split to achieve independent expansion, which improves the elasticity, availability, and efficiency of the system.
@@ -119,30 +118,30 @@ _Fig. 1. A comparison of cloud-hosting architecture and cloud-native architectur
 
 Since cloud applications have different types of workloads, e.g., write-heavy or read-heavy, there has emerged two types of cloud-native databases: 1) cloud-native online transaction processing (OLTP) databases, and 2) cloud-native online analytical processing (OLAP) databases. Both types of databases adopt the disaggregation architecture, but they own disparate techniques and face different challenges. In summary, there are five main challenges that need to address, including log-based transaction processing, multi-layer data consistency, failure recovery, cache-based query processing, and serverless computing.
 
-> 云应用的工作负载各不相同，例如写密集型或读密集型，由此催生了两类云原生数据库：1）云原生在线事务处理（OLTP）数据库；2）云原生在线分析处理（OLAP）数据库。两者都采用解耦架构，但使用的技术不同，面临的挑战也不同。总体上需要应对五项主要挑战：基于日志的事务处理、多层数据一致性、故障恢复、基于缓存的查询处理和无服务器计算。
-
 Challenge 1. Log-based Transaction Processing: Since the storage is disaggregated, it is challenging to support efficient transaction processing based on the cloud storage. As the log becomes the first-citizen, it is rather hard to handle the cache miss when the log has yet to be replayed.
 
+> 云应用的工作负载各不相同，例如写密集型或读密集型，由此催生了两类云原生数据库：1）云原生在线事务处理（OLTP）数据库；2）云原生在线分析处理（OLAP）数据库。两者都采用解耦架构，但使用的技术不同，面临的挑战也不同。总体上需要应对五项主要挑战：基于日志的事务处理、多层数据一致性、故障恢复、基于缓存的查询处理和无服务器计算。
+>
 > 挑战 1：基于日志的事务处理。存储解耦后，如何基于云存储高效处理事务成为难题。日志成为一等公民，而日志尚未重放时发生的缓存未命中尤其难以处理。
 
 Challenge 2. Multi-Layer Data Consistency: Cloud-native OLTP databases focus on processing transactions in the cloud. However, the main challenge is to ensure the data consistency in the multiple layers, e.g., the compute layer, the storage layer, or even the memory layer.
 
-> 挑战 2：多层数据一致性。云原生 OLTP 数据库面向云端事务处理，其主要挑战是保证计算层、存储层乃至内存层之间的数据一致性。
-
 Challenge 3. Failure Recovery: For the cloud-native databases, it is more complex to provide high availability as each layer may occur exceptions. Thus, a major concern is how to quickly recover the databases when facing compute/storage node failures.
-
-> 挑战 3：故障恢复。云原生数据库的每一层都可能发生异常，因而高可用机制更为复杂。计算节点或存储节点故障后如何快速恢复数据库，是其中的核心问题。
 
 Challenge 4. Cache-based Query Processing: Cloud-native OLAP databases target at scalable query processing with a remote cloud storage. To reduce the network traffic, they need to design effective caching strategies and computational pushdown on the storage side. However, finding an optimal yet cost-efficient query plan is challenging due to the trade-off between performance and cost.
 
+> 挑战 2：多层数据一致性。云原生 OLTP 数据库面向云端事务处理，其主要挑战是保证计算层、存储层乃至内存层之间的数据一致性。
+>
+> 挑战 3：故障恢复。云原生数据库的每一层都可能发生异常，因而高可用机制更为复杂。计算节点或存储节点故障后如何快速恢复数据库，是其中的核心问题。
+>
 > 挑战 4：基于缓存的查询处理。云原生 OLAP 数据库利用远程云存储实现可扩展查询处理。为减少网络流量，系统需要设计有效的缓存策略，并把计算下推到存储端；但性能与成本相互制约，难以找到既最优又经济的查询计划。
 
 Challenge 5. Serverless Computing: Many cloud databases have supported serverless computing that can dynamically schedule resources for users’ workloads with the pause-and-resume policy, but it is still challenging to adaptively schedule the resources for the workloads in a query granularity [83] as the resources are provisioned in the instance level.
 
-> 挑战 5：无服务器计算。许多云数据库已经支持无服务器计算，可借助暂停—恢复策略为用户工作负载动态调度资源；然而资源仍按实例配置，如何在查询粒度 [83] 上自适应调度仍是一项挑战。
-
 Fig. 2 presents an overview of key techniques of cloud-native databases. In this survey, we introduce the state-of-the-art techniques of cloud-native OLTP and OLAP databases, respectively. We introduce each type of cloud-native database from two aspects. First, we introduce a taxonomy of their disaggregated architectures. Then we present the representatives for each category. Second, we take a deep dive into their key techniques regarding OLTP and OLAP workloads. We summarize how existing approaches address the above-mentioned challenges.
 
+> 挑战 5：无服务器计算。许多云数据库已经支持无服务器计算，可借助暂停—恢复策略为用户工作负载动态调度资源；然而资源仍按实例配置，如何在查询粒度 [83] 上自适应调度仍是一项挑战。
+>
 > 图 2 概览了云原生数据库的关键技术。本文分别介绍云原生 OLTP 与 OLAP 数据库的最新技术，并从两个方面讨论每一类数据库：首先对其分离式架构建立分类体系并列举各类代表系统；其次深入分析面向 OLTP 与 OLAP 工作负载的关键技术，总结现有方法如何应对上述挑战。
 
 ![Figure 2. An overview of cloud-native databases.](./figure-02.png)
@@ -153,9 +152,7 @@ _Fig. 2. An overview of cloud-native databases._
 
 > **图表中文解读：** 图按 OLTP 与 OLAP 分成上下两部分；每部分左列给出架构分类，右列给出技术分类。OLTP 的三类架构围绕计算、日志/缓冲与存储的拆分，技术链覆盖数据放置、一致性、恢复和 HTAP；OLAP 的两类架构围绕是否独立出内存层，技术链覆盖存储、查询、无服务器、保护与机器学习。该图是全文分类体系的导航图。
 
-### A. Cloud-Native OLTP Databases
-
-> A. 云原生 OLTP 数据库
+### A. Cloud-Native OLTP Databases｜云原生 OLTP 数据库
 
 1. Cloud-Native OLTP Architectures: Cloud-native OLTP databases emphasize concurrency and low latency in transaction processing. The architecture design needs to consider the consistency of the primary and secondary nodes, the durability and availability of the storage layer, and the efficiency of query processing. We classify the architectures of cloud-native OLTP databases into three categories as follows:
 
@@ -197,9 +194,7 @@ _Fig. 2. An overview of cloud-native databases._
 
 > 5）HTAP 优化：本文讨论三类云原生 HTAP 优化：i）动态存储格式转换 [35]；ii）异构数据副本 [38]；iii）统一表存储设计 [78]。
 
-### B. Cloud-Native OLAP Databases
-
-> B. 云原生 OLAP 数据库
+### B. Cloud-Native OLAP Databases｜云原生 OLAP 数据库
 
 1. Cloud-Native OLAP Architectures: Cloud-native OLAP databases emphasize efficiency and throughput in analytical query processing. The architecture design needs to consider the elasticity of computation to support fluctuating workloads, as well as the local cache and shared memory for efficient query processing. The architectures of cloud-native OLAP databases are classified into two categories as follows:
 
@@ -237,16 +232,14 @@ _Fig. 2. An overview of cloud-native databases._
 
 > 5）机器学习：本文考察 SageMaker [55] 等面向机器学习的新兴云数据库技术，也介绍机器学习技术 [52], [53], [93] 如何反过来优化云数据库。
 
-### C. Contributions
-
-> C. 本文贡献
+### C. Contributions｜本文贡献
 
 Differences with existing surveys: In this paper, we focus on the fundamental techniques of cloud-native databases [50]. We also summarize the pros and cons of various architectures and techniques. Before the emergence of cloud-native databases, Sakr [81] reviewed cloud-hosting databases. Mansouri et al. [58] surveyed the key techniques of cloud storage management. Narasayya et al. [65], [66] discussed various cloud data services. Unfortunately, existing works neglected many fundamental techniques of cloud-native databases, such as data consistency, data synchronization, and failure recovery. Last but not least, we review newly-emerged techniques, such as the cloud-native HTAP techniques, pushdown-based query processing, and machine learning-based optimization.
 
-> 与现有综述的区别：本文聚焦云原生数据库的基础技术 [50]，并总结各类架构与技术的优缺点。在云原生数据库出现之前，Sakr [81] 综述了云托管数据库，Mansouri 等人 [58] 综述了云存储管理的关键技术，Narasayya 等人 [65], [66] 则讨论了多种云数据服务。遗憾的是，已有工作忽略了数据一致性、数据同步和故障恢复等许多云原生数据库基础技术。此外，本文还综述云原生 HTAP、基于下推的查询处理和基于机器学习的优化等新兴技术。
-
 To summarize, we make the following contributions:
 
+> 与现有综述的区别：本文聚焦云原生数据库的基础技术 [50]，并总结各类架构与技术的优缺点。在云原生数据库出现之前，Sakr [81] 综述了云托管数据库，Mansouri 等人 [58] 综述了云存储管理的关键技术，Narasayya 等人 [65], [66] 则讨论了多种云数据服务。遗憾的是，已有工作忽略了数据一致性、数据同步和故障恢复等许多云原生数据库基础技术。此外，本文还综述云原生 HTAP、基于下推的查询处理和基于机器学习的优化等新兴技术。
+>
 > 总体而言，本文作出以下贡献：
 
 1. We survey cloud-native databases from the perspective of system architectures. We introduce a taxonomy of cloud-native OLTP and OLAP databases, respectively. We also discuss their pros and cons.
@@ -261,9 +254,7 @@ To summarize, we make the following contributions:
 
 > 3）提出新的研究挑战并讨论未来方向，包括多写者架构、细粒度无服务器、SLA 感知的云原生 HTAP 技术与多云数据服务。
 
-## II. CLOUD-NATIVE OLTP ARCHITECTURES
-
-> 二、云原生 OLTP 架构
+## II. CLOUD-NATIVE OLTP ARCHITECTURES｜云原生 OLTP 架构
 
 OLTP database systems are designed for transaction processing scenarios, which means they should guarantee ACID properties during query processing [36]. However, the coupled compute-storage architecture in cloud-hosting databases suffers from write amplification due to coupled resource scheduling [48], [94]. The disaggregated architecture designs in cloud-native databases are introduced to solve the above problems. According to the degree of separation management of storage services and the use of remote memory services, the architectures of cloud-native OLTP databases can be classified into three categories (shown in Fig. 3): 1) Disaggregated Compute-Storage OLTP Architecture, 2) Disaggregated Compute-Log-Storage OLTP Architecture and 3) Disaggregated Compute-Buffer-Storage OLTP Architecture.
 
@@ -277,9 +268,7 @@ _Fig. 3. Architectures of cloud-native OLTP databases._
 
 > **图表中文解读：** 三幅子图从左到右逐步增加分离程度：a) 计算云直接连接存储云；b) 存储层再拆为日志存储云与页面存储云；c) 计算与持久存储之间加入远程内存支持的共享缓冲层。虚线是层边界，云形框是弹性服务，节点堆叠表示主/从计算副本，底部箭头表示存储节点或备份之间的数据流。
 
-### A. Disaggregated Compute-Storage OLTP
-
-> A. 计算存储分离式 OLTP
+### A. Disaggregated Compute-Storage OLTP｜计算存储分离式 OLTP
 
 1. Design Motivation: This category of databases adopts a disaggregation architecture that separates the compute and storage modules in the cloud. The design motivation of this architecture can be concluded as the following three aspects. i) Elasticity. it aims to schedule the computing and storage resources independently, which could avoid the waste of resources caused by resource coupling in cloud-hosting databases. ii) Efficiency. Dirty page flushing is eliminated under this architecture, which significantly reduces the write amplification. iii) Availability. Because of the multiple disaggregated modules, it must provides a multi-level failure tolerance to reduce the average recovery time compared to instance-level recovery.
 
@@ -297,9 +286,7 @@ _Fig. 3. Architectures of cloud-native OLTP databases._
 
 > 4）代表系统：计算存储分离式数据库的代表包括 Aurora [94] 和 AlloyDB [35]。二者架构相似，也都采用日志处理技术，例如 Aurora 的“日志就是数据库”和 AlloyDB 的 Log Processing Service；具体实现则有所不同。Aurora 增加数据副本并以 Quorum 机制优化存储管理，同时实现非阻塞故障恢复；AlloyDB 则在计算节点动态转换数据格式，以优化 HTAP 工作负载。
 
-### B. Disaggregated Compute-Log-Storage OLTP
-
-> B. 计算—日志—存储分离式 OLTP
+### B. Disaggregated Compute-Log-Storage OLTP｜计算—日志—存储分离式 OLTP
 
 1. Design Motivation: This category of databases extra separates the storage service for logs and pages based on the first category of databases. Logs guarantee the persistence of updates, while pages provide high-efficiency query processing. The design motivations can be concluded as two aspects. i) Efficiency. First, a fast cloud storage service for logs can significantly reduce the write commit latency. Second, standard cloud storage service for pages can avoid high costs. ii) Elasticity. It can improve the systems’ elasticity if these two storage services are scheduled independently.
 
@@ -317,9 +304,7 @@ _Fig. 3. Architectures of cloud-native OLTP databases._
 
 > 4）代表系统：计算—日志—存储分离式架构的代表是 Azure HyperScale [12] 和华为 Taurus Database [27]，二者主要区别在存储管理方式。Taurus 在每个计算节点加入存储抽象层（SAL）[27]，负责访问存储层；HyperScale 的 XLOG 服务 [12] 承担类似职责，但 XLOG 作为独立层与计算层分开，因而在可管理性和容错方面解耦得更彻底。
 
-### C. Disaggregated Compute-Buffer-Storage OLTP
-
-> C. 计算—缓冲—存储分离式 OLTP
+### C. Disaggregated Compute-Buffer-Storage OLTP｜计算—缓冲—存储分离式 OLTP
 
 1. Design Motivation: This category of databases expands the shared buffer for databases. The buffer is supported by remote shared memory service [98], which provides much lower latency data access than the persistent storage service. The design motivation can be concluded in three aspects. i) Efficiency. The read latency can be significantly reduced with the remote memory. ii) Throughput. If all the compute nodes share the remote buffer, it could reduce the duplicate read requests from different compute nodes. iii) Elasticity. Since the memory resource allocation is independent of persistent storage service, it could further improve the elasticity of databases.
 
@@ -337,17 +322,13 @@ _Fig. 3. Architectures of cloud-native OLTP databases._
 
 > 4）代表系统：阿里巴巴 PolarDB Serverless [22] 是计算—缓冲—存储分离式架构的代表。它基于远程内存服务为全部计算节点建立共享缓冲区；主节点可把更新写入该层并同步给从节点，从而提高数据同步性能。主要挑战是维持主节点与共享缓冲区之间的一致性，下一节将作讨论。
 
-### D. Summary of the Cloud-Native OLTP Architectures
-
-> D. 云原生 OLTP 架构小结
+### D. Summary of the Cloud-Native OLTP Architectures｜云原生 OLTP 架构小结
 
 Table I presents a comparison of the cloud-native OLTP architectures concerning read and write performance, availability, elasticity, and cost.
 
 > 表 I 从读写性能、可用性、弹性和成本方面比较云原生 OLTP 架构。
 
-**Table I. A classification of cloud-native OLTP databases based on the architecture.**
-
-> **表 I。按架构对云原生 OLTP 数据库分类。**
+**Table I. A classification of cloud-native OLTP databases based on the architecture.｜表。按架构对云原生 OLTP 数据库分类。**
 
 | OLTP Architecture<br>OLTP 架构                             | Representatives<br>代表系统 | Write<br>写性能 | Read<br>读性能 | Availability<br>可用性 | Elasticity<br>弹性 | Cost<br>成本 |
 | ---------------------------------------------------------- | --------------------------- | --------------- | -------------- | ---------------------- | ------------------ | ------------ |
@@ -369,9 +350,7 @@ Table I presents a comparison of the cloud-native OLTP architectures concerning 
 
 > 3）计算—缓冲—存储分离式：这类数据库依赖低网络延迟的远程内存服务，因而需要昂贵的 RDMA 网络，整体成本较高。作为回报，共享远程缓冲区能改善读取性能；远程内存服务独立于计算与存储，可增强系统弹性；远程缓冲区还能加速计算层恢复，提高可用性。
 
-## III. CLOUD-NATIVE OLTP TECHNIQUES
-
-> 三、云原生 OLTP 技术
+## III. CLOUD-NATIVE OLTP TECHNIQUES｜云原生 OLTP 技术
 
 This section will introduce the fundamental techniques in cloud-native OLTP databases. We classify them into five groups: data placement strategy, storage layer consistency, compute layer consistency, multi-layer recovery, and HTAP optimization. The relationship between these five parts is depicted in Fig. 4. Data placement strategy refers to the data organization and placement methods in the cloud. As there are multiple instances in both the storage layer and compute layer to ensure high availability, storage layer consistency and compute layer consistency care about the consistent protocols in the cloud. Multi-layer recovery mechanisms are designed to provide a fine-grained method to recover the failure in multiple layers. Finally, HTAP optimizations add the OLAP support based on the original OLTP mechanism. Table II summarizes the main approaches in each group, as well as their advantages and limitations.
 
@@ -385,9 +364,7 @@ _Fig. 4. An overview of cloud-native OLTP techniques._
 
 > **图表中文解读：** 纵向主链由存储管理、查询处理和混合工作负载组成：日志向下写入存储，页面向上供查询读取；左侧“Recovery”箭头表示恢复横跨存储与查询层；右侧“HTAP Supports”把 OLAP 能力接入；顶部 HTAP 箭头把 OLTP 与 OLAP 工作负载统一起来。主实例和两个从实例体现单写多读。
 
-**Table II. An overview of key techniques of cloud-native OLTP databases.**
-
-> **表 II。云原生 OLTP 数据库关键技术概览。**
+**Table II. An overview of key techniques of cloud-native OLTP databases.｜表。云原生 OLTP 数据库关键技术概览。**
 
 | Technique Type<br>技术类型                | Main Approaches<br>主要方法                        | Cloud Databases<br>云数据库 | Pros.<br>优点                                   | Cons.<br>缺点                             |
 | ----------------------------------------- | -------------------------------------------------- | --------------------------- | ----------------------------------------------- | ----------------------------------------- |
@@ -407,9 +384,7 @@ _Fig. 4. An overview of cloud-native OLTP techniques._
 
 > **图表中文解读：** 表按数据放置、两层一致性、多层恢复和 HTAP 五组列出 13 种方法。没有单一方案同时占优：低同步/读取延迟通常引入缓存一致性或额外分析，强一致性牺牲流程简洁度，快速恢复依赖更多层级/副本，HTAP 则在空间、搜索、新鲜度和内存成本间权衡。
 
-### A. Data Placement Strategy
-
-> A. 数据放置策略
+### A. Data Placement Strategy｜数据放置策略
 
 In cloud-native databases, the data placement strategy refers to organizing different data types in databases, mainly focusing on the logs and pages. The data placement strategy determines the transaction processing workflow. They are influenced by the architecture design, which can be categorized as 1) Coupled Page-Log Placement Strategy and 2) Disaggregated Page-Log Placement Strategy. For the former type, a unified cloud storage service supports log and page storage, which can provide physical correlation to reduce network pressure. The coupled placement strategy is used in disaggregated compute-storage architecture. For the latter one, the disaggregated placement strategy is used in disaggregated compute-log-storage architecture. Isolated cloud storage services support log and page storage, which separates the read and write process of transactions to achieve both low write latency and high read throughput.
 
@@ -455,9 +430,7 @@ Compared with the coupled strategy, this method has the following advantages: 1)
 
 > 与耦合策略相比，该方法具有以下优点： 1）减少数据写入延迟。日志持久化有快速的云存储支持，提高了写入性能。 2）更强的弹性。存储服务的调度是独立的，增强了系统的弹性。该策略的主要限制是当缓存未命中时，跨存储服务的同步会导致较大的读取延迟。
 
-### B. Storage Layer Consistency
-
-> B. 存储层一致性
+### B. Storage Layer Consistency｜存储层一致性
 
 In cloud-native databases, storage layer consistency techniques are used to maintain the consistency among multiple data replicas in the storage layer. These techniques are based on original distributed systems protocols with specific optimization for cloud environments, which can be categorized as 1) Quorum-based Protocol and 2) Paxos-based Protocol. The quorum-based protocol is derived from the quorum algorithm [89] with some mechanisms to enhance consistency. In comparison, the Paxos-based protocol is derived from the Paxos-like algorithm (including Paxos [47] & Raft [68]) with customized mechanisms to improve the concurrency.
 
@@ -469,10 +442,10 @@ In cloud-native databases, storage layer consistency techniques are used to main
 
 For the first challenge, most distributed systems implement the quorum algorithm with three data replicas, which provide single-node fault tolerance. However, data centers for cloud service are deployed geographically isolated and require extreme availability [34]. Therefore, Aurora increases the number of replicas for improving the system’s reliability [94]. Cloud services can be divided into multiple fault-tolerant independent regions through the isolated physical deployment. Hence, the probability of simultaneous failure in different regions is extremely small. Based on the above facts, the cloud databases can maintain two replicas in three regions to achieve “region + 1”-level fault tolerance. Even if a single region fails, at least four replicas still run normally to ensure high availability.
 
-> 对于第一项挑战，多数分布式系统以三个数据副本运行 Quorum 算法，只能容忍单节点故障。云服务的数据中心在地理上彼此隔离，同时又要求极高可用性 [34]，因此 Aurora 通过增加副本数来提高可靠性 [94]。物理隔离使云服务可以划分为多个相互独立的容错区域，不同区域同时故障的概率很低。据此，云数据库可在三个区域各维护两个副本，获得“区域 + 1”级容错；即使一个 Region 整体故障，仍有至少四个副本正常运行，足以保证高可用。
-
 For the second challenge, a possible solution of reducing failure recovery time is to prepare a new replica before the system breakdowns. In the case of multiple replicas, the database can migrate data in advance and can generate a backup instance after a single replica is abnormal. Since the data migration is performed asynchronously, the backup instance will not replace the abnormal one immediately due to the high migration cost. Instead, they will run simultaneously and be controlled by the quorum set mechanism [95]. Backup and abnormal instances and the rest of the normal replicas form two quorum sets. Multiple sets are managed in a logical “or” manner. Query processing only requires at least one set to complete. Instances with long-term exceptions will be removed, and the database will discard the quorum sets containing such instances.
 
+> 对于第一项挑战，多数分布式系统以三个数据副本运行 Quorum 算法，只能容忍单节点故障。云服务的数据中心在地理上彼此隔离，同时又要求极高可用性 [34]，因此 Aurora 通过增加副本数来提高可靠性 [94]。物理隔离使云服务可以划分为多个相互独立的容错区域，不同区域同时故障的概率很低。据此，云数据库可在三个区域各维护两个副本，获得“区域 + 1”级容错；即使一个 Region 整体故障，仍有至少四个副本正常运行，足以保证高可用。
+>
 > 对于第二项挑战，一种缩短恢复时间的办法是在系统彻底故障前预备新副本。数据库可在发现单个副本异常后提前迁移数据并生成备用实例。迁移异步进行且代价较高，因此备用实例不会立刻替换异常实例；二者会暂时并行运行，并由 Quorum Set 机制 [95] 管理。备用实例、异常实例与其余正常副本构成两个 Quorum Set，多个集合按逻辑“或”管理，查询只需其中至少一个集合完成即可。长期异常的实例最终会被移除，包含它的 Quorum Set 也随之丢弃。
 
 The advantage of quorum-based protocol is the high concurrency supported by the simple algorithm workflow. The limitation is that quorum-based protocols do not guarantee linearizability. Replicas implement extra gossip protocols to fill up the missing updates caused by temporary exceptions in certain replicas.
@@ -485,15 +458,13 @@ The advantage of quorum-based protocol is the high concurrency supported by the 
 
 Traditional databases require logs to be committed in a strict order, which means the previous logs must be committed successfully. Such a mechanism limits the concurrency due to the strict committing order. ParallelRaft [21] makes two optimizations to improve the performance. Out-of-order acknowledging and committing are allowed in ParallelRaft when the writing ranges of log entries are not overlapping, which is considered not conflicted. Besides, ParallelRaft optimizes the catch-up processes for lagging followers to re-synchronize with the leader.
 
-> 传统数据库严格按序提交日志，后一条日志只有在前一条提交成功后才能提交，因而限制了并发性。ParallelRaft [21] 通过两项优化提高性能：如果日志条目的写入范围互不重叠，即彼此不冲突，便允许乱序确认与提交；同时优化落后从节点的追赶过程，使其更快地与主节点重新同步。
-
 The advantage of paxos-based protocol is the linearizable features supported by the Paxos-like algorithms. The limitation is that Paxos-based protocols limit the system’s concurrent processing efficiency, which requires customized optimizations such as out-of-order committing.
 
+> 传统数据库严格按序提交日志，后一条日志只有在前一条提交成功后才能提交，因而限制了并发性。ParallelRaft [21] 通过两项优化提高性能：如果日志条目的写入范围互不重叠，即彼此不冲突，便允许乱序确认与提交；同时优化落后从节点的追赶过程，使其更快地与主节点重新同步。
+>
 > 基于 Paxos 的协议借助类 Paxos 算法提供线性化保证；其局限是会抑制系统的并发处理能力，因此需要乱序提交等定制优化。
 
-### C. Compute Layer Consistency
-
-> C. 计算层一致性
+### C. Compute Layer Consistency｜计算层一致性
 
 In cloud-native databases, compute layer adopts the “single-writer, multi-reader” architecture. That is, the primary node handles update queries and syncs the data to secondary nodes. All the secondary nodes are read-only and just update their status to the primary node. The synchronization process requires it to be low-latency and high-reliable, which can be categorized into three types: 1) Persistent storage based, 2) Local cache based, and 3) Remote shared buffer based. Notice that metadata synchronization always adopts direct transmission, and the data size is much smaller than log and page data. Therefore, this part mainly focuses on the synchronization of log and page data.
 
@@ -523,9 +494,7 @@ For the consistency issue, PolarDB serverless [22] proposes a cache invalidation
 
 > 为解决一致性问题，PolarDB Serverless [22] 提出缓存失效机制，以保证主节点与共享缓冲区一致。共享缓存中的专用表记录一致性关系，从节点据此忽略已失效的页面；该表与数据的更新具有原子性，其延迟远低于直接更新远程共享缓冲区中的对应页面。网络方面，RDMA 可同时提供高带宽和低延迟，因此系统需要在硬件层部署高速 RDMA 网络。（译注：原文将 update 拼作“udate”；此处保留。）
 
-### D. Mutli-Layer Recovery
-
-> D. 多层恢复（原文将 Multi 拼作 Mutli）
+### D. Mutli-Layer Recovery｜多层恢复（原文将 Multi 拼作 Mutli）
 
 In cloud-native databases, different cloud services support various functional modules, resulting in the fault-tolerant independence between the modules. On the one hand, independent fault tolerance produces high availability. On the other hand, the physical isolation of different cloud services significantly increases network latency for failure recovery, which demands specific treatment in the failure recovery phase. According to the architecture design of the cloud-native databases, the recovery optimization can be performed at different layers, which can be classified into the following three categories: 1) No-Redo Recovery in Compute Layer, 2) Two-Tier ARIES in Buffer Layer, and 3) Optimization in Storage Layer.
 
@@ -559,9 +528,7 @@ The most basic way of improving fault tolerance is to increase the number of red
 
 > 提高容错能力最直接的办法是增加冗余副本，例如把每个可用区中的副本数加倍 [95]，或扩充日志存储节点 [27]；其主要局限是额外的存储开销。第二种办法是在发现部分副本异常后，预先准备新的备用节点，Aurora 的 Quorum Set 机制 [95] 即属此类。它的存储开销较小，但创建备用节点时会占用网络带宽。
 
-### E. HTAP
-
-> E. HTAP
+### E. HTAP｜HTAP
 
 Traditional OLTP database systems are generally used for transactional workloads, so they have implemented many techniques to optimize the efficiency of transactional processing, e.g., row-format page organization and index structures. However, with the further development of data-intensive applications in recent years, it calls for real-time analysis requirements for the transactional databases, e.g., real-time fraud detection [79]. These demands drive the OLTP databases to add support for real-time analytical workloads [51], [74], [107], [108]. Regarding the cloud-native OLTP databases, there exists three types of HTAP optimization (shown in Fig. 9): 1) Dynamic storage format transformation in the compute layer; 2) Heterogeneous data replicas in the storage layer; and 3) Unified Table Storage. These techniques add particular optimizations for analytical workloads based on the original OLTP databases. Therefore, the ACID properties of the databases will not be affected.
 
@@ -589,10 +556,10 @@ The above approach has two main challenges: 1) Storage format transformation wil
 
 From the implementation perspective, the overall architecture do not need to be modified. The columnar format replicas are stored in read-only nodes, which are the learners of the row format replicas in the consensus protocol. Hence, it ensures the consistency of the heterogeneous replicas without influencing the origin OLTP system. Analytical workloads will be allocated with extra computing resources on demand according to the workload’s intensity, benefiting from cloud services’ elastic scheduling capability. Therefore, handling analytical workloads will not influence the computing resources for transaction processing.
 
-> 从实现角度看，系统无须改动整体架构。列式副本存放在只读节点上，这些节点在共识协议中充当行式副本的学习者，因而可以在不影响原有 OLTP 系统的情况下保证异构副本一致。得益于云服务的弹性调度能力，系统可按分析负载强度另行分配计算资源，使分析处理不占用事务处理所需的计算资源。
-
 From performance perspective, this method’s advantage is that it isolates the performance of transactional and analytical processing, meaning that both transactions and queries can be efficiently processed at the same time. Moreover, the excellent isolation facilitates the flexible scheduling of the heterogeneous workloads. However, since the columnar format replicas are the learners of row format ones, it must face the problem of data freshness due to the data transmission and transformation. That is, recent updates on the primary node must take certain time to be transferred and transformed to the columnar replica, causing analytical workloads to have a version lag compared to transactional workloads. Furthermore, this method adds additional computation and storage resources for the OLAP workload.
 
+> 从实现角度看，系统无须改动整体架构。列式副本存放在只读节点上，这些节点在共识协议中充当行式副本的学习者，因而可以在不影响原有 OLTP 系统的情况下保证异构副本一致。得益于云服务的弹性调度能力，系统可按分析负载强度另行分配计算资源，使分析处理不占用事务处理所需的计算资源。
+>
 > 从性能角度看，这种方法隔离了事务处理与分析处理，使事务和查询能够同时高效执行；良好的隔离性也便于灵活调度异构工作负载。不过，列式副本作为行式副本的学习者，必须经过数据传输与格式转换，因此存在数据新鲜度问题：主节点的最新更新需要一段时间才能传至列式副本并完成转换，导致分析工作负载所见版本落后于事务工作负载。此外，该方法还要为 OLAP 工作负载投入额外的计算与存储资源。
 
 3. Unified Table Storage: The third type of method is a unified table storage design for both OLTP and OLAP workloads, which is employed in the SingleStoreDB (S2DB) [78]. The main difference is that S2DB does not persist data into different layouts, which is often adopted in other HTAP systems. The unified table storage contains two parts: 1) In-memory row store. The in-memory storage is developed from its predecessor MemSQL [86], which implements a lock-free skiplist to index the rows and use the pessimistic concurrency control to avoid conflicts. This part is mainly used to improve the OLTP performance. 2) On-disk column store. WAL logs on the disk supports durability, which are written to the storage sequentially. Other data pages are organized in columnar format to optimize the aggregation and scan operations in analytical queries. Besides, it constructs the secondary and unique indexes on the column store, which provides the optimization on point-queries on the columnar store. In addition to the extra indexes on the disk, the key to maintain the high performance of S2DB is that the in-memory row store needs to cover most of the search requirements. Otherwise, on-disk column storage will degrade the performance in transaction processing compared with on-disk row store.
@@ -603,17 +570,13 @@ Overall, this method does not need to copy data into different layouts, which sa
 
 > 总体而言，该方法不需要将数据复制到不同的布局中，从而节省了数据转换带来的计算和 I/O 开销。该方法的局限性在于，为了获得较高的查找性能，需要保持较高的缓存命中率，而这需要更多的内存资源。
 
-## IV. CLOUD-NATIVE OLAP ARCHITECTURES
-
-> 四、云原生 OLAP 架构
+## IV. CLOUD-NATIVE OLAP ARCHITECTURES｜云原生 OLAP 架构
 
 Cloud-native OLAP databases target at large-scale data analytics with elastic and scalable cloud services. Compared to share-nothing MPP data warehouses, cloud-native OLAP databases increase the elasticity with the disaggregation architecture and achieve high availability with the cloud storage and cross-region availability zones. We classify the cloud-native OLAP architectures into two categories: 1) disaggregated compute-storage OLAP architecture and 2) disaggregated compute-memory-storage OLAP architecture.
 
 > 云原生 OLAP 数据库利用弹性、可扩展的云服务处理大规模数据分析。与无共享 MPP 数据仓库相比，它通过解耦架构增强弹性，并借助云存储和跨区域可用区实现高可用。本文把云原生 OLAP 架构分为两类：1）计算—存储分离式 OLAP 架构；2）计算—内存—存储分离式 OLAP 架构。
 
-### A. Disaggregated Compute-Storage OLAP
-
-> A. 计算存储分离式 OLAP
+### A. Disaggregated Compute-Storage OLAP｜计算存储分离式 OLAP
 
 This category of databases [3], [15], [96] adopts a disaggregated compute-storage architecture, and the compute layer and the storage layer are connected to a high-speed network. As shown in Fig. 10(a), the compute layer consists of a service manager and compute clusters, the service manager provides a collection of services that manage the metadata, resources, queries, and security. The compute clusters perform the queries with elastic compute resources, and each worker node has the local SSD for caching.
 
@@ -643,9 +606,7 @@ _Fig. 10. Architectures of cloud-native OLAP databases._
 
 > 4）代表系统：Snowflake [25], [96] 和 Redshift [70] 是这一架构的两个代表。Snowflake 依靠云服务管理多个虚拟仓库、工作负载、安全与元数据。计算层提供多个虚拟仓库（VW），每个 VW 都是由多个 EC2 实例组成的集群。通常，单个租户的一条查询在一个 VW 中执行，而 VW 可随时启停。存储方面，Snowflake 结合本地临时存储与 AWS S3 等云存储保存数据。Redshift [15], [70] 最初是 MPP 数据仓库，后来演进为云原生数据库。它同样包含多个计算集群，每个集群由一个充当协调器的领导节点和多个计算节点组成，并设有包含多种组件的加速层：Spectrum 节点经过定制，可使用 PartiQL [5] 查询半结构化数据；高级查询加速器 AQUA [70] 利用 FPGA [72] 加速查询处理；编译即服务 CaaS [15] 则缓存代码生成结果。每个集群的数据由以 Amazon S3 为后端的 Redshift 托管存储（RMS）管理。
 
-### B. Disaggregated Compute-Memory-Storage OLAP
-
-> B. 计算—内存—存储分离式 OLAP
+### B. Disaggregated Compute-Memory-Storage OLAP｜计算—内存—存储分离式 OLAP
 
 As shown in Fig. 10(b), the second architecture consists of three layers, a compute layer, a shuffle memory layer, and a storage layer. Similar to the first architecture, the compute layer has a service manager and a compute cluster. The main difference is that the compute cluster schedules the jobs for the workers in a centralized fashion. Moreover, it contains a shared memory pool to accelerate the shuffle process of complex operations such as aggregations and joins.
 
@@ -667,17 +628,13 @@ As shown in Fig. 10(b), the second architecture consists of three layers, a comp
 
 > 4）代表系统：采用三层架构的代表系统是构建在 Dremel 查询引擎 [60] 之上的 BigQuery [59]。它引入共享内存层来加速分布式连接的 Shuffle 处理，避免把中间结果写入磁盘后再读出，从而显著降低延迟；Dremel 查询引擎还支持半结构化数据查询。存储管理方面，BigQuery 依赖 Colossus 文件系统 [31]，并采用与 Parquet、ORC 类似的 Capacitor 格式 [59]。查询处理方面，它使用生产者—消费者模型：每个工作节点中的生产者生成分区并发送至内存节点执行 Shuffle，消费者再合并收到的分区并在本地执行操作。另一个代表系统是 Databricks Lakehouse [104]，它支持直接使用 Spark SQL [14] 分析数据湖；此外还在云对象存储之上开发了名为 Delta Lake [13] 的 ACID 表存储层，以及可与 Spark SQL 运行时集成的向量化查询引擎 Photon [18]。
 
-### C. Summary of the Cloud-Native OLAP Architectures
-
-> C. 云原生 OLAP 架构小结
+### C. Summary of the Cloud-Native OLAP Architectures｜云原生 OLAP 架构小结
 
 Table III presents a comparison of the cloud-native OLAP architectures concerning computation, storage, throughput, elasticity, isolation, and cost. The first category has the disaggregated compute-storage architecture. For the computation, it employs multiple clusters with various worker nodes. For the storage, it relies on local SSD caching and cloud storage. It has a high throughput based on scalable cloud computing. Its elasticity is also high because of the disaggregated architecture. Since the clusters are isolated and a query is typically only executed in one cluster, it has excellent performance isolation. By embracing the multi-tenancy with the elastic cloud service, it saves a large amount of cost for the cloud provider. The second category adopts the disaggregated compute-memory-storage architecture. For the computation, it employs multiple worker nodes with a shuffle memory layer. For the storage, it leverages the shared memory pool and the cloud storage. As the memory layer is disaggregated for shuffling, it has excellent throughput and elasticity. However, it leads to high costs due to the high price of in-memory computing. In addition, compared to the first category, it has lower performance isolation due to the shared memory pool.
 
 > 表 III 从计算、存储、吞吐量、弹性、隔离性和成本几个方面比较云原生 OLAP 架构。第一类采用计算存储分离式架构：计算侧由多个集群及其中的多个工作节点组成；存储侧依赖本地 SSD 缓存与云存储。可扩展云计算使其具备高吞吐量，分离式架构也带来高弹性。集群彼此隔离，且一条查询通常只在一个集群中执行，因此性能隔离性优异。多租户与弹性云服务相结合，还能为云提供商节省大量成本。第二类采用计算—内存—存储分离式架构：计算侧由多个工作节点和 Shuffle 内存层组成，存储侧利用共享内存池与云存储。独立的 Shuffle 内存层带来优异的吞吐量和弹性，但内存计算价格较高，成本也随之上升；与第一类相比，共享内存池还会降低性能隔离性。
 
-**Table III. A comparison of two cloud-native OLAP architectures.**
-
-> **表 III。两种云原生 OLAP 架构的比较。**
+**Table III. A comparison of two cloud-native OLAP architectures.｜表。两种云原生 OLAP 架构的比较。**
 
 | OLAP Architecture<br>OLAP 架构                             | Computation<br>计算                                                   | Storage<br>存储                                             | Throughput<br>吞吐量 | Elasticity<br>弹性 | Isolation<br>隔离性 | Cost<br>成本 |
 | ---------------------------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------- | -------------------- | ------------------ | ------------------- | ------------ |
@@ -686,17 +643,13 @@ Table III presents a comparison of the cloud-native OLAP architectures concernin
 
 > **图表中文解读：** 独立 Shuffle 内存层把吞吐量与弹性从高推到优，但隔离性从优降到高、成本从中升到高。换言之，共享内存池减少中间结果 I/O，却引入资源共享和昂贵内存的代价。
 
-## V. CLOUD-NATIVE OLAP TECHNIQUES
-
-> 五、云原生 OLAP 技术
+## V. CLOUD-NATIVE OLAP TECHNIQUES｜云原生 OLAP 技术
 
 This section introduces the key techniques of cloud-native OLAP databases in detail. Table IV summarizes five types of key techniques, including storage management, query processing, serverless computing, data protection, and machine learning. It also summarizes their pros and cons.
 
 > 本节详细介绍云原生 OLAP 数据库的关键技术。表 IV 汇总了存储管理、查询处理、无服务器计算、数据保护和机器学习五类技术及其优缺点。
 
-**Table IV. An overview of key techniques of cloud-native OLAP databases.**
-
-> **表 IV。云原生 OLAP 数据库关键技术概览。**
+**Table IV. An overview of key techniques of cloud-native OLAP databases.｜表。云原生 OLAP 数据库关键技术概览。**
 
 | Technique Type<br>技术类型           | Main Approach<br>主要方法                                          | Cloud Database<br>云数据库 | Pros<br>优点                   | Cons<br>缺点                      |
 | ------------------------------------ | ------------------------------------------------------------------ | -------------------------- | ------------------------------ | --------------------------------- |
@@ -727,9 +680,7 @@ _Fig. 12. An overview of cloud-native OLAP techniques._
 
 > **图表中文解读：** 核心纵向链是存储管理→查询处理→无服务器计算；顶部 SQL 箭头表示查询进入/返回，SQL with ML 经 DB4AI 路径把数据库用于 AI。右侧 Machine Learning 通过 AI4DB 反向优化三层，左侧 Data Protection 的箭头覆盖整条链；锁图标表示各层都需安全保护。
 
-### A. Storage Management
-
-> A. 存储管理
+### A. Storage Management｜存储管理
 
 We introduce three techniques of storage management: 1) metadata store based optimization; 2) join key based data partitioning; and 3) column store for semi-structured data.
 
@@ -775,9 +726,7 @@ There is a trade-off between the file size and query performance. To read a nest
 
 > 文件大小与查询性能之间存在权衡。第一种方法只有祖先字段记录嵌套信息，因此读取嵌套字段时必须访问其祖先信息；不过，信息被反规范化到彼此分离的表中，文件更小。第二种方法为每个字段重复记录祖先信息，无须读取其他表即可直接访问子字段；代价是共同祖先信息存在冗余，文件更大。除基于模式的编码外，还有一种无模式方法 [25]，能够推断数据类型，并自动聚类频繁访问的路径。（译注：原文将 repeats 拼作“repeates”；此处保留。）
 
-### B. Query Processing
-
-> B. 查询处理
+### B. Query Processing｜查询处理
 
 We introduce three types of query processing, including 1) columnar scan with pushdown [70], [96], [103], 2) columnar scan with caching and pushdown [102], and 3) columnar scan with shuffle memory pool [59]. As shown in Fig. 14, the first type loads the pushdown results from the cloud storage. The second one merges the results from both the pushdown results and the local cache. The third one loads the pushdown results from the cloud storage, then performs the queries using the shuffle memory tier.
 
@@ -797,10 +746,10 @@ _Fig. 14. Three key techniques for query processing._
 
 PushdownDB [103] has studied the relation between the pushdown performance and its price. It particularly extended the S3 Select API to support more operations, including index scan, hash-join, group by, and top-k. For instance, it designed an offset index table based on S3 Select, which has the form of |indexed value | first_byte_offset | last_byte_offset|. Finding the objects involves two phases. First, the S3 objects are filtered using the index table and the offset of the target data is returned. Second, the data is fetched using the cheaper HTTP API instead of the S3 Select API. To push down the join, it builds a bloom filter for the join key of the small table, then adopts a substring-based matching strategy to perform the join using S3 Select.
 
-> PushdownDB [103] 研究了下推性能与价格之间的关系，并扩展 S3 Select API，使其支持索引扫描、哈希连接、group by 和 top-k 等更多操作。例如，它基于 S3 Select 设计了形如 `| indexed value | first_byte_offset | last_byte_offset |` 的偏移量索引表。查找对象分为两步：先用索引表过滤 S3 对象并返回目标数据的偏移量，再改用价格更低的 HTTP API 获取数据，而不再调用 S3 Select API。下推连接时，系统先为小表的连接键构建布隆过滤器，再用基于子字符串的匹配策略通过 S3 Select 完成连接。
-
 Overall, these pushdown operations can have a lower cost and higher throughput regarding highly selective operators. Otherwise, it could have no payoffs due to the pushdown cost. Another drawback of the pushdown-only methods is that they make no use of the cache data.
 
+> PushdownDB [103] 研究了下推性能与价格之间的关系，并扩展 S3 Select API，使其支持索引扫描、哈希连接、group by 和 top-k 等更多操作。例如，它基于 S3 Select 设计了形如 `| indexed value | first_byte_offset | last_byte_offset |` 的偏移量索引表。查找对象分为两步：先用索引表过滤 S3 对象并返回目标数据的偏移量，再改用价格更低的 HTTP API 获取数据，而不再调用 S3 Select API。下推连接时，系统先为小表的连接键构建布隆过滤器，再用基于子字符串的匹配策略通过 S3 Select 完成连接。
+>
 > 总体而言，对高选择性算子进行下推，可以降低成本并提高吞吐量；选择性不高时，下推本身的成本却可能使其得不偿失。纯下推方法的另一项缺点是没有利用缓存数据。
 
 2. Columnar Scan With Caching Pushdown: The second type of query processing is to scan the data with both caching and pushdown. The main idea is that since the local cache is more efficient than pushdown, it can be combined to further speed up the queries. FlexPushdown [102] is a representative of such a technique. Specifically, it consists of two parts: hybrid execution and cache replacement. For hybrid execution, it organizes the columnar data with segments and transforms the original query plan to a separable query plan with the consideration of the local cache and computation pushdown. For instance, suppose a scan query retrieves two attributes A and B, if all the segments of A are cached, these data can be scanned using local cache while the filters on segments of B are pushed down to the cloud storage, and finally the segments are merged at the compute nodes. Regarding cache replacement, it employs a weighted LFU strategy to manage the cache data. Intuitively, the larger the pushdown computation cost is, the larger weight the related data has for caching. As a result, it relies on a benefit-based caching framework by calculating a segment’s weight w(s) = (tnet (s) + tscan (s) + tcompute (s))/size(s), where tnet (s) is the time of network transfer, tscan (s) is the time of data scanning, and tcompute (s)) is the time of computation from the query. For the pros, it has high throughput as it can utilize local cache. However, it has low scalability due to the limited capacity of local cache.
@@ -811,9 +760,7 @@ Overall, these pushdown operations can have a lower cost and higher throughput r
 
 > 3）使用 Shuffle 内存层的列式扫描：第三类方法使用 Shuffle 内存执行查询，与第二种计算—内存—存储分离式 OLAP 架构相对应。代表系统 BigQuery [59] 遵循 MapReduce 风格的处理范式，分多个阶段划分并处理数据。它采用生产者—消费者执行模型：每个工作节点中的生产者生成分区，并将其发送到内存节点进行 Shuffle；下一阶段的消费者异步合并这些分区，并在本地执行操作。在第 n−1 个 Shuffle 阶段，工作节点由消费者接收分区，再由生产者生成新分区，随后由分布式内存节点执行 Shuffle；在第 n+1 个 Shuffle 阶段，工作节点使用新的消费者和生产者执行同样的操作。最后，单个工作节点合并结果并返回协调器。其优点是共享内存执行 Shuffle，吞吐量高；缺点是内存计算定价较高，成本也高。
 
-### C. Serverless Computing in Cloud Databases
-
-> C. 云数据库中的无服务器计算
+### C. Serverless Computing in Cloud Databases｜云数据库中的无服务器计算
 
 Serverless computing is expected to be the next generation of cloud computing [84], which allows the programmers to write functions and code in the cloud without caring about server management, including resource provision and scaling, fault tolerance, and system monitoring. By combining cloud databases with serverless computing, users can enjoy the auto-scaling feature and pay for the used resources in a query granularity. Generally speaking, there are two implementations of serverless computing in cloud databases (see Fig. 15). The first type is i) serverless with functions as a service (FaaS) [64], [73], [91], where queries are adaptively executed by invoking the cloud function services. The second type is ii) serverless databases [16], [77], which automate the process of provisioning and scaling for the queries at the level of the database instance.
 
@@ -843,9 +790,7 @@ There are two main challenges for FaaS-based query processing, First, since func
 
 > 2）无服务器数据库：第二类方法 [76], [77], [85] 通过动态调度资源，以数据库实例支持无服务器计算。这一路线主要由 Aurora Serverless [6]、Athena Serverless [16] 和 Azure Serverless [61] 等商业云数据服务推动。这些服务定义了专用的资源调度单位。例如，Aurora Serverless V2 [7] 定义 Aurora Capacity Unit（ACU），最小调度单位为 0.5 ACU；每个 ACU 配有 2 GiB 内存，CPU 和网络资源与一个实例相同。BigQuery [59] 和 AutoExecutor [85] 可根据输入规模和预测的资源需求，改变执行多租户任务的执行器数量。无服务器计算有四项关键操作：预配、暂停、恢复和扩缩容。预配根据提交的查询分配资源；暂停暂时停止服务且不向用户收费；恢复以已预配资源重新启动服务；扩缩容则在工作负载访问模式变化时平滑增减资源。预配与扩缩容的核心问题是预测查询工作负载所需资源，而即使专家也难以准确估计某个查询的资源需求 [85]。暂停与恢复的核心问题是预测工作负载到达模式：暂停后启动数据库代价高，过早恢复又会浪费资源。因此，需要能预测暂停/恢复模式的自适应模型 [76], [77]。（译注：原文使用“predicated resources”，按上下文疑为 predicted resources；此处保留英文原貌。）
 
-### D. Data Protection
-
-> D. 数据保护
+### D. Data Protection｜数据保护
 
 Security is one of the most important issues in cloud databases. There are two main types of data protection techniques: software-based data protection [25] and hardware-based data protection [11].
 
@@ -867,9 +812,7 @@ _Fig. 16. Enclave-based query processing._
 
 > **图表中文解读：** 编号箭头给出完整协议：①用户向密钥提供方取得密钥；②携带密钥发出 SQL；③把密钥送至证明服务验证；④将验证结果通知加密数据库；⑤数据库把受保护的计算交给安全飞地；⑥结果返回用户。圆柱表示加密数据库，安全飞地矩形框表示受信执行边界，云形证明服务在密钥与执行环境之间建立信任。
 
-### E. Machine Learning
-
-> E. 机器学习
+### E. Machine Learning｜机器学习
 
 Intersecting cloud-native databases with machine learning (ML) is another major trend for modern data-intensive applications. On the one hand, machine learning can benefit cloud-native databases by optimizing various database tasks [4], [15], [28], [37], [54], [100], [113], [114]. On the other hand, cloud-native databases can facilitate machine learning techniques with SQL-enabled ML pipelines [26], [30], [55].
 
@@ -883,9 +826,7 @@ Intersecting cloud-native databases with machine learning (ML) is another major 
 
 > 2）基于 SQL 的机器学习流水线：使用云原生数据库开展机器学习有多项好处。第一，它提供由高弹性和高可用性支撑、支持 SQL 的机器学习流水线。第二，它把模型带到数据侧，无需额外传输数据。第三，它为用户提供 AutoML [42], [82], [101] 能力，例如自动模型选择、训练和超参数调优。SageMaker [26], [55] 例如支持以“Create Model”语法自动训练模型，再通过 SQL 函数进行预测。为在数据库本地执行机器学习推理，它调用 Neo 服务编译模型；Neo 把机器学习模型转换为推理代码，并将模型带到数据库侧。BigQueryML [30] 提供类似能力，用户可通过 SQL 工具导入、构建和调用基于 TensorFlow [57] 的先进机器学习模型。
 
-## VI. RELATED WORK
-
-> 六、相关工作
+## VI. RELATED WORK｜相关工作
 
 There is a general lack of a comprehensive survey on the cloud-native database as it is a relatively new field for both industry and academia. Particularly, Sakr [81] reviewed cloud-hosting databases. The survey discussed several topics, such as NoSQL databases, Database-as-a-Service (DaaS), and virtualized database servers. It also presented several future directions, including true elasticity, data consistency, live migration, SLA management, transaction support, and benchmarking. Mansouri [58] surveyed the storage management techniques in the cloud, namely, Storage as a Service (StaaS). The survey introduced cloud storage based on the intra-cloud and inter-cloud storage architectures. It also covered the topics of the data model, data replication, data consistency, transaction, and data management cost. Gartner [75] compared different cloud database systems from the business perspective. By weighing the business value with a set of evaluation criteria such as service quality and market record, the report classified the cloud DBMSs or cloud vendors into four roles in a Magic Quadrant, including niche players, visionaries, challengers, and leaders. It also discussed the strengths and weaknesses of each cloud DBMS. Narasayya et al. [65], [66] reviewed the cloud data services. The survey discussed various topics, including workloads and architectures, multi-tenancy and virtualization technologies, SLAs and pricing models, resource management, efficiency, and cost, as well as serverless databases.
 
@@ -895,37 +836,31 @@ Our work is different from existing surveys in three aspects. First, we classify
 
 > 本文与现有综述有三方面不同。第一，我们把云原生数据库分为 OLTP 型和 OLAP 型，并依据各自的分离式架构建立分类体系、总结优缺点；因此，分类依据是架构，而不是具体产品。第二，本文覆盖先进云原生数据库发展出的广泛前沿技术，包括 HTAP、无服务器计算和机器学习；以往工作很少综述并总结这些最新技术。第三，本文提出了现有工作尚未讨论的新未来方向。（译注：原文写作“update-to-date techniques”，疑为 up-to-date techniques；此处保留英文原貌。）
 
-## VII. OPEN PROBLEMS AND OPPORTUNITIES
-
-> 七、开放问题与机遇
+## VII. OPEN PROBLEMS AND OPPORTUNITIES｜开放问题与机遇
 
 Multi-Writer Architecture: Existing cloud databases only support a single writer and multiple readers, which may cause a large Recovery Time Objective (RTO) if the primary node has any failure. Besides, such an architecture has a limited capacity for highly-concurrent write transactions due to the single read-write (RW) node. Thus, it calls for cloud-native multi-writer techniques that can scale out write capabilities. Two promising architectures are 1) the share-storage architecture [97], [105] and 2) coherent cache architecture [69], where the former supports multiple RW nodes accessing the same storage with an RDMA network, and the latter enables the multi-writer with a coherent cache layer. The challenge is to handle skewed write as the storage layer will accept write requests from multiple RW nodes [116].
 
-> 多写者架构：现有云数据库只支持单写者、多读者；一旦主节点故障，恢复时间目标（RTO）可能很长。此外，单个读写（RW）节点也限制了系统处理高并发写事务的能力，因此需要可横向扩展写能力的云原生多写者技术。两种有前景的架构是：1）共享存储架构 [97], [105]，支持多个 RW 节点通过 RDMA 网络访问同一存储；2）一致性缓存架构 [69]，通过一致性缓存层支持多写者。其挑战在于处理写倾斜，因为存储层将同时接收多个 RW 节点的写请求 [116]。
-
 Fine-Grained Serverless: Existing elastic databases mainly support provisioning the resources for a query with coarse-grained serverless (VMs or specific units, e.g., Aurora Capacity Unit). However, they are not cost-efficient and may suffer from the high latency of elastic scaling. One promising direction is to combine the advantage of FaaS-based Serverless and databases, where the former has a lower starting cost that can be used to address the cold-start problem, and the latter has a better performance. The challenge is to balance the trade-off between cost and performance.
 
+> 多写者架构：现有云数据库只支持单写者、多读者；一旦主节点故障，恢复时间目标（RTO）可能很长。此外，单个读写（RW）节点也限制了系统处理高并发写事务的能力，因此需要可横向扩展写能力的云原生多写者技术。两种有前景的架构是：1）共享存储架构 [97], [105]，支持多个 RW 节点通过 RDMA 网络访问同一存储；2）一致性缓存架构 [69]，通过一致性缓存层支持多写者。其挑战在于处理写倾斜，因为存储层将同时接收多个 RW 节点的写请求 [116]。
+>
 > 细粒度无服务器：现有弹性数据库主要以粗粒度无服务器资源（VM 或 Aurora Capacity Unit 等特定单位）为查询预配资源，但成本效率不高，还可能承受弹性扩缩容的高延迟。一个有前景的方向是结合基于 FaaS 的无服务器计算与数据库：前者启动成本更低，可用来缓解冷启动问题；后者性能更好。挑战在于权衡成本与性能。
 
 SLA-Aware Cloud-Native HTAP: Existing cloud-native HTAP solutions only care about how to improve the HTAP performance, which may not be cost-efficient. For instance, transforming the row data to column data may accelerate query processing, but it also brings the higher dollar cost of memory computing. Two main challenges are 1) how to organize the data storage to achieve the best performance with the satisfied SLA [66], [81], and 2) how to judiciously schedule the resources for OLTP and OLAP workloads with SLA-aware optimization.
 
-> SLA 感知的云原生 HTAP：现有云原生 HTAP 方案只关注提升 HTAP 性能，未必具备成本效率。例如，把行式数据转换为列式数据可能加速查询处理，却也会增加内存计算的费用。两项主要挑战是：1）如何组织数据存储，在满足 SLA [66], [81] 的前提下取得最佳性能；2）如何通过 SLA 感知优化，审慎调度 OLTP 与 OLAP 工作负载的资源。
-
 Multi-Cloud Data Service: As multi-cloud has become available, more and more data-intensive applications can benefit from using multi-cloud data services. However, it also poses new challenges to cloud-native databases with higher complexity. First, it is challenging to provide high availability as the data is stored across the cloud vendor. Thus, data migration in real time can largely affect availability [39]. Second, it is hard to maintain data consistency between the cloud vendors when the data is updated frequently. Third, it is challenging to have a cost-efficient execution plan for query processing as different cloud vendors have different pricing models. Even for the different regions in the same cloud vendor, the offering resources are disparate. A promising direction is sky computing [92], which aims to build an abstraction on top of inter-cloud services. For example, Skyplane [39] has been developed to facilitate data migration across clouds, and the SkyPilot [90] framework has supported the ML workload using multiple cloud providers such as AWS [5], Google Cloud [32], and Azure Cloud [17] simultaneously.
 
+> SLA 感知的云原生 HTAP：现有云原生 HTAP 方案只关注提升 HTAP 性能，未必具备成本效率。例如，把行式数据转换为列式数据可能加速查询处理，却也会增加内存计算的费用。两项主要挑战是：1）如何组织数据存储，在满足 SLA [66], [81] 的前提下取得最佳性能；2）如何通过 SLA 感知优化，审慎调度 OLTP 与 OLAP 工作负载的资源。
+>
 > 多云数据服务：随着多云环境逐渐普及，越来越多的数据密集型应用可从多云数据服务中受益，但这也给云原生数据库带来更复杂的新挑战。第一，数据分布在不同云供应商之间，高可用难以保证，实时数据迁移会显著影响可用性 [39]。第二，数据频繁更新时，难以维持不同云供应商之间的数据一致性。第三，不同云供应商采用不同定价模型，即便同一供应商的不同区域所提供资源也不相同，因此很难为查询处理制定兼具成本效率的执行计划。一个有前景的方向是 Sky computing（天空计算）[92]，旨在跨云服务之上建立统一抽象。例如，Skyplane [39] 用于促进跨云数据迁移；SkyPilot [90] 框架已支持同时使用 AWS [5]、Google Cloud [32] 和 Azure Cloud [17] 等多个云提供商来运行机器学习工作负载。
 
-## VIII. CONCLUSION
-
-> 八、结论
+## VIII. CONCLUSION｜结论
 
 This paper offers a comprehensive survey of cloud-native databases. We summarize the state-of-the-art cloud-native architectures and techniques. We introduce three types of cloud-native OLTP architectures including 1) disaggregated compute-storage OLTP architecture, 2) disaggregated compute-log-storage OLTP Architecture, and 3) disaggregated compute-buffer-storage OLTP architecture. We also introduced their key techniques including data placement, storage layer consistency, compute layer consistency, multi-layer recovery, and HTAP optimization. Furthermore, we present two types of cloud-native OLAP architectures, including two-layered compute-storage OLAP architecture and three-layered compute-memory-storage OLAP architecture. We also summarize their key techniques regarding storage management, query processing, serverless computing, data protection, and machine learning. Finally, we discuss the research challenges and opportunities for cloud-native databases, including multiple write architecture, fine-grained serverless, SLA-aware cloud-native HTAP techniques, and multi-cloud data service.
 
 > 本文对云原生数据库进行了全面综述，总结了最新的云原生架构与技术。本文介绍三类云原生 OLTP 架构：1）计算存储分离式 OLTP 架构；2）计算—日志—存储分离式 OLTP 架构；3）计算—缓冲—存储分离式 OLTP 架构，并讨论其数据放置、存储层一致性、计算层一致性、多层恢复和 HTAP 优化等关键技术。本文还介绍两类云原生 OLAP 架构，即两层计算存储分离式 OLAP 架构和三层计算—内存—存储分离式 OLAP 架构，并总结其存储管理、查询处理、无服务器计算、数据保护和机器学习技术。最后，本文讨论云原生数据库的研究挑战与机遇，包括多写者架构、细粒度无服务器、SLA 感知的云原生 HTAP 技术和多云数据服务。（译注：原文结论使用“multiple write architecture”，与前文 multi-writer architecture 表述不一致；此处保留英文原貌。）
 
-## REFERENCES
-
-> 参考文献
+## REFERENCES｜参考文献
 
 [1] D. Abadi et al., “The seattle report on database research,” Commun. ACM, vol. 65, no. 8, pp. 72–79, 2022.
 
@@ -1391,20 +1326,18 @@ This paper offers a comprehensive survey of cloud-native databases. We summarize
 
 > [116] T. Ziegler, P. A. Bernstein, V. Leis, and C. Binnig，“云中的可扩展 OLTP 问题已解决吗？”，载于 Proc. Conf. Innov. Data Syst. Res.，2023 年。
 
-## AUTHOR BIOGRAPHIES
-
-> 作者简介
+## AUTHOR BIOGRAPHIES｜作者简介
 
 Haowen Dong received the bachelor’s degree in computer science from Tsinghua University. He is currently working toward the PhD degree with Tsinghua University. His research interests focus on cloud-native databases.
 
-> 董浩文获清华大学计算机科学学士学位，目前正在清华大学攻读博士学位，研究兴趣聚焦于云原生数据库。
-
 Chao Zhang received the PhD degree in computer science from the University of Helsinki, Finland. He is a postdoctoral researcher with Tsinghua University. He has given a tutorial on HTAP databases in SIGMOD 2022 and gave a tutorial on cloud databases in VLDB 2022. He serves as a PC member of SIGMOD 2024-2025, VLDB 2023-2024 Tutorial, and ICDE 2023. His research interests focus on heterogeneous database management systems.
-
-> 张超获芬兰赫尔辛基大学计算机科学博士学位，现为清华大学博士后研究员。他曾在 SIGMOD 2022 作 HTAP 数据库教程，并在 VLDB 2022 作云数据库教程；曾任 SIGMOD 2024–2025、VLDB 2023–2024 Tutorial 和 ICDE 2023 程序委员会委员。其研究兴趣聚焦于异构数据库管理系统。
 
 Guoliang Li (Fellow, IEEE) is a full professor with the Department of Computer Science, Tsinghua University. His research interests include database systems, large-scale data cleaning and integration. He received VLDB 2017 early research contribution award, TCDE 2014 early career award, Best of SIGMOD 2023, SIGMOD Research Highlight Award, VLDB 2023 Industry Best Paper Runner-up, DASFAA 2023 Best Paper Award, CIKM 2017 best paper award, and ICDE 2018 best papers. He served as a general chair of SIGMOD 2021, a demo chair of VLDB 2021, and an industry chair of ICDE 2022.
 
+> 董浩文获清华大学计算机科学学士学位，目前正在清华大学攻读博士学位，研究兴趣聚焦于云原生数据库。
+>
+> 张超获芬兰赫尔辛基大学计算机科学博士学位，现为清华大学博士后研究员。他曾在 SIGMOD 2022 作 HTAP 数据库教程，并在 VLDB 2022 作云数据库教程；曾任 SIGMOD 2024–2025、VLDB 2023–2024 Tutorial 和 ICDE 2023 程序委员会委员。其研究兴趣聚焦于异构数据库管理系统。
+>
 > 李国良（IEEE Fellow）是清华大学计算机科学系教授，研究兴趣包括数据库系统、大规模数据清洗与集成。他曾获 VLDB 2017 早期研究贡献奖、TCDE 2014 青年学者奖、Best of SIGMOD 2023、SIGMOD Research Highlight Award、VLDB 2023 工业最佳论文亚军、DASFAA 2023 最佳论文奖、CIKM 2017 最佳论文奖和 ICDE 2018 最佳论文奖；曾任 SIGMOD 2021 大会主席、VLDB 2021 演示主席和 ICDE 2022 工业主席。
 
 Huanchen Zhang received the PhD degree from Computer Science Department, Carnegie Mellon University. He is an assistant professor in the IIIS (Yao Class) with Tsinghua University. His research interest is in database management systems with particular interests in indexing data structures, data compression, and cloud databases. He is the recipient of the 2021 SIGMOD Jim Gray Dissertation Award.
