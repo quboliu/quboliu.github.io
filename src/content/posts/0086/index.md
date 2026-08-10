@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-08-09T12:00:00+08:00
+modDatetime: 2026-08-10T15:01:56+08:00
 timezone: "Asia/Shanghai"
-title: "论文阅读 | Time, Clocks, and the Ordering of Events in a Distributed System（中英对照全文）"
+title: "论文阅读 | Time, Clocks, and the Ordering of Events in a Distributed System｜时间、时钟与分布式系统中的事件排序"
 featured: false
 area: "distributed-systems"
 draft: false
@@ -11,10 +12,10 @@ tags:
   - "分布式系统"
   - "逻辑时钟"
   - "Lamport"
-description: "Leslie Lamport 关于 happened-before、逻辑时钟、全序与物理时钟同步的经典论文，中英逐段对照全文。"
+description: "Leslie Lamport 关于 happened-before、逻辑时钟、全序与物理时钟同步的经典论文，按语义单元编排的中英对照全文。"
 ---
 
-> 时间、时钟与分布式系统中的事件排序
+**Time, Clocks, and the Ordering of Events in a Distributed System｜时间、时钟与分布式系统中的事件排序**
 
 **Operating Systems**<br>
 **R. Stockton Gaines, Editor**
@@ -30,50 +31,48 @@ Massachusetts Computer Associates, Inc.
 
 The concept of one event happening before another in a distributed system is examined, and is shown to define a partial ordering of the events. A distributed algorithm is given for synchronizing a system of logical clocks which can be used to totally order the events. The use of the total ordering is illustrated with a method for solving synchronization problems. The algorithm is then specialized for synchronizing physical clocks, and a bound is derived on how far out of synchrony the clocks can become.
 
-> 本文考察分布式系统中一个事件发生在另一个事件之前这一概念，并说明它定义了事件的偏序。文中给出一种分布式算法，用于同步一组可以为事件建立全序的逻辑时钟；又以一种求解同步问题的方法说明全序的用途。随后，算法被特化为物理时钟同步算法，并推导出各时钟可能失同步到何种程度的上界。
-
 **Key Words and Phrases:** distributed systems, computer networks, clock synchronization, multiprocess systems
-
-> **关键词与短语：** 分布式系统，计算机网络，时钟同步，多进程系统
 
 **CR Categories:** 4.32, 5.29
 
+> 本文考察分布式系统中一个事件发生在另一个事件之前这一概念，并说明它定义了事件的偏序。文中给出一种分布式算法，用于同步一组可以为事件建立全序的逻辑时钟；又以一种求解同步问题的方法说明全序的用途。随后，算法被特化为物理时钟同步算法，并推导出各时钟可能失同步到何种程度的上界。
+>
+> **关键词与短语：** 分布式系统，计算机网络，时钟同步，多进程系统
+>
 > **CR 分类：** 4.32，5.29
 
-## Introduction
-
-> 引言
+## Introduction｜引言
 
 The concept of time is fundamental to our way of thinking. It is derived from the more basic concept of the order in which events occur. We say that something happened at 3:15 if it occurred _after_ our clock read 3:15 and _before_ it read 3:16. The concept of the temporal ordering of events pervades our thinking about systems. For example, in an airline reservation system we specify that a request for a reservation should be granted if it is made _before_ the flight is filled. However, we will see that this concept must be carefully reexamined when considering events in a distributed system.
 
-> 时间概念是我们思维方式的基础。它源自一个更基本的概念，即事件发生的先后次序。所谓某件事发生在 3:15，是指它发生于时钟读数为 3:15 _之后_、读数为 3:16 _之前_。事件的时间次序这一概念贯穿我们对系统的思考。例如，在航空订票系统中，我们规定：如果订票请求是在航班满员*之前*提出的，就应批准该请求。然而，我们将会看到，在考虑分布式系统中的事件时，必须仔细重新审视这一概念。
-
 A distributed system consists of a collection of distinct processes which are spatially separated, and which communicate with one another by exchanging messages. A network of interconnected computers, such as the ARPA net, is a distributed system. A single computer can also be viewed as a distributed system in which the central control unit, the memory units, and the input-output channels are separate processes. A system is distributed if the message transmission delay is not negligible compared to the time between events in a single process.
 
+> 时间概念是我们思维方式的基础。它源自一个更基本的概念，即事件发生的先后次序。所谓某件事发生在 3:15，是指它发生于时钟读数为 3:15 _之后_、读数为 3:16 _之前_。事件的时间次序这一概念贯穿我们对系统的思考。例如，在航空订票系统中，我们规定：如果订票请求是在航班满员*之前*提出的，就应批准该请求。然而，我们将会看到，在考虑分布式系统中的事件时，必须仔细重新审视这一概念。
+>
 > 分布式系统由一组空间上彼此分离的不同进程构成，这些进程通过交换消息相互通信。由计算机互连而成的网络——例如 ARPA 网——就是分布式系统。单台计算机也可以视为分布式系统，其中中央控制单元、存储单元和输入输出通道都是独立进程。如果消息传输延迟与单个进程内两事件之间的时间相比不可忽略，该系统就是分布式的。
 
 We will concern ourselves primarily with systems of spatially separated computers. However, many of our remarks will apply more generally. In particular, a multiprocessing system on a single computer involves problems similar to those of a distributed system because of the unpredictable order in which certain events can occur.
 
-> 我们主要关注由空间上彼此分离的计算机构成的系统。不过，本文许多论述具有更广泛的适用性。特别是，单台计算机上的多进程系统也会遇到与分布式系统类似的问题，因为某些事件的发生次序不可预测。
-
 In a distributed system, it is sometimes impossible to say that one of two events occurred first. The relation “happened before” is therefore only a partial ordering of the events in the system. We have found that problems often arise because people are not fully aware of this fact and its implications.
-
-> 在分布式系统中，有时无法断言两个事件中的哪一个先发生。因此，“先发生于”（happened before）关系只构成系统事件的一个偏序。我们发现，问题往往源于人们没有充分认识到这一事实及其含义。
 
 In this paper, we discuss the partial ordering defined by the “happened before” relation, and give a distributed algorithm for extending it to a consistent total ordering of all the events. This algorithm can provide a useful mechanism for implementing a distributed system. We illustrate its use with a simple method for solving synchronization problems. Unexpected, anomalous behavior can occur if the ordering obtained by this algorithm differs from that perceived by the user. This can be avoided by introducing real, physical clocks. We describe a simple method for synchronizing these clocks, and derive an upper bound on how far out of synchrony they can drift.
 
+> 我们主要关注由空间上彼此分离的计算机构成的系统。不过，本文许多论述具有更广泛的适用性。特别是，单台计算机上的多进程系统也会遇到与分布式系统类似的问题，因为某些事件的发生次序不可预测。
+>
+> 在分布式系统中，有时无法断言两个事件中的哪一个先发生。因此，“先发生于”（happened before）关系只构成系统事件的一个偏序。我们发现，问题往往源于人们没有充分认识到这一事实及其含义。
+>
 > 本文讨论由“先发生于”关系定义的偏序，并给出一种分布式算法，将它扩展为所有事件的一致全序。该算法可以为实现分布式系统提供一种有用机制。我们用一种求解同步问题的简单方法来说明其用途。如果该算法得到的次序与用户感知的次序不同，系统可能出现出乎意料的异常行为。引入真实的物理时钟可以避免这种情况。我们将介绍一种同步这些时钟的简单方法，并推导它们可能偏离同步状态的上界。
 
 General permission to make fair use in teaching or research of all or part of this material is granted to individual readers and to nonprofit libraries acting for them provided that ACM’s copyright notice is given and that reference is made to the publication, to its date of issue, and to the fact that reprinting privileges were granted by permission of the Association for Computing Machinery. To otherwise reprint a figure, table, other substantial excerpt, or the entire work requires specific permission as does republication, or systematic or multiple reproduction.
 
-> 允许个人读者以及代表读者的非营利图书馆在教学或研究中合理使用本材料的全部或部分内容，条件是注明 ACM 的版权声明，并引用本出版物、出版日期以及重印权由 Association for Computing Machinery 授权这一事实。除此之外，重印图、表、其他大段摘录或全文，以及再版、系统性复制或多份复制，均须获得特别许可。
-
 This work was supported by the Advanced Research Projects Agency of the Department of Defense and Rome Air Development Center. It was monitored by Rome Air Development Center under contract number F 30602-76-C-0094.
-
-> 本工作得到美国国防部高级研究计划局和 Rome Air Development Center 的支持，并由 Rome Air Development Center 依据合同 F 30602-76-C-0094 负责监督。
 
 Author’s address: Computer Science Laboratory, SRI International, 333 Ravenswood Ave., Menlo Park CA 94025.
 
+> 允许个人读者以及代表读者的非营利图书馆在教学或研究中合理使用本材料的全部或部分内容，条件是注明 ACM 的版权声明，并引用本出版物、出版日期以及重印权由 Association for Computing Machinery 授权这一事实。除此之外，重印图、表、其他大段摘录或全文，以及再版、系统性复制或多份复制，均须获得特别许可。
+>
+> 本工作得到美国国防部高级研究计划局和 Rome Air Development Center 的支持，并由 Rome Air Development Center 依据合同 F 30602-76-C-0094 负责监督。
+>
 > 作者地址：Computer Science Laboratory, SRI International, 333 Ravenswood Ave., Menlo Park CA 94025。
 
 © 1978 ACM 0001-0782/78/0700-0558 &#36;00.75
@@ -84,16 +83,14 @@ Communications of the ACM, July 1978, Volume 21, Number 7, pp. 558–565.
 
 > 《Communications of the ACM》，1978 年 7 月，第 21 卷，第 7 期，第 558–565 页。
 
-## The Partial Ordering
-
-> 偏序
+## The Partial Ordering｜偏序
 
 Most people would probably say that an event _a_ happened before an event _b_ if _a_ happened at an earlier time than _b_. They might justify this definition in terms of physical theories of time. However, if a system is to meet a specification correctly, then that specification must be given in terms of events observable within the system. If the specification is in terms of physical time, then the system must contain real clocks. Even if it does contain real clocks, there is still the problem that such clocks are not perfectly accurate and do not keep precise physical time. We will therefore define the “happened before” relation without using physical clocks.
 
-> 多数人或许会说，如果事件 _a_ 发生的时间早于事件 _b_，那么 _a_ 就发生在 _b_ 之前。他们可能会用关于时间的物理理论来论证这一定义。然而，若要让系统正确满足某项规范，该规范就必须用系统内部可观察的事件来表述。如果规范以物理时间表述，系统便必须包含真实时钟。即便确有真实时钟，仍存在这些时钟并非完全准确、无法保持精确物理时间的问题。因此，我们将在不使用物理时钟的情况下定义“先发生于”关系。
-
 We begin by defining our system more precisely. We assume that the system is composed of a collection of processes. Each process consists of a sequence of events. Depending upon the application, the execution of a subprogram on a computer could be one event, or the execution of a single machine instruction could be one event. We are assuming that the events of a process form a sequence, where _a_ occurs before _b_ in this sequence if _a_ happens before _b_. In other words, a single process is defined to be a set of events with an _a priori_ total ordering. This seems to be what is generally meant by a process.[^1] It would be trivial to extend our definition to allow a process to split into distinct subprocesses, but we will not bother to do so.
 
+> 多数人或许会说，如果事件 _a_ 发生的时间早于事件 _b_，那么 _a_ 就发生在 _b_ 之前。他们可能会用关于时间的物理理论来论证这一定义。然而，若要让系统正确满足某项规范，该规范就必须用系统内部可观察的事件来表述。如果规范以物理时间表述，系统便必须包含真实时钟。即便确有真实时钟，仍存在这些时钟并非完全准确、无法保持精确物理时间的问题。因此，我们将在不使用物理时钟的情况下定义“先发生于”关系。
+>
 > 我们先更精确地定义系统。假定系统由一组进程构成，每个进程包含一个事件序列。视具体应用而定，计算机上一次子程序执行可以算作一个事件，一条机器指令的执行也可以算作一个事件。我们假定一个进程的事件构成序列；如果 _a_ 先发生于 _b_，则 _a_ 在该序列中位于 _b_ 之前。换言之，单个进程被定义为一组具有*先验*全序的事件。这似乎正是人们通常所说的进程。[^1] 把定义扩展为允许一个进程分裂成不同子进程并不困难，但我们不打算这样做。
 
 [^1]:
@@ -103,14 +100,14 @@ We begin by defining our system more precisely. We assume that the system is com
 
 We assume that sending or receiving a message is an event in a process. We can then define the “happened before” relation, denoted by “→”, as follows.
 
-> 我们假定，发送或接收消息都是进程中的一个事件。于是，可以如下定义以“→”表示的“先发生于”关系。
-
 **Definition.** The relation “→” on the set of events of a system is the smallest relation satisfying the following three conditions: (1) If _a_ and _b_ are events in the same process, and _a_ comes before _b_, then _a_ → _b_. (2) If _a_ is the sending of a message by one process and _b_ is the receipt of the same message by another process, then _a_ → _b_. (3) If _a_ → _b_ and _b_ → _c_ then _a_ → _c_. Two distinct events _a_ and _b_ are said to be _concurrent_ if _a_ ↛ _b_ and _b_ ↛ _a_.
-
-> **定义。** 系统事件集合上的关系“→”是满足以下三个条件的最小关系：(1) 如果 _a_ 和 _b_ 是同一进程中的事件，且 _a_ 位于 _b_ 之前，则 _a_ → _b_；(2) 如果 _a_ 是一个进程发送某条消息的事件，而 _b_ 是另一个进程接收同一消息的事件，则 _a_ → _b_；(3) 如果 _a_ → _b_ 且 _b_ → _c_，则 _a_ → _c_。若两个不同事件 _a_ 和 _b_ 满足 _a_ ↛ _b_ 且 _b_ ↛ _a_，则称二者*并发*。
 
 We assume that _a_ ↛ _a_ for any event _a_. (Systems in which an event can happen before itself do not seem to be physically meaningful.) This implies that → is an irreflexive partial ordering on the set of all events in the system.
 
+> 我们假定，发送或接收消息都是进程中的一个事件。于是，可以如下定义以“→”表示的“先发生于”关系。
+>
+> **定义。** 系统事件集合上的关系“→”是满足以下三个条件的最小关系：(1) 如果 _a_ 和 _b_ 是同一进程中的事件，且 _a_ 位于 _b_ 之前，则 _a_ → _b_；(2) 如果 _a_ 是一个进程发送某条消息的事件，而 _b_ 是另一个进程接收同一消息的事件，则 _a_ → _b_；(3) 如果 _a_ → _b_ 且 _b_ → _c_，则 _a_ → _c_。若两个不同事件 _a_ 和 _b_ 满足 _a_ ↛ _b_ 且 _b_ ↛ _a_，则称二者*并发*。
+>
 > 我们假定任意事件 _a_ 都满足 _a_ ↛ _a_。（一个事件可以发生在自身之前的系统似乎不具有物理意义。）这意味着，→ 是系统全部事件集合上的非自反偏序。
 
 It is helpful to view this definition in terms of a “space-time diagram” such as Figure 1. The horizontal direction represents space, and the vertical direction represents time—later times being higher than earlier ones. The dots denote events, the vertical lines denote processes, and the wavy lines denote messages.[^2] It is easy to see that _a_ → _b_ means that one can go from _a_ to _b_ in the diagram by moving forward in time along process and message lines. For example, we have *p*₁ → *r*₄ in Figure 1.
@@ -124,30 +121,26 @@ It is helpful to view this definition in terms of a “space-time diagram” suc
 
 ![Fig. 1.](./figure-1.png)
 
-**Fig. 1.**
-
-> **图 1。**
+**Fig. 1.｜图。**
 
 > **图表中文解读：** 三条竖线分别表示进程 P、Q、R，越向上时间越晚；圆点是各进程中的事件，波浪箭头是实际发送并被接收的消息。若能沿进程线向上并顺着消息箭头从事件 _a_ 走到事件 _b_，则 _a_ → _b_。例如 *p*₁ → *r*₄；而 *p*₃ 与 *q*₃ 之间不存在任一方向的这种路径，因此二者并发。
 
 Another way of viewing the definition is to say that _a_ → _b_ means that it is possible for event _a_ to causally affect event _b_. Two events are concurrent if neither can causally affect the other. For example, events *p*₃ and *q*₃ of Figure 1 are concurrent. Even though we have drawn the diagram to imply that *q*₃ occurs at an earlier physical time than *p*₃, process P cannot know what process Q did at *q*₃ until it receives the message at *p*₄. (Before event *p*₄, P could at most know what Q was _planning_ to do at *q*₃.)
 
-> 也可以这样理解该定义：_a_ → _b_ 表示事件 _a_ 有可能在因果上影响事件 _b_。如果两个事件谁都无法在因果上影响对方，它们就是并发的。例如，图 1 中的 *p*₃ 和 *q*₃ 是并发事件。尽管图中画成 *q*₃ 的物理发生时间早于 *p*₃，但在进程 P 于 *p*₄ 收到消息之前，它不可能知道进程 Q 在 *q*₃ 做了什么。（在事件 *p*₄ 之前，P 至多只能知道 Q 在 *q*₃ *计划*做什么。）
-
 This definition will appear quite natural to the reader familiar with the invariant space-time formulation of special relativity, as described for example in [1] or the first chapter of [2]. In relativity, the ordering of events is defined in terms of messages that _could_ be sent. However, we have taken the more pragmatic approach of only considering messages that actually _are_ sent. We should be able to determine if a system performed correctly by knowing only those events which _did_ occur, without knowing which events _could have_ occurred.
 
+> 也可以这样理解该定义：_a_ → _b_ 表示事件 _a_ 有可能在因果上影响事件 _b_。如果两个事件谁都无法在因果上影响对方，它们就是并发的。例如，图 1 中的 *p*₃ 和 *q*₃ 是并发事件。尽管图中画成 *q*₃ 的物理发生时间早于 *p*₃，但在进程 P 于 *p*₄ 收到消息之前，它不可能知道进程 Q 在 *q*₃ 做了什么。（在事件 *p*₄ 之前，P 至多只能知道 Q 在 *q*₃ *计划*做什么。）
+>
 > 熟悉狭义相对论不变时空表述的读者会觉得这一定义十分自然，相关表述可见 [1] 或 [2] 第一章。在相对论中，事件次序由那些*可能*发送的消息定义；而我们采取了更务实的做法，只考虑实际*确实*发送的消息。我们应当只凭那些*确实*发生的事件，就能判断系统执行是否正确，而无须知道哪些事件*原本可能*发生。
 
-## Logical Clocks
-
-> 逻辑时钟
+## Logical Clocks｜逻辑时钟
 
 We now introduce clocks into the system. We begin with an abstract point of view in which a clock is just a way of assigning a number to an event, where the number is thought of as the time at which the event occurred. More precisely, we define a clock _Cᵢ_ for each process _Pᵢ_ to be a function which assigns a number _Cᵢ(a)_ to any event _a_ in that process. The entire system of clocks is represented by the function _C_ which assigns to any event _b_ the number _C(b)_, where _C(b) = Cⱼ(b)_ if _b_ is an event in process _Pⱼ_. For now, we make no assumption about the relation of the numbers _Cᵢ(a)_ to physical time, so we can think of the clocks _Cᵢ_ as logical rather than physical clocks. They may be implemented by counters with no actual timing mechanism.
 
-> 现在，我们把时钟引入系统。先从一个抽象视角出发：时钟只是一种给事件赋值的方法，所赋数字被视为该事件发生的时间。更精确地说，我们为每个进程 _Pᵢ_ 定义一个时钟 _Cᵢ_；它是一个函数，为该进程中的任意事件 _a_ 赋予数值 _Cᵢ(a)_。整个时钟系统由函数 _C_ 表示，它为任意事件 _b_ 赋予数值 _C(b)_；如果 _b_ 是进程 _Pⱼ_ 中的事件，则 _C(b) = Cⱼ(b)_。目前我们不对 _Cᵢ(a)_ 与物理时间的关系作任何假设，因此可以把 _Cᵢ_ 看作逻辑时钟而非物理时钟。它们可以用不含实际计时机制的计数器实现。
-
 We now consider what it means for such a system of clocks to be correct. We cannot base our definition of correctness on physical time, since that would require introducing clocks which keep physical time. Our definition must be based on the order in which events occur. The strongest reasonable condition is that if an event _a_ occurs before another event _b_, then _a_ should happen at an earlier time than _b_. We state this condition more formally as follows.
 
+> 现在，我们把时钟引入系统。先从一个抽象视角出发：时钟只是一种给事件赋值的方法，所赋数字被视为该事件发生的时间。更精确地说，我们为每个进程 _Pᵢ_ 定义一个时钟 _Cᵢ_；它是一个函数，为该进程中的任意事件 _a_ 赋予数值 _Cᵢ(a)_。整个时钟系统由函数 _C_ 表示，它为任意事件 _b_ 赋予数值 _C(b)_；如果 _b_ 是进程 _Pⱼ_ 中的事件，则 _C(b) = Cⱼ(b)_。目前我们不对 _Cᵢ(a)_ 与物理时间的关系作任何假设，因此可以把 _Cᵢ_ 看作逻辑时钟而非物理时钟。它们可以用不含实际计时机制的计数器实现。
+>
 > 现在来考虑这样一套时钟系统何谓正确。我们不能把正确性的定义建立在物理时间之上，因为那样就需要引入保持物理时间的时钟。我们的定义必须以事件发生的次序为基础。最强且合理的条件是：若事件 _a_ 发生在另一事件 _b_ 之前，则 _a_ 的时刻应早于 _b_。更形式化地说：
 
 **Clock Condition.** For any events _a_, _b_:
@@ -164,29 +157,27 @@ $$
 
 Note that we cannot expect the converse condition to hold as well, since that would imply that any two concurrent events must occur at the same time. In Figure 1, *p*₂ and *p*₃ are both concurrent with *q*₃, so this would mean that they both must occur at the same time as *q*₃, which would contradict the Clock Condition because *p*₂ → *p*₃.
 
-> 请注意，我们不能期望逆命题也成立，因为那将意味着任意两个并发事件都必须同时发生。在图 1 中，*p*₂ 和 *p*₃ 都与 *q*₃ 并发，因此这会意味着二者都必须与 *q*₃ 同时发生；然而 *p*₂ → *p*₃，这与时钟条件矛盾。
-
 It is easy to see from our definition of the relation “→” that the Clock Condition is satisfied if the following two conditions hold.
-
-> 根据我们对关系“→”的定义，不难看出，只要下列两个条件成立，时钟条件就会得到满足。
 
 **C1.** If _a_ and _b_ are events in process _Pᵢ_, and _a_ comes before _b_, then _Cᵢ(a) < Cᵢ(b)_.
 
+> 请注意，我们不能期望逆命题也成立，因为那将意味着任意两个并发事件都必须同时发生。在图 1 中，*p*₂ 和 *p*₃ 都与 *q*₃ 并发，因此这会意味着二者都必须与 *q*₃ 同时发生；然而 *p*₂ → *p*₃，这与时钟条件矛盾。
+>
+> 根据我们对关系“→”的定义，不难看出，只要下列两个条件成立，时钟条件就会得到满足。
+>
 > **C1。** 若 _a_ 和 _b_ 是进程 _Pᵢ_ 中的事件，且 _a_ 位于 _b_ 之前，则 _Cᵢ(a) < Cᵢ(b)_。
 
 **C2.** If _a_ is the sending of a message by process _Pᵢ_ and _b_ is the receipt of that message by process _Pⱼ_, then _Cᵢ(a) < Cⱼ(b)_.
 
-> **C2。** 若 _a_ 是进程 _Pᵢ_ 发送一条消息的事件，而 _b_ 是进程 _Pⱼ_ 接收该消息的事件，则 _Cᵢ(a) < Cⱼ(b)_。
-
 Let us consider the clocks in terms of a space-time diagram. We imagine that a process’ clock “ticks” through every number, with the ticks occurring between the process’ events. For example, if _a_ and _b_ are consecutive events in process _Pᵢ_ with _Cᵢ(a) = 4_ and _Cᵢ(b) = 7_, then clock ticks 5, 6, and 7 occur between the two events. We draw a dashed “tick line” through all the like-numbered ticks of the different processes. The space-time diagram of Figure 1 might then yield the picture in Figure 2. Condition C1 means that there must be a tick line between any two events on a process line, and condition C2 means that every message line must cross a tick line. From the pictorial meaning of →, it is easy to see why these two conditions imply the Clock Condition.
 
+> **C2。** 若 _a_ 是进程 _Pᵢ_ 发送一条消息的事件，而 _b_ 是进程 _Pⱼ_ 接收该消息的事件，则 _Cᵢ(a) < Cⱼ(b)_。
+>
 > 下面从时空图的角度考察这些时钟。设想进程的时钟“滴答”经过每一个数值，滴答发生在该进程的各个事件之间。例如，若 _a_ 和 _b_ 是进程 _Pᵢ_ 中相邻的两个事件，且 _Cᵢ(a) = 4_、_Cᵢ(b) = 7_，那么时钟滴答 5、6、7 就发生在这两个事件之间。我们画一条虚线“滴答线”，穿过不同进程中编号相同的滴答。这样，图 1 的时空图可能得到图 2 所示的图形。条件 C1 意味着进程线上的任意两个事件之间都必须有一条滴答线；条件 C2 意味着每条消息线都必须穿过一条滴答线。由 → 的图形含义，很容易看出这两个条件为何蕴含时钟条件。
 
 ![Fig. 2.](./figure-2.png)
 
-**Fig. 2.**
-
-> **图 2。**
+**Fig. 2.｜图。**
 
 > **图表中文解读：** 图中仍是进程 P、Q、R 及其事件和消息；虚线连接各进程逻辑时钟中编号相同的滴答。由于各进程时钟推进不同，这些线在图上可以倾斜。C1 要求同一进程的相邻事件之间至少有一条滴答线，C2 要求每条消息线至少穿过一条滴答线，因此消息的接收时刻一定大于发送时刻。
 
@@ -196,43 +187,39 @@ We can consider the tick lines to be the time coordinate lines of some Cartesian
 
 ![Fig. 3.](./figure-3.png)
 
-**Fig. 3.**
-
-> **图 3。**
+**Fig. 3.｜图。**
 
 > **图表中文解读：** 图 3 保留图 2 的同一组进程、事件和消息，只把逻辑时钟的等值滴答线拉直为水平线；事件的竖直间距和消息线形状也随这种重画而改变。这是一种坐标变换后的等价表示，并不表示图 3 比图 2 更接近物理时间。
 
 The reader may find it helpful to visualize a two-dimensional spatial network of processes, which yields a three-dimensional space-time diagram. Processes and messages are still represented by lines, but tick lines become two-dimensional surfaces.
 
-> 读者也许会发现，把进程网络想象成二维空间会有所帮助，这会产生一个三维时空图。进程和消息仍由线表示，但滴答线会变成二维曲面。
-
 Let us now assume that the processes are algorithms, and the events represent certain actions during their execution. We will show how to introduce clocks into the processes which satisfy the Clock Condition. Process _Pᵢ_’s clock is represented by a register _Cᵢ_, so that _Cᵢ(a)_ is the value contained by _Cᵢ_ during the event _a_. The value of _Cᵢ_ will change between events, so changing _Cᵢ_ does not itself constitute an event.
-
-> 现在假定各进程都是算法，而事件表示这些算法执行期间的某些动作。我们将说明如何把满足时钟条件的时钟引入进程。进程 _Pᵢ_ 的时钟用寄存器 _Cᵢ_ 表示，因此 _Cᵢ(a)_ 是事件 _a_ 发生期间 _Cᵢ_ 所含的值。_Cᵢ_ 的值会在事件之间改变，所以改变 _Cᵢ_ 本身并不构成事件。
 
 To guarantee that the system of clocks satisfies the Clock Condition, we will insure that it satisfies conditions C1 and C2. Condition C1 is simple; the processes need only obey the following implementation rule:
 
+> 读者也许会发现，把进程网络想象成二维空间会有所帮助，这会产生一个三维时空图。进程和消息仍由线表示，但滴答线会变成二维曲面。
+>
+> 现在假定各进程都是算法，而事件表示这些算法执行期间的某些动作。我们将说明如何把满足时钟条件的时钟引入进程。进程 _Pᵢ_ 的时钟用寄存器 _Cᵢ_ 表示，因此 _Cᵢ(a)_ 是事件 _a_ 发生期间 _Cᵢ_ 所含的值。_Cᵢ_ 的值会在事件之间改变，所以改变 _Cᵢ_ 本身并不构成事件。
+>
 > 为保证时钟系统满足时钟条件，我们将保证它满足条件 C1 和 C2。条件 C1 很简单；进程只须遵守下列实现规则：
 
 **IR1.** Each process _Pᵢ_ increments _Cᵢ_ between any two successive events.
 
-> **IR1。** 每个进程 _Pᵢ_ 都在任意两个相继事件之间递增 _Cᵢ_。
-
 To meet condition C2, we require that each message _m_ contain a timestamp _Tₘ_ which equals the time at which the message was sent. Upon receiving a message timestamped _Tₘ_, a process must advance its clock to be later than _Tₘ_. More precisely, we have the following rule.
-
-> 为满足条件 C2，我们要求每条消息 _m_ 都包含时间戳 _Tₘ_，其值等于消息发送时的时间。收到带有时间戳 _Tₘ_ 的消息后，进程必须把自己的时钟推进到晚于 _Tₘ_。更精确地说，有如下规则。
 
 **IR2.** (a) If event _a_ is the sending of a message _m_ by process _Pᵢ_, then the message _m_ contains a timestamp _Tₘ = Cᵢ(a)_. (b) Upon receiving a message _m_, process _Pⱼ_ sets _Cⱼ_ greater than or equal to its present value and greater than _Tₘ_.
 
+> **IR1。** 每个进程 _Pᵢ_ 都在任意两个相继事件之间递增 _Cᵢ_。
+>
+> 为满足条件 C2，我们要求每条消息 _m_ 都包含时间戳 _Tₘ_，其值等于消息发送时的时间。收到带有时间戳 _Tₘ_ 的消息后，进程必须把自己的时钟推进到晚于 _Tₘ_。更精确地说，有如下规则。
+>
 > **IR2。** (a) 若事件 _a_ 是进程 _Pᵢ_ 发送消息 _m_，则消息 _m_ 包含时间戳 _Tₘ = Cᵢ(a)_；(b) 进程 _Pⱼ_ 收到消息 _m_ 后，把 _Cⱼ_ 设置为不小于其当前值且大于 _Tₘ_ 的值。
 
 In IR2(b) we consider the event which represents the receipt of the message _m_ to occur after the setting of _Cⱼ_. (This is just a notational nuisance, and is irrelevant in any actual implementation.) Obviously, IR2 insures that C2 is satisfied. Hence, the simple implementation rules IR1 and IR2 imply that the Clock Condition is satisfied, so they guarantee a correct system of logical clocks.
 
 > 在 IR2(b) 中，我们把表示接收消息 _m_ 的事件视为发生在设置 _Cⱼ_ 之后。（这只是一点记号上的麻烦，对任何实际实现都无关紧要。）显然，IR2 保证 C2 成立。因此，简单的实现规则 IR1 和 IR2 蕴含时钟条件成立，从而保证得到一套正确的逻辑时钟。
 
-## Ordering the Events Totally
-
-> 对事件作全序排列
+## Ordering the Events Totally｜对事件作全序排列
 
 We can use a system of clocks satisfying the Clock Condition to place a total ordering on the set of all system events. We simply order the events by the times at which they occur. To break ties, we use any arbitrary total ordering < of the processes. More precisely, we define a relation ⇒ as follows: if _a_ is an event in process _Pᵢ_ and _b_ is an event in process _Pⱼ_, then _a_ ⇒ _b_ if and only if either (i) _Cᵢ(a) < Cⱼ(b)_ or (ii) _Cᵢ(a) = Cⱼ(b)_ and _Pᵢ < Pⱼ_. It is easy to see that this defines a total ordering, and that the Clock Condition implies that if _a_ → _b_ then _a_ ⇒ _b_. In other words, the relation ⇒ is a way of completing the “happened before” partial ordering to a total ordering.[^3]
 
@@ -245,18 +232,18 @@ We can use a system of clocks satisfying the Clock Condition to place a total or
 
 The ordering ⇒ depends upon the system of clocks _Cᵢ_, and is not unique. Different choices of clocks which satisfy the Clock Condition yield different relations ⇒. Given any total ordering relation ⇒ which extends →, there is a system of clocks satisfying the Clock Condition which yields that relation. It is only the partial ordering → which is uniquely determined by the system of events.
 
-> 全序 ⇒ 取决于时钟系统 _Cᵢ_，并不唯一。选择不同的、满足时钟条件的时钟，会得到不同的关系 ⇒。给定任意扩展 → 的全序关系 ⇒，都存在一套满足时钟条件并产生该关系的时钟。唯有偏序 → 是由事件系统唯一确定的。
-
 Being able to totally order the events can be very useful in implementing a distributed system. In fact, the reason for implementing a correct system of logical clocks is to obtain such a total ordering. We will illustrate the use of this total ordering of events by solving the following version of the mutual exclusion problem. Consider a system composed of a fixed collection of processes which share a single resource. Only one process can use the resource at a time, so the processes must synchronize themselves to avoid conflict. We wish to find an algorithm for granting the resource to a process which satisfies the following three conditions: (I) A process which has been granted the resource must release it before it can be granted to another process. (II) Different requests for the resource must be granted in the order in which they are made. (III) If every process which is granted the resource eventually releases it, then every request is eventually granted.
 
+> 全序 ⇒ 取决于时钟系统 _Cᵢ_，并不唯一。选择不同的、满足时钟条件的时钟，会得到不同的关系 ⇒。给定任意扩展 → 的全序关系 ⇒，都存在一套满足时钟条件并产生该关系的时钟。唯有偏序 → 是由事件系统唯一确定的。
+>
 > 能够对事件作全序排列，对实现分布式系统会很有用。事实上，实现一套正确逻辑时钟的目的正是获得这种全序。我们将求解下述版本的互斥问题，以说明如何运用事件全序。考虑一个由固定进程集合组成的系统，它们共享单一资源。任一时刻只能有一个进程使用该资源，因此各进程必须彼此同步以避免冲突。我们希望找到一个把资源授予进程的算法，并满足以下三个条件：(I) 已获得资源的进程必须先释放资源，资源才能授予另一进程；(II) 不同的资源请求必须按其提出的先后次序获得满足；(III) 若每个获得资源的进程最终都会释放资源，则每个请求最终都会获得满足。
 
 We assume that the resource is initially granted to exactly one process.
 
-> 我们假定，初始时资源恰好授予一个进程。
-
 These are perfectly natural requirements. They precisely specify what it means for a solution to be correct.[^4] Observe how the conditions involve the ordering of events. Condition II says nothing about which of two concurrently issued requests should be granted first.
 
+> 我们假定，初始时资源恰好授予一个进程。
+>
 > 这些要求十分自然，它们精确规定了解法何谓正确。[^4] 请注意这些条件如何涉及事件的次序。条件 II 并未规定同时发出的两个请求中哪一个应先获满足。
 
 [^4]:
@@ -266,22 +253,22 @@ These are perfectly natural requirements. They precisely specify what it means f
 
 It is important to realize that this is a nontrivial problem. Using a central scheduling process which grants requests in the order they are received will not work, unless additional assumptions are made. To see this, let _P₀_ be the scheduling process. Suppose _P₁_ sends a request to _P₀_ and then sends a message to _P₂_. Upon receiving the latter message, _P₂_ sends a request to _P₀_. It is possible for _P₂_’s request to reach _P₀_ before _P₁_’s request does. Condition II is then violated if _P₂_’s request is granted first.
 
-> 必须认识到，这并不是一个平凡问题。除非增加额外假设，否则用一个中央调度进程按收到请求的顺序予以满足并不可行。为说明这一点，设 _P₀_ 为调度进程。假定 _P₁_ 向 _P₀_ 发送请求，随后又向 _P₂_ 发送一条消息；_P₂_ 收到后一条消息时，向 _P₀_ 发送请求。_P₂_ 的请求可能先于 _P₁_ 的请求到达 _P₀_。若先满足 _P₂_ 的请求，就会违反条件 II。
-
 To solve the problem, we implement a system of clocks with rules IR1 and IR2, and use them to define a total ordering ⇒ of all events. This provides a total ordering of all request and release operations. With this ordering, finding a solution becomes a straightforward exercise. It just involves making sure that each process learns about all other processes’ operations.
-
-> 为解决该问题，我们用规则 IR1 和 IR2 实现一套时钟系统，并用它定义全部事件的全序 ⇒。这样便得到全部请求和释放操作的全序。有了这一排序，寻找解法便成为一项直接的工作，只需保证每个进程都获知所有其他进程的操作。
 
 To simplify the problem, we make some assumptions. They are not essential, but they are introduced to avoid distracting implementation details. We assume first of all that for any two processes _Pᵢ_ and _Pⱼ_, the messages sent from _Pᵢ_ to _Pⱼ_ are received in the same order as they are sent. Moreover, we assume that every message is eventually received. (These assumptions can be avoided by introducing message numbers and message acknowledgment protocols.) We also assume that a process can send messages directly to every other process.
 
+> 必须认识到，这并不是一个平凡问题。除非增加额外假设，否则用一个中央调度进程按收到请求的顺序予以满足并不可行。为说明这一点，设 _P₀_ 为调度进程。假定 _P₁_ 向 _P₀_ 发送请求，随后又向 _P₂_ 发送一条消息；_P₂_ 收到后一条消息时，向 _P₀_ 发送请求。_P₂_ 的请求可能先于 _P₁_ 的请求到达 _P₀_。若先满足 _P₂_ 的请求，就会违反条件 II。
+>
+> 为解决该问题，我们用规则 IR1 和 IR2 实现一套时钟系统，并用它定义全部事件的全序 ⇒。这样便得到全部请求和释放操作的全序。有了这一排序，寻找解法便成为一项直接的工作，只需保证每个进程都获知所有其他进程的操作。
+>
 > 为简化问题，我们作出若干假设。它们并非本质要求，引入它们只是为了避免无关紧要的实现细节。首先假定，对于任意两个进程 _Pᵢ_ 和 _Pⱼ_，从 _Pᵢ_ 发往 _Pⱼ_ 的消息按发送顺序被接收。还假定每条消息最终都会被接收。（通过引入消息编号和消息确认协议，可以不作这些假设。）此外还假定，一个进程能够直接向其他每个进程发送消息。
 
 Each process maintains its own request queue which is never seen by any other process. We assume that the request queues initially contain the single message _T₀:P₀ requests resource_, where _P₀_ is the process initially granted the resource and _T₀_ is less than the initial value of any clock.
 
-> 每个进程维护自己的请求队列，其他进程永远看不到这个队列。假定各请求队列初始时只含一条消息 _T₀:P₀ requests resource_（_T₀:P₀ 请求资源_），其中 _P₀_ 是初始获得资源的进程，且 _T₀_ 小于任一时钟的初始值。
-
 The algorithm is then defined by the following five rules. For convenience, the actions defined by each rule are assumed to form a single event.
 
+> 每个进程维护自己的请求队列，其他进程永远看不到这个队列。假定各请求队列初始时只含一条消息 _T₀:P₀ requests resource_（_T₀:P₀ 请求资源_），其中 _P₀_ 是初始获得资源的进程，且 _T₀_ 小于任一时钟的初始值。
+>
 > 于是，该算法由以下五条规则定义。为方便起见，假定每条规则所定义的动作构成单个事件。
 
 1. To request the resource, process _Pᵢ_ sends the message _Tₘ:Pᵢ requests resource_ to every other process, and puts that message on its request queue, where _Tₘ_ is the timestamp of the message.
@@ -316,14 +303,14 @@ The algorithm is then defined by the following five rules. For convenience, the 
 
 Note that conditions (i) and (ii) of rule 5 are tested locally by _Pᵢ_.
 
-> 请注意，规则 5 的条件 (i) 和 (ii) 均由 _Pᵢ_ 在本地检验。
-
 It is easy to verify that the algorithm defined by these rules satisfies conditions I–III. First of all, observe that condition (ii) of rule 5, together with the assumption that messages are received in order, guarantees that _Pᵢ_ has learned about all requests which preceded its current request. Since rules 3 and 4 are the only ones which delete messages from the request queue, it is then easy to see that condition I holds. Condition II follows from the fact that the total ordering ⇒ extends the partial ordering →. Rule 2 guarantees that after _Pᵢ_ requests the resource, condition (ii) of rule 5 will eventually hold. Rules 3 and 4 imply that if each process which is granted the resource eventually releases it, then condition (i) of rule 5 will eventually hold, thus proving condition III.
-
-> 不难验证，由这些规则定义的算法满足条件 I–III。首先，规则 5 的条件 (ii) 与消息按序接收这一假设共同保证，_Pᵢ_ 已经获知所有先于其当前请求的请求。由于只有规则 3 和 4 会从请求队列删除消息，很容易看出条件 I 成立。全序 ⇒ 扩展了偏序 →，故条件 II 成立。规则 2 保证 _Pᵢ_ 请求资源后，规则 5 的条件 (ii) 最终会成立。规则 3 和 4 表明，若每个获得资源的进程最终都释放资源，规则 5 的条件 (i) 最终就会成立，从而证明条件 III。
 
 This is a distributed algorithm. Each process independently follows these rules, and there is no central synchronizing process or central storage. This approach can be generalized to implement any desired synchronization for such a distributed multiprocess system. The synchronization is specified in terms of a State Machine, consisting of a set _C_ of possible commands, a set _S_ of possible states, and a function _e: C × S → S_. The relation _e(C, S) = S′_ means that executing the command _C_ with the machine in state _S_ causes the machine state to change to _S′_. In our example, the set _C_ consists of all the commands _Pᵢ requests resource_ and _Pᵢ releases resource_, and the state consists of a queue of waiting request commands, where the request at the head of the queue is the currently granted one. Executing a request command adds the request to the tail of the queue, and executing a release command removes a command from the queue.[^7]
 
+> 请注意，规则 5 的条件 (i) 和 (ii) 均由 _Pᵢ_ 在本地检验。
+>
+> 不难验证，由这些规则定义的算法满足条件 I–III。首先，规则 5 的条件 (ii) 与消息按序接收这一假设共同保证，_Pᵢ_ 已经获知所有先于其当前请求的请求。由于只有规则 3 和 4 会从请求队列删除消息，很容易看出条件 I 成立。全序 ⇒ 扩展了偏序 →，故条件 II 成立。规则 2 保证 _Pᵢ_ 请求资源后，规则 5 的条件 (ii) 最终会成立。规则 3 和 4 表明，若每个获得资源的进程最终都释放资源，规则 5 的条件 (i) 最终就会成立，从而证明条件 III。
+>
 > 这是一个分布式算法。每个进程都独立遵循这些规则，不存在中央同步进程或中央存储。这一方法可以推广，用于实现这种分布式多进程系统中任何所需的同步。同步以状态机来规定；状态机由可能命令的集合 _C_、可能状态的集合 _S_，以及函数 _e: C × S → S_ 构成。关系 _e(C, S) = S′_ 表示：机器处于状态 _S_ 时执行命令 _C_，会使机器状态变为 _S′_。在本例中，集合 _C_ 由所有命令 _Pᵢ requests resource_（_Pᵢ 请求资源_）和 _Pᵢ releases resource_（_Pᵢ 释放资源_）构成；状态则由等待中的请求命令队列构成，队首请求就是当前获准的请求。执行请求命令会把请求加到队尾，执行释放命令会从队列中删除一条命令。[^7]
 
 [^7]:
@@ -333,38 +320,36 @@ This is a distributed algorithm. Each process independently follows these rules,
 
 Each process independently simulates the execution of the State Machine, using the commands issued by all the processes. Synchronization is achieved because all processes order the commands according to their timestamps (using the relation ⇒), so each process uses the same sequence of commands. A process can execute a command timestamped _T_ when it has learned of all commands issued by all other processes with timestamps less than or equal to _T_. The precise algorithm is straightforward, and we will not bother to describe it.
 
-> 每个进程都使用所有进程发出的命令，独立模拟状态机的执行。之所以能够实现同步，是因为所有进程都按命令的时间戳排序（使用关系 ⇒），所以各进程采用同一命令序列。当一个进程已经获知其他所有进程发出的、时间戳小于或等于 _T_ 的全部命令时，它就可以执行时间戳为 _T_ 的命令。精确算法十分直接，这里不再赘述。
-
 This method allows one to implement any desired form of multiprocess synchronization in a distributed system. However, the resulting algorithm requires the active participation of all the processes. A process must know all the commands issued by other processes, so that the failure of a single process will make it impossible for any other process to execute State Machine commands, thereby halting the system.
 
+> 每个进程都使用所有进程发出的命令，独立模拟状态机的执行。之所以能够实现同步，是因为所有进程都按命令的时间戳排序（使用关系 ⇒），所以各进程采用同一命令序列。当一个进程已经获知其他所有进程发出的、时间戳小于或等于 _T_ 的全部命令时，它就可以执行时间戳为 _T_ 的命令。精确算法十分直接，这里不再赘述。
+>
 > 这种方法可以在分布式系统中实现任何所需形式的多进程同步。然而，由此得到的算法要求所有进程都积极参与。一个进程必须知道其他进程发出的全部命令，所以只要有一个进程失效，其他进程就无法执行状态机命令，从而使系统停顿。
 
 The problem of failure is a difficult one, and it is beyond the scope of this paper to discuss it in any detail. We will just observe that the entire concept of failure is only meaningful in the context of physical time. Without physical time, there is no way to distinguish a failed process from one which is just pausing between events. A user can tell that a system has “crashed” only because he has been waiting too long for a response. A method which works despite the failure of individual processes or communication lines is described in [3].
 
 > 失效问题很困难，详细讨论它超出了本文范围。这里只指出：整个失效概念只有在物理时间的语境中才有意义。没有物理时间，就无法区分失效进程与仅仅在两个事件之间暂停的进程。用户之所以能判断系统已经“崩溃”，只是因为等待响应的时间过长。[3] 描述了一种即使个别进程或通信线路失效也能工作的方案。
 
-## Anomalous Behavior
-
-> 异常行为
+## Anomalous Behavior｜异常行为
 
 Our resource scheduling algorithm ordered the requests according to the total ordering ⇒. This permits the following type of “anomalous behavior.” Consider a nationwide system of interconnected computers. Suppose a person issues a request _A_ on a computer _A_, and then telephones a friend in another city to have him issue a request _B_ on a different computer _B_. It is quite possible for request _B_ to receive a lower timestamp and be ordered before request _A_. This can happen because the system has no way of knowing that _A_ actually preceded _B_, since that precedence information is based on messages external to the system.
 
-> 我们的资源调度算法按照全序 ⇒ 对请求排序。这会允许出现下面这种“异常行为”。考虑一个由互连计算机构成的全国性系统。假定某人在计算机 _A_ 上发出请求 _A_，随后打电话给另一个城市的朋友，请他在另一台计算机 _B_ 上发出请求 _B_。请求 _B_ 很可能获得更小的时间戳，从而排在请求 _A_ 之前。这之所以可能发生，是因为系统无法知道 _A_ 实际上先于 _B_；这种先后信息来自系统外部的消息。
-
 Let us examine the source of the problem more closely. Let \(\mathcal{S}\) be the set of all system events. Let us introduce a set \(\underline{\mathcal{S}}\) of events which contains the events in \(\mathcal{S}\) together with all other relevant external events, such as the phone calls in our example. Let \(\underline{\rightarrow}\) denote the “happened before” relation for \(\underline{\mathcal{S}}\). In our example, we had _A_ \(\underline{\rightarrow}\) _B_, but _A_ ↛ _B_. It is obvious that no algorithm based entirely upon events in \(\mathcal{S}\), and which does not relate those events in any way with the other events in \(\underline{\mathcal{S}}\), can guarantee that request _A_ is ordered before request _B_.
 
+> 我们的资源调度算法按照全序 ⇒ 对请求排序。这会允许出现下面这种“异常行为”。考虑一个由互连计算机构成的全国性系统。假定某人在计算机 _A_ 上发出请求 _A_，随后打电话给另一个城市的朋友，请他在另一台计算机 _B_ 上发出请求 _B_。请求 _B_ 很可能获得更小的时间戳，从而排在请求 _A_ 之前。这之所以可能发生，是因为系统无法知道 _A_ 实际上先于 _B_；这种先后信息来自系统外部的消息。
+>
 > 进一步考察问题的根源。令 \(\mathcal{S}\) 为全部系统事件的集合。再引入事件集合 \(\underline{\mathcal{S}}\)，它包含 \(\mathcal{S}\) 中的事件以及所有其他相关的外部事件，例如本例中的电话通话。用 \(\underline{\rightarrow}\) 表示 \(\underline{\mathcal{S}}\) 上的“先发生于”关系。在本例中，_A_ \(\underline{\rightarrow}\) _B_，但 _A_ ↛ _B_。显然，若一个算法完全以 \(\mathcal{S}\) 中的事件为基础，而且不以任何方式把这些事件同 \(\underline{\mathcal{S}}\) 中的其他事件关联起来，就不可能保证请求 _A_ 排在请求 _B_ 之前。
 
 There are two possible ways to avoid such anomalous behavior. The first way is to explicitly introduce into the system the necessary information about the ordering \(\underline{\rightarrow}\). In our example, the person issuing request _A_ could receive the timestamp \(T_A\) of that request from the system. When issuing request _B_, his friend could specify that _B_ be given a timestamp later than \(T_A\). This gives the user the responsibility for avoiding anomalous behavior.
 
-> 有两种可能的办法可避免这种异常行为。第一种办法，是把关于次序 \(\underline{\rightarrow}\) 的必要信息显式引入系统。在本例中，发出请求 _A_ 的人可以从系统取得该请求的时间戳 \(T_A\)；他的朋友发出请求 _B_ 时，可以指定给 _B_ 一个晚于 \(T_A\) 的时间戳。这就把避免异常行为的责任交给了用户。
-
 The second approach is to construct a system of clocks which satisfies the following condition.
-
-> 第二种办法，是构造一套满足下列条件的时钟。
 
 **Strong Clock Condition.** For any events _a_, _b_ in \(\mathcal{S}\):
 
+> 有两种可能的办法可避免这种异常行为。第一种办法，是把关于次序 \(\underline{\rightarrow}\) 的必要信息显式引入系统。在本例中，发出请求 _A_ 的人可以从系统取得该请求的时间戳 \(T_A\)；他的朋友发出请求 _B_ 时，可以指定给 _B_ 一个晚于 \(T_A\) 的时间戳。这就把避免异常行为的责任交给了用户。
+>
+> 第二种办法，是构造一套满足下列条件的时钟。
+>
 > **强时钟条件。** 对 \(\mathcal{S}\) 中任意事件 _a_、_b_：
 
 $$
@@ -377,15 +362,13 @@ $$
 
 This is stronger than the ordinary Clock Condition because \(\underline{\rightarrow}\) is a stronger relation than →. It is not in general satisfied by our logical clocks.
 
-> 这比普通时钟条件更强，因为 \(\underline{\rightarrow}\) 是比 → 更强的关系。一般而言，我们的逻辑时钟并不满足这一条件。
-
 Let us identify \(\underline{\mathcal{S}}\) with some set of “real” events in physical space-time, and let \(\underline{\rightarrow}\) be the partial ordering of events defined by special relativity. One of the mysteries of the universe is that it is possible to construct a system of physical clocks which, running quite independently of one another, will satisfy the Strong Clock Condition. We can therefore use physical clocks to eliminate anomalous behavior. We now turn our attention to such clocks.
 
+> 这比普通时钟条件更强，因为 \(\underline{\rightarrow}\) 是比 → 更强的关系。一般而言，我们的逻辑时钟并不满足这一条件。
+>
 > 现在把 \(\underline{\mathcal{S}}\) 等同于物理时空中某组“真实”事件，并令 \(\underline{\rightarrow}\) 为狭义相对论所定义的事件偏序。宇宙的奥妙之一就在于：可以构造一套物理时钟，它们虽各自相当独立地运行，却能满足强时钟条件。因此，我们可以用物理时钟消除异常行为。下面转而讨论这种时钟。
 
-## Physical Clocks
-
-> 物理时钟
+## Physical Clocks｜物理时钟
 
 Let us introduce a physical time coordinate into our space-time picture, and let _Cᵢ(t)_ denote the reading of the clock _Cᵢ_ at physical time _t_.[^8] For mathematical convenience, we assume that the clocks run continuously rather than in discrete “ticks.” (A discrete clock can be thought of as a continuous one in which there is an error of up to ½ “tick” in reading it.) More precisely, we assume that _Cᵢ(t)_ is a continuous, differentiable function of _t_ except for isolated jump discontinuities where the clock is reset. Then _dCᵢ(t)/dt_ represents the rate at which the clock is running at time _t_.
 
@@ -398,10 +381,10 @@ Let us introduce a physical time coordinate into our space-time picture, and let
 
 In order for the clock _Cᵢ_ to be a true physical clock, it must run at approximately the correct rate. That is, we must have _dCᵢ(t)/dt ≈ 1_ for all _t_. More precisely, we will assume that the following condition is satisfied:
 
-> 时钟 _Cᵢ_ 要成为真正的物理时钟，就必须以近似正确的速率运行。也就是说，对所有 _t_ 都必须有 _dCᵢ(t)/dt ≈ 1_。更精确地，我们假定满足下列条件：
-
 **PC1.** There exists a constant \(\kappa \ll 1\) such that for all _i_:
 
+> 时钟 _Cᵢ_ 要成为真正的物理时钟，就必须以近似正确的速率运行。也就是说，对所有 _t_ 都必须有 _dCᵢ(t)/dt ≈ 1_。更精确地，我们假定满足下列条件：
+>
 > **PC1。** 存在常数 \(\kappa \ll 1\)，使得对所有 _i_：
 
 $$
@@ -414,26 +397,26 @@ $$
 
 For typical crystal controlled clocks, \(\kappa \le 10^{-6}\).
 
-> 对典型的晶体控制时钟，\(\kappa \le 10^{-6}\)。
-
 It is not enough for the clocks individually to run at approximately the correct rate. They must be synchronized so that _Cᵢ(t) ≈ Cⱼ(t)_ for all _i_, _j_, and _t_. More precisely, there must be a sufficiently small constant \(\epsilon\) so that the following condition holds:
-
-> 各时钟分别以近似正确的速率运行还不够。它们必须同步，使所有 _i_、_j_ 和 _t_ 都满足 _Cᵢ(t) ≈ Cⱼ(t)_。更精确地，必须存在充分小的常数 \(\epsilon\)，使下列条件成立：
 
 **PC2.** For all _i_, _j_: \(\left|C_i(t)-C_j(t)\right|<\epsilon\).
 
+> 对典型的晶体控制时钟，\(\kappa \le 10^{-6}\)。
+>
+> 各时钟分别以近似正确的速率运行还不够。它们必须同步，使所有 _i_、_j_ 和 _t_ 都满足 _Cᵢ(t) ≈ Cⱼ(t)_。更精确地，必须存在充分小的常数 \(\epsilon\)，使下列条件成立：
+>
 > **PC2。** 对所有 _i_、_j_：\(\left|C_i(t)-C_j(t)\right|<\epsilon\)。
 
 If we consider vertical distance in Figure 2 to represent physical time, then PC2 states that the variation in height of a single tick line is less than \(\epsilon\).
 
-> 若把图 2 中的竖直距离视为物理时间，则 PC2 表示一条滴答线的高度变化小于 \(\epsilon\)。
-
 Since two different clocks will never run at exactly the same rate, they will tend to drift further and further apart. We must therefore devise an algorithm to insure that PC2 always holds. First, however, let us examine how small \(\kappa\) and \(\epsilon\) must be to prevent anomalous behavior. We must insure that the system \(\underline{\mathcal{S}}\) of relevant physical events satisfies the Strong Clock Condition. We assume that our clocks satisfy the ordinary Clock Condition, so we need only require that the Strong Clock Condition holds when _a_ and _b_ are events in \(\mathcal{S}\) with _a_ ↛ _b_. Hence, we need only consider events occurring in different processes.
-
-> 由于两个不同的时钟绝不会以完全相同的速率运行，它们往往会漂移得越来越远。因此，必须设计一种算法来保证 PC2 始终成立。不过，首先来考察 \(\kappa\) 和 \(\epsilon\) 必须小到什么程度才能防止异常行为。必须保证相关物理事件系统 \(\underline{\mathcal{S}}\) 满足强时钟条件。我们假定时钟满足普通时钟条件，因此只需在 _a_ 和 _b_ 是 \(\mathcal{S}\) 中的事件且 _a_ ↛ _b_ 时要求强时钟条件成立。于是，只须考虑发生在不同进程中的事件。
 
 Let \(\mu\) be a number such that if event _a_ occurs at physical time _t_ and event _b_ in another process satisfies _a_ \(\underline{\rightarrow}\) _b_, then _b_ occurs later than physical time \(t+\mu\). In other words, \(\mu\) is less than the shortest transmission time for interprocess messages. We can always choose \(\mu\) equal to the shortest distance between processes divided by the speed of light. However, depending upon how messages in \(\underline{\mathcal{S}}\) are transmitted, \(\mu\) could be significantly larger.
 
+> 若把图 2 中的竖直距离视为物理时间，则 PC2 表示一条滴答线的高度变化小于 \(\epsilon\)。
+>
+> 由于两个不同的时钟绝不会以完全相同的速率运行，它们往往会漂移得越来越远。因此，必须设计一种算法来保证 PC2 始终成立。不过，首先来考察 \(\kappa\) 和 \(\epsilon\) 必须小到什么程度才能防止异常行为。必须保证相关物理事件系统 \(\underline{\mathcal{S}}\) 满足强时钟条件。我们假定时钟满足普通时钟条件，因此只需在 _a_ 和 _b_ 是 \(\mathcal{S}\) 中的事件且 _a_ ↛ _b_ 时要求强时钟条件成立。于是，只须考虑发生在不同进程中的事件。
+>
 > 令 \(\mu\) 为满足下述性质的数：若事件 _a_ 发生在物理时刻 _t_，而另一进程中的事件 _b_ 满足 _a_ \(\underline{\rightarrow}\) _b_，则 _b_ 发生在物理时刻 \(t+\mu\) 之后。换言之，\(\mu\) 小于进程间消息的最短传输时间。始终可以把 \(\mu\) 取为进程间最短距离除以光速。不过，根据 \(\underline{\mathcal{S}}\) 中消息的传输方式，\(\mu\) 可能大得多。
 
 To avoid anomalous behavior, we must make sure that for any _i_, _j_, and _t_: \(C_i(t+\mu)-C_j(t)>0\). Combining this with PC1 and 2 allows us to relate the required smallness of \(\kappa\) and \(\epsilon\) to the value of \(\mu\) as follows. We assume that when a clock is reset, it is always set forward and never back. (Setting it back could cause C1 to be violated.) PC1 then implies that \(C_i(t+\mu)-C_i(t)>(1-\kappa)\mu\). Using PC2, it is then easy to deduce that \(C_i(t+\mu)-C_j(t)>0\) if the following inequality holds:
@@ -450,22 +433,22 @@ $$
 
 This inequality together with PC1 and PC2 implies that anomalous behavior is impossible.
 
-> 该不等式与 PC1、PC2 共同蕴含异常行为不可能发生。
-
 We now describe our algorithm for insuring that PC2 holds. Let _m_ be a message which is sent at physical time _t_ and received at time _t′_. We define \(\nu_m=t'-t\) to be the _total delay_ of the message _m_. This delay will, of course, not be known to the process which receives _m_. However, we assume that the receiving process knows some _minimum delay_ \(\mu_m\ge0\) such that \(\mu_m\le\nu_m\). We call \(\xi_m=\nu_m-\mu_m\) the _unpredictable delay_ of the message.
-
-> 下面说明保证 PC2 成立的算法。设消息 _m_ 在物理时刻 _t_ 发送，在时刻 _t′_ 被接收。定义 \(\nu_m=t'-t\) 为消息 _m_ 的*总延迟*。接收 _m_ 的进程当然并不知道这个延迟。不过，我们假定接收进程知道某个*最小延迟* \(\mu_m\ge0\)，并有 \(\mu_m\le\nu_m\)。把 \(\xi_m=\nu_m-\mu_m\) 称为该消息的*不可预测延迟*。
 
 We now specialize rules IR1 and 2 for our physical clocks as follows:
 
+> 该不等式与 PC1、PC2 共同蕴含异常行为不可能发生。
+>
+> 下面说明保证 PC2 成立的算法。设消息 _m_ 在物理时刻 _t_ 发送，在时刻 _t′_ 被接收。定义 \(\nu_m=t'-t\) 为消息 _m_ 的*总延迟*。接收 _m_ 的进程当然并不知道这个延迟。不过，我们假定接收进程知道某个*最小延迟* \(\mu_m\ge0\)，并有 \(\mu_m\le\nu_m\)。把 \(\xi_m=\nu_m-\mu_m\) 称为该消息的*不可预测延迟*。
+>
 > 现在把规则 IR1 和 2 针对物理时钟具体化如下：
 
 **IR1′.** For each _i_, if _Pᵢ_ does not receive a message at physical time _t_, then _Cᵢ_ is differentiable at _t_ and \(dC_i(t)/dt>0\).
 
-> **IR1′。** 对每个 _i_，如果 _Pᵢ_ 在物理时刻 _t_ 没有接收消息，则 _Cᵢ_ 在 _t_ 处可微，且 \(dC_i(t)/dt>0\)。
-
 **IR2′.** (a) If _Pᵢ_ sends a message _m_ at physical time _t_, then _m_ contains a timestamp \(T_m=C_i(t)\). (b) Upon receiving a message _m_ at time _t′_, process _Pⱼ_ sets \(C_j(t')\) equal to maximum \((C_j(t'-0),T_m+\mu_m)\).[^9]
 
+> **IR1′。** 对每个 _i_，如果 _Pᵢ_ 在物理时刻 _t_ 没有接收消息，则 _Cᵢ_ 在 _t_ 处可微，且 \(dC_i(t)/dt>0\)。
+>
 > **IR2′。** (a) 若 _Pᵢ_ 在物理时刻 _t_ 发送消息 _m_，则 _m_ 含有时间戳 \(T_m=C_i(t)\)；(b) 进程 _Pⱼ_ 在时刻 _t′_ 收到消息 _m_ 时，把 \(C_j(t')\) 设置为 \((C_j(t'-0),T_m+\mu_m)\) 两者中的最大值。[^9]
 
 [^9]: \(C_j(t'-0)=\lim_{\delta\to0} C_j(t'-|\delta|)\).
@@ -474,47 +457,41 @@ We now specialize rules IR1 and 2 for our physical clocks as follows:
 
 Although the rules are formally specified in terms of the physical time parameter, a process only needs to know its own clock reading and the timestamps of messages it receives. For mathematical convenience, we are assuming that each event occurs at a precise instant of physical time, and different events in the same process occur at different times. These rules are then specializations of rules IR1 and IR2, so our system of clocks satisfies the Clock Condition. The fact that real events have a finite duration causes no difficulty in implementing the algorithm. The only real concern in the implementation is making sure that the discrete clock ticks are frequent enough so C1 is maintained.
 
-> 尽管这些规则在形式上以物理时间参数规定，进程实际上只须知道自己的时钟读数以及所收消息的时间戳。为便于数学处理，我们假定每个事件都发生在精确的物理时刻，同一进程中的不同事件发生于不同时刻。这些规则是 IR1 和 IR2 的具体形式，所以时钟系统满足时钟条件。真实事件持续有限时间这一事实，不会给算法实现造成困难。实现中唯一真正需要注意的是，离散时钟的滴答必须足够频繁，以维持 C1。
-
 We now show that this clock synchronizing algorithm can be used to satisfy condition PC2. We assume that the system of processes is described by a directed graph in which an arc from process _Pᵢ_ to process _Pⱼ_ represents a communication line over which messages are sent directly from _Pᵢ_ to _Pⱼ_. We say that a message is sent over this arc every \(\tau\) seconds if for any _t_, _Pᵢ_ sends at least one message to _Pⱼ_ between physical times _t_ and \(t+\tau\). The _diameter_ of the directed graph is the smallest number _d_ such that for any pair of distinct processes _Pⱼ_, _Pₖ_, there is a path from _Pⱼ_ to _Pₖ_ having at most _d_ arcs.
 
+> 尽管这些规则在形式上以物理时间参数规定，进程实际上只须知道自己的时钟读数以及所收消息的时间戳。为便于数学处理，我们假定每个事件都发生在精确的物理时刻，同一进程中的不同事件发生于不同时刻。这些规则是 IR1 和 IR2 的具体形式，所以时钟系统满足时钟条件。真实事件持续有限时间这一事实，不会给算法实现造成困难。实现中唯一真正需要注意的是，离散时钟的滴答必须足够频繁，以维持 C1。
+>
 > 下面说明该时钟同步算法可用于满足条件 PC2。假定进程系统由一个有向图描述，其中从进程 _Pᵢ_ 指向进程 _Pⱼ_ 的弧表示一条通信线路，消息经它直接从 _Pᵢ_ 发往 _Pⱼ_。若对任意 _t_，_Pᵢ_ 都会在物理时刻 _t_ 与 \(t+\tau\) 之间至少向 _Pⱼ_ 发送一条消息，就称每 \(\tau\) 秒在该弧上发送一条消息。有向图的*直径*是满足下述性质的最小数 _d_：对任意一对不同进程 _Pⱼ_、_Pₖ_，都存在一条从 _Pⱼ_ 到 _Pₖ_ 且至多含 _d_ 条弧的路径。
 
 In addition to establishing PC2, the following theorem bounds the length of time it can take the clocks to become synchronized when the system is first started.
 
-> 除了确立 PC2，下述定理还给出了系统首次启动时各时钟达到同步所需时间的上界。
-
 **THEOREM.** Assume a strongly connected graph of processes with diameter _d_ which always obeys rules IR1′ and IR2′. Assume that for any message _m_, \(\mu_m\le\mu\) for some constant \(\mu\), and that for all \(t\ge t_0\): (a) PC1 holds. (b) There are constants \(\tau\) and \(\xi\) such that every \(\tau\) seconds a message with an unpredictable delay less than \(\xi\) is sent over every arc. Then PC2 is satisfied with \(\epsilon\approx d(2\kappa\tau+\xi)\) for all \(t\ge t_0+\tau d\), where the approximations assume \(\mu+\xi\ll\tau\).
-
-> **定理。** 假定一个直径为 _d_ 的强连通进程图始终遵守规则 IR1′ 和 IR2′。假定对任意消息 _m_，存在常数 \(\mu\) 使 \(\mu_m\le\mu\)；并且对所有 \(t\ge t_0\)：(a) PC1 成立；(b) 存在常数 \(\tau\) 和 \(\xi\)，使得每 \(\tau\) 秒都会在每条弧上发送一条不可预测延迟小于 \(\xi\) 的消息。那么，对所有 \(t\ge t_0+\tau d\)，PC2 以 \(\epsilon\approx d(2\kappa\tau+\xi)\) 成立；其中的近似假定 \(\mu+\xi\ll\tau\)。
 
 The proof of this theorem is surprisingly difficult, and is given in the Appendix. There has been a great deal of work done on the problem of synchronizing physical clocks. We refer the reader to [4] for an introduction to the subject. The methods described in the literature are useful for estimating the message delays \(\mu_m\) and for adjusting the clock frequencies \(dC_i/dt\) (for clocks which permit such an adjustment). However, the requirement that clocks are never set backwards seems to distinguish our situation from ones previously studied, and we believe this theorem to be a new result.
 
+> 除了确立 PC2，下述定理还给出了系统首次启动时各时钟达到同步所需时间的上界。
+>
+> **定理。** 假定一个直径为 _d_ 的强连通进程图始终遵守规则 IR1′ 和 IR2′。假定对任意消息 _m_，存在常数 \(\mu\) 使 \(\mu_m\le\mu\)；并且对所有 \(t\ge t_0\)：(a) PC1 成立；(b) 存在常数 \(\tau\) 和 \(\xi\)，使得每 \(\tau\) 秒都会在每条弧上发送一条不可预测延迟小于 \(\xi\) 的消息。那么，对所有 \(t\ge t_0+\tau d\)，PC2 以 \(\epsilon\approx d(2\kappa\tau+\xi)\) 成立；其中的近似假定 \(\mu+\xi\ll\tau\)。
+>
 > 这一定理的证明出人意料地困难，见附录。物理时钟同步问题已有大量研究，可参阅 [4] 的入门介绍。文献所述方法有助于估计消息延迟 \(\mu_m\)，也可用于调整时钟频率 \(dC_i/dt\)（对允许此类调整的时钟而言）。然而，时钟绝不向后设置这一要求，似乎把本文情形同以往研究的情形区分开来；我们认为这一定理是一项新结果。
 
-## Conclusion
-
-> 结论
+## Conclusion｜结论
 
 We have seen that the concept of “happening before” defines an invariant partial ordering of the events in a distributed multiprocess system. We described an algorithm for extending that partial ordering to a somewhat arbitrary total ordering, and showed how this total ordering can be used to solve a simple synchronization problem. A future paper will show how this approach can be extended to solve any synchronization problem.
 
-> 我们已经看到，“先发生于”概念为分布式多进程系统中的事件定义了一种不变的偏序。我们描述了一种把该偏序扩展为某种带有任意性的全序的算法，并说明了如何用这种全序解决一个简单的同步问题。后续论文将说明如何扩展这一方法来解决任意同步问题。
-
 The total ordering defined by the algorithm is somewhat arbitrary. It can produce anomalous behavior if it disagrees with the ordering perceived by the system’s users. This can be prevented by the use of properly synchronized physical clocks. Our theorem showed how closely the clocks can be synchronized.
-
-> 该算法定义的全序具有一定任意性。若它与系统用户所感知的次序不一致，就可能产生异常行为。使用正确同步的物理时钟可以防止这种情况。我们的定理给出了时钟能够达到的同步精度。
 
 In a distributed system, it is important to realize that the order in which events occur is only a partial ordering. We believe that this idea is useful in understanding any multiprocess system. It should help one to understand the basic problems of multiprocessing independently of the mechanisms used to solve them.
 
+> 我们已经看到，“先发生于”概念为分布式多进程系统中的事件定义了一种不变的偏序。我们描述了一种把该偏序扩展为某种带有任意性的全序的算法，并说明了如何用这种全序解决一个简单的同步问题。后续论文将说明如何扩展这一方法来解决任意同步问题。
+>
+> 该算法定义的全序具有一定任意性。若它与系统用户所感知的次序不一致，就可能产生异常行为。使用正确同步的物理时钟可以防止这种情况。我们的定理给出了时钟能够达到的同步精度。
+>
 > 在分布式系统中，认识到事件发生次序仅仅是偏序非常重要。我们相信，这一思想有助于理解任何多进程系统；它应当帮助人们摆脱具体求解机制，独立把握多进程处理的基本问题。
 
-## Appendix
+## Appendix｜附录
 
-> 附录
-
-### Proof of the Theorem
-
-> 定理的证明
+### Proof of the Theorem｜定理的证明
 
 For any _i_ and _t_, let us define \(C_i^t\) to be a clock which is set equal to \(C_i\) at time _t_ and runs at the same rate as \(C_i\), but is never reset. In other words,
 
@@ -610,14 +587,14 @@ $$
 
 for \(t\ge t_{n+1}\).
 
+For any two processes _P_ and _P′_, we can find a sequence of processes \(P=P_0,P_1,\ldots,P_{n+1}=P'\), \(n\le d\), with communication arcs from each _Pᵢ_ to _Pᵢ₊₁_. By hypothesis (b) we can find times \(t_i,t_i'\) with \(t_i'-t_i\le\tau\) and \(t_{i+1}-t_i'\le\nu\), where \(\nu=\mu+\xi\). Hence, an inequality of the form (5) holds with \(n\le d\) whenever \(t\ge t_1+d(\tau+\nu)\). For any _i_, _j_ and any _t_, _t₁_ with \(t_1\ge t_0\) and \(t\ge t_1+d(\tau+\nu)\) we therefore have:
+
 > $$
 > C_{n+1}(t)\ge C_1(t_1)+(1-\kappa)(t-t_1)-n\xi\tag{5}
 > $$
 >
 > 对 \(t\ge t_{n+1}\) 成立。
-
-For any two processes _P_ and _P′_, we can find a sequence of processes \(P=P_0,P_1,\ldots,P_{n+1}=P'\), \(n\le d\), with communication arcs from each _Pᵢ_ to _Pᵢ₊₁_. By hypothesis (b) we can find times \(t_i,t_i'\) with \(t_i'-t_i\le\tau\) and \(t_{i+1}-t_i'\le\nu\), where \(\nu=\mu+\xi\). Hence, an inequality of the form (5) holds with \(n\le d\) whenever \(t\ge t_1+d(\tau+\nu)\). For any _i_, _j_ and any _t_, _t₁_ with \(t_1\ge t_0\) and \(t\ge t_1+d(\tau+\nu)\) we therefore have:
-
+>
 > 对任意两个进程 _P_ 和 _P′_，都能找到进程序列 \(P=P_0,P_1,\ldots,P_{n+1}=P'\)、\(n\le d\)，其中每个 _Pᵢ_ 到 _Pᵢ₊₁_ 都有一条通信弧。根据假设 (b)，可以找到时刻 \(t_i,t_i'\)，使 \(t_i'-t_i\le\tau\)、\(t_{i+1}-t_i'\le\nu\)，其中 \(\nu=\mu+\xi\)。因此，只要 \(t\ge t_1+d(\tau+\nu)\)，就有一个形如 (5) 且 \(n\le d\) 的不等式成立。于是，对任意 _i_、_j_ 以及满足 \(t_1\ge t_0\)、\(t\ge t_1+d(\tau+\nu)\) 的任意 _t_、_t₁_，有：
 
 $$
@@ -630,10 +607,10 @@ $$
 
 Now let _m_ be any message timestamped _Tₘ_, and suppose it is sent at time _t_ and received at time _t′_. We pretend that _m_ has a clock _Cₘ_ which runs at a constant rate such that \(C_m(t)=T_m\) and \(C_m(t')=T_m+\mu_m\). Then \(\mu_m\le t'-t\) implies that \(dC_m/dt\le1\). Rule IR2′(b) simply sets \(C_j(t')\) to maximum \((C_j(t'-0),C_m(t'))\). Hence, clocks are reset only by setting them equal to other clocks.
 
-> 现在取任意一条时间戳为 _Tₘ_ 的消息 _m_，假定它在时刻 _t_ 发送、时刻 _t′_ 接收。设想 _m_ 有一个以恒定速率运行的时钟 _Cₘ_，使得 \(C_m(t)=T_m\)、\(C_m(t')=T_m+\mu_m\)。于是，\(\mu_m\le t'-t\) 蕴含 \(dC_m/dt\le1\)。规则 IR2′(b) 只是把 \(C_j(t')\) 设置为 \((C_j(t'-0),C_m(t'))\) 两者中的最大值。因此，时钟复位只会把它们设置为等于其他时钟。
-
 For any time \(t_x\ge t_0+\mu/(1-\kappa)\), let _Cₓ_ be the clock having the largest value at time _tₓ_. Since all clocks run at a rate less than \(1+\kappa\), we have for all _i_ and all \(t\ge t_x\):
 
+> 现在取任意一条时间戳为 _Tₘ_ 的消息 _m_，假定它在时刻 _t_ 发送、时刻 _t′_ 接收。设想 _m_ 有一个以恒定速率运行的时钟 _Cₘ_，使得 \(C_m(t)=T_m\)、\(C_m(t')=T_m+\mu_m\)。于是，\(\mu_m\le t'-t\) 蕴含 \(dC_m/dt\le1\)。规则 IR2′(b) 只是把 \(C_j(t')\) 设置为 \((C_j(t'-0),C_m(t'))\) 两者中的最大值。因此，时钟复位只会把它们设置为等于其他时钟。
+>
 > 对任意时刻 \(t_x\ge t_0+\mu/(1-\kappa)\)，令 _Cₓ_ 为时刻 _tₓ_ 取值最大的时钟。由于所有时钟都以小于 \(1+\kappa\) 的速率运行，对所有 _i_ 及所有 \(t\ge t_x\)，有：
 
 $$
@@ -706,10 +683,10 @@ $$
 
 Hence, \(C_q(t_x-\mu/(1-\kappa))\le C_q(t_1)\), so \(t_x-t_1\le\mu/(1-\kappa)\) and thus \(t_1\ge t_0\).
 
-> 因此，\(C_q(t_x-\mu/(1-\kappa))\le C_q(t_1)\)，故 \(t_x-t_1\le\mu/(1-\kappa)\)，从而 \(t_1\ge t_0\)。
-
 Letting \(t_1=t_x\) in case (i), we can combine (8i) and (8ii) to deduce that for any _t_, _tₓ_ with \(t\ge t_x\ge t_0+\mu/(1-\kappa)\) there is a process _P_q_ and a time _t₁_ with \(t_x-\mu/(1-\kappa)\le t_1\le t_x\) such that for all _i_:
 
+> 因此，\(C_q(t_x-\mu/(1-\kappa))\le C_q(t_1)\)，故 \(t_x-t_1\le\mu/(1-\kappa)\)，从而 \(t_1\ge t_0\)。
+>
 > 在情况 (i) 中令 \(t_1=t_x\)，便可结合 (8i) 和 (8ii) 推出：对于满足 \(t\ge t_x\ge t_0+\mu/(1-\kappa)\) 的任意 _t_、_tₓ_，存在进程 _P_q_ 和时刻 _t₁_，其中 \(t_x-\mu/(1-\kappa)\le t_1\le t_x\)，使得对所有 _i_：
 
 $$
@@ -790,23 +767,21 @@ $$
 
 and this holds for all \(t\ge t_0+d\tau\). □
 
-> 且这对所有 \(t\ge t_0+d\tau\) 成立。□
-
 Note that relation (11) of the proof yields an exact upper bound for \(|C_i(t)-C_j(t)|\) in case the assumption \(\mu+\xi\ll\tau\) is invalid. An examination of the proof suggests a simple method for rapidly initializing the clocks, or resynchronizing them if they should go out of synchrony for any reason. Each process sends a message which is relayed to every other process. The procedure can be initiated by any process, and requires less than \(2d(\mu+\xi)\) seconds to effect the synchronization, assuming each of the messages has an unpredictable delay less than \(\xi\).
-
-> 请注意，如果假设 \(\mu+\xi\ll\tau\) 不成立，证明中的关系 (11) 会给出 \(|C_i(t)-C_j(t)|\) 的精确上界。审视该证明还能得到一种简单方法，用于快速初始化时钟，或在时钟因任何原因失去同步时重新同步。每个进程发送一条由其他各进程中继的消息。任一进程都可以发起该过程；若假定每条消息的不可预测延迟都小于 \(\xi\)，完成同步所需时间少于 \(2d(\mu+\xi)\) 秒。
 
 **Acknowledgment.** The use of timestamps to order operations, and the concept of anomalous behavior are due to Paul Johnson and Robert Thomas.
 
+> 且这对所有 \(t\ge t_0+d\tau\) 成立。□
+>
+> 请注意，如果假设 \(\mu+\xi\ll\tau\) 不成立，证明中的关系 (11) 会给出 \(|C_i(t)-C_j(t)|\) 的精确上界。审视该证明还能得到一种简单方法，用于快速初始化时钟，或在时钟因任何原因失去同步时重新同步。每个进程发送一条由其他各进程中继的消息。任一进程都可以发起该过程；若假定每条消息的不可预测延迟都小于 \(\xi\)，完成同步所需时间少于 \(2d(\mu+\xi)\) 秒。
+>
 > **致谢。** 使用时间戳对操作排序的方法，以及异常行为这一概念，源自 Paul Johnson 和 Robert Thomas。
 
 Received March 1976; revised October 1977
 
 > 1976 年 3 月收到；1977 年 10 月修订
 
-## References
-
-> 参考文献
+## References｜参考文献
 
 1. Schwartz, J.T. _Relativity in Illustrations_. New York U. Press, New York, 1962.
 
