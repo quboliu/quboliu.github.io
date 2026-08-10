@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
-pubDatetime: 2026-08-09T12:00:00+08:00
-modDatetime: 2026-08-10T15:01:56+08:00
+pubDatetime: 2024-11-10T12:00:00+08:00
+modDatetime: 2026-08-10T15:33:40+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Implementing Fault-Tolerant Services Using the State Machine Approach: A Tutorial｜使用状态机方法实现容错服务：教程"
 featured: false
