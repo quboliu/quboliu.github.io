@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
-pubDatetime: 2024-12-25T00:00:00+08:00
-modDatetime: 2026-08-10T15:01:56+08:00
+pubDatetime: 2025-02-02T12:00:00+08:00
+modDatetime: 2026-08-10T15:33:40+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Amazon Aurora: On Avoiding Distributed Consensus for I/Os, Commits, and Membership Changes｜Amazon Aurora：如何在 I/O、提交与成员变更中避免分布式共识"
 featured: false
