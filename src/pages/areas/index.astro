@@ -38,10 +38,10 @@ const areaLinks = areas.map(({ slug, name, posts }) => ({
   <Breadcrumb />
 
   <Main pageTitle={t.pages.areasTitle} pageDesc={t.pages.areasDesc} wide>
-    <div class="grid gap-8 lg:grid-cols-[190px_minmax(0,1fr)] lg:gap-12">
+    <div class="grid gap-8 xl:grid-cols-[188px_minmax(0,1fr)]">
       <AreaNavigation areas={areaLinks} />
 
-      <div class="min-w-0 space-y-12">
+      <div class="mx-auto w-full max-w-[800px] min-w-0 space-y-12 xl:mx-0">
         {
           areas.map(area => (
             <section
