@@ -2,7 +2,6 @@
 import type { CollectionEntry } from "astro:content";
 import { getPostUrl } from "@/utils/getPostPaths";
 import { toTransitionName } from "@/utils/toTransitionName";
-import ContentTypeBadge from "@/components/ContentTypeBadge.astro";
 import dayjs from "dayjs";
 
 type Props = {
@@ -21,19 +20,17 @@ const date = dayjs(pubDatetime).format("YYYY-MM-DD");
     class="text-muted-foreground shrink-0 basis-[130px] font-mono text-[15px]"
     >{date}</span
   >
-  <div class="min-w-0">
-    <ContentTypeBadge {contentType} class="me-1 align-[0.08em]" />
-    <a
-      href={getPostUrl(id, filePath, Astro.currentLocale)}
-      class="text-accent visited:text-visited no-underline hover:underline"
+  <a
+    href={getPostUrl(id, filePath, Astro.currentLocale)}
+    data-content-type={contentType}
+    class="post-title-color text-accent visited:text-visited min-w-0 no-underline hover:underline"
+  >
+    <Heading
+      lang={lang}
+      transition:name={toTransitionName(title)}
+      class="inline text-inherit"
     >
-      <Heading
-        lang={lang}
-        transition:name={toTransitionName(title)}
-        class="inline"
-      >
-        {title}
-      </Heading>
-    </a>
-  </div>
+      {title}
+    </Heading>
+  </a>
 </li>

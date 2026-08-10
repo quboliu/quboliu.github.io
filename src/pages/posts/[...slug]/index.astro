@@ -19,7 +19,6 @@ import Comments from "@/components/Comments.astro";
 import TableOfContents from "./_components/TableOfContents.astro";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
-import ContentTypeBadge from "@/components/ContentTypeBadge.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -125,16 +124,14 @@ const ogImage = ogImageUrl
     class:list={["app-layout", { "mt-8": !config.features.showBackButton }]}
     data-pagefind-body
   >
-    <div class="flex max-w-full flex-wrap items-center gap-x-2 gap-y-1">
-      <ContentTypeBadge {contentType} />
-      <h1
-        lang={lang}
-        style={{ viewTransitionName: toTransitionName(title) }}
-        class="text-heading inline-block max-w-full text-2xl font-bold [overflow-wrap:anywhere] sm:text-3xl"
-      >
-        {title}
-      </h1>
-    </div>
+    <h1
+      lang={lang}
+      data-content-type={contentType}
+      style={{ viewTransitionName: toTransitionName(title) }}
+      class="post-title-color text-heading inline-block max-w-full text-2xl font-bold [overflow-wrap:anywhere] sm:text-3xl"
+    >
+      {title}
+    </h1>
 
     <div class="my-2 flex flex-wrap items-center gap-2">
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />

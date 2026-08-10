@@ -43,6 +43,12 @@
   @apply border-accent text-accent font-medium;
 }
 
+/* All non-original posts share one quiet title color. */
+.post-title-color:not([data-content-type="original"]),
+.post-title-color:not([data-content-type="original"]):visited {
+  color: var(--post-title-non-original);
+}
+
 /* Bear-style post list: monospace date + title link */
 @utility blog-posts {
   @apply list-none p-0;

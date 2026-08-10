@@ -27,6 +27,7 @@
   --muted: #f2f2f2;
   --muted-foreground: #777777;
   --border: #dddddd;
+  --post-title-non-original: #7f6b50;
   --font-main:
     Verdana, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
     "Noto Sans SC", sans-serif;
@@ -43,6 +44,7 @@
   --muted: #000000;
   --muted-foreground: #9ab5bd;
   --border: #1e4552;
+  --post-title-non-original: #bca98b;
 }
 
 @layer base {
