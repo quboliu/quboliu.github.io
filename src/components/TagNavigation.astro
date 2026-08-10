@@ -23,12 +23,18 @@ const { tags } = Astro.props;
           <a
             href={`#tag-${slug}`}
             data-tag-nav={slug}
+            data-tag-weight={
+              count >= 4 ? "high" : count >= 2 ? "medium" : "low"
+            }
             aria-current={index === 0 ? "location" : undefined}
             aria-label={`#${name}，${count} 篇文章`}
             title={`${count} 篇文章`}
-            class="tag-nav-link border-border text-muted-foreground hover:border-accent hover:text-accent inline-flex rounded border px-1.5 py-1 text-xs whitespace-nowrap no-underline transition-colors"
+            class="tag-nav-link inline-flex items-center gap-0.5 rounded-full px-2 py-1 text-xs whitespace-nowrap no-underline transition-colors"
           >
-            #{name}
+            <span class="tag-hash" aria-hidden="true">
+              #
+            </span>
+            <span>{name}</span>
           </a>
         </li>
       ))
@@ -123,10 +129,40 @@ const { tags } = Astro.props;
     overflow-anchor: none;
   }
 
-  .tag-nav-link[aria-current="location"] {
+  .tag-nav-link {
+    color: var(--muted-foreground);
+    background-color: color-mix(in srgb, var(--muted) 72%, var(--background));
+  }
+
+  .tag-nav-link:hover {
     color: var(--accent);
-    border-color: var(--accent);
-    background-color: var(--muted);
+    background-color: color-mix(in srgb, var(--accent) 12%, var(--background));
+  }
+
+  .tag-hash {
+    color: var(--accent);
+    opacity: 0.72;
+  }
+
+  .tag-nav-link[data-tag-weight="medium"] {
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  .tag-nav-link[data-tag-weight="high"] {
+    color: var(--foreground);
+    font-size: 0.875rem;
     font-weight: 600;
+  }
+
+  .tag-nav-link[aria-current="location"] {
+    color: var(--accent-foreground);
+    background-color: var(--accent);
+    font-weight: 600;
+  }
+
+  .tag-nav-link[aria-current="location"] .tag-hash {
+    color: currentColor;
+    opacity: 1;
   }
 </style>
