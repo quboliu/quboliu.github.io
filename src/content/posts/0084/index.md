@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-08-09T12:00:00+08:00
+modDatetime: 2026-08-10T15:01:56+08:00
 timezone: "Asia/Shanghai"
-title: "论文阅读 | Disaggregated Data Systems – State-of-the-Art and Open Challenges（中英对照全文）"
+title: "论文阅读 | Disaggregated Data Systems – State-of-the-Art and Open Challenges｜解耦式数据系统——研究现状与开放挑战"
 featured: false
 area: "databases"
 draft: false
@@ -11,36 +12,36 @@ tags:
   - "分布式系统"
   - "云原生数据库"
   - "CXL"
-description: "一篇梳理解耦式数据系统研究现状的 EDBT 2026 教程论文，覆盖 CXL、远程内存、RDMA、数据路径计算与解耦税，中英逐段对照全文。"
+description: "一篇梳理解耦式数据系统研究现状的 EDBT 2026 教程论文，覆盖 CXL、远程内存、RDMA、数据路径计算与解耦税，按语义单元编排的中英对照全文。"
 ---
 
-> 解耦式数据系统——研究现状与开放挑战
+**Disaggregated Data Systems – State-of-the-Art and Open Challenges｜解耦式数据系统——研究现状与开放挑战**
 
 **Alexander Krause**<br>
 alexander.krause@tu-dresden.de<br>
 Technische Universität Dresden<br>
 Dresden, Germany
 
-> **Alexander Krause**<br>
-> alexander.krause@tu-dresden.de<br>
-> 德累斯顿工业大学<br>
-> 德国德累斯顿
-
 **Johannes Pietrzyk**<br>
 johannes.pietrzyk@tu-dresden.de<br>
 Technische Universität Dresden<br>
 Dresden, Germany
-
-> **Johannes Pietrzyk**<br>
-> johannes.pietrzyk@tu-dresden.de<br>
-> 德累斯顿工业大学<br>
-> 德国德累斯顿
 
 **Alexander Boehm**<br>
 alexander.boehm@sap.com<br>
 SAP SE<br>
 Walldorf, Germany
 
+> **Alexander Krause**<br>
+> alexander.krause@tu-dresden.de<br>
+> 德累斯顿工业大学<br>
+> 德国德累斯顿
+>
+> **Johannes Pietrzyk**<br>
+> johannes.pietrzyk@tu-dresden.de<br>
+> 德累斯顿工业大学<br>
+> 德国德累斯顿
+>
 > **Alexander Boehm**<br>
 > alexander.boehm@sap.com<br>
 > SAP SE<br>
@@ -48,10 +49,10 @@ Walldorf, Germany
 
 **Tutorial Paper**
 
-> **教程论文**
-
 **EDBT ’26, 24-27 March 2026, Tampere (Finland)**
 
+> **教程论文**
+>
 > **EDBT ’26，2026 年 3 月 24–27 日，芬兰坦佩雷**
 
 © 2026 Copyright held by the owner/author(s). Published on OpenProceedings.org under ISBN 978-3-89318-104-9, series ISSN 2367-2005. Distribution of this paper is permitted under the terms of the Creative Commons license CC-by-nc-nd 4.0.
@@ -64,25 +65,19 @@ Walldorf, Germany
 > **DOI：** 10.48786/edbt.2026.77<br>
 > **页码：** 772–775
 
-## Abstract
-
-> 摘要
+## Abstract｜摘要
 
 This tutorial aims to review disaggregated systems research in the context of database systems. We cover the exploitation of disaggregated storage in the industry landscape, contemporary research aimed towards database applications, and the current trend of data path computing. Our journey through disaggregated systems is concluded with a statement about open challenges in all three categories.
 
 > 本教程旨在从数据库系统的语境出发，回顾解耦式系统研究。我们将介绍产业界对解耦式存储的运用、面向数据库应用的当代研究，以及当前的数据路径计算趋势。最后，我们将陈述这三类方向各自面临的开放挑战，为解耦式系统之旅作结。
 
-## Keywords
-
-> 关键词
+## Keywords｜关键词
 
 Disaggregated Systems, Disaggregated Memory, CXL, RDMA, Near Data Processing
 
 > 解耦式系统，解耦式内存，计算快速链路（CXL），远程直接内存访问（RDMA），近数据处理
 
-## 1 Motivation and Relevance
-
-> 1 动机与意义
+## 1 Motivation and Relevance｜动机与意义
 
 Disaggregated systems promise to break the fixed resource ratios of server form factors and expose compute, storage, and memory as independently and thus elastically scalable building blocks. While not yet fully implemented, this vision is already visible in production cloud deployments: durable storage is routinely provisioned and managed separately from compute, while traditionally "local" resources (notably DRAM and NVMe SSDs) are increasingly targeted for pooling and remote access. For data management systems, the consequence is an even stronger emphasis of managing data movement and control-path overhead—bytes on the fabric, CPU cycles in protocol/I/O stacks, and extra round-trips on critical access paths.
 
@@ -90,27 +85,23 @@ Disaggregated systems promise to break the fixed resource ratios of server form 
 
 Disaggregation opens novel operating points for data systems - or more generally - data-intensive platforms: elastic scaling and rapid reconfiguration, reduced resource stranding through better demand matching, and new recovery/migration strategies enabled by decoupling state from specific machines. Yet, nothing comes for free: remote access amplifies latency sensitivity, stresses caching and concurrency control, and forces explicit placement decisions: what stays close to compute, what can reside in a remote tier, and which parts of the processing pipeline should move toward the data.
 
-> 解耦为数据系统——更一般地说，也为数据密集型平台——开辟了新的运行点：弹性扩缩与快速重配置；通过更好地匹配需求来减少资源搁浅；以及借助状态与特定机器的分离而实现新的恢复与迁移策略。然而，天下没有免费的午餐：远程访问会放大系统对延迟的敏感性，给缓存和并发控制带来压力，并迫使系统显式作出放置决策：哪些应留在计算侧附近，哪些可以驻留在远程层，以及处理流水线的哪些部分应移向数据。
-
 **Tutorial Scope:** This tutorial is motivated by how recent research connects these infrastructure capabilities to data system-specific design questions. RDMA-style Split architectures and CXL-style Pool architectures provide different performance envelopes for memory disaggregation, and their implications propagate upward from OS-level mechanisms through buffer management, access paths, and query execution. In parallel, a renewed push toward data-path computing (near-storage and near-network processing) aims to mitigate the "disaggregation tax" by reducing the number of transferred bytes and host-side overhead. Our goal is to provide a structured overview of this evolving design space, summarize state-of-the-art approaches, and highlight the open challenges that must be addressed to make disaggregation a foundation for future data systems. To achieve that, our tutorial is divided into three parts: (i) a brief review of disaggregated systems history in the industry landscape, (ii) contemporary research, and (iii) current research directions.
 
+> 解耦为数据系统——更一般地说，也为数据密集型平台——开辟了新的运行点：弹性扩缩与快速重配置；通过更好地匹配需求来减少资源搁浅；以及借助状态与特定机器的分离而实现新的恢复与迁移策略。然而，天下没有免费的午餐：远程访问会放大系统对延迟的敏感性，给缓存和并发控制带来压力，并迫使系统显式作出放置决策：哪些应留在计算侧附近，哪些可以驻留在远程层，以及处理流水线的哪些部分应移向数据。
+>
 > **教程范围：** 本教程的出发点，是考察近期研究如何把这些基础设施能力与数据系统特有的设计问题联系起来。RDMA 式的分离（Split）架构与 CXL 式的资源池（Pool）架构为内存解耦提供了不同的性能包络，其影响从操作系统层机制一路向上传导至缓冲区管理、访问路径和查询执行。与此同时，数据路径计算（近存储处理与近网络处理）再度受到关注，目标是通过减少传输字节数和主机侧开销来缓解“解耦税”（即资源解耦后因远程数据移动和控制路径而新增的成本）。我们的目标是对这一不断演进的设计空间给出结构化概览，总结最先进的方法，并指出要使解耦成为未来数据系统基础仍须解决的开放挑战。为此，本教程分为三部分：(i) 简要回顾产业界解耦式系统的历史；(ii) 当代研究；(iii) 当前研究方向。
 
 **Intended Audience:** This tutorial is aimed at researchers and practitioners alike, and at anyone interested in working with hardware disaggregation. This tutorial should help (i) to make disaggregated system research accessible to a wider audience and (ii) to understand the current rise of and hype around CXL and memory sharing.
 
 > **目标受众：** 本教程既面向研究人员与从业者，也面向任何有兴趣从事硬件解耦工作的人。它应有助于：(i) 让更广泛的受众能够理解解耦式系统研究；(ii) 理解 CXL 与内存共享眼下的兴起及其热潮。
 
-## 2 Disaggregated Infrastructure
-
-> 2 解耦式基础设施
+## 2 Disaggregated Infrastructure｜解耦式基础设施
 
 In the first part of our tutorial, we give a brief historical perspective on the evolution of the hardware ecosystem. With the advent of cloud computing, infrastructure deployments are increasingly moving away from static, on-premise setups and towards infrastructure-as-a-service (IAAS) offerings in the cloud. A key characteristic of cloud-based offerings is the separation of compute and storage. This means that customers pick a certain shape of virtual machine, which defines the CPUs and memory resources available. Durable storage is added separately, e.g., in the form of block devices that are mounted into the VMs, or by leveraging object storage offering large storage volumes with GET/PUT semantics at a comparatively low price. The separation of compute and storage virtually allows arbitrary combinations of CPU/DRAM and disk space, e.g., it is possible to create a small, virtual server with only one virtual CPU (vCPU), but to attach terabytes of persistent storage to it.
 
 > 在教程的第一部分，我们从简要的历史视角考察硬件生态系统的演进。随着云计算兴起，基础设施部署正日益从静态的本地配置转向云端的基础设施即服务（原文写作“IAAS”，通常写作“IaaS”）产品。云服务的一项关键特征是计算与存储相分离。这意味着客户选择某种虚拟机规格，由该规格确定可用的 CPU 和内存资源；持久化存储则单独添加，例如以挂载到虚拟机中的块设备形式提供，或利用对象存储，以相对较低的价格提供采用 GET/PUT 语义的大容量存储。计算与存储分离后，CPU/DRAM 与磁盘空间实际上可以任意组合：例如，可以创建一台只有一个虚拟 CPU（vCPU）的小型虚拟服务器，却为它挂载数 TB 的持久化存储。
 
-### 2.1 Implications for Data Systems
-
-> 2.1 对数据系统的影响
+### 2.1 Implications for Data Systems｜对数据系统的影响
 
 For many years, the database and distributed systems communities have researched the novel opportunities of disaggregated infrastructure. This effort has resulted in both novel system architectures and proposals for the incremental evolution of existing designs. Using some representative examples, we discuss three exemplary classes of data management designs and how they benefit from large-scale, disaggregated infrastructure.
 
@@ -126,15 +117,11 @@ Another popular approach for building cloud-native, disaggregated systems is the
 
 ![Two high-level architectures for memory disaggregation: Split and Pool.](./figure-1-memory-architectures.png)
 
-**Figure 1: High-level system architectures for memory disaggregation (cf. Figure 2 of [9])**
-
-> **图 1：内存解耦的高层系统架构（参见文献 [9] 的图 2）**
+**Figure 1: High-level system architectures for memory disaggregation (cf. Figure 2 of [9])｜图：内存解耦的高层系统架构（参见文献 [9] 的图 2）**
 
 > **图表中文解读：** 左侧 Split 架构把远程内存分散在各服务器内部，各服务器通过网络直接访问别的服务器上的 DRAM；右侧 Pool 架构则把远程 DRAM 从计算服务器中抽离，形成可由多台服务器共享的独立内存池。二者分别对应后文讨论的 RDMA 式“分离”与 CXL 式“资源池”性能边界。
 
-### 2.2 Remaining Challenges
-
-> 2.2 尚存挑战
+### 2.2 Remaining Challenges｜尚存挑战
 
 While the separation of compute and storage is a key building block to engineer the next generation data systems architectures, still, the availability and capacity of several other important hardware resources are tied to the virtual machine. This includes both local solid-state drives (SSDs) that are key for low-latency, persistent data storage, as well as main memory (DRAM).
 
@@ -148,9 +135,7 @@ Particularly, DRAM stranding is a very relevant problem due to the high DRAM pri
 
 > 尤其是，鉴于 DRAM 价格高昂，DRAM 搁浅是一个非常现实的问题；我们将重点介绍文献中为解决这一问题提出的若干不同方案 [17, 18]。对于本地 SSD，NVMe-over-TCP 等新型网络访问协议也可能使其实现解耦，前提是使用方能够容忍远程通信引入的额外延迟。译注：原文“highlight several different proposals how to address ... proposed”存在重复且句法生硬，英文照录，译文按其本意处理。
 
-## 3 Disambiguating Disaggregation
-
-> 3 辨析“解耦”
+## 3 Disambiguating Disaggregation｜辨析“解耦”
 
 Memory disaggregation is sometimes confused with storage disaggregation. Both approaches separate hardware resources from the host machine on which they are ultimately used. Following up on the discussion about storage disaggregation from the first part of the tutorial, we will introduce the concept of disaggregated memory in the second part. Moving from the constraint of physically attached resources towards rack-organized hardware components is a key enabler for true software-defined systems, also known as disaggregated systems.
 
@@ -162,15 +147,11 @@ Memory disaggregation can be achieved in several ways, but typically through a n
 
 ![CXL-enabled memory-disaggregation topology connecting local, extended, shared or pooled, and distributed remote memory.](./figure-2-cxl-memory-disaggregation.png)
 
-**Figure 2: CXL-enabled memory disaggregation**
-
-> **图 2：由 CXL 支持的内存解耦**
+**Figure 2: CXL-enabled memory disaggregation｜图：由 CXL 支持的内存解耦**
 
 > **图表中文解读：** 单元 1 展示了多层内存：标为 local 的 DRAM 与右侧 CPU 直接相连；标为 near 的 DRAM 连接左侧 CPU，而两个 CPU 通过 UPI 相连；extended DRAM 则经 PCIe/CXL 设备连接。单元 1 还能通过 RDMA 网卡和网络访问单元 n 的分布式远程内存。右侧的单元 m 是与 CPU 无关的解耦式内存资源：CXL 2.0 区域表示经 CXL 交换机和 Fabric Manager 管理的池化内存，CXL 3.0 区域则示意与单元 2 等多个 CPU 共享同一内存设备。
 
-### 3.1 Working up the Database Stack
-
-> 3.1 沿数据库栈逐层向上
+### 3.1 Working up the Database Stack｜沿数据库栈逐层向上
 
 This second part of the tutorial will present the general overview of a data system’s software stack and with it, we will highlight memory disaggregation research throughout its layers. We first sketch operating system level techniques with Infiniswap [12] and Software-defined far memory [14]. Such techniques enable systems to use far memory as an extension for the local swap memory or to move cold, stale data to external memory.
 
@@ -180,9 +161,7 @@ We cover different research directions across the software stack, spanning from 
 
 > 我们将介绍跨越软件栈的不同研究方向：从缓冲层，经由存储与访问系统，直至查询处理层。自 NUMA 出现以来，数据移动与近数据处理一直是首要问题。PolarDBCXL [32] 把数据库内容放入远端内存，以应对 RDMA 固有的异步性与集成开销。Pipeline Grouping [10] 等其他方法表明，当并发查询执行所用的基础数据具有足够重叠时，智能读写操作可以胜过朴素地使用 load/store。自然地，我们也会涵盖在真实 CXL 硬件上对内存数据处理开展的整体性评测 [31]。译注：原文在“the asynchronicity and integration overhead”之后使用“that is inherent”，存在数的一致性和逗号使用问题；英文照录，译文按并列含义处理。
 
-### 3.2 Open Challenges
-
-> 3.2 开放挑战
+### 3.2 Open Challenges｜开放挑战
 
 CXL is a key enabler for true hardware disaggregation, but its cost may not offset its usability. Even major players like Google do not share a harmonic vision on the cost-benefit tradeoff for CXL, ranging from it being a godsend[^1],[^2] or straight up way too expensive to become a true savior for cloud providers [16]. The latency penalty for CXL-attached memory varies greatly between directly attaching an add-in card to the PCIe socket or coupling multiple memory expansion devices behind a CXL switch. This poses a crucial memory access and data placement optimization criterion, especially for tiered memory setups.
 
@@ -198,24 +177,20 @@ CXL is a key enabler for true hardware disaggregation, but its cost may not offs
 
     > https://www.linkedin.com/posts/laurie-kirk_outside-of-the-datacenter-world-no-one-realizes-activity-7413329701861154816-QVwe [访问于 2026-03-03]
 
-## 4 Computing on the Data Path
-
-> 4 数据路径上的计算
+## 4 Computing on the Data Path｜数据路径上的计算
 
 Disaggregation shifts the dominant cost from arithmetic to data movement and control-path overhead: bytes on the fabric, CPU cycles in protocol or I/O stacks, and extra round-trips. Near-Data Processing (NDP) addresses this "disaggregation tax" by executing selected computation on the data path—near storage, inside network devices (DPUs/SmartNICs), or near memory, so that less data (or fewer expensive control actions) must traverse remote boundaries. Recent research shows a consistent pattern: the largest and reliable gains come from (i) pushing down high-data-reduction work, (ii) using low-overhead interfaces, and (iii) ensuring correctness once updates cross the host-device boundary [2, 3, 15, 19, 29, 34]. Building on the disaggregated storage and memory models discussed in the previous tutorial parts, NDP can be viewed as "data-path computing": inserting computation along remote-access paths to reduce the number of transferred bytes and/or host CPU overhead. Storage-side NDP ranges from operator pushdown into storage servers to computational storage devices that run restricted kernels inside SSD/FPGA/SoC controllers. Network-side NDP leverages DPUs on the fast path to offload copying and request handling (and sometimes co-process data-parallel primitives), reducing the CPU load for remote I/O. Memory-side NDP (often implicit) redesigns access paths and data structures so that remote-memory latency/bandwidth constraints do not dominate performance. Hence, the third part of the tutorial sways the focus towards the question of how to exploit compute capabilites during data movement.
 
 > 解耦把主导成本从算术运算转移到了数据移动和控制路径开销：互连结构上传输的字节、协议栈或 I/O 栈消耗的 CPU 周期，以及额外的往返通信。近数据处理（NDP）通过在数据路径上——存储附近、网络设备（DPU/SmartNIC）内部或内存附近——执行选定计算，使更少的数据（或更少代价高昂的控制操作）跨越远程边界，以此应对这种“解耦税”。近期研究呈现出一致规律：最大且可靠的收益来自：(i) 下推能大幅缩减数据量的工作；(ii) 使用低开销接口；(iii) 在更新跨越主机—设备边界后确保正确性 [2, 3, 15, 19, 29, 34]。基于教程前几部分讨论的解耦式存储与内存模型，可以把 NDP 看成“数据路径计算”：沿远程访问路径插入计算，以减少传输字节数和/或主机 CPU 开销。存储侧 NDP 的范围，从把算子下推到存储服务器，延伸至在 SSD/FPGA/SoC 控制器内部运行受限内核的计算存储设备。网络侧 NDP 利用快速路径上的 DPU 卸载复制和请求处理（有时还协同处理数据并行原语），从而降低远程 I/O 的 CPU 负载。内存侧 NDP（往往是隐式的）重新设计访问路径和数据结构，避免远程内存的延迟/带宽约束主导性能。因此，教程第三部分把重点转向如何在数据移动期间利用计算能力。译注：原文“the largest and reliable gains”并列形式不一致，末句还将“capabilities”误拼为“capabilites”；英文均照录，译文按原意处理。
 
-### 4.1 NDP Placement Along the Access Paths
-
-> 4.1 沿访问路径放置 NDP
+### 4.1 NDP Placement Along the Access Paths｜沿访问路径放置 NDP
 
 At the storage side (operator pushdown into storage servers and computational storage devices), the state of the art focuses on byte reduction first: FPGA/SoC engines execute scan-centric kernels (filter/projection/lightweight aggregation) close to storage so that only reduced results traverse the fabric, with the host orchestrating transfers via DMA-friendly, streaming interfaces [26, 29].
 
-> 在存储侧（把算子下推到存储服务器和计算存储设备），当前最先进的方法首先关注减少字节量：FPGA/SoC 引擎在靠近存储的位置执行以扫描为中心的内核（过滤、投影、轻量聚合），使互连结构上只传输缩减后的结果；主机则通过适合 DMA 的流式接口编排传输 [26, 29]。
-
 Moving up the stack to the storage-engine / format boundary, the key shift is from "run code near data" to "run DBMS-aware code near data": systems must bridge engine-specific layouts and MVCC visibility into device-friendly streams and compact coordination metadata, and explicitly manage where version/visibility work is performed to avoid random-access amplification across the host–device boundary [15, 29]. At the query/operator layer on compute frontends, practical designs therefore push down primarily high–data-reduction operators (filters, partial aggregates, early projections) to cut shipped bytes [19, 29].
 
+> 在存储侧（把算子下推到存储服务器和计算存储设备），当前最先进的方法首先关注减少字节量：FPGA/SoC 引擎在靠近存储的位置执行以扫描为中心的内核（过滤、投影、轻量聚合），使互连结构上只传输缩减后的结果；主机则通过适合 DMA 的流式接口编排传输 [26, 29]。
+>
 > 沿软件栈向上来到存储引擎/格式边界，关键变化是从“在数据附近运行代码”转向“在数据附近运行理解 DBMS 的代码”：系统必须把引擎特有的布局和 MVCC 可见性转换为设备友好的数据流及紧凑协调元数据，并显式管理版本/可见性工作的执行位置，以免跨主机—设备边界的随机访问被放大 [15, 29]。因此，在计算前端的查询/算子层，实用设计主要下推数据缩减率高的算子（过滤、部分聚合、早期投影），以减少传输字节数 [19, 29]。
 
 Beyond read-mostly pipelines, recent work begins to offload stateful modifications under explicit transactional contracts, using cache-coherent shared locking or coordination metadata paths to preserve correctness while bounding interference with foreground work [2, 3]. For memory-side NDP in memory - disaggregated Split (RDMA) and Pool (CXL fabric) settings, the dominant mechanism is often structural rather than "kernel offload": index and access-path designs reshape concurrency control, caching, and validation to reduce round-trips and remote synchronization, preventing pointer-heavy traversals from turning into control-path stalls dominated by remote latency [20].
@@ -226,45 +201,37 @@ Finally, at the network/DPU datapath inside storage backends, DPUs can remove pr
 
 > 最后，在存储后端内部的网络/DPU 数据路径上，DPU 可以消除协议与复制开销（例如，实现零拷贝请求处理和轻量解析/分派），但近期证据强调，真正的前沿在于协同处理与放置：收益取决于配置、输入特征和 DPU 资源上限；如果缺少自适应的拆分决策，静态卸载策略的表现可能不佳 [11, 34]。总体而言，这些结果进一步印证了本教程把 NDP 定义为数据路径计算的框架：可靠收益来自减少传输字节数和控制路径工作；开放研究问题正日益从“识别可卸载的内核”，转向“在资源争用与正确性约束下如何放置并协调这些计算片段”[11, 13]。
 
-### 4.2 Open Challenges
-
-> 4.2 开放挑战
+### 4.2 Open Challenges｜开放挑战
 
 A first research direction is end-to-end, adaptive placement: optimizers and runtimes should jointly model selectivity (data reduction), device saturation, reconfiguration cost, and contention and interference under shared devices [11, 13, 20, 34]. A second is portable correctness for update-capable NDP—minimal, reusable abstractions for MVCC visibility, locking, logging/recovery, and failure handling that can span heterogeneous near-data engines and varying fabrics (RDMA versus coherent CXL-class links) without per-platform redesign [2, 3, 15, 29]. A third is reusable representations and observability: canonical data formats, layout-aware transformations, and profiling/debugging support so that split execution remains understandable and verifiable as computation migrates into devices [11, 15, 34].
 
 > 第一项研究方向是端到端自适应放置：优化器与运行时应联合建模选择率（数据缩减）、设备饱和度、重配置成本，以及共享设备上的资源争用与相互干扰 [11, 13, 20, 34]。第二项是为支持更新的 NDP 提供可移植的正确性保障：为 MVCC 可见性、加锁、日志/恢复和故障处理设计最小且可复用的抽象，使其无需针对每个平台重新设计，便能跨越异构近数据引擎和不同互连结构（RDMA 与缓存一致的 CXL 类链路）[2, 3, 15, 29]。第三项是可复用表示与可观测性：提供规范数据格式、感知布局的转换，以及剖析/调试支持，使计算迁移到设备中之后，拆分执行仍然可理解、可验证 [11, 15, 34]。
 
-## 5 Biography
-
-> 5 作者简介
+## 5 Biography｜作者简介
 
 This is a joint tutorial, held by TU Dresden and SAP SE.
 
-> 本教程由德累斯顿工业大学与 SAP SE 联合举办。
-
 **Alexander Krause** is a PostDoc at TU Dresden’s Database Research Group, chaired by Wolfgang Lehner. He is currently participating in the Reinhart Koselleck-Project of the German Research Foundation, which focuses on serverless data management principles. His research focuses on databases in the context of disaggregated systems by leveraging RDMA and CXL and he currently serves as an active member of the PVLDB Vol. 19 and SIGMOD 2027 review boards as well as a Proceedings Chair for the EDBT/ICDT 2026.
-
-> **Alexander Krause** 是德累斯顿工业大学数据库研究组的博士后，该研究组由 Wolfgang Lehner 领导。他目前参与德国科学基金会的 Reinhart Koselleck 项目，研究重点是无服务器数据管理原理。他的研究聚焦于借助 RDMA 和 CXL 探索解耦式系统语境下的数据库；目前，他是 PVLDB 第 19 卷和 SIGMOD 2027 评审委员会的活跃成员，并担任 EDBT/ICDT 2026 论文集主席。
 
 **Johannes Pietrzyk** is a PostDoc with the Database Research Group at TU Dresden. He currently works on CHORYS, a Horizon Europe project on open and programmable accelerators for data-intensive applications, with a particular focus on near-data processing, asynchronous data services, and RISC-V-based system design. His research interests include data-intensive systems, database architectures, hardware/software co-design, and high-performance data processing. Within CHORYS, he works on designing and evaluating system abstractions and mechanisms to enhance the performance of modern cloud and data platforms.
 
+> 本教程由德累斯顿工业大学与 SAP SE 联合举办。
+>
+> **Alexander Krause** 是德累斯顿工业大学数据库研究组的博士后，该研究组由 Wolfgang Lehner 领导。他目前参与德国科学基金会的 Reinhart Koselleck 项目，研究重点是无服务器数据管理原理。他的研究聚焦于借助 RDMA 和 CXL 探索解耦式系统语境下的数据库；目前，他是 PVLDB 第 19 卷和 SIGMOD 2027 评审委员会的活跃成员，并担任 EDBT/ICDT 2026 论文集主席。
+>
 > **Johannes Pietrzyk** 是德累斯顿工业大学数据库研究组的博士后。他目前参与“地平线欧洲”的 CHORYS 项目，该项目研究面向数据密集型应用的开放、可编程加速器，尤其关注近数据处理、异步数据服务以及基于 RISC-V 的系统设计。他的研究兴趣包括数据密集型系统、数据库架构、软硬件协同设计与高性能数据处理。在 CHORYS 项目中，他致力于设计和评估系统抽象与机制，以提升现代云平台和数据平台的性能。
 
 **Alexander Boehm** is a Distinguished Engineer at SAP and one of the chief architects for the SAP HANA Cloud database management system. His specific focus is on system performance and core database topics. Additionally, he is working on the evolution of the HANA system, including novel hardware and cloud-based system deployments. Before re-joining SAP in 2024, Alexander was a Principal Engineer at Google Cloud and an Uber-Techlead for Google’s AlloyDB for PostgreSQL system.
 
 > **Alexander Boehm** 是 SAP 杰出工程师，也是 SAP HANA Cloud 数据库管理系统的首席架构师之一。他主要关注系统性能与数据库核心议题。此外，他也致力于 HANA 系统的演进，包括新型硬件和云端系统部署。在 2024 年重新加入 SAP 之前，Alexander 曾任 Google Cloud 首席工程师，并担任 Google AlloyDB for PostgreSQL 系统的跨团队技术负责人（Uber-Techlead）。
 
-## Acknowledgments
-
-> 致谢
+## Acknowledgments｜致谢
 
 This work was partly funded by (1) by the German Research Foundation (DFG) under grant LE-1416/28-1 and (2) the European Union’s Horizon research and innovation program under grant agreement no. 101189551. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Health and Digital Executive Agency. Neither the European Union nor the granting authority can be held responsible for them.
 
 > 本工作部分由以下项目资助：(1) 德国科学基金会（DFG）的 LE-1416/28-1 号基金；(2) 欧盟“地平线”研究与创新计划的 101189551 号资助协议。然而，文中表达的观点和意见仅代表作者本人，并不一定反映欧盟或欧洲卫生与数字执行局的立场。欧盟及资助机构均不对此承担责任。译注：原文“funded by (1) by”重复使用了“by”，英文照录，译文去除重复。
 
-## References
-
-> 参考文献
+## References｜参考文献
 
 [1] Panagiotis Antonopoulos, Alex Budovski, Cristian Diaconu, Alejandro Hernandez Saenz, Jack Hu, Hanuma Kodavalla, Donald Kossmann, Sandeep Lingam, Umar Farooq Minhas, Naveen Prakash, Vijendra Purohit, Hugh Qu, Chaitanya Sreenivas Ravella, Krystyna Reisteter, Sheetal Shrotri, Dixin Tang, and Vikram Wakade. 2019. Socrates: The New SQL Server in the Cloud. In Proceedings of the 2019 International Conference on Management of Data, SIGMOD Conference 2019, Amsterdam, The Netherlands, June 30 - July 5, 2019. ACM, 1743–1756. doi:10.1145/3299869.3314047
 
