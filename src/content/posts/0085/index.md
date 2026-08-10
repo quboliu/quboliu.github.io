@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
-pubDatetime: 2026-08-09T12:00:00+08:00
-modDatetime: 2026-08-10T15:01:56+08:00
+pubDatetime: 2025-05-25T12:00:00+08:00
+modDatetime: 2026-08-10T15:33:40+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | CloudyBench: A Testbed for A Comprehensive Evaluation of Cloud-Native Databases｜CloudyBench：用于全面评估云原生数据库的测试平台"
 featured: false
