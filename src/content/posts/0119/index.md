@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-08-12T00:55:59+08:00
+modDatetime: 2026-08-12T01:11:02+08:00
 timezone: "Asia/Shanghai"
-title: "Paxos的魔法学研究报告"
+title: "转载|Paxos的魔法学研究报告"
 contentType: "repost"
 featured: false
 area: "distributed-systems"
