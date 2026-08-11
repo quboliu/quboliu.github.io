@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
-pubDatetime: 2026-08-11T16:56:19+08:00
+pubDatetime: 2024-12-15T10:00:00+08:00
+modDatetime: 2026-08-11T20:32:10+08:00
 timezone: "Asia/Shanghai"
 title: "论文翻译 | StarFish: Highly Available Block Storage｜StarFish：高可用块存储"
 contentType: "paper-translation"
