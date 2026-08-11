@@ -1,7 +1,6 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-08-18T10:00:00+08:00
-modDatetime: 2026-08-11T20:32:10+08:00
 timezone: "Asia/Shanghai"
 title: "技术演讲 | Volumes as a Micro-Service｜卷即微服务：由 Docker 实现的分布式块存储（中英对照）"
 contentType: "docs-translation"
