@@ -1,7 +1,6 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-11-17T10:00:00+08:00
-modDatetime: 2026-08-11T20:32:10+08:00
 timezone: "Asia/Shanghai"
 title: "论文翻译 | Petal: Distributed Virtual Disks｜Petal：分布式虚拟磁盘"
 contentType: "paper-translation"
