@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
-pubDatetime: 2026-08-11T16:09:22+08:00
+pubDatetime: 2025-03-16T10:00:00+08:00
+modDatetime: 2026-08-11T20:32:10+08:00
 timezone: "Asia/Shanghai"
 title: "论文翻译 | Optimizing the Longhorn Cloud-native Software Defined Storage Engine for High Performance｜面向高性能的 Longhorn 云原生软件定义存储引擎优化"
 contentType: "paper-translation"
