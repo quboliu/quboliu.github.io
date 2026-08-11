@@ -1,11 +1,12 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2025-08-24T12:00:00+08:00
+modDatetime: 2026-08-10T21:05:34+08:00
 timezone: "Asia/Shanghai"
 title: "官方文档 | etcd API Guarantees｜etcd API 语义保证"
 contentType: "docs-translation"
 featured: false
-area: "distributed-systems"
+area: "kubernetes"
 draft: false
 tags:
   - "官方文档"
