@@ -1,11 +1,12 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2025-02-16T12:00:00+08:00
+modDatetime: 2026-08-10T21:05:34+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Omega: Flexible, Scalable Schedulers for Large Compute Clusters｜Omega：面向大规模计算集群的灵活、可扩展调度器"
 contentType: "paper-translation"
 featured: false
-area: "distributed-systems"
+area: "kubernetes"
 draft: false
 tags:
   - "论文阅读"
