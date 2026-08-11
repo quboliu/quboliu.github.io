@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
-pubDatetime: 2026-08-11T17:27:27+08:00
+pubDatetime: 2025-01-19T10:00:00+08:00
+modDatetime: 2026-08-11T20:32:10+08:00
 timezone: "Asia/Shanghai"
 title: "论文翻译 | FAB: Building Distributed Enterprise Disk Arrays from Commodity Components｜FAB：用普通硬件构建分布式企业磁盘阵列"
 contentType: "paper-translation"
