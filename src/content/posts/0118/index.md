@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
-pubDatetime: 2026-08-11T17:35:50+08:00
+pubDatetime: 2025-12-28T10:00:00+08:00
+modDatetime: 2026-08-11T20:32:10+08:00
 timezone: "Asia/Shanghai"
 title: "官方博客 | V2 Disk Size Aggregation｜Longhorn V2 磁盘容量聚合（中英对照）"
 contentType: "docs-translation"
