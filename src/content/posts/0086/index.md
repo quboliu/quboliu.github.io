@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-09-29T12:00:00+08:00
-modDatetime: 2026-08-12T11:05:06+08:00
+modDatetime: 2026-08-12T11:44:08+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Time, Clocks, and the Ordering of Events in a Distributed System｜时间、时钟与分布式系统中的事件排序"
 contentType: "paper-translation"
@@ -106,13 +106,13 @@ We assume that sending or receiving a message is an event in a process. We can t
 
 > 我们假定，发送或接收消息都是进程中的一个事件。于是，可以如下定义以“→”表示的“先发生于”关系。
 
-**Definition.** The relation “→” on the set of events of a system is the smallest relation satisfying the following three conditions: (1) If *a* and *b* are events in the same process, and *a* comes before *b*, then *a* → *b*. (2) If *a* is the sending of a message by one process and *b* is the receipt of the same message by another process, then *a* → *b*. (3) If *a* → *b* and *b* → *c* then *a* → *c*. Two distinct events *a* and *b* are said to be *concurrent* if *a* ↛ *b* and *b* ↛ *a*.
+**Definition.** The relation “→” on the set of events of a system is the smallest relation satisfying the following three conditions: (1) If *a* and *b* are events in the same process, and *a* comes before *b*, then *a* → *b*. (2) If *a* is the sending of a message by one process and *b* is the receipt of the same message by another process, then *a* → *b*. (3) If *a* → *b* and *b* → *c* then *a* → *c*. Two distinct events *a* and *b* are said to be *concurrent* if $a \nrightarrow b$ and $b \nrightarrow a$.
 
-> **定义。** 系统事件集合上的关系“→”是满足以下三个条件的最小关系：(1) 如果 *a* 和 *b* 是同一进程中的事件，且 *a* 位于 *b* 之前，则 *a* → *b*；(2) 如果 *a* 是一个进程发送某条消息的事件，而 *b* 是另一个进程接收同一消息的事件，则 *a* → *b*；(3) 如果 *a* → *b* 且 *b* → *c*，则 *a* → *c*。若两个不同事件 *a* 和 *b* 满足 *a* ↛ *b* 且 *b* ↛ *a*，则称二者*并发*。
+> **定义。** 系统事件集合上的关系“→”是满足以下三个条件的最小关系：(1) 如果 *a* 和 *b* 是同一进程中的事件，且 *a* 位于 *b* 之前，则 *a* → *b*；(2) 如果 *a* 是一个进程发送某条消息的事件，而 *b* 是另一个进程接收同一消息的事件，则 *a* → *b*；(3) 如果 *a* → *b* 且 *b* → *c*，则 *a* → *c*。若两个不同事件 *a* 和 *b* 满足 $a \nrightarrow b$ 且 $b \nrightarrow a$，则称二者*并发*。
 
-We assume that *a* ↛ *a* for any event *a*. (Systems in which an event can happen before itself do not seem to be physically meaningful.) This implies that → is an irreflexive partial ordering on the set of all events in the system.
+We assume that no event happens before itself. (Systems in which an event can happen before itself do not seem to be physically meaningful.) This implies that → is an irreflexive partial ordering on the set of all events in the system.
 
-> 我们假定任意事件 *a* 都满足 *a* ↛ *a*。（一个事件可以发生在自身之前的系统似乎不具有物理意义。）这意味着，→ 是系统全部事件集合上的非自反偏序。
+> 我们假定，没有任何事件会先于自身发生。（一个事件可以发生在自身之前的系统似乎不具有物理意义。）这意味着，→ 是系统全部事件集合上的非自反偏序。
 
 It is helpful to view this definition in terms of a “space-time diagram” such as Figure 1. The horizontal direction represents space, and the vertical direction represents time—later times being higher than earlier ones. The dots denote events, the vertical lines denote processes, and the wavy lines denote messages.[^2] It is easy to see that *a* → *b* means that one can go from *a* to *b* in the diagram by moving forward in time along process and message lines. For example, we have *p*₁ → *r*₄ in Figure 1.
 
@@ -346,9 +346,9 @@ Our resource scheduling algorithm ordered the requests according to the total or
 
 > 我们的资源调度算法按照全序 ⇒ 对请求排序。这会允许出现下面这种“异常行为”。考虑一个由互连计算机构成的全国性系统。假定某人在计算机 *A* 上发出请求 *A*，随后打电话给另一个城市的朋友，请他在另一台计算机 *B* 上发出请求 *B*。请求 *B* 很可能获得更小的时间戳，从而排在请求 *A* 之前。这之所以可能发生，是因为系统无法知道 *A* 实际上先于 *B*；这种先后信息来自系统外部的消息。
 
-Let us examine the source of the problem more closely. Let $\mathcal{S}$ be the set of all system events. Let us introduce a set $\underline{\mathcal{S}}$ of events which contains the events in $\mathcal{S}$ together with all other relevant external events, such as the phone calls in our example. Let $\underline{\rightarrow}$ denote the “happened before” relation for $\underline{\mathcal{S}}$. In our example, we had *A* $\underline{\rightarrow}$ *B*, but *A* ↛ *B*. It is obvious that no algorithm based entirely upon events in $\mathcal{S}$, and which does not relate those events in any way with the other events in $\underline{\mathcal{S}}$, can guarantee that request *A* is ordered before request *B*.
+Let us examine the source of the problem more closely. Let $\mathcal{S}$ be the set of all system events. Let us introduce a set $\underline{\mathcal{S}}$ of events which contains the events in $\mathcal{S}$ together with all other relevant external events, such as the phone calls in our example. Let $\underline{\rightarrow}$ denote the “happened before” relation for $\underline{\mathcal{S}}$. In our example, $A \underline{\rightarrow} B$, but the system’s happened-before relation does not order $A$ before $B$. It is obvious that no algorithm based entirely upon events in $\mathcal{S}$, and which does not relate those events in any way with the other events in $\underline{\mathcal{S}}$, can guarantee that request *A* is ordered before request *B*.
 
-> 进一步考察问题的根源。令 $\mathcal{S}$ 为全部系统事件的集合。再引入事件集合 $\underline{\mathcal{S}}$，它包含 $\mathcal{S}$ 中的事件以及所有其他相关的外部事件，例如本例中的电话通话。用 $\underline{\rightarrow}$ 表示 $\underline{\mathcal{S}}$ 上的“先发生于”关系。在本例中，*A* $\underline{\rightarrow}$ *B*，但 *A* ↛ *B*。显然，若一个算法完全以 $\mathcal{S}$ 中的事件为基础，而且不以任何方式把这些事件同 $\underline{\mathcal{S}}$ 中的其他事件关联起来，就不可能保证请求 *A* 排在请求 *B* 之前。
+> 进一步考察问题的根源。令 $\mathcal{S}$ 为全部系统事件的集合。再引入事件集合 $\underline{\mathcal{S}}$，它包含 $\mathcal{S}$ 中的事件以及所有其他相关的外部事件，例如本例中的电话通话。用 $\underline{\rightarrow}$ 表示 $\underline{\mathcal{S}}$ 上的“先发生于”关系。在本例中，扩展事件集上有 $A \underline{\rightarrow} B$，但系统的“先发生于”关系并不将 $A$ 排在 $B$ 之前。显然，若一个算法完全以 $\mathcal{S}$ 中的事件为基础，而且不以任何方式把这些事件同 $\underline{\mathcal{S}}$ 中的其他事件关联起来，就不可能保证请求 *A* 排在请求 *B* 之前。
 
 There are two possible ways to avoid such anomalous behavior. The first way is to explicitly introduce into the system the necessary information about the ordering $\underline{\rightarrow}$. In our example, the person issuing request *A* could receive the timestamp $T_A$ of that request from the system. When issuing request *B*, his friend could specify that *B* be given a timestamp later than $T_A$. This gives the user the responsibility for avoiding anomalous behavior.
 
@@ -422,9 +422,9 @@ If we consider vertical distance in Figure 2 to represent physical time, then PC
 
 > 若把图 2 中的竖直距离视为物理时间，则 PC2 表示一条滴答线的高度变化小于 $\epsilon$。
 
-Since two different clocks will never run at exactly the same rate, they will tend to drift further and further apart. We must therefore devise an algorithm to insure that PC2 always holds. First, however, let us examine how small $\kappa$ and $\epsilon$ must be to prevent anomalous behavior. We must insure that the system $\underline{\mathcal{S}}$ of relevant physical events satisfies the Strong Clock Condition. We assume that our clocks satisfy the ordinary Clock Condition, so we need only require that the Strong Clock Condition holds when *a* and *b* are events in $\mathcal{S}$ with *a* ↛ *b*. Hence, we need only consider events occurring in different processes.
+Since two different clocks will never run at exactly the same rate, they will tend to drift further and further apart. We must therefore devise an algorithm to insure that PC2 always holds. First, however, let us examine how small $\kappa$ and $\epsilon$ must be to prevent anomalous behavior. We must insure that the system $\underline{\mathcal{S}}$ of relevant physical events satisfies the Strong Clock Condition. We assume that our clocks satisfy the ordinary Clock Condition, so we need only require that the Strong Clock Condition holds when *a* and *b* are events in $\mathcal{S}$ and neither event happens before the other. Hence, we need only consider events occurring in different processes.
 
-> 由于两个不同的时钟绝不会以完全相同的速率运行，它们往往会漂移得越来越远。因此，必须设计一种算法来保证 PC2 始终成立。不过，首先来考察 $\kappa$ 和 $\epsilon$ 必须小到什么程度才能防止异常行为。必须保证相关物理事件系统 $\underline{\mathcal{S}}$ 满足强时钟条件。我们假定时钟满足普通时钟条件，因此只需在 *a* 和 *b* 是 $\mathcal{S}$ 中的事件且 *a* ↛ *b* 时要求强时钟条件成立。于是，只须考虑发生在不同进程中的事件。
+> 由于两个不同的时钟绝不会以完全相同的速率运行，它们往往会漂移得越来越远。因此，必须设计一种算法来保证 PC2 始终成立。不过，首先来考察 $\kappa$ 和 $\epsilon$ 必须小到什么程度才能防止异常行为。必须保证相关物理事件系统 $\underline{\mathcal{S}}$ 满足强时钟条件。我们假定时钟满足普通时钟条件，因此只需在 *a* 和 *b* 是 $\mathcal{S}$ 中的事件，且二者在“先发生于”关系下互不先于对方时，要求强时钟条件成立。于是，只须考虑发生在不同进程中的事件。
 
 Let $\mu$ be a number such that if event *a* occurs at physical time *t* and event *b* in another process satisfies *a* $\underline{\rightarrow}$ *b*, then *b* occurs later than physical time $t+\mu$. In other words, $\mu$ is less than the shortest transmission time for interprocess messages. We can always choose $\mu$ equal to the shortest distance between processes divided by the speed of light. However, depending upon how messages in $\underline{\mathcal{S}}$ are transmitted, $\mu$ could be significantly larger.
 
