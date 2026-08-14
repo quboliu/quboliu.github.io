@@ -31,3 +31,8 @@ public/pagefind
 
 # docker compose
 compose.override.yaml
+
+# Local compatibility links into /home/muxunting/WorkSpace/BUILD.
+/node_modules
+/dist
+/.astro
