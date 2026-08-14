@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-08-14T16:49:58+08:00
+modDatetime: 2026-08-14T17:44:22+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | The Network is Reliable｜网络是可靠的：现实世界通信故障的非正式调查"
 contentType: "paper-translation"
@@ -23,8 +24,6 @@ description: "Peter Bailis 与 Kyle Kingsbury 对真实世界通信故障案例�
 
 > **Peter Bailis，加州大学伯克利分校**<br>
 > **Kyle Kingsbury，Jepsen Networks**
-
-> **译者说明：** 本文依据作者托管的 [ACM Queue 定稿 PDF](https://www.bailis.org/papers/partitions-queue2014.pdf) 翻译，并用 [AMPLab 论文页](https://amplab.cs.berkeley.edu/publication/the-network-is-reliable/) 与[作者源稿仓库](https://github.com/aphyr/partitions-post)核对元数据和链接。原文发表于 *ACM Queue* 12(7)，2014 年 7 月，后收录于 *Communications of the ACM* 57(9)，2014 年 9 月。译文经授权发布，采用英文原文在前、中文译文在后的逐段对照形式；参考文献编号沿用原文。
 
 “The network is reliable” tops Peter Deutsch’s classic list, “[Eight fallacies of distributed computing](https://blogs.oracle.com/jag/resource/Fallacies.html),” “all [of which] prove to be false in the long run and all [of which] cause big trouble and painful learning experiences.” Accounting for and understanding the implications of network behavior is key to designing robust distributed programs—in fact, six of Deutsch’s “fallacies” directly pertain to limitations on networked communications. This should be unsurprising: the ability (and often requirement) to communicate over a shared channel is a defining characteristic of distributed programs, and many of the key results in the field pertain to the possibility and impossibility of performing distributed computations under particular sets of network conditions.
 
