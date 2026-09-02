@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-02T10:30:52+08:00
-modDatetime: 2026-09-02T10:34:05+08:00
+modDatetime: 2026-09-02T11:31:43+08:00
 timezone: "Asia/Shanghai"
 title: "Google Spanner 的四道防线：Paxos、2PL、2PC 与 Commit Wait 分别解决什么问题？"
 area: "distributed-systems"
@@ -112,6 +112,31 @@ Paxos 让同一个 Paxos group 中的副本对操作日志达成共识。leader 
 
 需要注意，经典 Spanner 讨论的是读写事务。只读事务通常可以使用 MVCC 的历史版本和一致性快照，避免获取读锁。
 
+### 跨分片事务使用的是局部 2PL，还是全局 2PL
+
+答案是：**锁表是分片局部的，但 2PL 约束是事务全局的。**
+
+每个 Paxos group 的 leader 只管理本分片数据的锁，不存在一张覆盖所有分片的中心化全局锁表。但是，同一个跨分片事务在所有参与分片持有的锁，共同组成该事务的锁集合。
+
+```text
+跨分片事务 T
+├── 分片 A 的 lock table：持有锁 LA
+├── 分片 B 的 lock table：持有锁 LB
+└── 分片 C 的 lock table：持有锁 LC
+```
+
+这些分片不是各自运行互不相关的事务。事务 T 在全局上遵守 strict 2PL：执行期间可以继续获取需要的锁，但在提交或回滚决定作出前，不会提前释放各分片上的必要锁。
+
+跨分片时，各 participant 在本地检查锁冲突；2PC coordinator 收集所有 participant 的 Prepare 结果。只有全局决定提交或回滚以后，各分片才完成相同决定并释放锁。
+
+因此，2PL 和 2PC 的关系是：
+
+- 2PL 通过分布式持锁，约束并发事务的交错，提供可串行化隔离；
+- 2PC 协调这些持锁的参与者，保证跨分片修改原子提交；
+- 2PC 本身不单独创造隔离性，2PL 也不单独保证跨分片原子提交。
+
+所以，“2PL 只管单分片隔离，Transaction Manager 单独负责跨分片隔离”并不准确。更准确的说法是：**Transaction Manager 用 2PC 协调多个局部锁表，而整个事务形成一套分布式 2PL。**
+
 ## 2PC：解决跨分片事务的原子性
 
 假设一个转账事务需要执行：
@@ -138,6 +163,25 @@ Paxos 和 2PC 经常同时出现在 Spanner 中，但它们的参与对象不同
 - 2PC：同一笔事务涉及的多个分片之间达成一致。
 
 在 Spanner 中，2PC 的 prepare、commit 等事务状态也会通过底层 Paxos 复制，从而让 coordinator 或 participant leader 故障后可以恢复事务状态。不过，网络分区或多数派不可用时，事务仍可能停顿并持有锁；Paxos 改善了状态恢复，并没有让经典 2PC 在所有故障下都不阻塞。
+
+### 多个分片之间能不能使用 Paxos
+
+能，但“跨分片使用 Paxos”可能指三种不同设计，不能混为一句话。
+
+第一种是 **Spanner 的常规做法**：每个分片分别拥有自己的 Paxos group，跨分片事务再由 2PC 连接这些 group。这里没有一个横跨所有分片的 Paxos 实例；Paxos 复制各 participant 和 coordinator 的事务状态，使 2PC 决定能够在副本故障后恢复。
+
+第二种是让**一个共识日志覆盖多个逻辑分片**。所有相关操作先进入同一个 Paxos/Multi-Paxos 日志，再按统一顺序执行。这样容易获得跨分片全序，却会把吞吐量、leader 负载和故障影响域绑在同一个共识组上，削弱分片原本用于水平扩展的意义。
+
+第三种是 **Paxos Commit**。它不是把所有数据塞进一个 Paxos group，而是用一组 Paxos 共识实例容错地记录各 participant 的 Prepare/Abort 意愿，进而决定全局 Commit/Abort。其意义是消除单个事务协调者作为唯一故障点，并在所需多数派可用时继续推进提交。
+
+还有一类系统把共识放在事务执行之前。例如 Calvin 对事务输入进行 Paxos 式同步复制，再通过确定性排序让各分片按同一事务顺序执行。它用“先排序、后执行”的架构减少正常路径对 2PC 的依赖，但代价是需要预先知道读写集或处理重调度，并承担全局排序层的延迟与容量约束。
+
+因此，跨分片引入 Paxos 通常有两个目的：
+
+1. **决定顺序**：让多个分片对事务或命令的全局顺序达成一致；
+2. **决定结果**：让 Commit/Abort 决定在协调者故障后仍可恢复或继续推进。
+
+它不是“比 2PC 更强，所以直接替换 2PC”这么简单。Paxos 解决共识与容错，原子提交还要定义每个 participant 的投票如何汇聚成事务结果；Paxos Commit 正是把二者结合起来的一种专门协议。
 
 ## Commit Wait：解决提交时间顺序问题
 
@@ -212,3 +256,5 @@ Commit Wait：等待提交时间戳确定已经成为过去
 - [Spanner: Google's Globally-Distributed Database](https://research.google/pubs/spanner-googles-globally-distributed-database-2/)
 - [Life of Spanner Reads & Writes](https://docs.cloud.google.com/spanner/docs/whitepapers/life-of-reads-and-writes)
 - [Spanner: TrueTime and external consistency](https://docs.cloud.google.com/spanner/docs/true-time-external-consistency)
+- [Consensus on Transaction Commit](https://lamport.azurewebsites.net/pubs/transaction.pdf)
+- [Calvin: Fast Distributed Transactions for Partitioned Database Systems](https://www.cs.yale.edu/homes/thomson/publications/calvin-sigmod12.pdf)
