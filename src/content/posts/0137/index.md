@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-07T19:25:21+08:00
-modDatetime: 2026-09-07T20:11:18+08:00
+modDatetime: 2026-09-07T20:14:06+08:00
 timezone: "Asia/Shanghai"
-title: "DDIA 第二版的内在逻辑：数据为什么越来越难管理"
+title: "DDIA 第二版：数据表示、变更协调与状态派生"
 area: "distributed-systems"
 featured: false
 draft: false
