@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-08T19:44:50+08:00
+modDatetime: 2026-09-09T01:32:10+08:00
 timezone: "Asia/Shanghai"
 title: "线性一致读，哪些步骤不能省？——从 etcd v2、v3 到 Neon"
 area: "distributed-systems"
@@ -43,9 +44,7 @@ GET /v2/keys/x?quorum=true
 
 v2.3.8 将它转换为内部 `QGET`，与 PUT、DELETE 一样序列化后调用 `s.r.Propose(...)`，提交给 Raft。[v2.3.8：Do](https://github.com/etcd-io/etcd/blob/v2.3.8/etcdserver/server.go#L721)
 
-```text
-QGET 请求 → 追加 Raft 日志 → quorum 复制确认 → 提交 → 按序执行读取
-```
+读请求先进入 Raft 日志，经多数派复制确认并提交后，按序执行读取。
 
 例如：
 
@@ -67,16 +66,9 @@ v3 的 Range 默认线性一致。这里讨论读取最新状态的普通 Range/
 
 假设 A 是 leader，客户端把 Get 发给 follower C：
 
-```text
-客户端 → C：Get(x)
-           │
-           └→ A：ReadIndex(q)
-                 │ 记录当前提交位置 R
-                 │ 携带 q 的心跳取得 quorum 确认
-                 └→ C：返回 R
-                       │ 等待 appliedIndex ≥ R
-                       └→ 读取本地 KV，返回客户端
-```
+![etcd v2 的读日志、v3 的 ReadIndex 与 Neon Pageserver 本地追进度的对照。](./linearizable-read-flow.png)
+
+客户端向 C 发出 Get(x)，C 向 leader A 请求 ReadIndex。A 记录 R 并取得本次读取的多数派确认后，将 R 返回 C；C 等待本地 appliedIndex 达到 R，再查询 KV 并返回结果。
 
 ### R 是什么，谁确定？
 
@@ -135,13 +127,7 @@ etcd 的后台读循环能够唤醒一批等待请求，不是每个 Get 都严�
 
 有对应，但要放在正确层次。Neon 计算节点执行 PostgreSQL，向 Safekeeper 发送 WAL；Pageserver 摄取 WAL，按计算节点请求的页面版本提供数据。
 
-```text
-etcd follower：
-取得安全位置 R → 等待本地应用到 R → 查询 KV
-
-Neon Pageserver：
-收到页面版本要求 → 等待所需 WAL 摄取到位 → 重建并返回页面
-```
+etcd v3 先取得安全读取位置 R，再等待本地应用到 R 后查询 KV。Pageserver 则接收页面版本要求，等待所需 WAL 摄取到位，再重建并返回页面。相似的是本地追进度，不能把两条路径的授权与一致性保证直接等同。
 
 两者都不允许用落后数据随便应答。但 etcd 等的是状态机已经应用到 R；Pageserver 等的是重建所需 WAL 已经摄取到位，页面可以随后再按需重做，并非所有页面都提前更新完毕。[Neon：等待 WAL 并读取页面](https://github.com/neondatabase/neon/blob/fa504217c61bbcaf5c512d75830564541f917f8f/pageserver/src/page_service.rs#L2513)
 
