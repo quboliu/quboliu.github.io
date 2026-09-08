@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-08T10:02:38+08:00
+modDatetime: 2026-09-08T10:09:32+08:00
 timezone: "Asia/Shanghai"
 title: "共识协议如何面对不可靠的时钟：Paxos、Raft 与 Neon Safekeeper"
 area: "distributed-systems"
@@ -12,7 +13,7 @@ tags:
   - "Raft"
   - "Neon"
   - "分布式时钟"
-description: "从墙上时钟的偏差、漂移与跳变，到单调时钟的频率误差，分析 Paxos、Raft 与 Neon Safekeeper 的安全性边界、超时实现和租约假设。"
+description: "区分 Paxos、Raft 的理论假设与工程实现，结合 etcd-io/raft 和 Neon Safekeeper 固定版本源码，分析时钟异常、超时与租约的安全边界。"
 ---
 
 机器上的时间并不可靠：两台机器可能相差几分钟，同一台机器的时间可能突然回拨；即使换成单调时钟，不同机器的一秒也未必一样长。依靠心跳和超时运行的共识协议，为什么还能保证一致性？
@@ -21,9 +22,23 @@ description: "从墙上时钟的偏差、漂移与跳变，到单调时钟的频
 
 Paxos 和 Raft 的基础共识机制属于前一种设计。Neon 的 Safekeeper 是面向 PostgreSQL WAL 的共识组件，继承了类似原则，但其工程实现仍包含墙上时钟。理解它们，需要把协议模型、计时实现和数据库对外语义分开。
 
+## 阅读范围：理论、工程文献与源码分别说明什么
+
+Paxos、Raft 是算法名称，存在不同实现；Safekeeper 是 Neon 的具体组件，其背后也有协议设计和形式化模型。因此，本文不是把三个同层次的算法直接并列，而是沿着“协议假设—实现机制—时钟异常的影响”逐层比较。
+
+| 对象                | 理论或设计依据                    | 本文核对的实现依据                                                                 |
+| ------------------- | --------------------------------- | ---------------------------------------------------------------------------------- |
+| Paxos / Multi-Paxos | Lamport《Paxos Made Simple》      | Google《Paxos Made Live》对当年实现的描述；未核对该实现源码                        |
+| Raft                | Ongaro、Ousterhout 的 Raft 原论文 | `etcd-io/raft` 独立库，提交 `3cbf6a74be3f`；主要检查 `raft.go`、`node.go`          |
+| Neon WAL 共识       | Neon 协议说明、仓库中的 TLA+ 模型 | `neondatabase/neon`，提交 `fa504217c61b`；检查 WAL proposer、Safekeeper 和恢复路径 |
+
+Raft 部分所说的源码，是 [etcd-io/raft 库](https://github.com/etcd-io/raft/tree/3cbf6a74be3fa392edd8b64253fcd11c3ce5649b)，不是其他 Raft 实现，也不是对整个 etcd 服务的审计。Neon 部分使用[指定提交的公开源码](https://github.com/neondatabase/neon/tree/fa504217c61bbcaf5c512d75830564541f917f8f)，不据此推断其生产控制面的全部行为。
+
+下文会分别标明理论性质、源码事实和分析推论。**统一时钟公式及租约推导是本文的分析工具，不是三个对象共同采用的原始模型。** 工程文献描述不能替代源码核对，源码核对也不等于完成了时钟故障实验或系统级证明。
+
 ## 一、先把“时钟不准”写成明确的模型
 
-设真实时间为 $t$。它只是分析用的参照，节点不能直接读取。节点 $i$ 的墙上时钟写作：
+为统一描述误差，设真实时间为 $t$。它只是分析用的参照，节点不能直接读取。节点 $i$ 的墙上时钟写作：
 
 $$
 W_i(t)=t+\theta_i(t)
@@ -51,6 +66,8 @@ $$
 
 这才是“频率误差有上界”的模型。它比单调性强得多，也排除了该时间区间内不受约束的停表和跳变。后面讨论租约时，这个区别会直接决定安全性。
 
+不能反过来把这个不等式当作基础 Paxos、Raft 的必需前提。它们的核心安全性并不需要先规定一个 $\rho$；只有当某项机制用经过时长证明权限时，才需要建立相应误差条件。
+
 工程上的时钟名称也不能替代模型。Linux 的 `CLOCK_MONOTONIC` 不受墙上时钟不连续调整的影响，但会受渐进频率调整影响，且不计系统挂起时间；`CLOCK_MONOTONIC_RAW` 不受这种频率调整影响，却仍有硬件误差；`CLOCK_BOOTTIME` 则包含挂起时间。[Linux 时钟接口说明](https://man7.org/linux/man-pages/man2/clock_gettime.2.html)
 
 ## 二、共识安全性允许故障检测出错
@@ -73,17 +90,29 @@ $$
 
 ## 三、Paxos：用承诺和提案顺序约束决定
 
+### 3.1 理论层：安全性证明不依赖物理时钟界限
+
+《Paxos Made Simple》从异步消息传递出发，允许进程任意慢、消息延迟、丢失和重复等情况。其安全性依靠协议状态转移，而非全局时钟、消息超时上界或固定走时精度；论文没有要求实现必须选用某一种操作系统时钟。[Paxos Made Simple，§2.1](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf)
+
 Paxos 不需要比较“谁的物理时间更新”。对于一个共识实例，Proposer 使用可全序比较且不重复的提案编号；一种实现是“持久化计数器、节点唯一 ID”的组合，并在重试时提升编号。
 
 Acceptor 记录已承诺的编号以及已接受的提案。新的 Proposer 获得多数派承诺后，若回复包含已接受的值，必须选择其中编号最高者的值。多数派相交与这条继承规则共同保住已经选定的结果。编号生成和承诺持久化都不需要墙上时间。[Paxos Made Simple，§2.2–2.5](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf)
 
-因此，墙上时钟的固定偏差不会改变提案顺序；漂移或跳变若只是改变重试、心跳和故障检测的节奏，就只会改变竞争方式。单调时钟走速不同也可能让 Proposer 反复抢占，但不能使 Acceptor 忘记承诺。
+由此得到的分析结论是：在采用上述逻辑编号的实现中，墙上时钟的固定偏差不会改变提案顺序。漂移、跳变或单调时钟走速差异若只改变重试和故障检测的节奏，就只改变竞争方式，不改变 Acceptor 必须遵守的承诺。
 
 这里的“只影响进展”有明确前提：不能用可能回拨的时间戳直接替代唯一提案编号，也不能按 TTL 删除仍然需要的承诺。这样做改变了协议状态规则，已经超出基础 Paxos 的保证。
 
-Multi-Paxos 通常通过稳定的 Leader 减少竞争和重复准备阶段。Leader 的稳定性改善性能；如果多个协调者持续互相抢占，系统可能停滞。Google 的工程论文专门讨论了这类 Leader 抖动问题。[Paxos Made Live，§4.2、§5.2](https://research.google.com/archive/paxos_made_live.pdf)
+### 3.2 工程文献层：Google 的实现描述，不是所有 Paxos 的计时方式
+
+本文采用的工程案例是 Google 2007 年《Paxos Made Live》。它描述支撑 Chubby 的 Paxos 系统，包括稳定 master、Leader 抖动和 master lease。Multi-Paxos 的稳定协调者减少竞争及重复准备阶段，但持续抢占仍可能阻碍进展。[Paxos Made Live，§4.2、§5.2](https://research.google.com/archive/paxos_made_live.pdf)
+
+其中，master 使用比其他副本更短的租约超时，以应对时钟漂移。这说明该项优化有额外的时间条件；它不是基础 Paxos 的要求，也不能推广为所有 Paxos 实现的行为。
+
+这份文献不足以确定本文关心的全部计时细节，例如具体使用哪种时钟 API、系统挂起是否计时、误差界限如何落实。因此，本文对这个案例的证据止于论文描述，不声称完成了源码或部署配置核对。
 
 ## 四、Raft：任期是逻辑编号，超时不是任期的到期证明
+
+### 4.1 理论层：任期和日志规则保证安全，超时帮助取得进展
 
 Raft 的 `term` 是递增整数，没有“每个任期持续几秒”的规定。Follower 超时后递增 term、请求投票；它必须得到多数票，并满足候选者日志足够新的条件，才能当选。
 
@@ -97,7 +126,19 @@ $$
 
 它描述维持稳定 Leader 的时间尺度，而不是日志安全性的前提。配置上满足“心跳 100 ms、选举 1 s”，也不等于真实运行中满足这些关系：计时速度、线程调度、网络与持久化延迟都参与其中。[Raft 原论文，§5.6](https://raft.github.io/raft.pdf)
 
-协议并没有规定必须调用哪一种操作系统时钟。etcd 的 Raft 核心通过 `tickElection`、`tickHeartbeat` 累加逻辑 tick，由外部驱动时间前进。因此要判断某个实现是否受墙上时钟跳变影响，还要检查 tick 的来源和暂停后的处理方式。[etcd Raft 计时实现](https://github.com/etcd-io/raft/blob/3cbf6a74be3fa392edd8b64253fcd11c3ce5649b/raft.go#L849-L904)
+### 4.2 源码层：etcd-io/raft 接收 tick，而非直接读取墙上时间
+
+以下只讨论 `etcd-io/raft` 提交 `3cbf6a74be3f`。`node.go` 的 `Node.Tick()` 接口以 tick 为计时单位；`raft.go` 中的 `tickElection`、`tickHeartbeat` 每执行一次就递增相应计数，并按阈值触发选举或心跳。[Tick 接口](https://github.com/etcd-io/raft/blob/3cbf6a74be3fa392edd8b64253fcd11c3ce5649b/node.go#L132-L135)、[核心计时处理](https://github.com/etcd-io/raft/blob/3cbf6a74be3fa392edd8b64253fcd11c3ce5649b/raft.go#L849-L904)
+
+因此，源码层可以确认的是：这些核心函数接收时间推进事件，没有通过比较两台机器的墙上时间决定是否超时。库的使用者负责驱动 tick；算法论文没有规定这种接口形式，更没有规定必须使用 Go、Tokio 或某种 Linux 时钟。
+
+计时事件还受到调度影响。该版本 `Node.Tick()` 尝试向内部通道入队；通道无法立即接收时，会记录 tick 未能送入的警告。因此，“底层时钟准确”并不自动意味着核心计数与真实经过时间保持固定比例。[Node.Tick 实现](https://github.com/etcd-io/raft/blob/3cbf6a74be3fa392edd8b64253fcd11c3ce5649b/node.go#L456-L465)
+
+### 4.3 分析边界：库内计时不能替整个 etcd 服务作保证
+
+据上述源码可以推导，tick 过快、过慢或长期得不到处理，会改变选举和心跳的真实间隔。若它们只触发基础协议允许的事件，仍不能绕过投票和日志规则。
+
+但这还不能回答“完整 etcd 服务是否受墙上时钟跳变影响”。要回答后者，需要继续核对指定 etcd 版本的 tick 调用链、运行时定时器、阻塞和暂停处理。本文未追踪这条完整路径，因此不把库内观察改写成“etcd 全部使用单调时钟”或“etcd 不受跳变影响”。
 
 **任期递增负责识别协议的新旧，计时器负责安排下一次尝试。** 即使计时器不可靠，只要它没有绕开投票和提交规则，基础日志安全性仍然成立。
 
@@ -109,7 +150,7 @@ Neon 将其归入 Paxos 家族，同时吸收了 Raft 的任期和日志思想�
 
 以下实现分析固定在 Neon 提交 [`fa504217c61b`](https://github.com/neondatabase/neon/tree/fa504217c61bbcaf5c512d75830564541f917f8f)。这避免把早期协议文档中的字段、算法描述，误当作当前源码的逐项说明；也不据公开源码推断生产控制面的全部行为。
 
-### 5.1 它依据 term、WAL 历史和持久化位置判断安全
+### 5.1 协议与源码层：依据 term、WAL 历史和持久化位置判断安全
 
 WAL proposer 收集足够的 Safekeeper 状态，选择更高 term，发起投票。Safekeeper 仅在收到更高 term 时授予新票，并在回复前持久化这个选择；接受较高 term 后，它拒绝较低 term 的追加请求。[投票与追加处理](https://github.com/neondatabase/neon/blob/fa504217c61bbcaf5c512d75830564541f917f8f/safekeeper/src/safekeeper.rs#L1051-L1089)
 
@@ -121,7 +162,7 @@ WAL proposer 收集足够的 Safekeeper 状态，选择更高 term，发起投�
 
 仓库中的 TLA+ 模型也围绕 Proposer、Acceptor、日志和提交状态表达安全性质，没有引入物理时钟。不过模型明确简化了消息传递等行为，不能据此宣称整个生产系统已覆盖所有故障并得到证明。[Safekeeper 形式化模型及其简化条件](https://github.com/neondatabase/neon/blob/fa504217c61bbcaf5c512d75830564541f917f8f/safekeeper/spec/ProposerAcceptorStatic.tla)
 
-### 5.2 墙上时钟确实出现在 WAL proposer 的连接管理中
+### 5.2 源码事实与推论：WAL proposer 的连接管理使用墙上时钟
 
 在 PostgreSQL 适配层，`walprop_pg_get_current_timestamp()` 调用 `GetCurrentTimestamp()`；PostgreSQL 的后者读取 `gettimeofday()`。因此，这条具体路径使用的是墙上时间。[Neon 适配层](https://github.com/neondatabase/neon/blob/fa504217c61bbcaf5c512d75830564541f917f8f/pgxn/neon/walproposer_pg.c#L932-L936)、[PostgreSQL 时间实现](https://doxygen.postgresql.org/backend_2utils_2adt_2timestamp_8c_source.html#l01649)
 
@@ -136,7 +177,7 @@ WAL proposer 用它记录最近收到消息的时间，并判断连接是否超�
 
 这些判断会断开、重试或等待连接，没有把超时当成一次 WAL 持久化确认。因此，可以指出它对恢复延迟的敏感性，却不能直接推导出时钟跳变会破坏 WAL 共识。
 
-### 5.3 Safekeeper 的部分后台路径使用单调时钟
+### 5.3 源码事实与推论：部分后台路径使用单调时钟
 
 Safekeeper 收到 peer 状态后，用本地 Tokio `Instant::now()` 记录接收时刻，再按经过时长过滤过旧的 peer 信息。它比较的是本地观察的年龄，不是远端携带的墙上时间。[peer 信息计时](https://github.com/neondatabase/neon/blob/fa504217c61bbcaf5c512d75830564541f917f8f/safekeeper/src/timeline.rs#L390-L404)
 
@@ -148,13 +189,15 @@ Safekeeper 收到 peer 状态后，用本地 Tokio `Instant::now()` 记录接收
 
 日志安全不等于可以直接读取旧 Leader 的本地状态。旧 Leader 与多数派失联期间，新 Leader 可能已经完成写入；旧 Leader 若继续回答新的读取，就可能破坏线性一致性。
 
-一种做法是通过共识排序读取，或进行正确的多数派读取确认。以 Raft 的安全 ReadIndex 路径为例，需要满足本任期已提交记录等前提，完成相应 quorum 确认，并等待本地状态机应用到读取位置；不能只检查“刚才收过心跳”。[etcd Raft 读取处理](https://github.com/etcd-io/raft/blob/3cbf6a74be3fa392edd8b64253fcd11c3ce5649b/raft.go#L1354-L1385)
+一种做法是通过共识排序读取，或进行正确的多数派读取确认。具体到本文核对的 etcd-io/raft 版本，`ReadOnlySafe` 走 quorum 确认路径，而 `ReadOnlyLeaseBased` 依赖 Leader lease。它们是该库的两种模式，不能把它们笼统合称为“Raft 读取的时钟假设”。[读取模式分支](https://github.com/etcd-io/raft/blob/3cbf6a74be3fa392edd8b64253fcd11c3ce5649b/raft.go#L2146-L2163)
 
-另一种做法是租约：多数派在一段时间内限制授予冲突权限，持有者据此省掉每次读取的通信。这时，本地时长就参与了“权限是否仍有效”的证明。Google 的 Paxos 工程实现让 master 使用比其他副本更短的租约超时，以防走时误差。[Paxos Made Live，§5.2](https://research.google.com/archive/paxos_made_live.pdf)
+安全读取还涉及本任期已提交记录等前提；库返回读取位置后，上层必须等待本地状态机应用到相应位置，再读取状态。库产生 ReadIndex 与数据库完成线性一致读也属于两个层次。[读取前提](https://github.com/etcd-io/raft/blob/3cbf6a74be3fa392edd8b64253fcd11c3ce5649b/raft.go#L1354-L1385)、[ReadStates 接口约定](https://github.com/etcd-io/raft/blob/3cbf6a74be3fa392edd8b64253fcd11c3ce5649b/node.go#L68-L72)
+
+租约的共同思路是：多数派在一段时间内限制授予冲突权限，持有者据此省掉每次读取的通信。这时，本地时长就参与了“权限是否仍有效”的证明。Google 的 master lease 是工程文献中的案例，etcd-io/raft 的 lease-based read 是具体库的模式；二者不能据名称相近就视为完全相同的算法。
 
 ### 6.1 相对时长租约需要约束频率，不必对齐钟面
 
-下面构造一个简化模型，说明为什么“两个单调时钟都等十秒”仍然不够。这是原理推导，不是上述三个系统通用的参数公式。
+下面由本文构造一个简化模型，说明为什么“两个单调时钟都等十秒”仍然不够。它不是对 Google master lease 或 etcd-io/raft 的逐行还原，也不表示 Neon Safekeeper 使用这种租约。
 
 设持有者在发送请求前开始计时，使用期限为本地 $H$ 秒；每个授予者收到请求后承诺本地 $G$ 秒内不授予冲突权限。双方都满足前文的频率误差上界 $\rho$，持有者只在收齐 quorum 确认且自身尚未过期后使用租约。
 
@@ -180,20 +223,25 @@ $$
 
 此外，“检查租约有效”与实际读取或外部副作用之间不能留下未经分析的暂停窗口。对共识系统之外的存储操作，通常还需要由接收方执行 fencing 检查，阻止失去权限的旧持有者继续操作。Safekeeper 对旧 term 的拒绝就体现了这种接收方校验思路，但不能替其他外部资源完成校验。
 
-## 七、把三者放到同一张表里
+## 七、分层比较，才能正确使用结论
 
-下表比较基础日志／WAL 共识；租约读取等扩展需另加条件。“影响活性”也包括实际故障切换延迟和请求超时，不意味着时钟异常无关紧要。
+在协议层，比较的是安全性究竟需要哪些条件。下表的“无需”都限定于基础日志／WAL 共识，不包含额外的租约读取或外部业务行为。
 
-| 比较项                               | Paxos / Multi-Paxos                    | Raft                             | Neon Safekeeper WAL 共识                         |
-| ------------------------------------ | -------------------------------------- | -------------------------------- | ------------------------------------------------ |
-| 决定新旧的依据                       | 提案编号、已接受提案                   | term、日志任期与位置             | term、term history、WAL LSN                      |
-| 核心安全约束                         | 持久化承诺、值继承、quorum             | 投票、日志匹配、选举与提交规则   | 持久化投票、WAL 历史恢复、追加与提交规则         |
-| 墙上时钟需要同步吗                   | 不需要                                 | 不需要                           | 所核对的 WAL 共识路径不需要                      |
-| 墙上时钟跳变怎么办                   | 取决于外围计时；不得改变编号与承诺规则 | 取决于计时实现；不能绕过投票提交 | proposer 的部分连接计时会受影响；term 检查仍生效 |
-| 单调时钟频率不同怎么办               | 可能改变重试与竞争节奏                 | 可能引起选举抖动或恢复迟缓       | 可能影响 peer 判断、恢复等待与重试               |
-| 持续进展还依赖什么                   | 稳定协调者和有效通信等条件             | 足够稳定的 Leader、通信与调度    | WAL quorum 可用，计算节点竞争最终消除            |
-| 仅凭本地未超时可直接提供线性一致读吗 | 基础 Paxos 不赋予此权限                | 基础 Raft 不赋予此权限           | WAL 共识本身不能给 SQL 读取作此保证              |
+| 协议层对象            | 核心安全依据                            | 时钟假设的边界                                                 |
+| --------------------- | --------------------------------------- | -------------------------------------------------------------- |
+| 基础 Paxos            | 提案顺序、持久化承诺、值继承与 quorum   | 安全性无需墙上时钟同步或固定频率误差界；进展还需协调与通信条件 |
+| 基础 Raft             | term、投票、日志匹配、选举与提交规则    | 安全性无需物理时钟界；稳定选举和及时响应依赖时间关系           |
+| Neon WAL 协议及其模型 | 任期、WAL 历史继承、持久化确认与 quorum | 所核对路径不用物理时间决定 WAL 权威性；模型有明确简化条件      |
+
+在实现层，比较的是已核对材料能够支持多具体的结论。没有给出时钟 API 的地方，应保留未知，不能从算法名称补出实现细节。
+
+| 实现或工程案例                     | 已知计时机制                                          | 本文能确定的边界                                           |
+| ---------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------- |
+| Google 2007 年 Paxos 工程案例      | 论文描述 master 使用更短的租约超时                    | 有漂移防护设计；未核对具体时钟 API、误差落实方式或源码     |
+| etcd-io/raft，`3cbf6a74be3f`       | 核心使用外部驱动的 tick；区分 Safe 与 LeaseBased 读取 | 能分析库内计数与读取模式；不能替整个 etcd 服务确定时钟行为 |
+| Neon WAL proposer，`fa504217c61b`  | PostgreSQL 适配层的部分连接计时使用墙上时间           | 跳变可能改变超时与重连节奏；这些判断不替代 WAL 确认        |
+| Neon Safekeeper 后台路径，同一提交 | peer 信息年龄使用 `Instant`，恢复使用 Tokio timeout   | 频率和调度影响等待与恢复；仍须执行 term 和历史检查         |
 
 检查一个实现时，可以沿着同一条线追问：**它读了哪种时钟；把读数代入什么判断；判断结果只是触发重试，还是直接允许一次本来需要协调的操作？** 前者要评估恢复和可用性，后者则必须把时钟误差、暂停和重启写进安全条件。
 
-本文核对的是原始论文与上述固定版本的公开源码，并给出相应模型推导；没有对 Neon 生产系统执行时钟故障实验。源码定位用于说明具体机制，不把局部实现分析扩展成整个数据库的时钟安全证明。
+最终应形成的判断是：“某版本的某条路径，依据某个时钟条件，保证某项性质。”基础共识安全、租约读取安全与整个数据库的对外语义，需要分别论证。本文提供的是文献核对、指定源码路径分析和模型推导，未执行时钟故障注入实验。
