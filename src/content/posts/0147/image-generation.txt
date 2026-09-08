@@ -11,3 +11,6 @@ Stage3 title "③ N 满足提交条件". Explanation "B 将提交位置推进到
 Bottom note exact: "本任期条目提交 → 确定此前日志的提交边界；状态机仍须按序应用。"
 Legend small "绿色：B 已知提交    橙色：B 尚未知是否提交    蓝色：新追加，等待确认".
 Keep text exact, no extra theoretical claims. Render as a professional readable educational figure.
+
+内置 ImageGen：leader-read-flow.png
+Use case: infographic-diagram. 中文技术博客教育流程图白底深蓝字青色箭头橙色提醒，横向1536x1024。标题「Raft：赢得选举之后」。主流程四步从左到右「赢得选举」「追加本任期 no-op」「复制并满足提交条件」「推进已提交前缀，按序应用」。在第一步下写「确定本任期 leader」，第三步下写「多数派确认」。第二步到第三步为消息复制箭头。下半部有单独分支标题「随后处理线性一致读」，三框「本任期已有条目提交」「为本次读取确认领导者资格」「本地应用到所需位置再读取」。下半部不是暗示每次读追加no-op，明确写「no-op 在当选后追加，不是每次读取追加」。底部「一次选举之后，可以连续复制许多日志条目；不是每条日志都重新选主」。清晰留白，大字，准确中文，不画代码块。
