@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-08T16:22:06+08:00
-modDatetime: 2026-09-08T16:55:13+08:00
+modDatetime: 2026-09-08T17:11:22+08:00
 timezone: "Asia/Shanghai"
-title: "谁拿到了 0 号？从 CAS、共享日志到一个持续运转的订座系统"
+title: "为什么 CAS 和共享日志能解决共识，而取值并加一只能支持两个参与者？"
 area: "distributed-systems"
 featured: false
 draft: false
