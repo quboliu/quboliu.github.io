@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="760" viewBox="0 0 1000 760" role="img" aria-labelledby="title desc">
+<title id="title">租户归属区架构</title><desc id="desc">客户端按租户归属访问区域服务。媒体使用对象存储与受限 CDN，业务数据库不做全球多主复制。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#536a83"/></marker></defs>
+<rect width="1000" height="760" rx="16" fill="#f6f8fc"/>
+<g font-family="sans-serif" fill="#172b46" text-anchor="middle">
+<text x="500" y="46" font-size="27" font-weight="700">人可以跨区，数据归属保持稳定</text>
+<text x="500" y="76" font-size="16" fill="#52647b">每个区域单元服务自己的租户；按市场逐区部署</text>
+<g stroke="#536a83" stroke-width="2" fill="none" marker-end="url(#arrow)">
+<path d="M 225 160 V 259"/><path d="M 765 160 V 259"/>
+<path d="M 225 327 V 400"/><path d="M 765 327 V 400"/>
+<path d="M 370 435 H 620"/>
+<path d="M 225 470 V 548"/><path d="M 765 470 V 548"/>
+<path d="M 370 583 H 620"/>
+</g>
+<rect x="80" y="104" width="290" height="56" rx="10" fill="#e2ebfc" stroke="#92aed6"/>
+<text x="225" y="139" font-size="20">APP / 企业后台</text>
+<rect x="620" y="104" width="290" height="56" rx="10" fill="#e2ebfc" stroke="#92aed6"/>
+<text x="765" y="139" font-size="20">相机 / 私有传图协议</text>
+<rect x="90" y="186" width="270" height="34" rx="5" fill="#f6f8fc"/><text x="225" y="208" font-size="15">组织码 / 已保存的归属端点</text>
+<rect x="635" y="186" width="260" height="34" rx="5" fill="#f6f8fc"/><text x="765" y="208" font-size="15">激活凭据 / 已绑定区域</text>
+<rect x="40" y="237" width="920" height="413" rx="14" fill="none" stroke="#92aed6" stroke-width="2" stroke-dasharray="7 5"/>
+<rect x="80" y="260" width="290" height="67" rx="10" fill="#fff" stroke="#92aed6"/>
+<text x="225" y="288" font-size="19">区域认证与业务 API</text><text x="225" y="312" font-size="14">验证身份、租户、设备权限</text>
+<rect x="620" y="260" width="290" height="67" rx="10" fill="#fff" stroke="#92aed6"/>
+<text x="765" y="288" font-size="19">区域设备接入</text><text x="765" y="312" font-size="14">鉴权、组帧、去重、上传确认</text>
+<rect x="80" y="400" width="290" height="70" rx="10" fill="#e3f2ed" stroke="#80b6a1"/>
+<text x="225" y="429" font-size="19">PostgreSQL / 区内单写</text><text x="225" y="454" font-size="14">租户、绑定、权限、媒体索引</text>
+<rect x="620" y="400" width="290" height="70" rx="10" fill="#e3f2ed" stroke="#80b6a1"/>
+<text x="765" y="429" font-size="19">区域对象存储</text><text x="765" y="454" font-size="14">图片、录像原件和派生物</text>
+<rect x="397" y="407" width="195" height="23" fill="#f6f8fc"/><text x="495" y="423" font-size="14">索引指向已确认对象</text>
+<rect x="80" y="548" width="290" height="70" rx="10" fill="#fff" stroke="#92aed6"/>
+<text x="225" y="578" font-size="19">可靠异步任务</text><text x="225" y="601" font-size="14">校验、转码、删除与补偿</text>
+<rect x="620" y="548" width="290" height="70" rx="10" fill="#fff1dd" stroke="#d4b47e"/>
+<text x="765" y="578" font-size="19">媒体分发</text><text x="765" y="601" font-size="14">按政策启用 CDN 或区域直读</text>
+<rect x="408" y="555" width="170" height="22" fill="#f6f8fc"/><text x="493" y="572" font-size="14">派生媒体发布</text>
+<text x="500" y="679" font-size="17" font-weight="700">区域内部署多 AZ；区域之间不做全量业务与媒体复制</text>
+<text x="500" y="710" font-size="15" fill="#52647b">图示为存储与回放主路径。实时观看走独立的信令、直连或 TURN 中继。</text>
+<text x="500" y="735" font-size="15" fill="#52647b">权限始终由服务端校验；旅行和 DNS 变化都不触发租户迁移。</text>
+</g></svg>
