@@ -1,0 +1,13 @@
+Mode: built-in image_gen, generate
+Use case: infographic-diagram
+Original: /home/xuntingmu/.codex/generated_images/01a07e9b-400b-71b0-aa10-715c452e9fe0/exec-cf54fbba-c0e8-4b0e-a9e2-8d92f93a399d.png
+Prompt:
+Use case: infographic-diagram.
+Create a polished Chinese technical blog diagram, landscape, white background, crisp flat vector-like typography, generous spacing, restrained navy, amber and teal. No decoration or mascot. Explain Raft new leader no-op with three horizontal stacked stages, read top to bottom. Title exact: "已有日志，不等于已知它已提交". Subtitle: "新领导者 B 如何把已知提交位置从 9 推进到 11".
+Each stage has left explanatory text and right simple log strip with cells aligned in columns for positions 9,10,11. Use readable large Simplified Chinese.
+Stage 1 title "① B 当选：任期 5". Explanation "A 已提交 X，但通知前故障" and "B 有 X，已知提交位置仍为 9". Log cells: position9 green label "此前历史"; position10 amber label "X · 任期 4"; position11 dashed empty. Small commit pointer below position9 labeled "commitIndex = 9". NOTE X is already committed globally but unknown to B; do NOT label X uncommitted. Color legend amber must mean "B 尚未知是否提交".
+Stage 2 title "② 追加本任期 no-op". Explanation "N 没有业务操作，但有日志位置" and "向副本复制，等待多数持久化确认". Log9 green "此前历史"; log10 amber "X · 任期 4"; log11 blue "N · 任期 5". Commit pointer remains under9 labeled "commitIndex = 9". Do not imply locally appended equals committed.
+Stage3 title "③ N 满足提交条件". Explanation "B 将提交位置推进到 11" and "X 与 N 均进入 B 已知的提交前缀". All 3 cells green, log10 "X · 任期 4", log11 "N · 任期 5". Commit pointer under11 labeled "commitIndex = 11". Add green bracket spanning9 through11 labeled "已知提交前缀".
+Bottom note exact: "本任期条目提交 → 确定此前日志的提交边界；状态机仍须按序应用。"
+Legend small "绿色：B 已知提交    橙色：B 尚未知是否提交    蓝色：新追加，等待确认".
+Keep text exact, no extra theoretical claims. Render as a professional readable educational figure.
