@@ -20,3 +20,7 @@ Use blocked red small X between third and formal election implied label "不进�
 Footer prominent exact "预投票阻止无效竞选抬高任期；心跳保护避免健康多数派支持无谓挑战。"
 Small footer note "示意为一种允许发生的执行；并非坏链路必然导致无限切换。"
 Ensure no mixed-up terms, no label claiming B forwards heartbeats, text fits with generous margins.
+
+内置 ImageGen：prevote-election-flow.png
+Use case: infographic-diagram. 中文Raft技术博客专业教育图白底1536x1024，大字号，深蓝字，橙色风险青色修复。标题「预投票把提高正式任期推迟到多数预票之后」。上半部左小拓扑A B C，A-B双向绿色、B-C双向绿色、A-C红色断链，注明「B 不代转心跳」。上半部右橙色循环「C 收不到心跳」→「超时，提高正式任期」→「RequestVote 发给其他节点」→「对方处理更高任期，可能退位」→「C 仍未收齐选票」箭头返回「C 收不到心跳」。循环小字「单向通信下，未当选也可能反复打断 leader」。下半部两行对比：基础选举「超时 → 增加正式任期 → 请求正式选票」；预投票「超时 → 试探多数支持，正式任期不变 → 获得多数预票 → 增加正式任期并正式竞选」。预投票试探处向下短分支「未获多数 → 不进入正式竞选」。底部「近期心跳保护：B 仍收到 A 的有效心跳时，不支持 C 的挑战」「预投票减少无谓竞选，不保证任何网络故障下都能稳定选主」。不能声称预投票成功等于正式当选，清晰不拥挤，无代码块。
+定向编辑：拓扑边标注通信双向；两个不同故障场景分别标明。
