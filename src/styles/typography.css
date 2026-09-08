@@ -149,3 +149,48 @@
     }
   }
 }
+
+/* Keep the code surface above Tailwind Typography's prose utilities. */
+.app-prose pre {
+  background: var(--code-background);
+  border: 1px solid var(--code-border);
+  border-radius: 0.5rem;
+  padding: 2.75rem 1rem 1rem;
+  overflow-x: auto;
+  line-height: 1.65;
+}
+
+.app-prose pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.code-block {
+  position: relative;
+  margin-block: 1.5rem;
+}
+
+.app-prose .code-block pre {
+  margin: 0;
+}
+
+.code-block .copy-code {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  border: 1px solid var(--code-border);
+  background: var(--code-background);
+  color: var(--foreground);
+  border-radius: 0.25rem;
+  padding: 0.2rem 0.5rem;
+  font: 500 0.75rem/1.4 var(--font-main);
+}
+
+.code-block .copy-code:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}

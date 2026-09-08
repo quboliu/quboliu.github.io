@@ -25,6 +25,8 @@
   --accent-foreground: #ffffff;
   --visited: #8b6fcb;
   --muted: #f2f2f2;
+  --code-background: #f4f6f8;
+  --code-border: #d5dce3;
   --muted-foreground: #777777;
   --border: #dddddd;
   --post-title-non-original: #7f6b50;
@@ -42,6 +44,8 @@
   --accent-foreground: #01242e;
   --visited: #8b6fcb;
   --muted: #000000;
+  --code-background: #011627;
+  --code-border: #345061;
   --muted-foreground: #9ab5bd;
   --border: #1e4552;
   --post-title-non-original: #bca98b;
