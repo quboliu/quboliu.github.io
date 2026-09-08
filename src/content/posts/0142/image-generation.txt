@@ -1,0 +1,22 @@
+# Image generation record
+
+Mode: built-in image_gen tool (no CLI fallback).
+
+Asset: broadcast-log-decision.png
+
+Review: all three local logs contain b, a, c; all decisions are b; the shared rectangle is a logical abstraction, not a central server. The figure is a caught-up snapshot, not a requirement to wait for all proposals.
+
+## Final prompt
+
+Use case: infographic-diagram.
+Asset type: one high-resolution educational figure for a Chinese technical blog. Landscape, approximately 16:9, large readable typography, clean flat technical illustration on warm white background, restrained navy, teal and orange. No photographic elements, no decorative robot, no watermark.
+Subject: total-order broadcast used as an already-provided abstraction, turning proposals into local shared-log copies and a common single-value decision. DO NOT depict or name any consensus implementation, leader, voting, Raft or Paxos.
+Layout: four clearly separated left-to-right columns, with three horizontally aligned participant rows A, B, C. A single tall dashed-border rounded rectangle occupies column 2, shared by all three rows: it represents a logical abstraction, NOT a central server. Use unambiguous arrowheads.
+Top title EXACT: "From broadcast to a shared log"
+Column headings EXACT: "1. Submit" | "2. Ordered delivery" | "3. Append locally" | "4. Read and decide"
+Column 1: three small sender boxes in rows A/B/C with exact labels "A: propose a", "B: propose b", "C: propose c". An arrow from EACH box points into column 2.
+Column 2 dashed rectangle exact text: "Total-order broadcast" then "Same delivery order" then smaller "Internal algorithm not shown". Three outgoing arrows, one towards each row in column 3, EACH labeled exactly "deliver: b → a → c". It is essential that all three output sequences are identical b,a,c, although input values are a,b,c.
+Column 3: three independent local-log boxes, labeled EXACTLY "Local log A", "Local log B", "Local log C". EACH box contains exactly three adjacent indexed cells: index 0 contains b, index 1 contains a, index 2 contains c. Highlight the FIRST cell b with orange, other cells teal or gray. This shows a completed snapshot after all deliveries. They are different physical local logs with the same logical sequence.
+Column 4: an arrow from EACH local log's first cell leads to the same-row result box, each labeled exactly "read(0) → b" on first line and "decide b" on second line.
+Bottom note EXACT: "Same sequence; different delivery times."
+Maintain generous spacing. Text and connectors must not overlap. No arrows that suggest a participant reads another participant's proposal directly. No a-first log. No c-first log. No majority or shared disk. English labels only, exact spelling. Diagram must be correct and readable before decorative styling.
