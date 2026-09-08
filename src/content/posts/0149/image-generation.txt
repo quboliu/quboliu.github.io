@@ -1,0 +1,22 @@
+Mode: built-in image_gen; generate
+Original: /home/xuntingmu/.codex/generated_images/01a07e9b-400b-71b0-aa10-715c452e9fe0/exec-3c7b110f-5bc3-461c-9c30-ebb4ab73c736.png
+Prompt:
+Use case: infographic-diagram. Create one Chinese technical blog diagram, landscape 1536x1024, white background, very legible Simplified Chinese, flat professional vector-like style, navy text, coral for disruption, teal for stable operation, no mascots or decorative illustrations.
+Title exact: "一条坏链路，为什么会反复换领导者？"
+Top centered topology: three circular nodes arranged triangle, A left, B top-center, C right. Solid green bidirectional links A↔B and B↔C labelled "正常"; dashed red bidirectional direct link A↔C labelled "心跳不通". Node A label "A：当前 leader", B "B：两边都能联系", C "C：收不到 A 的心跳". Small note "只表示 Raft 节点间通信；B 不自动转发 A 的心跳".
+Below two clearly separated columns.
+Left heading "基础选举：先升任期，再争取选票". Four stacked boxes connected by downward arrows:
+"C 超时，正式 term 从 t 升到 t+1"
+"B 收到更高任期，转入新任期"
+"若日志足够新，C 获得 C+B 的票"
+"A 又收不到 C 心跳，发起下一次选举"
+Curved arrow loops back to heading with small text "可反复切换". Footnote inside left "候选者即使落选，也可能用高任期打断现任 leader".
+Right heading "预投票 + 心跳保护：先问能否参选". Four boxes:
+"C 超时，发送 PreVote(t+1)"
+"C 的正式 term 仍为 t"
+"B 仍收到 A 心跳，忽略此次挑战"
+"C 无多数预票；A+B 继续工作"
+Use blocked red small X between third and formal election implied label "不进入正式选举". No claim fixed forever.
+Footer prominent exact "预投票阻止无效竞选抬高任期；心跳保护避免健康多数派支持无谓挑战。"
+Small footer note "示意为一种允许发生的执行；并非坏链路必然导致无限切换。"
+Ensure no mixed-up terms, no label claiming B forwards heartbeats, text fits with generous margins.
