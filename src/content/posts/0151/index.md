@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-09T01:21:52+08:00
+modDatetime: 2026-09-09T01:32:10+08:00
 timezone: "Asia/Shanghai"
 title: "高可用为什么不等于需要共识？——读 DDIA 的服务发现"
 area: "distributed-systems"
@@ -83,13 +84,7 @@ Eureka 就采用注册表对等复制。其官方说明明确允许网络故障�
 
 服务发现完全可以采用这样的结构：
 
-```text
-注册信息变更 → 共识维护的权威注册表
-                         ↓
-                  副本与客户端缓存
-                         ↓
-                  使用已有地址访问服务
-```
+![权威注册表通过共识维护变更，客户端使用缓存地址直接访问业务服务。](./discovery-cache.png)
 
 后台严格维护注册信息，查询路径允许使用旧副本或缓存，二者并不矛盾。Consul 的服务目录就由服务器通过 Raft 维护。[Consul 架构说明](https://docs.hashicorp.com/consul/docs/architecture)
 
