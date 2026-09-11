@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-09T13:05:38+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "无共享不是不共享：分布式文件系统与 NAS 到底差在哪里？——DDIA 11.3 注解"
+title: "DDIA 阅读札记：无共享不是不共享：分布式文件系统与 NAS 到底差在哪里？——DDIA 11.3 注解"
 area: "storage-systems"
 featured: false
 draft: false
