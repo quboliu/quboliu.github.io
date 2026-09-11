@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-07T10:31:05+08:00
-modDatetime: 2026-09-07T10:37:33+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "网络、进程、时钟：DDIA 第 9 章为什么反复讨论这三件事？"
+title: "DDIA 阅读札记：网络、进程、时钟：DDIA 第 9 章为什么反复讨论这三件事？"
 area: "distributed-systems"
 featured: false
 draft: false
