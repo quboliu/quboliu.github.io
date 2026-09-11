@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-06T22:49:08+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "锁服务何时真的多余？——从 DDIA 的条件写入到租约与 Fencing Token"
+title: "DDIA 阅读札记：锁服务何时真的多余？——从 DDIA 的条件写入到租约与 Fencing Token"
 area: "distributed-systems"
 featured: false
 draft: false
