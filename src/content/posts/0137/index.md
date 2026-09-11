@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-07T19:25:21+08:00
-modDatetime: 2026-09-07T20:14:06+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "DDIA 第二版：数据表示、变更协调与状态派生"
+title: "DDIA 阅读札记：第二版：数据表示、变更协调与状态派生"
 area: "distributed-systems"
 featured: false
 draft: false
