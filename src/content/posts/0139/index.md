@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-08T10:50:25+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "FLP 到底禁止了什么：从 DDIA 第二版看共识的条件与承诺"
+title: "DDIA 阅读札记：FLP 到底禁止了什么：从 DDIA 第二版看共识的条件与承诺"
 area: "distributed-systems"
 featured: false
 draft: false
