@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-07T17:35:39+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "HLC 为什么不识别并发：从因果偏序到事务串行顺序"
+title: "DDIA 阅读札记：HLC 为什么不识别并发：从因果偏序到事务串行顺序"
 area: "databases"
 featured: false
 draft: false
