@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-07T17:43:11+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "逻辑时钟为什么会排错因果顺序？——DDIA 隐私照片例子的边界"
+title: "DDIA 阅读札记：逻辑时钟为什么会排错因果顺序？——DDIA 隐私照片例子的边界"
 area: "distributed-systems"
 featured: false
 draft: false
