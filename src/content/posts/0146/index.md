@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-08T18:26:19+08:00
-modDatetime: 2026-09-09T01:31:59+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "共享日志怎样变成计数器，又怎样生成 Fencing Token？——DDIA 10.6.2 注解"
+title: "DDIA 阅读札记：共享日志怎样变成计数器，又怎样生成 Fencing Token？——DDIA 10.6.2 注解"
 area: "distributed-systems"
 featured: false
 draft: false
