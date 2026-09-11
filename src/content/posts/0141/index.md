@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-08T12:02:30+08:00
-modDatetime: 2026-09-08T12:02:48+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "共享日志，究竟共享了什么？"
+title: "DDIA 阅读札记：共享日志，究竟共享了什么？"
 area: "distributed-systems"
 featured: false
 draft: false
