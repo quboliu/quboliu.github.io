@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-09T01:21:52+08:00
-modDatetime: 2026-09-09T01:32:10+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "高可用为什么不等于需要共识？——读 DDIA 的服务发现"
+title: "DDIA 阅读札记：高可用为什么不等于需要共识？——读 DDIA 的服务发现"
 area: "distributed-systems"
 featured: false
 draft: false
