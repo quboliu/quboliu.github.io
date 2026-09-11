@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-08T18:46:31+08:00
-modDatetime: 2026-09-09T01:31:59+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "Raft 新领导者为什么先写一条空日志？——DDIA 10.6.2 注解"
+title: "DDIA 阅读札记：Raft 新领导者为什么先写一条空日志？——DDIA 10.6.2 注解"
 area: "distributed-systems"
 featured: false
 draft: false
