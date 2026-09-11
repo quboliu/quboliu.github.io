@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-07T18:58:32+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "有了递增 ID，为什么还不能实现锁？——DDIA 中排序与裁决的区别"
+title: "DDIA 阅读札记：有了递增 ID，为什么还不能实现锁？——DDIA 中排序与裁决的区别"
 area: "distributed-systems"
 featured: false
 draft: false
