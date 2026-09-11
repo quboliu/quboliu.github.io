@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-04T18:29:33+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "XA 为什么会让应用代码成为单点故障？——DDIA V2 对“无法直接通信”的释疑"
+title: "DDIA 阅读札记：XA 为什么会让应用代码成为单点故障？——DDIA V2 对“无法直接通信”的释疑"
 area: "distributed-systems"
 featured: false
 draft: false
