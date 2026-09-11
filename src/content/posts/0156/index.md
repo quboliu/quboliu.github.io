@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-10T13:41:33+08:00
-modDatetime: 2026-09-10T13:48:17+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "DDIA 全书的第一性原理：从系统约束到 36 个工程机制"
+title: "DDIA 阅读札记：全书的第一性原理：从系统约束到 36 个工程机制"
 area: "distributed-systems"
 featured: false
 draft: false
