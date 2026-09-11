@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-08T20:16:45+08:00
-modDatetime: 2026-09-09T01:32:10+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "Raft 为什么反复换领导者？预投票修复了什么，还剩什么"
+title: "DDIA 阅读札记：Raft 为什么反复换领导者？预投票修复了什么，还剩什么"
 area: "distributed-systems"
 featured: false
 draft: false
