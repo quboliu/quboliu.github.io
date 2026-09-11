@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-07T19:18:33+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "CAP 的 C 和 A，为什么“反直觉”？"
+title: "DDIA 阅读札记：CAP 的 C 和 A，为什么“反直觉”？"
 area: "distributed-systems"
 featured: false
 draft: false
