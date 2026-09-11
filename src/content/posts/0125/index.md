@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-03T13:55:23+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "原子与隔离"
+title: "DDIA 阅读札记：原子与隔离"
 area: "software-engineering"
 featured: false
 draft: false
