@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-08T11:23:41+08:00
-modDatetime: 2026-09-08T11:40:29+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "原子性到底在保证什么：从一个操作的三种要求说起"
+title: "DDIA 阅读札记：原子性到底在保证什么：从一个操作的三种要求说起"
 area: "distributed-systems"
 featured: false
 draft: false
