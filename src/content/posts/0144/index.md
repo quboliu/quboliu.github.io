@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-08T16:22:06+08:00
-modDatetime: 2026-09-08T17:15:34+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "为什么 CAS 和共享日志能解决共识，而取值并加一只能支持两个参与者？"
+title: "DDIA 阅读札记：为什么 CAS 和共享日志能解决共识，而取值并加一只能支持两个参与者？"
 area: "distributed-systems"
 featured: false
 draft: false
