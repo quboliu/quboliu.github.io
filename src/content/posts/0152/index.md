@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-09T01:30:19+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "容错与高可用：重合在哪里，区别在哪里？"
+title: "DDIA 阅读札记：容错与高可用：重合在哪里，区别在哪里？"
 area: "distributed-systems"
 featured: false
 draft: false
