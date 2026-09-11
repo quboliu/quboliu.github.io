@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-07T19:20:40+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "复制什么时候需要共识？——从 PostgreSQL 主备切换说起"
+title: "DDIA 阅读札记：复制什么时候需要共识？——从 PostgreSQL 主备切换说起"
 area: "distributed-systems"
 featured: false
 draft: false
