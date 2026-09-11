@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-10T13:01:11+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "业务已成功，ACK 却丢了：如何实现恰好一次的业务效果？"
+title: "DDIA 阅读札记：业务已成功，ACK 却丢了：如何实现恰好一次的业务效果？"
 area: "distributed-systems"
 featured: false
 draft: false
