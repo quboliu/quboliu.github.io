@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-04T18:55:51+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "再谈恰好一次的消息处理：从 DDIA 的消息 ID 表到 Kafka Streams"
+title: "DDIA 阅读札记：再谈恰好一次的消息处理：从 DDIA 的消息 ID 表到 Kafka Streams"
 area: "distributed-systems"
 featured: false
 draft: false
