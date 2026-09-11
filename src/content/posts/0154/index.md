@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-10T10:56:28+08:00
-modDatetime: 2026-09-10T15:03:38+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "消息直接写入对象存储，还需要自己做复制吗？"
+title: "DDIA 阅读札记：消息直接写入对象存储，还需要自己做复制吗？"
 area: "distributed-systems"
 featured: false
 draft: false
