@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-08T21:33:50+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "故障检测凭什么判断节点失效？从 etcd、ZooKeeper 到安全接管"
+title: "DDIA 阅读札记：故障检测凭什么判断节点失效？从 etcd、ZooKeeper 到安全接管"
 area: "distributed-systems"
 featured: false
 draft: false
