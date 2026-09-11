@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-08T19:44:50+08:00
-modDatetime: 2026-09-09T01:32:10+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "线性一致读，哪些步骤不能省？——从 etcd v2、v3 到 Neon"
+title: "DDIA 阅读札记：线性一致读，哪些步骤不能省？——从 etcd v2、v3 到 Neon"
 area: "distributed-systems"
 featured: false
 draft: false
