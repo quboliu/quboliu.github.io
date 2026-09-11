@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-07T13:40:46+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "可串行化：不是让事务排队，而是让并发留下可排队解释的历史"
+title: "DDIA 阅读札记：可串行化：不是让事务排队，而是让并发留下可排队解释的历史"
 area: "databases"
 featured: false
 draft: false
