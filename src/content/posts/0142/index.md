@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-08T14:37:22+08:00
-modDatetime: 2026-09-08T15:15:44+08:00
+modDatetime: 2026-09-11T11:33:25+08:00
 timezone: "Asia/Shanghai"
-title: "从全序广播到共享日志，再到一个共同决定"
+title: "DDIA 阅读札记：从全序广播到共享日志，再到一个共同决定"
 area: "distributed-systems"
 featured: false
 draft: false
