@@ -10,7 +10,7 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
-const { title, lang, pubDatetime, contentType } = data;
+const { title, lang, pubDatetime } = data;
 const date = dayjs(pubDatetime).format("YYYY-MM-DD");
 ---
 
@@ -22,8 +22,7 @@ const date = dayjs(pubDatetime).format("YYYY-MM-DD");
   >
   <a
     href={getPostUrl(id, filePath, Astro.currentLocale)}
-    data-content-type={contentType}
-    class="post-title-color text-accent visited:text-visited min-w-0 no-underline hover:underline"
+    class="text-accent visited:text-visited min-w-0 no-underline hover:underline"
   >
     <Heading
       lang={lang}

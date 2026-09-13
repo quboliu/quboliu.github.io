@@ -33,7 +33,6 @@ export async function getStaticPaths() {
           ? {
               id: sortedPosts[index - 1].id,
               title: sortedPosts[index - 1].data.title,
-              contentType: sortedPosts[index - 1].data.contentType,
               filePath: sortedPosts[index - 1].filePath,
             }
           : null,
@@ -42,7 +41,6 @@ export async function getStaticPaths() {
           ? {
               id: sortedPosts[index + 1].id,
               title: sortedPosts[index + 1].data.title,
-              contentType: sortedPosts[index + 1].data.contentType,
               filePath: sortedPosts[index + 1].filePath,
             }
           : null,
@@ -53,7 +51,6 @@ export async function getStaticPaths() {
 type AdjacentPost = {
   id: string;
   title: string;
-  contentType: CollectionEntry<"posts">["data"]["contentType"];
   filePath: string | undefined;
 } | null;
 
@@ -69,7 +66,6 @@ const t = useTranslations(locale);
 
 const {
   title,
-  contentType,
   area,
   lang,
   description,
@@ -126,9 +122,8 @@ const ogImage = ogImageUrl
   >
     <h1
       lang={lang}
-      data-content-type={contentType}
       style={{ viewTransitionName: toTransitionName(title) }}
-      class="post-title-color text-heading inline-block max-w-full text-2xl font-bold [overflow-wrap:anywhere] sm:text-3xl"
+      class="text-heading inline-block max-w-full text-2xl font-bold [overflow-wrap:anywhere] sm:text-3xl"
     >
       {title}
     </h1>
