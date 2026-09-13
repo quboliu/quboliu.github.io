@@ -31,7 +31,7 @@ const tagLinks = tagGroups.map(({ tag, tagName, posts: tagPosts }) => ({
 
   <Breadcrumb />
 
-  <Main pageTitle={t.pages.postsTitle} pageDesc={t.pages.tagsDesc} wide>
+  <Main pageTitle={t.pages.postsTitle} pageDesc={t.pages.tagsDesc}>
     <PostsViewNavigation active="tags" />
 
     <div class="grid gap-8 xl:grid-cols-[188px_minmax(0,1fr)]">

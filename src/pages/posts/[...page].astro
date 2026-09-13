@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
@@ -61,12 +62,22 @@ const monthLinks = monthGroups.map(({ slug, label, posts }) => ({
   slug,
   label,
   count: posts.length,
+  href: `#month-${slug}`,
 }));
+
+function getTimelineHref(slug: string, firstPost: (typeof allPosts)[number]) {
+  const pageNumber =
+    Math.floor(allPosts.indexOf(firstPost) / config.posts.perPage) + 1;
+  const path = pageNumber === 1 ? "posts" : `posts/${pageNumber}`;
+  return `${getRelativeLocaleUrl(locale, path)}#month-${slug}`;
+}
+
 const allMonthLinks = groupPostsByMonth(allPosts).map(
   ({ slug, label, posts }) => ({
     slug,
     label,
     count: posts.length,
+    href: getTimelineHref(slug, posts[0]),
   })
 );
 ---
@@ -76,7 +87,7 @@ const allMonthLinks = groupPostsByMonth(allPosts).map(
 
   <Breadcrumb />
 
-  <Main pageTitle={t.pages.postsTitle} pageDesc={t.pages.postsDesc} wide>
+  <Main pageTitle={t.pages.postsTitle} pageDesc={t.pages.postsDesc}>
     <PostsViewNavigation active="timeline" />
 
     <div class="grid gap-8 xl:grid-cols-[188px_minmax(0,1fr)]">

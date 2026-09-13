@@ -3,6 +3,7 @@ type MonthLink = {
   slug: string;
   label: string;
   count: number;
+  href: string;
 };
 
 type Props = {
@@ -22,10 +23,10 @@ const { months } = Astro.props;
     class="flex min-w-max gap-2 xl:min-w-0 xl:flex-col xl:gap-1"
   >
     {
-      months.map(({ slug, label, count }, index) => (
+      months.map(({ slug, label, count, href }, index) => (
         <li>
           <a
-            href={`#month-${slug}`}
+            {href}
             data-timeline-nav={slug}
             aria-current={index === 0 ? "location" : undefined}
             class="timeline-nav-link text-muted-foreground hover:text-accent flex items-baseline justify-between gap-3 rounded px-2 py-1.5 text-sm no-underline transition-colors"
@@ -164,6 +165,12 @@ const { months } = Astro.props;
               detail: { sectionId: `month-${slug}` },
             })
           );
+          const fallbackHref = link.href;
+          window.setTimeout(() => {
+            if (!document.getElementById(`month-${slug}`)) {
+              window.location.assign(fallbackHref);
+            }
+          }, 2500);
         }
         setActive(slug);
       },
