@@ -19,12 +19,13 @@ const posts = getSortedPosts(
   await getCollection("posts", ({ data }) => !data.draft)
 );
 
-const areas = [...AREAS]
-  .sort((areaA, areaB) => areaA.order - areaB.order)
-  .map(area => ({
-    ...area,
-    posts: posts.filter(post => post.data.area === area.slug),
-  }));
+const areas = AREAS.map(area => ({
+  ...area,
+  posts: posts.filter(post => post.data.area === area.slug),
+})).sort(
+  (areaA, areaB) =>
+    areaB.posts.length - areaA.posts.length || areaA.order - areaB.order
+);
 
 const areaLinks = areas.map(({ slug, name, posts }) => ({
   slug,
