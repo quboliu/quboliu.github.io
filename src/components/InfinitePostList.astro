@@ -81,7 +81,7 @@ const t = useTranslations(Astro.currentLocale);
     const postEnd = end;
     const { signal } = postFeedController;
     let next = postFeed.dataset.nextUrl ?? "";
-    let loadingNext = false;
+    let loadingPromise: Promise<boolean> | undefined;
     let failed = false;
 
     function updateEndState() {
@@ -93,52 +93,123 @@ const t = useTranslations(Astro.currentLocale);
       }
     }
 
-    async function loadNextPage() {
-      if (!next || loadingNext) return;
-
-      loadingNext = true;
-      failed = false;
-      postLoading.hidden = false;
-      postLoadMore.hidden = true;
-      postError.hidden = true;
-
-      try {
-        const response = await fetch(next, {
-          headers: { Accept: "text/html" },
-          signal,
-        });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-        const html = await response.text();
-        const document = new DOMParser().parseFromString(html, "text/html");
-        const nextFeed =
-          document.querySelector<HTMLElement>("[data-post-feed]");
-        const nextList =
-          nextFeed?.querySelector<HTMLElement>("[data-post-list]");
-
-        if (!nextFeed || !nextList || nextList.children.length === 0) {
-          throw new Error("The next post page has no post list");
+    function appendNextPosts(nextList: HTMLElement) {
+      for (const nextChild of Array.from(nextList.children)) {
+        const nextPost = nextChild.cloneNode(true);
+        if (!(nextPost instanceof HTMLElement)) {
+          postList.append(nextPost);
+          continue;
         }
 
-        postList.append(
-          ...Array.from(nextList.children, post => post.cloneNode(true))
+        const timelineSlug = nextPost.dataset.timelineSection;
+        const existingSection = Array.from(postList.children).find(
+          (child): child is HTMLElement =>
+            child instanceof HTMLElement &&
+            child.dataset.timelineSection === timelineSlug
         );
-        next = nextFeed.dataset.nextUrl ?? "";
-        postFeed.dataset.nextUrl = next;
-        updateEndState();
-      } catch {
-        if (signal.aborted) return;
-        failed = true;
-        postError.hidden = false;
-        postLoadMore.hidden = false;
-        pagination?.removeAttribute("hidden");
-      } finally {
-        loadingNext = false;
-        postLoading.hidden = true;
+        const incomingPosts = nextPost.querySelector<HTMLElement>(
+          "[data-timeline-posts]"
+        );
+        if (!timelineSlug || !incomingPosts || !existingSection) {
+          postList.append(nextPost);
+          continue;
+        }
+
+        const existingPosts = existingSection.querySelector<HTMLElement>(
+          "[data-timeline-posts]"
+        );
+        if (!existingPosts) {
+          postList.append(nextPost);
+          continue;
+        }
+
+        existingPosts.append(
+          ...Array.from(incomingPosts.children, post => post.cloneNode(true))
+        );
+        const count = String(existingPosts.children.length);
+        existingSection.dataset.timelineCount = count;
+        existingSection
+          .querySelectorAll<HTMLElement>("[data-timeline-count]")
+          .forEach(element => {
+            element.textContent = count;
+          });
       }
+
+      document.dispatchEvent(new CustomEvent("post-feed:appended"));
+    }
+
+    function loadNextPage(): Promise<boolean> {
+      if (!next) return Promise.resolve(false);
+      if (loadingPromise) return loadingPromise;
+
+      loadingPromise = (async () => {
+        failed = false;
+        postLoading.hidden = false;
+        postLoadMore.hidden = true;
+        postError.hidden = true;
+
+        try {
+          const response = await fetch(next, {
+            headers: { Accept: "text/html" },
+            signal,
+          });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+          const html = await response.text();
+          const document = new DOMParser().parseFromString(html, "text/html");
+          const nextFeed =
+            document.querySelector<HTMLElement>("[data-post-feed]");
+          const nextList =
+            nextFeed?.querySelector<HTMLElement>("[data-post-list]");
+
+          if (!nextFeed || !nextList || nextList.children.length === 0) {
+            throw new Error("The next post page has no post list");
+          }
+
+          appendNextPosts(nextList);
+          next = nextFeed.dataset.nextUrl ?? "";
+          postFeed.dataset.nextUrl = next;
+          updateEndState();
+          return true;
+        } catch {
+          if (!signal.aborted) {
+            failed = true;
+            postError.hidden = false;
+            postLoadMore.hidden = false;
+            pagination?.removeAttribute("hidden");
+          }
+          return false;
+        } finally {
+          loadingPromise = undefined;
+          postLoading.hidden = true;
+        }
+      })();
+
+      return loadingPromise;
+    }
+
+    async function loadUntil(sectionId: string) {
+      while (next && !document.getElementById(sectionId)) {
+        const didLoad = await loadNextPage();
+        if (!didLoad) return;
+      }
+
+      document
+        .getElementById(sectionId)
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     postLoadMore.addEventListener("click", loadNextPage, { signal });
+    document.addEventListener(
+      "post-feed:load-until",
+      event => {
+        const request = event as CustomEvent<{ sectionId?: unknown }>;
+        if (typeof request.detail?.sectionId === "string") {
+          void loadUntil(request.detail.sectionId);
+        }
+      },
+      { signal }
+    );
 
     if (next) {
       pagination?.setAttribute("hidden", "true");

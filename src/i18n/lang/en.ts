@@ -38,10 +38,6 @@ export default {
     loadMore: "Load more",
     end: "You’ve reached the end.",
     error: "Unable to load more posts. Try again.",
-    tagFilterLabel: "Filter tags",
-    tagFilterPlaceholder: "Filter tags…",
-    tagsCount: "{{count}} tags",
-    noMatchingTags: "No tags match your filter.",
   },
   home: {
     socialLinks: "Social Links",

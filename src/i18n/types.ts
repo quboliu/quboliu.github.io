@@ -36,10 +36,6 @@ export interface UIStrings {
     loadMore: string;
     end: string;
     error: string;
-    tagFilterLabel: string;
-    tagFilterPlaceholder: string;
-    tagsCount: string;
-    noMatchingTags: string;
   };
   home: {
     socialLinks: string;

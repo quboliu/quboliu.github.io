@@ -5,7 +5,8 @@ import Header from "@/components/Header.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import Main from "@/components/Main.astro";
 import PostsViewNavigation from "@/components/PostsViewNavigation.astro";
-import TagDirectory from "@/components/TagDirectory.astro";
+import TagNavigation from "@/components/TagNavigation.astro";
+import Card from "@/components/Card.astro";
 import Footer from "@/components/Footer.astro";
 import { getTagGroups } from "@/utils/getTagGroups";
 import { useTranslations } from "@/i18n";
@@ -14,7 +15,8 @@ import config from "@/config";
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
 const posts = await getCollection("posts", ({ data }) => !data.draft);
-const tags = getTagGroups(posts).map(({ tag, tagName, posts: tagPosts }) => ({
+const tagGroups = getTagGroups(posts);
+const tagLinks = tagGroups.map(({ tag, tagName, posts: tagPosts }) => ({
   slug: tag,
   name: tagName,
   count: tagPosts.length,
@@ -32,10 +34,47 @@ const tags = getTagGroups(posts).map(({ tag, tagName, posts: tagPosts }) => ({
   <Main pageTitle={t.pages.postsTitle} pageDesc={t.pages.tagsDesc} wide>
     <PostsViewNavigation active="tags" />
 
-    <div class="mx-auto w-full max-w-[800px] min-w-0">
-      <TagDirectory tags={tags} />
+    <div class="grid gap-8 xl:grid-cols-[188px_minmax(0,1fr)]">
+      <TagNavigation tags={tagLinks} />
+
+      <div class="mx-auto w-full max-w-[800px] min-w-0 space-y-8 xl:mx-0">
+        {
+          tagGroups.map(({ tag, tagName, posts: tagPosts }) => (
+            <section
+              id={`tag-${tag}`}
+              data-tag-section={tag}
+              class="scroll-mt-20"
+            >
+              <h2 class="border-border border-b pb-2 text-base font-bold">
+                <a
+                  href={`#tag-${tag}`}
+                  class="text-accent no-underline hover:underline"
+                >
+                  #{tagName}
+                </a>
+                <sup class="text-muted-foreground ms-1 text-sm font-normal">
+                  {tagPosts.length}
+                </sup>
+              </h2>
+              <ul class="tag-post-list mt-2">
+                {tagPosts.map(post => (
+                  <Card {...post} variant="h3" />
+                ))}
+              </ul>
+            </section>
+          ))
+        }
+      </div>
     </div>
   </Main>
 
   <Footer />
 </Layout>
+
+<style>
+  @media (max-width: 40rem) {
+    .tag-post-list :global(li > span) {
+      flex-basis: 105px;
+    }
+  }
+</style>

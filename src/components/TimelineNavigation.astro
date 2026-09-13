@@ -1,0 +1,189 @@
+---
+type MonthLink = {
+  slug: string;
+  label: string;
+  count: number;
+};
+
+type Props = {
+  months: MonthLink[];
+};
+
+const { months } = Astro.props;
+---
+
+<nav
+  data-timeline-navigation
+  aria-label="Timeline navigation"
+  class="border-border bg-background/95 sticky top-0 z-20 -mx-5 min-w-0 overflow-x-auto border-y px-5 py-3 backdrop-blur xl:top-6 xl:z-10 xl:mx-0 xl:max-h-[calc(100vh-3rem)] xl:self-start xl:overflow-y-auto xl:border-0 xl:bg-transparent xl:px-0 xl:py-0 xl:backdrop-blur-none"
+>
+  <ul
+    data-timeline-navigation-list
+    class="flex min-w-max gap-2 xl:min-w-0 xl:flex-col xl:gap-1"
+  >
+    {
+      months.map(({ slug, label, count }, index) => (
+        <li>
+          <a
+            href={`#month-${slug}`}
+            data-timeline-nav={slug}
+            aria-current={index === 0 ? "location" : undefined}
+            class="timeline-nav-link text-muted-foreground hover:text-accent flex items-baseline justify-between gap-3 rounded px-2 py-1.5 text-sm no-underline transition-colors"
+          >
+            <span>{label}</span>
+            <span
+              data-timeline-nav-count
+              class="font-mono text-xs"
+              aria-label={`${count} 篇文章`}
+            >
+              {count}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  let timelineNavigationController: AbortController | undefined;
+
+  function initTimelineNavigation() {
+    timelineNavigationController?.abort();
+    timelineNavigationController = new AbortController();
+
+    const navigation = document.querySelector<HTMLElement>(
+      "[data-timeline-navigation]"
+    );
+    const list = navigation?.querySelector<HTMLUListElement>(
+      "[data-timeline-navigation-list]"
+    );
+    if (!navigation || !list) return;
+
+    const timelineNavigation = navigation;
+    const timelineList = list;
+    const { signal } = timelineNavigationController;
+
+    function links() {
+      return Array.from(
+        timelineNavigation.querySelectorAll<HTMLAnchorElement>(
+          "[data-timeline-nav]"
+        )
+      );
+    }
+
+    function sections() {
+      return Array.from(
+        document.querySelectorAll<HTMLElement>("[data-timeline-section]")
+      );
+    }
+
+    function syncNavigation() {
+      for (const section of sections()) {
+        const slug = section.dataset.timelineSection;
+        if (!slug) continue;
+
+        const count = section.dataset.timelineCount ?? "0";
+        const existing = links().find(
+          link => link.dataset.timelineNav === slug
+        );
+        if (existing) {
+          continue;
+        }
+
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        const label = document.createElement("span");
+        const countElement = document.createElement("span");
+        link.href = `#month-${slug}`;
+        link.dataset.timelineNav = slug;
+        link.className =
+          "timeline-nav-link text-muted-foreground hover:text-accent flex items-baseline justify-between gap-3 rounded px-2 py-1.5 text-sm no-underline transition-colors";
+        link.setAttribute("aria-label", `${count} 篇文章`);
+        label.textContent = section.dataset.timelineLabel ?? slug;
+        countElement.dataset.timelineNavCount = "";
+        countElement.className = "font-mono text-xs";
+        countElement.textContent = count;
+        link.append(label, countElement);
+        item.append(link);
+        timelineList.append(item);
+      }
+    }
+
+    function setActive(slug?: string) {
+      links().forEach(link => {
+        if (link.dataset.timelineNav === slug) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    }
+
+    function updateActive() {
+      const timelineSections = sections();
+      if (timelineSections.length === 0) return;
+
+      const marker = window.scrollY + Math.min(window.innerHeight * 0.3, 220);
+      let current = timelineSections[0];
+      for (const section of timelineSections) {
+        if (section.offsetTop <= marker) current = section;
+      }
+
+      const atPageEnd =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+      if (atPageEnd) current = timelineSections.at(-1) ?? current;
+
+      setActive(current.dataset.timelineSection);
+    }
+
+    let animationFrame: number | undefined;
+    function requestUpdate() {
+      if (animationFrame !== undefined) return;
+      animationFrame = window.requestAnimationFrame(() => {
+        animationFrame = undefined;
+        updateActive();
+      });
+    }
+
+    timelineNavigation.addEventListener(
+      "click",
+      event => {
+        if (!(event.target instanceof Element)) return;
+        const link = event.target.closest<HTMLAnchorElement>(
+          "[data-timeline-nav]"
+        );
+        const slug = link?.dataset.timelineNav;
+        if (!slug) return;
+
+        if (!document.getElementById(`month-${slug}`)) {
+          event.preventDefault();
+          document.dispatchEvent(
+            new CustomEvent("post-feed:load-until", {
+              detail: { sectionId: `month-${slug}` },
+            })
+          );
+        }
+        setActive(slug);
+      },
+      { signal }
+    );
+    document.addEventListener("post-feed:appended", syncNavigation, { signal });
+    window.addEventListener("scroll", requestUpdate, { passive: true, signal });
+    window.addEventListener("resize", requestUpdate, { passive: true, signal });
+    syncNavigation();
+    updateActive();
+  }
+
+  document.addEventListener("astro:page-load", initTimelineNavigation);
+  initTimelineNavigation();
+</script>
+
+<style>
+  .timeline-nav-link[aria-current="location"] {
+    color: var(--accent);
+    background-color: var(--muted);
+    font-weight: 600;
+  }
+</style>
