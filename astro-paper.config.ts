@@ -14,7 +14,7 @@ export default defineAstroPaperConfig({
   },
   posts: {
     perPage: 50,
-    perIndex: 5,
+    perIndex: 10,
     scheduledPostMargin: 15 * 60 * 1000,
   },
   features: {
