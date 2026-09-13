@@ -8,7 +8,6 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --color-visited: var(--visited);
   --font-app: var(--font-main);
   --font-mono:
     ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
@@ -23,7 +22,6 @@
   --heading: #222222;
   --accent: #3273dc;
   --accent-foreground: #ffffff;
-  --visited: #8b6fcb;
   --muted: #f2f2f2;
   --code-background: #f4f6f8;
   --code-border: #d5dce3;
@@ -41,7 +39,6 @@
   --heading: #eeeeee;
   --accent: #8cc2dd;
   --accent-foreground: #01242e;
-  --visited: #8b6fcb;
   --muted: #000000;
   --code-background: #011627;
   --code-border: #345061;

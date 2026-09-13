@@ -62,9 +62,6 @@
     @apply text-accent no-underline hover:underline;
   }
 
-  & li a:visited {
-    color: var(--visited);
-  }
 }
 
 :target {
