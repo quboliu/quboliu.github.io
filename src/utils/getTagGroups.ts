@@ -47,5 +47,7 @@ export function getTagGroups(posts: CollectionEntry<"posts">[]) {
       ...group,
       posts: group.posts.sort(byPubDatetimeDesc),
     }))
-    .sort((a, b) => a.tag.localeCompare(b.tag));
+    .sort(
+      (a, b) => b.posts.length - a.posts.length || a.tag.localeCompare(b.tag)
+    );
 }
