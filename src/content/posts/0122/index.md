@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-02T10:30:52+08:00
-modDatetime: 2026-09-02T11:31:43+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "Google Spanner 的四道防线：Paxos、2PL、2PC 与 Commit Wait 分别解决什么问题？"
 area: "distributed-systems"
@@ -12,6 +12,10 @@ tags:
   - "数据库"
   - "Google Spanner"
   - "一致性"
+  - "Paxos"
+  - "事务隔离"
+  - "分布式事务"
+  - "外部一致性"
 description: "Paxos、2PL、2PC 和 Commit Wait 并不是重复的一致性算法，而是分别负责副本一致性、并发隔离、跨分片原子提交和现实时间顺序。"
 ---
 

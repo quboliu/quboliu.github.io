@@ -1,13 +1,14 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-05-21T14:09:14+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "Vibe Coding 时的 UI 和 UX 设计开发问题"
 featured: false
 area: "ai-and-agents"
 draft: false
 tags:
-  - "vibe coding"
+  - "Vibe Coding"
   - "UI/UX"
   - "AI 辅助开发"
 description: "非设计背景的开发者用 AI 做 UI/UX 时的四条出路：学设计词汇、截图加源码积累、用先进工具开盲盒、等底层模型迭代。"

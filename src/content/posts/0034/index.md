@@ -1,13 +1,15 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-08-12T09:01:54+08:00
-modDatetime: 2024-08-12T09:06:07+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "详解IPC"
 featured: false
 area: "operating-systems"
 draft: false
-tags: []
+tags:
+  - "进程间通信"
+  - "消息队列"
 description: "IPC: Inter-Process Communication"
 ---
 

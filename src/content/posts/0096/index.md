@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-08-18T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | The Google File System｜Google 文件系统"
 contentType: "paper-translation"
@@ -14,6 +14,7 @@ tags:
   - "GFS"
   - "分布式文件系统"
   - "存储系统"
+  - "论文翻译"
 description: "The Google File System 中英对照全文，涵盖 GFS 的单主控架构、块与租约、原子记录追加、一致性模型、容错恢复及真实集群测量。"
 ---
 

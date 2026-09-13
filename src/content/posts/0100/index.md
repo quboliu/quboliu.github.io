@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2025-10-12T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Conflict-free Replicated Data Types｜无冲突复制数据类型"
 contentType: "paper-translation"
@@ -14,6 +14,7 @@ tags:
   - "CRDT"
   - "最终一致性"
   - "数据复制"
+  - "论文翻译"
 description: "按语义单元编排的中英对照精读 CRDT 经典论文，涵盖半格、单调性、交换律、幂等性、基于状态与基于操作的复制模型，以及无需同步协调即可确定性收敛的条件。"
 ---
 

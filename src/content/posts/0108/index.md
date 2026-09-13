@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2025-02-16T12:00:00+08:00
-modDatetime: 2026-08-10T21:05:34+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Omega: Flexible, Scalable Schedulers for Large Compute Clusters｜Omega：面向大规模计算集群的灵活、可扩展调度器"
 contentType: "paper-translation"
@@ -15,6 +15,7 @@ tags:
   - "Omega"
   - "集群调度"
   - "乐观并发控制"
+  - "论文翻译"
 description: "Omega 经典论文中英对照精读：比较单体、两级与共享状态调度，分析乐观并发、调度器干扰、冲突处理和 MapReduce 专用调度。"
 ---
 > **Source and translation basis｜来源与翻译依据**

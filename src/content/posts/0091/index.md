@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-11-10T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Implementing Fault-Tolerant Services Using the State Machine Approach: A Tutorial｜使用状态机方法实现容错服务：教程"
 contentType: "paper-translation"
@@ -14,6 +14,7 @@ tags:
   - "容错"
   - "状态机复制"
   - "拜占庭故障"
+  - "论文翻译"
 description: "Schneider 状态机复制经典教程中英对照全文，系统讲解副本一致性与顺序、故障模型、时钟与稳定性测试、客户端和输出容错，以及动态重配置。"
 ---
 

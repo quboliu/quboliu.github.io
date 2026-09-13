@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2025-03-02T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Paxos Made Live: An Engineering Perspective｜让 Paxos 真正运行起来：工程实践视角"
 contentType: "paper-translation"
@@ -14,6 +14,7 @@ tags:
   - "Paxos"
   - "共识算法"
   - "容错工程"
+  - "论文翻译"
 description: "Paxos Made Live: An Engineering Perspective 中英对照全文，讨论 Paxos 从算法论文走向 Chubby 生产系统时的持久化、恢复、租约、成员变更、快照、测试与工程故障。"
 ---
 

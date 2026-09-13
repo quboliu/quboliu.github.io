@@ -1,13 +1,16 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-08-15T00:22:59+08:00
-modDatetime: 2024-08-16T17:52:30+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "CPU特权级指令和非特权级指令罗列"
 featured: false
 area: "operating-systems"
 draft: false
-tags: []
+tags:
+  - "x86"
+  - "特权级"
+  - "操作系统"
 description: "列举 x86 中常见的特权级与非特权级指令，并解释硬件和操作系统各自承担的权限控制职责。"
 ---
 

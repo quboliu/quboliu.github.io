@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2025-05-25T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | CloudyBench: A Testbed for A Comprehensive Evaluation of Cloud-Native Databases｜CloudyBench：用于全面评估云原生数据库的测试平台"
 contentType: "paper-translation"
@@ -13,6 +13,7 @@ tags:
   - "云原生数据库"
   - "数据库基准测试"
   - "ICDE 2025"
+  - "论文翻译"
 description: "CloudyBench 对五种商业云数据库的弹性、多租户、成本与故障恢复进行综合评测；本文为按语义单元编排的中英对照全文。"
 ---
 

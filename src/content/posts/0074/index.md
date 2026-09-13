@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-05-15T15:19:28+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "声明式接口的约束、选择与代价：关系数据库管理系统、Kubernetes 与 Agent"
 featured: true
@@ -8,6 +9,10 @@ area: "software-engineering"
 draft: false
 tags:
   - "计算机系统"
+  - "声明式 API"
+  - "数据库"
+  - "Kubernetes"
+  - "AI Agent"
 description: "声明式接口如何分配控制权：从计算理论与编程范式出发，剖析关系型 DBMS 优化器、Kubernetes Controller Loop 与 LLM Agent Runtime 的约束、选择与代价。"
 ---
 

@@ -1,14 +1,16 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-08-15T14:52:31+08:00
-modDatetime: 2026-08-10T21:39:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "如何阅读 Go 源代码"
 contentType: "repost"
 featured: false
 area: "go"
 draft: false
-tags: []
+tags:
+  - "转载"
+  - "Golang"
 description: "转载并整理阅读 Go 源码的方法，包括标准库追踪、汇编分析和 Delve 调试。"
 ---
 

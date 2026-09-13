@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-04-05T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Disaggregated Data Systems – State-of-the-Art and Open Challenges｜解耦式数据系统——研究现状与开放挑战"
 contentType: "paper-translation"
@@ -13,6 +13,7 @@ tags:
   - "分布式系统"
   - "云原生数据库"
   - "CXL"
+  - "论文翻译"
 description: "一篇梳理解耦式数据系统研究现状的 EDBT 2026 教程论文，覆盖 CXL、远程内存、RDMA、数据路径计算与解耦税，按语义单元编排的中英对照全文。"
 ---
 

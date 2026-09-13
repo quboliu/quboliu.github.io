@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-09-08T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Dynamo: Amazon’s Highly Available Key-value Store｜Dynamo：亚马逊的高可用键值存储"
 contentType: "paper-translation"
@@ -14,6 +14,7 @@ tags:
   - "Dynamo"
   - "最终一致性"
   - "键值存储"
+  - "论文翻译"
 description: "Amazon Dynamo 经典论文中英对照全文，系统讲解一致性哈希、向量时钟、宽松法定人数、提示移交、Merkle 树、gossip 与生产经验。"
 ---
 

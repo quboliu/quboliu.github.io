@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-08-12T00:55:59+08:00
-modDatetime: 2026-08-12T01:11:02+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "转载|Paxos的魔法学研究报告"
 contentType: "repost"
@@ -9,7 +9,7 @@ featured: false
 area: "distributed-systems"
 draft: false
 tags:
-  - "文章转载"
+  - "转载"
   - "Paxos"
   - "共识算法"
   - "分布式系统"

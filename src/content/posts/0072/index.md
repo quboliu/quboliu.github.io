@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-03-20T13:47:01+08:00
-modDatetime: 2026-08-10T21:39:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "First Principles: Elon Musk on the Power of Thinking for Yourself"
 contentType: "repost"
@@ -9,7 +9,7 @@ featured: true
 area: "notes-and-thoughts"
 draft: false
 tags:
-  - "文章转载"
+  - "转载"
   - "第一性原理"
 description: "两篇第一性原理经典文章转载（James Clear 与 Farnam Street），英中对照排版，含原文链接与作者信息。"
 ---

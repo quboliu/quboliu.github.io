@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2025-01-12T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Linearizability: A Correctness Condition for Concurrent Objects｜线性一致性：并发对象的正确性条件"
 contentType: "paper-translation"
@@ -14,6 +14,7 @@ tags:
   - "并发编程"
   - "线性一致性"
   - "正确性"
+  - "论文翻译"
 description: "Herlihy 与 Wing 定义线性一致性、论证其局部性与非阻塞性并给出并发对象验证方法的经典论文，按语义单元编排的中英对照全文。"
 ---
 

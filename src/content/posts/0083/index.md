@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2025-12-14T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Disaggregation: A New Architecture for Cloud Databases｜解耦：云数据库的一种新架构"
 contentType: "paper-translation"
@@ -12,6 +12,7 @@ tags:
   - "论文阅读"
   - "云原生数据库"
   - "数据库架构"
+  - "论文翻译"
 description: "Xiangyao Yu 关于云数据库从存算分离走向广义模块解耦与服务化的 2025 年论文，按语义单元编排的中英对照全文。"
 ---
 

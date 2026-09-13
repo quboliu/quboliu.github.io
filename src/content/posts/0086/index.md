@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-09-29T12:00:00+08:00
-modDatetime: 2026-08-12T11:44:08+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Time, Clocks, and the Ordering of Events in a Distributed System｜时间、时钟与分布式系统中的事件排序"
 contentType: "paper-translation"
@@ -13,6 +13,7 @@ tags:
   - "分布式系统"
   - "逻辑时钟"
   - "Lamport"
+  - "论文翻译"
 description: "Leslie Lamport 关于 happened-before、逻辑时钟、全序与物理时钟同步的经典论文，按语义单元编排的中英对照全文。"
 ---
 

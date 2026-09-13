@@ -1,13 +1,15 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-08-21T15:12:06+08:00
-modDatetime: 2024-08-21T20:57:45+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "postgresql系列之编译安装-步骤拆解"
 featured: false
 area: "databases"
 draft: false
-tags: []
+tags:
+  - "PostgreSQL"
+  - "编译安装"
 description: "从源码下载、依赖安装、编译配置到 initdb 与 systemd 服务，拆解 PostgreSQL 16.1 的编译安装流程。"
 ---
 

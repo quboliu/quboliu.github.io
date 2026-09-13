@@ -1,13 +1,16 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-08-13T10:29:34+08:00
-modDatetime: 2024-08-14T21:10:13+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "熟悉到容易被忽视的操作系统进程真相"
 featured: false
 area: "operating-systems"
 draft: false
-tags: []
+tags:
+  - "操作系统"
+  - "进程"
+  - "调度"
 description: "Linux系统是宏内核，但是它具有模块热插拔和动态装载的功能。——————《深入Linux内核架构》"
 ---
 

@@ -1,13 +1,16 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-08-12T10:44:27+08:00
-modDatetime: 2024-08-12T13:53:20+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "详解上下文切换"
 featured: false
 area: "operating-systems"
 draft: false
-tags: []
+tags:
+  - "上下文切换"
+  - "进程"
+  - "协程"
 description: "对比进程、线程与协程的上下文切换，重点追问寄存器保存为何可以在用户态完成。"
 ---
 

@@ -1,13 +1,15 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-08-10T11:14:33+08:00
-modDatetime: 2024-08-10T15:37:39+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "解密黑话之上下文"
 featured: false
 area: "notes-and-thoughts"
 draft: false
-tags: []
+tags:
+  - "上下文"
+  - "计算机系统"
 description: "从 CPU 与自然语言处理两个层面，辨析“上下文”在不同技术语境中的含义。"
 ---
 

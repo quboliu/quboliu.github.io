@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-01-06T16:11:16+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Transformer Explainer：通过交互式可视化讲解与实验学习 LLM Transformer"
 contentType: "paper-translation"
@@ -9,6 +10,7 @@ area: "ai-and-agents"
 draft: false
 tags:
   - "论文阅读"
+  - "论文翻译"
 description: "CHI 2026 论文《Transformer Explainer》全文中英对照精读：一个面向非专业用户的 Transformer 交互式可视化学习工具，浏览器内运行真实 GPT-2 模型，已服务超过 49 万用户。"
 ---
 

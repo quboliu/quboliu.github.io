@@ -1,13 +1,16 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-08-17T21:40:13+08:00
-modDatetime: 2024-08-17T21:42:00+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "一个hexo一键推送的脚本"
 featured: false
 area: "tools-and-workflow"
 draft: false
-tags: []
+tags:
+  - "Hexo"
+  - "GitHub"
+  - "PowerShell"
 description: "该脚本由ChatGPT、Claude联合调整而成，目前还是好用的。 运行于Win11下, .ps1后缀。"
 ---
 

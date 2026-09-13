@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-10-20T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Distributed Snapshots: Determining Global States of Distributed Systems｜分布式快照：确定分布式系统的全局状态"
 contentType: "paper-translation"
@@ -14,6 +14,7 @@ tags:
   - "分布式快照"
   - "全局状态"
   - "Chandy-Lamport"
+  - "论文翻译"
 description: "Chandy 与 Lamport 的分布式快照经典论文中英对照全文，涵盖无全局时钟条件下的一致全局状态记录、标记算法、可达性证明与稳定性质检测。"
 ---
 

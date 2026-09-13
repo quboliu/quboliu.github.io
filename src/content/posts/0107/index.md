@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2025-01-12T12:00:00+08:00
-modDatetime: 2026-08-10T21:05:34+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Large-scale Cluster Management at Google with Borg｜Google Borg 的大规模集群管理"
 contentType: "paper-translation"
@@ -15,6 +15,7 @@ tags:
   - "Borg"
   - "集群管理"
   - "资源调度"
+  - "论文翻译"
 description: "Google Borg 经典论文中英对照精读：覆盖 Cell、作业与任务、Borgmaster/Borglet、调度、可用性、资源回收、隔离及十年生产经验。"
 ---
 > **Source and translation basis｜来源与翻译依据**

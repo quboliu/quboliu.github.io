@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2025-06-08T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Impossibility of Distributed Consensus with One Faulty Process｜单个故障进程下分布式共识的不可能性"
 contentType: "paper-translation"
@@ -13,6 +13,7 @@ tags:
   - "分布式系统"
   - "共识算法"
   - "FLP"
+  - "论文翻译"
 description: "Fischer、Lynch 与 Paterson 关于完全异步系统中确定性共识不可能性的经典论文，按语义单元编排的中英对照全文。"
 ---
 

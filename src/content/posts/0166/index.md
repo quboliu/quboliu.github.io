@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-12T23:39:01+08:00
-modDatetime: 2026-09-12T23:52:11+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "DDIA 阅读札记：共识一定需要 Paxos/Raft 吗？"
 area: "distributed-systems"
@@ -12,6 +12,9 @@ tags:
   - "共识"
   - "分布式系统"
   - "Raft"
+  - "Paxos"
+  - "线性一致性"
+  - "状态机复制"
 description: "共识不一定需要共识算法：人工指定领导者也能达成一致。Raft/Paxos 真正多解决的，是在没有可信外部裁决者的前提下，用两轮投票和法定人数相交，交付一条自动容错、不会脑裂的线性一致复制日志。"
 ---
 读 DDIA 第二版第 10 章时，一个想法浮现出来：**共识并不一定需要共识算法**。

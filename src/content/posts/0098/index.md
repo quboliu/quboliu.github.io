@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2025-08-31T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | ZooKeeper: Wait-free Coordination for Internet-scale Systems｜ZooKeeper：面向互联网规模系统的无等待协调"
 contentType: "paper-translation"
@@ -14,6 +14,7 @@ tags:
   - "ZooKeeper"
   - "协调服务"
   - "一致性"
+  - "论文翻译"
 description: "按语义单元编排的中英对照精读 ZooKeeper 经典论文，涵盖无等待协调原语、顺序保证、watch、会话、Zab 原子广播、模糊快照、故障恢复与性能评估。"
 ---
 

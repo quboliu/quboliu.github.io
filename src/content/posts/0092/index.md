@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-12-01T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Paxos Made Simple｜Paxos 简明论"
 contentType: "paper-translation"
@@ -14,6 +14,7 @@ tags:
   - "共识算法"
   - "Paxos"
   - "状态机复制"
+  - "论文翻译"
 description: "Leslie Lamport 的 Paxos 经典论文中英对照全文，从安全性约束逐步推导两阶段共识算法，并说明学习者、活性、稳定存储与多实例状态机复制。"
 ---
 

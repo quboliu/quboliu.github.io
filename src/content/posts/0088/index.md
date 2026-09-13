@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-12-15T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Cloud-Native Databases: A Survey｜云原生数据库：综述"
 contentType: "paper-translation"
@@ -14,6 +14,7 @@ tags:
   - "数据库系统"
   - "OLTP"
   - "OLAP"
+  - "论文翻译"
 description: "系统梳理云原生 OLTP 与 OLAP 数据库架构、关键技术、挑战与研究方向的综述论文，按语义单元编排的中英对照全文。"
 ---
 

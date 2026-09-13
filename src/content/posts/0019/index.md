@@ -1,13 +1,15 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-08-04T17:35:14+08:00
-modDatetime: 2024-08-04T17:36:52+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "二叉搜索树(BST)"
 featured: false
 area: "algorithms"
 draft: false
-tags: []
+tags:
+  - "数据结构"
+  - "二叉搜索树"
 description: "梳理二叉搜索树的定义、查找、插入、删除，以及树高对操作效率的影响。"
 ---
 

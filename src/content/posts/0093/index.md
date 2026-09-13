@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2025-08-10T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | In Search of an Understandable Consensus Algorithm｜寻找一种易于理解的共识算法"
 contentType: "paper-translation"
@@ -14,6 +14,7 @@ tags:
   - "共识算法"
   - "Raft"
   - "状态机复制"
+  - "论文翻译"
 description: "Raft 经典论文中英对照全文，系统讲解领导者选举、日志复制、安全性、成员变更、快照、线性一致读取及可理解性评估。"
 ---
 

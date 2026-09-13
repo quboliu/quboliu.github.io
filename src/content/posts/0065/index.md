@@ -1,14 +1,18 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2024-08-19T15:46:12+08:00
-modDatetime: 2024-08-19T15:46:54+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "全文翻译 The Native POSIX Thread Library for Linux"
 contentType: "paper-translation"
 featured: false
 area: "operating-systems"
 draft: false
-tags: []
+tags:
+  - "论文翻译"
+  - "Linux"
+  - "线程"
+  - "POSIX"
 description: "整理 Linux 原生 POSIX 线程库（NPTL）论文，涵盖设计背景、实现选择、性能结果与遗留挑战。"
 ---
 

@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2025-06-29T12:00:00+08:00
-modDatetime: 2026-08-10T15:33:40+08:00
+modDatetime: 2026-09-13T23:40:25+08:00
 timezone: "Asia/Shanghai"
 title: "论文阅读 | Consensus in the Presence of Partial Synchrony｜部分同步环境中的共识"
 contentType: "paper-translation"
@@ -14,6 +14,7 @@ tags:
   - "部分同步"
   - "共识算法"
   - "容错"
+  - "论文翻译"
 description: "Dwork、Lynch 与 Stockmeyer 的部分同步经典论文完整中英对照译文，涵盖 GST、容错共识、分布式时钟及同步性下界。"
 ---
 
