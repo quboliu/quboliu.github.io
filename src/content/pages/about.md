@@ -7,15 +7,6 @@ This is quboliu's minimal publishing space, built with [Astro](https://astro.bui
 
 The visual design is inspired by [Herman's blog](https://herman.bearblog.dev/) ([Bear Blog](https://bearblog.dev/)) — a Verdana, single-column, no-nonsense reading experience.
 
-## Features
-
-- Markdown and MDX
-- Local images and responsive output
-- YouTube, Bilibili, and hosted video
-- Full-text search, Areas, tags, archives, and RSS
-- Light and dark mode
-- Comments powered by GitHub Discussions
-
 ## Source
 
 The source is available on [GitHub](https://github.com/quboliu/quboliu.github.io).
