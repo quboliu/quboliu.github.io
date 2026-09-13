@@ -8,6 +8,8 @@ import Main from "@/components/Main.astro";
 import Card from "@/components/Card.astro";
 import Footer from "@/components/Footer.astro";
 import Pagination from "@/components/Pagination.astro";
+import InfinitePostList from "@/components/InfinitePostList.astro";
+import PostsViewNavigation from "@/components/PostsViewNavigation.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
@@ -29,12 +31,16 @@ const t = useTranslations(locale);
   <Breadcrumb />
 
   <Main pageTitle={t.pages.postsTitle} pageDesc={t.pages.postsDesc}>
-    <ul>
-      {page.data.map(data => <Card {...data} />)}
-    </ul>
+    <PostsViewNavigation active="timeline" />
+
+    <InfinitePostList nextUrl={page.url.next}>
+      <ul data-post-list class="list-none p-0">
+        {page.data.map(data => <Card {...data} />)}
+      </ul>
+    </InfinitePostList>
   </Main>
 
-  <Pagination {page} />
+  <Pagination id="post-pagination" {page} />
 
   <Footer noMarginTop={page.lastPage > 1} />
 </Layout>

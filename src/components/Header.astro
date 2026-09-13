@@ -27,11 +27,13 @@ const isActive = (path: string) => {
   return currentPath === path || currentPathArray[0] === pathArray[0];
 };
 
+const isPostsSection = ["/posts", "/areas", "/tags"].some(
+  path => currentPath === path || currentPath.startsWith(`${path}/`)
+);
+
 const navItems = [
   { path: "", label: t.nav.home },
   { path: "posts", label: t.nav.posts },
-  { path: "areas", label: t.nav.areas },
-  { path: "tags", label: t.nav.tags },
   ...(features.showArchives
     ? [{ path: "archives", label: t.nav.archives }]
     : []),
@@ -72,7 +74,12 @@ const navItems = [
           href={getRelativeLocaleUrl(locale, path)}
           class:list={[
             "text-accent no-underline hover:underline",
-            { "active-nav": isActive(path === "" ? "/" : `/${path}`) },
+            {
+              "active-nav":
+                path === "posts"
+                  ? isPostsSection
+                  : isActive(path === "" ? "/" : `/${path}`),
+            },
           ]}
         >
           {label}

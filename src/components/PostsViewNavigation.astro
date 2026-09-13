@@ -1,0 +1,57 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+type View = "timeline" | "areas" | "tags";
+
+type Props = {
+  active: View;
+};
+
+const { active } = Astro.props;
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+
+const views = [
+  {
+    key: "timeline" as const,
+    href: getRelativeLocaleUrl(locale, "posts"),
+    label: t.views.timeline,
+  },
+  {
+    key: "areas" as const,
+    href: getRelativeLocaleUrl(locale, "posts/areas"),
+    label: t.views.areas,
+  },
+  {
+    key: "tags" as const,
+    href: getRelativeLocaleUrl(locale, "posts/tags"),
+    label: t.views.tags,
+  },
+];
+---
+
+<nav class="border-border mb-6 border-b" aria-label={t.views.navigationLabel}>
+  <ul class="flex flex-wrap gap-x-5 gap-y-1" role="list">
+    {
+      views.map(({ key, href, label }) => (
+        <li>
+          <a
+            href={href}
+            aria-current={active === key ? "page" : undefined}
+            class:list={[
+              "inline-block border-b-2 border-transparent px-1 pb-2 text-sm no-underline transition-colors",
+              {
+                "text-accent border-accent font-medium": active === key,
+                "text-muted-foreground hover:text-accent": active !== key,
+              },
+            ]}
+          >
+            {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

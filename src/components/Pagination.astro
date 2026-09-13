@@ -8,9 +8,10 @@ import { useTranslations } from "@/i18n";
 
 type Props = {
   page: Page<CollectionEntry<"posts">>;
+  id?: string;
 };
 
-const { page } = Astro.props;
+const { page, id } = Astro.props;
 
 const t = useTranslations(Astro.currentLocale);
 ---
@@ -18,6 +19,8 @@ const t = useTranslations(Astro.currentLocale);
 {
   page.lastPage > 1 && (
     <nav
+      id={id}
+      data-post-pagination={id === "post-pagination" ? true : undefined}
       class="mt-auto mb-8 flex justify-center gap-4"
       role="navigation"
       aria-label="Pagination Navigation"

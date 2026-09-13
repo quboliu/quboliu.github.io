@@ -27,6 +27,20 @@ export interface UIStrings {
     next: string;
     page: string;
   };
+  views: {
+    timeline: string;
+    areas: string;
+    tags: string;
+    navigationLabel: string;
+    loading: string;
+    loadMore: string;
+    end: string;
+    error: string;
+    tagFilterLabel: string;
+    tagFilterPlaceholder: string;
+    tagsCount: string;
+    noMatchingTags: string;
+  };
   home: {
     socialLinks: string;
     featured: string;

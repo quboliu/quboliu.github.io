@@ -34,9 +34,12 @@ const navLabels: Record<string, string> = {
   search: t.nav.search,
 };
 
-// if breadcrumb is Home > Posts > [page] <etc>
-// replace Posts with localized "Posts (page number)"
-if (breadcrumbList[0] === "posts") {
+// if breadcrumb is Home > Posts > [page] <etc>, replace Posts with the
+// localized page label. Named views such as /posts/areas/ remain expanded.
+if (
+  breadcrumbList[0] === "posts" &&
+  (!breadcrumbList[1] || !isNaN(Number(breadcrumbList[1])))
+) {
   breadcrumbList.splice(
     0,
     2,

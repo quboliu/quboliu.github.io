@@ -1,0 +1,120 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+type TagLink = {
+  slug: string;
+  name: string;
+  count: number;
+};
+
+type Props = {
+  tags: TagLink[];
+};
+
+const { tags } = Astro.props;
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+---
+
+<div data-tag-directory>
+  <div class="mb-6 flex flex-wrap items-center gap-3">
+    <label class="min-w-60 flex-1">
+      <span class="sr-only">{t.views.tagFilterLabel}</span>
+      <input
+        type="search"
+        data-tag-filter
+        aria-controls="tag-directory-list"
+        placeholder={t.views.tagFilterPlaceholder}
+        class="border-border bg-background focus:border-accent w-full rounded border px-3 py-2 text-sm outline-none"
+      />
+    </label>
+    <span
+      class="text-muted-foreground text-sm"
+      data-tag-count
+      data-count-template={t.views.tagsCount}
+      aria-live="polite"
+    >
+      {tags.length} tags
+    </span>
+  </div>
+
+  <ul
+    id="tag-directory-list"
+    class="grid list-none grid-cols-1 gap-x-8 gap-y-2 p-0 sm:grid-cols-2"
+  >
+    {
+      tags.map(({ slug, name, count }) => (
+        <li data-tag-entry data-tag-search={name.toLocaleLowerCase(locale)}>
+          <a
+            href={getRelativeLocaleUrl(locale, `tags/${slug}/`)}
+            class="border-border bg-muted/35 hover:border-accent hover:bg-muted/70 flex items-baseline justify-between gap-3 rounded border px-3 py-2 no-underline transition-colors"
+          >
+            <span class="text-accent min-w-0 truncate">#{name}</span>
+            <span class="text-muted-foreground shrink-0 font-mono text-xs">
+              {count}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p data-tag-empty class="text-muted-foreground py-8 text-center" hidden>
+    {t.views.noMatchingTags}
+  </p>
+</div>
+
+<script>
+  let tagDirectoryController: AbortController | undefined;
+
+  function initTagDirectory() {
+    tagDirectoryController?.abort();
+    tagDirectoryController = new AbortController();
+
+    const directory = document.querySelector<HTMLElement>(
+      "[data-tag-directory]"
+    );
+    const input =
+      directory?.querySelector<HTMLInputElement>("[data-tag-filter]");
+    const entries = Array.from(
+      directory?.querySelectorAll<HTMLElement>("[data-tag-entry]") ?? []
+    );
+    const count = directory?.querySelector<HTMLElement>("[data-tag-count]");
+    const empty = directory?.querySelector<HTMLElement>("[data-tag-empty]");
+
+    if (!directory || !input || !count || !empty) return;
+
+    const tagInput = input;
+    const tagCount = count;
+    const emptyMessage = empty;
+    const { signal } = tagDirectoryController;
+    const countTemplate = tagCount.dataset.countTemplate ?? "{{count}} tags";
+
+    function formatCount(value: number) {
+      return countTemplate.replace("{{count}}", String(value));
+    }
+
+    function update() {
+      const query = tagInput.value.trim().toLocaleLowerCase();
+      let visible = 0;
+
+      for (const entry of entries) {
+        const matches =
+          !query || (entry.dataset.tagSearch ?? "").includes(query);
+        entry.hidden = !matches;
+        if (matches) visible += 1;
+      }
+
+      tagCount.textContent = formatCount(visible);
+      emptyMessage.hidden = visible !== 0;
+    }
+
+    tagInput.addEventListener("input", update, { signal });
+    update();
+  }
+
+  document.addEventListener("astro:page-load", initTagDirectory);
+  initTagDirectory();
+</script>
