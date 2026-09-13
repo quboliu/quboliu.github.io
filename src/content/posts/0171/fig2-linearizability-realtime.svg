@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" font-family="system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <!-- time axis -->
+  <line x1="60" y1="280" x2="770" y2="280" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+    <marker id="arr2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#b91c1c"/>
+    </marker>
+  </defs>
+  <text x="640" y="268" font-size="13" fill="#64748b">真实时间 →</text>
+
+  <!-- op A -->
+  <rect x="90" y="70" width="170" height="26" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="175" y="62" font-size="14" fill="#1e3a8a" text-anchor="middle" font-weight="600">A：写 x = 1</text>
+  <text x="90" y="115" font-size="12" fill="#64748b" text-anchor="middle">调用</text>
+  <text x="260" y="115" font-size="12" fill="#64748b" text-anchor="middle">响应</text>
+  <line x1="90" y1="96" x2="90" y2="104" stroke="#64748b"/>
+  <line x1="260" y1="96" x2="260" y2="104" stroke="#64748b"/>
+
+  <!-- op B -->
+  <rect x="360" y="70" width="170" height="26" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="445" y="62" font-size="14" fill="#1e3a8a" text-anchor="middle" font-weight="600">B：读 x</text>
+
+  <!-- constraint arrow A->B -->
+  <path d="M 268 140 Q 310 175 352 140" fill="none" stroke="#b91c1c" stroke-width="2" marker-end="url(#arr2)"/>
+  <text x="310" y="195" font-size="13.5" fill="#b91c1c" text-anchor="middle" font-weight="600">A 已完成、B 才开始 ⇒ A 必须排在 B 前</text>
+  <text x="310" y="215" font-size="12.5" fill="#475569" text-anchor="middle">（B 必须读到 x = 1，陈旧读非法）</text>
+
+  <!-- overlapping ops C/D -->
+  <rect x="590" y="70" width="130" height="26" rx="5" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="655" y="62" font-size="14" fill="#14532d" text-anchor="middle" font-weight="600">C</text>
+  <rect x="630" y="120" width="130" height="26" rx="5" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="695" y="164" font-size="14" fill="#14532d" text-anchor="middle" font-weight="600">D</text>
+  <text x="668" y="215" font-size="13.5" fill="#166534" text-anchor="middle" font-weight="600">时间重叠 ⇒ 任一顺序都合法</text>
+  <text x="668" y="235" font-size="12.5" fill="#475569" text-anchor="middle">（顺序一致性与线性一致性此处无差别）</text>
+</svg>

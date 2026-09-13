@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" font-family="system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <rect x="30" y="20" width="740" height="420" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="52" y="50" font-size="16" fill="#334155" font-weight="600">U：系统所有可能产生的执行历史</text>
+
+  <ellipse cx="360" cy="230" rx="235" ry="160" fill="#3b82f6" fill-opacity="0.18" stroke="#3b82f6" stroke-width="2"/>
+  <ellipse cx="470" cy="230" rx="235" ry="160" fill="#22c55e" fill-opacity="0.18" stroke="#22c55e" stroke-width="2"/>
+
+  <text x="220" y="112" font-size="15" fill="#1d4ed8" font-weight="600" text-anchor="middle">可串行化 S</text>
+  <text x="610" y="112" font-size="15" fill="#15803d" font-weight="600" text-anchor="middle">尊重实时 RT</text>
+
+  <text x="415" y="222" font-size="15" fill="#0f172a" font-weight="700" text-anchor="middle">严格可串行化</text>
+  <text x="415" y="243" font-size="12.5" fill="#475569" text-anchor="middle">（strong-1SR / 外部一致性）</text>
+
+  <text x="180" y="215" font-size="13.5" fill="#1e40af" font-weight="600" text-anchor="middle">非严格可串行化</text>
+  <text x="180" y="235" font-size="12" fill="#475569" text-anchor="middle">隔离合格，时间违约</text>
+  <text x="180" y="255" font-size="12" fill="#475569" text-anchor="middle">（允许陈旧读）</text>
+
+  <text x="640" y="210" font-size="13.5" fill="#166534" font-weight="600" text-anchor="middle">时间守序但隔离不满足</text>
+  <text x="640" y="230" font-size="12" fill="#475569" text-anchor="middle">（线性一致不防写偏差）</text>
+
+  <text x="415" y="420" font-size="13" fill="#b91c1c" text-anchor="middle">U − (S ∪ RT)：隔离异常（脏读、丢失更新、写偏差…）</text>
+</svg>
