@@ -188,6 +188,14 @@ const { months } = Astro.props;
 </script>
 
 <style>
+  nav {
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar {
+    display: none;
+  }
+
   .timeline-nav-link[aria-current="location"] {
     color: var(--accent);
     background-color: var(--muted);

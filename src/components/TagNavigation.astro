@@ -127,6 +127,11 @@ const { tags } = Astro.props;
 <style>
   nav {
     overflow-anchor: none;
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar {
+    display: none;
   }
 
   .tag-nav-link {

@@ -104,6 +104,14 @@ const { areas } = Astro.props;
 </script>
 
 <style>
+  nav {
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar {
+    display: none;
+  }
+
   .area-nav-link[aria-current="location"] {
     color: var(--accent);
     background-color: var(--muted);

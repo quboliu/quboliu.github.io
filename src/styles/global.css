@@ -28,7 +28,7 @@
 }
 
 @utility max-w-app {
-  max-width: 840px;
+  max-width: 960px;
 }
 
 @utility app-layout {
