@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-14T10:31:30+08:00
+modDatetime: 2026-09-14T10:35:43+08:00
 timezone: "Asia/Shanghai"
-title: "DDIA 复制日志分类与数据库实现对照"
+title: "DDIA 阅读札记：DDIA 复制日志分类与数据库实现对照"
 area: "databases"
 featured: false
 draft: false
