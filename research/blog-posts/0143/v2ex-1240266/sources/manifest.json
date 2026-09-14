@@ -1,0 +1,12 @@
+{
+  "retrieved_at_utc": "2026-09-08T06:41:14.652068+00:00",
+  "url": "https://v2ex.com/t/1240266#reply34",
+  "visible_floors": 37,
+  "api_replies_returned": 32,
+  "note": "HTML snapshot authoritative for floor mapping; API is older. No pagination found. Snapshot may not include later replies.",
+  "files": {
+    "replies.json": "cba4f86bf9b8269373f89d93810fa985d5b443e7b184a2a86dadeded18d0b4b4",
+    "topic.html": "b6bdc17868e06806cb7375fc0f02882bd0e0264fb560a769b81895a5f9d51903",
+    "topic-api.json": "f50ffad7354c962bb56cd5ed06c15b15236b2a2bb4c7e744f2bec63d7d981f85"
+  }
+}
