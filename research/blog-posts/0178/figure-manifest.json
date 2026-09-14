@@ -1,0 +1,56 @@
+[
+  {
+    "figure": 1,
+    "path": "replication-logs/assets/01-taxonomy.png",
+    "bytes": 1413691,
+    "sha256": "ef835a49d58b711484218c39b5cce1e8401fed2f8d3aa6de533003a4fd0effbe"
+  },
+  {
+    "figure": 2,
+    "path": "replication-logs/assets/02-pg-wal-v2.png",
+    "bytes": 1823758,
+    "sha256": "0a7046b127236efb65e9a7b90c39a68682ab101b0df74e96234a2f4226a70531"
+  },
+  {
+    "figure": 3,
+    "path": "replication-logs/assets/03-pg-physical.png",
+    "bytes": 1397218,
+    "sha256": "3eeacb1e9386ad420bd4d37970ee9b8121fa51abaaddd499e829c1d4680b3387"
+  },
+  {
+    "figure": 4,
+    "path": "replication-logs/assets/04-pg-logical-v2.png",
+    "bytes": 1502224,
+    "sha256": "fadf0337805af07aeb070849c5992f905e0703dd09a6ae1bcc77af80797a298b"
+  },
+  {
+    "figure": 5,
+    "path": "replication-logs/assets/07-two-engines.png",
+    "bytes": 1439146,
+    "sha256": "2d2bccb28ab64c0287da29b8c5b4db2e730e8441d616587b1200a08bb1d76bca"
+  },
+  {
+    "figure": 6,
+    "path": "replication-logs/assets/09-innodb-redo.png",
+    "bytes": 1709615,
+    "sha256": "3e705c3ae7d9db95291080bfbb0fe3e66289b8da11445ba44cdc41b797ff607a"
+  },
+  {
+    "figure": 7,
+    "path": "replication-logs/assets/05-mysql-binlog.png",
+    "bytes": 1447474,
+    "sha256": "518e84678d76cd9ba5a9ef1a4b45f50668c19ba0a717831ec0b1481c600a256b"
+  },
+  {
+    "figure": 8,
+    "path": "replication-logs/assets/08-real-bytes-v2.png",
+    "bytes": 1544951,
+    "sha256": "b05b03be52f3d9feb658f5fefb8b212c4b1256a0633d6e409a9eb23b878c5671"
+  },
+  {
+    "figure": 9,
+    "path": "replication-logs/assets/06-mysql-stream.png",
+    "bytes": 1391915,
+    "sha256": "93e55e18a08098cfe18ebe3ce22bac2cf2e7789390a208a144331e016b799d24"
+  }
+]

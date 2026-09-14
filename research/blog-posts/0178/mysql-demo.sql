@@ -1,0 +1,28 @@
+-- 在已完成初始化的隔离 MySQL 8.4 实例中执行，开启 binlog 与 GTID。
+-- 使用显式会话设置；不要求真实文件编号与本文相同。
+CREATE DATABASE demo;
+USE demo;
+CREATE TABLE accounts(id INT PRIMARY KEY, balance INT NOT NULL) ENGINE=InnoDB;
+INSERT INTO accounts VALUES(7,1000);
+FLUSH BINARY LOGS;
+SHOW BINARY LOG STATUS;
+SET SESSION binlog_format='STATEMENT';
+BEGIN;
+UPDATE accounts SET balance=balance-100 WHERE id=7;
+COMMIT;
+FLUSH BINARY LOGS;
+SHOW BINARY LOG STATUS;
+SET SESSION binlog_format='ROW';
+SET SESSION binlog_row_image='FULL';
+BEGIN;
+UPDATE accounts SET balance=balance-100 WHERE id=7;
+COMMIT;
+FLUSH BINARY LOGS;
+SHOW BINARY LOG STATUS;
+SET SESSION binlog_row_image='MINIMAL';
+BEGIN;
+UPDATE accounts SET balance=balance-100 WHERE id=7;
+COMMIT;
+FLUSH BINARY LOGS;
+SELECT VERSION();
+SHOW BINARY LOGS;

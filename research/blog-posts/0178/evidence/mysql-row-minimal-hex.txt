@@ -1,0 +1,13 @@
+原始 binlog 十六进制；未加密，事务压缩关闭
+magic: fe 62 69 6e
+offset=4 type=15 server_id=101 size=123 next=127
+offset=127 type=35 server_id=101 size=71 next=198
+offset=198 type=33 server_id=101 size=79 next=277
+offset=277 type=2 server_id=101 size=84 next=361
+90 74 a2 6a 02 65 00 00 00 54 00 00 00 69 01 00 00 08 00 09 00 00 00 00 00 00 00 04 00 00 26 00 00 00 00 00 00 01 20 00 a0 45 00 00 00 00 06 03 73 74 64 04 08 00 08 00 ff 00 09 01 00 00 00 00 00 00 00 12 ff 00 64 65 6d 6f 00 42 45 47 49 4e 45 cb 31 cc
+offset=361 type=19 server_id=101 size=55 next=416
+90 74 a2 6a 13 65 00 00 00 37 00 00 00 a0 01 00 00 00 00 57 00 00 00 00 00 01 00 04 64 65 6d 6f 00 08 61 63 63 6f 75 6e 74 73 00 02 03 03 00 00 01 01 00 47 f3 de ed
+offset=416 type=31 server_id=101 size=46 next=462
+90 74 a2 6a 1f 65 00 00 00 2e 00 00 00 ce 01 00 00 00 00 57 00 00 00 00 00 01 00 02 00 02 01 02 00 07 00 00 00 00 bc 02 00 00 90 29 e6 c3
+offset=462 type=16 server_id=101 size=31 next=493
+offset=493 type=4 server_id=101 size=47 next=540

@@ -1,0 +1,26 @@
+Log_name	Pos	Event_type	Server_id	End_log_pos	Info
+mysql-bin.000004	4	Format_desc	101	127	Server ver: 8.4.11, Binlog ver: 4
+mysql-bin.000004	127	Previous_gtids	101	198	1e0c7b6c-acf7-11f1-a867-9e20c372f265:1-8
+mysql-bin.000004	198	Gtid	101	277	SET @@SESSION.GTID_NEXT= '1e0c7b6c-acf7-11f1-a867-9e20c372f265:9'
+mysql-bin.000004	277	Query	101	368	BEGIN
+mysql-bin.000004	368	Query	101	504	use `demo`; UPDATE accounts SET balance=balance-100 WHERE id=7
+mysql-bin.000004	504	Xid	101	535	COMMIT /* xid=17 */
+mysql-bin.000004	535	Rotate	101	582	mysql-bin.000005;pos=4
+Log_name	Pos	Event_type	Server_id	End_log_pos	Info
+mysql-bin.000005	4	Format_desc	101	127	Server ver: 8.4.11, Binlog ver: 4
+mysql-bin.000005	127	Previous_gtids	101	198	1e0c7b6c-acf7-11f1-a867-9e20c372f265:1-9
+mysql-bin.000005	198	Gtid	101	277	SET @@SESSION.GTID_NEXT= '1e0c7b6c-acf7-11f1-a867-9e20c372f265:10'
+mysql-bin.000005	277	Query	101	361	BEGIN
+mysql-bin.000005	361	Table_map	101	416	table_id: 87 (demo.accounts)
+mysql-bin.000005	416	Update_rows	101	470	table_id: 87 flags: STMT_END_F
+mysql-bin.000005	470	Xid	101	501	COMMIT /* xid=23 */
+mysql-bin.000005	501	Rotate	101	548	mysql-bin.000006;pos=4
+Log_name	Pos	Event_type	Server_id	End_log_pos	Info
+mysql-bin.000006	4	Format_desc	101	127	Server ver: 8.4.11, Binlog ver: 4
+mysql-bin.000006	127	Previous_gtids	101	198	1e0c7b6c-acf7-11f1-a867-9e20c372f265:1-10
+mysql-bin.000006	198	Gtid	101	277	SET @@SESSION.GTID_NEXT= '1e0c7b6c-acf7-11f1-a867-9e20c372f265:11'
+mysql-bin.000006	277	Query	101	361	BEGIN
+mysql-bin.000006	361	Table_map	101	416	table_id: 87 (demo.accounts)
+mysql-bin.000006	416	Update_rows	101	462	table_id: 87 flags: STMT_END_F
+mysql-bin.000006	462	Xid	101	493	COMMIT /* xid=28 */
+mysql-bin.000006	493	Rotate	101	540	mysql-bin.000007;pos=4

@@ -1,0 +1,4 @@
+mysql-statement: CRC32 and event boundaries OK; rows=[]; SQL update=True
+mysql-row-full: CRC32 and event boundaries OK; rows=[(54, 3, 3, [{'id': 7, 'balance': 900}, {'id': 7, 'balance': 800}])]; SQL update=False
+mysql-row-minimal: CRC32 and event boundaries OK; rows=[(46, 1, 2, [{'id': 7}, {'balance': 700}])]; SQL update=False
+PostgreSQL pgoutput: B/R/U/C; U length=22; relation=16388; N=['7', '900']

@@ -1,0 +1,5 @@
+rmgr: XLOG        len (rec/tot):     49/   117, tx:          0, lsn: 0/017EA740, prev 0/017EA6C8, desc: FPI_FOR_HINT , blkref #0: rel 1663/5/6106 blk 0 FPW
+rmgr: XLOG        len (rec/tot):     49/   181, tx:          0, lsn: 0/017EA7B8, prev 0/017EA740, desc: FPI_FOR_HINT , blkref #0: rel 1663/5/6104 blk 0 FPW
+rmgr: XLOG        len (rec/tot):     49/   109, tx:          0, lsn: 0/017EA870, prev 0/017EA7B8, desc: FPI_FOR_HINT , blkref #0: rel 1663/5/16388 blk 0 FPW
+rmgr: Heap        len (rec/tot):     74/    74, tx:        767, lsn: 0/017EA8E0, prev 0/017EA870, desc: HOT_UPDATE old_xmax: 767, old_off: 1, old_infobits: [], flags: 0x10, new_xmax: 0, new_off: 2, blkref #0: rel 1663/5/16388 blk 0
+rmgr: Transaction len (rec/tot):     46/    46, tx:        767, lsn: 0/017EA930, prev 0/017EA8E0, desc: COMMIT 2026-09-10 09:15:03.526791 UTC
