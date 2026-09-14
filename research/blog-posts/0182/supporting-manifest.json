@@ -1,0 +1,63 @@
+[
+  {
+    "name": "contentful-search",
+    "url": "https://www.contentful.com/blog/contentful-faster-full-text-search/",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "name": "nginx-history",
+    "url": "https://mailman.nginx.org/pipermail/nginx/2008-May/004816.html",
+    "bytes": 4598,
+    "text_chars": 2653,
+    "at": "2026-09-14T11:02:29.446705+00:00"
+  },
+  {
+    "name": "linkedin-kafka-2011",
+    "url": "https://www.linkedin.com/blog/member/archive/open-source-linkedin-kafka",
+    "bytes": 54003,
+    "text_chars": 3927,
+    "at": "2026-09-14T11:02:30.254173+00:00"
+  },
+  {
+    "name": "linkedin-kafka-talk",
+    "url": "https://www.linkedin.com/blog/engineering/archive/come-linkedin-hear-talk-about-kafka-our-open-source-distributed-pub-sub-messaging-system",
+    "bytes": 82032,
+    "text_chars": 4819,
+    "at": "2026-09-14T11:02:30.722918+00:00"
+  },
+  {
+    "name": "solid-queue",
+    "url": "https://github.com/rails/solid_queue",
+    "bytes": 634998,
+    "text_chars": 65764,
+    "at": "2026-09-14T11:02:30.546181+00:00"
+  },
+  {
+    "name": "kafka-upgrade-41",
+    "url": "https://kafka.apache.org/41/getting-started/upgrade/",
+    "bytes": 94282,
+    "text_chars": 26437,
+    "at": "2026-09-14T11:02:30.046495+00:00"
+  },
+  {
+    "name": "kafka-introduction-41",
+    "url": "https://kafka.apache.org/41/getting-started/introduction/",
+    "bytes": 72281,
+    "text_chars": 12418,
+    "at": "2026-09-14T11:02:29.728504+00:00"
+  },
+  {
+    "name": "etcd-api-36",
+    "url": "https://etcd.io/docs/v3.6/learning/api_guarantees/",
+    "bytes": 266453,
+    "text_chars": 22629,
+    "at": "2026-09-14T11:02:30.951651+00:00"
+  },
+  {
+    "name": "etcd-why-36",
+    "url": "https://etcd.io/docs/v3.6/learning/why/",
+    "bytes": 277315,
+    "text_chars": 28970,
+    "at": "2026-09-14T11:02:31.120324+00:00"
+  }
+]

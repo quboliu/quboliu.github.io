@@ -1,0 +1,4 @@
+# Public-page snapshots remain local research material; publish citations instead.
+sources/
+# Preserve complete CLI output locally, publish the reviewed findings and responses.
+kimi-*.txt
