@@ -1,9 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-14T00:57:48+08:00
-modDatetime: 2026-09-14T01:36:07+08:00
+modDatetime: 2026-09-14T09:56:41+08:00
 timezone: "Asia/Shanghai"
-title: "计算机系统的数字直觉：从 CPU 周期到数据库吞吐量"
+title: "重置直觉（一）——计算机系统的数字直觉"
 area: "software-engineering"
 featured: false
 draft: false
