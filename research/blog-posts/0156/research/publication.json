@@ -1,0 +1,44 @@
+{
+  "url": "https://quboliu.github.io/posts/0156/",
+  "status": 200,
+  "principles": 36,
+  "images": [
+    {
+      "url": "https://quboliu.github.io/_astro/01-constraints-map.C1ofEWzX_Z144zBm.webp",
+      "status": 200,
+      "type": "image/webp"
+    },
+    {
+      "url": "https://quboliu.github.io/_astro/02-redundancy-domains.psxA11Yu_ZSfzdo.webp",
+      "status": 200,
+      "type": "image/webp"
+    },
+    {
+      "url": "https://quboliu.github.io/_astro/03-ack-retry.CQpPArLO_ZhnSeT.webp",
+      "status": 200,
+      "type": "image/webp"
+    },
+    {
+      "url": "https://quboliu.github.io/_astro/05-coordination-choices.6zZWmKSb_1PIhtt.webp",
+      "status": 200,
+      "type": "image/webp"
+    },
+    {
+      "url": "https://quboliu.github.io/_astro/06-bounded-queues.eQdcCe-i_ZQRay2.webp",
+      "status": 200,
+      "type": "image/webp"
+    },
+    {
+      "url": "https://quboliu.github.io/_astro/04-log-rebuild.6g10yNE2_Zj3o7P.webp",
+      "status": 200,
+      "type": "image/webp"
+    },
+    {
+      "url": "https://quboliu.github.io/_astro/07-progress-and-gc.DI2POT_w_Z2qPTyT.webp",
+      "status": 200,
+      "type": "image/webp"
+    }
+  ],
+  "deploy_run": "https://github.com/quboliu/quboliu.github.io/actions/runs/34442210073",
+  "commit": "c6a2837aa2495fc48a259ac7ca30cdcc9ac2d9b3"
+}

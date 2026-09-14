@@ -1,0 +1,32 @@
+38: #dual-heading(2, [Storage and Indexing for OLTP], [OLTP 的存储与索引])
+133: #dual-heading(3, [Log-Structured Storage], [日志结构化存储])
+167: #dual-heading(4, [The SSTable file format], [SSTable 文件格式])
+197: #dual-heading(4, [Constructing and merging SSTables], [构建与合并 SSTable])
+257: #dual-heading(4, [Bloom filters], [布隆过滤器])
+299: #dual-heading(4, [Compaction strategies], [压缩策略]) <sec_storage_lsm_compaction>
+327: #dual-heading(2, [Embedded Storage Engines], [嵌入式存储引擎])
+351: #dual-heading(3, [B-Trees], [B 树])
+417: #dual-heading(4, [Making B-trees reliable], [让 B 树可靠])
+451: #dual-heading(4, [Using B-tree variants], [使用 B 树变体])
+469: #dual-heading(3, [Comparing B-Trees and LSM-Trees], [比较 B 树与 LSM-tree]) <sec_storage_btree_lsm_comparison>
+477: #dual-heading(4, [Read performance], [读取性能])
+499: #dual-heading(4, [Sequential versus random writes], [顺序写入与随机写入])
+513: #dual-heading(4, [Write amplification], [写放大])
+551: #dual-heading(4, [Disk space usage], [磁盘空间使用])
+583: #dual-heading(3, [Multicolumn and Secondary Indexes], [多列索引与二级索引])
+599: #dual-heading(3, [Storing Values Within the Index], [在索引中存储值])
+625: #dual-heading(3, [Keeping Everything in Memory], [把一切都保存在内存中])
+659: #dual-heading(2, [Sequential Versus Random Writes on SSDs], [SSD 上的顺序写入与随机写入])
+683: #dual-heading(2, [Data Storage for Analytics], [用于分析的数据存储]) <sec_storage_analytics>
+705: #dual-heading(3, [Cloud Data Warehouses], [云数据仓库])
+739: #dual-heading(3, [Column-Oriented Storage], [面向列的存储])
+757: #dual-heading(4, [Example 4-1. Analyzing whether people are more inclined to buy fresh fruit or candy, depending on the day of the week], [示例 4-1。分析人们是否更倾向于在一周的不同日期购买新鲜水果或糖果]) <fig_storage_analytics_query>
+833: #dual-heading(4, [Column compression], [列压缩])
+919: #dual-heading(4, [Sort order in column storage], [列式存储中的排序顺序])
+969: #dual-heading(4, [Writing to column-oriented storage], [向列式存储写入])
+1004: #dual-heading(3, [Query Execution: Compilation and Vectorization], [查询执行：编译与向量化]) <sec_storage_vectorized>
+1078: #dual-heading(3, [Materialized Views and Data Cubes], [物化视图与数据立方体])
+1140: #dual-heading(2, [Multidimensional and Full-Text Indexes], [多维索引与全文索引]) <sec_storage_multidimensional>
+1195: #dual-heading(3, [Full-Text Search], [全文搜索])
+1256: #dual-heading(3, [Vector Embeddings], [向量嵌入])
+1361: #dual-heading(2, [Summary], [总结])

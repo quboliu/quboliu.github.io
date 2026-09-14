@@ -1,0 +1,47 @@
+56: #dual-heading(2, [Backups and Replication], [备份与复制])
+80: #dual-heading(2, [Single-Leader Replication], [单领导者复制])
+126: #dual-heading(3, [Synchronous Versus Asynchronous Replication], [同步复制与异步复制])
+186: #dual-heading(3, [Setting Up New Followers], [设置新的追随者])
+232: #dual-heading(2, [Databases Backed by Object Storage], [以对象存储为后端的数据库])
+278: #dual-heading(3, [Handling Node Outages], [处理节点中断]) <sec_replication_failover>
+292: #dual-heading(4, [Follower failure: Catch-up recovery], [追随者故障：追赶恢复])
+312: #dual-heading(4, [Leader failure: Failover], [领导者故障：故障转移])
+372: #dual-heading(3, [Implementation of Replication Logs], [复制日志的实现])
+380: #dual-heading(4, [Statement-based replication], [基于语句的复制])
+416: #dual-heading(4, [Write-ahead log shipping], [预写式日志传送])
+436: #dual-heading(4, [Logical (row-based) log replication], [逻辑（基于行的）日志复制])
+478: #dual-heading(3, [Problems with Replication Lag], [复制延迟带来的问题]) <sec_replication_lag>
+524: #dual-heading(4, [Reading your own writes], [读取自己的写入])
+588: #dual-heading(2, [Regions and Availability Zones], [区域与可用区])
+606: #dual-heading(4, [Monotonic reads], [单调读])
+636: #dual-heading(4, [Consistent prefix reads], [一致性前缀读]) <sec_replication_consistent_prefix>
+696: #dual-heading(3, [Solutions for Replication Lag], [复制延迟的解决方案])
+728: #dual-heading(2, [Multi-Leader Replication], [多领导者复制]) <sec_replication_multi_leader>
+760: #dual-heading(3, [Geographically Distributed Operation], [地理分布式运行])
+832: #dual-heading(4, [Multi-leader replication topologies], [多领导者复制拓扑])
+864: #dual-heading(4, [Problems with different topologies], [不同拓扑带来的问题])
+900: #dual-heading(3, [Sync Engines and Local-First Software], [同步引擎与本地优先软件])
+920: #dual-heading(4, [Real-time collaboration, offline-first, and local-first apps], [实时协作、离线优先与本地优先应用])
+946: #dual-heading(4, [Pros and cons of sync engines], [同步引擎的优点与缺点])
+984: #dual-heading(3, [Dealing with Conflicting Writes], [处理冲突写入]) <sec_replication_write_conflicts>
+1016: #dual-heading(4, [Conflict avoidance], [避免冲突])
+1042: #dual-heading(4, [Last write wins (discarding concurrent writes)], [最后写入获胜（丢弃并发写入）]) <sec_replication_lww>
+1074: #dual-heading(4, [Manual conflict resolution], [手动冲突解决])
+1110: #dual-heading(4, [Automatic conflict resolution], [自动冲突解决])
+1142: #dual-heading(4, [Conflict-free replicated datatypes and operational transformation], [无冲突复制数据类型与操作转换])
+1190: #dual-heading(4, [Types of conflict], [冲突的类型])
+1210: #dual-heading(2, [Leaderless Replication], [无领导者复制])
+1238: #dual-heading(3, [Writing to the Database When a Node Is Down], [节点宕机时写入数据库])
+1280: #dual-heading(4, [Catching up on missed writes], [追赶错过的写入])
+1306: #dual-heading(4, [Using quorums for reading and writing], [使用法定人数读写]) <sec_replication_quorum_condition>
+1374: #dual-heading(4, [Understanding the limitations of quorum consistency], [理解法定人数一致性的局限])
+1428: #dual-heading(4, [Monitoring staleness], [监控数据陈旧程度])
+1448: #dual-heading(3, [Single-Leader Versus Leaderless Replication Performance], [单领导者与无领导者复制的性能])
+1506: #dual-heading(3, [Multi-Region Operation], [多区域运行])
+1532: #dual-heading(3, [Detecting Concurrent Writes], [检测并发写入]) <sec_replication_concurrent>
+1578: #dual-heading(4, [The happens-before relation and concurrency], [先发生关系与并发]) <sec_replication_happens_before>
+1608: #dual-heading(2, [Concurrency, Time, and Relativity], [并发、时间与相对性])
+1632: #dual-heading(4, [Capturing the happens-before relationship], [捕获先发生关系])
+1698: #dual-heading(4, [Version vectors], [版本向量])
+1730: #dual-heading(4, [Version vectors and vector clocks], [版本向量与向量时钟])
+1738: #dual-heading(2, [Summary], [总结])

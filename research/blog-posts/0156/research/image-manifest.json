@@ -1,0 +1,31 @@
+[
+  {
+    "file": "01-constraints-map.png",
+    "source": "/home/xuntingmu/.codex/generated_images/01a089aa-56fd-7b70-89bd-33b661089085/exec-1ffb1199-851a-458c-9098-c219e11c51e1.png"
+  },
+  {
+    "file": "02-redundancy-domains.png",
+    "source": "/home/xuntingmu/.codex/generated_images/01a089aa-56fd-7b70-89bd-33b661089085/exec-622a23ce-9108-4fb2-a4a7-84443a3e37f7.png"
+  },
+  {
+    "file": "03-ack-retry.png",
+    "source": "/home/xuntingmu/.codex/generated_images/01a089aa-56fd-7b70-89bd-33b661089085/exec-f463fc75-c78f-4d6c-a029-66a1cd9de118.png"
+  },
+  {
+    "file": "04-log-rebuild.png",
+    "source": "/home/xuntingmu/.codex/generated_images/01a089aa-56fd-7b70-89bd-33b661089085/exec-3b323013-6efa-4cc3-a0c5-1fe0c32f66d3.png",
+    "initial_source": "/home/xuntingmu/.codex/generated_images/01a089aa-56fd-7b70-89bd-33b661089085/exec-2a10f49e-fcd4-4cc1-9a7d-2872953e4e5f.png"
+  },
+  {
+    "file": "05-coordination-choices.png",
+    "source": "/home/xuntingmu/.codex/generated_images/01a089aa-56fd-7b70-89bd-33b661089085/exec-35b22df1-03c6-421b-ac5d-ea5c32cdca77.png"
+  },
+  {
+    "file": "06-bounded-queues.png",
+    "source": "/home/xuntingmu/.codex/generated_images/01a089aa-56fd-7b70-89bd-33b661089085/exec-a9cefe3d-fef4-4aac-9bd7-6976cbbcdfc4.png"
+  },
+  {
+    "file": "07-progress-and-gc.png",
+    "source": "/home/xuntingmu/.codex/generated_images/01a089aa-56fd-7b70-89bd-33b661089085/exec-ff66487d-ecde-47d5-85c8-05e421d8e584.png"
+  }
+]

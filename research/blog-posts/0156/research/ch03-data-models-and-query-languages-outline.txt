@@ -1,0 +1,42 @@
+62: #dual-heading(2, [Terminology: Declarative Query Languages], [术语：声明式查询语言])
+88: #dual-heading(2, [Relational Versus Document Models], [关系模型与文档模型])
+138: #dual-heading(3, [The Object-Relational Mismatch], [对象—关系阻抗失配])
+157: #dual-heading(4, [Object-relational mapping], [对象—关系映射])
+197: #dual-heading(4, [The document data model for one-to-many relationships], [一对多关系的文档数据模型])
+227: #dual-heading(4, [Example 3-1. Representing a LinkedIn profile as a JSON document], [示例 3-1。用 JSON 文档表示 LinkedIn 个人资料]) <fig_obama_json>
+289: #dual-heading(3, [Normalization, Denormalization, and Joins], [规范化、反规范化与连接]) <sec_datamodels_normalization>
+374: #dual-heading(4, [Trade-offs of normalization], [规范化的权衡])
+424: #dual-heading(4, [Denormalization in the social networking case study], [社交网络案例研究中的反规范化])
+484: #dual-heading(3, [Many-to-One and Many-to-Many Relationships], [多对一与多对多关系]) <sec_datamodels_many_to_many>
+512: #dual-heading(4, [Example 3-2. A résumé that references organizations by ID], [示例 3-2。通过 ID 引用组织的简历]) <fig_datamodels_m2m_json>
+555: #dual-heading(3, [Stars and Snowflakes: Schemas for Analytics], [星型模式与雪花模式：分析型模式]) <sec_datamodels_analytics>
+657: #dual-heading(3, [When to Use Which Model], [何时使用哪种模型])
+691: #dual-heading(4, [Schema flexibility in the document model], [文档模型中的模式灵活性]) <sec_datamodels_schema_flexibility>
+790: #dual-heading(4, [Data locality for reads and writes], [读写时的数据局部性]) <sec_datamodels_document_locality>
+816: #dual-heading(4, [Query languages for documents], [文档查询语言])
+887: #dual-heading(4, [Convergence of document and relational databases], [文档数据库与关系数据库的融合])
+914: #dual-heading(2, [Graph-Like Data Models], [图式数据模型])
+1020: #dual-heading(3, [Property Graphs], [属性图])
+1074: #dual-heading(4, [Example 3-3. Representing a property graph with a relational schema], [示例 3-3。用关系模式表示属性图]) <fig_graph_sql_schema>
+1142: #dual-heading(3, [The Cypher Query Language], [Cypher 查询语言])
+1160: #dual-heading(4, [Example 3-4. A subset of the data in #link(<fig_datamodels_graph>)[Figure 3-6], represented as a Cypher query], [示例 3-4。用 Cypher 查询表示#link(<fig_datamodels_graph>)[图 3-6] 中的部分数据]) <fig_cypher_create>
+1188: #dual-heading(4, [Example 3-5. A Cypher query to find people who emigrated from the US to Europe], [示例 3-5。查找从美国移民到欧洲的人的 Cypher 查询]) <fig_cypher_query>
+1236: #dual-heading(3, [Graph Queries in SQL], [使用 SQL 查询图])
+1278: #dual-heading(4, [Example 3-6. The same query as #link(<fig_cypher_query>)[Example 3-5], written in SQL using recursive common table expressions], [示例 3-6。使用递归公共表表达式，以 SQL 编写#link(<fig_cypher_query>)[示例 3-5] 中的同一查询]) <fig_graph_sql_query>
+1376: #dual-heading(3, [Triple Stores and SPARQL], [三元组存储与 SPARQL])
+1427: #dual-heading(4, [Example 3-7. A subset of the data in #link(<fig_datamodels_graph>)[Figure 3-6], represented as Turtle triples], [示例 3-7。用 Turtle 三元组表示#link(<fig_datamodels_graph>)[图 3-6] 中的部分数据]) <fig_graph_n3_triples>
+1463: #dual-heading(4, [Example 3-8. A more concise way of writing the data in #link(<fig_graph_n3_triples>)[Example 3-7]], [示例 3-8。更简洁地书写#link(<fig_graph_n3_triples>)[示例 3-7] 中的数据]) <fig_graph_n3_shorthand>
+1473: #dual-heading(4, [The RDF data model], [RDF 数据模型])
+1483: #dual-heading(4, [Example 3-9. The data from #link(<fig_graph_n3_shorthand>)[Example 3-8] expressed using RDF/XML syntax], [示例 3-9。使用 RDF/XML 语法表示#link(<fig_graph_n3_shorthand>)[示例 3-8] 中的数据]) <fig_graph_rdf_xml>
+1529: #dual-heading(4, [The SPARQL query language], [SPARQL 查询语言])
+1547: #dual-heading(4, [Example 3-10. The same query as #link(<fig_cypher_query>)[Example 3-5], expressed in SPARQL], [示例 3-10。用 SPARQL 表达#link(<fig_cypher_query>)[示例 3-5] 中的同一查询]) <fig_sparql_query>
+1595: #dual-heading(2, [The Semantic Web], [语义网])
+1615: #dual-heading(3, [Datalog: Recursive Relational Queries], [Datalog：递归关系查询])
+1641: #dual-heading(4, [Example 3-11. A subset of the data in #link(<fig_datamodels_graph>)[Figure 3-6], represented as Datalog facts], [示例 3-11。用 Datalog 事实表示#link(<fig_datamodels_graph>)[图 3-6] 中的部分数据]) <fig_datalog_triples>
+1663: #dual-heading(4, [Example 3-12. The same query as #link(<fig_cypher_query>)[Example 3-5], expressed in Datalog], [示例 3-12。用 Datalog 表达#link(<fig_cypher_query>)[示例 3-5] 中的同一查询]) <fig_datalog_query>
+1749: #dual-heading(3, [GraphQL], [GraphQL])
+1783: #dual-heading(4, [Example 3-13. A GraphQL query for a group chat application], [示例 3-13。群聊应用的 GraphQL 查询]) <fig_graphql_query>
+1815: #dual-heading(4, [Example 3-14. A possible response to the query in #link(<fig_graphql_query>)[Example 3-13]], [示例 3-14。#link(<fig_graphql_query>)[示例 3-13] 查询的一种可能响应]) <fig_graphql_response>
+1874: #dual-heading(2, [Event Sourcing and CQRS], [事件溯源与 CQRS])
+2008: #dual-heading(2, [DataFrames, Matrices, and Arrays], [DataFrame、矩阵与数组]) <sec_datamodels_dataframes>
+2094: #dual-heading(2, [Summary], [总结])

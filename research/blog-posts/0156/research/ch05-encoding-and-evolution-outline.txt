@@ -1,0 +1,34 @@
+92: #dual-heading(2, "Formats for Encoding Data", "数据编码格式")
+114: #dual-heading(4, "Terminology clash", "术语冲突")
+134: #dual-heading(3, "Language-Specific Formats", "语言特定格式")
+178: #dual-heading(3, "JSON, XML, and Binary Variants", "JSON、XML 及二进制变体") <sec_encoding_json>
+222: #dual-heading(4, "JSON Schema", "JSON Schema")
+248: #dual-heading(4, "Example 5-1. A JSON Schema with integer keys and string values", "示例 5-1。键为整数、值为字符串的 JSON Schema") <fig_encoding_json_schema>
+269: #dual-heading(4, "Binary encodings", "二进制编码")
+283: #dual-heading(4, "Example 5-2. A record that we will encode in several binary formats in this chapter", "示例 5-2。本章将用多种二进制格式编码的记录") <fig_encoding_json>
+331: #dual-heading(3, "Protocol Buffers", "Protocol Buffers") <sec_encoding_protobuf>
+387: #dual-heading(4, "Field tags and schema evolution", "字段标签与模式演进")
+425: #dual-heading(3, "Avro", "Avro")
+497: #dual-heading(4, "The writer’s schema and the reader’s schema", "写入者模式与读取者模式")
+527: #dual-heading(4, "Schema evolution rules", "模式演进规则")
+559: #dual-heading(4, "But what is the writer’s schema?", "但写入者模式究竟是什么？")
+596: #dual-heading(4, "Dynamically generated schemas", "动态生成的模式")
+622: #dual-heading(3, "The Merits of Schemas", "模式的优点")
+666: #dual-heading(2, "Modes of Dataflow", "数据流的模式")
+686: #dual-heading(3, "Dataflow Through Databases", "数据库中的数据流") <sec_encoding_dataflow_db>
+706: #dual-heading(4, "Different values written at different times", "不同时间写入的不同值")
+732: #dual-heading(4, "Archival storage", "归档存储")
+752: #dual-heading(3, "Dataflow Through Services: REST and RPC", "服务中的数据流：REST 与 RPC") <sec_encoding_dataflow_rpc>
+784: #dual-heading(4, "Web services", "Web 服务") <sec_web_services>
+819: #dual-heading(4, "Example 5-3. An OpenAPI service definition in YAML", "示例 5-3。用 YAML 编写的 OpenAPI 服务定义") <fig_open_api_def>
+851: #dual-heading(4, [Example 5-4. A FastAPI service implementing the definition from #link(<fig_open_api_def>)[Example 5-3]], [示例 5-4。实现#link(<fig_open_api_def>)[示例 5-3] 中定义的 FastAPI 服务]) <fig_fastapi_def>
+874: #dual-heading(4, "The problems with remote procedure calls", "远程过程调用的问题")
+909: #dual-heading(4, "Load balancers, service discovery, and service meshes", "负载均衡器、服务发现与服务网格")
+971: #dual-heading(4, "Data encoding and evolution for RPC", "RPC 的数据编码与演进")
+1004: #dual-heading(3, "Durable Execution and Workflows", "持久化执行与工作流")
+1018: #dual-heading(4, "Tasks, activities, and functions", "任务、活动与函数")
+1058: #dual-heading(4, [Example 5-5. A Temporal workflow definition fragment for the payment workflow in #link(<fig_encoding_workflow>)[Figure 5-7]], [示例 5-5。#link(<fig_encoding_workflow>)[图 5-7] 所示支付工作流的 Temporal 工作流定义片段]) <fig_temporal_workflow>
+1098: #dual-heading(3, "Event-Driven Architectures", "事件驱动架构")
+1132: #dual-heading(4, "Message brokers", "消息代理")
+1172: #dual-heading(4, "Distributed actor frameworks", "分布式 Actor 框架")
+1198: #dual-heading(2, "Summary", "总结")

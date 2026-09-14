@@ -1,0 +1,66 @@
+75: #dual-heading(2, [What Exactly Is a Transaction?], [事务究竟是什么？])
+101: #dual-heading(3, [The Meaning of ACID], [ACID 的含义])
+129: #dual-heading(4, [Atomicity], [原子性])
+161: #dual-heading(4, [Consistency], [一致性]) <sec_transactions_acid_consistency>
+205: #dual-heading(4, [Isolation], [隔离性]) <sec_transactions_acid_isolation>
+235: #dual-heading(4, [Durability], [持久性])
+257: #dual-heading(2, [Replication and Durability], [复制与持久性])
+315: #dual-heading(3, [Single-Object and Multi-Object Operations], [单对象与多对象操作])
+383: #dual-heading(4, [Single-object writes], [单对象写入]) <sec_transactions_single_object>
+427: #dual-heading(4, [The need for multi-object transactions], [多对象事务的必要性]) <sec_transactions_need>
+457: #dual-heading(4, [Handling errors and aborts], [处理错误与中止])
+495: #dual-heading(2, [Weak Isolation Levels], [弱隔离级别]) <sec_transactions_isolation_levels>
+547: #dual-heading(3, [Read Committed], [读已提交]) <sec_transactions_read_committed>
+569: #dual-heading(4, [No dirty reads], [不会发生脏读])
+601: #dual-heading(4, [No dirty writes], [不会发生脏写]) <sec_transactions_dirty_write>
+633: #dual-heading(4, [Implementing read-committed], [实现读已提交]) <sec_transactions_read_committed_impl>
+677: #dual-heading(3, [Snapshot Isolation and Repeatable Read], [快照隔离与可重复读]) <sec_transactions_snapshot_isolation>
+751: #dual-heading(4, [Multiversion concurrency control], [多版本并发控制]) <sec_transactions_snapshot_impl>
+793: #dual-heading(4, [Visibility rules for observing a consistent snapshot], [观察一致性快照的可见性规则]) <sec_transactions_mvcc_visibility>
+839: #dual-heading(4, [Indexes and snapshot isolation], [索引与快照隔离])
+865: #dual-heading(4, [Snapshot isolation, repeatable read, and naming confusion], [快照隔离、可重复读与命名混乱])
+885: #dual-heading(3, [Preventing Lost Updates], [防止丢失更新]) <sec_transactions_lost_update>
+921: #dual-heading(4, [Atomic write operations], [原子写操作])
+951: #dual-heading(4, [Explicit locking], [显式加锁])
+965: #dual-heading(4, [Example 8-1. Explicitly locking rows to prevent lost updates], [例 8-1：显式锁定行以防止丢失更新]) <fig_transactions_select_for_update>
+999: #dual-heading(4, [Automatically detecting lost updates], [自动检测丢失更新])
+1019: #dual-heading(4, [Conditional writes (compare-and-set)], [条件写入（比较并设置）]) <sec_transactions_compare_and_set>
+1051: #dual-heading(4, [Conflict resolution and replication], [冲突解决与复制])
+1083: #dual-heading(3, [Write Skew and Phantoms], [写偏差与幻读]) <sec_transactions_write_skew>
+1119: #dual-heading(4, [Characterizing write skew], [写偏差的特征])
+1169: #dual-heading(4, [More examples of write skew], [写偏差的更多例子])
+1183: #dual-heading(4, [Example 8-2. A meeting room booking system that attempts to avoid double-booking (not safe under snapshot isolation)], [例 8-2：试图避免重复预订的会议室预订系统（在快照隔离下并不安全）]) <fig_transactions_meeting_rooms>
+1225: #dual-heading(4, [Phantoms causing write skew], [导致写偏差的幻读]) <sec_transactions_phantom>
+1267: #dual-heading(4, [Materializing conflicts], [物化冲突])
+1293: #dual-heading(2, [Serializability], [可串行化]) <sec_transactions_serializability>
+1339: #dual-heading(3, [Actual Serial Execution], [实际串行执行])
+1373: #dual-heading(4, [Encapsulating transactions in stored procedures], [将事务封装在存储过程中])
+1415: #dual-heading(4, [Pros and cons of stored procedures], [存储过程的优缺点])
+1459: #dual-heading(4, [Sharding], [分片])
+1491: #dual-heading(4, [Summary of serial execution], [串行执行总结])
+1511: #dual-heading(3, [Two-Phase Locking], [两阶段锁定]) <sec_transactions_2pl>
+1519: #dual-heading(4, [2PL is not 2PC], [2PL 不是 2PC])
+1553: #dual-heading(4, [Implementation of 2PL], [2PL 的实现])
+1588: #dual-heading(4, [Performance of 2PL], [2PL 的性能])
+1620: #dual-heading(4, [Predicate locks], [谓词锁])
+1667: #dual-heading(4, [Index-range locks], [索引范围锁]) <sec_transactions_2pl_range>
+1713: #dual-heading(3, [Serializable Snapshot Isolation], [可串行化快照隔离]) <sec_transactions_ssi>
+1733: #dual-heading(4, [Pessimistic versus optimistic concurrency control], [悲观并发控制与乐观并发控制])
+1771: #dual-heading(4, [Decisions based on an outdated premise], [基于过时前提作出的决策])
+1805: #dual-heading(4, [Detection of stale MVCC reads], [检测过时的 MVCC 读取])
+1835: #dual-heading(4, [Detection of writes that affect prior reads], [检测影响先前读取的写入])
+1871: #dual-heading(4, [Performance of serializable snapshot isolation], [可串行化快照隔离的性能])
+1909: #dual-heading(2, [Distributed Transactions], [分布式事务])
+1979: #dual-heading(3, [Two-Phase Commit], [两阶段提交]) <sec_transactions_2pc>
+2023: #dual-heading(4, [A system of promises], [承诺体系])
+2065: #dual-heading(4, [Coordinator failure], [协调者故障])
+2107: #dual-heading(4, [Three-phase commit], [三阶段提交])
+2127: #dual-heading(3, [Distributed Transactions Across Different Systems], [跨不同系统的分布式事务])
+2165: #dual-heading(4, [Exactly-once message processing], [恰好一次的消息处理]) <sec_transactions_exactly_once>
+2191: #dual-heading(4, [XA transactions], [XA 事务])
+2223: #dual-heading(4, [Holding locks while in doubt], [存疑期间持有锁])
+2249: #dual-heading(4, [Recovering from coordinator failure], [从协调者故障中恢复])
+2275: #dual-heading(4, [Problems with XA transactions], [XA 事务的问题])
+2307: #dual-heading(3, [Database-Internal Distributed Transactions], [数据库内部的分布式事务])
+2351: #dual-heading(3, [Exactly-Once Message Processing Revisited], [再谈恰好一次的消息处理])
+2395: #dual-heading(2, [Summary], [总结])

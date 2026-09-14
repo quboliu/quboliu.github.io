@@ -1,0 +1,28 @@
+132: #dual-heading(2, "Batch Processing with Unix Tools", "使用 Unix 工具进行批处理")
+177: #dual-heading(3, "Simple Log Analysis", "简单的日志分析") <sec_batch_log_analysis>
+276: #dual-heading(3, "Chain of Commands Versus Custom Program", "命令链与自定义程序")
+351: #dual-heading(3, "Sorting Versus In-Memory Aggregation", "排序与内存中聚合")
+393: #dual-heading(2, "Batch Processing in Distributed Systems", "分布式系统中的批处理")
+421: #dual-heading(3, "Distributed Filesystems", "分布式文件系统")
+501: #dual-heading(2, [Distributed Filesystems and Network Storage], [分布式文件系统与网络存储])
+529: #dual-heading(3, "Object Stores", "对象存储")
+595: #dual-heading(3, "Distributed Job Orchestration", "分布式作业编排")
+687: #dual-heading(4, "Resource allocation", "资源分配")
+747: #dual-heading(4, "Scheduling workflows", "调度工作流") <sec_batch_workflows>
+807: #dual-heading(4, "Handling faults", "处理故障")
+857: #dual-heading(2, "Batch Processing Models", "批处理模型")
+875: #dual-heading(3, "MapReduce", "MapReduce")
+939: #dual-heading(2, [MapReduce and Functional Programming], [MapReduce 与函数式编程])
+967: #dual-heading(3, "Dataflow Engines", "数据流引擎") <sec_batch_dataflow>
+1025: #dual-heading(3, "Shuffling Data", "数据混洗") <sec_shuffle>
+1035: #dual-heading(4, "Shuffle is not random", "混洗并不是随机的")
+1113: #dual-heading(3, "Joins and Grouping", "连接与分组")
+1179: #dual-heading(3, "Query Languages", "查询语言")
+1231: #dual-heading(2, [Batch Processing and Cloud Data Warehouses Converge], [批处理与云数据仓库趋同])
+1283: #dual-heading(3, "DataFrames", "DataFrame")
+1317: #dual-heading(2, "Batch Use Cases", "批处理使用场景") <sec_batch_output>
+1347: #dual-heading(3, "Extract–Transform–Load", "抽取—转换—加载")
+1397: #dual-heading(3, "Analytics", "分析")
+1439: #dual-heading(3, "Machine Learning", "机器学习")
+1531: #dual-heading(3, "Serving Derived Data", "提供派生数据")
+1603: #dual-heading(2, "Summary", "总结")

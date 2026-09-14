@@ -1,0 +1,19 @@
+118: #dual-heading(2, [Terminology: Frontends and Backends], [术语：前端与后端])
+132: #dual-heading(2, "Operational Versus Analytical Systems", "运营系统与分析系统") <sec_introduction_analytics>
+178: #dual-heading(3, "Characterizing Transaction Processing and Analytics", "刻画事务处理与分析")
+304: #dual-heading(3, "Data Warehousing", "数据仓库") <sec_introduction_dwh>
+382: #dual-heading(4, "From data warehouse to data lake", "从数据仓库到数据湖")
+416: #dual-heading(4, "Beyond the data lake", "超越数据湖")
+436: #dual-heading(3, "Systems of Record and Derived Data", "记录系统与派生数据") <sec_introduction_derived>
+486: #dual-heading(2, "Cloud Versus Self-Hosting", "云服务与自托管") <sec_introduction_cloud>
+522: #dual-heading(3, "Pros and Cons of Cloud Services", "云服务的优缺点")
+588: #dual-heading(3, "Cloud Native System Architecture", "云原生系统架构") <sec_introduction_cloud_native>
+628: #dual-heading(4, "Layering of cloud services", "云服务的分层")
+662: #dual-heading(4, "Separation of storage and compute", "存储与计算分离")
+700: #dual-heading(3, "Operations in the Cloud Era", "云时代的运维") <sec_introduction_operations>
+770: #dual-heading(2, "Distributed Versus Single-Node Systems", "分布式系统与单节点系统") <sec_introduction_distributed>
+838: #dual-heading(3, "Problems with Distributed Systems", "分布式系统的问题")
+870: #dual-heading(3, "Microservices and Serverless", "微服务与无服务器") <sec_introduction_microservices>
+920: #dual-heading(3, "Cloud Computing Versus Supercomputing", "云计算与超级计算")
+948: #dual-heading(2, "Data Systems, Law, and Society", "数据系统、法律与社会") <sec_introduction_compliance>
+1016: #dual-heading(2, "Summary", "总结")
