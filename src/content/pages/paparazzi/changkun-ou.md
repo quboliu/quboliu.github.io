@@ -2,7 +2,7 @@
 title: "changkun.de"
 description: "跟踪 Changkun Ou（欧长坤）的研究、Go 语言资料与公开项目。"
 subjectName: "Changkun Ou"
-paparazziTier: "top"
+paparazziTier: "star"
 avatarCandidates:
   - url: "https://avatars.githubusercontent.com/u/5498964?v=4"
     source: "GitHub"
@@ -23,7 +23,7 @@ avatarCandidates:
 
 ### 分档依据
 
-欧长坤以研究者、公开技术写作者和《Go 语言原本》主要作者之一的身份被列入**第一档**。档案以其个人站、履历页、GitHub 和公开教材为准；后续更新优先检查个人博客与公开项目。
+欧长坤以研究者、公开技术写作者和《Go 语言原本》主要作者之一的身份被列入**第二档**。档案以其个人站、履历页、GitHub 和公开教材为准；后续更新优先检查个人博客与公开项目。
 
 ### 当前观察
 

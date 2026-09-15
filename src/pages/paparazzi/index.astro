@@ -62,7 +62,7 @@ const tieredPaparazziPages = tierOrder.map(tier => ({
             class="border-border w-full border-t pt-6 first:border-t-0 first:pt-0"
             aria-label={tierLabels[tier]}
           >
-            <ul class="grid grid-cols-1 gap-y-5">
+            <ul class="grid grid-cols-2 gap-x-2 gap-y-4 sm:grid-cols-3 sm:gap-x-3 sm:gap-y-5 md:grid-cols-4">
               {pages.map(page => {
                 const slug = getSlug(page.id);
                 const href = getRelativeLocaleUrl(locale, `paparazzi/${slug}`);
@@ -82,7 +82,7 @@ const tieredPaparazziPages = tierOrder.map(tier => ({
                       aria-label={`Open ${subjectName} dossier`}
                     >
                       <span
-                        class="border-border bg-background relative block h-12 w-12 overflow-hidden rounded-full border shadow-sm transition-transform duration-300 group-hover:scale-105 sm:h-14 sm:w-14"
+                        class="border-border bg-background relative block h-10 w-10 overflow-hidden rounded-full border shadow-sm transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:w-12"
                         title={avatarTitle}
                       >
                         <Avatar
@@ -91,10 +91,10 @@ const tieredPaparazziPages = tierOrder.map(tier => ({
                           fallback={getInitials(subjectName)}
                         />
                       </span>
-                      <span class="text-foreground mt-1 text-[11px] font-semibold">
+                      <span class="text-foreground mt-0.5 text-[10px] font-semibold">
                         {subjectName}
                       </span>
-                      <span class="text-muted-foreground mt-0.5 text-[11px]">
+                      <span class="text-muted-foreground mt-0.5 text-[10px]">
                         {page.data.title}
                       </span>
                     </a>
