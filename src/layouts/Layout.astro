@@ -4,6 +4,7 @@ import { resolveDefaultOgImagePath } from "@/utils/resolveDefaultOgImagePath";
 import { getAssetPath } from "@/utils/withBase";
 import config from "@/config";
 import "@/styles/global.css";
+import Analytics from "@/components/Analytics.astro";
 
 type Props = {
   title?: string;
@@ -73,6 +74,8 @@ const rssHref = getAssetPath("rss.xml");
 
     <!-- Filled at runtime by theme.ts to match the current background colour -->
     <meta name="theme-color" content="#fdfdfd" />
+
+    <Analytics />
 
     <!-- Extra head content injected by child layouts (e.g. JSON-LD, article meta) -->
     <slot name="head" />

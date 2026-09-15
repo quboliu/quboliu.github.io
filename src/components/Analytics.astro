@@ -1,0 +1,24 @@
+---
+import {
+  PUBLIC_UMAMI_SCRIPT_URL,
+  PUBLIC_UMAMI_WEBSITE_ID,
+} from "astro:env/client";
+import config from "@/config";
+
+const scriptUrl = PUBLIC_UMAMI_SCRIPT_URL ?? "https://cloud.umami.is/script.js";
+const domain = new URL(config.site.url).hostname;
+---
+
+{
+  PUBLIC_UMAMI_WEBSITE_ID ? (
+    <script
+      is:inline
+      defer
+      src={scriptUrl}
+      data-website-id={PUBLIC_UMAMI_WEBSITE_ID}
+      data-domains={domain}
+      data-do-not-track="true"
+      data-exclude-search="true"
+    />
+  ) : null
+}

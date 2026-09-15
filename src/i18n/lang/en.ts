@@ -7,6 +7,7 @@ export default {
     areas: "Areas",
     tags: "Tags",
     paparazzi: "Paparazzi",
+    stats: "Stats",
     about: "About",
     archives: "Archives",
     search: "Search",

@@ -5,6 +5,7 @@ export interface UIStrings {
     areas: string;
     tags: string;
     paparazzi: string;
+    stats: string;
     about: string;
     archives: string;
     search: string;
