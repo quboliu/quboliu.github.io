@@ -14,9 +14,33 @@ const paparazziPages = (
   await getCollection("pages", ({ id }) => id.startsWith("paparazzi/"))
 ).sort((a, b) => a.data.title.localeCompare(b.data.title));
 
+const tierOrder = ["top", "star", "indie"] as const;
+const tierLabels = {
+  top: "Top-tier dossiers",
+  star: "Star engineer dossiers",
+  indie: "Independent technologist dossiers",
+} as const;
+
 const getSlug = (id: string) => id.split("/").at(-1) ?? id;
 const getInitials = (name: string) =>
   Array.from(name.trim()).slice(0, 2).join("").toUpperCase() || "?";
+
+const unclassifiedPages = paparazziPages.filter(
+  page => !page.data.paparazziTier
+);
+
+if (unclassifiedPages.length) {
+  throw new Error(
+    `Every Paparazzi dossier must declare paparazziTier (top, star, or indie): ${unclassifiedPages
+      .map(page => page.id)
+      .join(", ")}`
+  );
+}
+
+const tieredPaparazziPages = tierOrder.map(tier => ({
+  tier,
+  pages: paparazziPages.filter(page => page.data.paparazziTier === tier),
+}));
 ---
 
 <Layout
@@ -31,48 +55,57 @@ const getInitials = (name: string) =>
     pageTitle="Paparazzi"
     pageDesc="Independent dossiers tracking notable blogs and projects — separate from Posts. Public avatars are tried in priority order, with initials as the final fallback."
   >
-    <ul class="grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-4">
+    <div class="space-y-7 sm:space-y-8">
       {
-        paparazziPages.map(page => {
-          const slug = getSlug(page.id);
-          const href = getRelativeLocaleUrl(locale, `paparazzi/${slug}`);
-          const subjectName = page.data.subjectName ?? page.data.title;
-          const avatarSources = page.data.avatarCandidates.map(
-            candidate => candidate.source
-          );
-          const avatarTitle = avatarSources.length
-            ? `Avatar priority: ${avatarSources.join(" → ")} → initials`
-            : "No public avatar found; using initials";
+        tieredPaparazziPages.map(({ tier, pages }) => (
+          <section
+            class="border-border border-t pt-6 first:border-t-0 first:pt-0"
+            aria-label={tierLabels[tier]}
+          >
+            <ul class="grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3 lg:grid-cols-4">
+              {pages.map(page => {
+                const slug = getSlug(page.id);
+                const href = getRelativeLocaleUrl(locale, `paparazzi/${slug}`);
+                const subjectName = page.data.subjectName ?? page.data.title;
+                const avatarSources = page.data.avatarCandidates.map(
+                  candidate => candidate.source
+                );
+                const avatarTitle = avatarSources.length
+                  ? `Avatar priority: ${avatarSources.join(" → ")} → initials`
+                  : "No public avatar found; using initials";
 
-          return (
-            <li class="group flex justify-center text-center">
-              <a
-                href={href}
-                class="flex flex-col items-center no-underline"
-                aria-label={`Open ${subjectName} dossier`}
-              >
-                <span
-                  class="border-border bg-background relative block h-20 w-20 overflow-hidden rounded-full border-2 shadow-sm transition-transform duration-300 group-hover:scale-105 sm:h-24 sm:w-24"
-                  title={avatarTitle}
-                >
-                  <Avatar
-                    candidates={page.data.avatarCandidates}
-                    alt={`${subjectName} avatar`}
-                    fallback={getInitials(subjectName)}
-                  />
-                </span>
-                <span class="text-foreground mt-2 text-sm font-semibold">
-                  {subjectName}
-                </span>
-                <span class="text-muted-foreground mt-1 text-sm">
-                  {page.data.title}
-                </span>
-              </a>
-            </li>
-          );
-        })
+                return (
+                  <li class="group flex justify-center text-center">
+                    <a
+                      href={href}
+                      class="flex flex-col items-center no-underline"
+                      aria-label={`Open ${subjectName} dossier`}
+                    >
+                      <span
+                        class="border-border bg-background relative block h-14 w-14 overflow-hidden rounded-full border shadow-sm transition-transform duration-300 group-hover:scale-105 sm:h-16 sm:w-16"
+                        title={avatarTitle}
+                      >
+                        <Avatar
+                          candidates={page.data.avatarCandidates}
+                          alt={`${subjectName} avatar`}
+                          fallback={getInitials(subjectName)}
+                        />
+                      </span>
+                      <span class="text-foreground mt-1.5 text-xs font-semibold">
+                        {subjectName}
+                      </span>
+                      <span class="text-muted-foreground mt-0.5 text-xs">
+                        {page.data.title}
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))
       }
-    </ul>
+    </div>
   </Main>
 
   <Footer />

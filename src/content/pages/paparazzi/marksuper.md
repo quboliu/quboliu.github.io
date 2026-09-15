@@ -2,6 +2,7 @@
 title: "marksuper.xyz"
 description: "跟踪 marksuper.xyz 的文章、作者与主题变化。"
 subjectName: "Mark"
+paparazziTier: "indie"
 avatarCandidates:
   - url: "https://marksuper.xyz/picture/mine.jpg"
     source: "博客个人头像"

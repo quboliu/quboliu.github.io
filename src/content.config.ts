@@ -35,6 +35,7 @@ const pages = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     subjectName: z.string().optional(),
+    paparazziTier: z.enum(["top", "star", "indie"]).optional(),
     avatarCandidates: z
       .array(
         z.object({

@@ -2,6 +2,7 @@
 title: "martin.kleppmann.com"
 description: "跟踪 Martin Kleppmann 的博客、研究、公开项目与主题变化。"
 subjectName: "Martin Kleppmann"
+paparazziTier: "top"
 avatarCandidates:
   - url: "https://martin.kleppmann.com/images/kleppmann-local-first-2026.jpg"
     source: "个人网站照片"

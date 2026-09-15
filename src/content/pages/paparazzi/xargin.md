@@ -2,6 +2,7 @@
 title: "xargin.com"
 description: "跟踪 xargin.com 的文章、作者与主题变化。"
 subjectName: "Xargin"
+paparazziTier: "star"
 avatarCandidates:
   - url: "https://avatars.githubusercontent.com/u/384546?v=4"
     source: "GitHub"
