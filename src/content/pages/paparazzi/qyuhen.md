@@ -2,7 +2,7 @@
 title: "qyuhen"
 description: "追踪雨痕的 Go 学习笔记与公开资料。"
 subjectName: "雨痕 / Q.yuhen"
-paparazziTier: "top"
+paparazziTier: "star"
 avatarCandidates:
   - url: "https://avatars.githubusercontent.com/u/465305?v=4"
     source: "GitHub"
@@ -11,19 +11,34 @@ avatarCandidates:
 
 ## 〇、档案与追踪入口
 
-- **身份确认：** 原始清单列名为“雨痕”，并指向 [GitHub `qyuhen`](https://github.com/qyuhen)；该账号显示名为 Q.yuhen。
-- **最新可核验动态（2026-09-15）：** 唯一公开仓库 [book](https://github.com/qyuhen/book) 当日更新，仓库说明为“学习笔记”。
-- **资料入口：** [GitHub 主页](https://github.com/qyuhen)、[学习笔记仓库](https://github.com/qyuhen/book)。原清单还给出语雀入口，但该站需登录，未纳入可复查文章统计。
+- **身份确认：** 原始清单列名为“雨痕”，并指向 [GitHub `qyuhen`](https://github.com/qyuhen)；该账号显示名为 Q.yuhen。[原始条目](https://quboliu.github.io/posts/0063/)
+- **资料载体：** 这不是传统博客，而是一个以 README 汇总语雀专栏的公开资料仓库：[qyuhen/book](https://github.com/qyuhen/book)。因此以下按“资料单元”而不是博客文章统计。
+- **仓库规模（调查截点：2026-09-15）：** 1 个公开仓库、12,501 stars、3,361 forks；[GitHub 仓库 API](https://api.github.com/repos/qyuhen/book)。该仓库的最新源文件提交是 2023-02-06 的 README 更新，[提交历史](https://github.com/qyuhen/book/commits/master)。
+- **资料日期范围：** README 标记为 `2023.02`；仓库创建于 2014-03-08，不能据此推断资料从 2014 年开始连载。[仓库 API](https://api.github.com/repos/qyuhen/book)
+- **更新节奏：** 无法从公开仓库确认稳定发布节奏；README 当前提供四个语雀资料入口，平台内章节更新时间未公开在 GitHub 目录中。
+- **作者情报：** GitHub API 显示账号创建于 2010-11-03，有 3,087 followers、1 个公开仓库，未填写个人简介、公司、地点、博客或 Twitter。[用户 API](https://api.github.com/users/qyuhen)
+- **头像来源：** [GitHub 头像](https://avatars.githubusercontent.com/u/465305?v=4)；没有找到独立简历或其他已确认社交账号，故不扩写未经证实的职业履历。
 
-## 一、公开资料
+### 内容画像
 
-- [学习笔记](https://github.com/qyuhen/book)
-- [GitHub 账号](https://github.com/qyuhen)
+- **核心主题：** 以 C、Rust、Go、NASM 四门语言的系统编程资料为主，目录集中在语言基础、底层实现与程序设计。
+- **载体迁移：** GitHub 只承担目录与版本记录，正文链接到语雀；因此 GitHub 的提交日期代表目录变更，不代表语雀每章的发表时间。
+- **资料空白：** 没有公开的独立博客文章列表、分类页或可交叉核对的完整发布日期，不能伪造文章总数和发布节奏。
 
-## 二、Go 关联
+## 一、Go 与系统编程
 
-原始清单以 Go 学习资料收录该作者；本档案只保留可直接验证的仓库入口，不把转载 PDF 或第三方镜像当作作者当前发布渠道。
+- [《Go 程序设计》](https://www.yuque.com/qyuhen/go)（README 标记：2023-02）
 
-## 三、追踪结论
+## 二、Rust 与 C
 
-该账号仓库规模小但当日有活动。因缺少公开、稳定的个人博客目录，当前以仓库为主要追踪面。
+- [《Rust 程序设计》](https://www.yuque.com/qyuhen/rust)（README 标记：2023-02）
+- [《C 程序设计》](https://www.yuque.com/qyuhen/c11)（README 标记：2023-02）
+
+## 三、汇编与资料索引
+
+- [《NASM 程序设计》](https://www.yuque.com/qyuhen/asm)（README 标记：2023-02）
+- [公开资料仓库 README](https://github.com/qyuhen/book)（目录更新：2023-02-06）
+
+## 四、追踪结论
+
+雨痕以高 star 的公开学习资料仓库满足第二档条件；当前可见动态是资料目录而非持续更新的博客。后续追踪优先检查 GitHub README 提交和四个语雀专栏是否出现新章节。
