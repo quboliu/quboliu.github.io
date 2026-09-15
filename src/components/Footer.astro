@@ -1,6 +1,5 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { getRelativeLocaleUrl } from "astro:i18n";
 import Socials from "./Socials.astro";
 import { useTranslations } from "@/i18n";
 
@@ -12,8 +11,6 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
 
 const t = useTranslations(Astro.currentLocale);
 const currentYear = new Date().getFullYear();
-const locale = Astro.currentLocale ?? "en";
-const statsHref = getRelativeLocaleUrl(locale, "stats");
 ---
 
 <footer
@@ -24,9 +21,6 @@ const statsHref = getRelativeLocaleUrl(locale, "stats");
     <Socials />
     <p class="mt-2">
       {t.footer.copyright} &#169; {currentYear} · {t.footer.allRightsReserved}
-    </p>
-    <p class="mt-2">
-      <a href={statsHref} class="hover:text-accent">{t.nav.stats}</a>
     </p>
   </div>
 </footer>

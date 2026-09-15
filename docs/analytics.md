@@ -17,7 +17,7 @@ put an API key in the generated frontend.
    - **PUBLIC_UMAMI_SHARE_URL**: an Umami public Share URL for the dashboard.
 
 3. Run the deploy workflow again. The tracker is injected into the document
-   head, and the Stats link appears in the main navigation and footer.
+   head, and the traffic panel appears in the About page.
 
 The website ID, script URL, and public Share URL are intended to be public
 build-time values. Never put an Umami API key in a PUBLIC variable or in a
@@ -25,13 +25,13 @@ frontend file.
 
 ## what is shown
 
-The Stats page embeds the public Share URL when both the website ID and Share
+The About page embeds the public Share URL when both the website ID and Share
 URL are configured. Umami lets the owner choose which views are shared, from a
 small overview to pageviews, visitors, sessions, top pages, referrers, devices,
 countries, and realtime data. The external dashboard remains the source of
 truth; the blog does not proxy or store analytics data.
 
-Without the variables, the page remains a harmless setup placeholder and no
+Without the variables, the About page remains a harmless setup placeholder and no
 tracking request is made.
 
 ## privacy defaults
