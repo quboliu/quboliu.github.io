@@ -1,29 +1,2156 @@
 ---
 title: "tonybai.com"
-description: "追踪 Tony Bai 的 Go 技术写作与公开资料。"
+description: "追踪 Tony Bai 的 Go 技术写作、开源项目与长期主题变化。"
 subjectName: "Tony Bai / 白明"
-paparazziTier: "top"
+paparazziTier: "star"
 avatarCandidates:
-  - url: "https://avatars.githubusercontent.com/u/6941450?v=4"
+  - url: "https://avatars.githubusercontent.com/u/419088?v=4"
     source: "GitHub"
-    profileUrl: "https://github.com/tonybai"
+    profileUrl: "https://github.com/bigwhite"
+  - url: "https://github.com/bigwhite.png?size=400"
+    source: "GitHub profile image"
+    profileUrl: "https://github.com/bigwhite"
 ---
 
 ## 〇、档案与追踪入口
 
-- **身份确认：** 原始清单将“白明 / Tony Bai”与 [tonybai.com](https://tonybai.com/) 关联；[GitHub `tonybai`](https://github.com/tonybai) 是同名公开账号。
-- **最新资料入口（2026-09-15）：** [博客首页](https://tonybai.com/) 与 [归档页](https://tonybai.com/archives/) 是当前文章追踪入口。此次未做站内全量计数，以免把抓取失败误报为停更。
-- **GitHub 信号：** 账号公开仓库更新较早，因此不把 GitHub 活跃度替代博客更新判断。[仓库列表](https://github.com/tonybai?tab=repositories&sort=updated)
+- **博客：** [Tony Bai](https://tonybai.com/)；首页自称“一个程序员的心路历程”，站点生成器为 Hugo。[首页](https://tonybai.com/)
+- **调查截点：** 2026-09-15。归档页当前可解析出 2,051 个带标题、日期和链接的唯一文章条目；[完整归档](https://tonybai.com/archives/)。
+- **统计口径：** 以站点归档页为主，日期取每个条目的 archive metadata；本次 discover.py 只发现 1,964 条，而归档页发现 2,051 条，差异来自 sitemap/listing 过滤，故采用归档页这一更完整的站内索引。
+- **日期范围：** 2004-09-15 至 2026-09-15。
+- **按年份：** 2004 年 27 篇、2005 年 77 篇、2006 年 214 篇、2007 年 109 篇、2008 年 99 篇、2009 年 91 篇、2010 年 70 篇、2011 年 82 篇、2012 年 76 篇、2013 年 57 篇、2014 年 39 篇、2015 年 28 篇、2016 年 33 篇、2017 年 51 篇、2018 年 26 篇、2019 年 35 篇、2020 年 41 篇、2021 年 63 篇、2022 年 68 篇、2023 年 66 篇、2024 年 77 篇、2025 年 312 篇、2026 年 310 篇。
+- **更新节奏：** 相邻归档条目的日期间隔中位数约 2.0 天；去除超过 180 天的长期停更间隔后，中位数约 2.0 天。早期记录与近年高频更新混在同一归档中，单一平均值不能代表全部时期。
+- **第二档依据：** [GitHub `bigwhite`](https://github.com/bigwhite) 的公开资料列出《Go 语言精进之路》配套代码；同时 [gopherdaily](https://github.com/bigwhite/gopherdaily)（1,072 stars）、[experiments](https://github.com/bigwhite/experiments)（889 stars）、[publication](https://github.com/bigwhite/publication)（347 stars）和 [GoProgrammingFromBeginnerToMaster](https://github.com/bigwhite/GoProgrammingFromBeginnerToMaster)（278 stars）均超过 100 stars。star 数按 2026-09-15 GitHub API 快照记录。
+- **作者情报：** GitHub API 显示 Tony Bai 的账号是 `bigwhite`，个人简介为 architect and go programmer at Reachauto，公开仓库 76 个、followers 1,902，个人站点指向 tonybai.com。[GitHub 用户 API](https://api.github.com/users/bigwhite)
+- **社交入口：** 站点直接列出 [GitHub](https://github.com/bigwhite)、[X](https://x.com/tony_bai)、[Bluesky](https://bsky.app/profile/tonybai.com)、[Reddit](https://www.reddit.com/user/tonybai_cn/) 和 [豆瓣](https://www.douban.com/people/tony_bai)。这些是站点导航中的作者入口，确认度高；知乎入口因当前返回 403，不作为可验证链接发布。
+- **博客源码判断：** 站点 generator 标记为 Hugo；在 `bigwhite` 的公开仓库列表中没有确认到 tonybai.com 的站点源码仓库，因此只记录公开代码和出版物仓库，不把它们误判为博客源码。[GitHub 仓库列表](https://github.com/bigwhite?tab=repositories)
 
-## 一、博客与归档
+### 内容画像
 
-- [Tony Bai 的博客](https://tonybai.com/)
-- [文章归档](https://tonybai.com/archives/)
+- **主题总览：** 归档从早期 Java、C/C++、Ruby 和软件工程笔记逐渐转向 Go、云原生、基础设施和工程实践；2025–2026 年又明显增加 AI、Agent、Rust 与 Go 生态新闻/评论。标题分类是本次按关键词人工辅助归纳，不是站点原生分类。
+- **当前重心：** 最近 12 篇（2026-09-05–2026-09-15）中，Go、AI、Rust 和基础设施交错出现，说明博客当前既承担 Go 技术写作，也承担技术行业快讯与趋势解释。
+- **资料空白：** 归档页有完整条目，但站点原生分类与年份统计没有提供统一的机器可读汇总；本档案的分类数量由标题归类产生，应视为导航口径。
 
-## 二、公开代码资料
+### 最近更新
 
-- [GitHub 主页](https://github.com/tonybai)
+- [刚刚，Go 社区冒出一个“AI 工厂”：SuperPlane 开源，专治 AI Agent 乱来](https://tonybai.com/2026/09/15/superplane-ai-factory-go-open-source/)（2026-09-15）
+- [Go 核心团队放大招：cgo 不用 C编译器也能跑，AI/GPU 库调用将迎来大简化](https://tonybai.com/2026/09/14/go-cgo-without-c-toolchain/)（2026-09-14）
+- [2 名工程师 + Codex，OpenAI 用 Rust 重写了扛住 10 亿人的存储系统](https://tonybai.com/2026/09/13/openai-habitat-storage-rust-migration-1-billion-users/)（2026-09-13）
+- [Rust 要变成下一个C++？](https://tonybai.com/2026/09/12/rust-complexity-debate-2026/)（2026-09-12）
+- [Go SIMD杀疯了：开发者删光最后一行cgo代码，性能反超C语言库](https://tonybai.com/2026/09/11/go-simd-kills-cgo-turbopfor-avx512/)（2026-09-11）
+- [Mermaid最强挑战者“断奶”上位：D2官宣转型非营利，压箱底三年的TALA布局算法也开源了](https://tonybai.com/2026/09/10/d2-goes-nonprofit-tala-open-sourced/)（2026-09-10）
+- [刚刚，YC 公开处刑「唯模型论」：决定 Agent 上限的，从来不是模型，而是 Harness](https://tonybai.com/2026/09/09/why-harness-matters-more-than-model-yc-paper-club/)（2026-09-09）
+- [两年攻坚、11 个子任务闭环，Go 终于把 HTTP/2 这个“寄养”十年的孩子接回了标准库](https://tonybai.com/2026/09/08/go-127-http2-move-into-std/)（2026-09-08）
+- [物理 AI 淘金热：为何机器人是下一个数万亿美元级的超级风口](https://tonybai.com/2026/09/07/the-physical-ai-gold-rush/)（2026-09-07）
+- [团队共享同一个 Agent：Superconductor 创始人一份宣言，说透了“多人 AI”的五条铁律](https://tonybai.com/2026/09/07/multiplayer-ai-manifesto/)（2026-09-07）
+- [Go 1.27 Release Party 实录：泛型方法为什么「憋」了五年？Go核心团队罕见自曝内幕](https://tonybai.com/2026/09/06/go-1-27-release-party-insider-story/)（2026-09-06）
+- [JetBrains 官方深度指南：如何在 Go 中优雅地处理错误？从底层原理到现代最佳实践](https://tonybai.com/2026/09/05/how-to-handle-errors-in-go/)（2026-09-05）
 
-## 三、追踪结论
+## 统计
 
-该档案以长期 Go 写作与书籍/课程型资料影响力归入第一档；更新追踪应以个人站归档为准，而非陈旧的 GitHub 仓库活动。
+| 主题 | 篇数 |
+| --- | ---: |
+| Go 语言、运行时与工具链 | 693 |
+| AI、智能体与新兴技术 | 146 |
+| Rust、编程语言与编译器 | 54 |
+| 云原生、容器与基础设施 | 70 |
+| 网络、数据、性能与安全 | 55 |
+| 软件工程、架构与开源实践 | 168 |
+| 读书、社区与行业观察 | 48 |
+| 其他早期记录 | 817 |
+| **合计** | **2051** |
+
+## 一、Go 语言、运行时与工具链（693）
+
+围绕 Go 语言演进、runtime、并发、标准库、工具链与生态的长期记录。
+
+- [刚刚，Go 社区冒出一个“AI 工厂”：SuperPlane 开源，专治 AI Agent 乱来](https://tonybai.com/2026/09/15/superplane-ai-factory-go-open-source/)（2026-09-15）
+- [Go 核心团队放大招：cgo 不用 C编译器也能跑，AI/GPU 库调用将迎来大简化](https://tonybai.com/2026/09/14/go-cgo-without-c-toolchain/)（2026-09-14）
+- [Go SIMD杀疯了：开发者删光最后一行cgo代码，性能反超C语言库](https://tonybai.com/2026/09/11/go-simd-kills-cgo-turbopfor-avx512/)（2026-09-11）
+- [两年攻坚、11 个子任务闭环，Go 终于把 HTTP/2 这个“寄养”十年的孩子接回了标准库](https://tonybai.com/2026/09/08/go-127-http2-move-into-std/)（2026-09-08）
+- [Go 1.27 Release Party 实录：泛型方法为什么「憋」了五年？Go核心团队罕见自曝内幕](https://tonybai.com/2026/09/06/go-1-27-release-party-insider-story/)（2026-09-06）
+- [JetBrains 官方深度指南：如何在 Go 中优雅地处理错误？从底层原理到现代最佳实践](https://tonybai.com/2026/09/05/how-to-handle-errors-in-go/)（2026-09-05）
+- [《Fluent Python》作者深度解读：Go 集合类型家族要“大改版”了](https://tonybai.com/2026/09/02/fluent-python-author-go-collection-is-comming/)（2026-09-02）
+- [一只机器鸭子，用 Rust 写了个“大脑”：拆解 Hugging Face 爆款机器人 Microduck](https://tonybai.com/2026/09/01/microduck-rust-robot-brain-deep-dive/)（2026-09-01）
+- [“我恨Go现在的样子”：泛型、迭代器杀入语言核心，两百条评论吵翻了Reddit](https://tonybai.com/2026/08/31/go-hate-where-its-moving-generics-iterators-debate/)（2026-08-31）
+- [刚刚，Go语言之父荣获终身成就奖：UTF-8、Plan 9、Go，他一人写下半部计算机简史](https://tonybai.com/2026/08/28/rob-pike-usenix-flame-award-2026/)（2026-08-28）
+- [Go 1.27 中值得关注的几个变化：从泛型方法终成正果、encoding/json/v2 转正到后量子安全全面落地](https://tonybai.com/2026/08/26/some-changes-in-go-1-27/)（2026-08-26）
+- [Go 语言史上“钉子户”提案重启：一场关于 string(int) 的 14 年拉锯战](https://tonybai.com/2026/08/17/go-issue-3939-string-int-proposal-revival/)（2026-08-17）
+- [Google官方下场安利：AI时代，Go才是“最适合”的编程语言](https://tonybai.com/2026/08/14/go-ideal-language-for-ai-assisted-engineering/)（2026-08-14）
+- [Go 核心团队公开新提案流程设计：加权投票、多轨评审，能拯救积压的近千个提案吗？](https://tonybai.com/2026/08/08/go-proposal-process-overhaul-2026/)（2026-08-08）
+- [Go 密码学前掌门人亲自提案：crypto/passkey 要把“免密登录”这件事一次性做对](https://tonybai.com/2026/08/07/go-crypto-passkey-proposal-explained/)（2026-08-07）
+- [三年磨一剑！Go 桌面框架 Wails 发布 v3公测版：多窗口、AST 绑定、透明构建系统一次到位](https://tonybai.com/2026/08/04/wails-v3-go-desktop-framework/)（2026-08-04）
+- [Go 正在背离初心？一条 Reddit 热帖，暴露了 Go 社区最深的分歧：简单，到底能坚持多久？](https://tonybai.com/2026/08/03/go-simplicity-philosophy-debate-reddit/)（2026-08-03）
+- [Go 1.28 大动作：泛型集合终于要进标准库了，Set、树形Map、堆一次性标准化](https://tonybai.com/2026/07/29/go-1-28-generic-collections-proposal/)（2026-07-29）
+- [不用 Python，也能训练大模型：两年之后再看 Go 语言机器学习框架 GoMLX](https://tonybai.com/2026/07/26/gomlx-one-year-later/)（2026-07-26）
+- [Go 密码学维护者放大招：把 Passkey 存成一行字符串，还顺手为 Go 1.28 写好了 API](https://tonybai.com/2026/07/22/go-passkey-record-crypto-passkey-api/)（2026-07-22）
+- [Loop Engineering才火两个月，硅谷已经卷出“Graph Engineering”了](https://tonybai.com/2026/07/21/from-loop-engineering-to-graph-engineering/)（2026-07-21）
+- [为了一个函数名，Go官方吵了两个月：maps.Same提案近日正式通过](https://tonybai.com/2026/07/17/go-maps-same-proposal-accepted/)（2026-07-17）
+- [Go 1.28 路线图首度曝光：Cgo 告别C工具链？泛型容器将入标准库？](https://tonybai.com/2026/07/16/go-1-28-roadmap-compiler-and-runtime-features-preview/)（2026-07-16）
+- [171个“已批准”却迟迟未实现的提案：Go语言的十年“欠账清单”](https://tonybai.com/2026/07/14/171-accepted-unimplemented-go-proposals-a-decade-of-technical-debt/)（2026-07-14）
+- [别再往 Go 里塞 Java 了：拆解 spf13 的 Idiomatic Go 信仰](https://tonybai.com/2026/07/13/spf13-idiomatic-go/)（2026-07-13）
+- [10倍速 TypeScript 7.0 正式发布，前Go产品经理：Go才是AI智能体时代的“天选语言”](https://tonybai.com/2026/07/11/typescript-compiler-rewritten-in-go-agentic-ai-language/)（2026-07-11）
+- [从手动 govanityurls + Nginx 迁移到 gvu：一次真实迁移记录](https://tonybai.com/2026/07/08/migrate-from-govanityurls-to-gvu/)（2026-07-08）
+- [Go 私有模块拉取全解：凭据配置 + Vanity URL，个人与组织全覆盖](https://tonybai.com/2026/07/08/go-private-modules-comprehensive-guide/)（2026-07-08）
+- [Go 对语言演化的保守态度，在未来 5 年是否仍然正确呢？](https://tonybai.com/2026/07/06/is-go-language-conservative-evolution-still-viable-next-5-years/)（2026-07-06）
+- [别把“容易”当“简单”：Gin 框架作者撰文揭秘 88k Star 背后的架构哲学](https://tonybai.com/2026/07/04/build-gin-simple-over-easy/)（2026-07-04）
+- [Andrej Karpathy 解析 Loop Engineering：构建“数日级”长程 Agent 的 9 条黄金法则](https://tonybai.com/2026/07/02/loops-md-notes-on-agents-that-run-for-days/)（2026-07-02）
+- [一个 Rust 项目吃掉 75GB 硬盘？聊聊 Go 与 Rust 的“缓存焦虑”与拯救指南](https://tonybai.com/2026/06/30/rust-project-eating-75gb-disk-space-go-vs-rust-cache-anxiety/)（2026-06-30）
+- [折腾过各种语言后，我为什么总是回到 Go 语言？](https://tonybai.com/2026/06/29/keep-returning-to-go-no-matter-how-many-languages-i-try/)（2026-06-29）
+- [偿还十年技术债：深度拆解 Go 1.27 的 GODEBUG 强力清理计划](https://tonybai.com/2026/06/26/policy-for-removing-godebug-flags/)（2026-06-26）
+- [浏览器里的“安全阴谋”：为什么 Go 1.27 的 UUIDv7 会离奇丧失随机性？](https://tonybai.com/2026/06/25/go-1-27-uuid-newv7-always-generates-uuid-with-7000-on-browsers/)（2026-06-25）
+- [Go 1.27新特性前瞻：泛型方法落地，标准库内建 UUID](https://tonybai.com/2026/06/24/go-1-27-foresight/)（2026-06-24）
+- [屠榜 CNCF！为什么在云原生时代，Go 语言能把 Java、C++ 和 Rust 堵在门外？](https://tonybai.com/2026/06/22/why-is-go-dominating-in-cncf-landscape/)（2026-06-22）
+- [在 AI 编码时代，为什么我们依然选择 Go 而不是 Rust？](https://tonybai.com/2026/06/18/why-choose-go-over-rust-today-in-ai-age/)（2026-06-18）
+- [写地道的 Go 语言，是否能让你成为了一个更好的开发者？](https://tonybai.com/2026/06/11/writing-idiomatic-go-make-you-better/)（2026-06-11）
+- [终结十年纠结：Go 新提案允许 Example 支持任意函数签名](https://tonybai.com/2026/06/09/go-proposal-examples-to-support-arbitrary-function-signatures/)（2026-06-09）
+- [2026年，大厂重构核心系统为何集体投向 Go？](https://tonybai.com/2026/06/08/the-real-reason-big-tech-is-switching-to-go/)（2026-06-08）
+- [别把 Go 写成 Java：毁掉项目从过度架构开始](https://tonybai.com/2026/06/05/stop-writing-go-like-java-avoid-over-architecting/)（2026-06-05）
+- [Go 生态17年大浪淘沙：2026年最值得引入的10个“神仙级”QoL工具包](https://tonybai.com/2026/06/03/10-god-tier-go-qol-libraries-to-use-in-2026/)（2026-06-03）
+- [再见样板代码！Go 官方新提案：函数一键转接口](https://tonybai.com/2026/06/02/no-more-boilerplate-go-proposal-function-to-interface-conversion/)（2026-06-02）
+- [无痛消灭技术债：Google I/O 2026 开启 Go 自动重构时代](https://tonybai.com/2026/05/29/google-io-2026-automated-go-refactoring-eliminating-technical-debt/)（2026-05-29）
+- [省下 10% CPU！Uber 揭秘 Go 栈扩容的隐秘代价](https://tonybai.com/2026/05/28/uber-reveals-hidden-cost-of-go-stack-growth-10-percent-cpu-savings/)（2026-05-28）
+- [从 Go 迁移到 Rust](https://tonybai.com/2026/05/27/migrate-go-to-rust/)（2026-05-27）
+- [悄悄用 Go 重写 AI 基础设施：NVIDIA 的 GPU 云平台为何选择 Go？](https://tonybai.com/2026/05/26/why-nvidia-chose-go-to-rewrite-their-ai-infrastructure/)（2026-05-26）
+- [十年难题终获突破：揭秘 Go 1.27 接口逃逸分析优化](https://tonybai.com/2026/05/22/go-1-27-interface-escape-analysis-optimization-breakthrough/)（2026-05-22）
+- [大洗牌！Google 内部确认：Go 正取代 C++，成为 AI Agent 时代的“通用语言”](https://tonybai.com/2026/05/21/go-is-the-new-lingua-franca-for-ai-agents-at-google/)（2026-05-21）
+- [AI 编码胜率榜：Go 与 Rust 完胜 C++](https://tonybai.com/2026/05/20/ai-coding-win-rate-rankings-go-and-rust-vs-cpp/)（2026-05-20）
+- [别神话 Rust 重写了：搞定1%热路径，Go 性能照样起飞](https://tonybai.com/2026/05/18/go-performance-optimization-over-rust-rewrites/)（2026-05-18）
+- [写了 10 年 Java/TS，Go 语言终于治好了我的“过度设计”绝症](https://tonybai.com/2026/05/16/go-cured-my-over-engineering-addiction-after-java-ts/)（2026-05-16）
+- [AI 时代，软件大师们为什么都倒戈向 Go 和 Rust 了？](https://tonybai.com/2026/05/14/uncle-bob-esr-on-why-we-are-turning-to-go-and-rust-in-the-ai-era/)（2026-05-14）
+- [别再瞎写 go.mod 了！一行 go 1.xx，竟藏着 7 个足以颠覆你认知的“秘密开关”](https://tonybai.com/2026/05/13/go-mod-hidden-features-7-secret-switches-in-go-version/)（2026-05-13）
+- [“用 Go 打天下，用 Rust 救火”：这才是 2026 年后端架构的唯一正解](https://tonybai.com/2026/05/11/go-vs-rust-backend-architecture-the-2026-strategy/)（2026-05-11）
+- [火爆外网的 Go 开源神器 CLI Printing Press：一键生成 Agent 专属 CLI 工具](https://tonybai.com/2026/05/09/cli-printing-press-intro/)（2026-05-09）
+- [AWS 大神发文炮轰：Go 的并发就是个“笑话”，JVM 的方案要更优越](https://tonybai.com/2026/05/07/aws-guru-slams-go-concurrency-as-a-joke-vs-jvm/)（2026-05-07）
+- [从“Vibe-Coding”到“Agentic Engineering”：Andrej Karpathy 的 AI 时代程序员生存法则](https://tonybai.com/2026/05/02/from-vibe-coding-to-agentic-engineering-karpathy-survival-guide/)（2026-05-02）
+- [Ghostty 之父带头“出走”GitHub！官方 CTO 紧急道歉，并揭秘正在使用 Go 语言救火](https://tonybai.com/2026/04/30/ghostty-creator-leads-github-exodus-cto-apology-go-fix/)（2026-04-30）
+- [Go 1.27 将默认开启 SIMD for amd64，可移植 SIMD 包提案出炉](https://tonybai.com/2026/04/29/go-1-27-default-simd-for-amd64-portable-simd-proposal/)（2026-04-29）
+- [Go 语言“内战”迎来终局？Go 圣经作者亲自下场，为“三元运算符”发起折中提案！](https://tonybai.com/2026/04/28/go-conditional-expressions-propsal/)（2026-04-28）
+- [“我们想用 Rust 重写的次数是：零”：云平台 Render 靠“无聊”的 Go 撑起了千亿流量](https://tonybai.com/2026/04/27/render-why-we-wont-rewrite-in-rust-the-power-of-boring-go/)（2026-04-27）
+- [Go 代码设计的“第一天原则”：一份能让你少走五年弯路的实战模式清单](https://tonybai.com/2026/04/24/go-code-design-day-one-principle-practical-patterns-list/)（2026-04-24）
+- [HashiCorp 创始人亲口“认错”：AI 让我重新爱上了 Go (文末福利)](https://tonybai.com/2026/04/23/hashicorp-founder-admits-go-is-alive-thanks-to-ai/)（2026-04-23）
+- [为什么说 go 语句是新时代的 goto？四大法则拯救失控 goroutine](https://tonybai.com/2026/04/16/structured-concurrency-in-go-research-oriented-perspective/)（2026-04-16）
+- [别再无脑 go func() 了！Go 资深布道师 Dave Cheney 的 Goroutine 管理哲学](https://tonybai.com/2026/04/13/dave-cheney-goroutine-management-philosophy/)（2026-04-13）
+- [Go Command 工作组成立：这几个用了十年的命令可能要被废！](https://tonybai.com/2026/04/11/go-command-working-group-formed-legacy-commands-deprecated/)（2026-04-11）
+- [别搞“小而美”了！Rust 开发者请愿：求求标准库学学 Go 吧](https://tonybai.com/2026/04/09/stop-being-small-and-beautiful-rust-petition-to-learn-from-go/)（2026-04-09）
+- [倒计时 33 个月？Go 前安全负责人：量子计算机将“摧毁”互联网](https://tonybai.com/2026/04/08/perspective-on-quantum-computing-timeline/)（2026-04-08）
+- [从 1960 到 2026：一文看透 Java、Go、Python 垃圾回收器的原理与演进](https://tonybai.com/2026/04/07/garbage-collectors-deep-dive/)（2026-04-07）
+- [2026 编程语言“饱和度”榜单出炉：JavaScript/Python 已“烂大街”，Go/Rust 成最大赢家？](https://tonybai.com/2026/04/02/2026-programming-language-saturation-rankings-go-rust-winners/)（2026-04-02）
+- [当 Go 还在追求极简时，C++ 26 却又加了四大“史诗级”新特性](https://tonybai.com/2026/03/31/go-minimalism-vs-cpp26-epic-new-features/)（2026-03-31）
+- [降低 74% 的 P99 尾延迟：揭秘 Go HTTP 客户端的“请求对冲”魔法](https://tonybai.com/2026/03/30/reduced-p99-latency-by-request-hedging-in-go/)（2026-03-30）
+- [Rust 看了流泪，AI 看了沉默：扒开 Go 泛型最让你抓狂的“残疾”类型推断](https://tonybai.com/2026/03/27/function-type-inference-should-work-in-all-assignment-contexts/)（2026-03-27）
+- [Go 语言之父亲自下场道歉：藏在 Spec 里的十年“笔误”，终于要修正了！](https://tonybai.com/2026/03/25/go-spec-contradiction-in-types-section/)（2026-03-25）
+- [OpenAI 创始人盛赞 Rust，却遭开发者反驳：Go 才是大模型眼里的“香饽饽”！](https://tonybai.com/2026/03/23/go-is-the-best-programming-language-for-llm/)（2026-03-23）
+- [你的 Go 报错信息正在“出卖”你！扒一扒大厂是如何做错误隔离与日志脱敏的](https://tonybai.com/2026/03/21/best-practices-for-secure-error-handling-in-go/)（2026-03-21）
+- [别再无脑 go get @latest 了！你的服务器可能下一秒就被黑客接管](https://tonybai.com/2026/03/19/proposal-support-dependency-cooldown-in-go-tooling/)（2026-03-19）
+- [刚刚，2025图灵奖揭晓！面对即将瘫痪的传统密码学，Go 语言的“抗量子”底牌曝光](https://tonybai.com/2026/03/19/2025-turing-award-go-quantum-resistant-cryptography/)（2026-03-19）
+- [被嘲笑比 Python 还慢？扒开 Go 正则表达式的底层，看看它为了防范“系统猝死”付出了什么](https://tonybai.com/2026/03/17/why-is-go-regex-so-slow/)（2026-03-17）
+- [真相调查：Go 语言真的消灭了 Undefined Behavior 吗？](https://tonybai.com/2026/03/16/go-language-eliminated-undefined-behavior-truth-investigation/)（2026-03-16）
+- [拒绝“偷天换日”！深度拆解 Go sumdb 的密码学防线](https://tonybai.com/2026/03/14/go-sumdb-transparent-logs-supply-chain-trust/)（2026-03-14）
+- [别再滥用 ClickHouse 了！单机每秒狂刷 1800 万条数据，拆解 Go+DuckDB 的“微型数仓”降维打击](https://tonybai.com/2026/03/13/go-duckdb-micro-data-warehouse-dimensionality-reduction/)（2026-03-13）
+- [老板花重金买了台 128 核服务器，我的 Go 程序反而变慢了？](https://tonybai.com/2026/03/12/go-concurrency-scalability-issues-on-128-core-cpu/)（2026-03-12）
+- [拉个 JSON 居然要装 5 个第三方库？终于明白 Go 的标准库到底有多“霸道”](https://tonybai.com/2026/03/11/standard-library-is-part-of-the-go-success/)（2026-03-11）
+- [你每天敲下的 go func()，藏着这位 92 岁老人的毕生心血](https://tonybai.com/2026/03/11/in-memory-of-tony-hoare/)（2026-03-11）
+- [硬核测评：哪门语言最受 AI 宠爱？13 种语言横向对比，Go 表现如何？](https://tonybai.com/2026/03/09/hardcore-review-13-languages-ai-favorite-go-performance/)（2026-03-09）
+- [AI 时代的新王座：为什么说 Go 可能是开发 AI Agent 的最佳语言？](https://tonybai.com/2026/03/07/why-go-is-the-best-language-for-ai-agents/)（2026-03-07）
+- [数据说话：Go 1.26 或成近年来“问题最多”的大版本，现在升级安全吗？](https://tonybai.com/2026/03/06/go-1-26-most-problematic-release/)（2026-03-06）
+- [2026 年了，写 Go + Protobuf 还在手敲 protoc 命令？是时候换用这种新姿势了！](https://tonybai.com/2026/03/05/modern-go-protobuf-dev-in-2026/)（2026-03-05）
+- [“棘手”难题：为什么 Go、Rust 与 Java 等语言的包管理永远无法达到完美？](https://tonybai.com/2026/03/04/package-management-unsolvable-problem-programming-languages/)（2026-03-04）
+- [别再像 2015 年那样写 Go 了：Modern Go 终极进化指南](https://tonybai.com/2026/03/02/modern-go-evolution-guide-1-0-to-1-26/)（2026-03-02）
+- [告别 google/uuid：Go 标准库拟新增 crypto/uuid 深度解析](https://tonybai.com/2026/03/01/goodbye-google-uuid-go-standard-library-crypto-uuid/)（2026-03-01）
+- [Go mod init 降级撤回背后：精英主义正在杀死 Go 社区的民主？](https://tonybai.com/2026/02/27/go-mod-init-controversy-elitism-vs-democracy/)（2026-02-27）
+- [拒绝 Rust 的复杂，跨越 Go 的极简：Zig 会是系统级编程的最终答案吗？](https://tonybai.com/2026/02/26/rust-complexity-go-minimalism-vs-zig-ultimate-answer/)（2026-02-26）
+- [拒绝无效告警！用 Govulncheck 构建高信噪比的 Go 安全扫描工作流](https://tonybai.com/2026/02/25/govulncheck-high-signal-to-noise-ratio-security-workflow/)（2026-02-25）
+- [性能之战的“罗生门”：Go 重写 Node.js 项目，究竟赢在了哪里？](https://tonybai.com/2026/02/24/go-vs-node-js-performance-rewrite-rashomon/)（2026-02-24）
+- [金融级基础设施重构：放弃 Rust 拥抱 Go，务实主义的最终胜利？](https://tonybai.com/2026/02/23/financial-infrastructure-rust-to-go-pragmatism-victory/)（2026-02-23）
+- [一行 Go 代码瘫痪 6 小时！复盘 Cloudflare BGP 路由撤回灾难](https://tonybai.com/2026/02/23/cloudflare-bgp-withdrawal-outage-go-post-mortem/)（2026-02-23）
+- [“你装了 Go 1.26，却写不了 Go 1.26 的代码？”——复盘 go mod init 的降级风波](https://tonybai.com/2026/02/22/go-1-26-go-mod-init-downgrade-collision-review/)（2026-02-22）
+- [复利工程（Compound Engineering）：AI 原生时代的软件开发新哲学](https://tonybai.com/2026/02/21/compound-engineering-ai-native-software-development-philosophy/)（2026-02-21）
+- [别再轻信 GitHub 上的源码：为何我们需要全新的 Go 模块审查机制？](https://tonybai.com/2026/02/20/why-we-need-new-go-module-review-mechanism/)（2026-02-20）
+- [Go 1.26 重磅更新：用 go fix 重塑代码现代化的艺术](https://tonybai.com/2026/02/19/using-go-fix-to-modernize-go-code/)（2026-02-19）
+- [AI 基础设施的语言之争：为何构建 LLM 网关时，我们放弃了 Python 选择了 Go？](https://tonybai.com/2026/02/18/why-we-chose-go-over-python-for-llm-gateways/)（2026-02-18）
+- [Go 1.26 ：go mod init 默认行为的变化与 Go 版本管理的哲学思辨](https://tonybai.com/2026/02/16/go-1-26-go-mod-init-changes-version-management-philosophy/)（2026-02-16）
+- [拒绝 AI 署名！Go 核心团队在 AIGC 时代划下的“工程红线”](https://tonybai.com/2026/02/15/go-core-team-rejects-ai-authorship/)（2026-02-15）
+- [Go 1.26 中值得关注的几个变化：从 new(expr) 真香落地、极致性能到智能工具链](https://tonybai.com/2026/02/14/some-changes-in-go-1-26/)（2026-02-14）
+- [Go 微服务重构实录：当后端性能提升 10 倍，移动端体验为何反而崩塌？](https://tonybai.com/2026/02/13/go-microservices-refactoring-10x-backend-vs-mobile-collapse/)（2026-02-13）
+- [Go 1.26 发布在即，为何 json/v2 依然“难产”？七大技术路障全解析](https://tonybai.com/2026/02/11/go-1-26-json-v2-delay-7-technical-roadblocks/)（2026-02-11）
+- [告别 Flaky Tests：Go 官方拟引入 testing/nettest，重塑内存网络测试标准](https://tonybai.com/2026/02/10/goodbye-flaky-tests-go-testing-nettest-proposal/)（2026-02-10）
+- [沉睡 8 年的提案被唤醒：Go 语言真的要引入“不可变类型”了吗？](https://tonybai.com/2026/02/09/go-immutable-types-8-year-dormant-proposal-awakened/)（2026-02-09）
+- [数据打脸刻板印象：Go 的“样板代码”竟然和 Rust 一样多？](https://tonybai.com/2026/02/08/go-boilerplate-code-vs-rust-data-refutes-stereotypes/)（2026-02-08）
+- [“Go 2，请不要发生！”：如果 Go 变成了“缝合怪”，你还会爱它吗？](https://tonybai.com/2026/02/06/go-2-dont-become-a-frankenstein-monster/)（2026-02-06）
+- [再见，丑陋的 container/heap！Go 泛型堆 heap/v2 提案解析](https://tonybai.com/2026/02/04/goodbye-container-heap-go-generic-heap-heap-v2-proposal/)（2026-02-04）
+- [我用 Go 重写了 Python 网关，性能提升 10 倍，却成了职场噩梦](https://tonybai.com/2026/02/01/go-rewrite-python-gateway-10x-performance-career-nightmare/)（2026-02-01）
+- [Go 性能诊断工具大变天？Race 检测有望进生产，Trace 秒开不是梦！](https://tonybai.com/2026/01/31/go-official-updates-race-detector-trace-ui-pprof/)（2026-01-31）
+- [20 年 Java 老店的“背叛”：WSO2 为何高呼“Goodbye Java, Hello Go”？](https://tonybai.com/2026/01/29/wso2-goodbye-java-hello-go-tech-stack-shift/)（2026-01-29）
+- [Go 标准库竟然也用 vendor？std 和 cmd 模块是如何管理外部依赖的](https://tonybai.com/2026/01/28/go-standard-library-vendor-std-cmd-dependency-management/)（2026-01-28）
+- [TypeScript 编译器 Go 重写版提速 10 倍：微软团队深度揭秘幕后工程细节](https://tonybai.com/2026/01/27/typescript-compiler-go-rewrite-10x-speed-microsoft-details/)（2026-01-27）
+- [Go 泛型落地 4 年后，终于要支持泛型方法了！](https://tonybai.com/2026/01/24/go-generics-finally-supports-generic-methods/)（2026-01-24）
+- [2025 Go 官方调查解读：91% 满意度背后的隐忧与 AI 时代的“双刃剑”](https://tonybai.com/2026/01/23/go-developer-2025-survey-result/)（2026-01-23）
+- [凌晨3点的警报：一个导致 50000 多个 Goroutine 泄漏的 Bug 分析](https://tonybai.com/2026/01/22/a-bug-cause-50000-goroutine-leak/)（2026-01-22）
+- [当 Go 遇上 GPU：用 CUDA 释放千倍算力的实战指南](https://tonybai.com/2026/01/21/integrating-cuda-in-go/)（2026-01-21）
+- [AI 时代，Go 语言会“失宠”还是“封神”？—— GopherCon 2025 圆桌深度复盘](https://tonybai.com/2026/01/20/ai-and-go-opportunities-and-challenges/)（2026-01-20）
+- [Go 语言的“魔法”时刻：如何用 -toolexec 实现零侵入式自动插桩？](https://tonybai.com/2026/01/19/unleashing-the-go-toolchain/)（2026-01-19）
+- [Go 官方密码学原则：为什么 Go 的 Crypto 库难以被“用错”？](https://tonybai.com/2026/01/18/go-cryptography-principles/)（2026-01-18）
+- [Go, Rust 还是 Zig？一场关于“简单”与“控制”的灵魂拷问](https://tonybai.com/2026/01/17/go-rust-zig-simplicity-vs-control/)（2026-01-17）
+- [为什么 Go 社区强调避免不必要的抽象？—— 借用海德格尔哲学寻找“正确”的答案](https://tonybai.com/2026/01/16/go-community-the-right-kind-of-abstraction/)（2026-01-16）
+- [内存去哪儿了？一个让大多数 Gopher 都无法清晰回答的问题](https://tonybai.com/2026/01/15/where-did-the-memory-go-gopher-unanswered-question/)（2026-01-15）
+- [Go 的“显式哲学”为何在接口上“食言”了？—— 探秘隐式接口背后的设计智慧](https://tonybai.com/2026/01/14/go-explicit-philosophy-implicit-interfaces-design-wisdom/)（2026-01-14）
+- [从入门到极致：VictoriaMetrics 教你写出最高效的 Go 代码](https://tonybai.com/2026/01/12/victoriametrics-guide-most-efficient-go-code/)（2026-01-12）
+- [Go 的“浮点数陷阱”将被填平：浮点转整数即将在所有平台上行为一致](https://tonybai.com/2026/01/11/proposal-float-to-int-conversions-should-saturate-on-overflow/)（2026-01-11）
+- [离了大谱！Go 一年之内从第 7 掉到第 16](https://tonybai.com/2026/01/10/go-dropped-from-7th-to-16th-in-one-year/)（2026-01-10）
+- [谁才是 Go 生态的“幕后之王”？—— 深度挖掘 4000 万个节点后的惊人发现](https://tonybai.com/2026/01/09/the-most-popular-go-dependency-is/)（2026-01-09）
+- [PostgreSQL 吞噬世界，MongoDB 起诉 Go 开源项目：2025 数据库年度盘点](https://tonybai.com/2026/01/08/databases-in-2025-a-year-in-review/)（2026-01-08）
+- [Go 语言的“舒适区”：为何在这张“鄙视链”金字塔中，Go 仅次于 C？](https://tonybai.com/2026/01/07/go-language-comfort-zone-in-contempt-chain-pyramid/)（2026-01-07）
+- [别再盯着 go.sum 看了：它不是你想象中的那个 Lockfile](https://tonybai.com/2026/01/06/go-sum-is-not-a-lockfile/)（2026-01-06）
+- [Go 考古：图灵奖得主 Ken Thompson 亲述，Go 语言是如何在 C++ 的“废墟”上诞生的](https://tonybai.com/2026/01/05/how-ken-thompson-developed-go-language-at-google/)（2026-01-05）
+- [从“源码审计”到“能力审计”：Go 生态应对供应链攻击的范式转移](https://tonybai.com/2026/01/02/go-supply-chain-attack-source-code-to-capability-auditing-paradigm-shift/)（2026-01-02）
+- [Go 考古：Go 官方如何决定支持你的 CPU 和 OS？](https://tonybai.com/2026/01/01/go-archaeology-porting-policy/)（2026-01-01）
+- [Go 服务自省指南：抛弃 ldflags，让你的二进制文件“开口说话”](https://tonybai.com/2025/12/31/go-introspection-using-debug-buildinfo/)（2025-12-31）
+- [代码简单，人也简单？揭秘 Go 社区的“反内卷”文化](https://tonybai.com/2025/12/31/why-go-community-so-active-and-friendly/)（2025-12-31）
+- [Logging 已死？从“调试日记”到“结构化事件”的范式转移](https://tonybai.com/2025/12/30/logging-sucks/)（2025-12-30）
+- [高并发后端：坚守 Go，还是拥抱 Rust？](https://tonybai.com/2025/12/30/high-concurrency-backend-go-vs-rust/)（2025-12-30）
+- [告别 interface{} 模拟，Go 终于要有真正的 Union 类型了？](https://tonybai.com/2025/12/29/go-community-new-sum-type-end-interface-union-types/)（2025-12-29）
+- [像 Go 创始人一样思考：用五大思维原理重学 Go 语言](https://tonybai.com/2025/12/26/think-like-go-founders-relearn-go-five-principles/)（2025-12-26）
+- [Go 的 AI 时代宣言：我们如何用“老”原则，解决“新”问题？](https://tonybai.com/2025/12/25/go-next-frontier-gophercon-2025/)（2025-12-25）
+- [Bash 虽好，但我选 Go：如何用 10 倍代码换来 100 倍的维护性？](https://tonybai.com/2025/12/24/bash-vs-go-10x-code-100x-maintainability/)（2025-12-24）
+- [Go 性能分析的“新范式”：用关键路径分析破解高并发延迟谜题](https://tonybai.com/2025/12/24/profiling-request-latency-with-critical-path-analysis/)（2025-12-24）
+- [告别“If-Else”地狱：OpenFeature 如何重塑 Go 应用的特性开关管理？](https://tonybai.com/2025/12/23/goodbye-if-else-hell-openfeature-feature-flag-management-go/)（2025-12-23）
+- [AI 还在写“老式 Go”？Alan Donovan 详解 Go 代码的现代化](https://tonybai.com/2025/12/22/alan-donovan-go-code-modernization/)（2025-12-22）
+- [Go 1.26 的“加密风暴”：当 Hashicorp Vault 的合规需求，撞上 Go 团队的安全哲学](https://tonybai.com/2025/12/21/go-1-26-cryptographic-storm-vault-compliance-vs-go-security/)（2025-12-21）
+- [Goroutine “气泡”宇宙——Go 并发模型的新维度](https://tonybai.com/2025/12/20/goroutine-bubble-universe-go-concurrency-new-dimension/)（2025-12-20）
+- [“这段代码是 AI 写的！”—— Go 社区的“AI 辅助编程”第一案](https://tonybai.com/2025/12/18/go-community-first-case-ai-assisted-programming/)（2025-12-18）
+- [逃离 Java 的“自行车棚”：Go 语言真的是那片“净土”吗？](https://tonybai.com/2025/12/18/escaping-java-bicycle-shed-is-go-the-pure-land/)（2025-12-18）
+- [Cloudflare 2025 年度报告发布——Go 语言再次“屠榜”API 领域，AI 流量激增！](https://tonybai.com/2025/12/17/cloudflare-2025-report-go-language-api-traffic-ai-surge/)（2025-12-17）
+- [Go 1.26 新特性前瞻：从 Green Tea GC 到语法糖 new(expr)，性能与体验的双重进化](https://tonybai.com/2025/12/16/go-1-26-foresight/)（2025-12-16）
+- [Go 语言的“反模式”清单：来自资深 Gopher 血泪教训的 10 条“不要做”](https://tonybai.com/2025/12/15/go-language-anti-patterns-10-donts/)（2025-12-15）
+- [跨越20年的对话：从 Eiffel 的“契约”到 Go 的“接口”](https://tonybai.com/2025/12/13/from-eiffel-contract-to-go-interface/)（2025-12-13）
+- [Gin 真的是“真菌”吗？—— 一篇引发热议的“反 Gin”檄文解读](https://tonybai.com/2025/12/12/gin-is-a-very-bad-software-library/)（2025-12-12）
+- [Go 跌出 TIOBE 前十？别被排名骗了，这才是它的真实地位](https://tonybai.com/2025/12/11/is-golang-still-a-growing-programming-language/)（2025-12-11）
+- [Jepsen 报告震动 Go 社区：NATS JetStream 会丢失已确认写入](https://tonybai.com/2025/12/11/jepsen-report-nats-jetstream-data-loss-acknowledged-writes/)（2025-12-11）
+- [“我曾想付钱给 Google 去工作”—— Russ Cox 深度访谈：Go 的诞生、演进与未来](https://tonybai.com/2025/12/10/russ-cox-interview-go-birth-evolution-future/)（2025-12-10）
+- [Go 的“最小惊讶原则”破功了吗？—— 一个vet 新提案引发的思考](https://tonybai.com/2025/12/09/vet-add-check-for-using-verb-q/)（2025-12-09）
+- [拒绝“面条代码”，做有架构思维的 Go API 设计师](https://tonybai.com/2025/12/08/api-design-pattern-and-implementation/)（2025-12-08）
+- [“我从未想过学完 Rust 后会转向 Go”—— 这门“无聊”的语言究竟有什么魅力？](https://tonybai.com/2025/12/07/switching-from-rust-to-go-appeal-of-the-language/)（2025-12-07）
+- [如果《疯狂动物城》是一个分布式系统，那它一定是用 Go 写的](https://tonybai.com/2025/12/06/zootopia-distributed-system-written-in-go/)（2025-12-06）
+- [Go 安全新提案：runtime/secret 能否终结密钥残留的噩梦？](https://tonybai.com/2025/12/05/proposal-runtime-secret/)（2025-12-05）
+- [Go 2025云原生与可观测年度报告：底层性能革新与生态固防](https://tonybai.com/2025/12/03/go-2025-cloud-native-observability-report/)（2025-12-03）
+- [Brad Fitzpatrick 也等不及了！sync.Map 的泛型进化与 sync/v2 的诞生之路](https://tonybai.com/2025/12/01/proposal-sync-v2/)（2025-12-01）
+- [Go 编译器崩溃背后：一个 append 函数引发的语言规范修正案](https://tonybai.com/2025/11/30/ice-assertion-failed-with-append/)（2025-11-30）
+- [Go 2026 路线图曝光：SIMD、泛型方法与无 C 工具链 CGO —— 性能与表达力的双重飞跃？](https://tonybai.com/2025/11/28/go-2026-roadmap-revealed/)（2025-11-28）
+- [dingo：Go 语言的 “TypeScript”时刻？—— 一场由社区驱动的语言演进实验](https://tonybai.com/2025/11/27/dingo-go-typescript-moment/)（2025-11-27）
+- [霸榜 GitHub 一周！Google 开源 ADK for Go，彻底终结 AI“炼丹”时代？](https://tonybai.com/2025/11/24/google-adk-go-in-action/)（2025-11-24）
+- [Go 2025 密码学年度报告：后量子时代的防御与 FIPS 的“纯 Go”革命](https://tonybai.com/2025/11/22/the-2025-go-cryptography-state-of-the-union/)（2025-11-22）
+- [为什么 Go 在悄悄地做 Rust 做不到的事：保持简单](https://tonybai.com/2025/11/21/why-go-is-quietly-doing-what-rust-couldnt-staying-simple/)（2025-11-21）
+- [Goroutine 栈增长机制新提案：用缺页中断替代栈检查？Rob Pike 亲自下场“劝退”](https://tonybai.com/2025/11/20/proposal-improve-goroutine-stack-using-page-faults/)（2025-11-20）
+- [Go 泛型再进化：移除类型参数的循环引用限制](https://tonybai.com/2025/11/19/proposal-remove-cycle-restriction-for-type-parameters/)（2025-11-19）
+- [Go 在 Web3 的统治力：2025 年架构与生态综述](https://tonybai.com/2025/11/18/go-web3-dominance-overview-2025/)（2025-11-18）
+- [你的 Go 测试，还停留在“演员对台词”吗？](https://tonybai.com/2025/11/17/go-testing-journey/)（2025-11-17）
+- [你的 Kubernetes 知识在“冰山”的第几层？—— 一份给 Gopher 的 K8s 进阶“航海图”](https://tonybai.com/2025/11/17/explain-kubernetes/)（2025-11-17）
+- [Go 的甜蜜16 岁：一份来自官方的年度成绩单与未来路线图](https://tonybai.com/2025/11/15/go-turns-16/)（2025-11-15）
+- [Go 也开始“叛逆”了？深度解读 JetBrains 2025 报告：为何“原生信仰”不再是唯一答案](https://tonybai.com/2025/11/14/the-go-ecosystem-in-2025/)（2025-11-14）
+- [Go 的 16 年：一门为持久而生的编程语言](https://tonybai.com/2025/11/12/16-years-of-go-a-programming-language-built-to-last/)（2025-11-12）
+- [“学习 Go 毁掉了我钟爱的其他语言”：一场网络热议揭示 Go 开发者真正的爱与痛](https://tonybai.com/2025/11/11/go-developers-love-pain-online-debate/)（2025-11-11）
+- [来自 Go 创始人的忠告：这五条关于“复杂性”的法则，比算法更重要](https://tonybai.com/2025/11/10/rob-pike-on-complexity/)（2025-11-10）
+- [Go 标准库将迎来 Zstandard：性能超越 Gzip，让你的应用更快、更省](https://tonybai.com/2025/11/08/proposal-zstd/)（2025-11-08）
+- [Go 的“简单”幻象：易于上手，难于精通](https://tonybai.com/2025/11/07/go-simple-illusion-easy-to-learn-hard-to-master/)（2025-11-07）
+- [连 Rob Pike 都感到“担忧”：Go 1.26 SIMD 引入的新复杂性与应对之道](https://tonybai.com/2025/11/06/proposal-simd-cpu-feature-vet-check/)（2025-11-06）
+- [GODEBUG 的“技术债”清算：Go 团队提出全新生命周期管理策略](https://tonybai.com/2025/11/05/proposal-remove-godebug-flags/)（2025-11-05）
+- [Go GUI 开发的“绝境”与“破局”：2025 年现状与展望](https://tonybai.com/2025/11/03/go-gui-development-2025/)（2025-11-03）
+- [从 Python 到 Go：我们失去了什么，又得到了什么？](https://tonybai.com/2025/11/01/from-python-to-go-what-we-lost-and-gained/)（2025-11-01）
+- [Go 官方详解“Green Tea”垃圾回收器：从对象到页，一场应对现代硬件挑战的架构演进](https://tonybai.com/2025/10/31/deep-into-go-green-tea-gc/)（2025-10-31）
+- [告别懵圈：实战派 Gopher 的类型理论入门](https://tonybai.com/2025/10/30/type-theory-intro-for-gopher/)（2025-10-30）
+- [解构Go函数迭代器——为什么 break 没有按预期工作？](https://tonybai.com/2025/10/29/why-break-in-go-function-iterators-does-not-work/)（2025-10-29）
+- [Go 考古：错误处理的“语法糖”之战与最终的“投降”](https://tonybai.com/2025/10/28/go-archaeology-error-handling/)（2025-10-28）
+- [Go 模块构建与依赖管理：我们到底在“折腾”什么？](https://tonybai.com/2025/10/27/the-ultimate-guide-to-go-module/)（2025-10-27）
+- [SQLite 对 Go 和 Rust 说“不”：揭示“安全语言”光环下的工程现实](https://tonybai.com/2025/10/26/sqlite-say-no-to-go-and-rust/)（2025-10-26）
+- [Go 的 iota：设计缺陷还是“黑魔法”？—— 从一条“咆哮”推文谈起](https://tonybai.com/2025/10/25/go-iota-flaw-or-magic/)（2025-10-25）
+- [Go FFI 的新范式：purego 与 libffi 如何让我们无痛拥抱 C 生态](https://tonybai.com/2025/10/23/go-ffi-new-paradigm/)（2025-10-23）
+- [Go 语言观察：登顶“最受期待”榜首，JetBrains 2025报告洞悉未来趋势](https://tonybai.com/2025/10/23/go-language-leads-jetbrains-trends/)（2025-10-23）
+- [从 Go “叛逃”到 Java，再回归：一位开发者关于“魔法”与“显式”的深度反思](https://tonybai.com/2025/10/22/back-to-go-after-defection-to-java/)（2025-10-22）
+- [写出让同事赞不绝口的Go代码：Reddit工程师总结的10条地道Go编程法则](https://tonybai.com/2025/10/21/10-go-programming-rules-from-reddit/)（2025-10-21）
+- [为什么 Flask 的创造者选择 Go 作为他 AI 创业公司的核心语言？](https://tonybai.com/2025/10/19/flask-creator-choose-go/)（2025-10-19）
+- [Go 技术沉思录：Java 26 年演进史给我们带来的启示](https://tonybai.com/2025/10/18/lessons-from-java-26-years-evolution/)（2025-10-18）
+- [收到非 UTF-8 文本怎么办？Go 字符集检测的探索与实践](https://tonybai.com/2025/10/17/detect-charset-in-go/)（2025-10-17）
+- [释放 Go 的极限潜能：CPU 缓存友好的数据结构设计指南](https://tonybai.com/2025/10/16/cpu-cache-friendly-in-go/)（2025-10-16）
+- [Go 考古：defer 的“救赎”——从性能“原罪”到零成本的“开放编码”](https://tonybai.com/2025/10/15/go-archaeology-defer/)（2025-10-15）
+- [string 与 rune 的设计哲学：为什么Go 程序员很少为“乱码”烦恼？](https://tonybai.com/2025/10/13/string-and-rune-in-go/)（2025-10-13）
+- [Go 作为第一门编程语言：天才之选还是糟糕开端？](https://tonybai.com/2025/10/11/go-is-a-good-first-programming-language/)（2025-10-11）
+- [Go 零拷贝“最后一公里”：Peek API背后的设计哲学与权衡](https://tonybai.com/2025/10/10/proposal-add-buffer-peek/)（2025-10-10）
+- [Go开发者必读：JSON 的跨语言陷阱与 Go 防御指南](https://tonybai.com/2025/10/09/json-isnt-json/)（2025-10-09）
+- [只会 net/http 还不够，Go 网络编程的“深水区”你敢闯吗？](https://tonybai.com/2025/10/08/go-network-programming-complete-guide/)（2025-10-08）
+- [Go 标准库提供一个“Must” 函数？社区关于“断言式初始化”的思考](https://tonybai.com/2025/10/07/proposal-must-do/)（2025-10-07）
+- [Go 考古：Slice 的“隐秘角落”——只读切片与扩容策略的权衡](https://tonybai.com/2025/10/02/go-archaeology-slice/)（2025-10-02）
+- [并发测试神器 synctest的“成人礼”：从goroutine泄漏到微妙的竞态，Go团队如何修复三大“首日bug”？](https://tonybai.com/2025/09/29/synctest-bugs-in-go-1-25/)（2025-09-29）
+- [Go 结构体初始化的“反直觉”设计终于要改了？深入探讨嵌入字段直接初始化提案](https://tonybai.com/2025/09/27/direct-ref-to-embedded-fields-in-struct-literals/)（2025-09-27）
+- [“自立程序员宣言”解读：这不就是我们一直在说的Go语言哲学吗？](https://tonybai.com/2025/09/26/self-reliant-programmer/)（2025-09-26）
+- [Go 安全的“隐形战争”：过去、现在与未来](https://tonybai.com/2025/09/25/go-security-past-present-and-future/)（2025-09-25）
+- [Go团队成员的忠告：在你的API变得无法挽回之前，必须掌握的四条原则](https://tonybai.com/2025/09/24/evolving-your-go-api/)（2025-09-24）
+- [“可移植性”的隐藏成本：Go为何要重塑maphash并划定新的运行时边界？](https://tonybai.com/2025/09/23/go-maphash-portability-costs-and-runtime-boundaries/)（2025-09-23）
+- [“我们放弃了”——Go 团队坦诚布公，聊聊那些可能永远不会加入 Go 的功能](https://tonybai.com/2025/09/22/go-team-gave-up-on-features/)（2025-09-22）
+- [重构还是重写？GitHub工程师维护Go大项目的实践指南](https://tonybai.com/2025/09/20/refactoring-go-in-large-codebases/)（2025-09-20）
+- [Go写业务是垃圾？Rust重写是坨屎？聊聊程序员评论区里的那股“煞气”](https://tonybai.com/2025/09/19/the-tension-in-programmer-comments/)（2025-09-19）
+- [从arena、memory region到runtime.free：Go内存管理探索的务实转向](https://tonybai.com/2025/09/18/go-runtime-free-proposal/)（2025-09-18）
+- [Dave Cheney 复出首谈：那些我反复强调的Go编程模式](https://tonybai.com/2025/09/17/some-things-i-keep-repeating-about-go/)（2025-09-17）
+- [Go 语言的灵魂之问：当“简单”变得“复杂”](https://tonybai.com/2025/09/16/go-language-when-simple-becomes-complex/)（2025-09-16）
+- [context：Go 语言的“天问”，你真的懂了吗？](https://tonybai.com/2025/09/15/go-context-column/)（2025-09-15）
+- [超越零值：Go 语言“构造模式”深度指南](https://tonybai.com/2025/09/12/go-constructor-pattern-guide/)（2025-09-12）
+- [直面依赖之痛与TLS简化：GopherCon 2025贡献者峰会核心纪要深度解读](https://tonybai.com/2025/09/11/gophercon-2025-contributor-summit-notes/)（2025-09-11）
+- [MCP协议注册中心发布：Go在下一代AI基础设施中扮演关键角色](https://tonybai.com/2025/09/10/introducing-the-mcp-registry/)（2025-09-10）
+- [最好的教师节礼物：来自2.5万名Gopher的认可](https://tonybai.com/2025/09/10/happy-teachers-day-2025/)（2025-09-10）
+- [NASA的十大编码“诫律”：Go视角的全新解读](https://tonybai.com/2025/09/09/the-power-of-ten-in-go/)（2025-09-09）
+- [告别算法“天书”，Go程序员的学术伪代码“翻译”指南](https://tonybai.com/2025/09/06/gopher-pseudocode-translation-guide/)（2025-09-06）
+- [Go Proxy的“背景刷新”机制，是优化还是“DDoS”？一次社区事件引发的深度复盘](https://tonybai.com/2025/09/05/go-proxy-revise-background-refresh-pacing/)（2025-09-05）
+- [“简单”不是“容易”：Go开发者应该懂的5个道理](https://tonybai.com/2025/09/04/simple-is-not-easy/)（2025-09-04）
+- [Gopher直通大厂，就从这第一课开始！](https://tonybai.com/2025/09/03/gopher-first-lesson-to-big-factory/)（2025-09-03）
+- [成为更完整的 Go 工程师，从补上这堂系统编程课开始](https://tonybai.com/2025/09/01/system-programming-in-go/)（2025-09-01）
+- [我的 Gopher “长期主义”：从《Go语言第一课》新书说起](https://tonybai.com/2025/08/28/go-primer-published/)（2025-08-28）
+- [Go语言的“灵魂拷问”：接口只关乎行为，还是也应拥抱数据？](https://tonybai.com/2025/08/27/go-interface-embrace-data/)（2025-08-27）
+- [告别性能猜谜：一份Go并发操作的成本层级清单](https://tonybai.com/2025/08/26/go-concurrency-cost-hierarchy/)（2025-08-26）
+- [Go的“七宗罪”：一篇“Go依然不够好”如何引爆社区激辩？](https://tonybai.com/2025/08/25/go-is-still-not-good/)（2025-08-25）
+- [泛型重塑 Go 错误检查：errors.As 的下一站 AsA？](https://tonybai.com/2025/08/23/proposal-errors-asa/)（2025-08-23）
+- [解锁 CPU 终极性能：Go 原生 SIMD 包预览版初探](https://tonybai.com/2025/08/22/go-simd-package-preview/)（2025-08-22）
+- [哲学家与工程师：为何 Rust 和 Go 的“官方之声”如此不同？](https://tonybai.com/2025/08/21/go-rust-official-voices/)（2025-08-21）
+- [收藏级指南：Gopher AI入局路线图](https://tonybai.com/2025/08/18/ai-app-dev-guide-for-gopher/)（2025-08-18）
+- [从 Rob Pike 的提案到社区共识：Go 或将通过 new(v) 彻底解决指针初始化难题](https://tonybai.com/2025/08/17/create-pointer-to-simple-types/)（2025-08-17）
+- [Go 1.25中值得关注的几个变化](https://tonybai.com/2025/08/15/some-changes-in-go-1-25/)（2025-08-15）
+- [二进制的“魔术”：每个 Go 程序员都应掌握的位操作艺术](https://tonybai.com/2025/08/13/bit-manipulation-in-go/)（2025-08-13）
+- [Go 的“身份危机”：当新 Gopher 试图将它变成他们最爱的语言](https://tonybai.com/2025/08/12/go-identity-crisis/)（2025-08-12）
+- [为何Go语言迟迟未能拥抱 io_uring？揭秘集成的三大核心困境](https://tonybai.com/2025/08/11/why-go-not-embrace-iouring/)（2025-08-11）
+- [Go json/v2实战：告别内存爆炸，掌握真流式Marshal和Unmarshal](https://tonybai.com/2025/08/09/true-streaming-support-in-jsonv2/)（2025-08-09）
+- [想用Go复刻“Claude Code”？那你得先补上TUI这一课](https://tonybai.com/2025/08/08/go-tui-primer/)（2025-08-08）
+- [Go 模块的“分叉之痛”：一个提案能否终结“全局替换”的噩梦？](https://tonybai.com/2025/08/07/fork-go-module/)（2025-08-07）
+- [Go语言正在成为“老旧”生态的“新引擎”？从 FrankenPHP 和新版 TypeScript 编译器谈起](https://tonybai.com/2025/08/06/go-new-engine-of-old-languages/)（2025-08-06）
+- [从“锁”到“channel”：开启你的Go并发心智模型转变之旅](https://tonybai.com/2025/08/05/go-concurrency-mental-model/)（2025-08-05）
+- [Go官方 HTTP/3 实现终迎曙光：x/net/http3 提案启动，QUIC 基础已就位](https://tonybai.com/2025/08/02/proposal-http3/)（2025-08-02）
+- [Go fix 命令将迎“重生”：移除过时功能，为集成现代化代码分析器铺平道路](https://tonybai.com/2025/07/28/go-fix-reborn/)（2025-07-28）
+- [Go vs. Rust vs. C++：从语言规范长度看三种不同的“复杂性”](https://tonybai.com/2025/07/25/go-vs-rust-vs-cpp-in-complexity/)（2025-07-25）
+- [Goroutine泄漏防不胜防？Go GC或将可以检测“部分死锁”，已在Uber生产环境验证](https://tonybai.com/2025/07/24/deadlock-detection-by-gc/)（2025-07-24）
+- [美国运通复盘 Go 语言实践：从依赖管理到并发模型，七大经验教训全解析](https://tonybai.com/2025/07/24/go-at-american-express-today/)（2025-07-24）
+- [Uber性能优化实践：如何用 GenAI 将 Go 代码调优从数周缩短至数小时？](https://tonybai.com/2025/07/23/uber-perfinsights/)（2025-07-23）
+- [不止是云原生：为什么 Go 的热度在持续上升？来自社区的真实声音](https://tonybai.com/2025/07/23/go-surge-in-popularity/)（2025-07-23）
+- [Go 1.24用户报告：Datadog如何借助 Swiss Tables版map节省数百 GB 内存？](https://tonybai.com/2025/07/22/go-swiss-table-map-user-report/)（2025-07-22）
+- [解密 Go 安全核心：7 步掌握现代密码学工程](https://tonybai.com/2025/07/21/go-crypto-101/)（2025-07-21）
+- [HashiCorp创始人Mitchell Hashimoto 的 Agentic Engineering 实战心法](https://tonybai.com/2025/07/20/mitchell-hashimoto-agentic-engineering/)（2025-07-20）
+- [Go 比 Python 更懂“Python 之禅”？](https://tonybai.com/2025/07/19/go-understand-the-zen-of-python-better-than-python/)（2025-07-19）
+- [一张图读懂Go的生存之道：当“面条代码”来敲门](https://tonybai.com/2025/07/16/when-spaghetti-code-knocks/)（2025-07-16）
+- [Go 的“无聊”超能力：为什么“选项更少”反而让你更快？](https://tonybai.com/2025/07/12/insanely-productive-in-go/)（2025-07-12）
+- [Go pprof 迎来重大革新：v2 提案详解，告别默认注册，拥抱飞行记录器](https://tonybai.com/2025/07/11/net-http-pprof-v2/)（2025-07-11）
+- [上手MCP官方Go SDK：一份面向实战的入门指南](https://tonybai.com/2025/07/10/mcp-official-go-sdk/)（2025-07-10）
+- [告别字符串魔法：Go 迎来类型化 Struct Tag 提案，编译期安全触手可及？](https://tonybai.com/2025/07/08/typed-struct-tags/)（2025-07-08）
+- [“先发布，后审核”：Go模块生态的阿喀琉斯之踵？](https://tonybai.com/2025/07/07/go-module-supply-chain-attack-case/)（2025-07-07）
+- [读懂Go的设计哲学：为什么说它是“恰到好处”的80/20语言？](https://tonybai.com/2025/07/05/go-is-8020-language/)（2025-07-05）
+- [Twitch工程师的Go进阶之路：为何你写的Go代码，总感觉“不对劲”？](https://tonybai.com/2025/07/04/everything-i-did-to-become-an-expert-in-golang/)（2025-07-04）
+- [Go考古：创始人亲述Go语言的“创世纪”](https://tonybai.com/2025/07/03/meet-the-go-team-2012/)（2025-07-03）
+- [Go并行编程的“第一性原理”：Guy Steele 教你如何“不去想”并行](https://tonybai.com/2025/06/29/thinking-parallel-programming/)（2025-06-29）
+- [Gopher视角：Java 开发者转向 Go 时，最需要“掰过来”的几个习惯](https://tonybai.com/2025/06/27/from-java-to-go/)（2025-06-27）
+- [Go vs. Rust再掀波澜：Grab真实案例复盘，Gopher如何看待这场“效率与代价”之争？](https://tonybai.com/2025/06/24/grab-rewrote-go-service-in-rust/)（2025-06-24）
+- [Go 解析器的“隐秘角落”：encoding/json 的安全陷阱与 JSONv2 的救赎](https://tonybai.com/2025/06/22/unexpected-security-footguns-in-go-parsers/)（2025-06-22）
+- [Go errors.Join：是“天赐之物”还是“潘多拉魔盒”？——深入错误聚合的适用场景与最佳实践](https://tonybai.com/2025/06/20/about-errors-join/)（2025-06-20）
+- [RedMonk最新排行出炉：Go语言稳居Top 12，AI 冲击下 Stack Overflow 权重生变？](https://tonybai.com/2025/06/20/redmonk-index-2025-jan/)（2025-06-20）
+- [当一切皆可用Python：Go这样的通用语言与DSL的未来价值何在？](https://tonybai.com/2025/06/19/language-design-in-the-era-of-llm/)（2025-06-19）
+- [解构Go并发之核，与Dmitry Vyukov共探Go调度艺术](https://tonybai.com/2025/06/18/inside-goroutine-scheduler-column/)（2025-06-18）
+- [GCP大面积故障，Go语言是“元凶”还是“背锅侠”？](https://tonybai.com/2025/06/16/go-avoid-critical-incident/)（2025-06-16）
+- [Go还是Rust？2025年技术选型之辩](https://tonybai.com/2025/06/15/rust-vs-go-2025/)（2025-06-15）
+- [Go 1.25新特性前瞻：GC提速，容器更“懂”Go，json有v2了！](https://tonybai.com/2025/06/14/go-1-25-foresight/)（2025-06-14）
+- [爽就完了！Go语言的“简单之美”为何让开发者直呼过瘾？](https://tonybai.com/2025/06/12/grog-brain-heaven/)（2025-06-12）
+- [告别手写汇编：Go官方提出原生SIMD支持，高性能计算将迎来巨变](https://tonybai.com/2025/06/09/go-simd-intrinsics/)（2025-06-09）
+- [“Rustacean”胚胎 vs “Gopher”胚胎：假如用技术栈测“人格”，你会是哪一款？](https://tonybai.com/2025/06/07/nucleus-embryo/)（2025-06-07）
+- [千呼万唤始出来？Go 1.25解决Git仓库子目录作为模块根路径难题](https://tonybai.com/2025/06/07/allow-serving-module-under-subdir/)（2025-06-07）
+- [Go项目该拥抱Monorepo吗？Google经验、etcd模式及白盒交付场景下的深度剖析](https://tonybai.com/2025/06/06/go-monorepo/)（2025-06-06）
+- [Go 错误处理语法之争尘埃落定？Go 团队为何十五年探索后仍选择“不”](https://tonybai.com/2025/06/04/error-syntax/)（2025-06-04）
+- [AI 编码工具“真香”还是“智商税”？一位资深码农的“挑衅”与Go开发者的反思](https://tonybai.com/2025/06/03/provocation-about-ai-assisted-programming/)（2025-06-03）
+- [Go的简洁性之辩：轻量级匿名函数提案为何七年悬而未决？](https://tonybai.com/2025/06/03/lightweight-anonymous-func-syntax/)（2025-06-03）
+- [“这代码迟早出事！”——复盘线上问题：六个让你头痛的Go编码坏味道](https://tonybai.com/2025/05/31/six-smells-in-go/)（2025-05-31）
+- [当Gopher拥有了“Go语言女友”：一张图带你读懂Go的那些“可爱”特性](https://tonybai.com/2025/05/30/gopher-girlfriend/)（2025-05-30）
+- [Go x/exp/xiter提案搁浅背后：社区的选择与深度思考](https://tonybai.com/2025/05/29/xiter-declined/)（2025-05-29）
+- [Google I/O 2025 Go 语言进展：生产力、生产就绪与 AI 赋能](https://tonybai.com/2025/05/25/go-at-googleio-2025/)（2025-05-25）
+- [API设计的“Go境界”：Go团队设计MCP SDK过程中的取舍与思考](https://tonybai.com/2025/05/23/go-api-design-mcp-sdk/)（2025-05-23）
+- [Go工具链进化：go.mod新增ignore指令，破解混合项目构建难题](https://tonybai.com/2025/05/22/go-mod-ignore-directive/)（2025-05-22）
+- [透视软件供应链安全：SBOM标准解读与Go项目生成指南](https://tonybai.com/2025/05/22/go-sbom-practice/)（2025-05-22）
+- [权威认证：Go核心密码学库通过独立安全审计](https://tonybai.com/2025/05/21/go-crypto-audit/)（2025-05-21）
+- [未雨绸缪：Go开发者需要了解的后量子密码学与实现现状](https://tonybai.com/2025/05/20/post-quantum-cryptography-in-go/)（2025-05-20）
+- [原子操作的瓶颈与Go的多核扩展性之痛：深入剖析sync.ShardedValue及per-CPU提案](https://tonybai.com/2025/05/19/shardedvalue-per-cpu-proposal/)（2025-05-19）
+- [Java屹立30年，Go的“少年壮志”如何续写辉煌？——来自Java之父的“长寿秘诀”](https://tonybai.com/2025/05/17/java-at-30/)（2025-05-17）
+- [揭秘Go语言中的rune：一段跨越30年的Plan 9往事与UTF-8的诞生传奇](https://tonybai.com/2025/05/16/how-rune-came/)（2025-05-16）
+- [手把手带你玩转GOEXPERIMENT=jsonv2：Go下一代JSON库初探](https://tonybai.com/2025/05/15/go-json-v2/)（2025-05-15）
+- [从Go路由选择看“标准库优先”：何时坚守？何时拓展？](https://tonybai.com/2025/05/14/which-go-router-should-i-use/)（2025-05-14）
+- [Go社区的“轻框架”理念：自由的馈赠还是无形的枷锁？](https://tonybai.com/2025/05/13/go-prefer-less-framework/)（2025-05-13）
+- [Go运行时底层接口标准化？“GOOS=none”欲为Go铺设通往裸金属、固件和微控制器的桥梁](https://tonybai.com/2025/05/13/goos-none-proposal/)（2025-05-13）
+- [从线下到线上，我的“Go语言进阶课”终于在极客时间与大家见面了！](https://tonybai.com/2025/05/12/go-advanced-course/)（2025-05-12）
+- [Go包维护者必读：如何让你的Go包更易被发现、文档更专业？](https://tonybai.com/2025/05/11/deep-into-pkg-go-dev/)（2025-05-11）
+- [Go语言进入“后元老时代”？Ian Lance Taylor离职引发的思考：传承、创新与社区](https://tonybai.com/2025/05/11/ian-lance-taylor-leave-go/)（2025-05-11）
+- [百万行依赖的“恐惧”：一位Rust开发者的深度反思与Go的启示](https://tonybai.com/2025/05/10/rust-dependencies-scare-me/)（2025-05-10）
+- [GitHub英语沟通太难？别让语言成为你参与顶级Go项目的拦路虎！](https://tonybai.com/2025/05/09/github-english-communication-patterns-and-practice/)（2025-05-09）
+- [Go 1.25链接器提速、执行文件瘦身：DWARF 5调试信息格式升级终落地](https://tonybai.com/2025/05/08/go-dwarf5/)（2025-05-08）
+- [代码覆盖率新玩法：Russ Cox教你用差异化分析加速Go调试](https://tonybai.com/2025/05/07/debug-with-diff-cover/)（2025-05-07）
+- [解读“Cheating the Reaper”：在Go中与GC共舞的Arena黑科技](https://tonybai.com/2025/05/06/cheating-the-reaper-in-go/)（2025-05-06）
+- [Go新垃圾回收器登场：Green Tea GC如何通过内存感知显著降低CPU开销？](https://tonybai.com/2025/05/03/go-green-tea-garbage-collector/)（2025-05-03）
+- [“错误即值”，不同实现：Go与Zig错误处理哲学对比](https://tonybai.com/2025/04/30/go-vs-zig-in-error-handling/)（2025-04-30）
+- [Go的简洁神话？转Go前你需要知道的5个“真相”](https://tonybai.com/2025/04/29/hard-truths-before-switching-to-go/)（2025-04-29）
+- [go-yaml归档背后：Go开源生态的“脆弱”与“韧性”，我们该如何看待？](https://tonybai.com/2025/04/28/go-ecosystem/)（2025-04-28）
+- [Go开发者必知：五大缓存策略详解与选型指南](https://tonybai.com/2025/04/28/five-cache-strategies/)（2025-04-28）
+- [Rob Pike的“抱怨”与Go的“解药”：直面软件膨胀的四大根源](https://tonybai.com/2025/04/27/rob-pike-on-bloat/)（2025-04-27）
+- [一个字符引发的30%性能下降：Go值接收者的隐藏成本与优化](https://tonybai.com/2025/04/25/hidden-costs-of-go-value-receiver/)（2025-04-25）
+- [Go应用的K8s“最佳拍档”：何时以及如何用好多容器Pod模式](https://tonybai.com/2025/04/24/multiple-containers-pod-pattern/)（2025-04-24）
+- [不止Go，更是Go+AI：我的知识星球「Go & AI 精进营」全新启航！](https://tonybai.com/2025/04/22/go-ai-knowledge-community-launch/)（2025-04-22）
+- [Go项目设计的“七宗罪”？警惕那些流行的“反模式”](https://tonybai.com/2025/04/21/go-project-design-antipatterns/)（2025-04-21）
+- [AI会写Go代码了，初学者还需要系统学习吗？](https://tonybai.com/2025/04/19/learn-go-in-ai-era/)（2025-04-19）
+- [代码Agent没有护城河？我用Go标准库和DeepSeek证明给你看！](https://tonybai.com/2025/04/18/reproduce-thorsten-balls-code-agent/)（2025-04-18）
+- [“Go is badly designed”？它像极了我们当年恨过的物理老师！](https://tonybai.com/2025/04/17/go-is-badly-designed/)（2025-04-17）
+- [自定义Hash终迎标准化？Go提案maphash.Hasher接口设计解读](https://tonybai.com/2025/04/17/standardize-the-hash-function/)（2025-04-17）
+- [11个现代Go特性：用gopls/modernize让你的代码焕然一新](https://tonybai.com/2025/04/15/embrace-modern-go-style-with-gopls-modernize/)（2025-04-15）
+- [Go开发者必看！Uber如何利用PGO将Go服务性能优化推向新高度？](https://tonybai.com/2025/04/11/uber-go-pgo-optimization/)（2025-04-11）
+- [Go开发者必看！JetBrains 2024报告深度解读：Go语言现状、趋势与未来机遇](https://tonybai.com/2025/04/10/jetbrains-2024-go-report-analysis/)（2025-04-10）
+- [Go 1.25新提案：GOMAXPROCS默认值将迎Cgroup感知能力，终结容器性能噩梦？](https://tonybai.com/2025/04/09/gomaxprocs-defaults-add-cgroup-aware/)（2025-04-09）
+- [Go testing包将迎来新增强：标准化属性与持久化构件API即将落地](https://tonybai.com/2025/04/07/go-testing-add-attr-and-artifactdir/)（2025-04-07）
+- [WaitGroup.Go要来了？Go官方提案或让你告别Add和Done样板代码](https://tonybai.com/2025/04/03/waitgroup-go-proposal/)（2025-04-03）
+- [Go安全版图再添利器：OpenPubkey SSH开源，用SSO彻底改变SSH认证](https://tonybai.com/2025/03/31/openpubkey-ssh-open-source/)（2025-03-31）
+- [Go模块发布流程再加固：go mod verify -tag提案详解](https://tonybai.com/2025/03/28/go-mod-verify-tag/)（2025-03-28）
+- [Go 1.25规范大扫除：移除“Core Types”，为更灵活的泛型铺路](https://tonybai.com/2025/03/27/remove-coretypes-from-go-spec/)（2025-03-27）
+- [Go方法名的作用域：包级，但需间接调用](https://tonybai.com/2025/03/24/understand-methodname-scope/)（2025-03-24）
+- [体验Gemini Deep Research：以Go语言未来演进方向分析为例](https://tonybai.com/2025/03/16/gemini-deep-research-experience/)（2025-03-16）
+- [Anders Hejlsberg专访全文：TypeScript正在向Go移植](https://tonybai.com/2025/03/13/interview-with-anders-hejlsberg/)（2025-03-13）
+- [Anders Hejlsberg谈TypeScript编译器向Go移植的实践与规划](https://tonybai.com/2025/03/12/typescript-native-port-to-go/)（2025-03-12）
+- [深入GOCACHEPROG：Go构建缓存的自定义扩展](https://tonybai.com/2025/03/04/deep-dive-into-gocacheprog-custom-extensions-for-go-build-cache/)（2025-03-04）
+- [Go 1.24中值得关注的几个变化](https://tonybai.com/2025/02/16/some-changes-in-go-1-24/)（2025-02-16）
+- [关于Go错误处理新提案的一个想法：?操作符这样用行不行](https://tonybai.com/2025/02/08/personal-idea-about-using-question-mark-operator-in-go-error-handling-new-proposal/)（2025-02-08）
+- [Go encoding/json/v2提案：JSON处理新引擎](https://tonybai.com/2025/02/05/go-encoding-json-v2-proposal-json-processing-new-engine/)（2025-02-05）
+- [Go导出标识符：那些鲜为人知的细节](https://tonybai.com/2025/01/23/the-hidden-details-of-go-exported-identifiers/)（2025-01-23）
+- [探索Go gcflags的使用模式与完整参数选项列表](https://tonybai.com/2025/01/22/gcflags-options-list-and-usage/)（2025-01-22）
+- [Go工具链版本已不由你定：go和toolchain指令详解](https://tonybai.com/2025/01/14/understand-go-and-toolchain-in-go-dot-mod/)（2025-01-14）
+- [2024年Go语言盘点：排名历史新高，团队新老传承](https://tonybai.com/2025/01/06/the-2024-review-of-go-programming-language/)（2025-01-06）
+- [Go 1.24新特性前瞻：工具链和标准库](https://tonybai.com/2024/12/17/go-1-24-foresight-part2/)（2024-12-17）
+- [Go 1.24新特性前瞻：语法、编译器与运行时](https://tonybai.com/2024/12/16/go-1-24-foresight-part1/)（2024-12-16）
+- [量子计算入门与Go模拟](https://tonybai.com/2024/12/11/simulate-quantum-computing-in-go/)（2024-12-11）
+- [惊！Go在十亿次循环和百万任务中表现不如Java，究竟为何？](https://tonybai.com/2024/12/02/why-go-sucks/)（2024-12-02）
+- [一文搞懂如何在Go包中支持Hash-Based Bisect调试](https://tonybai.com/2024/11/24/how-to-support-hash-based-bisect-in-go-package/)（2024-11-24）
+- [Go包构建：专家也未必了解的文件选择细节](https://tonybai.com/2024/11/21/go-source-file-selection-details-when-building-package/)（2024-11-21）
+- [走向合规：Go加密库对FIPS 140的支持](https://tonybai.com/2024/11/16/go-crypto-and-fips-140/)（2024-11-16）
+- [Gotip安装：基于Go镜像代码仓库](https://tonybai.com/2024/11/15/install-gotip-using-go-repo-mirror/)（2024-11-15）
+- [Go map使用Swiss Table重新实现，性能最高提升近50%](https://tonybai.com/2024/11/14/go-map-use-swiss-table/)（2024-11-14）
+- [Go，15岁了\[译\]](https://tonybai.com/2024/11/12/go-turns-15/)（2024-11-12）
+- [Go编译的几个细节，连专家也要停下来想想](https://tonybai.com/2024/11/11/some-details-about-go-compilation/)（2024-11-11）
+- [构建无密码认证：passkey入门与Go实现](https://tonybai.com/2024/11/01/introduction-to-passkey/)（2024-11-01）
+- [写Go就像喝白开水](https://tonybai.com/2024/10/29/go-coding-is-like-drinking-boiled-water/)（2024-10-29）
+- [写出Go标准库级别文档注释的十个细节](https://tonybai.com/2024/10/27/ten-details-when-using-documentation-comments/)（2024-10-27）
+- [Go开发者的密码学导航：crypto库使用指南](https://tonybai.com/2024/10/19/go-crypto-package-design-deep-dive/)（2024-10-19）
+- [Go语言演进的双保险：GOEXPERIMENT与GODEBUG](https://tonybai.com/2024/10/11/go-evolution-dual-insurance-goexperiment-godebug/)（2024-10-11）
+- [Go语言的新时代：新领导团队和未来规划](https://tonybai.com/2024/10/10/pass-torch-to-go-new-leadership-team/)（2024-10-10）
+- [与Thorsten Ball的共鸣：Go作为教学语言在技术写作中的优越性](https://tonybai.com/2024/10/09/resonating-with-thorsten-ball-on-go-in-technical-writing/)（2024-10-09）
+- [从DevOps到日常脚本：聊聊Go语言的多面性](https://tonybai.com/2024/10/08/go-languages-versatility-from-devops-to-daily-scripts/)（2024-10-08）
+- [Go项目中使用Git Submodule，还有这个必要吗？](https://tonybai.com/2024/10/05/using-git-submodules-in-go-projects/)（2024-10-05）
+- [探索Go守护进程的实现方法](https://tonybai.com/2024/10/03/how-to-daemonize-go-program/)（2024-10-03）
+- [为什么Canonical Import Path注释在Go中不再必要](https://tonybai.com/2024/10/02/why-canonical-import-paths-no-longer-necessary-in-go/)（2024-10-02）
+- [跟上Go演进步伐，你只需要关注这几件事儿](https://tonybai.com/2024/09/30/how-to-keep-up-with-go-evolution/)（2024-09-30）
+- [Go语言中的深拷贝：概念、实现与局限](https://tonybai.com/2024/09/28/understand-deep-copy-in-go/)（2024-09-28）
+- [“类型名称”在Go语言规范中的演变](https://tonybai.com/2024/09/24/the-evolution-of-type-name-in-go-spec/)（2024-09-24）
+- [Go weak包前瞻：弱指针为内存管理带来新选择](https://tonybai.com/2024/09/23/go-weak-package-preview/)（2024-09-23）
+- [htmx：Gopher走向全栈的完美搭档？](https://tonybai.com/2024/09/20/htmx-gopher-perfect-partner-for-full-stack/)（2024-09-20）
+- [Go unique包：突破字符串局限的通用值Interning技术实现](https://tonybai.com/2024/09/18/understand-go-unique-package-by-example/)（2024-09-18）
+- [重拾精髓：go doc -http让离线包文档浏览更便捷](https://tonybai.com/2024/09/06/go-doc-add-http-support/)（2024-09-06）
+- [Go 1.18之后的语法新特性Quiz，你能做对几个？](https://tonybai.com/2024/08/27/a-new-syntax-quiz-after-go-1-18/)（2024-08-27）
+- [从零开始编程：Go语言真的适合新手吗？](https://tonybai.com/2024/08/22/go-as-first-language/)（2024-08-22）
+- [Go 1.23中值得关注的几个变化](https://tonybai.com/2024/08/19/some-changes-in-go-1-23/)（2024-08-19）
+- [都2024年了，当初那个“Go，互联网时代的C语言”的预言成真了吗？](https://tonybai.com/2024/08/17/go-the-c-language-of-the-internet-era-come-true/)（2024-08-17）
+- [通过Go示例理解函数式编程思维](https://tonybai.com/2024/08/11/understand-functional-programming-in-go/)（2024-08-11）
+- [使用TLA+形式化验证Go并发程序](https://tonybai.com/2024/08/05/formally-verify-concurrent-go-programs-using-tla-plus/)（2024-08-05）
+- [Gopher Daily支持Feed订阅](https://tonybai.com/2024/08/04/gopherdaily-add-feed-support/)（2024-08-04）
+- [Go语言中的SIMD加速：以矩阵加法为例](https://tonybai.com/2024/07/21/simd-in-go/)（2024-07-21）
+- [通过实例理解Go访问和操作数据库的几种方式](https://tonybai.com/2024/07/15/understand-the-ways-to-access-databases-in-go/)（2024-07-15）
+- [Go语言编程指南翻译记：一本书，一支队伍，一段难忘的旅程](https://tonybai.com/2024/07/05/go-fundamentals-translation/)（2024-07-05）
+- [Go与神经网络：手写数字识别](https://tonybai.com/2024/06/28/go-and-nn-part3-handwritten-digit-recognition/)（2024-06-28）
+- [Go 1.23中的自定义迭代器与iter包](https://tonybai.com/2024/06/24/range-over-func-and-package-iter-in-go-1-23/)（2024-06-24）
+- [Go团队的工作方式](https://tonybai.com/2024/06/22/how-things-get-done-on-the-go-team/)（2024-06-22）
+- [Gopher的Rust第一课：Rust的依赖管理](https://tonybai.com/2024/06/16/gopher-rust-first-lesson-managing-deps/)（2024-06-16）
+- [Go与神经网络：线性回归](https://tonybai.com/2024/06/10/go-and-nn-part2-linear-regression/)（2024-06-10）
+- [Gopher的Rust第一课：Rust代码组织](https://tonybai.com/2024/06/06/gopher-rust-first-lesson-organizing-rust-code/)（2024-06-06）
+- [Go 1.23新特性前瞻](https://tonybai.com/2024/05/30/go-1-23-foresight/)（2024-05-30）
+- [Gopher的Rust第一课：第一个Rust程序](https://tonybai.com/2024/05/27/gopher-rust-first-lesson-first-rust-program/)（2024-05-27）
+- [Go团队：Go是什么](https://tonybai.com/2024/05/19/what-the-go-team-think-go-is/)（2024-05-19）
+- [Go早期的那些布道者](https://tonybai.com/2024/05/17/the-early-evangelists-of-go/)（2024-05-17）
+- [Gopher的Rust第一课：建立Rust开发环境](https://tonybai.com/2024/05/10/gopher-rust-first-lesson-setup-dev-env/)（2024-05-10）
+- [使用Ollama和Go基于文本嵌入模型实现文本向量化](https://tonybai.com/2024/05/09/text-vectorization-using-ollama-and-go-based-on-text-embedding-models/)（2024-05-09）
+- [Go未用代码消除与可执行文件瘦身](https://tonybai.com/2024/05/05/dead-code-elimination-and-executable-file-slimming-in-go/)（2024-05-05）
+- [从零到生产：Go在Google的历程\[译\]](https://tonybai.com/2024/04/24/go-journey-at-google/)（2024-04-24）
+- [Gopher的Rust第一课：Rust的那些事儿](https://tonybai.com/2024/04/22/gopher-rust-first-lesson-all-about-rust/)（2024-04-22）
+- [选择正确的Go Module Path](https://tonybai.com/2024/04/09/choose-the-right-go-module-path/)（2024-04-09）
+- [Go 1.22引入的包级变量初始化次序问题](https://tonybai.com/2024/03/29/the-issue-in-pkg-level-var-init-order-in-go-1-22/)（2024-03-29）
+- [Go 1.22中值得关注的几个变化](https://tonybai.com/2024/02/18/some-changes-in-go-1-22/)（2024-02-18）
+- [2024年的Rust与Go\[译\]](https://tonybai.com/2024/01/24/rust-vs-go-in-2024/)（2024-01-24）
+- [依赖Kafka的Go单元测试例解](https://tonybai.com/2024/01/08/go-unit-testing-deps-on-kafka/)（2024-01-08）
+- [Go语言之父的反思：我们做对了什么，做错了什么](https://tonybai.com/2024/01/07/what-we-got-right-what-we-got-wrong/)（2024-01-07）
+- [Go测试的20个实用建议](https://tonybai.com/2024/01/01/go-testing-by-example/)（2024-01-01）
+- [2023年Go语言盘点：稳中求新，稳中求变](https://tonybai.com/2023/12/31/the-2023-review-of-go-programming-language/)（2023-12-31）
+- [Go 1.22新特性前瞻](https://tonybai.com/2023/12/25/go-1-22-foresight/)（2023-12-25）
+- [Go未来演进：基于共同目标和数据驱动的决策](https://tonybai.com/2023/12/10/go-changes/)（2023-12-10）
+- [Go语言gRPC服务Handler单元测试详解](https://tonybai.com/2023/11/25/grpc-handler-unit-testing-in-go/)（2023-11-25）
+- [关系代数、SQL语句和Go语言示例](https://tonybai.com/2023/11/15/relational-algebra-and-sql-with-go-examples/)（2023-11-15）
+- [Go，14周年\[译\]](https://tonybai.com/2023/11/11/go-opensource-14-years/)（2023-11-11）
+- [通过实例理解Go Web身份认证的几种方式](https://tonybai.com/2023/10/23/understand-go-web-authn-by-example/)（2023-10-23）
+- [Go TLS服务端绑定证书的几种方式](https://tonybai.com/2023/10/13/multiple-ways-to-bind-certificates-on-go-tls-server-side/)（2023-10-13）
+- [Go项目目录该怎么组织？官方终于出指南了！](https://tonybai.com/2023/10/05/the-official-guide-of-organizing-go-project/)（2023-10-05）
+- [聊聊Go与依赖注入](https://tonybai.com/2023/09/28/dependency-injection-with-go/)（2023-09-28）
+- [使用Go和WebRTC data channel实现端到端实时通信](https://tonybai.com/2023/09/23/p2p-rtc-implementation-with-go-and-webrtc-data-channel/)（2023-09-23）
+- [聊聊Go语言的向前兼容性和toolchain规则](https://tonybai.com/2023/09/10/understand-go-forward-compatibility-and-toolchain-rule/)（2023-09-10）
+- [slog正式版来了：Go日志记录新选择！](https://tonybai.com/2023/09/01/slog-a-new-choice-for-logging-in-go/)（2023-09-01）
+- [编译Go应用的黑盒挑战：无源码只有.a文件，你能搞定吗？](https://tonybai.com/2023/08/30/how-to-build-with-only-archive-in-go/)（2023-08-30）
+- [Go 1.21中值得关注的几个变化](https://tonybai.com/2023/08/20/some-changes-in-go-1-21/)（2023-08-20）
+- [Go项目初始化不再困扰你：gonew全方位解析](https://tonybai.com/2023/08/11/introduction-to-the-gonew-tool/)（2023-08-11）
+- [Gopher Daily改版了](https://tonybai.com/2023/08/06/gopherdaily-revamped/)（2023-08-06）
+- [Go语言开发者的Apache Arrow使用指南：读写Parquet文件](https://tonybai.com/2023/07/31/a-guide-of-using-apache-arrow-for-gopher-part6/)（2023-07-31）
+- [Go语言开发者的Apache Arrow使用指南：扩展compute包](https://tonybai.com/2023/07/22/a-guide-of-using-apache-arrow-for-gopher-part5/)（2023-07-22）
+- [使用testify包辅助Go测试指南](https://tonybai.com/2023/07/16/the-guide-of-go-testing-with-testify-package/)（2023-07-16）
+- [Go语言开发者的Apache Arrow使用指南：数据操作](https://tonybai.com/2023/07/13/a-guide-of-using-apache-arrow-for-gopher-part4/)（2023-07-13）
+- [Go语言开发者的Apache Arrow使用指南：高级数据结构](https://tonybai.com/2023/07/08/a-guide-of-using-apache-arrow-for-gopher-part3/)（2023-07-08）
+- [Go语言开发者的Apache Arrow使用指南：内存管理](https://tonybai.com/2023/06/30/a-guide-of-using-apache-arrow-for-gopher-part2/)（2023-06-30）
+- [Go语言开发者的Apache Arrow使用指南：数据类型](https://tonybai.com/2023/06/25/a-guide-of-using-apache-arrow-for-gopher-part1/)（2023-06-25）
+- [Go语言包设计指南](https://tonybai.com/2023/06/18/go-package-design-guide/)（2023-06-18）
+- [Go GC：了解便利背后的开销](https://tonybai.com/2023/06/13/understand-go-gc-overhead-behind-the-convenience/)（2023-06-13）
+- [Go语言反射编程指南](https://tonybai.com/2023/06/04/reflection-programming-guide-in-go/)（2023-06-04）
+- [聊聊Go语言的控制语句](https://tonybai.com/2023/05/27/control-flow-statement-in-go/)（2023-05-27）
+- [Go与神经网络：张量运算](https://tonybai.com/2023/05/21/go-and-nn-part1-tensor-operations/)（2023-05-21）
+- [Go错误处理：错误链使用指南](https://tonybai.com/2023/05/14/a-guide-of-using-go-error-chain/)（2023-05-14）
+- [Go项目组织：在单一repo中管理多个Go module指南](https://tonybai.com/2023/05/10/a-guide-of-managing-multiple-go-modules-in-mono-repo/)（2023-05-10）
+- [Go：值与指针](https://tonybai.com/2023/05/05/go-value-and-pointer/)（2023-05-05）
+- [Go 1.21新特性前瞻](https://tonybai.com/2023/04/26/go-1-21-foresight/)（2023-04-26）
+- [一文告诉你当module path为main时执行go test失败的真正原因](https://tonybai.com/2023/04/08/the-reason-why-go-test-fails-when-module-path-is-main/)（2023-04-08）
+- [使用go test框架驱动的自动化测试](https://tonybai.com/2023/03/30/automated-testing-driven-by-go-test/)（2023-03-30）
+- [Go开发命令行程序指南](https://tonybai.com/2023/03/25/the-guide-of-developing-cli-program-in-go/)（2023-03-25）
+- [聊聊Go语言的全局变量](https://tonybai.com/2023/03/22/global-variable-in-go/)（2023-03-22）
+- [聊聊godoc、go doc与pkgsite](https://tonybai.com/2023/03/20/godoc-vs-go-doc-vs-pkgsite/)（2023-03-20）
+- [一文搞懂Go subtest](https://tonybai.com/2023/03/15/an-intro-of-go-subtest/)（2023-03-15）
+- [Go是一门面向对象编程语言吗](https://tonybai.com/2023/03/12/is-go-object-oriented/)（2023-03-12）
+- [小厂内部私有Go module拉取方案3](https://tonybai.com/2023/03/03/the-approach-to-go-get-private-go-module-in-house-part3/)（2023-03-03）
+- [十分钟入门Go语言](https://tonybai.com/2023/02/23/learn-go-in-10-min/)（2023-02-23）
+- [2023年的Rust与Go\[译\]](https://tonybai.com/2023/02/22/rust-vs-go-in-2023/)（2023-02-22）
+- [一文告诉你如何判断Go接口变量是否相等](https://tonybai.com/2023/02/19/how-to-determine-if-two-interface-vars-are-equal/)（2023-02-19）
+- [Go 1.20中值得关注的几个变化](https://tonybai.com/2023/02/08/some-changes-in-go-1-20/)（2023-02-08）
+- [聊聊Go与TLS 1.3](https://tonybai.com/2023/01/13/go-and-tls13/)（2023-01-13）
+- [2022年Go语言盘点：泛型落地，无趣很好，稳定为王](https://tonybai.com/2022/12/29/the-2022-review-of-go-programming-language/)（2022-12-29）
+- [Go类型系统：有何与众不同](https://tonybai.com/2022/12/18/go-type-system/)（2022-12-18）
+- [Go为什么能成功](https://tonybai.com/2022/12/07/why-go-succeed/)（2022-12-07）
+- [这可能是最权威、最全面的Go语言编码风格规范了！](https://tonybai.com/2022/11/26/intro-of-google-go-style/)（2022-11-26）
+- [Go 1.20新特性前瞻](https://tonybai.com/2022/11/17/go-1-20-foresight/)（2022-11-17）
+- [使用反射操作channel](https://tonybai.com/2022/11/15/using-reflect-to-manipulate-channels/)（2022-11-15）
+- [Go，13周年\[译\]](https://tonybai.com/2022/11/11/go-opensource-13-years/)（2022-11-11）
+- [通过实例理解Go标准库context包](https://tonybai.com/2022/11/08/understand-go-context-by-example/)（2022-11-08）
+- [slog：Go官方版结构化日志包](https://tonybai.com/2022/10/30/first-exploration-of-slog/)（2022-10-30）
+- [Go标准库依赖的那些modules](https://tonybai.com/2022/10/25/the-modules-that-go-standard-library-depend-on/)（2022-10-25）
+- [通过实例理解Go静态单赋值（SSA）](https://tonybai.com/2022/10/21/understand-go-ssa-by-example/)（2022-10-21）
+- [通过实例理解Go内联优化](https://tonybai.com/2022/10/17/understand-go-inlining-optimisations-by-example/)（2022-10-17）
+- [Go语言之道\[译\]](https://tonybai.com/2022/09/25/the-tao-of-go/)（2022-09-25）
+- [如何像gitlab-runner那样将Go应用安装为系统服务](https://tonybai.com/2022/09/12/how-to-install-a-go-app-as-a-system-service-like-gitlab-runner/)（2022-09-12）
+- [Go 1.19中值得关注的几个变化](https://tonybai.com/2022/08/22/some-changes-in-go-1-19/)（2022-08-22）
+- [使用Go开发Kubernetes Operator：基本结构](https://tonybai.com/2022/08/15/developing-kubernetes-operators-in-go-part1/)（2022-08-15）
+- [使用Go语言实现eBPF程序内核态与用户态的双向数据交换](https://tonybai.com/2022/07/25/bidirectional-data-exchange-between-kernel-and-user-states-of-ebpf-programs-using-go/)（2022-07-25）
+- [使用Go语言开发eBPF程序](https://tonybai.com/2022/07/19/develop-ebpf-program-in-go/)（2022-07-19）
+- [使用Go基于国密算法实现双向认证](https://tonybai.com/2022/07/17/two-way-authentication-using-go-and-sm-algorithm/)（2022-07-17）
+- [GoCN社区Go读书会第二期：《Go语言精进之路》](https://tonybai.com/2022/07/07/gocn-community-go-book-club-issue2-go-programming-from-beginner-to-master/)（2022-07-07）
+- [Go语言数据竞争检测与数据竞争模式](https://tonybai.com/2022/06/21/data-race-detection-and-pattern-in-go/)（2022-06-21）
+- [小厂内部私有Go module拉取方案（续）](https://tonybai.com/2022/06/18/the-approach-to-go-get-private-go-module-in-house-part2/)（2022-06-18）
+- [Go 1.19新特性前瞻](https://tonybai.com/2022/06/12/go-1-19-foresight/)（2022-06-12）
+- [Go：方法集合中“消失的方法”](https://tonybai.com/2022/06/06/the-disappeared-method-in-method-set/)（2022-06-06）
+- [评点2021-2022年上市的那些Go语言新书](https://tonybai.com/2022/06/01/reviewing-those-new-go-language-books-coming-out-in-2021-2022/)（2022-06-01）
+- [手把手教你使用ANTLR和Go实现一门DSL语言（第五部分）：错误处理](https://tonybai.com/2022/05/30/an-example-of-implement-dsl-using-antlr-and-go-part5/)（2022-05-30）
+- [手把手教你使用ANTLR和Go实现一门DSL语言（第四部分）：组装语义模型并测试DSL](https://tonybai.com/2022/05/28/an-example-of-implement-dsl-using-antlr-and-go-part4/)（2022-05-28）
+- [手把手教你使用ANTLR和Go实现一门DSL语言（第三部分）：建立和验证语义模型](https://tonybai.com/2022/05/27/an-example-of-implement-dsl-using-antlr-and-go-part3/)（2022-05-27）
+- [手把手教你使用ANTLR和Go实现一门DSL语言（第二部分）：文法验证](https://tonybai.com/2022/05/25/an-example-of-implement-dsl-using-antlr-and-go-part2/)（2022-05-25）
+- [手把手教你使用ANTLR和Go实现一门DSL语言（第一部分）：设计DSL语法与文法](https://tonybai.com/2022/05/24/an-example-of-implement-dsl-using-antlr-and-go-part1/)（2022-05-24）
+- [使用具名返回值巧妙解决泛型函数返回零值的问题](https://tonybai.com/2022/05/20/solving-problems-in-generic-function-implementation-using-named-return-values/)（2022-05-20）
+- [Go程序员拥抱C语言简明指南](https://tonybai.com/2022/05/16/the-short-guide-of-embracing-c-lang-for-gopher/)（2022-05-16）
+- [使用ANTLR和Go实现DSL入门](https://tonybai.com/2022/05/10/introduction-of-implement-dsl-using-antlr-and-go/)（2022-05-10）
+- [Go编程语言与环境：万字长文复盘导致Go语言成功的那些设计决策\[译\]](https://tonybai.com/2022/05/04/the-paper-of-go-programming-language-and-environment/)（2022-05-04）
+- [我来告诉你Go项目标准结构如何布局](https://tonybai.com/2022/04/28/the-standard-layout-of-go-project/)（2022-04-28）
+- [世界读书日：带你走近Go语言编程思维](https://tonybai.com/2022/04/23/taking-a-closer-look-at-programming-thinking-in-go/)（2022-04-23）
+- [Go 1.18中值得关注的几个变化](https://tonybai.com/2022/04/20/some-changes-in-go-1-18/)（2022-04-20）
+- [Go字符串比较，终于有人讲清楚了](https://tonybai.com/2022/04/18/inside-go-string-comparison/)（2022-04-18）
+- [Go是如何缓解供应链攻击的\[译\]](https://tonybai.com/2022/04/02/how-go-mitigates-supply-chain-attacks/)（2022-04-02）
+- [Go社区主流Kafka客户端简要对比](https://tonybai.com/2022/03/28/the-comparison-of-the-go-community-leading-kakfa-clients/)（2022-03-28）
+- [Go泛型介绍\[译\]](https://tonybai.com/2022/03/25/intro-generics/)（2022-03-25）
+- [Go是否支持增量构建？我来告诉你！](https://tonybai.com/2022/03/21/go-native-support-incremental-build/)（2022-03-21）
+- [Go 1.18版本正式发布了](https://tonybai.com/2022/03/16/go-1-18-released/)（2022-03-16）
+- [Go语言map类型变量背后的那些事儿](https://tonybai.com/2022/03/15/the-underlying-of-a-map-type-variable/)（2022-03-15）
+- [聊聊Go语言的软件供应链安全](https://tonybai.com/2022/03/14/software-supply-chain-security-in-go/)（2022-03-14）
+- [为什么有了Go module后“依赖地狱”问题依然存在](https://tonybai.com/2022/03/12/dependency-hell-in-go/)（2022-03-12）
+- [Gopher部落：2022年要做的事儿](https://tonybai.com/2022/03/06/the-2022-plan-of-gopher-tribe/)（2022-03-06）
+- [聊聊Go应用输出日志的工程实践](https://tonybai.com/2022/03/05/go-logging-practice/)（2022-03-05）
+- [Go GC如何检测内存对象中是否包含指针](https://tonybai.com/2022/02/21/how-gc-detect-pointer-in-mem-obj/)（2022-02-21）
+- [“Go语言第一课”结课了](https://tonybai.com/2022/02/17/go-first-course-close/)（2022-02-17）
+- [Go究竟是否为空切片分配了底层数组](https://tonybai.com/2022/02/15/whether-go-allocate-underlying-array-for-empty-slice/)（2022-02-15）
+- [2021年Go语言盘点：厉兵秣马强技能，蓄势待发新征程](https://tonybai.com/2022/01/16/the-2021-review-of-go-programming-language/)（2022-01-16）
+- [Go语言精进之路：为Gopher们准备的“知识年货”](https://tonybai.com/2022/01/15/go-programming-from-beginners-to-masters-is-published/)（2022-01-15）
+- [切换到Go 1.18后的第一件事：将interface{}全部替换为any](https://tonybai.com/2021/12/18/replace-empty-interface-with-any-first-after-switching-to-go-1-18/)（2021-12-18）
+- [Gopher部落：简单复盘这一年](https://tonybai.com/2021/12/17/gopher-tribe-first-anniversary-review/)（2021-12-17）
+- [Go 1.18 Beta1版本发布，支持泛型\[译\]](https://tonybai.com/2021/12/15/go-1-18-beta1/)（2021-12-15）
+- [惊了！原来Go语言也有隐式转型](https://tonybai.com/2021/12/02/go-has-implicit-type-convertion/)（2021-12-02）
+- [Go 1.18新特性前瞻：原生支持Fuzzing测试](https://tonybai.com/2021/12/01/first-class-fuzzing-in-go-1-18/)（2021-12-01）
+- [Go 1.18新特性前瞻：Go工作区模式](https://tonybai.com/2021/11/12/go-workspace-mode-in-go-1-18/)（2021-11-12）
+- [Go，12周年](https://tonybai.com/2021/11/11/go-opensource-12-years/)（2021-11-11）
+- [Ian Lance Taylor：Go泛型使用的一般准则](https://tonybai.com/2021/11/07/using-generics-in-go/)（2021-11-07）
+- [Go 1.18对泛型的支持策略](https://tonybai.com/2021/10/28/expectations-for-generics-in-go-1-18/)（2021-10-28）
+- [Go语言第一课背后的那些事儿](https://tonybai.com/2021/10/25/the-things-behind-the-first-lesson-of-go-language/)（2021-10-25）
+- [Tony Bai带你入门Go语言](https://tonybai.com/2021/10/15/your-first-go-course-by-tonybai/)（2021-10-15）
+- [Go语言之父谈Go编程语言与环境](https://tonybai.com/2021/10/06/the-go-programming-language-and-environment/)（2021-10-06）
+- [gRPC服务的响应设计](https://tonybai.com/2021/09/26/the-design-of-the-response-for-grpc-server/)（2021-09-26）
+- [gRPC客户端的那些事儿](https://tonybai.com/2021/09/17/those-things-about-grpc-client/)（2021-09-17）
+- [小厂内部私有Go module拉取方案](https://tonybai.com/2021/09/03/the-approach-to-go-get-private-go-module-in-house/)（2021-09-03）
+- [Brooks、Wirth和Go\[译\]](https://tonybai.com/2021/08/25/brooks-wirth-and-go/)（2021-08-25）
+- [Go 1.17新特性详解：使用基于寄存器的调用惯例](https://tonybai.com/2021/08/20/using-register-based-calling-convention-in-go-1-17/)（2021-08-20）
+- [Go 1.17新特性详解：module依赖图修剪与延迟module加载](https://tonybai.com/2021/08/19/go-module-changes-in-go-1-17/)（2021-08-19）
+- [Go 1.17新特性详解：支持将切片转换为数组指针](https://tonybai.com/2021/08/18/go-language-specs-changes-in-go-1-17/)（2021-08-18）
+- [Go 1.17中值得关注的几个变化](https://tonybai.com/2021/08/17/some-changes-in-go-1-17/)（2021-08-17）
+- [一文告诉你如何帮助测试Go语言Beta公测版或RC候选发布版](https://tonybai.com/2021/08/11/how-to-test-go-beta-or-rc/)（2021-08-11）
+- [Go中被闭包捕获的变量何时会被回收](https://tonybai.com/2021/08/09/when-variables-captured-by-closures-are-recycled-in-go/)（2021-08-09）
+- [Go基于I/O多路复用的TCP协议流解析实践](https://tonybai.com/2021/07/31/io-multiplexing-model-tcp-stream-protocol-parsing-practice-in-go/)（2021-07-31）
+- [Go经典阻塞式TCP协议流解析的实践](https://tonybai.com/2021/07/28/classic-blocking-network-tcp-stream-protocol-parsing-practice-in-go/)（2021-07-28）
+- [一文搞懂Go语言的plugin](https://tonybai.com/2021/07/19/understand-go-plugin/)（2021-07-19）
+- [使用go-metrics在Go应用中增加度量](https://tonybai.com/2021/07/06/add-metrics-for-go-application-using-go-metrics/)（2021-07-06）
+- [通过实例理解Go Execution Tracer](https://tonybai.com/2021/06/28/understand-go-execution-tracer-by-example/)（2021-06-28）
+- [使用functrace辅助进行Go项目源码分析](https://tonybai.com/2021/06/04/go-source-analysis-with-functrace/)（2021-06-04）
+- [通过实例理解Go逃逸分析](https://tonybai.com/2021/05/24/understand-go-escape-analysis-by-example/)（2021-05-24）
+- [Go标准库http与fasthttp服务端性能比较](https://tonybai.com/2021/04/25/server-side-performance-nethttp-vs-fasthttp/)（2021-04-25）
+- [Go标准库flag包的“小陷阱”](https://tonybai.com/2021/04/12/pitfall-in-std-flag-pkg/)（2021-04-12）
+- [Go语言“十诫”\[译\]](https://tonybai.com/2021/04/09/ten-commandments-of-go/)（2021-04-09）
+- [Go泛型语法又出“幺蛾子”：引入type set概念和移除type list中的type关键字](https://tonybai.com/2021/04/07/go-generics-use-type-sets-to-remove-type-keyword/)（2021-04-07）
+- [Go语言中常见的几种反模式\[译\]](https://tonybai.com/2021/03/31/common-anti-patterns-in-go/)（2021-03-31）
+- [Go语言的“黑暗角落”：盘点学习Go语言时遇到的那些陷阱\[译\]（第二部分）](https://tonybai.com/2021/03/29/darker-corners-of-go-part2/)（2021-03-29）
+- [Go语言的“黑暗角落”：盘点学习Go语言时遇到的那些陷阱\[译\]（第一部分）](https://tonybai.com/2021/03/29/darker-corners-of-go-part1/)（2021-03-29）
+- [使用Go实现可用select监听的队列](https://tonybai.com/2021/03/26/implement-a-queue-with-select-listener-in-go/)（2021-03-26）
+- [对Go 1.16 io/fs设计的第一感觉：得劲儿！](https://tonybai.com/2021/03/23/io-fs-interface-is-an-excellent-design/)（2021-03-23）
+- [Rust vs. Go：为什么强强联合会更好](https://tonybai.com/2021/03/15/rust-vs-go-why-they-are-better-together/)（2021-03-15）
+- [究竟是什么让Go语言成为恶意软件作者的最爱](https://tonybai.com/2021/03/07/go-malware-round-up-2020/)（2021-03-07）
+- [Go 1.16中值得关注的几个变化](https://tonybai.com/2021/02/25/some-changes-in-go-1-16/)（2021-02-25）
+- [“能力越大，责任越大” – Go语言之父详解将于Go 1.18发布的Go泛型](https://tonybai.com/2021/02/18/typing-generic-go-by-griesemer-at-gophercon-2020/)（2021-02-18）
+- [Go语言学习技术路线图2021发布了！](https://tonybai.com/2021/02/08/go-programming-language-learning-roadmap-2021/)（2021-02-08）
+- [通过实例理解Go标准库http包是如何处理keep-alive连接的](https://tonybai.com/2021/01/08/understand-how-http-package-deal-with-keep-alive-connection/)（2021-01-08）
+- [Go语言很无聊…其实它妙不可言！\[译\]](https://tonybai.com/2021/01/07/go-is-boring/)（2021-01-07）
+- [Hugo作者、Go核心开发团队成员谈诞生13年的Go语言：生态系统、演化与未来\[译\]](https://tonybai.com/2021/01/02/go-language-13-years/)（2021-01-02）
+- [2020年Go语言盘点：新冠大流行阻挡不了Go演进的步伐](https://tonybai.com/2020/12/30/the-2020-review-of-go-programming-language/)（2020-12-30）
+- [如何作废一个已发布的Go module版本，我来告诉你！](https://tonybai.com/2020/12/26/how-to-deprecate-a-published-version-of-some-specific-go-module/)（2020-12-26）
+- [BPF和Go：在Linux中内省的现代方式\[译\]](https://tonybai.com/2020/12/25/bpf-and-go-modern-forms-of-introspection-in-linux/)（2020-12-25）
+- [Go语言有哪些“劣势”](https://tonybai.com/2020/12/24/the-disadvantages-of-go/)（2020-12-24）
+- [Go语言对ARM架构的支持与未来\[译\]](https://tonybai.com/2020/12/18/go-ports-until-202012/)（2020-12-18）
+- [一文告诉你神奇的Go内建函数源码在哪里](https://tonybai.com/2020/12/17/where-is-the-source-of-builtin-functions/)（2020-12-17）
+- [如何查看历史版本的Go文档？嘘！答案我只告诉你！](https://tonybai.com/2020/12/15/how-to-see-the-manual-of-go-history-version/)（2020-12-15）
+- [Go 1.16新功能特性不完全前瞻](https://tonybai.com/2020/12/12/a-forward-look-to-new-feature-of-go-1-16/)（2020-12-12）
+- [Go函数调用链跟踪的一种实现思路](https://tonybai.com/2020/12/10/a-kind-of-thinking-about-how-to-trace-function-call-chain/)（2020-12-10）
+- [Go是编程语言世界的“特斯拉”](https://tonybai.com/2020/12/01/go-is-the-tesla-of-programming-world/)（2020-12-01）
+- [一文告诉你如何抢先体验Go泛型](https://tonybai.com/2020/11/28/httpstonybai-com20201128how-to-experience-go-generics-first/)（2020-11-28）
+- [一文搞懂Go语言中的切片排序](https://tonybai.com/2020/11/26/slice-sort-in-go/)（2020-11-26）
+- [“Gopher部落”知识星球开球了](https://tonybai.com/2020/11/22/zssq-gopher-tribe-born/)（2020-11-22）
+- [没有VPS搭建govanityurls服务？别急！你依然可以自定义Go包导入路径](https://tonybai.com/2020/11/15/another-approach-to-customize-package-import-path/)（2020-11-15）
+- [HashiCorp联合创始人：Go是成功且无悔的选择](https://tonybai.com/2020/11/13/go-is-a-successful-and-zero-regret-choice-for-us-by-hashicorp-founder/)（2020-11-13）
+- [Go，11周年](https://tonybai.com/2020/11/11/go-opensource-11-years/)（2020-11-11）
+- [重度使用Go的“后遗症“，你有吗？](https://tonybai.com/2020/11/05/the-sequela-after-being-used-to-writting-code-in-go/)（2020-11-05）
+- [系统学习Go语言，有这几本书就够了！](https://tonybai.com/2020/11/04/the-recommend-books-list-for-learning-go/)（2020-11-04）
+- [Go 1.15中值得关注的几个变化](https://tonybai.com/2020/10/11/some-changes-in-go-1-15/)（2020-10-11）
+- [官宣：Go专栏“改善Go语言编程质量的50个有效实践”上线了](https://tonybai.com/2020/09/08/imooc-go-column-is-available/)（2020-09-08）
+- [Google内部是如何使用Go语言的](https://tonybai.com/2020/08/30/new-case-studies-about-googles-use-of-go/)（2020-08-30）
+- [Go泛型真的要来了！最早在Go 1.17版本支持](https://tonybai.com/2020/06/18/the-go-generics-is-coming-and-supported-in-go-1-17-at-the-earliest/)（2020-06-18）
+- [Go语言联合作者Rob Pike专访：Go确实已成为云基础架构的语言](https://tonybai.com/2020/05/01/rob-pike-interview-go-become-the-language-of-cloud-infrastructure/)（2020-05-01）
+- [后端程序员一定要看的语言大比拼：Java vs. Go vs. Rust](https://tonybai.com/2020/05/01/comparison-between-java-go-and-rust/)（2020-05-01）
+- [go protobuf v1败给了gogo protobuf，那v2呢？](https://tonybai.com/2020/04/24/gogoprotobuf-vs-goprotobuf-v1-and-v2/)（2020-04-24）
+- [图解Go运行时调度器](https://tonybai.com/2020/03/21/illustrated-tales-of-go-runtime-scheduler/)（2020-03-21）
+- [可视化Go内存管理](https://tonybai.com/2020/03/10/visualizing-memory-management-in-golang/)（2020-03-10）
+- [小心go.mod中的go directive](https://tonybai.com/2020/03/09/take-care-of-the-go-directive-in-go-dot-mod/)（2020-03-09）
+- [Go 1.14中值得关注的几个变化](https://tonybai.com/2020/03/08/some-changes-in-go-1-14/)（2020-03-08）
+- [Go语言之禅](https://tonybai.com/2020/02/24/the-zen-of-go/)（2020-02-24）
+- [图解Go内存分配器](https://tonybai.com/2020/02/20/a-visual-guide-to-golang-memory-allocator-from-ground-up/)（2020-02-20）
+- [Go modules：最小版本选择](https://tonybai.com/2019/12/21/go-modules-minimal-version-selection/)（2019-12-21）
+- [Go官方发布的go.dev给gopher们带来了什么](https://tonybai.com/2019/11/14/what-the-godev-website-bring-to-gophers/)（2019-11-14）
+- [Go语言开源十周年](https://tonybai.com/2019/11/09/go-opensource-10-years/)（2019-11-09）
+- [Go语言项目的安全评估技术](https://tonybai.com/2019/11/08/security-assessment-techniques-for-go-projects/)（2019-11-08）
+- [图解中文字符编码-Go语言例解](https://tonybai.com/2019/11/07/non-ascii-character-encoding-illustrated/)（2019-11-07）
+- [Go语言的遗产](https://tonybai.com/2019/11/04/the-legacy-of-go/)（2019-11-04）
+- [Go 1.13中值得关注的几个变化](https://tonybai.com/2019/10/27/some-changes-in-go-1-13/)（2019-10-27）
+- [Go 1.13中的错误处理](https://tonybai.com/2019/10/18/errors-handling-in-go-1-13/)（2019-10-18）
+- [Uber Go语言编码规范](https://tonybai.com/2019/10/12/uber-go-style-guide/)（2019-10-12）
+- [如何在Go语言中使用Websockets：最佳工具与行动指南](https://tonybai.com/2019/09/28/how-to-build-websockets-in-go/)（2019-09-28）
+- [Go语言包管理简史](https://tonybai.com/2019/09/21/brief-history-of-go-package-management/)（2019-09-21）
+- [Go语言回顾：从Go 1.0到Go 1.13](https://tonybai.com/2019/09/07/go-retrospective/)（2019-09-07）
+- [Go module机制下升级major版本号的实践](https://tonybai.com/2019/06/03/the-practice-of-upgrading-major-version-under-go-module/)（2019-06-03）
+- [Go正走在成为下一个企业级编程语言的轨道上](https://tonybai.com/2019/05/03/go-is-on-a-trajectory-to-become-the-next-enterprise-programming-language/)（2019-05-03）
+- [记一次go panic问题的解决过程](https://tonybai.com/2019/04/04/notes-about-fixing-a-go-panic-problem/)（2019-04-04）
+- [使用nomad实现集群管理和微服务部署调度](https://tonybai.com/2019/03/30/cluster-management-and-microservice-deployment-and-scheduled-by-nomad/)（2019-03-30）
+- [Go 1.12中值得关注的几个变化](https://tonybai.com/2019/03/02/some-changes-in-go-1-12/)（2019-03-02）
+- [Go与SOAP](https://tonybai.com/2019/01/08/go-and-soap/)（2019-01-08）
+- [Hello，Go module proxy](https://tonybai.com/2018/11/26/hello-go-module-proxy/)（2018-11-26）
+- [Go 1.11中值得关注的几个变化](https://tonybai.com/2018/11/19/some-changes-in-go-1-11/)（2018-11-19）
+- [Go，9周年](https://tonybai.com/2018/11/12/go-opensource-9-years/)（2018-11-12）
+- [初窥Go module](https://tonybai.com/2018/07/15/hello-go-module/)（2018-07-15）
+- [对一段有关Go Code Block和变量作用域的代码的简要分析](https://tonybai.com/2018/05/11/the-analysis-of-a-go-code-snippet-about-code-blocks-and-scope/)（2018-05-11）
+- [写Go代码时遇到的那些问题\[第3期\]](https://tonybai.com/2018/04/06/the-problems-i-encountered-when-writing-go-code-issue-3rd/)（2018-04-06）
+- [对一段Go语言代码输出结果的简要分析](https://tonybai.com/2018/03/20/the-analysis-of-output-results-of-a-go-code-snippet/)（2018-03-20）
+- [Go 1.10中值得关注的几个变化](https://tonybai.com/2018/02/17/some-changes-in-go-1-10/)（2018-02-17）
+- [写Go代码时遇到的那些问题\[第2期\]](https://tonybai.com/2018/01/27/the-problems-i-encountered-when-writing-go-code-issue-2nd/)（2018-01-27）
+- [写Go代码时遇到的那些问题\[第1期\]](https://tonybai.com/2018/01/13/the-problems-i-encountered-when-writing-go-code-issue-1st/)（2018-01-13）
+- [Goroutine调度实例简要分析](https://tonybai.com/2017/11/23/the-simple-analysis-of-goroutine-schedule-examples/)（2017-11-23）
+- [源创会开源访谈：十年成长，Go语言的演化之路](https://tonybai.com/2017/10/24/go-evolution-for-ten-years-an-interview-by-osc/)（2017-10-24）
+- [Go语言：成长的十年](https://tonybai.com/2017/09/24/go-ten-years-and-climbing/)（2017-09-24）
+- [Go 1.9中值得关注的几个变化](https://tonybai.com/2017/07/14/some-changes-in-go-1-9/)（2017-07-14）
+- [搭建你自己的Go Runtime metrics环境](https://tonybai.com/2017/07/04/setup-go-runtime-metrics-for-yourself/)（2017-07-04）
+- [使用govanityurls让私有代码仓库中的go包支持go get](https://tonybai.com/2017/06/30/go-get-go-packages-in-private-code-repo-by-govanityurls/)（2017-06-30）
+- [定制Go Package的Go Get导入路径](https://tonybai.com/2017/06/28/set-custom-go-get-import-path-for-go-package/)（2017-06-28）
+- [也谈Go的可移植性](https://tonybai.com/2017/06/27/an-intro-about-go-portability/)（2017-06-27）
+- [也谈goroutine调度器](https://tonybai.com/2017/06/23/an-intro-about-goroutine-scheduler/)（2017-06-23）
+- [Go coding in go way](https://tonybai.com/2017/04/20/go-coding-in-go-way/)（2017-04-20）
+- [GopherChina2017以讲师身份参会感悟](https://tonybai.com/2017/04/18/my-experience-of-gopherchina-2017-as-a-speaker/)（2017-04-18）
+- [GopherChina讲师专访](https://tonybai.com/2017/04/06/an-interview-with-me-as-a-lecturer-of-gopherchina-2017/)（2017-04-06）
+- [使用Fluentd和ElasticSearch Stack实现Kubernetes的集群Logging](https://tonybai.com/2017/03/03/implement-kubernetes-cluster-level-logging-with-fluentd-and-elasticsearch-stack/)（2017-03-03）
+- [Go 1.8中值得关注的几个变化](https://tonybai.com/2017/02/03/some-changes-in-go-1-8/)（2017-02-03）
+- [使用Visual Studio Code辅助Go源码编写](https://tonybai.com/2016/12/23/write-go-code-in-vscode/)（2016-12-23）
+- [论golang Timer Reset方法使用的正确姿势](https://tonybai.com/2016/12/21/how-to-use-timer-reset-in-golang-correctly/)（2016-12-21）
+- [为Kubernetes集群中服务部署Nginx入口服务](https://tonybai.com/2016/11/22/deploy-nginx-service-for-the-services-in-kubernetes-cluster/)（2016-11-22）
+- [Kubernetes集群中的Nginx配置热更新方案](https://tonybai.com/2016/11/17/nginx-config-hot-reloading-approach-for-kubernetes-cluster/)（2016-11-17）
+- [使用go-ceph管理Ceph RBD映像](https://tonybai.com/2016/11/09/operate-ceph-rbd-images-with-go-ceph/)（2016-11-09）
+- [Go包导入与Java的差别](https://tonybai.com/2016/09/13/package-import-in-golang-vs-in-java/)（2016-09-13）
+- [vim-go更新小记](https://tonybai.com/2016/09/08/upgrade-vim-go/)（2016-09-08）
+- [Go 1.7中值得关注的几个变化](https://tonybai.com/2016/06/21/some-changes-in-go-1-7/)（2016-06-21）
+- [GopherChina2016后记](https://tonybai.com/2016/04/18/my-experience-of-gopherchina2016/)（2016-04-18）
+- [Go 1.6中值得关注的几个变化](https://tonybai.com/2016/02/21/some-changes-in-go-1-6/)（2016-02-21）
+- [Go语言随机测试工具go-fuzz](https://tonybai.com/2015/12/08/go-fuzz-intro/)（2015-12-08）
+- [Go语言TCP Socket编程](https://tonybai.com/2015/11/17/tcp-programming-in-golang/)（2015-11-17）
+- [Go语言错误处理](https://tonybai.com/2015/10/30/error-handling-in-go/)（2015-10-30）
+- [关于Go，你可能不注意的7件事](https://tonybai.com/2015/09/17/7-things-you-may-not-pay-attation-to-in-go/)（2015-09-17）
+- [理解Golang语句中的求值顺序](https://tonybai.com/2015/08/27/understanding-go-statements-evaluating-order/)（2015-08-27）
+- [Go程序调试、分析与优化](https://tonybai.com/2015/08/25/go-debugging-profiling-optimization/)（2015-08-25）
+- [Golang技术幻灯片的查看方法](https://tonybai.com/2015/08/22/how-to-view-golang-tech-slide/)（2015-08-22）
+- [godep支持Go 1.5 vendor](https://tonybai.com/2015/08/05/godep-support-go15-vendor/)（2015-08-05）
+- [理解Go 1.5 vendor](https://tonybai.com/2015/07/31/understand-go15-vendor/)（2015-07-31）
+- [制作go-talks.appspot.com应用镜像](https://tonybai.com/2015/07/27/make-a-mirror-of-gotalks-appsport-app/)（2015-07-27）
+- [Go 1.5中值得关注的几个变化](https://tonybai.com/2015/07/10/some-changes-in-go-1-5/)（2015-07-10）
+- [Golang程序配置方案小结](https://tonybai.com/2015/07/01/config-solutions-for-golang-app/)（2015-07-01）
+- [也谈并发与并行](https://tonybai.com/2015/06/23/concurrency-and-parallelism/)（2015-06-23）
+- [Appdash，用Go实现的分布式系统跟踪神器](https://tonybai.com/2015/06/17/appdash-distributed-systems-tracing-in-go/)（2015-06-17）
+- [Caddy，一个用Go实现的Web Server](https://tonybai.com/2015/06/04/caddy-a-web-server-in-go/)（2015-06-04）
+- [Go和HTTPS](https://tonybai.com/2015/04/30/go-and-https/)（2015-04-30）
+- [理解Golang包导入](https://tonybai.com/2015/03/09/understanding-import-packages/)（2015-03-09）
+- [近期遇到的3个Golang代码问题](https://tonybai.com/2015/01/23/three-issues-about-go-code/)（2015-01-23）
+- [一个有关Golang变量作用域的坑](https://tonybai.com/2015/01/13/a-hole-about-variable-scope-in-golang/)（2015-01-13）
+- [使用Golang开发微信公众平台-发送客服消息](https://tonybai.com/2014/12/30/send-custom-service-text-msg-for-wechat-public-platform-dev-in-golang/)（2014-12-30）
+- [使用Golang开发微信公众平台-接收加密消息](https://tonybai.com/2014/12/24/recv-encrypted-text-msg-for-wechat-public-platform-dev-in-golang/)（2014-12-24）
+- [使用Golang开发微信公众平台-接收文本消息](https://tonybai.com/2014/12/20/receive-text-for-wechat-public-platform-dev-in-golang/)（2014-12-20）
+- [使用Golang开发微信公众平台-接入验证](https://tonybai.com/2014/12/18/access-validation-for-wechat-public-platform-dev-in-golang/)（2014-12-18）
+- [Goroutine是如何工作的](https://tonybai.com/2014/11/15/how-goroutines-work/)（2014-11-15）
+- [Go语言的有效错误处理](https://tonybai.com/2014/11/14/effective-error-handling-in-go/)（2014-11-14）
+- [Go，5周年](https://tonybai.com/2014/11/12/go-5-years/)（2014-11-12）
+- [Golang开发环境搭建-Vim篇](https://tonybai.com/2014/11/07/golang-development-environment-for-vim/)（2014-11-07）
+- [Go语言是如何处理栈的](https://tonybai.com/2014/11/05/how-stacks-are-handled-in-go/)（2014-11-05）
+- [Go 1.4中值得关注的几个变化](https://tonybai.com/2014/11/04/some-changes-in-go-1-4/)（2014-11-04）
+- [Golang的演化历程](https://tonybai.com/2014/10/25/golang-history/)（2014-10-25）
+- [Golang测试技术](https://tonybai.com/2014/10/22/golang-testing-techniques/)（2014-10-22）
+- [组织Golang代码](https://tonybai.com/2014/10/21/organize-golang-code/)（2014-10-21）
+- [Golang跨平台交叉编译](https://tonybai.com/2014/10/20/cross-compilation-with-golang/)（2014-10-20）
+- [Golang Channel用法简编](https://tonybai.com/2014/09/29/a-channel-compendium-for-golang/)（2014-09-29）
+- [Go defer的C实现](https://tonybai.com/2013/02/03/implement-go-defer-in-c/)（2013-02-03）
+- [也谈Go语言代码包分发](https://tonybai.com/2012/10/25/go-package-distributing/)（2012-10-25）
+- [也谈Go语言声明语法](https://tonybai.com/2012/10/11/understanding-go-declaration-syntax/)（2012-10-11）
+- [Go与C语言的互操作](https://tonybai.com/2012/09/26/interoperability-between-go-and-c/)（2012-09-26）
+- [Go中的系统Signal处理](https://tonybai.com/2012/09/21/signal-handling-in-go/)（2012-09-21）
+- [Go语言标准库概览](https://tonybai.com/2012/09/08/a-brief-tour-of-go-standard-library/)（2012-09-08）
+- [Go程序设计语言(三)](https://tonybai.com/2012/08/28/the-go-programming-language-tutorial-part3/)（2012-08-28）
+- [Go程序设计语言(二)](https://tonybai.com/2012/08/27/the-go-programming-language-tutorial-part2/)（2012-08-27）
+- [Go程序设计语言(一)](https://tonybai.com/2012/08/23/the-go-programming-language-tutorial-part1/)（2012-08-23）
+- [也谈Go语言编程 – Hello，Go!](https://tonybai.com/2012/08/17/hello-go/)（2012-08-17）
+- [开始学Go](https://tonybai.com/2012/08/14/getting-going-with-go/)（2012-08-14）
+- [为什么不用用Go？](https://tonybai.com/2012/08/08/why-not-go/)（2012-08-08）
+- [P.J.Plauger版本C标准库实现分析之'ctype.h'](https://tonybai.com/2006/07/17/plauger-c-standard-lib-ctype-header/)（2006-07-17）
+- [P.J.Plauger版本C标准库实现分析之'assert.h'](https://tonybai.com/2006/07/08/plauger-c-standard-lib-assert-header/)（2006-07-08）
+- [Begin 'setup.S'](https://tonybai.com/2006/02/13/begin-setup/)（2006-02-13）
+
+## 二、AI、智能体与新兴技术（146）
+
+记录 AI、Agent、模型、自动化开发和新兴技术的近期观察。
+
+- [2 名工程师 + Codex，OpenAI 用 Rust 重写了扛住 10 亿人的存储系统](https://tonybai.com/2026/09/13/openai-habitat-storage-rust-migration-1-billion-users/)（2026-09-13）
+- [刚刚，YC 公开处刑「唯模型论」：决定 Agent 上限的，从来不是模型，而是 Harness](https://tonybai.com/2026/09/09/why-harness-matters-more-than-model-yc-paper-club/)（2026-09-09）
+- [物理 AI 淘金热：为何机器人是下一个数万亿美元级的超级风口](https://tonybai.com/2026/09/07/the-physical-ai-gold-rush/)（2026-09-07）
+- [团队共享同一个 Agent：Superconductor 创始人一份宣言，说透了“多人 AI”的五条铁律](https://tonybai.com/2026/09/07/multiplayer-ai-manifesto/)（2026-09-07）
+- [起底Uber AI软件工厂：智能体用量暴涨9.4倍，账单却纹丝不动](https://tonybai.com/2026/09/03/uber-ai-software-factory-cost-optimization/)（2026-09-03）
+- [Token效率鄙视链被打脸：实测证明，Rust才是AI编程时代的隐藏赢家](https://tonybai.com/2026/08/27/rust-ai-coding-agent-token-efficiency-danluu/)（2026-08-27）
+- [刚被 SpaceX 收购，Cursor 就推出自研 Git 托管硬刚 GitHub，Shopify CEO 一周末就把它复刻了](https://tonybai.com/2026/08/25/cursor-continuity-git-walgit-spacex/)（2026-08-25）
+- [开源杀出重围！OpenAI 亲述：如何把Codex变成谁都能装进产品里的“智能体引擎”](https://tonybai.com/2026/08/24/codex-as-a-platform-open-agent-harness/)（2026-08-24）
+- [ACM专访Russ Cox：管理者若不谨慎，AI agent会变成“终极战术龙卷风”](https://tonybai.com/2026/08/23/russ-cox-acm-interview-tactical-tornado-ai-agent-warning/)（2026-08-23）
+- [Rust官方砸半年时间访谈70+人：学Rust到底卡在哪，AI又帮上了多少忙？](https://tonybai.com/2026/08/22/rust-official-learning-rust-journey/)（2026-08-22）
+- [Harness 不是一次性脚手架：自进化 Coding Agent 系统如何越跑越强](https://tonybai.com/2026/08/19/self-evolving-coding-agent-harness-map/)（2026-08-19）
+- [刚刚，DeepSeek开源Harness：把Agent拆成插件，一切皆可换](https://tonybai.com/2026/08/14/deepseek-harness-everything-is-a-plugin/)（2026-08-14）
+- [3600人、95%覆盖率、24万次拦截：Cloudflare怎么用AI把“提效不降质”变成现实](https://tonybai.com/2026/08/10/cloudflare-ai-engineering-stack-deep-dive/)（2026-08-10）
+- [1.5万星背后：Google首次揭秘Agent Skills是怎么“造”出来的](https://tonybai.com/2026/08/09/google-agent-skills-behind-the-scenes/)（2026-08-09）
+- [Rust官方发文：AI 可以审代码，但不能写代码](https://tonybai.com/2026/08/06/rust-lang-llm-policy-interpretation-2026/)（2026-08-06）
+- [AI智能体的记忆，终于有人认真研究“文件系统”这条路了——新论文给出五个反直觉答案](https://tonybai.com/2026/08/05/filesystem-based-memory-for-llm-agents/)（2026-08-05）
+- [ccsa：给 Claude Code 的 session 起个人类可记的名字，一键 resume](https://tonybai.com/2026/08/02/ccsa-claude-code-session-alias-tool/)（2026-08-02）
+- [谷歌重磅论文：多智能体不是万能药！260组实验实测出AI 智能体的第一条“缩放定律”](https://tonybai.com/2026/08/02/google-agent-scaling-science-multi-agent-myth/)（2026-08-02）
+- [YC亲自下场开源内部Harness：QM，一个“多人在线”的公司级Agent操作系统](https://tonybai.com/2026/08/01/yc-open-source-qm-multiplayer-agent-harness/)（2026-08-01）
+- [前谷歌工程师万字拆解：AI替你写代码的时代，你更需要写好一份设计文档](https://tonybai.com/2026/08/01/how-to-write-an-effective-design-doc/)（2026-08-01）
+- [刚刚，MCP协议迎来“史上最大更新”：State彻底消失，Claude率先适配支持](https://tonybai.com/2026/07/30/mcp-2026-07-28-stateless-core-claude/)（2026-07-30）
+- [AI 写了 75% 的代码，工程师却越来越慌：“黑灯软件工厂”的问题不在 harness，而在模型本身](https://tonybai.com/2026/07/27/why-software-factories-fail-harness-engineering-not-enough/)（2026-07-27）
+- [百万行代码，两周搞定！Anthropic揭秘AI代码迁移六步法：秘诀不是改代码，是改流程](https://tonybai.com/2026/07/25/content/posts/2026/ai-code-migration-claude-code-six-steps/)（2026-07-25）
+- [重磅！Tokio官方发布全栈框架Topcoat：不用WASM，AI时代Rust也能“糊”网页了](https://tonybai.com/2026/07/24/tokio-topcoat-rust-fullstack-framework/)（2026-07-24）
+- [Twitter之父再出手：Block开源Buzz，要让人类和AI Agent「同工同权」](https://tonybai.com/2026/07/22/jack-dorsey-block-buzz-ai-agent-workspace-opensource/)（2026-07-22）
+- [我开源了 cc-session-migrate ：让 Claude Code 会话在多台机器之间自由迁移](https://tonybai.com/2026/07/20/introducing-cc-session-migrate/)（2026-07-20）
+- [从掌上设备的失败到AI时代的基石：Java官方纪录片，揭开一门语言30年的生死赌局](https://tonybai.com/2026/07/20/the-java-story-30-years-documentary/)（2026-07-20）
+- [“皇帝的新衣”一年后：对话Thorsten Ball谈Agentic编程](https://tonybai.com/2026/07/19/agentic-engineering-thorsten-ball-amp-interview/)（2026-07-19）
+- [告别标签页焦虑：我让 AI 帮我做了个浏览器插件 TabQueue](https://tonybai.com/2026/07/18/introducing-tabqueue/)（2026-07-18）
+- [AI 不在乎代码烂不烂，但你的Token账单在乎：一项660次实验揭示的编程新常识](https://tonybai.com/2026/07/12/does-code-cleanliness-affect-coding-agents/)（2026-07-12）
+- [全新 AI 技术栈：模型、Harness、Loop 与自我进化的智能体](https://tonybai.com/2026/07/10/the-new-ai-stack-model-harness-loop-agent/)（2026-07-10）
+- [AI 重写 Bun 为Rust全过程揭秘：101万行代码、11天、64个Claude并行开工](https://tonybai.com/2026/07/09/ai-rewrite-bun-in-rust/)（2026-07-09）
+- [从“切歌小工具”到“零人工代码”：Claude Code 的诞生史，比科幻还科幻](https://tonybai.com/2026/07/07/the-making-of-claude-code/)（2026-07-07）
+- [如何使用 Claude Code 构建 AI 循环系统（Loops）](https://tonybai.com/2026/07/07/how-to-create-loops-with-claude-code/)（2026-07-07）
+- [每个 AI 工程师都应该知道的 20 个循环设计模式](https://tonybai.com/2026/07/03/20-loop-design-patterns-every-ai-engineer-should-know/)（2026-07-03）
+- [cc-switch-cli：专为终端控与远程开发打造的 Claude Code 多模型切换工具！](https://tonybai.com/2026/07/02/cc-switch-cli-opensource/)（2026-07-02）
+- [HashiCorp 创始人：AI 时代，我们为什么越来越需要有“品味”的程序员？](https://tonybai.com/2026/07/01/hashicorp-creator-define-taste/)（2026-07-01）
+- [YC 揭秘 AI 原生组织：打造一家在睡梦中自我进化的公司](https://tonybai.com/2026/06/28/yc-ai-native-company-self-evolving-organizations/)（2026-06-28）
+- [AI 正在撕裂研发团队：狂欢的“托管派”与心碎的“守夜人”](https://tonybai.com/2026/06/23/ai-divide-developers-into-lazy-juniors-and-the-burnedout-seniors/)（2026-06-23）
+- [上千程序员自爆 AI 的“卧槽时刻”：是推开神界大门，还是跌入黑盒地狱？](https://tonybai.com/2026/06/21/what-was-your-oh-shit-moment-with-genai/)（2026-06-21）
+- [大模型正在见顶！传奇架构师：欢迎来到“平坦曲线时代”](https://tonybai.com/2026/06/20/steve-yegge-the-flat-curve-society/)（2026-06-20）
+- [Anthropic 40万大样本揭秘：AI 时代为什么“专家”身价暴涨？](https://tonybai.com/2026/06/19/agentic-coding-and-persistent-returns-to-expertise/)（2026-06-19）
+- [DeepMind 亮出王炸：别再手写 Agent Harness 了，AI 已经学会自己写了！](https://tonybai.com/2026/06/17/deepmind-automation-agent-harness-ai-self-coding/)（2026-06-17）
+- [谷歌 SRE 重磅白皮书：当 AI 自动写出 10 倍代码，谁来阻止系统崩溃？](https://tonybai.com/2026/06/15/google-ai-in-sre/)（2026-06-15）
+- [拒领上亿、封杀 AI：Zig 之父为什么 10 年不发 1.0？](https://tonybai.com/2026/06/12/zig-father-refuses-funding-bans-ai-why-no-1-0-in-a-decade/)（2026-06-12）
+- [“辛辛苦苦考上985，却发现AI能替代我90%的工作”：今天的高考，我们还在为什么而战？](https://tonybai.com/2026/06/07/gaokao-in-the-age-of-ai-is-the-top-tier-degree-worthless/)（2026-06-07）
+- [传奇黑客 Geohot 炮轰 AI Agent：这是软件工程史上代价最昂贵的灾难！](https://tonybai.com/2026/06/06/geohot-slams-ai-agents-as-the-most-expensive-software-disaster/)（2026-06-06）
+- [AI 时代如何真正掌握一门新技术？这份非主流学习指南建议永久收藏](https://tonybai.com/2026/06/04/master-new-tech-in-ai-era-counter-intuitive-learning-guide/)（2026-06-04）
+- [写代码快 10 倍，不等于研发快 10 倍！Google 揭秘 AI 系统级瓶颈](https://tonybai.com/2026/06/01/coding-10x-faster-isnt-10x-development-speed-google-ai-bottleneck/)（2026-06-01）
+- [Google I/O 2026：Jeff Dean 携 DeepMind 众神宣告，AI Agent 正在终结“标准化软件”时代](https://tonybai.com/2026/05/31/google-io-2026-defining-the-agentic-ai-era/)（2026-05-31）
+- [AI 优化 1.5ms，手写 0.02ms！Ghostty 作者痛批 AI 编程“平庸陷阱”](https://tonybai.com/2026/05/30/ghostty-creator-slams-ai-coding-performance-1-5ms-vs-0-02ms/)（2026-05-30）
+- [Shopify 23,000 名工程师背后的 Claude Code 配置方案（你可以直接复刻的完整配置）](https://tonybai.com/2026/05/24/shopify-claude-code-configuration-for-23000-engineers/)（2026-05-24）
+- [Google 开源 AX 与 Agent Substrate：构建以 Agent 为核心的云原生计算底座](https://tonybai.com/2026/05/23/google-open-sources-ax-and-agent-substrate-agent-centric-cloud-native-foundation/)（2026-05-23）
+- [代码可以让 AI 写，但设计得由你做：重塑工程师的“算法直觉”](https://tonybai.com/2026/05/19/ai-era-software-engineer-algorithm-map/)（2026-05-19）
+- [如何在大型代码库中运用 Claude Code：最佳实践及入门指南](https://tonybai.com/2026/05/17/how-claude-code-works-in-large-codebases-best-practices-and-where-to-start/)（2026-05-17）
+- [Anthropic 工程师发文：别用 Markdown 了，HTML 才是 AI 的终极语言！](https://tonybai.com/2026/05/09/anthropic-engineer-say-html-is-the-ultimate-language-for-ai/)（2026-05-09）
+- [Bun 创始人带头“叛逃”：放弃 Zig，用 AI 把项目重写成 Rust？](https://tonybai.com/2026/05/08/bun-founder-abandons-zig-for-rust-ai-rewrite/)（2026-05-08）
+- [“AI 让每个人都成了开发者”，就像“相机让每个人都成了摄影师”](https://tonybai.com/2026/05/05/ai-makes-everyone-a-developer-like-cameras-for-photographers/)（2026-05-05）
+- [AI 正在把我们推向“双输”深渊：顶级论文揭示“AI 裁员陷阱”](https://tonybai.com/2026/05/04/the-ai-layoff-trap/)（2026-05-04）
+- [“AI 正在用垃圾代码摧毁一切！”：Flask 之父对话 Pi 作者，揭开 AI 编程的残酷真相](https://tonybai.com/2026/05/03/flask-creator-pi-author-on-ai-coding-the-cruel-truth/)（2026-05-03）
+- [对话 Martin Kleppmann：DDIA 第二版揭秘，以及 AI 将如何颠覆分布式系统](https://tonybai.com/2026/04/26/interview-martin-kleppmann-ddia-2nd-edition-ai-distributed-systems/)（2026-04-26）
+- [聊聊为什么我要花这么大精力，带大家手写 Agent Harness？](https://tonybai.com/2026/04/21/why-we-are-building-agent-harness-from-scratch/)（2026-04-21）
+- [“我把公司卖了，却感觉一无所有”：OpenClaw 之父 TED 亲述如何靠 AI 重获新生](https://tonybai.com/2026/04/20/openclaw-father-ted-talk/)（2026-04-20）
+- [薄驾驭，厚技能：YC 掌门人揭秘拉开 1000 倍效率差距的 AI 工程化心法](https://tonybai.com/2026/04/19/thin-harness-fat-skills/)（2026-04-19）
+- [AI 时代，敏捷宣言已死？听听 Martin Fowler 和 Kent Beck 怎么说](https://tonybai.com/2026/04/12/agile-manifesto-dead-in-ai-era-martin-fowler-kent-beck/)（2026-04-12）
+- [Ruby on Rails 之父最新访谈：AI 正在推高顶尖程序员的身价](https://tonybai.com/2026/04/10/rails-father-dhh-on-ai-and-programmer-value/)（2026-04-10）
+- [AI 编程时代，我挖出了一本 1999 年的“删库跑路”指南](https://tonybai.com/2026/04/06/how-to-write-unmaintainable-code/)（2026-04-06）
+- [当AI 榨干了编程所有的乐趣：我不再是程序员，而是“Claude Code”的项目经理](https://tonybai.com/2026/04/04/the-death-of-coding-joy-in-the-age-of-ai-agents/)（2026-04-04）
+- [REST 已老，AI 时代的智能体需要怎样的 API？](https://tonybai.com/2026/04/03/agentic-api-in-action/)（2026-04-03）
+- [别再用 AI 疯狂撸代码了！我们正在把自己逼入“死胡同”](https://tonybai.com/2026/03/29/stop-mindless-ai-coding-we-are-heading-to-a-dead-end/)（2026-03-29）
+- [谷歌一篇论文砸崩内存巨头？不懂“显存墙”，怎么做 AI 时代的工程师！](https://tonybai.com/2026/03/28/ai-engineer-gpu-introduction-course/)（2026-03-28）
+- [Rust 核心团队大吐苦水：求求你们别再用 AI 提交“垃圾 PR”了！](https://tonybai.com/2026/03/26/rust-project-perspectives-on-ai/)（2026-03-26）
+- [告别古法编程黄金时代：AI 时代不会再有新编程语言诞生的土壤](https://tonybai.com/2026/03/24/no-soil-for-new-programming-languages-in-ai-era/)（2026-03-24）
+- [手工作坊的终结：为什么你必须把 Agent Skills 开发，变成严谨的软件工程?](https://tonybai.com/2026/03/18/building-industrial-grade-agent-skills/)（2026-03-18）
+- [为什么你的 AI Agent 总是像个智障？来自 Manus 大佬的 2 年血泪避坑指南](https://tonybai.com/2026/03/18/why-ai-agents-act-stupid-manus-expert-pitfall-guide/)（2026-03-18）
+- [泡沫消退后的冷思考：2026年，AI 工程师的真实生存图景](https://tonybai.com/2026/03/17/ai-engineer-survival-2026-post-hype/)（2026-03-17）
+- [都在用 OpenClaw 跑 Skill，但你写的“技能”为什么总让 AI 频繁罢工？](https://tonybai.com/2026/03/15/why-your-openclaw-skills-make-ai-go-on-strike/)（2026-03-15）
+- [从第一位程序员到 AI 时代的领航者：代码世界里的“她”力量](https://tonybai.com/2026/03/08/her-power-in-code-pioneers-to-ai-era/)（2026-03-08）
+- [从手写代码到日提 30 个 PR：Claude Code 缔造者的 AI 编程启示录](https://tonybai.com/2026/03/06/building-claude-code-with-boris-cherny/)（2026-03-06）
+- [为什么 Web3 依然寒气逼人？AI 智能体如何催生 Web 4.0 的黎明](https://tonybai.com/2026/03/04/why-web3-remains-cold-ai-agents-web4-dawn/)（2026-03-04）
+- [AI 时代的开源：当 Coding Agent 接管 GitHub，我们该何去何从？](https://tonybai.com/2026/03/01/open-source-ai-era-coding-agent-takes-over-github/)（2026-03-01）
+- [AI 垃圾代码泛滥？HashiCorp 创始人开源 Vouch：重构开源信任机制](https://tonybai.com/2026/02/12/ai-garbage-code-hashicorp-founder-vouch-rebuilding-open-source-trust/)（2026-02-12）
+- [从 P2H 到 P2A2H：软件架构的终极倒置——为智能体设计软件](https://tonybai.com/2026/02/12/p2h-to-p2a2h-software-architecture-inversion-designing-for-agents/)（2026-02-12）
+- [2026 软件开发新纪元：解读 Anthropic《Agentic Coding 趋势报告》](https://tonybai.com/2026/02/11/2026-software-development-anthropic-agentic-coding-trends-report/)（2026-02-11）
+- [输入需求，输出系统：AI Agent 正在实现软件工程的“终极梦想” —— 软件工厂！](https://tonybai.com/2026/02/10/ai-agent-realizes-ultimate-dream-software-factory/)（2026-02-10）
+- [告别单打独斗！Claude Code 全新“Agent Team”模式：当 AI 开始组队干活](https://tonybai.com/2026/02/08/claude-code-agent-team-mode/)（2026-02-08）
+- [承认吧，AI 写的代码，平均质量已经超过了 80% 的人类程序员！](https://tonybai.com/2026/02/05/ai-code-quality-surpasses-80-percent-of-human-programmers/)（2026-02-05）
+- [忘掉 MCP？OpenClaw 作者说：CLI 才是 AI 连接世界的终极接口](https://tonybai.com/2026/02/04/openclaw-author-cli-ultimate-agent-interface-vs-mcp/)（2026-02-04）
+- [Claude Code 创始人亲授：解锁 10 倍效率的 10 个“隐藏技能”](https://tonybai.com/2026/02/03/claude-code-founder-10x-efficiency-10-hidden-skills/)（2026-02-03）
+- [Git 即数据库：Beads (bd) —— 专为 AI Agent 打造的分布式任务追踪引擎](https://tonybai.com/2026/02/02/beads-bd-distributed-task-tracking-engine-for-ai-agent/)（2026-02-02）
+- [Rust 输了？在 AI Agent 的战场上，TypeScript 才是唯一的“神”](https://tonybai.com/2026/01/31/rust-vs-typescript-ai-agent-battleground-winner/)（2026-01-31）
+- [“退休”大佬的 AI 复出战：为了“好玩”，他写出了火遍全网的 Moltbot](https://tonybai.com/2026/01/30/clawdbot-author-peter-steinberger-full-interview/)（2026-01-30）
+- [你的 CLAUDE.md 写错了：为什么指令越多，AI 越笨？](https://tonybai.com/2026/01/29/write-a-good-claude-md/)（2026-01-29）
+- [别读代码了，看着它流过就行：ClawdBot 作者的 AI 开发工作流](https://tonybai.com/2026/01/28/clawdbot-author-ai-development-workflow/)（2026-01-28）
+- [Claude Code 官方最佳实践：50 条没人告诉你的“核心军规”](https://tonybai.com/2026/01/25/claude-code-official-best-practices-50-core-rules/)（2026-01-25）
+- [Gas Town 启示录：多智能体编排开启 AI 编程工业革命](https://tonybai.com/2026/01/25/gas-town-multi-agent-orchestration-ai-programming-revolution/)（2026-01-25）
+- [从“手搓 Prompt”到“无限循环”：AI 编码的下一个形态是“Ralph”吗？](https://tonybai.com/2026/01/21/ai-coding-evolution-from-prompting-to-ralph/)（2026-01-21）
+- [Tech Lead 不是管理者？一文看懂技术负责人的核心职责与能力模型](https://tonybai.com/2026/01/18/traits-of-a-good-tech-lead/)（2026-01-18）
+- [在 AI 时代主动“找虐”：为什么保留“认知摩擦”是你最后的护城河？](https://tonybai.com/2026/01/17/ai-era-cognitive-friction-as-your-last-moat/)（2026-01-17）
+- [当机器开始“剁手”：详解 Google UCP 与 Agentic Commerce 的架构革命](https://tonybai.com/2026/01/14/google-ucp-agentic-commerce-architecture-revolution/)（2026-01-14）
+- [技术考古：Markdown 为何从博客工具演变成统治 AI 世界的“通用语”？](https://tonybai.com/2026/01/13/how-markdown-took-over-the-world/)（2026-01-13）
+- [像构建 Claude Code 一样构建应用：揭秘 Agent-native 架构的 5 大核心原则](https://tonybai.com/2026/01/13/agent-native-architecture/)（2026-01-13）
+- [拆解 Claude Code：Coding Agent 终于“能用”背后的架构真相](https://tonybai.com/2026/01/08/how-claude-code-works/)（2026-01-08）
+- [别再“Vibe Coding”了：2025 年专业开发者是如何驾驭 Coding Agent的？](https://tonybai.com/2026/01/07/stop-vibe-coding-professional-developers-master-coding-agent-2025/)（2026-01-07）
+- [刚刚，Claude Code 作者曝光了自己的“私房”配置：原来顶尖高手是这样用 AI 写代码的！](https://tonybai.com/2026/01/05/httpstonybai-com20260105claude-code-author-reveals-private-ai-coding-config/)（2026-01-05）
+- [为什么 AI 时代，C++ 和 Rust 反而更火了？Herb Sutter 的硬核解读](https://tonybai.com/2026/01/03/why-cpp-programmers-keep-growing-fast/)（2026-01-03）
+- [Kent Beck 最新思考：AI 时代的“一人派对”，代码审查的终结与重生](https://tonybai.com/2026/01/02/kent-beck-ai-era-code-review-end-and-rebirth/)（2026-01-02）
+- [AI 是让你忘掉如何编程的最快方式](https://tonybai.com/2026/01/01/ai-is-the-fastest-way-to-forget-how-to-code/)（2026-01-01）
+- [“为什么很多工程师还在无视 AI 编程？”—— 这里的答案，或许决定了你三年后的身价](https://tonybai.com/2025/12/29/why-many-software-engineers-still-ignore-ai-programming/)（2025-12-29）
+- [Bug 激增 1.7 倍！AI 写代码：是速度的蜜糖，还是质量的砒霜？](https://tonybai.com/2025/12/28/state-of-ai-vs-human-code-generation-report/)（2025-12-28）
+- [AI 代码审查的“危”与“机”：从个体挣扎到 Uber 的系统化解法](https://tonybai.com/2025/12/27/code-review-hell-in-ai-age/)（2025-12-27）
+- [Rob Pike 罕见暴怒！痛斥 AI 公司的“伪善”致谢信，引爆技术圈](https://tonybai.com/2025/12/27/rob-pike-outburst-denounces-ai-companies-hypocritical-thanks/)（2025-12-27）
+- [从工具到伙伴：Google 三巨头定义 2025 为“AI Agent 与推理元年”](https://tonybai.com/2025/12/26/google-2025-research-breakthroughs/)（2025-12-26）
+- [别演了，真实的程序员根本不修电脑：我们左手AI，右手星辰大海](https://tonybai.com/2025/12/21/real-programmers-dont-fix-computers-ai-stars-and-seas/)（2025-12-21）
+- [AI 编码时代的生产力跃迁：2025 年开发者生态报告深度解读](https://tonybai.com/2025/12/20/ai-coding-era-productivity-leap-2025-developer-ecosystem-report/)（2025-12-20）
+- [继 MCP 之后，Anthropic 再放大招：Agent Skills 正式发布为开放标准！](https://tonybai.com/2025/12/19/anthropic-agent-skills-open-standard-launch/)（2025-12-19）
+- [AI 编程的“90% 陷阱”：为什么你生成代码 1 分钟，修 Bug 却要 1 小时？](https://tonybai.com/2025/12/17/ai-programming-90-percent-trap-generation-vs-bug-fix/)（2025-12-17）
+- [你的大脑是 CPU，别让 AI 把它挂起 (WAIT)](https://tonybai.com/2025/12/14/dont-let-ai-put-your-brain-cpu-in-wait/)（2025-12-14）
+- [给了机关枪，你却非要耍大刀：2025 年末，程序员 All in AI 的生存启示录](https://tonybai.com/2025/12/09/programmer-all-in-ai-survival-revelation-in-2025/)（2025-12-09）
+- [别盲目梭哈 Agentic AI！先看清“确定性”的崩塌与“概率性”重建](https://tonybai.com/2025/12/04/thoughts-before-all-in-agentic-ai/)（2025-12-04）
+- [还在当“上下文搬运工”？我写了一门课，帮你重塑AI开发工作流](https://tonybai.com/2025/11/20/ai-native-dev-workflow/)（2025-11-20）
+- [Rust 布道者Jon Gjengset深度访谈：在 AI 时代，我们该如何思考编程、职业与未来？](https://tonybai.com/2025/10/30/jon-gjengset-rust-ai-future/)（2025-10-30）
+- [AI 让代码产出速度提升 10 倍，为什么我们的软件交付成功率却停滞不前？](https://tonybai.com/2025/10/18/revisit-extreme-programming-in-the-age-of-ai/)（2025-10-18）
+- [从“键盘牛仔”到“规范工程师”，AI 浪潮下的程序员身份危机](https://tonybai.com/2025/10/12/the-programmer-identity-crisis/)（2025-10-12）
+- [Dropbox最新研究解读：AI 正在拉平生产力差距，顶尖开发者如何脱颖而出？](https://tonybai.com/2025/09/28/how-top-performers-stand-out-in-the-age-of-ai/)（2025-09-28）
+- [Azure CTO 深度解读：微软为何要用 Rust “替换” C/C++，又将如何用 AI 加速代码迁移？](https://tonybai.com/2025/09/11/microsoft-is-getting-rusty/)（2025-09-11）
+- [AI 时代的初级工程师生存指南：别让“万能”的AI工具，毁掉你最宝贵的成长期](https://tonybai.com/2025/08/24/junior-engineer-survival-guide-in-ai-age/)（2025-08-24）
+- [2025年最佳机器人Linux操作系统——顶级发行版与最新进展！](https://tonybai.com/2025/08/17/best-linux-os-for-robotics-in-2025/)（2025-08-17）
+- [AI正在重塑编程语言格局：Rust、Python 和 TypeScript 真是最终赢家吗？](https://tonybai.com/2025/08/14/rs-py-ts-trifecta/)（2025-08-14）
+- [警惕 AI 效率神话：你是“闪电战”的独立开发者，还是“持久战”的工程师？](https://tonybai.com/2025/08/06/blitzkrieg-vs-attrition-in-ai-age/)（2025-08-06）
+- [AI 正在放大技术选型的风险：为什么我们更应该“选择无聊的技术”](https://tonybai.com/2025/08/03/choose-boring-technology/)（2025-08-03）
+- [你的 AI Agent 为何总“犯傻”？构建生产级 Agent 所需的6大工程原则](https://tonybai.com/2025/07/30/six-principles-production-ai-agents/)（2025-07-30）
+- [Anthropic内部实践首次公开：揭秘Claude Code如何引爆全员生产力](https://tonybai.com/2025/07/25/how-anthropic-teams-use-claude-code/)（2025-07-25）
+- [写作即思考：AI 时代，开发者为什么要警惕“思考外包”？](https://tonybai.com/2025/07/25/writing-is-thinking/)（2025-07-25）
+- [AI 正在重写“软件工程师”的岗位描述：未来你需要这 6 项核心技能](https://tonybai.com/2025/07/15/the-agentic-software-engineer/)（2025-07-15）
+- [停止构建AI Agent！这里有5个更简单的LLM工作流模式，能解决90%的问题](https://tonybai.com/2025/07/10/stop-building-ai-agents/)（2025-07-10）
+- [你的命令行，即将迎来一场“AI 革命”](https://tonybai.com/2025/07/09/gemini-cli-starting-guide/)（2025-07-09）
+- [拥抱Agentic Coding：软件开发的未来](https://tonybai.com/2025/07/05/agentic-coding-is-the-future/)（2025-07-05）
+- [NVIDIA 的颠覆性观点：AI Agent 的未来，属于小模型 (SLM)](https://tonybai.com/2025/07/04/slm-is-the-future-of-agentic-ai/)（2025-07-04）
+- [别再直接让 AI 写代码了！试试这个“Vibe Specs”模式，效率提升60%](https://tonybai.com/2025/07/02/vibe-specs/)（2025-07-02）
+- [Martin Fowler最新洞察：LLM 不止是“更高”的抽象，它正在改变编程的“本质”！](https://tonybai.com/2025/06/26/non-deterministic-abstraction/)（2025-06-26）
+- [Sam Altman的“温和奇点”已至：我们真的越过了AI的“事件视界”吗？](https://tonybai.com/2025/06/11/the-gentle-singularity/)（2025-06-11）
+- [告别智能体孤岛：谷歌A2A协议能否成为企业AI协作的通用语？](https://tonybai.com/2025/04/14/what-is-a2a-protocol/)（2025-04-14）
+- [构建高效的AI智能体\[译\]](https://tonybai.com/2025/03/11/building-effective-agents/)（2025-03-11）
+- [智能时代临近：我眼中AI编程的现在与未来](https://tonybai.com/2024/10/14/programming-in-ai-era/)（2024-10-14）
+- [那些可免费使用的在线大语言模型服务](https://tonybai.com/2024/05/06/those-free-to-use-online-llm-services/)（2024-05-06）
+
+## 三、Rust、编程语言与编译器（54）
+
+从 Rust、C/C++、Java 到语言设计、编译器和运行时的跨语言观察。
+
+- [Rust 要变成下一个C++？](https://tonybai.com/2026/09/12/rust-complexity-debate-2026/)（2026-09-12）
+- [Rust官方宣布启动函数重载实验，一个特性打通 C++ 互操作最后一公里](https://tonybai.com/2026/09/04/rust-function-overloading-experiment-nightly-splat/)（2026-09-04）
+- [Rust 下一代借用检查器 Polonius Alpha 登陆 Nightly：十年磨一剑，编译器终于“看懂”代码分支](https://tonybai.com/2026/08/20/rust-polonius-alpha-borrow-checker-nightly/)（2026-08-20）
+- [事不过三，我们为什么总是学不好 Rust？](https://tonybai.com/2026/08/18/rust-primer-introduction/)（2026-08-18）
+- [出租车司机极少得阿尔兹海默症，那手写 Rust 代码的程序员呢？我大胆推了一个脑洞](https://tonybai.com/2026/08/16/taxi-drivers-alzheimers-rust-programmers-mental-map/)（2026-08-16）
+- [Rust重写运动，到底是真香还是被吹爆？](https://tonybai.com/2026/08/15/rust-rewrite-blazingly-fast-or-hyped-rustikon-2026/)（2026-08-15）
+- [从 Mozilla 孤儿到独立王国：起底 Rust 基金会如何“养大”一门产业级语言](https://tonybai.com/2026/08/12/rust-foundation-explained-governance-and-funding/)（2026-08-12）
+- [Bun刚把Zig重写成Rust，这个团队却用487天反向重写](https://tonybai.com/2026/07/18/rust-to-zig-roc-compiler-rewrite/)（2026-07-18）
+- [Bun 重写为 Rust 后，Zig 之父罕见开炮：“我们早就等着看你重写”](https://tonybai.com/2026/07/10/zig-founder-andrew-kelley-thoughts-bun-rust-rewrite/)（2026-07-10）
+- [为什么说“编译通过，就能运行”？Google 专家 Alice 揭秘 Rust 的工程美学与底层逻辑](https://tonybai.com/2026/06/16/why-if-it-compiles-it-runs-rust-engineering-aesthetics-and-logic/)（2026-06-16）
+- [Linux 内核顶级维护者：写了 35 年 C，是 Rust 让我重新找回了编程的乐趣](https://tonybai.com/2026/06/13/linux-maintainer-greg-kh-switched-to-rust-after-35-years-of-c/)（2026-06-13）
+- [C++ 的权力游戏：一部关于妥协、背叛与重生的“史诗神剧”](https://tonybai.com/2026/06/10/the-story-of-cpp/)（2026-06-10）
+- [谁说 Rust 在中国火了？扒开 2025 全年数据，我看到了令人尴尬的真相](https://tonybai.com/2026/05/12/the-embarrassing-truth-about-rust-adoption-in-china/)（2026-05-12）
+- [为什么人人爱 Rust，但 RedMonk 榜单却给它泼了一盆冷水？](https://tonybai.com/2026/04/25/rust-popularity-vs-redmonk-ranking-reality-check/)（2026-04-25）
+- [Rust 还没进前十，TIOBE 就开始唱衰了？](https://tonybai.com/2026/04/17/tiobe-ranking-and-the-decline-of-rust-hype/)（2026-04-17）
+- [C++ 社区内部大讨论：新特性到底是“生产力革命”，还是“叠加的复杂性”？](https://tonybai.com/2026/04/15/cpp-community-debate-productivity-revolution-vs-complexity/)（2026-04-15）
+- [Rust 的“跨越鸿沟”时刻：Ubuntu 全面拥抱 Rust 意味着什么？](https://tonybai.com/2026/02/25/rust-crossing-the-chasm-ubuntu-embrace/)（2026-02-25）
+- [当“安全性”遭遇“交付速度”：2026 年，我为什么告别了 Rust](https://tonybai.com/2026/02/21/safety-vs-delivery-speed-why-farewell-rust-in-2026/)（2026-02-21）
+- [让编译器成为你的副驾驶：告别“防御性编程”，拥抱“类型驱动开发”](https://tonybai.com/2026/01/04/stop-lying-to-the-compiler/)（2026-01-04）
+- [一次 unwrap() 引发的全球宕机：Cloudflare 故障报告背后的 Rust 安全反思](https://tonybai.com/2025/11/19/cloudflare-18-november-2025-outage/)（2025-11-19）
+- [Python简史：一个圣诞节的“私活”项目，如何改变了编程世界？](https://tonybai.com/2025/08/30/python-an-origin-story/)（2025-08-30）
+- [掌握架构师的“编程语言”：将“想法”部署到“人”的艺术](https://tonybai.com/2025/08/25/documents-the-architects-programming-language/)（2025-08-25）
+- [Rust 2025 深度解读：在十周年里程碑上，Niko Matsakis 如何擘画下一个时代的灵魂与蓝图？](https://tonybai.com/2025/08/19/rust-in-2025/)（2025-08-19）
+- [Rust 的安全神话？数据库 CEO 为何在关键系统中仍选 C++](https://tonybai.com/2025/07/22/cedardb-choose-cpp-rather-than-rust/)（2025-07-22）
+- [认知负荷对编程语言选择和学习的影响](https://tonybai.com/2024/10/24/cognitive-load-impact-on-programming-language-choice-and-study/)（2024-10-24）
+- [关于编程语言学习的一些体会](https://tonybai.com/2013/10/22/some-experience-about-learning-programming-language/)（2013-10-22）
+- [Python脚本命令行变量的实现](https://tonybai.com/2013/07/09/an-implementation-of-python-commandline-variables/)（2013-07-09）
+- [C,C++开源项目中的100个Bugs](https://tonybai.com/2013/04/10/100-bugs-in-c-cpp-opensource-projects/)（2013-04-10）
+- [关于Python Package下的Module import方式](https://tonybai.com/2013/01/24/the-module-import-way-under-python-package/)（2013-01-24）
+- [编程语言进入“拼爹”时代](https://tonybai.com/2012/10/08/the-new-age-of-programming-language/)（2012-10-08）
+- [也谈C语言编译器的标准编译阶段](https://tonybai.com/2011/07/04/also-talk-about-standard-compile-stage-of-c-compiler/)（2011-07-04）
+- [C++咬文嚼字-'Pointer Trick'](https://tonybai.com/2007/05/22/cpp-weigh-every-word-series-pointer-trick/)（2007-05-22）
+- [C++咬文嚼字-'Functions'](https://tonybai.com/2007/03/13/cpp-weigh-every-word-series-functions/)（2007-03-13）
+- [C++咬文嚼字-'Evil cast'](https://tonybai.com/2007/03/12/cpp-weigh-every-word-series-evil-cast/)（2007-03-12）
+- [C++咬文嚼字-'0 or NULL'](https://tonybai.com/2007/03/10/cpp-weigh-every-word-series-0-or-null/)（2007-03-10）
+- [C++咬文嚼字－'Hijack const'](https://tonybai.com/2007/03/09/cpp-weigh-every-word-series-hijack-const/)（2007-03-09）
+- ['寓教于乐'学Ruby](https://tonybai.com/2006/06/28/learn-ruby-in-amusement/)（2006-06-28）
+- [一个C++项目的Makefile编写-Tony与Alex的对话系列](https://tonybai.com/2005/05/23/tony-alex-dialog-on-write-makefile-for-cpp-project/)（2005-05-23）
+- [深入Java底层](https://tonybai.com/2005/01/16/deep_into_java/)（2005-01-16）
+- [Mix-in in Ruby](https://tonybai.com/2005/01/12/mix-in-in-ruby/)（2005-01-12）
+- [结识Ruby](https://tonybai.com/2005/01/05/learn-ruby/)（2005-01-05）
+- [Effective Java阅读笔记-item异常](https://tonybai.com/2004/12/03/effective-java-notes-item-exception/)（2004-12-03）
+- [Effective Java阅读笔记-item18](https://tonybai.com/2004/11/30/effective-java-notes-item18/)（2004-11-30）
+- [Effective Java阅读笔记-item24、25、34](https://tonybai.com/2004/11/30/effective-java-notes-item24-item25-item34/)（2004-11-30）
+- [Effective Java阅读笔记-item13、14](https://tonybai.com/2004/11/29/effective-java-notes-item13-and-item14/)（2004-11-29）
+- [Effective Java阅读笔记-item16](https://tonybai.com/2004/11/29/effective-java-notes-item16/)（2004-11-29）
+- [Effective Java阅读笔记-item12](https://tonybai.com/2004/11/27/effective-java-notes-item12/)（2004-11-27）
+- [Effective Java阅读笔记-item4、6](https://tonybai.com/2004/11/27/effective-java-notes-item4-and-item6/)（2004-11-27）
+- [Effective Java阅读笔记-item1](https://tonybai.com/2004/11/26/effective-java-notes-item1/)（2004-11-26）
+- [Java 5.0新特性研究(二)](https://tonybai.com/2004/11/22/java5-research-part2/)（2004-11-22）
+- [Java 5.0新特性研究(一)](https://tonybai.com/2004/11/19/java5-research-part1/)（2004-11-19）
+- [C++ Advanced Training(二)](https://tonybai.com/2004/11/12/cpp-advanced-training-part2/)（2004-11-12）
+- [C++ Advanced Training(一)](https://tonybai.com/2004/11/09/cpp-advanced-training-part1/)（2004-11-09）
+- [Java基础](https://tonybai.com/2004/10/10/java-basics/)（2004-10-10）
+
+## 四、云原生、容器与基础设施（70）
+
+覆盖 Kubernetes、容器、云原生、运维和基础设施工程。
+
+- [别再死磕 K8s 文档了：一个“亚马逊仓库”的比喻，把 Kubernetes 全部讲透](https://tonybai.com/2026/08/30/kubernetes-warehouse-analogy-explained/)（2026-08-30）
+- [5 分钟上手 gvu：把 vanity import path 这件事，从“半天运维”变成一条命令](https://tonybai.com/2026/07/06/get-started-with-gvu-in-5-minutes/)（2026-07-06）
+- [一天重写 JSONata，我用 400 美元干掉了公司 50 万美元的 K8s 集群](https://tonybai.com/2026/04/01/rewrote-jsonata-in-golang-with-ai/)（2026-04-01）
+- [Docker 的十年：重塑云原生基础设施的“底层炼金术”](https://tonybai.com/2026/03/09/a-decade-of-docker-containers/)（2026-03-09）
+- [Kelsey Hightower 退休后的冷思考：为什么 10 年过去了，我们还在谈论容器？](https://tonybai.com/2026/01/22/why-are-we-still-talking-about-containers-in-ai-age/)（2026-01-22）
+- [13万节点！Google 如何打破 Kubernetes 的物理极限，构建全球最大集群](https://tonybai.com/2025/11/26/how-google-built-a-130000-node-k8s-cluster/)（2025-11-26）
+- [7 个常见的 Kubernetes 陷阱（以及我是如何学会避免它们的）](https://tonybai.com/2025/10/22/seven-kubernetes-pitfalls/)（2025-10-22）
+- [一个 Kubernetes 集群的“珠峰攀登”：从 10 万到 100 万节点的极限探索](https://tonybai.com/2025/10/20/k8s-1m-intro/)（2025-10-20）
+- [Google 揭秘生产环境调试心法：SRE 与 SWE 的四大思维差异与实战路径](https://tonybai.com/2025/08/10/debugging-incidents-in-google/)（2025-08-10）
+- [后VMware时代：为什么Kubernetes正在成为VM的新家？](https://tonybai.com/2025/08/05/the-voice-of-k8s-experts-report-2025/)（2025-08-05）
+- [Kubernetes 2.0 畅想：告别 YAML、etcd 束缚与 Helm 之痛，K8s 的下一站是什么？](https://tonybai.com/2025/06/21/kubernetes-2-0/)（2025-06-21）
+- [云原生时代，如何用RED三板斧搞定服务监控？](https://tonybai.com/2025/05/26/monitor-design-with-red/)（2025-05-26）
+- [探索Docker默认网络NAT映射的分配与过滤行为](https://tonybai.com/2024/12/05/exploring-nat-mapping-assignment-and-filtering-behavior-of-docker-default-network/)（2024-12-05）
+- [使用Docker容器突破客户端6w可用端口的误区](https://tonybai.com/2021/12/14/the-misconception-of-using-docker-to-break-out-of-6w-ports-of-the-client/)（2021-12-14）
+- [使用Docker Compose构建一键启动的运行环境](https://tonybai.com/2021/11/26/build-all-in-one-runtime-environment-with-docker-compose/)（2021-11-26）
+- [Kubernetes Deployment故障排除图解指南](https://tonybai.com/2019/12/08/k8s-deployment-troubleshooting/)（2019-12-08）
+- [如何在Ubuntu 18.04 Server上部署Kubernetes集群](https://tonybai.com/2019/10/21/how-to-deploy-a-kubernetes-cluster-with-ubuntu-server-18-04/)（2019-10-21）
+- [在Kubernetes上如何基于自定义指标实现应用的自动缩放](https://tonybai.com/2019/10/11/autoscaling-apps-on-kubernetes/)（2019-10-11）
+- [构建Kubernetes集群 – 选择工作节点大小](https://tonybai.com/2019/09/05/kubernetes-node-size/)（2019-09-05）
+- [Kubernetes网络插件（CNI）基准测试的最新结果](https://tonybai.com/2019/04/18/benchmark-result-of-k8s-network-plugin-cni/)（2019-04-18）
+- [YAML入门：以创建一个Kubernetes deployment为例](https://tonybai.com/2019/02/25/introduction-to-yaml-creating-a-kubernetes-deployment/)（2019-02-25）
+- [官宣：慕课网课程“Kubernetes实战：高可用集群搭建、配置、运维与应用”上线了](https://tonybai.com/2018/10/17/imooc-course-kubernetes-practice-go-online/)（2018-10-17）
+- [HTTPS服务的Kubernetes ingress配置实践](https://tonybai.com/2018/06/25/the-kubernetes-ingress-practice-for-https-service/)（2018-06-25）
+- [实践kubernetes ingress controller的四个例子](https://tonybai.com/2018/06/21/kubernetes-ingress-controller-practice-using-four-examples/)（2018-06-21）
+- [使用kubectl访问Kubernetes集群时的身份验证和授权](https://tonybai.com/2018/06/14/the-authentication-and-authorization-of-kubectl-when-accessing-k8s-cluster/)（2018-06-14）
+- [在Kubernetes 1.10.3上以Hard模式搭建EFK日志分析平台](https://tonybai.com/2018/06/13/setup-efk-on-kubernetes-1-10-3-in-the-hard-way/)（2018-06-13）
+- [慕课网免费课“Kubernetes：开启云原生之门”上线](https://tonybai.com/2018/05/02/imooc-course-kubernetes-open-the-gate-to-cloudnative-go-online/)（2018-05-02）
+- [使用istio治理微服务入门](https://tonybai.com/2018/01/03/an-intro-of-microservices-governance-by-istio/)（2018-01-03）
+- [追求极简：Docker镜像构建演化史](https://tonybai.com/2017/12/21/the-concise-history-of-docker-image-building/)（2017-12-21）
+- [在Kubernetes集群上部署高可用Harbor镜像仓库](https://tonybai.com/2017/12/08/deploy-high-availability-harbor-on-kubernetes-cluster/)（2017-12-08）
+- [理解Docker的多阶段镜像构建](https://tonybai.com/2017/11/11/multi-stage-image-build-in-docker/)（2017-11-11）
+- [再谈Docker容器单机网络：利用iptables trace和ebtables log](https://tonybai.com/2017/11/06/explain-docker-single-host-network-using-iptables-trace-and-ebtables-log/)（2017-11-06）
+- [源创会2017沈阳站讲稿：基于Harbor的高可用企业级私有容器镜像仓库部署实践](https://tonybai.com/2017/10/23/the-speech-script-practice-on-deploying-a-ha-harbor-cluster-for-osc-shenyang-2017/)（2017-10-23）
+- [Kubernetes节点资源耗尽状态的处理](https://tonybai.com/2017/10/16/out-of-node-resource-handling-in-kubernetes-cluster/)（2017-10-16）
+- [Kubernetes Dashboard 1.7.0部署二三事](https://tonybai.com/2017/09/26/some-notes-about-deploying-kubernetes-dashboard-1-7-0/)（2017-09-26）
+- [解决Kubernetes 1.7.3 kube-apiserver频繁异常重启的问题](https://tonybai.com/2017/08/09/fix-kube-apiserver-restart-exceptionally-in-k8s-1-7-3/)（2017-08-09）
+- [解决Kubernetes 1.6.4 Dashboard无法访问的问题](https://tonybai.com/2017/07/20/fix-cannot-access-dashboard-in-k8s-1-6-4/)（2017-07-20）
+- [一步步打造基于Kubeadm的高可用Kubernetes集群-第二部分](https://tonybai.com/2017/05/15/setup-a-ha-kubernetes-cluster-based-on-kubeadm-part2/)（2017-05-15）
+- [一步步打造基于Kubeadm的高可用Kubernetes集群-第一部分](https://tonybai.com/2017/05/15/setup-a-ha-kubernetes-cluster-based-on-kubeadm-part1/)（2017-05-15）
+- [Kubernetes集群node主机名修改导致的异常](https://tonybai.com/2017/05/09/exception-caused-by-kubernetes-node-hostname-change/)（2017-05-09）
+- [Kubernetes集群跨节点挂载CephFS](https://tonybai.com/2017/05/08/mount-cephfs-acrossing-nodes-in-kubernetes-cluster/)（2017-05-08）
+- [在Kubernetes Pod中使用Service Account访问API Server](https://tonybai.com/2017/03/03/access-api-server-from-a-pod-through-serviceaccount/)（2017-03-03）
+- [Kubernetes集群Pod使用Host的本地时区设置](https://tonybai.com/2017/02/20/use-host-timezone-in-kubernetes-pods/)（2017-02-20）
+- [Kubernetes Pod无法挂载ceph RBD存储卷的临时解决方法](https://tonybai.com/2017/02/17/temp-fix-for-pod-unable-mount-cephrbd-volume/)（2017-02-17）
+- [Kubernetes集群中Service的滚动更新](https://tonybai.com/2017/02/09/rolling-update-for-services-in-kubernetes-cluster/)（2017-02-09）
+- [以Kubeadm方式安装的Kubernetes集群的探索](https://tonybai.com/2017/01/24/explore-kubernetes-cluster-installed-by-kubeadm/)（2017-01-24）
+- [Kubernetes Dashboard集成Heapster](https://tonybai.com/2017/01/20/integrate-heapster-for-kubernetes-dashboard/)（2017-01-20）
+- [Kubernetes集群Dashboard插件安装](https://tonybai.com/2017/01/19/install-dashboard-addon-for-k8s/)（2017-01-19）
+- [理解Kubernetes网络之Flannel网络](https://tonybai.com/2017/01/17/understanding-flannel-network-for-kubernetes/)（2017-01-17）
+- [理解Docker容器网络之Linux Network Namespace](https://tonybai.com/2017/01/11/understanding-linux-network-namespace-for-docker-network/)（2017-01-11）
+- [使用Kubeadm安装Kubernetes](https://tonybai.com/2016/12/30/install-kubernetes-on-ubuntu-with-kubeadm/)（2016-12-30）
+- [使用Kubeadm安装Kubernetes-Part2](https://tonybai.com/2016/12/30/install-kubernetes-on-ubuntu-with-kubeadm-2/)（2016-12-30）
+- [当Docker遇到systemd](https://tonybai.com/2016/12/27/when-docker-meets-systemd/)（2016-12-27）
+- [Kubernetes集群的安全配置](https://tonybai.com/2016/11/25/the-security-settings-for-kubernetes-cluster/)（2016-11-25）
+- [Kubernetes从Private Registry中拉取容器镜像的方法](https://tonybai.com/2016/11/16/how-to-pull-images-from-private-registry-on-kubernetes-cluster/)（2016-11-16）
+- [使用Ceph RBD为Kubernetes集群提供存储卷](https://tonybai.com/2016/11/07/integrate-kubernetes-with-ceph-rbd/)（2016-11-07）
+- [Kubernetes集群DNS插件安装](https://tonybai.com/2016/10/23/install-dns-addon-for-k8s/)（2016-10-23）
+- [一篇文章带你了解Kubernetes安装](https://tonybai.com/2016/10/18/learn-how-to-install-kubernetes-on-ubuntu/)（2016-10-18）
+- [Docker 1.12 swarm模式下遇到的各种问题](https://tonybai.com/2016/10/11/some-problems-under-swarm-mode-in-docker-1-12/)（2016-10-11）
+- [使用Filebeat输送Docker容器的日志](https://tonybai.com/2016/03/25/ship-docker-container-log-with-filebeat/)（2016-03-25）
+- [现代企业应用架构-使用Docker CaaS交付敏捷的、可移植的、受控的应用](https://tonybai.com/2016/03/15/modern-application-architecture-for-the-enterprise-with-docker-caas/)（2016-03-15）
+- [部署私有Docker Registry](https://tonybai.com/2016/02/26/deploy-a-private-docker-registry/)（2016-02-26）
+- [理解Docker跨多主机容器网络](https://tonybai.com/2016/02/15/understanding-docker-multi-host-networking/)（2016-02-15）
+- [理解Docker容器端口映射](https://tonybai.com/2016/01/18/understanding-binding-docker-container-ports-to-host/)（2016-01-18）
+- [理解Docker单机容器网络](https://tonybai.com/2016/01/15/understanding-container-networking-on-single-host/)（2016-01-15）
+- [Wordpress迁移到Docker容器](https://tonybai.com/2014/11/01/migrate-wordpress-into-docker-container/)（2014-11-01）
+- [探讨Docker容器中修改系统变量的方法](https://tonybai.com/2014/10/14/discussion-on-the-approach-to-modify-system-variables-in-docker/)（2014-10-14）
+- [探讨docker容器对共享内存的支持情况](https://tonybai.com/2014/10/12/discussion-on-shared-mem-support-in-docker/)（2014-10-12）
+- [docker容器内服务程序的优雅退出](https://tonybai.com/2014/10/09/gracefully-shutdown-app-running-in-docker/)（2014-10-09）
+- [Ubuntu Server 14.04安装docker](https://tonybai.com/2014/09/26/install-docker-on-ubuntu-server-1404/)（2014-09-26）
+
+## 五、网络、数据、性能与安全（55）
+
+覆盖网络协议、数据库、消息系统、Linux、性能、可观测性和安全。
+
+- [14.3 万条/秒！VictoriaMetrics 亲自“开考”，把 8 大主流日志采集器按在地上摩擦](https://tonybai.com/2026/08/21/victoriametrics-vlagent-log-collectors-benchmark-2026/)（2026-08-21）
+- [Redis 之父吐槽现代前端的复杂性：我们到底是在解决问题，还是在制造问题？](https://tonybai.com/2026/05/29/redis-creator-slams-modern-frontend-complexity/)（2026-05-29）
+- [地球上第一个“硅基生命”社交网络moltbook上线：人类禁止发帖，只能围观！](https://tonybai.com/2026/02/01/moltbook-first-social-network-for-ai-agent/)（2026-02-01）
+- [MinIO 开源版突发“安乐死”：维护模式开启，社区愤怒，你的数据还安全吗？](https://tonybai.com/2025/12/04/minio-enter-maintenance-mode/)（2025-12-04）
+- [谁“杀”死了你的 HTTP 连接？—— 揭秘云环境下连接池配置的隐形陷阱](https://tonybai.com/2025/11/25/who-killed-your-http-connection-traps-of-connection-pooling/)（2025-11-25）
+- [为什么说“接口”，而非代码或硬件堆砌，决定了系统的性能上限？](https://tonybai.com/2025/09/07/the-power-of-an-interface-for-performance/)（2025-09-07）
+- [从 0 到 1.5 亿 QPS：Uber 核心存储架构的十年演进与缓存设计哲学](https://tonybai.com/2025/09/01/uber-150-million-reads/)（2025-09-01）
+- [日志查询从 70 小时到 10 秒？VictoriaMetrics 联创揭示 PB 级日志处理性能奥秘](https://tonybai.com/2025/08/20/large-scale-logging-made-easy/)（2025-08-20）
+- [持续性能分析正在成为继Metrics、Logs 和 Traces之后，可观测性的“第四大支柱”](https://tonybai.com/2025/08/04/continuous-profiling-fourth-pillar/)（2025-08-04）
+- [为什么 VictoriaMetrics 正在替换 Prometheus？一次大规模可观测性迁移实录](https://tonybai.com/2025/07/26/migrate-from-prometheus-to-victoriametrics/)（2025-07-26）
+- [探索基于pion开发的WebRTC应用的建连过程](https://tonybai.com/2024/12/26/exploring-the-connection-establish-process-of-webrtc-app-built-with-pion/)（2024-12-26）
+- [WebRTC第一课：从信令、ICE到NAT穿透的连接建立全流程](https://tonybai.com/2024/12/14/webrtc-first-lesson-how-connection-estabish/)（2024-12-14）
+- [WebRTC第一课：网络架构与NAT工作原理](https://tonybai.com/2024/11/27/webrtc-first-lesson-network-architecture-and-how-nat-work/)（2024-11-27）
+- [使用Ollama和OpenWebUI在CPU上玩转Meta Llama3-8B](https://tonybai.com/2024/04/23/playing-with-meta-llama3-8b-on-cpu-using-ollama-and-openwebui/)（2024-04-23）
+- [要么返回错误值，要么输出日志，别两样都做](https://tonybai.com/2024/04/14/either-return-error-or-log-them-do-not-do-both/)（2024-04-14）
+- [通过实例理解Web应用跨域问题](https://tonybai.com/2023/11/19/understand-go-web-cross-origin-problem-by-example/)（2023-11-19）
+- [通过实例理解Web应用的机密管理](https://tonybai.com/2023/11/08/understand-go-web-secret-management-by-example/)（2023-11-08）
+- [通过实例理解Web应用授权的几种方式](https://tonybai.com/2023/11/04/understand-go-web-authz-by-example/)（2023-11-04）
+- [通过实例理解Web应用用户密码存储方案](https://tonybai.com/2023/10/25/understand-password-storage-of-web-app-by-example/)（2023-10-25）
+- [slog实战：文件日志、轮转与kafka集成](https://tonybai.com/2023/09/04/slog-in-action-file-logging-rotation-and-kafka-integration/)（2023-09-04）
+- [Apache Arrow：驱动列式分析性能和连接性的提升\[译\]](https://tonybai.com/2023/07/01/arrow-columnar-analytics/)（2023-07-01）
+- [理解时序数据库的时间线](https://tonybai.com/2023/05/28/understand-time-series-of-tsdb/)（2023-05-28）
+- [有没有安全漏洞，你说了不算，govulncheck是裁判！](https://tonybai.com/2022/09/10/an-intro-of-govulncheck/)（2022-09-10）
+- [使用C语言从头开发一个Hello World级别的eBPF程序](https://tonybai.com/2022/07/05/develop-hello-world-ebpf-program-in-c-from-scratch/)（2022-07-05）
+- [一文告诉你如何用好uber开源的zap日志库](https://tonybai.com/2021/07/14/uber-zap-advanced-usage/)（2021-07-14）
+- [http.Client的连接行为控制详解](https://tonybai.com/2021/04/02/go-http-client-connection-control/)（2021-04-02）
+- [基于Redis Cluster的分布式锁实现以互斥方式操作共享资源](https://tonybai.com/2021/02/13/operate-with-shared-resources-in-a-mutually-exclusive-way-through-distributed-lock-implemented-by-redis-cluster/)（2021-02-13）
+- [以单件方式创建和获取数据库实例](https://tonybai.com/2021/02/09/create-and-get-db-access-instance-through-singleton/)（2021-02-09）
+- [使用minio搭建高性能对象存储-第一部分：原型](https://tonybai.com/2020/03/16/build-high-performance-object-storage-with-minio-part1-prototype/)（2020-03-16）
+- [使用nomad在weave网络中部署工作负载](https://tonybai.com/2019/04/20/deploy-workload-in-weave-network-using-nomad/)（2019-04-20）
+- [TensorFlow入门：零基础建立第一个神经网络](https://tonybai.com/2017/02/06/build-your-first-neural-network-with-tensorflow/)（2017-02-06）
+- [VirtualBox虚拟机下Windows登录密码破解方法](https://tonybai.com/2014/10/29/crack-windows-logon-password-under-virtualbox/)（2014-10-29）
+- [使用squid搭建http代理](https://tonybai.com/2012/11/21/setup-http-proxy-with-squid/)（2012-11-21）
+- [使用ssh通过http代理访问bitbucket](https://tonybai.com/2012/05/09/ssh-access-bitbucket-via-http-proxy/)（2012-05-09）
+- [如何加入Linux内核开发社区(7)](https://tonybai.com/2012/04/09/how-to-participate-linux-community-section-7/)（2012-04-09）
+- [如何加入Linux内核开发社区(5)](https://tonybai.com/2012/04/05/how-to-participate-linux-community-section-5/)（2012-04-05）
+- [如何加入Linux内核开发社区(6)](https://tonybai.com/2012/04/05/how-to-participate-linux-community-section-6/)（2012-04-05）
+- [如何加入Linux内核开发社区(4)](https://tonybai.com/2012/03/31/how-to-participate-linux-community-section-4/)（2012-03-31）
+- [如何加入Linux内核开发社区(3)](https://tonybai.com/2012/03/29/how-to-participate-linux-community-section-3/)（2012-03-29）
+- [如何加入Linux内核开发社区(2)](https://tonybai.com/2012/03/28/how-to-participate-linux-community-section-2/)（2012-03-28）
+- [如何加入Linux内核开发社区(1)](https://tonybai.com/2012/03/27/how-to-participate-linux-community-section-1/)（2012-03-27）
+- [也谈Linux Kernel Hacking – Kconfig与Kbuild](https://tonybai.com/2012/03/18/linux-kernel-hacking-series-kconfig-and-kbuild/)（2012-03-18）
+- [也谈Linux Kernel Hacking – 内核配置、编译与安装](https://tonybai.com/2012/03/15/linux-kernel-hacking-series-kernel-config-compile-and-install/)（2012-03-15）
+- [利用缓冲区溢出漏洞Hack应用](https://tonybai.com/2011/12/01/hack-app-by-buffer-overflow-leak/)（2011-12-01）
+- [“找回”自己的密码](https://tonybai.com/2009/09/23/my-password-get-back/)（2009-09-23）
+- [瞬时“失忆”，密码忘记](https://tonybai.com/2009/09/22/forget-the-password-of-mailbox/)（2009-09-22）
+- [Picasa Web Albums疑似被和谐了](https://tonybai.com/2009/07/27/picasa-web-albums-may-be-forbidden/)（2009-07-27）
+- [switch语句性能考量](https://tonybai.com/2008/08/18/thoughts-on-the-performance-of-switch-case-statments/)（2008-08-18）
+- [回顾TCP协议那些事儿](https://tonybai.com/2007/12/06/review-tcp-protocol/)（2007-12-06）
+- ['诺顿事件'揭示'国家安全隐患'](https://tonybai.com/2007/05/21/norton-event-reflect-nation-security-defect/)（2007-05-21）
+- [有感于在'安全模式'下工作](https://tonybai.com/2007/03/19/work-under-safe-mode/)（2007-03-19）
+- [字符串拷贝密码](https://tonybai.com/2006/06/26/the-secret-of-string-copy/)（2006-06-26）
+- [遭遇'不明生物'攻击](https://tonybai.com/2006/06/18/attacked-by-unknown-living-being/)（2006-06-18）
+- [在Linux上工作](https://tonybai.com/2005/12/15/working-on-linux/)（2005-12-15）
+- [APR源代码分析-网络IO篇](https://tonybai.com/2005/12/05/apr-network-io/)（2005-12-05）
+
+## 六、软件工程、架构与开源实践（168）
+
+记录架构、工程方法、测试、项目协作、开源工具与日常开发实践。
+
+- [Mermaid最强挑战者“断奶”上位：D2官宣转型非营利，压箱底三年的TALA布局算法也开源了](https://tonybai.com/2026/09/10/d2-goes-nonprofit-tala-open-sourced/)（2026-09-10）
+- [你真的需要一座软件工厂吗？](https://tonybai.com/2026/08/29/do-your-need-a-software-factory/)（2026-08-29）
+- [Thoughtworks最新报告：代码生成不再是瓶颈，“没人能验证”才是！](https://tonybai.com/2026/07/31/thoughtworks-future-of-software-engineering-2026-verification-bottleneck/)（2026-07-31）
+- [软件工厂的明与暗：当代码可以自动生产，人类为何必须留下一盏灯？](https://tonybai.com/2026/07/23/software-factory-light-and-dark/)（2026-07-23）
+- [掌控外环：为什么“循环工程”的边界必须由人类死守？](https://tonybai.com/2026/07/15/own-the-outer-loop/)（2026-07-15）
+- [MCP Server 架构模式全解析：5 种模式、4 个反模式，与那条不能越过的“工具数量红线”](https://tonybai.com/2026/07/09/mcp-server-architecture-patterns-analysis/)（2026-07-09）
+- [开源维护者的困境](https://tonybai.com/2026/06/04/the-maintainers-dilemma/)（2026-06-04）
+- [开源社区“内战”爆发：Bun 创始人预言“未来将禁止人类贡献”，硅谷大佬纷纷站队！](https://tonybai.com/2026/05/01/open-source-civil-war-bun-founder-predicts-ban-on-human-contributions/)（2026-05-01）
+- [从“开源英雄”到“社区公敌”，Ollama 到底做错了什么？](https://tonybai.com/2026/04/18/ollama-from-open-source-hero-to-community-enemy/)（2026-04-18）
+- [看了 100 小时教程，你为什么依然写不好代码？扒开技术人的“成长环”真相](https://tonybai.com/2026/03/22/stop-tactical-diligence-start-stretch-zone-growth/)（2026-03-22）
+- [别傻了，写出极致整洁的代码，是你升不了职的根本原因](https://tonybai.com/2026/03/15/over-engineering-trap-no-promotion-for-simplicity/)（2026-03-15）
+- [打破“知识诅咒”：资深架构师在 OpenClaw 浪潮中的掉队与反思](https://tonybai.com/2026/03/07/breaking-curse-of-knowledge-architect-reflection-openclaw/)（2026-03-07）
+- [停止“氛围编程”（Vibe Coding），拥抱新一代软件工程](https://tonybai.com/2026/02/28/agentic-software-engineering/)（2026-02-28）
+- [极简主义的胜利：OpenClaw 核心引擎 Pi 的架构哲学与开发实录](https://tonybai.com/2026/02/15/openclaw-core-engine-pi-architecture-philosophy-minimalism/)（2026-02-15）
+- [“代码必须不是人写的”：2026 年软件工厂宣言！](https://tonybai.com/2026/02/14/2026-software-factory-manifesto-code-not-by-humans/)（2026-02-14）
+- [UML 之父 Grady Booch：别听 CEO 瞎忽悠，软件工程的第三次黄金时代才刚刚开始](https://tonybai.com/2026/02/13/grady-booch-uml-software-engineering-third-golden-age-begins/)（2026-02-13）
+- [AMP 宣布砍掉 VS Code 插件：为什么说“人机结对编程”已死？](https://tonybai.com/2026/02/09/amp-kills-vscode-plugin-human-ai-pair-programming-is-dead/)（2026-02-09）
+- [大项目构建太慢？Brad Fitzpatrick 提议引入 -cachelink 降低测试等待时间](https://tonybai.com/2026/02/05/brad-fitzpatrick-cachelink-reduce-go-test-wait-time/)（2026-02-05）
+- [代码之外的修炼：Google 资深工程师的 21 条“生存法则”](https://tonybai.com/2026/01/11/21-lessons-from-google-engineer/)（2026-01-11）
+- [耗时六个月，我为你画了一张通往“分布式架构师”的黄金地图](https://tonybai.com/2026/01/06/a-golden-map-to-distributed-architect/)（2026-01-06）
+- [再见了，微服务：从 100 多个“问题儿童”到 1 个“超级巨星”的架构回归](https://tonybai.com/2025/12/19/twilio-say-goodbye-microservices/)（2025-12-19）
+- [看完《疯狂动物城2》，我发现“完美架构”的谎言被戳破了](https://tonybai.com/2025/12/07/zootopia-2-perfect-architecture-lie-exposed/)（2025-12-07）
+- [Anthropic 内部报告：程序员的“死”与“生”，效率暴增 50% 的残酷启示](https://tonybai.com/2025/12/05/how-ai-is-transforming-work-at-anthropic/)（2025-12-05）
+- [只要 Title 带“工程师”，你就必须写代码：Uber 杰出工程师的硬核建议](https://tonybai.com/2025/12/02/advices-from-uber-distinguished-engineer/)（2025-12-02）
+- [白天改Bug，晚上刷视频：你以为在放松，其实在消耗你写出好代码的能力](https://tonybai.com/2025/11/23/short-form-videos-harm-programmers/)（2025-11-23）
+- [从韩立到梅西：顶级“全栈工程师”的修炼之道与生存哲学](https://tonybai.com/2025/11/23/leo-messi-and-fanren-hanli/)（2025-11-23）
+- [“6 个月，47 个微服务”：一场由“简历驱动”引发的架构灾难](https://tonybai.com/2025/11/02/6-months-47-microservices-architecture-disaster/)（2025-11-02）
+- [从《凡人修仙传》到《三体》：顶尖程序员的“降维打击”与“法则”之力](https://tonybai.com/2025/10/24/from-fanren-to-three-body-top-programmers-power/)（2025-10-24）
+- [致敬 1024 程序员节：写给奔跑在二进制世界里的你 (文末赠书)](https://tonybai.com/2025/10/24/honoring-1024-programmers-day/)（2025-10-24）
+- [超越时间的智慧：重读那些定义了现代软件开发的经典文章](https://tonybai.com/2025/10/04/the-software-essays-that-shaped-me/)（2025-10-04）
+- [除了技术能力，什么决定了软件工程师的上限？答案是“品味”](https://tonybai.com/2025/09/30/good-taste-in-software-engineering/)（2025-09-30）
+- [面对“好主意”，为何开源项目的维护者必须学会说“不”？](https://tonybai.com/2025/09/21/why-maintainers-should-say-no-to-good-idea/)（2025-09-21）
+- [软件工程的永恒法则：《代码大全》作者访谈给我们的三大启示](https://tonybai.com/2025/09/14/code-complete-with-steve-mcconnell/)（2025-09-14）
+- [从《凡人修仙传》看程序员境界：道友，你修炼到哪一层了？](https://tonybai.com/2025/09/08/fanren-xiuxian-programmer-levels/)（2025-09-08）
+- [“无聊”设计的终极奥义：为什么“做可能奏效的最简单的事”是最高法则？](https://tonybai.com/2025/08/31/the-simplest-thing-that-could-possibly-work/)（2025-08-31）
+- [无聊的API是最好的API：从系统设计到接口契约的九条法则](https://tonybai.com/2025/08/29/good-api-design/)（2025-08-29）
+- [无聊即可靠：一位资深工程师的九条系统设计法则](https://tonybai.com/2025/08/26/good-system-design/)（2025-08-26）
+- [系统设计的“元素周期表”：40个横跨所有领域的通用设计原则](https://tonybai.com/2025/07/31/periodic-table-of-system-design/)（2025-07-31）
+- [代码之外的必修课：顶级技术文档风格指南如何提升你的工程效率](https://tonybai.com/2025/07/14/writing-style-guide/)（2025-07-14）
+- [特斯拉首席工程师的忠告：用“单向门 vs 双向门”决策，看清分布式系统的未来](https://tonybai.com/2025/07/01/predicting-the-future-of-distributed-systems/)（2025-07-01）
+- [“骑手与大象”架构：超越微服务与单体之争的务实之道？](https://tonybai.com/2025/06/17/rider-elephant-arch/)（2025-06-17）
+- [【规律之手】资深码农都懂？软件工程中的13条“潜规则”定律](https://tonybai.com/2025/04/26/13-laws-of-software-engineering/)（2025-04-26）
+- [拯救你的Commit Log：Conventional Commits实践指南](https://tonybai.com/2025/04/24/conventional-commits-guide/)（2025-04-24）
+- [揭秘顶尖技术专家的15个关键方法与心态，不只靠代码](https://tonybai.com/2025/04/13/top-programmers-methods-mindset/)（2025-04-13）
+- [代码提交者的代码评审通关指南\[译\]](https://tonybai.com/2024/10/11/the-cl-author-guide-to-getting-through-code-review/)（2024-10-11）
+- [致敬：程序员成长路上的良师与经典著作](https://tonybai.com/2024/09/10/programmer-mentors-and-their-classic-works/)（2024-09-10）
+- [有效表达软件架构的最小图集](https://tonybai.com/2023/12/06/a-minimum-set-of-diagrams-for-expressing-software-architecture/)（2023-12-06）
+- [通过实例理解API网关的主要功能特性](https://tonybai.com/2023/12/03/understand-api-gateway-main-functional-features-by-example/)（2023-12-03）
+- [Service Weaver：以单体形式编码，以微服务形式部署](https://tonybai.com/2023/10/09/service-weaver-coding-in-monolithic-deploy-in-microservices/)（2023-10-09）
+- [当函数设计遇到切片](https://tonybai.com/2022/10/27/when-encountering-slice-during-function-design/)（2022-10-27）
+- [让reviewdog支持gitlab-push-commit，守住代码质量下限](https://tonybai.com/2022/09/08/make-reviewdog-support-gitlab-push-commit-to-preserve-the-code-quality-floor/)（2022-09-08）
+- [基于多label的issue驱动软件开发的实践](https://tonybai.com/2022/08/12/practices-of-multi-label-based-issue-driven-software-development/)（2022-08-12）
+- [vendor目录是否需要提交到代码库中？答案全在这一篇](https://tonybai.com/2020/12/03/should-you-commit-the-vendor-folder-in-go/)（2020-12-03）
+- [基于Markdown格式的电子书生成工具大比拼：gohugo、mdbook和peach](https://tonybai.com/2020/06/27/gohugo-vs-mdbook-vs-peach/)（2020-06-27）
+- [Kuberize Ceph RBD API服务](https://tonybai.com/2016/11/21/kuberize-ceph-rbd-api-service/)（2016-11-21）
+- [部署devstack](https://tonybai.com/2016/05/04/deploy-devstack/)（2016-05-04）
+- [再谈那些代码中的“中国式”命名](https://tonybai.com/2013/11/22/those-chinese-style-naming-in-code-again/)（2013-11-22）
+- [代码是怎么腐化的](https://tonybai.com/2013/11/12/how-code-corrupt/)（2013-11-12）
+- [那些代码中的“中国式”命名](https://tonybai.com/2013/11/06/those-chinese-style-naming-in-code/)（2013-11-06）
+- [关于程序员的构思能力的一些体会](https://tonybai.com/2013/10/27/some-experience-about-ideation-of-programmer/)（2013-10-27）
+- [程序 – 程序员的avatar](https://tonybai.com/2013/10/08/program-the-avatar-of-programmers/)（2013-10-08）
+- [也谈代码行统计](https://tonybai.com/2013/07/24/thoughts-about-lines-of-code-statistics/)（2013-07-24）
+- [给新手程序员的建议](https://tonybai.com/2013/07/18/advice-to-a-new-programmer/)（2013-07-18）
+- [buildc 0.3.1版本发布](https://tonybai.com/2013/07/15/buildc-0-3-1-release/)（2013-07-15）
+- [代码评审，由人治过渡到“法治”](https://tonybai.com/2013/07/08/code-review-from-rule-of-man-to-rule-of-law/)（2013-07-08）
+- [buildc 0.3.0版本发布](https://tonybai.com/2013/05/11/buildc-0-3-0-release/)（2013-05-11）
+- [为什么还用C编程？](https://tonybai.com/2013/02/27/why-code-in-c-anymore/)（2013-02-27）
+- [buildc 0.2.2版本发布](https://tonybai.com/2013/01/15/buildc-0-2-2-release/)（2013-01-15）
+- [buildc 0.2.1版本发布](https://tonybai.com/2012/12/06/buildc-0-2-1-release/)（2012-12-06）
+- [个人时间管理的一些实践体会](https://tonybai.com/2012/11/23/some-experience-on-personal-time-management/)（2012-11-23）
+- [buildc 0.2.0版本发布](https://tonybai.com/2012/11/06/buildc-0-2-0-release/)（2012-11-06）
+- [改善技术布道效果的几个实践](https://tonybai.com/2012/10/26/some-practice-on-improving-tech-preach/)（2012-10-26）
+- [由一个软件库存问题想到的](https://tonybai.com/2012/10/22/thoughts-on-software-inventory/)（2012-10-22）
+- [项目跳票成常态，组织基因难逃干系](https://tonybai.com/2012/08/15/bouncing-check-and-organization-gene/)（2012-08-15）
+- [《改善技术布道效果的几个实践》勘误](https://tonybai.com/2012/08/07/errata-of-some-practice-to-improve-tech-sermon/)（2012-08-07）
+- [buildc 0.1.9版本发布](https://tonybai.com/2012/07/19/buildc-0-1-9-release/)（2012-07-19）
+- [buildc 0.1.8版本发布](https://tonybai.com/2012/07/02/buildc-0-1-8-release/)（2012-07-02）
+- [也谈技术布道 – 影响因素及有效实践](https://tonybai.com/2012/04/24/influencing-factors-and-effective-practice-about-driving-technical-changes/)（2012-04-24）
+- [buildc 0.1.7版本发布](https://tonybai.com/2012/04/19/buildc-0-1-7-release/)（2012-04-19）
+- [一场关于“何时发布版本”的论战](https://tonybai.com/2012/04/17/a-discussion-about-when-to-release/)（2012-04-17）
+- [buildc 0.1.5版本发布](https://tonybai.com/2012/04/13/buildc-0-1-5-release/)（2012-04-13）
+- [buildc 0.1.4版本发布](https://tonybai.com/2012/04/12/buildc-0-1-4-release/)（2012-04-12）
+- [lcut 0.3.0版本发布](https://tonybai.com/2012/04/10/lcut-0-3-0-release/)（2012-04-10）
+- [也谈C应用安装包制作与部署](https://tonybai.com/2012/02/01/also-talk-about-c-app-install-package-making-and-deploying/)（2012-02-01）
+- [C语言项目构建管理辅助工具 – buildc](https://tonybai.com/2011/12/08/buildc-a-building-assistant-tool-for-c-app/)（2011-12-08）
+- [C程序员驯服Common Lisp – 函数](https://tonybai.com/2011/09/23/c-programers-tame-common-lisp-series-functions/)（2011-09-23）
+- [C程序员驯服Common Lisp – 变量](https://tonybai.com/2011/09/20/c-programers-tame-common-lisp-series-variables/)（2011-09-20）
+- [C程序员驯服Common Lisp – 控制结构](https://tonybai.com/2011/09/14/c-programers-tame-common-lisp-series-control-structure/)（2011-09-14）
+- [当可执行程序版本信息变更时](https://tonybai.com/2011/09/09/when-program-version-changed/)（2011-09-09）
+- [C程序员驯服Common Lisp – 表达式](https://tonybai.com/2011/09/02/c-programers-tame-common-lisp-series-expressions/)（2011-09-02）
+- [使用C99特性简化代码编写](https://tonybai.com/2011/08/31/simplify-coding-in-c99/)（2011-08-31）
+- [C程序员驯服Common Lisp – 入门](https://tonybai.com/2011/08/30/c-programers-tame-common-lisp-series-introduction/)（2011-08-30）
+- [CBehave – 一个C语言行为驱动开发框架](https://tonybai.com/2011/08/15/cbehave-a-bdd-framework-for-c/)（2011-08-15）
+- [行为驱动开发导引](https://tonybai.com/2011/08/10/introducing-bdd/)（2011-08-10）
+- [让BuildBot服务于多个项目](https://tonybai.com/2011/06/07/use-buildbot-serves-serveral-projects-simultaneously/)（2011-06-07）
+- [使用命令行方式开发Android应用](https://tonybai.com/2011/05/24/develop-android-app-in-command-line-method/)（2011-05-24）
+- [聆听编程“古训”](https://tonybai.com/2011/05/10/listen-to-old-maxim-respectfully/)（2011-05-10）
+- [只对代码无法表达的东西写注释](https://tonybai.com/2011/05/05/comments-only-what-the-code-cannot-say/)（2011-05-05）
+- [应用C语言代码风格检查](https://tonybai.com/2011/04/21/apply-style-check-to-c-code/)（2011-04-21）
+- [借开源实现你的雄心壮志](https://tonybai.com/2011/03/26/fulfill-your-ambitions-with-opensource/)（2011-03-26）
+- [你应该关心你的代码](https://tonybai.com/2011/03/22/you-gotta-care-about-the-code/)（2011-03-22）
+- [通过精减来改善代码](https://tonybai.com/2011/03/17/improve-code-by-removing-it/)（2011-03-17）
+- [知道如何使用命令行工具](https://tonybai.com/2011/03/16/know-how-to-use-command-line-tool/)（2011-03-16）
+- [专业程序员](https://tonybai.com/2011/02/24/the-professional-programmer/)（2011-02-24）
+- [代码评审](https://tonybai.com/2011/02/22/code-reviews/)（2011-02-22）
+- [在你重构之前](https://tonybai.com/2011/02/15/before-you-refactor/)（2011-02-15）
+- [别忘了测试你的假定](https://tonybai.com/2011/01/08/do-not-forget-to-test-your-assumption/)（2011-01-08）
+- [基于svn diff结果的有效代码量统计](https://tonybai.com/2010/12/24/an-effectual-method-based-on-svn-diff-for-code-quantity-statistics/)（2010-12-24）
+- [关于在线代码评审的几点考量](https://tonybai.com/2010/12/18/thoughts-on-online-coding-review/)（2010-12-18）
+- [别为代码的"Bad Smell"提供土壤](https://tonybai.com/2010/12/06/do-not-provide-soil-for-bad-smell-code/)（2010-12-06）
+- [在TeX文档中插入源代码](https://tonybai.com/2010/12/01/insert-source-code-into-tex-document/)（2010-12-01）
+- [《Programming in Haskell》中文版翻译项目](https://tonybai.com/2010/11/14/the-chinese-translation-project-for-programming-in-haskell/)（2010-11-14）
+- [发布一款轻量级C语言单元测试框架](https://tonybai.com/2010/09/30/opensource-a-lightweight-c-unit-test-framework/)（2010-09-30）
+- [做好个人代码备份与版本管理](https://tonybai.com/2010/09/19/personal-code-backup-and-revision-control/)（2010-09-19）
+- [经典设计原则背后的本质](https://tonybai.com/2010/09/17/the-nature-of-some-classical-design-rules/)（2010-09-17）
+- [一次函数设计讨论](https://tonybai.com/2010/09/02/an-discussion-on-function-design/)（2010-09-02）
+- [使用astyle美化代码](https://tonybai.com/2010/07/29/use-astyle-to-beautify-your-code/)（2010-07-29）
+- [C单元测试之使用cmockery](https://tonybai.com/2009/08/22/introduce-cmockery-for-c-unit-test/)（2009-08-22）
+- [GLIBC strlen源代码分析](https://tonybai.com/2009/04/11/glibc-strlen-source-analysis/)（2009-04-11）
+- [有关单元测试的“只言片语”](https://tonybai.com/2009/04/08/only-a-word-or-two-about-unit-test/)（2009-04-08）
+- [也谈软件调试](https://tonybai.com/2009/03/22/also-talk-about-debugging-software/)（2009-03-22）
+- [使用Scons改造现有项目](https://tonybai.com/2008/12/21/use-scons-to-build-current-projects/)（2008-12-21）
+- [代码评审·CC2e·断言·其它](https://tonybai.com/2008/11/13/coding-review-and-cc2e-and-assertion-and-others/)（2008-11-13）
+- [开始思考项目](https://tonybai.com/2008/09/17/begin-to-think-over-the-project/)（2008-09-17）
+- [小议架构师](https://tonybai.com/2008/09/04/thoughts-on-architect/)（2008-09-04）
+- [C单元测试之Mock Test篇](https://tonybai.com/2008/04/12/mock-test-in-c-unit-test/)（2008-04-12）
+- [软件业的'图纸'在哪里？](https://tonybai.com/2008/03/31/where-is-the-drawing-of-software-developing/)（2008-03-31）
+- [开发程序不能太'单纯'](https://tonybai.com/2008/01/23/programmers-should-not-be-too-pure/)（2008-01-23）
+- [推进项目改进，难!](https://tonybai.com/2008/01/22/difficult-to-reform-in-current-project/)（2008-01-22）
+- [QA人员一定要有实际项目经验](https://tonybai.com/2008/01/07/qa-must-have-experience-in-real-project/)（2008-01-07）
+- [程序员与影视作品](https://tonybai.com/2008/01/07/programmers-and-films-and-television-programs/)（2008-01-07）
+- [Blogbus在线编辑器不支持代码缩进了](https://tonybai.com/2007/12/10/the-editor-of-blogbus-do-not-support-indent/)（2007-12-10）
+- [读'代码修改艺术'，可观其大略](https://tonybai.com/2007/11/09/know-its-general-aspects-when-reading-working-effectively-with-legacy-code/)（2007-11-09）
+- [浅谈如何编码使程序更易维护](https://tonybai.com/2007/09/30/thoughts-on-how-to-make-code-more-maintainable/)（2007-09-30）
+- [转载'编程大腕'](https://tonybai.com/2007/06/13/foward-master-programmer/)（2007-06-13）
+- [开发人员之维护他人项目有感](https://tonybai.com/2007/05/25/thoughts-on-maintain-projects-of-others/)（2007-05-25）
+- [设计心理学](https://tonybai.com/2007/05/21/the-design-of-everyday-things/)（2007-05-21）
+- [代码评审很必要](https://tonybai.com/2006/05/31/code-review-is-necessary/)（2006-05-31）
+- [单元测试进行曲](https://tonybai.com/2006/05/12/the-march-of-unit-test/)（2006-05-12）
+- [C语言也重构](https://tonybai.com/2006/03/28/c-refactoring/)（2006-03-28）
+- [如果让我面试C程序员，我会问](https://tonybai.com/2006/03/26/interview-questions-for-c-programmer/)（2006-03-26）
+- [用GDB调试多进程程序](https://tonybai.com/2006/01/08/debug-multiple-process-program-using-gdb/)（2006-01-08）
+- [APR源代码分析-线程同步篇](https://tonybai.com/2005/12/11/apr-thread-synchronization/)（2005-12-11）
+- [APR源代码分析-进程同步篇](https://tonybai.com/2005/12/02/apr-process-synchronization/)（2005-12-02）
+- [软件抽象](https://tonybai.com/2005/11/21/software-abstraction/)（2005-11-21）
+- [tony说设计-实践后的体会](https://tonybai.com/2005/11/16/experience-after-some-design-practice/)（2005-11-16）
+- [C单元测试包设计与实现](https://tonybai.com/2005/11/08/the-design-and-implementation-of-c-unittest-framework/)（2005-11-08）
+- [APR源代码分析-环篇](https://tonybai.com/2005/11/03/apr-ring/)（2005-11-03）
+- [APR源代码分析-共享内存篇](https://tonybai.com/2005/09/23/apr-shmem/)（2005-09-23）
+- [APR源代码分析-高级IO篇](https://tonybai.com/2005/09/17/apr-advanced-io/)（2005-09-17）
+- [APR源代码分析-文件IO篇](https://tonybai.com/2005/09/15/apr-file-io/)（2005-09-15）
+- [APR源代码分析-信号篇](https://tonybai.com/2005/09/13/apr-signal/)（2005-09-13）
+- [APR源代码分析-内存篇](https://tonybai.com/2005/09/07/apr-memory-management/)（2005-09-07）
+- [APR源代码分析-进程篇](https://tonybai.com/2005/09/01/apr-process-management/)（2005-09-01）
+- [APR源代码分析-设计篇](https://tonybai.com/2005/08/30/apr-design/)（2005-08-30）
+- [APR源代码分析-整体篇](https://tonybai.com/2005/08/25/apr-introduction/)（2005-08-25）
+- [C程序员之“痛”](https://tonybai.com/2005/07/20/pain-of-c-programmer/)（2005-07-20）
+- [CppUnit入门实践-Tony与Alex的对话系列](https://tonybai.com/2005/05/30/tony-alex-dialog-on-cppunit-introduction/)（2005-05-30）
+- [一个Xml Parser的TDD开发过程-Tony与Alex的对话系列](https://tonybai.com/2005/04/30/tony-alex-dialog-on-implement-xmlparser-using-tdd/)（2005-04-30）
+- [看完“程序员”2005-04期一些想法](https://tonybai.com/2005/04/20/thoughts-after-reading-programmer-magazine-200504/)（2005-04-20）
+- [Boost_1_32_0版源代码编译](https://tonybai.com/2005/01/28/build-boost-1-32-0/)（2005-01-28）
+- [Dominoo项目日记(四)](https://tonybai.com/2005/01/17/dominoo-notes-part4/)（2005-01-17）
+- [拥抱敏捷](https://tonybai.com/2005/01/07/embrace-agile/)（2005-01-07）
+- [JDK5.0源代码初览](https://tonybai.com/2004/12/15/glimpse-jdk5-source/)（2004-12-15）
+- [学习重构](https://tonybai.com/2004/12/09/learn-refactoring/)（2004-12-09）
+- [Dominoo项目日记(三)](https://tonybai.com/2004/12/06/dominoo-notes-part3/)（2004-12-06）
+- [Dominoo项目日记(二)](https://tonybai.com/2004/11/27/dominoo-notes-part2/)（2004-11-27）
+- [Dominoo项目日记(一)](https://tonybai.com/2004/10/10/dominoo-notes-part1/)（2004-10-10）
+
+## 七、读书、社区与行业观察（48）
+
+收录阅读、书籍、会议、社区、职业、行业变化和作者思考。
+
+- [purego 标签到底是什么意思？一场长达六年的社区辩论终于有了定论](https://tonybai.com/2025/08/01/proposal-purego/)（2025-08-01）
+- [世界读书日：如何高效阅读“砖头”技术书？我的心法分享（文末赠书）](https://tonybai.com/2025/04/23/tips-for-reading-technical-books/)（2025-04-23）
+- [《走近周恩来》读后感](https://tonybai.com/2021/09/15/getting-closer-to-zhou-enlai/)（2021-09-15）
+- [使用section.key的形式读取ini配置项](https://tonybai.com/2021/07/10/read-ini-config-item-by-passing-section-key/)（2021-07-10）
+- [使用reflect包在反射世界里读写各类型变量](https://tonybai.com/2021/04/19/variable-operation-using-reflection-in-go/)（2021-04-19）
+- [通过实例深入理解sync.Map的工作原理](https://tonybai.com/2020/11/10/understand-sync-map-inside-through-examples/)（2020-11-10）
+- [使用nomad实现工作负载版本升级](https://tonybai.com/2019/04/09/upgrade-workload-using-nomad/)（2019-04-09）
+- [把学校留的手工作业还给孩子们](https://tonybai.com/2017/01/05/leave-hand-made-homework-to-kids/)（2017-01-05）
+- [我的工作原则2](https://tonybai.com/2013/09/03/my-personal-work-principles-2/)（2013-09-03）
+- [我的工作原则](https://tonybai.com/2013/08/19/my-personal-work-principles/)（2013-08-19）
+- [再谈组织工作效率提升](https://tonybai.com/2013/08/04/more-thoughts-on-improving-efficiency/)（2013-08-04）
+- [说说工作幸福感](https://tonybai.com/2013/01/04/my-opinion-on-improving-work-happiness/)（2013-01-04）
+- [2013新年快乐](https://tonybai.com/2013/01/01/2013-happy-new-year/)（2013-01-01）
+- [谈谈如何高效地组织和实施内部会议](https://tonybai.com/2012/12/03/how-to-organize-and-hold-meetings-efficiently/)（2012-12-03）
+- [果果2岁以来的成长记录](https://tonybai.com/2012/11/27/some-growing-up-details-of-my-two-years-old-daughter/)（2012-11-27）
+- [读《How Google Tests Software》](https://tonybai.com/2012/07/10/read-how-google-tests-software/)（2012-07-10）
+- [2011·工作中的成长](https://tonybai.com/2012/01/12/my-grow-up-in-2011/)（2012-01-12）
+- [2011·读过的书](https://tonybai.com/2011/12/22/book-list-i-have-read-in-2011/)（2011-12-22）
+- [小试番茄工作法](https://tonybai.com/2011/06/14/try-pomodoro-technique/)（2011-06-14）
+- [说书单2011.01.24](https://tonybai.com/2011/01/24/booklist-2011-01-24/)（2011-01-24）
+- [果果祝大家新年快乐](https://tonybai.com/2011/01/01/happy-new-year-from-my-daughter-2011/)（2011-01-01）
+- [工作装备更新了](https://tonybai.com/2010/03/20/upgrade-r51-to-thinkpad-x60/)（2010-03-20）
+- [说书单2009.10.28](https://tonybai.com/2009/10/28/booklist-2009-10-28/)（2009-10-28）
+- [分享一个Oracle OCI库的BUG](https://tonybai.com/2009/07/31/a-bug-of-oracle-oci-lib/)（2009-07-31）
+- [网上淘二手书](https://tonybai.com/2009/04/21/buy-second-hand-books-on-the-internet/)（2009-04-21）
+- [2009·第一个工作日](https://tonybai.com/2009/01/04/2009-the-first-working-day/)（2009-01-04）
+- [分布式编译让你的工作更高效](https://tonybai.com/2008/10/14/distributed-compiling-make-you-work-more-effectivly/)（2008-10-14）
+- [使用双显示器工作](https://tonybai.com/2008/10/08/work-with-dual-monitors/)（2008-10-08）
+- [在卓越网买书](https://tonybai.com/2008/03/04/buy-book-on-amazon/)（2008-03-04）
+- [使用Ubuntu工作了一上午](https://tonybai.com/2008/02/27/work-on-ubuntu-this-morning/)（2008-02-27）
+- [第一次网上买书](https://tonybai.com/2007/11/15/buy-book-on-internet-for-the-first-time/)（2007-11-15）
+- [汉密尔顿夺职业首冠，阿隆索为不地道付出代价](https://tonybai.com/2007/06/11/hamilton-win-his-frist-substation-champion/)（2007-06-11）
+- [工作中的故事-0是'TRUE'还是'FALSE'？](https://tonybai.com/2007/01/17/zero-is-true-or-false/)（2007-01-17）
+- [搬到新工作区了](https://tonybai.com/2007/01/10/move-to-new-office/)（2007-01-10）
+- ['Write Great Code'书中的一处错误](https://tonybai.com/2006/12/26/an-error-of-write-great-code/)（2006-12-26）
+- [从本源看世界-读'Write Great Code'](https://tonybai.com/2006/12/22/write-great-code-reading-note/)（2006-12-22）
+- [工作繁忙，病毒侵扰](https://tonybai.com/2006/11/10/busy-work-and-virus-attack/)（2006-11-10）
+- [无'新书'可读](https://tonybai.com/2006/10/10/no-new-book-to-read/)（2006-10-10）
+- [Harry Potter and the Sorcerer's Stone读书笔记Part2](https://tonybai.com/2006/08/12/harry-potter-and-the-sorcerers-stone-reading-notes-part2/)（2006-08-12）
+- [Harry Potter and the Sorcerer's Stone读书笔记Part1](https://tonybai.com/2006/08/11/harry-potter-and-the-sorcerers-stone-reading-notes-part1/)（2006-08-11）
+- [我读书的TIMELINE](https://tonybai.com/2006/05/18/timeline-of-reading-books/)（2006-05-18）
+- [五一节你快乐，我工作](https://tonybai.com/2006/05/01/you-happy-i-work-on-may-day/)（2006-05-01）
+- [口语学习笔记之'在工作单位'](https://tonybai.com/2006/04/29/spoken-english-note-series-at-work/)（2006-04-29）
+- [2006IT书讯之经典重现篇](https://tonybai.com/2006/03/31/classic-it-books-of-2006/)（2006-03-31）
+- [华为致新员工书](https://tonybai.com/2006/03/17/a-letter-to-huawei-beginner/)（2006-03-17）
+- [人生数字](https://tonybai.com/2005/07/26/life-number/)（2005-07-26）
+- [动态代理再思考](https://tonybai.com/2005/03/25/thoughts-on-dynamic-proxy/)（2005-03-25）
+- [写在工作时](https://tonybai.com/2004/12/27/an-essay-when-working/)（2004-12-27）
+
+## 八、其他早期记录（817）
+
+无法仅凭标题可靠归入前述主题的早期技术与生活记录。
+
+- [扎克伯格罕见发万字长文：超级智能不能被少数人垄断，必须属于每一个人](https://tonybai.com/2026/08/11/zuckerberg-superintelligence-for-everyone/)（2026-08-11）
+- [隐退三年后杀回来：HashiCorp创始人官宣二次创业，这次要做「万物的多路复用器」](https://tonybai.com/2026/07/31/superlogical-mitchell-hashimoto-launch/)（2026-07-31）
+- [上次说“没有靠谱的尺子”，这次 Dex Horthy 找到了一把——Opus 5 实测通过率只有 24%](https://tonybai.com/2026/07/28/why-software-factories-fail-part-3-slopcodebench-opus-5-benchmark/)（2026-07-28）
+- [五年，三篇文章，一个我一直没真正解决的问题](https://tonybai.com/2026/07/05/go-private-modules-lessons-learned/)（2026-07-05）
+- [从 WordPress 到 Hugo：一个 20 年技术博客的迁移实录](https://tonybai.com/2026/06/27/wp-to-hugo-migration-journey/)（2026-06-27）
+- [别再省 Token 了！硅谷新共识：浪费算力才是唯一捷径](https://tonybai.com/2026/06/14/stop-saving-tokens-silicon-valley-consensus-waste-compute-shortcut/)（2026-06-14）
+- [RSA 将死？Let’s Encrypt 押注 MTCs 迎战后量子时代](https://tonybai.com/2026/06/10/lets-encrypt-adopts-mtcs-preparing-for-post-quantum-security/)（2026-06-10）
+- [对话 Uber 前 CTO：我如何用 5000 个微服务驯服这头失控的巨兽](https://tonybai.com/2026/05/10/scaling-uber-with-thuan-pham/)（2026-05-10）
+- [Robert Griesemer 亲述：只解决 90% 问题的“箭头函数”该长什么样？](https://tonybai.com/2026/05/06/robert-griesemer-on-go-arrow-functions/)（2026-05-06）
+- [GPU 计算的起源](https://tonybai.com/2026/04/17/the-origins-of-gpu-computing/)（2026-04-17）
+- [如果服务器悄悄“猝死”，你的系统还能活几秒？揭秘分布式集群的“续命”保底机制](https://tonybai.com/2026/03/20/heartbeats-in-distributed-systems/)（2026-03-20）
+- [别再卷前端 UI 了！未来万亿级用户的产品，根本没有界面](https://tonybai.com/2026/03/12/building-for-trillions-of-agents/)（2026-03-12）
+- [算法神话的祛魅：Russ Cox 与浮点数转换的 15 年求索之路](https://tonybai.com/2026/02/03/russ-cox-15-year-war-on-floating-point-conversion/)（2026-02-03）
+- [坚守内核，拥抱变量：我的 2025 年终复盘与 2026 展望](https://tonybai.com/2026/01/04/stick-to-the-core-embrace-variables-2025-review-2026-outlook/)（2026-01-04）
+- [InfluxDB 3.0：一场豪赌的未来，还是又一次痛苦的轮回？](https://tonybai.com/2025/12/13/influxdb-3-0-grand-gamble-or-painful-cycle/)（2025-12-13）
+- [Linus 的名言要改了：Talk is cheap, show me the Spec](https://tonybai.com/2025/12/12/talk-is-cheap-show-me-the-spec/)（2025-12-12）
+- [J组！阿根廷开启2026卫冕之旅：梅西，这一次，请尽情享受足球！](https://tonybai.com/2025/12/06/argentina-2026-world-cup-title-defense-messi-enjoy-football/)（2025-12-06）
+- [“香蕉、猴子和整片丛林”：我们是否深陷于 OOP 的“优雅”陷阱？](https://tonybai.com/2025/11/29/oop-the-worst-thing-that-happened-to-programming/)（2025-11-29）
+- [PGO 驱动的“动态逃逸分析”：w.Write(b) 中的切片逃逸终于有救了？](https://tonybai.com/2025/11/13/proposal-dynamic-escapes/)（2025-11-13）
+- [算了一笔账后，这个双十一我决定做个“亏本”买卖](https://tonybai.com/2025/11/11/zsxq-11-11-2025/)（2025-11-11）
+- [微服务灾难清单：从技术深坑到组织泥潭的 10 个惨痛教训](https://tonybai.com/2025/11/04/microservice-disasters/)（2025-11-04）
+- [杨振宁先生留给我们的遗产，远不止于物理学](https://tonybai.com/2025/10/21/yang-zhengning-legacy-beyond-physics/)（2025-10-21）
+- [划船，还是扬帆？重新审视 996 文化背后的杠杆缺失](https://tonybai.com/2025/10/16/rethink-996-culture/)（2025-10-16）
+- [《凡人修仙传中的物理学》：当韩天尊遇见爱因斯坦](https://tonybai.com/2025/10/15/physics-in-fanren/)（2025-10-15）
+- [“包管理器是万恶之源”：一次来自Odin语言作者的灵魂拷问](https://tonybai.com/2025/09/13/package-managers-are-evil/)（2025-09-13）
+- [亚马逊CTO Werner Vogels的9条军规](https://tonybai.com/2025/09/02/amazon-cto-werner-vogels-9-commandments/)（2025-09-02）
+- [内核之外的冰山：为什么说从零写一个操作系统已几乎不可能？](https://tonybai.com/2025/08/16/brand-new-os-impossible/)（2025-08-16）
+- [slog 如何同时输出到控制台和文件？MultiHandler 提案或将终结重复造轮子](https://tonybai.com/2025/07/29/slog-multihandler/)（2025-07-29）
+- [Prometheus 联合创始人的警告：在使用 OpenTelemetry 生成 Metrics 前请三思！](https://tonybai.com/2025/07/27/native-prometheus-instrumentation-over-opentelemetry/)（2025-07-27）
+- [思想实验：如果全球网站一夜之间弃用HTTPS，能为地球节省多少电？](https://tonybai.com/2025/05/16/energy-savings-if-abandon-https/)（2025-05-16）
+- [RPC 2.0](https://tonybai.com/2025/04/16/ai-protocol-prefer-jsonrpc/)（2025-04-16）
+- [使用issue2md将Github issue转换为Markdown](https://tonybai.com/2024/12/23/convert-github-issue-to-markdown-with-issue2md/)（2024-12-23）
+- [从简单到强大：再次探索Caddy服务器的魅力](https://tonybai.com/2024/11/07/exploring-caddy/)（2024-11-07）
+- [成为那个拿锤子的人](https://tonybai.com/2024/11/03/become-the-one-with-the-hammer/)（2024-11-03）
+- [JSON包新提案：用“omitzero”解决编码中的空值困局](https://tonybai.com/2024/09/12/solve-the-empty-value-dilemma-in-json-encoding-with-omitzero/)（2024-09-12）
+- [通过实例理解SQL查询语句的执行顺序](https://tonybai.com/2024/07/20/sql-query-execution-order/)（2024-07-20）
+- [通过实例理解OpenID身份认证](https://tonybai.com/2023/12/22/understand-oidc-by-example/)（2023-12-22）
+- [通过实例理解OAuth2授权](https://tonybai.com/2023/12/16/understand-oauth2-by-example/)（2023-12-16）
+- [简单之道](https://tonybai.com/2023/12/11/simplicity/)（2023-12-11）
+- [基于公钥验签实现应用许可机制](https://tonybai.com/2023/10/16/implementation-of-app-licensing-based-on-verifying-sign-by-pubkey/)（2023-10-16）
+- [单测时尽量用fake object](https://tonybai.com/2023/04/20/provide-fake-object-for-external-collaborators/)（2023-04-20）
+- [理解unsafe-assume-no-moving-gc包](https://tonybai.com/2023/04/16/understanding-unsafe-assume-no-moving-gc/)（2023-04-16）
+- [一文告诉你哪些map element类型支持就地更新](https://tonybai.com/2023/04/02/map-element-types-support-in-place-update/)（2023-04-02）
+- [将Roaring Bitmap序列化为JSON](https://tonybai.com/2023/02/01/serialize-roaring-bitmap-to-json/)（2023-02-01）
+- [2022年博客回顾与总结](https://tonybai.com/2023/01/11/2022-blog-summary/)（2023-01-11）
+- [聊聊Prometheus Gauge的增减操作实现](https://tonybai.com/2023/01/10/how-prometheus-gauge-add-and-sub/)（2023-01-10）
+- [阿根廷圆梦卡塔尔世界杯，梅西正式加冕第三代球王](https://tonybai.com/2022/12/19/argentina-wins-qatar-world-cup/)（2022-12-19）
+- [重阳节思姥姥姥爷](https://tonybai.com/2022/10/04/remembering-grandma-and-grandpa-on-chung-yeung-festival/)（2022-10-04）
+- [使用viper实现yaml配置文件的合并](https://tonybai.com/2022/09/20/use-viper-to-do-merge-of-yml-configuration-files/)（2022-09-20）
+- [因为热爱：2022年空军航空开放日观展记](https://tonybai.com/2022/08/28/the-visiting-notes-of-2022-china-air-force-aviation-open-day/)（2022-08-28）
+- [Prometheus采不到数据了！居然是Prometheus client包的锅](https://tonybai.com/2022/06/15/prometheus-can-not-pick-up-data-because-of-the-prometheus-client-package/)（2022-06-15）
+- [绞尽脑汁，帮你理解方法本质并选择正确的receiver类型](https://tonybai.com/2022/05/17/understand-the-nature-of-go-method-and-how-to-choose-the-correct-receiver-type/)（2022-05-17）
+- [我的姥姥](https://tonybai.com/2022/04/05/my-grandma/)（2022-04-05）
+- [len(s)表达式的求值结果究竟是常量还是变量？我来告诉你](https://tonybai.com/2022/03/24/the-result-of-a-len-expression-is-constant-or-variable/)（2022-03-24）
+- [针对大型数组的迭代，for range真的比经典for loop慢吗？](https://tonybai.com/2022/03/19/for-range-vs-classic-for-loop-when-iterating-large-array/)（2022-03-19）
+- [为什么这个T类型实例无法调用*T类型的方法](https://tonybai.com/2022/02/27/go-addressable/)（2022-02-27）
+- [2021年博客回顾与总结](https://tonybai.com/2021/12/31/2021-blog-summary/)（2021-12-31）
+- [梅西凑齐七个金球成功召唤神龙](https://tonybai.com/2021/11/30/leo-messi-win-his-seventh-ballondor/)（2021-11-30）
+- [ants：在Submit中再调用当前Pool的Submit可能导致阻塞](https://tonybai.com/2021/11/27/ants-call-submit-in-submit-may-cause-blocking/)（2021-11-27）
+- [亲子游之丹东凤凰山](https://tonybai.com/2021/09/07/a-tour-of-phoenix-mountain/)（2021-09-07）
+- [二闺女一周岁了](https://tonybai.com/2021/07/23/my-second-daughter-is-one-year-old/)（2021-07-23）
+- [minikube v1.20.0版本的一个bug](https://tonybai.com/2021/05/14/a-bug-of-minikube-1-20/)（2021-05-14）
+- [给expvarmon插上数据持久化的“翅膀”](https://tonybai.com/2021/04/14/expvarmon-save-and-convert-to-xlsx/)（2021-04-14）
+- [使用multipart/form-data实现文件的上传与下载](https://tonybai.com/2021/01/16/upload-and-download-file-using-multipart-form-over-http/)（2021-01-16）
+- [又当爸爸了！](https://tonybai.com/2020/07/29/my-second-daughter-was-born/)（2020-07-29）
+- [亲爱的母校哈工大，100岁生日快乐！](https://tonybai.com/2020/06/07/hit-100-happy-birthday/)（2020-06-07）
+- [关于xml包在Unmarshal时将 重写为 的问题](https://tonybai.com/2020/06/04/the-issue-of-go-xml-package-rewrite-carriage-return/)（2020-06-04）
+- [果果十周岁了！](https://tonybai.com/2020/05/03/guoguo-ten-years-old/)（2020-05-03）
+- [图解git原理的几个关键概念](https://tonybai.com/2020/04/07/illustrated-tale-of-git-internal-key-concepts/)（2020-04-07）
+- [Hello，WireGuard](https://tonybai.com/2020/03/29/hello-wireguard/)（2020-03-29）
+- [计算重现性：一些挑战](https://tonybai.com/2019/11/19/computational-reproducibility-some-challenges/)（2019-11-19）
+- [提高您的kubectl生产力（第三部分）：集群上下文切换、使用别名减少输入和插件扩展](https://tonybai.com/2019/08/31/kubectl-productivity-part3/)（2019-08-31）
+- [提高您的kubectl生产力（第二部分）：命令完成、资源规范快速查看和自定义列输出格式](https://tonybai.com/2019/08/30/kubectl-productivity-part2/)（2019-08-30）
+- [提高您的kubectl生产力（第一部分）：什么是kubectl](https://tonybai.com/2019/08/29/kubectl-productivity-part1/)（2019-08-29）
+- [增值类业务短信收发协议介绍](https://tonybai.com/2019/08/21/introduction-on-tech-protocol-of-transfering-value-added-sms/)（2019-08-21）
+- [增值类短信业务图文简介](https://tonybai.com/2019/08/20/introduction-to-value-added-sms-in-graphic-form/)（2019-08-20）
+- [图解3GPP规范文档组织结构与编号规则](https://tonybai.com/2019/07/25/illustrate-3gpp-spec-docs-structure-and-numbering/)（2019-07-25）
+- [使用git操作svn仓库](https://tonybai.com/2019/06/25/using-git-with-svn-repo/)（2019-06-25）
+- [Go2 Error Inspection前瞻](https://tonybai.com/2019/01/27/perspective-study-on-go2-error-inspection/)（2019-01-27）
+- [基于consul实现微服务的服务发现和负载均衡](https://tonybai.com/2018/09/10/setup-service-discovery-and-load-balance-based-on-consul/)（2018-09-10）
+- [defer函数参数求值简要分析](https://tonybai.com/2018/03/23/the-analysis-of-the-param-evaluation-of-defer-functions/)（2018-03-23）
+- [TB一周萃选\[第10期\]](https://tonybai.com/2018/03/03/10th-issue-of-the-tech-weekly-carefully-chosen-by-tonybai/)（2018-03-03）
+- [TB一周萃选\[第9期\]](https://tonybai.com/2018/02/11/9th-issue-of-the-tech-weekly-carefully-chosen-by-tonybai/)（2018-02-11）
+- [TB一周萃选\[第8期\]](https://tonybai.com/2018/02/03/8th-issue-of-the-tech-weekly-carefully-chosen-by-tonybai/)（2018-02-03）
+- [TB一周萃选\[第7期\]](https://tonybai.com/2018/01/28/7th-issue-of-the-tech-weekly-carefully-chosen-by-tonybai/)（2018-01-28）
+- [TB一周萃选\[第6期\]](https://tonybai.com/2018/01/20/6th-issue-of-the-tech-weekly-carefully-chosen-by-tonybai/)（2018-01-20）
+- [TB一周萃选\[第5期\]](https://tonybai.com/2018/01/14/5th-issue-of-the-tech-weekly-carefully-chosen-by-tonybai/)（2018-01-14）
+- [TB一周萃选\[第4期\]](https://tonybai.com/2018/01/06/4th-issue-of-the-tech-weekly-carefully-chosen-by-tonybai/)（2018-01-06）
+- [TB一周萃选\[第3期\]](https://tonybai.com/2017/12/30/3rd-issue-of-the-tech-weekly-carefully-chosen-by-tonybai/)（2017-12-30）
+- [TB一周萃选\[第2期\]](https://tonybai.com/2017/12/22/2nd-issue-of-the-tech-weekly-carefully-chosen-by-tonybai/)（2017-12-22）
+- [TB一周萃选\[第1期\]](https://tonybai.com/2017/12/17/1st-issue-of-the-tech-weekly-carefully-chosen-by-tonybai/)（2017-12-17）
+- [Hello，Termux](https://tonybai.com/2017/11/09/hello-termux/)（2017-11-09）
+- [Hello, Apollo](https://tonybai.com/2017/08/15/hello-apollo/)（2017-08-15）
+- [Hello, ROS](https://tonybai.com/2017/08/01/hello-ros/)（2017-08-01）
+- [体验共享单车](https://tonybai.com/2017/07/24/ride-a-shared-bike/)（2017-07-24）
+- [外星人为什么还没降落到地球上？](https://tonybai.com/2017/06/25/why-aliens-have-not-arrived-at-earth/)（2017-06-25）
+- [解决登录Harbor Registry时鉴权失败的问题](https://tonybai.com/2017/06/15/fix-auth-fail-when-login-harbor-registry/)（2017-06-15）
+- [基于Harbor和CephFS搭建高可用Private Registry](https://tonybai.com/2017/06/09/setup-a-high-availability-private-registry-based-on-harbor-and-cephfs/)（2017-06-09）
+- [初窥dep](https://tonybai.com/2017/06/08/first-glimpse-of-dep/)（2017-06-08）
+- [专访稿：兴趣才是第一生产力](https://tonybai.com/2017/05/18/an-interview-from-operation-partner-in-2017/)（2017-05-18）
+- [2016小结](https://tonybai.com/2017/01/03/2016-summary/)（2017-01-03）
+- [给女儿搭建一个博客站点](https://tonybai.com/2016/12/18/build-a-blog-website-for-my-daughter/)（2016-12-18）
+- [使用wukong全文搜索引擎](https://tonybai.com/2016/12/06/an-intro-to-wukong-fulltext-search-engine/)（2016-12-06）
+- [智慧城市到底满足的是谁的诉求](https://tonybai.com/2016/08/05/whose-appeals-does-smartcity-meet/)（2016-08-05）
+- [闲话智慧城市](https://tonybai.com/2016/06/01/gossip-in-smart-city/)（2016-06-01）
+- [理解Unikernels](https://tonybai.com/2016/05/16/understanding-unikernels/)（2016-05-16）
+- [Rancher使用入门](https://tonybai.com/2016/04/14/an-introduction-about-rancher/)（2016-04-14）
+- [使用Hugo搭建静态站点](https://tonybai.com/2015/09/23/intro-of-gohugo/)（2015-09-23）
+- [开始使用Markdown写Blog](https://tonybai.com/2015/09/19/write-blog-in-markdown/)（2015-09-19）
+- [weed-fs使用简介](https://tonybai.com/2015/08/22/intro-of-using-weedfs/)（2015-08-22）
+- [使用core-vagrant方式安装CoreOS](https://tonybai.com/2015/07/20/install-coreos-by-coreos-vagrant/)（2015-07-20）
+- [使用consul实现分布式服务注册和发现](https://tonybai.com/2015/07/06/implement-distributed-services-registery-and-discovery-by-consul/)（2015-07-06）
+- [巴萨“三冠王”梅开二度，梅球王预定第五座金球奖杯](https://tonybai.com/2015/06/07/barca-win-treble-twice/)（2015-06-07）
+- [ngrok原理浅析](https://tonybai.com/2015/05/14/ngrok-source-intro/)（2015-05-14）
+- [Blog站点被黑以及问题解决过程](https://tonybai.com/2015/04/12/fix-hacked-blog-site/)（2015-04-12）
+- [搭建自己的ngrok服务](https://tonybai.com/2015/03/14/selfhost-ngrok-service/)（2015-03-14）
+- [2014小结](https://tonybai.com/2014/12/31/2014-summary/)（2014-12-31）
+- [将Blog迁移到DigitalOcean的VPS上](https://tonybai.com/2014/11/28/migrate-blog-to-digitalocean-vps/)（2014-11-28）
+- [godep的一个“坑”](https://tonybai.com/2014/10/30/a-hole-of-godep/)（2014-10-30）
+- [Cocos2d-x集成Amazon内购和GameCircle服务](https://tonybai.com/2014/08/04/amazon-inapp-purchasing-and-gamecirle-in-cocos2dx/)（2014-08-04）
+- [世界足球的那个“王”还会出现吗？](https://tonybai.com/2014/07/15/will-new-soccer-king-appear/)（2014-07-15）
+- [Cocos2d-x屏幕适配之Sprite绘制原理](https://tonybai.com/2014/05/13/sprite-draw-principles-of-cocos2dx-screen-adaptation/)（2014-05-13）
+- [Cocos2d-x 3.0rc0集成Google AdMob SDK](https://tonybai.com/2014/05/01/integrate-cocos2dx3rc0-with-admob/)（2014-05-01）
+- [Cocos2d-x 3.0多线程异步资源加载](https://tonybai.com/2014/04/28/multithreaded-resource-loading-in-cocos2dx-3/)（2014-04-28）
+- [Cocos2d-x 3.0rc2集成ShareSDK](https://tonybai.com/2014/04/25/integrate-cocos2dx3rc2-with-sharesdk/)（2014-04-25）
+- [Cocos2d-x 3.0rc2针对Android平台的变动](https://tonybai.com/2014/04/23/changes-in-cocos2dx-3-rc2-for-android/)（2014-04-23）
+- [Hello, Cocos2d-x 3.0rc0](https://tonybai.com/2014/04/22/hello-cocos2dx-3-rc0/)（2014-04-22）
+- [ShareSDK Cocos2d-x专用组件的一个Bug](https://tonybai.com/2014/04/17/a-bug-from-sharesdk-componet-for-cocos2dx/)（2014-04-17）
+- [Cocos2d-x内存管理-绕不过去的坎](https://tonybai.com/2014/03/18/cocos2dx-memory-management/)（2014-03-18）
+- [Hello, Cocos2d-x](https://tonybai.com/2014/03/11/hello-cocos2dx/)（2014-03-11）
+- [说说执行力](https://tonybai.com/2014/03/05/thought-on-executive-power/)（2014-03-05）
+- [关于2014团队改善的考量](https://tonybai.com/2014/03/03/considerations-on-team-improved-in-2014/)（2014-03-03）
+- [厨房里的领导课](https://tonybai.com/2014/02/18/mentoring-in-the-kitchen/)（2014-02-18）
+- [2013小结](https://tonybai.com/2014/01/04/my-summary-of-2013/)（2014-01-04）
+- [向安德学指挥](https://tonybai.com/2013/12/27/learn-how-to-command-from-ender/)（2013-12-27）
+- [只为那一抹释然](https://tonybai.com/2013/12/26/just-for-being-relieved/)（2013-12-26）
+- [团队与创造的平衡](https://tonybai.com/2013/12/21/the-balance-between-team-and-creativity/)（2013-12-21）
+- [Recommended C Style and Coding Standards中文版全文](https://tonybai.com/2013/11/26/the-full-text-of-recommended-c-style-and-coding-standards/)（2013-11-26）
+- [Memcached CAS应用一例](https://tonybai.com/2013/11/01/a-case-of-applying-memcached-cas/)（2013-11-01）
+- [为阻塞型函数调用添加超时机制](https://tonybai.com/2013/10/25/add-timeout-to-blocking-function-call/)（2013-10-25）
+- [当Bug A遇到Bug B](https://tonybai.com/2013/10/14/when-bug-a-encounter-bug-b/)（2013-10-14）
+- [爱上跑步](https://tonybai.com/2013/10/09/love-running/)（2013-10-09）
+- [站在更高的平台上](https://tonybai.com/2013/09/24/stand-on-a-higher-platform/)（2013-09-24）
+- [结婚五周年纪念](https://tonybai.com/2013/09/09/fifth-wedding-anniversary/)（2013-09-09）
+- [把所有东西都放入版本控制系统](https://tonybai.com/2013/09/04/putting-absolutely-everything-in-version-control/)（2013-09-04）
+- [利用ZooKeeper服务实现分布式系统的配置数据同步](https://tonybai.com/2013/08/28/implement-config-sync-for-distributed-system-with-zookeeper-services/)（2013-08-28）
+- [利用ZooKeeper服务实现分布式系统的Leader选举](https://tonybai.com/2013/08/23/leader-election-using-zookeeper/)（2013-08-23）
+- [Ubuntu 12.04修复记](https://tonybai.com/2013/08/07/ubuntu-12-04-repairing-notes/)（2013-08-07）
+- [毕业九年 – 忆我的大学同学](https://tonybai.com/2013/07/30/recall-my-college-classmates-after-graduating-9-years/)（2013-07-30）
+- [港澳行记](https://tonybai.com/2013/06/18/a-hongkong-macau-trip/)（2013-06-18）
+- [跨过BUG查找的"最后一公里"](https://tonybai.com/2013/06/18/walk-through-the-last-mile-of-bugfix/)（2013-06-18）
+- [《Understanding and Using C Pointers》要点先睹为快](https://tonybai.com/2013/05/28/understanding-and-using-c-pointers-keypoint-preview/)（2013-05-28）
+- [再谈C语言位域](https://tonybai.com/2013/05/21/talk-about-bitfield-in-c-again/)（2013-05-21）
+- [果果3周岁了](https://tonybai.com/2013/05/18/daughter-is-3-years-old/)（2013-05-18）
+- [也谈Commit log](https://tonybai.com/2013/05/09/also-talk-about-commit-log/)（2013-05-09）
+- [推动知识管理的这两年](https://tonybai.com/2013/05/03/the-past-two-years-to-promote-the-knowledge-management/)（2013-05-03）
+- [libiconv库链接问题一则](https://tonybai.com/2013/04/25/a-libiconv-linkage-problem/)（2013-04-25）
+- [Hello，Sublime Text 2](https://tonybai.com/2013/04/01/hello-sublime-text-2/)（2013-04-01）
+- [简析指针与多维数组](https://tonybai.com/2013/03/28/pointer-and-multi-dimension-array-in-c/)（2013-03-28）
+- [简析多级指针解引用](https://tonybai.com/2013/03/23/multi-dimension-pointer-in-c/)（2013-03-23）
+- [一种基于内存映射文件的系统运行数据提取方法](https://tonybai.com/2013/03/18/sys-running-data-extraction-method-using-mmap/)（2013-03-18）
+- [SVN命令输出结果的语言选择](https://tonybai.com/2013/03/15/choose-lang-for-svn-cmd-output/)（2013-03-15）
+- [谋划2013](https://tonybai.com/2013/03/11/2013-plan/)（2013-03-11）
+- [也谈C语言的Struct Hack](https://tonybai.com/2013/03/07/struct-hack-in-c/)（2013-03-07）
+- [玩转top](https://tonybai.com/2013/03/02/deep-into-top/)（2013-03-02）
+- [果果的蛇年春节独白](https://tonybai.com/2013/02/18/my-daughter-monologue-about-2013-spring-festival/)（2013-02-18）
+- [期待过年](https://tonybai.com/2013/02/06/look-forward-to-spring-festival/)（2013-02-06）
+- [梅西与四座金球](https://tonybai.com/2013/01/17/leomessi-with-four-ballon-dor/)（2013-01-17）
+- [梅西，金球之王](https://tonybai.com/2013/01/08/leomessi-the-king-of-ballon-dor/)（2013-01-08）
+- [我的博客观](https://tonybai.com/2012/12/19/my-blog-outlook/)（2012-12-19）
+- [2012小结](https://tonybai.com/2012/12/18/my-summary-of-2012/)（2012-12-18）
+- [关于绩效面谈的一些拙见](https://tonybai.com/2012/12/13/some-opinions-about-performance-interview/)（2012-12-13）
+- [梅西，足球新王](https://tonybai.com/2012/12/10/leomessi-the-new-king-of-soccer/)（2012-12-10）
+- [将Unity换成Gnome3](https://tonybai.com/2012/12/06/replace-unity-with-gnome3/)（2012-12-06）
+- [升级到Ubuntu 12.04LTS](https://tonybai.com/2012/12/04/upgrade-ubuntu-to-1204-lts/)（2012-12-04）
+- [谈谈如何写好Mail](https://tonybai.com/2012/11/28/how-to-write-a-good-email/)（2012-11-28）
+- [新速腾首保小记](https://tonybai.com/2012/11/18/note-for-my-2012-sagitar-first-maintenance/)（2012-11-18）
+- [制定绩效目标的几个重要因素](https://tonybai.com/2012/11/17/several-important-factors-in-making-performance-goals/)（2012-11-17）
+- [知识管理的几点野路子经营策略](https://tonybai.com/2012/11/04/the-amateur-way-of-knowledge-management/)（2012-11-04）
+- [辩证地看待“重新发明轮子”](https://tonybai.com/2012/11/02/treat-reinventing-the-wheel-dialectically/)（2012-11-02）
+- [关于团队经营的若干体会](https://tonybai.com/2012/11/01/some-experience-on-team-management/)（2012-11-01）
+- [知识管理推广难的几点原因](https://tonybai.com/2012/08/06/reasons-for-promote-km-difficult/)（2012-08-06）
+- [做正确的事要趁早](https://tonybai.com/2012/08/02/do-right-things-early/)（2012-08-02）
+- [绥中电厂海滩之旅](https://tonybai.com/2012/07/30/a-trip-to-suizhong-beach/)（2012-07-30）
+- [1000公里驾车感受](https://tonybai.com/2012/06/21/some-feeling-after-driving-for-1000km/)（2012-06-21）
+- [暴雨·冰雹·涉水·夜路·堵车·行车记](https://tonybai.com/2012/06/04/drive-in-rainstorm/)（2012-06-04）
+- [新速腾提车与第一次上路](https://tonybai.com/2012/05/25/new-sagitar-and-my-first-driving-experience/)（2012-05-25）
+- [勇于面对](https://tonybai.com/2012/05/21/to-face-it/)（2012-05-21）
+- [翻译《七周七语言》的那些事儿](https://tonybai.com/2012/05/08/translate-seven-languages-in-seven-weeks/)（2012-05-08）
+- [关于编译阶段符号多重定义的问题](https://tonybai.com/2012/04/11/multiple-definitions-of-the-compiling-phase/)（2012-04-11）
+- [C语言编码风格和标准](https://tonybai.com/2012/03/07/the-chinese-translation-of-recommended-c-style-and-coding-standards/)（2012-03-07）
+- [Adapter模式的C实现](https://tonybai.com/2012/03/05/implement-adapter-pattern-in-c/)（2012-03-05）
+- [Blog新起点 – 从BlogBus搬家到WordPress](https://tonybai.com/2012/02/29/a-new-departure-of-my-blog-move-from-blogbus-to-wordpress/)（2012-02-29）
+- [使用Jenkins实现多平台并行集成](https://tonybai.com/2012/02/15/intergating-on-multiple-platforms-simultaneously-using-jenkins/)（2012-02-15）
+- [折腾Jenkins](https://tonybai.com/2012/02/14/install-and-configure-jenkins/)（2012-02-14）
+- [为buildc添加安装包制作相关功能](https://tonybai.com/2012/02/10/add-packing-feature-to-buildc/)（2012-02-10）
+- [为buildc添加setup脚本](https://tonybai.com/2012/02/07/add-setup-script-for-buildc/)（2012-02-07）
+- [谋划2012](https://tonybai.com/2012/01/29/plan-and-design-2012/)（2012-01-29）
+- [2012·果果给您拜年了](https://tonybai.com/2012/01/23/happy-spring-festival-from-my-daughter-2012/)（2012-01-23）
+- [也谈C语言应用构建](https://tonybai.com/2012/01/17/also-talk-about-building-c-app/)（2012-01-17）
+- [由劝退一名员工所想到的](https://tonybai.com/2012/01/08/thoughts-from-persuading-somebody-to-quit/)（2012-01-08）
+- [关于组织内部建立良性提议反馈机制的一些考量](https://tonybai.com/2012/01/06/thoughts-on-establishing-a-benign-feedback-mechanisms-inside-the-organization/)（2012-01-06）
+- [2011小结](https://tonybai.com/2011/12/21/my-year-end-summary-of-2011/)（2011-12-21）
+- [知识管理那些事儿](https://tonybai.com/2011/11/23/those-things-about-knowledge-management/)（2011-11-23）
+- [也谈C语言的restrict类型修饰符](https://tonybai.com/2011/11/18/also-talk-about-restrict-type-qualifier-in-c/)（2011-11-18）
+- [State模式的C实现](https://tonybai.com/2011/11/07/implement-state-pattern-in-c/)（2011-11-07）
+- [Transaction模式的C实现](https://tonybai.com/2011/11/04/implement-transaction-pattern-in-c/)（2011-11-04）
+- [提高效率不是口号](https://tonybai.com/2011/10/31/improving-efficiency-should-not-only-be-a-slogan/)（2011-10-31）
+- [Chain of Responsibility模式的C实现](https://tonybai.com/2011/10/25/implement-chain-of-responsibility-pattern-in-c/)（2011-10-25）
+- [Strategy模式的C实现](https://tonybai.com/2011/10/20/implement-strategy-pattern-in-c/)（2011-10-20）
+- [C语言的现状](https://tonybai.com/2011/10/17/the-state-of-c/)（2011-10-17）
+- [Observer模式的C实现](https://tonybai.com/2011/10/14/implement-observer-pattern-in-c/)（2011-10-14）
+- [秋游天华山](https://tonybai.com/2011/09/26/the-tour-of-tianhua-moutain-in-autumn/)（2011-09-26）
+- [西中岛旅记](https://tonybai.com/2011/09/06/a-tour-of-xizhong-island/)（2011-09-06）
+- [果果一周岁生日靓照](https://tonybai.com/2011/09/05/one-year-old-photos-of-my-daughter/)（2011-09-05）
+- [使用autoconf解决可移植性问题](https://tonybai.com/2011/08/23/solve-portable-problem-with-autoconf/)（2011-08-23）
+- [Bambook使用手记](https://tonybai.com/2011/08/16/some-notes-on-using-bambook/)（2011-08-16）
+- [Common Lisp初学点滴](https://tonybai.com/2011/08/05/some-experience-of-common-lisp-beginner/)（2011-08-05）
+- [偿还N年前的一笔技术债](https://tonybai.com/2011/07/21/pay-for-a-tech-debt-of-several-year-ago/)（2011-07-21）
+- [为函数添加enter和exit级trace](https://tonybai.com/2011/07/13/add-enter-and-exit-trace-for-your-function/)（2011-07-13）
+- [也谈共享库2](https://tonybai.com/2011/07/07/also-talk-about-shared-library-2/)（2011-07-07）
+- [也谈阿根廷队2011美洲杯首演](https://tonybai.com/2011/07/02/also-talk-about-the-first-match-of-agentina-on-2011-copa-america/)（2011-07-02）
+- [也谈C语言对国际化的支持](https://tonybai.com/2011/07/01/also-talk-about-the-internationalization-support-in-c/)（2011-07-01）
+- [使用Apache2配置多个站点](https://tonybai.com/2011/06/27/configure-multiple-websites-with-apache2/)（2011-06-27）
+- [也谈C语言的内联函数](https://tonybai.com/2011/06/22/also-talk-about-inline-function-in-c/)（2011-06-22）
+- [Hello，Common Lisp](https://tonybai.com/2011/06/21/hello-common-lisp/)（2011-06-21）
+- [解决一个IP路由选择问题](https://tonybai.com/2011/06/21/solve-a-problem-about-ip-route/)（2011-06-21）
+- [把握好编码的节奏](https://tonybai.com/2011/06/03/hold-the-coding-rhythm/)（2011-06-03）
+- [解决BuildBot构建结果mail无法发送的问题](https://tonybai.com/2011/05/31/solve-the-problem-that-buildbot-can-not-send-mail/)（2011-05-31）
+- [果果写真-一周岁花丛系列](https://tonybai.com/2011/05/22/among-flowers-the-portray-of-my-daughter/)（2011-05-22）
+- [使用Make的命令行变量](https://tonybai.com/2011/05/19/use-command-line-vars-of-make/)（2011-05-19）
+- [使用BuildBot搭建持续集成环境](https://tonybai.com/2011/05/18/set-up-ci-environment-with-buildbot/)（2011-05-18）
+- [果果一周岁了](https://tonybai.com/2011/05/03/my-daughter-is-one-year-old/)（2011-05-03）
+- [Ubuntu一年使用感受](https://tonybai.com/2011/04/29/feel-experience-after-using-ubuntu-for-one-year/)（2011-04-29）
+- [终于见到擎天柱大哥了！](https://tonybai.com/2011/04/24/i-finally-see-optimus-prime/)（2011-04-24）
+- [童子军规则](https://tonybai.com/2011/04/23/the-boy-scout-rule/)（2011-04-23）
+- [使用正确的算法和数据结构](https://tonybai.com/2011/04/19/use-the-right-algorithm-and-data-structure/)（2011-04-19）
+- [带果果到户外感受春天](https://tonybai.com/2011/04/10/bring-my-daughter-outdoor-in-sping/)（2011-04-10）
+- [也谈SVN冲突解决](https://tonybai.com/2011/03/23/also-talk-about-solving-the-svn-conflicts/)（2011-03-23）
+- [别放弃你的标准](https://tonybai.com/2011/03/21/do-not-give-up-your-standard-first/)（2011-03-21）
+- [升级Thunderbird](https://tonybai.com/2011/03/21/upgrade-thunderbird/)（2011-03-21）
+- [现实版灾难片-日本大地震](https://tonybai.com/2011/03/12/the-earthquake-happened-in-japan/)（2011-03-12）
+- [Review Board的几点使用体会](https://tonybai.com/2011/03/04/some-experience-on-using-review-board/)（2011-03-04）
+- [买了把人体工学座椅](https://tonybai.com/2011/03/01/buy-an-ergonomic-chair/)（2011-03-01）
+- [持续学习](https://tonybai.com/2011/02/23/continous-learning/)（2011-02-23）
+- [把一切都纳入版本控制](https://tonybai.com/2011/02/18/put-everything-under-version-control/)（2011-02-18）
+- [将你的编码标准自动化](https://tonybai.com/2011/02/16/automate-your-coding-standard/)（2011-02-16）
+- [果果给您拜年了](https://tonybai.com/2011/02/02/happy-spring-festival-from-my-daughter-2011/)（2011-02-02）
+- [眼神儿太差了](https://tonybai.com/2011/01/28/terrible-eyes/)（2011-01-28）
+- [2011·同事对我的期望](https://tonybai.com/2011/01/26/the-expectations-of-my-colleagues-in-2011/)（2011-01-26）
+- [应对库接口原型变更](https://tonybai.com/2011/01/24/response-for-the-interface-prototype-change/)（2011-01-24）
+- [又遇字节序问题](https://tonybai.com/2011/01/21/encounter-byte-order-problem-again/)（2011-01-21）
+- [小试git-svn](https://tonybai.com/2011/01/20/try-git-svn/)（2011-01-20）
+- [梅西给力，蝉联金球](https://tonybai.com/2011/01/11/leomessi-defend-his-ballon-dor/)（2011-01-11）
+- [关于年终总结](https://tonybai.com/2011/01/04/about-year-end-summary/)（2011-01-04）
+- ["%05s"行为未定义](https://tonybai.com/2010/12/17/undefined-behavior-of-05s/)（2010-12-17）
+- [使用Libtool创建库文件](https://tonybai.com/2010/12/14/create-libraries-with-libtool/)（2010-12-14）
+- [也谈共享库](https://tonybai.com/2010/12/13/also-talk-about-shared-library/)（2010-12-13）
+- [尝试博客搬家](https://tonybai.com/2010/11/30/try-to-move-blog/)（2010-11-30）
+- [给assert加上返回值，不给力！](https://tonybai.com/2010/11/24/it-is-not-gelivable-to-add-return-value-for-assert/)（2010-11-24）
+- [有选择的保留遗留“惯例”](https://tonybai.com/2010/11/15/keep-legacy-conventions-selectively/)（2010-11-15）
+- [一个制作朴素幻灯片的TeX模板](https://tonybai.com/2010/11/08/a-tex-template-for-making-plain-ppt/)（2010-11-08）
+- [一个基于XeTeX和xeCJK的TeX模板](https://tonybai.com/2010/11/02/a-tex-template-based-on-xetex-and-xecjk/)（2010-11-02）
+- [lcut增加对mock的支持](https://tonybai.com/2010/10/29/lcut-add-mock-support/)（2010-10-29）
+- [关于Makefile.am中与Build相关的变量设置](https://tonybai.com/2010/10/26/about-variables-related-to-building-in-makefile-am/)（2010-10-26）
+- [由bool类型引发的一个问题](https://tonybai.com/2010/10/21/a-problem-caused-by-bool-type/)（2010-10-21）
+- [你好，TeX](https://tonybai.com/2010/10/18/hello-tex/)（2010-10-18）
+- [从mock malloc说起](https://tonybai.com/2010/10/11/start-with-mock-malloc/)（2010-10-11）
+- [这个十一累并快乐着](https://tonybai.com/2010/10/06/tired-and-happy-on-this-national-day-vacation/)（2010-10-06）
+- [遭遇“死循环”](https://tonybai.com/2010/10/01/encounter-endless-loop/)（2010-10-01）
+- [Hello，autoconf和automake](https://tonybai.com/2010/09/26/hello-autoconf-and-automake/)（2010-09-26）
+- [果果的百岁照](https://tonybai.com/2010/09/23/one-hundred-days-photos-of-my-daughter/)（2010-09-23）
+- [果果的第一张照片](https://tonybai.com/2010/09/13/the-first-photo-of-my-daughter/)（2010-09-13）
+- [使用Ubuntu文档模板](https://tonybai.com/2010/09/10/use-the-document-template-of-ubuntu/)（2010-09-10）
+- [修改SVN中文件的可执行属性](https://tonybai.com/2010/09/08/modify-the-executable-property-of-files-in-svn-repository/)（2010-09-08）
+- [一个关于Vim扩展TAB键的问题](https://tonybai.com/2010/09/07/a-problem-about-vim-expand-tab/)（2010-09-07）
+- [视警告为错误](https://tonybai.com/2010/09/05/view-warning-as-error/)（2010-09-05）
+- [Ubuntu一周体验](https://tonybai.com/2010/09/04/one-week-experience-of-ubuntu/)（2010-09-04）
+- [Ubuntu扫盲](https://tonybai.com/2010/08/31/ubuntu-eliminate-illiteracy/)（2010-08-31）
+- [初用TiddlyWiki](https://tonybai.com/2010/08/30/learn-tiddlywiki/)（2010-08-30）
+- [也谈使用分支](https://tonybai.com/2010/08/26/also-talk-about-branch/)（2010-08-26）
+- [彻底迁移到Ubuntu](https://tonybai.com/2010/08/25/move-to-ubuntu-thoroughly/)（2010-08-25）
+- [重新定制VIM](https://tonybai.com/2010/08/22/reconfigure-vim/)（2010-08-22）
+- [周末全职奶爸](https://tonybai.com/2010/08/15/fulltime-daddy-daycare-at-weekends/)（2010-08-15）
+- [一周琐事](https://tonybai.com/2010/08/13/some-trifles-of-this-week/)（2010-08-13）
+- [使用svn pre-commit hook](https://tonybai.com/2010/08/07/use-svn-pre-commit-hook/)（2010-08-07）
+- [果果会翻身了](https://tonybai.com/2010/07/24/my-daughter-can-turn-over-in-bed/)（2010-07-24）
+- [阿根廷出局，世界杯结束！](https://tonybai.com/2010/07/04/agentina-out-my-worldcup-ends/)（2010-07-04）
+- [阿根廷，继续前进！](https://tonybai.com/2010/06/29/agentina-come-on/)（2010-06-29）
+- [阿根廷出线，梅西小憾](https://tonybai.com/2010/06/17/agentina-foot-team-promote-from-group-match/)（2010-06-17）
+- [说说斗牛士首演被爆冷](https://tonybai.com/2010/06/17/spain-lose-the-first-match-of-2010-worldcup/)（2010-06-17）
+- [快乐的“阿根廷梅西”回来了！](https://tonybai.com/2010/06/13/the-happy-agentina-messi-return-back/)（2010-06-13）
+- [宝宝满月了！](https://tonybai.com/2010/06/10/celebrate-the-first-month-of-my-daughter/)（2010-06-10）
+- [趣事一则：试驾](https://tonybai.com/2010/05/26/a-joke-test-ride/)（2010-05-26）
+- [最赏心悦目的中国武者形象](https://tonybai.com/2010/05/12/the-most-eyeable-image-of-chinese-warrior/)（2010-05-12）
+- [当爸爸了！](https://tonybai.com/2010/05/11/now-i-am-a-father/)（2010-05-11）
+- [五一逛北陵](https://tonybai.com/2010/05/01/a-tour-of-beiling-park-on-may-vacation/)（2010-05-01）
+- [巴萨双杀皇马，憧憬卫冕](https://tonybai.com/2010/04/11/barca-expect-defend-the-championship/)（2010-04-11）
+- [慎用线程取消](https://tonybai.com/2010/04/09/be-careful-about-thread-cancellation/)（2010-04-09）
+- [Win7下招行专业版通讯问题解决](https://tonybai.com/2010/03/24/solve-the-problem-of-china-merchants-bank-professional-on-windows/)（2010-03-24）
+- [梅西，我的神啊！](https://tonybai.com/2010/03/22/leomessi-my-god/)（2010-03-22）
+- [也谈Configure脚本问题的解决](https://tonybai.com/2010/03/19/also-talk-about-solving-the-problem-of-configure-script/)（2010-03-19）
+- [“MT710”请回了家](https://tonybai.com/2010/03/16/buy-moto-mt710/)（2010-03-16）
+- [试用Libmemcached](https://tonybai.com/2010/03/15/try-libmemcached/)（2010-03-15）
+- [HelloWorld.s](https://tonybai.com/2010/02/28/helloworld-in-assembly/)（2010-02-28）
+- [也谈指针运算](https://tonybai.com/2010/02/23/also-talk-about-pointer-arithmetics/)（2010-02-23）
+- [命令行选项解析-备忘](https://tonybai.com/2010/02/09/parse-command-line-options/)（2010-02-09）
+- [雨中游三坊七巷](https://tonybai.com/2010/02/04/a-tour-of-san-fang-qi-xiang-in-the-rain/)（2010-02-04）
+- [iterator的C实现](https://tonybai.com/2010/01/30/implement-iterator-in-c/)（2010-01-30）
+- [人在福州，忙！](https://tonybai.com/2010/01/29/working-busy-at-fuzhou/)（2010-01-29）
+- [逛台江步行街](https://tonybai.com/2010/01/17/shopping-at-taijiang-pedestrian-street/)（2010-01-17）
+- [闲话梅西百球](https://tonybai.com/2010/01/17/leomessi-one-hundred-goals-for-barca/)（2010-01-17）
+- [T400终于到手了](https://tonybai.com/2010/01/10/thinkpad-t400-is-available/)（2010-01-10）
+- [2010·做快乐的事](https://tonybai.com/2010/01/04/wish-to-do-happy-things-in-2010/)（2010-01-04）
+- [平安夜“宅”在酒店](https://tonybai.com/2009/12/24/stay-in-hotel-on-christmas-eve/)（2009-12-24）
+- [梅西，2009世界足球先生](https://tonybai.com/2009/12/22/leomessi-fifa-world-player-of-2009/)（2009-12-22）
+- [巴萨，六冠王！](https://tonybai.com/2009/12/20/barca-historically-win-six-champions-in-one-season/)（2009-12-20）
+- [福州震感明显](https://tonybai.com/2009/12/19/feel-earthquake-obviously-at-fuzhou/)（2009-12-19）
+- [睡了十二个小时](https://tonybai.com/2009/12/13/sleep-for-12-hours/)（2009-12-13）
+- [今年金球奖属于梅西](https://tonybai.com/2009/12/01/leomessi-win-ballon-dor/)（2009-12-01）
+- [Thunderbird跨平台共享邮件设置](https://tonybai.com/2009/11/20/cross-platform-configuration-of-thunderbird/)（2009-11-20）
+- [升级到Ubuntu 9.10](https://tonybai.com/2009/11/16/upgrade-to-ubuntu-9-10/)（2009-11-16）
+- [梅西版狮子吼](https://tonybai.com/2009/11/15/lion-roaring-of-leo-messi/)（2009-11-15）
+- [大雪下，路漫漫](https://tonybai.com/2009/11/13/heavy-snow-and-long-journey/)（2009-11-13）
+- [这下桌面干净了](https://tonybai.com/2009/11/09/clean-my-desktop/)（2009-11-09）
+- [一个Solaris x86平台64位编译的问题](https://tonybai.com/2009/11/05/a-64bit-compiling-problem-on-x86-solaris/)（2009-11-05）
+- [使用iconv做内码转换](https://tonybai.com/2009/10/31/internal-code-transform-by-iconv/)（2009-10-31）
+- [榕城走一回](https://tonybai.com/2009/10/24/a-trip-to-fuzhou/)（2009-10-24）
+- [Review Board中文支持](https://tonybai.com/2009/10/05/chinese-support-for-review-board/)（2009-10-05）
+- [这个十一没回家](https://tonybai.com/2009/10/02/not-visit-parents-during-this-golden-vacation/)（2009-10-02）
+- [也谈VIM字符集编码设置](https://tonybai.com/2009/09/28/also-talk-about-vim-charset-configuration/)（2009-09-28）
+- [Firefox变身Vim](https://tonybai.com/2009/09/20/vimperator-plugin-for-firefox/)（2009-09-20）
+- [Review Board安装和配置札记](https://tonybai.com/2009/09/19/review-board-installation-and-configuration/)（2009-09-19）
+- [充实的一周](https://tonybai.com/2009/09/18/this-week-is-fully/)（2009-09-18）
+- [Solaris 10安装二三事](https://tonybai.com/2009/09/10/something-about-installing-solaris-10/)（2009-09-10）
+- [Bash文件描述符重定向符号的另类理解](https://tonybai.com/2009/09/08/the-alternative-understanding-on-file-descriptor-redirection/)（2009-09-08）
+- [手机做MODEM实现无线上网](https://tonybai.com/2009/08/30/make-pc-surfing-the-internet-through-mobile-phone/)（2009-08-30）
+- [梅西·坚强意志赢欧超级杯](https://tonybai.com/2009/08/29/europe-super-champion/)（2009-08-29）
+- [梅西·荣膺欧足联最佳球员](https://tonybai.com/2009/08/28/europe-best-player/)（2009-08-28）
+- [cmockery支持mock输出参数](https://tonybai.com/2009/08/26/cmockery-support-mocking-out-parameter/)（2009-08-26）
+- [模拟器陷阱](https://tonybai.com/2009/08/22/the-trap-of-simulator/)（2009-08-22）
+- [天儿太热了！](https://tonybai.com/2009/08/12/it-is-too-hot/)（2009-08-12）
+- [我眼中的哈利波特6](https://tonybai.com/2009/08/01/film-harry-potter-6-in-my-eyes/)（2009-08-01）
+- [巴萨·2009-2010赛季看点](https://tonybai.com/2009/07/24/barca-2010/)（2009-07-24）
+- [周末“捉虫”记](https://tonybai.com/2009/07/18/debugging-notes-at-weekends/)（2009-07-18）
+- [体检·SSH·Safari4](https://tonybai.com/2009/07/17/physical-examination-and-ssh-and-safari4/)（2009-07-17）
+- [“牢骚”几句](https://tonybai.com/2009/07/12/some-complaints/)（2009-07-12）
+- [家中新绿](https://tonybai.com/2009/07/04/a-hint-of-green-appear-in-house/)（2009-07-04）
+- [成都行记](https://tonybai.com/2009/07/02/the-tour-of-chengdu/)（2009-07-02）
+- [梅西·用三个冠军奖杯庆生](https://tonybai.com/2009/06/25/triple-champion-the-best-birthday-gift/)（2009-06-25）
+- [走进九寨](https://tonybai.com/2009/06/24/the-tour-of-jiuzhaigou/)（2009-06-24）
+- [梅西·引领梦三登欧冠之巅](https://tonybai.com/2009/05/29/europe-barca-vs-manchester_united/)（2009-05-29）
+- [巴萨问鼎欧冠，梅西引领“梦三”](https://tonybai.com/2009/05/28/barca-win-the-champion-league/)（2009-05-28）
+- [手绘](https://tonybai.com/2009/05/20/hand-painted/)（2009-05-20）
+- [对着电脑发呆](https://tonybai.com/2009/05/06/sit-in-front-of-the-pc-and-do-nothing/)（2009-05-06）
+- [梅西·两球击碎皇马卫冕梦](https://tonybai.com/2009/05/03/real_mardrid-vs-barca/)（2009-05-03）
+- [梅西·为欧冠收力巴萨险平](https://tonybai.com/2009/04/26/valencia-vs-barca/)（2009-04-26）
+- [梅西·绝杀赫塔菲预示夺冠](https://tonybai.com/2009/04/19/getafe-vs-barca/)（2009-04-19）
+- [简说GLIBC strncpy实现](https://tonybai.com/2009/04/15/glibc-strncpy-source-analysis/)（2009-04-15）
+- [梅西·与巴萨一起碾碎拜仁](https://tonybai.com/2009/04/09/europe-barca-vs-bayern/)（2009-04-09）
+- [梅西·正式加冕阿根廷10号](https://tonybai.com/2009/03/29/nation-agentina-vs-venezuela/)（2009-03-29）
+- [网购飞利浦家庭影院小记](https://tonybai.com/2009/03/24/buy-philips-home-theater-from-internet/)（2009-03-24）
+- [用电压力锅制作酱焖鸡腿](https://tonybai.com/2009/03/24/use-electric-pressure-cooker-cook-roast-chicken-with-soy-sauce/)（2009-03-24）
+- [IE8的糟糕体验](https://tonybai.com/2009/03/23/terrible-experience-on-ie8/)（2009-03-23）
+- [梅西·梅式入球引爆三叉戟](https://tonybai.com/2009/03/23/barca-vs-malaga/)（2009-03-23）
+- [发掘Trac](https://tonybai.com/2009/03/18/learn-trac/)（2009-03-18）
+- [梅西·滑雪式入球打爆里昂](https://tonybai.com/2009/03/12/europe-barca-vs-lyons/)（2009-03-12）
+- [梅西·点杀锁胜局巴萨复活](https://tonybai.com/2009/03/08/barca-vs-athletic_bilbao/)（2009-03-08）
+- [惊蛰日身边事小记](https://tonybai.com/2009/03/05/small-things-during-jingzhe/)（2009-03-05）
+- [梅西·扳平球助巴萨进决赛](https://tonybai.com/2009/03/05/cup-semifinal-mallorca-vs-barca/)（2009-03-05）
+- [梅西·破进球荒无奈被逆转](https://tonybai.com/2009/03/02/atletico_madrid-vs-barca/)（2009-03-02）
+- [“扶正”Bash Shell](https://tonybai.com/2009/02/27/make-bash-my-default-shell/)（2009-02-27）
+- [“中国人史纲”和ThinkPad红点背包](https://tonybai.com/2009/02/26/an-outline-history-of-china-and-thinkpad-pack/)（2009-02-26）
+- [CSCOPE使用中问题小解](https://tonybai.com/2009/02/23/solve-some-problems-when-using-cscope/)（2009-02-23）
+- [梅西·国王低靡巴萨亦低靡](https://tonybai.com/2009/02/15/barca-vs-espanyol/)（2009-02-15）
+- [梅西·亮相洛佩拉未演神奇](https://tonybai.com/2009/02/15/betis-vs-barca/)（2009-02-15）
+- [梅西·入制胜球两星胜一星](https://tonybai.com/2009/02/12/barca-vs-racing_santander-2/)（2009-02-12）
+- [梅西·巧助攻难掩兴奋不足](https://tonybai.com/2009/02/09/barca-vs-gijon-2/)（2009-02-09）
+- [“梅西本纪”开张了！](https://tonybai.com/2009/02/04/start-to-write-the-biography-of-leomessi/)（2009-02-04）
+- [梅西·右脚两球演绎救世主](https://tonybai.com/2009/02/02/racing_santander-vs-barca/)（2009-02-02）
+- [梅西·疲态显现巴萨险晋级](https://tonybai.com/2009/01/30/cup-4th-final-barca-vs-espanyol/)（2009-01-30）
+- [梅西·两射一传献牛年礼包](https://tonybai.com/2009/01/25/barca-vs-numancia/)（2009-01-25）
+- [梅西·天才少年西甲首亮相](https://tonybai.com/2009/01/23/messi-first-match-in-lfp-for-barca/)（2009-01-23）
+- [梅西·二线低靡国王难出彩](https://tonybai.com/2009/01/22/cup-4th-final-espanyol-vs-barca/)（2009-01-22）
+- [第一次滑雪](https://tonybai.com/2009/01/18/the-experience-of-skiing-for-the-first-time/)（2009-01-18）
+- [梅西·精灵开罐巧射破拉科](https://tonybai.com/2009/01/18/barca-vs-deportivo/)（2009-01-18）
+- [梅西往事·世界杯首例入球](https://tonybai.com/2009/01/14/the-story-of-leomessi-his-first-goal-of-worldcup/)（2009-01-14）
+- [梅西，2009我们从头再来](https://tonybai.com/2009/01/13/leomessi-start-again-from-scratch-on-2009/)（2009-01-13）
+- [梅西·传射建功逆转副班长](https://tonybai.com/2009/01/12/osasuna-vs-barca/)（2009-01-12）
+- [2008年FIFA世界足球先生网调结果](https://tonybai.com/2009/01/11/the-internet-survey-result-of-2008-fifa-world-player/)（2009-01-11）
+- [第一次弯弓射箭](https://tonybai.com/2009/01/08/the-experience-of-archery-for-the-first-time/)（2009-01-08）
+- [梅西·巴萨新国王正式加冕](https://tonybai.com/2009/01/07/cup-atletico_madrid-vs-barca/)（2009-01-07）
+- [又见梅西上演帽子戏法](https://tonybai.com/2009/01/07/leo-messi-play-another-hat-trick/)（2009-01-07）
+- [幸福从哪儿来？](https://tonybai.com/2009/01/06/where-is-the-happiness-from/)（2009-01-06）
+- [VIM“重装上阵”](https://tonybai.com/2008/12/30/in-depth-study-vim/)（2008-12-30）
+- [做了一回“圣诞老人”](https://tonybai.com/2008/12/25/play-as-a-santa-claus/)（2008-12-25）
+- [曙光](https://tonybai.com/2008/12/23/the-dawn/)（2008-12-23）
+- [为Ubuntu下的Firefox提速](https://tonybai.com/2008/12/17/accelerate-the-firefox-on-ubuntu/)（2008-12-17）
+- [发掘Scons](https://tonybai.com/2008/12/14/learn-scons/)（2008-12-14）
+- [看西班牙国家德比需要耐心](https://tonybai.com/2008/12/14/you-should-be-patient-when-watching-spanish-national-derby/)（2008-12-14）
+- [地热维修小记](https://tonybai.com/2008/12/10/maintain-the-terrestrial-heat-of-my-house/)（2008-12-10）
+- [常量类型的识别-一个小例子](https://tonybai.com/2008/12/02/an-example-for-recognizing-the-const-variable/)（2008-12-02）
+- [这张梅西的照片我最喜欢](https://tonybai.com/2008/11/18/i-like-this-picture-of-leo-messi-most/)（2008-11-18）
+- [四谈内存对齐](https://tonybai.com/2008/11/17/httptonybai-com20061208talk-about-memory-alignment-the-4th-time/)（2008-11-17）
+- [被推荐为最具Bus气质的优秀Blogger首批参选者](https://tonybai.com/2008/11/14/being-one-of-the-candidates-of-excellent-bloggers-on-blogbus/)（2008-11-14）
+- [说说年假](https://tonybai.com/2008/11/14/thoughts-on-pay-vacation/)（2008-11-14）
+- [离开太原](https://tonybai.com/2008/10/31/leave-taiyuan/)（2008-10-31）
+- [游永祚寺和迎泽公园](https://tonybai.com/2008/10/26/the-tour-of-two-tower-temple-and-yingze-park/)（2008-10-26）
+- [太原晋祠游记](https://tonybai.com/2008/10/25/the-tour-of-jin-memorial-hall-of-taiyuan/)（2008-10-25）
+- [初到山西](https://tonybai.com/2008/10/22/first-trip-to-shanxi/)（2008-10-22）
+- [秋游关门山](https://tonybai.com/2008/10/20/a-tour-of-guanmen-mountain-in-autumn/)（2008-10-20）
+- [重返足球场](https://tonybai.com/2008/10/16/return-back-to-football-field/)（2008-10-16）
+- [国民素质·信息化·效率](https://tonybai.com/2008/10/15/national-quality-and-information-and-efficiency/)（2008-10-15）
+- [领导意志](https://tonybai.com/2008/10/11/the-leader-will/)（2008-10-11）
+- [第一次给父母做饭](https://tonybai.com/2008/09/30/cook-meal-for-my-parents-the-first-time/)（2008-09-30）
+- [坚持](https://tonybai.com/2008/09/28/stick-with-my-blog/)（2008-09-28）
+- [终于有沙发了](https://tonybai.com/2008/09/27/the-arrival-of-sofa/)（2008-09-27）
+- [近期的几则“烦心事”](https://tonybai.com/2008/09/25/some-trouble-recently/)（2008-09-25）
+- [梅西·演梅式助攻巴萨连胜](https://tonybai.com/2008/09/25/barca-vs-betis/)（2008-09-25）
+- [梅西·锦上添花巴萨取首胜](https://tonybai.com/2008/09/22/barca-vs-gijon/)（2008-09-22）
+- [梅西·入首球难掩平局尴尬](https://tonybai.com/2008/09/14/barca-vs-racing_santander/)（2008-09-14）
+- [液晶电视选购使用记](https://tonybai.com/2008/09/13/choose-and-buy-lcd-tv/)（2008-09-13）
+- [发现一隐藏多年的Bug](https://tonybai.com/2008/09/06/found-a-bug-that-is-hidden-several-years/)（2008-09-06）
+- [无意中的Pair Programming](https://tonybai.com/2008/09/02/unexpected-pair-programming/)（2008-09-02）
+- [装修的遗憾，其实不美](https://tonybai.com/2008/08/30/the-flaw-of-house-decoration-is-not-beautiful/)（2008-08-30）
+- [尝试Scrum中的Demo模式](https://tonybai.com/2008/08/27/try-demo-practice-of-scrum/)（2008-08-27）
+- [北京奥运会完美谢幕](https://tonybai.com/2008/08/24/beijing-olympic-games-ends-perfectly/)（2008-08-24）
+- [CruiseControl.rb初体验](https://tonybai.com/2008/08/20/the-experience-of-cruisecontrol-rb/)（2008-08-20）
+- [CHECKLIST的不实用之处](https://tonybai.com/2008/08/15/checklist-is-impractical/)（2008-08-15）
+- [无线路由设置也'疯狂'(续)](https://tonybai.com/2008/08/15/configure-wireless-router-cont/)（2008-08-15）
+- [当“为荣誉而战”成为口头禅时](https://tonybai.com/2008/08/14/when-fighting-for-glory-become-a-per-phrase/)（2008-08-14）
+- [此刻，让我们共同见证第29届北京奥运会](https://tonybai.com/2008/08/08/now-let-us-be-the-witness-of-29th-beijing-olympic-games-together/)（2008-08-08）
+- [新浪网居然如此粗心大意](https://tonybai.com/2008/08/08/sina-make-a-stupid-mistake/)（2008-08-08）
+- [从座位调换看文化差异](https://tonybai.com/2008/08/07/learn-culture-differences-from-seat-exchanges/)（2008-08-07）
+- [Google上看鸟巢和水立方](https://tonybai.com/2008/08/06/watch-bird-nest-and-water-cube-through-google-earth/)（2008-08-06）
+- [别墅·空间·服务](https://tonybai.com/2008/08/04/visit-sun-city-of-countrygarden/)（2008-08-04）
+- [周末李官游](https://tonybai.com/2008/07/28/a-tour-of-liguan-at-weekends/)（2008-07-28）
+- [“撒哈拉大森林”](https://tonybai.com/2008/07/24/a-joke-sahara-forest/)（2008-07-24）
+- [城市窒息](https://tonybai.com/2008/07/14/the-city-make-me-stifling/)（2008-07-14）
+- [奥运圣火走进春城昆明](https://tonybai.com/2008/06/09/beijing-olympic-torch-step-in-kunming/)（2008-06-09）
+- [全国哀悼日，贴图寄哀思](https://tonybai.com/2008/05/19/national-grief-day-for-wenchuan-earthquake/)（2008-05-19）
+- [关于宏定义切换以及屏蔽的例子](https://tonybai.com/2008/05/17/examples-for-macro-definition-switch-and-mask/)（2008-05-17）
+- [也谈C语言标识符的NAMESPACE](https://tonybai.com/2008/05/15/also-talk-about-namespace-in-c/)（2008-05-15）
+- [关注四川汶川地震，为灾区人民祈祷](https://tonybai.com/2008/05/14/pray-for-the-people-in-sichuan-wenchuan/)（2008-05-14）
+- [一分之差](https://tonybai.com/2008/05/12/not-pass-the-driving-exam-by-one-point/)（2008-05-12）
+- [也谈C语言变长参数](https://tonybai.com/2008/05/07/also-talk-about-c-variable-length-args/)（2008-05-07）
+- [也谈typedef](https://tonybai.com/2008/05/02/also-talk-about-typedef/)（2008-05-02）
+- [由一把座椅想到的](https://tonybai.com/2008/04/30/thought-on-a-chair/)（2008-04-30）
+- [事业单位考试：小心'专业不对口'](https://tonybai.com/2008/04/28/make-sure-your-profession-match-before-attending-public-servant-exam/)（2008-04-28）
+- [Mingle初体验](https://tonybai.com/2008/04/09/the-experience-of-mingle/)（2008-04-09）
+- [面对'破窗户'的无奈](https://tonybai.com/2008/03/28/the-helplessness-to-face-the-broken-window/)（2008-03-28）
+- [说说用xml做配置文件的优劣](https://tonybai.com/2008/03/24/the-benefits-of-using-xml-as-configuration/)（2008-03-24）
+- ['史前一万年'观感](https://tonybai.com/2008/03/23/thoughts-on-film-10000-bc/)（2008-03-23）
+- [装修博弈·主材选购](https://tonybai.com/2008/03/17/house-decoration-notes-buying-materials/)（2008-03-17）
+- [多行宏定义中的注释问题](https://tonybai.com/2008/03/14/the-problems-of-commenting-multiple-lines-macro/)（2008-03-14）
+- [无线路由设置也'疯狂'](https://tonybai.com/2008/03/08/configure-wireless-router/)（2008-03-08）
+- [装修博弈·迈出第一步](https://tonybai.com/2008/03/04/house-decoration-notes-the-first-step/)（2008-03-04）
+- [中国女足走上男足之路](https://tonybai.com/2008/02/25/women-football-team-is-on-the-wrong-way/)（2008-02-25）
+- [牢骚中体验Ubuntu](https://tonybai.com/2008/02/23/many-complaints-about-ubuntu/)（2008-02-23）
+- [自己的文字太生硬、太干涩!](https://tonybai.com/2008/02/18/my-words-is-too-stiff/)（2008-02-18）
+- [初装Ubuntu 7.10](https://tonybai.com/2008/02/17/install-ubuntu-7-10-the-first-time/)（2008-02-17）
+- [节后逛三好街](https://tonybai.com/2008/02/16/shopping-on-the-sanhao-street-after-festival/)（2008-02-16）
+- [姥姥姥爷'闯关东'](https://tonybai.com/2008/02/15/grandparents-making-a-living-to-northeast/)（2008-02-15）
+- ['福'字不该倒着贴](https://tonybai.com/2008/02/14/word-fu-should-not-paste-upside-down/)（2008-02-14）
+- [这注定是个难忘的春节](https://tonybai.com/2008/02/14/it-is-a-memorable-spring-festival/)（2008-02-14）
+- [共享库中的符号链接](https://tonybai.com/2008/02/03/symbol-linkage-in-shared-library/)（2008-02-03）
+- ['灾难'到来之前，我们该做点啥](https://tonybai.com/2008/02/01/what-should-we-do-before-disaster-come/)（2008-02-01）
+- [查表法求解'自然数对'问题](https://tonybai.com/2008/01/29/use-searching-table-to-solve-natural-number-pair-problem/)（2008-01-29）
+- [三角形输出问题考量](https://tonybai.com/2008/01/27/solve-triangle-print-problem/)（2008-01-27）
+- [年会归来](https://tonybai.com/2008/01/26/return-back-from-annual-meeting/)（2008-01-26）
+- [体验手机写博客](https://tonybai.com/2008/01/25/writing-blog-through-mobile-phone/)（2008-01-25）
+- [都是病毒惹得祸](https://tonybai.com/2008/01/18/a-disaster-caused-by-virus/)（2008-01-18）
+- [再谈如何评价人的技巧](https://tonybai.com/2008/01/15/talk-about-how-to-evaluate-persion-again/)（2008-01-15）
+- [万枚硬币送出人间温暖](https://tonybai.com/2008/01/14/ten-thousand-coins-warm-the-world/)（2008-01-14）
+- [国家出台禁止免费提供塑料袋规定](https://tonybai.com/2008/01/10/my-country-forbid-free-plastic-bag/)（2008-01-10）
+- [如何评价一个人](https://tonybai.com/2008/01/09/how-to-evaluate-a-person/)（2008-01-09）
+- [我的ClustrMap Show](https://tonybai.com/2008/01/09/my-clustrmap-show/)（2008-01-09）
+- ['演好自己的戏，有意义'](https://tonybai.com/2008/01/01/it-does-make-sense-to-play-yourself-well/)（2008-01-01）
+- [集结一起看'集结号'](https://tonybai.com/2007/12/30/watch-film-assembly-together/)（2007-12-30）
+- ['未来狂想曲'后的狂想](https://tonybai.com/2007/12/28/thoughts-after-watching-the-future-is-wild/)（2007-12-28）
+- ['北极圈之王'的无奈](https://tonybai.com/2007/12/19/the-helpless-of-polar-bear/)（2007-12-19）
+- [也谈’SIGBUS和SIGSEGV’](https://tonybai.com/2007/12/19/also-talk-about-sigbus-and-sigsegv/)（2007-12-19）
+- [一个很有意思的Bug](https://tonybai.com/2007/12/18/an-funny-bug/)（2007-12-18）
+- [从'即将消失的曼谷'说起](https://tonybai.com/2007/12/12/thought-on-disappearing-bangkok/)（2007-12-12）
+- ['追爱总动员'-一部让你90分钟保持轻松快乐的电影](https://tonybai.com/2007/12/09/film-falling-in-love/)（2007-12-09）
+- ['符号连接'那些事儿](https://tonybai.com/2007/12/08/those-things-about-symbol-linkage/)（2007-12-08）
+- [亲历Eee PC实机](https://tonybai.com/2007/12/02/my-experience-of-eee-pc/)（2007-12-02）
+- [也谈'万能'栈](https://tonybai.com/2007/11/27/also-talk-about-univerisal-stack/)（2007-11-27）
+- ['嫦娥'发回月球照片](https://tonybai.com/2007/11/26/the-picture-of-moon-sent-back-from-chang-e-1/)（2007-11-26）
+- [见证国足进入死亡之组](https://tonybai.com/2007/11/26/national-football-team-is-assigned-to-the-group-of-death/)（2007-11-26）
+- [又获Ubuntu 7.10光盘](https://tonybai.com/2007/11/25/got-ubuntu-7-disc/)（2007-11-25）
+- [Eee PC内地上市，价格略偏高](https://tonybai.com/2007/11/24/eee-pc-is-available-on-the-market/)（2007-11-24）
+- ['集结号'即将吹响](https://tonybai.com/2007/11/17/film-assembly-is-comming/)（2007-11-17）
+- [这种美味，你咽的下去吗？](https://tonybai.com/2007/11/15/you-should-not-eat-such-food/)（2007-11-15）
+- [面对'错误'的抉择](https://tonybai.com/2007/11/13/the-choice-when-dealing-with-errors/)（2007-11-13）
+- [遭遇Heap溢出](https://tonybai.com/2007/11/10/debug-heap-overflow/)（2007-11-10）
+- [在Solaris上编译Ethereal的注意事项](https://tonybai.com/2007/11/08/some-notice-about-building-ethereal-on-solaris/)（2007-11-08）
+- [也谈计算机字符编码](https://tonybai.com/2007/11/03/also-talk-about-char-encoding/)（2007-11-03）
+- [不是不奉献](https://tonybai.com/2007/11/02/the-reason-for-not-dedicate/)（2007-11-02）
+- [关注'百元PC'](https://tonybai.com/2007/10/25/focus-olpc/)（2007-10-25）
+- [推荐雅虎收藏](https://tonybai.com/2007/10/24/recommend-yahoo-shoucang/)（2007-10-24）
+- [冰人笑到最后，汉密尔顿虎头蛇尾](https://tonybai.com/2007/10/22/finally-raikkonen-win-hamilton-fail/)（2007-10-22）
+- [口诛笔伐'黄金周'](https://tonybai.com/2007/10/09/the-criticism-on-golden-week/)（2007-10-09）
+- [三场比赛确立诺坎普新国王](https://tonybai.com/2007/09/30/3-matches-establish-new-king-of-barca/)（2007-09-30）
+- [整体实力差距太大，女足复兴需来日](https://tonybai.com/2007/09/16/national-women-football-team-need-time-to-rebirth/)（2007-09-16）
+- [女足今亮相，期望莫太高](https://tonybai.com/2007/09/12/do-not-expect-too-high-to-national-women-soccer-team/)（2007-09-12）
+- [门将乌龙-2007女足世界杯之首粒入球](https://tonybai.com/2007/09/10/first-goal-of-the-women-football-worldcup/)（2007-09-10）
+- [治牙记](https://tonybai.com/2007/08/23/dental-treatment-note/)（2007-08-23）
+- [马拉多纳开创'世青赛'巨星之路](https://tonybai.com/2007/07/27/maradona-initiate-the-way-to-giant-star-of-world-youth-soccer/)（2007-07-27）
+- [国美送货服务让人失望！](https://tonybai.com/2007/07/24/delivery-service-of-gome-make-me-disppointed/)（2007-07-24）
+- [汉密尔顿走下'神坛'](https://tonybai.com/2007/07/24/hamilton-step-down-altar/)（2007-07-24）
+- [清醒吧，国足水平也就这样了](https://tonybai.com/2007/07/19/sober-yourself-national-football-team-is-indeed-on-such-low-level/)（2007-07-19）
+- [阿根廷人得了冠军'恐惧症'](https://tonybai.com/2007/07/17/agentina-suffer-champion-phobia/)（2007-07-17）
+- [发现中国队为什么总踢难看球了](https://tonybai.com/2007/07/17/the-reason-why-chinese-nation-football-team-play-worse/)（2007-07-17）
+- [哈利波特应该拍成30集电视剧](https://tonybai.com/2007/07/13/wish-harry-potter-be-a-tv-play/)（2007-07-13）
+- [变形金刚国内上映了](https://tonybai.com/2007/07/11/film-transformers-comes/)（2007-07-11）
+- [我们和中国队是一个档次的球队，所以要争胜](https://tonybai.com/2007/07/10/we-are-on-the-same-level-with-chinese-national-football-team/)（2007-07-10）
+- [破旧的银石赛道，失落的汉密尔顿](https://tonybai.com/2007/07/08/hamilton-fail-on-silverstone/)（2007-07-08）
+- [成功Build ACE](https://tonybai.com/2007/06/14/build-ace-successfully/)（2007-06-14）
+- [惊见凯旋门](https://tonybai.com/2007/06/09/found-the-triumphal-arch-in-3d-driving-game/)（2007-06-09）
+- ['山'上近况](https://tonybai.com/2007/06/08/recent-situation-of-my-house/)（2007-06-08）
+- [博客无欲，乐在其中](https://tonybai.com/2007/06/08/it-is-fun-to-write-blog-without-any-other-desire/)（2007-06-08）
+- [生活趣事两则](https://tonybai.com/2007/06/08/two-funny-things-recently/)（2007-06-08）
+- [山东队真丢人！](https://tonybai.com/2007/06/07/shandong-football-team-loses-face/)（2007-06-07）
+- [大公司也会忽悠](https://tonybai.com/2007/06/01/famous-company-also-lies/)（2007-06-01）
+- [又逢六一](https://tonybai.com/2007/06/01/today-is-childrens-day/)（2007-06-01）
+- [汉密尔顿，首个分站赛冠军只是时间问题!](https://tonybai.com/2007/05/28/only-time-problem-to-win-first-substation-champion-for-hamilton/)（2007-05-28）
+- [数的圆整算式](https://tonybai.com/2007/05/24/number-round-up-formula/)（2007-05-24）
+- [工厂模式三剑客](https://tonybai.com/2007/05/21/the-three-musketeers-of-factory-pattern/)（2007-05-21）
+- [国足输泰国，我不意外](https://tonybai.com/2007/05/16/it-is-not-unexpected-that-national-football-team-lose-game-with-tailand/)（2007-05-16）
+- [转节假日各大公司加班口号](https://tonybai.com/2007/05/09/foward-the-slogans-of-the-company-overtime-work/)（2007-05-09）
+- [昆明圆通山动物园拾趣](https://tonybai.com/2007/05/07/a-trip-to-animals-zoo-of-kunming/)（2007-05-07）
+- [探访昆明景星花鸟市场之卖'电狗'族](https://tonybai.com/2007/04/23/visit-toy-guns-store-in-kunming-jingxing-market/)（2007-04-23）
+- [有感于'上海集中销毁仿真枪支'](https://tonybai.com/2007/04/20/thought-on-destroying-toy-guns-in-shanghai/)（2007-04-20）
+- [梅西·走在通往新一代'球王'的路上](https://tonybai.com/2007/04/19/messi-on-the-way-to-new-football-king/)（2007-04-19）
+- [群组'We Fight!'](https://tonybai.com/2007/04/16/add-a-group-called-we-fight-on-blogbus/)（2007-04-16）
+- [LEWIS HAMILTON让我爱上F1](https://tonybai.com/2007/04/15/lewis-hamilton-make-me-love-f1/)（2007-04-15）
+- [颠颠簸簸三入滇](https://tonybai.com/2007/04/13/fly-to-yunnan-3rd-times/)（2007-04-13）
+- [沈阳·天主教堂](https://tonybai.com/2007/04/09/shenyang-roman-catholic-cathedral/)（2007-04-09）
+- [Google输入法试用心得](https://tonybai.com/2007/04/04/experience-of-trying-google-input-method/)（2007-04-04）
+- [手机图片·彩电塔和辽宁展览馆](https://tonybai.com/2007/03/21/mobile-pictures-tv-tower-and-liaoning-exhibition-hall/)（2007-03-21）
+- [Unix体验中心开张](https://tonybai.com/2007/03/20/unix-center-begin-supply-services/)（2007-03-20）
+- [把郭德刚从链接中删掉](https://tonybai.com/2007/03/15/delete-guodegang-from-links/)（2007-03-15）
+- [好漂亮的擎天柱剧照](https://tonybai.com/2007/03/15/optimus-prime-in-movie-is-so-handsome/)（2007-03-15）
+- [7、80年代我们都在玩什么](https://tonybai.com/2007/03/13/what-do-we-play-on-1970s-and-1980s/)（2007-03-13）
+- [精灵发威，巴萨险平](https://tonybai.com/2007/03/11/messi-help-barca-win-a-draw/)（2007-03-11）
+- [春天，打好基础](https://tonybai.com/2007/03/10/ground-well-in-spring/)（2007-03-10）
+- [沈阳·暴雪后](https://tonybai.com/2007/03/05/shenyang-after-the-heavy-snow/)（2007-03-05）
+- [沈阳·特大暴风雪跟踪'报道'](https://tonybai.com/2007/03/05/track-the-very-heavy-snow-in-shenyang/)（2007-03-05）
+- [沈阳·暴雪中度过元宵节](https://tonybai.com/2007/03/04/take-lanterns-festival-while-it-snows-heavily-at-shenyang/)（2007-03-04）
+- [列车上过'情人节'](https://tonybai.com/2007/02/14/take-valentine-day-on-the-train-alone/)（2007-02-14）
+- [山西环境污染让人触目惊心](https://tonybai.com/2007/02/13/shanxi-environment-polluted-very-seriously/)（2007-02-13）
+- [云南行·在途中](https://tonybai.com/2007/02/06/on-the-flight-to-yunnan/)（2007-02-06）
+- [昆明印象·市博物馆和特色手工艺品](https://tonybai.com/2007/02/03/impressions-of-kunming-museum-and-handcrafts/)（2007-02-03）
+- [云南九乡游记](https://tonybai.com/2007/01/27/a-tour-of-yunnan-jiuxiang/)（2007-01-27）
+- [昆明印象·金殿和世博园外景](https://tonybai.com/2007/01/26/impressions-of-kunming-gold-palace-and-world-horti-expo-garden/)（2007-01-26）
+- [昆明印象·大观楼和滇池一角](https://tonybai.com/2007/01/25/impressions-of-kunming-one-corner-of-lake-dian/)（2007-01-25）
+- [昆明印象·金马碧鸡坊和翠湖](https://tonybai.com/2007/01/24/impressions-of-kunming-golden-horse-green-chicken-lane-and-green-lake/)（2007-01-24）
+- [昆明印象·夜](https://tonybai.com/2007/01/23/impressions-of-kunming-night/)（2007-01-23）
+- [昆明印象·城市](https://tonybai.com/2007/01/22/impressions-of-kunming-city/)（2007-01-22）
+- [云南，我来了!](https://tonybai.com/2007/01/22/a-trip-to-yunnan/)（2007-01-22）
+- ['80后特质'我占了多少？](https://tonybai.com/2007/01/14/how-many-80s-characters-i-have/)（2007-01-14）
+- [SHENYANG·感受年味](https://tonybai.com/2007/01/14/shenyang-taste-spring-festival/)（2007-01-14）
+- [2006·我一直在写Blog](https://tonybai.com/2007/01/10/i-am-writing-blog-all-the-time-on-2006/)（2007-01-10）
+- [又是一部唯美的后宫'乱伦'演绎的闹剧](https://tonybai.com/2007/01/06/bad-film-the-banquet/)（2007-01-06）
+- [2007环球日报第一期](https://tonybai.com/2007/01/04/global-times-2007-1st-period/)（2007-01-04）
+- [SHENYANG·晨雾](https://tonybai.com/2007/01/04/shenyang-foggy-in-the-morning/)（2007-01-04）
+- [猜猜都是啥](https://tonybai.com/2007/01/04/guess-what-they-are/)（2007-01-04）
+- ['金猪年'快乐](https://tonybai.com/2007/01/01/happy-new-year-2007/)（2007-01-01）
+- [岁尾小记](https://tonybai.com/2006/12/31/note-at-the-end-of-year/)（2006-12-31）
+- [编译Ethereal On Windows](https://tonybai.com/2006/12/30/build-ethereal-on-windows/)（2006-12-30）
+- [露一手-'孜然羊肉'](https://tonybai.com/2006/12/27/fried-lamb-with-cumin/)（2006-12-27）
+- [2006·圣诞印象](https://tonybai.com/2006/12/25/2006-christmas-impression/)（2006-12-25）
+- [2006岁末期待·Harry Potter and the Deathly Hallows](https://tonybai.com/2006/12/23/expect-harry-potter-and-the-deathly-hallows/)（2006-12-23）
+- [2006岁末期待·Transformers](https://tonybai.com/2006/12/23/expect-transformers/)（2006-12-23）
+- ['画蛇添足'招致的BUG](https://tonybai.com/2006/12/21/a-bug-caused-by-gild-the-lily/)（2006-12-21）
+- [姥爷走了](https://tonybai.com/2006/12/19/my-grandfather-pass-away/)（2006-12-19）
+- [疏忽大意招致恼人'BUG'](https://tonybai.com/2006/12/16/a-bug-caused-by-carelessness/)（2006-12-16）
+- [我的家的'SU'版本](https://tonybai.com/2006/12/14/sketchup-design-for-my-house/)（2006-12-14）
+- [我未来的'窝'](https://tonybai.com/2006/12/13/my-intending-house/)（2006-12-13）
+- [见识'MADE IN CHINA'](https://tonybai.com/2006/12/11/made-in-china-everywhere/)（2006-12-11）
+- [一个'莫须有'的BUG](https://tonybai.com/2006/12/11/a-unwarranted-bug/)（2006-12-11）
+- [三谈内存对齐－背后的故事](https://tonybai.com/2006/12/08/talk-about-memory-alignment-the-3rd-time/)（2006-12-08）
+- [梦到地震了](https://tonybai.com/2006/12/07/dream-about-earthquake/)（2006-12-07）
+- [我的姥爷](https://tonybai.com/2006/12/07/my-grandfather/)（2006-12-07）
+- [挖掘一下C语言中的多维数组](https://tonybai.com/2006/11/29/understand-multiple-dimension-array-in-c/)（2006-11-29）
+- [只给女人做一种款式的鞋子](https://tonybai.com/2006/11/27/only-one-style-of-shoes-for-ladies/)（2006-11-27）
+- [感受南方的湿冷](https://tonybai.com/2006/11/18/feel-the-southern-clamminess/)（2006-11-18）
+- [上'风尚'频道了](https://tonybai.com/2006/11/15/be-listed-on-fengshang-channel-on-blogbus/)（2006-11-15）
+- [亲历马王堆出土文物展](https://tonybai.com/2006/11/11/a-tour-of-hunan-museum/)（2006-11-11）
+- [国青正在上演'软慢烂'](https://tonybai.com/2006/11/06/national-youth-team-become-worse/)（2006-11-06）
+- [逛逛岳麓山](https://tonybai.com/2006/11/04/a-tour-of-yuelu-mountain/)（2006-11-04）
+- [吃在湘地-腊肉篇](https://tonybai.com/2006/11/01/eat-at-hunan-bacon/)（2006-11-01）
+- [吃在湘地-煲仔篇](https://tonybai.com/2006/10/31/eat-at-hunan-hot-pot-rice/)（2006-10-31）
+- [吃在湘地-面食篇](https://tonybai.com/2006/10/31/eat-at-hunan-noodles/)（2006-10-31）
+- [湘地光影](https://tonybai.com/2006/10/29/some-photos-of-changsha-of-hunan/)（2006-10-29）
+- [身在湘地](https://tonybai.com/2006/10/27/i-am-at-hunan-province/)（2006-10-27）
+- [公务员招考应该'与时俱进'](https://tonybai.com/2006/10/24/civil-servant-exam-should-keep-up-with-the-times/)（2006-10-24）
+- [我也支持打开秦始皇陵](https://tonybai.com/2006/10/24/i-agree-in-opening-the-mausoleum-of-qinshihuang/)（2006-10-24）
+- [今天敲了'一亿次'键盘](https://tonybai.com/2006/10/19/knock-keyboard-a-hundred-million-times/)（2006-10-19）
+- [本本换风扇记](https://tonybai.com/2006/10/18/replace-electric-fan-for-laptop/)（2006-10-18）
+- [Goto也有它的好](https://tonybai.com/2006/10/17/goto-also-has-beneift/)（2006-10-17）
+- [吃了辣椒的苦头](https://tonybai.com/2006/10/12/bitter-taste-from-cayenne/)（2006-10-12）
+- [令人昏昏欲睡的'夜宴'](https://tonybai.com/2006/09/30/worse-film-the-banquet/)（2006-09-30）
+- ['此起彼伏'的复杂性](https://tonybai.com/2006/09/12/the-complexity-rise-one-after-another/)（2006-09-12）
+- [不完备库接口带来的隐患](https://tonybai.com/2006/09/09/hidden-danger-introduced-by-uncompleted-interface/)（2006-09-09）
+- ['Manna' – An extremely attractive fiction](https://tonybai.com/2006/09/07/manna-an-extremely-attractive-fiction/)（2006-09-07）
+- [小心'溢出'陷阱](https://tonybai.com/2006/09/06/be-careful-of-the-trap-of-overflow/)（2006-09-06）
+- [最初接触计算机的两三事](https://tonybai.com/2006/09/01/somethings-about-using-computer-at-first/)（2006-09-01）
+- [Books And Films](https://tonybai.com/2006/08/12/books-and-films/)（2006-08-12）
+- [Warning: Super Typhoon is coming!](https://tonybai.com/2006/08/11/warning-super-typhoon-is-coming/)（2006-08-11）
+- [My English Diary Starts From Scratch](https://tonybai.com/2006/08/10/my-english-diary-starts-from-scratch/)（2006-08-10）
+- [大连生活记-老虎滩乐园篇](https://tonybai.com/2006/07/31/dalian-trip-notes-tiger-beach/)（2006-07-31）
+- [英语培训日记20060728](https://tonybai.com/2006/07/28/english-train-notes-20060728/)（2006-07-28）
+- [Superman Returns](https://tonybai.com/2006/07/26/superman-returns/)（2006-07-26）
+- [又一部国产好剧-疯狂的石头](https://tonybai.com/2006/07/26/good-film-crazy-stone/)（2006-07-26）
+- [大连生活记-生活环境篇](https://tonybai.com/2006/07/24/dalian-trip-notes-living-environment/)（2006-07-24）
+- [英语培训日记20060719](https://tonybai.com/2006/07/19/english-train-notes-20060719/)（2006-07-19）
+- [英语培训日记20060717](https://tonybai.com/2006/07/18/english-train-notes-20060717/)（2006-07-18）
+- [英语培训日记20060714](https://tonybai.com/2006/07/14/english-train-notes-20060714/)（2006-07-14）
+- [梦想中的'无线世界'](https://tonybai.com/2006/07/12/wireless-world-in-dream/)（2006-07-12）
+- [英语培训日记20060712](https://tonybai.com/2006/07/12/english-train-notes-20060712/)（2006-07-12）
+- [英语培训日记200607010](https://tonybai.com/2006/07/10/english-train-notes-200607010/)（2006-07-10）
+- [灾难巨制'海神号'](https://tonybai.com/2006/07/09/film-poseidon/)（2006-07-09）
+- [英语培训日记20060707](https://tonybai.com/2006/07/07/english-train-notes-20060707/)（2006-07-07）
+- [2006荷月靓乐](https://tonybai.com/2006/07/06/recommend-music-of-2006-06/)（2006-07-06）
+- [英语培训日记20060706](https://tonybai.com/2006/07/06/english-train-notes-20060706/)（2006-07-06）
+- [英语培训日记20060705](https://tonybai.com/2006/07/05/english-train-notes-20060705/)（2006-07-05）
+- [英语培训日记20060704](https://tonybai.com/2006/07/04/english-train-notes-20060704/)（2006-07-04）
+- ['回归'学生宿舍](https://tonybai.com/2006/07/02/return-to-campus-dormitory/)（2006-07-02）
+- [在'辽东半岛号'上](https://tonybai.com/2006/07/02/on-the-train-to-dalian/)（2006-07-02）
+- [告别阿根廷，告别世界杯](https://tonybai.com/2006/07/01/say-bye-to-agentina-and-worldcup/)（2006-07-01）
+- [我的阿根廷队队服](https://tonybai.com/2006/06/29/my-agentina-team-clothes/)（2006-06-29）
+- [鼓掌告别加纳，斗牛士折戟沉沙](https://tonybai.com/2006/06/28/spain-out/)（2006-06-28）
+- [澳大利亚含冤出局，史上最差点球队诞生](https://tonybai.com/2006/06/27/australia-team-out/)（2006-06-27）
+- [世界杯拒绝'老二'](https://tonybai.com/2006/06/26/worldcup-refuse-2nd-team-of-each-group/)（2006-06-26）
+- [Tony说世界杯之八强预测篇](https://tonybai.com/2006/06/24/tony-forecast-the-final-eight-of-worldcup/)（2006-06-24）
+- [大学毕业两年了](https://tonybai.com/2006/06/21/two-years-since-graduate-from-university/)（2006-06-21）
+- [解决算法分析中递归问题的方法](https://tonybai.com/2006/06/21/solve-recursion-problem-when-doing-algorithm-analysis/)（2006-06-21）
+- [从'地狱'升入'天堂'](https://tonybai.com/2006/06/20/from-hell-to-heaven/)（2006-06-20）
+- [突破英语句型之'不耻下问篇'](https://tonybai.com/2006/06/20/learn-some-sentential-form-for-asking/)（2006-06-20）
+- [理解’位域’](https://tonybai.com/2006/06/19/understand-bit-fields/)（2006-06-19）
+- [第一支出局的亚洲球队诞生了！](https://tonybai.com/2006/06/18/the-first-washed-out-asian-football-team-come-out/)（2006-06-18）
+- [今晨'死亡之组'复活!](https://tonybai.com/2006/06/18/the-dead-group-reborn/)（2006-06-18）
+- [秀一下我的'本本'](https://tonybai.com/2006/06/18/show-my-laptop/)（2006-06-18）
+- ['死亡之组'结束'死亡之旅'](https://tonybai.com/2006/06/17/dead-group-end-up-the-dead-trip/)（2006-06-17）
+- [梅西-潘帕斯高原的'精灵'](https://tonybai.com/2006/06/17/messi-the-genius-of-pampas/)（2006-06-17）
+- [当数组访问越界后](https://tonybai.com/2006/06/16/after-array-index-overflow/)（2006-06-16）
+- [世界杯32强英文国名大观](https://tonybai.com/2006/06/15/the-names-of-32-participating-countries-of-this-worldcup/)（2006-06-15）
+- [也谈内存对齐(续)](https://tonybai.com/2006/06/14/also-talk-about-memory-alignment-cont/)（2006-06-14）
+- [Google Earth更新中国地区卫星照片啦！](https://tonybai.com/2006/06/13/google-earth-update-maps-of-mainland/)（2006-06-13）
+- [这届世界杯'不太冷'](https://tonybai.com/2006/06/13/few-dark-horse-in-this-worldcup/)（2006-06-13）
+- [世界杯真的来了!](https://tonybai.com/2006/06/09/worldcup-comes/)（2006-06-09）
+- [一碗自做的肉丝卤面](https://tonybai.com/2006/06/08/a-bowl-of-self-made-noodles/)（2006-06-08）
+- ['离开'Google的日子](https://tonybai.com/2006/06/07/the-time-without-google/)（2006-06-07）
+- [线程函数参数引发的问题](https://tonybai.com/2006/06/07/a-problem-caused-by-thread-func-argument/)（2006-06-07）
+- [中国队应该感谢韩国人](https://tonybai.com/2006/06/07/national-football-team-should-appreciate-korean/)（2006-06-07）
+- ['666'留念](https://tonybai.com/2006/06/06/remembrance-of-666/)（2006-06-06）
+- [2006榴月靓乐](https://tonybai.com/2006/06/05/recommend-music-of-2006-05/)（2006-06-05）
+- [韩乔生经典语录](https://tonybai.com/2006/06/05/hanqiaosheng-sayings/)（2006-06-05）
+- [周末吃喝购物](https://tonybai.com/2006/06/03/shopping-at-weekend/)（2006-06-03）
+- [Tony说世界杯之小组赛预测篇](https://tonybai.com/2006/06/02/tony-forecast-group-match-of-worldcup/)（2006-06-02）
+- [美妙的文件描述符传递](https://tonybai.com/2006/06/01/passing-file-descriptor/)（2006-06-01）
+- [也想过儿童节](https://tonybai.com/2006/06/01/want-to-take-children-day/)（2006-06-01）
+- [说在端午，吃在端午](https://tonybai.com/2006/05/31/talk-and-eat-on-dragon-boat-festival/)（2006-05-31）
+- [小心库函数调用的'陷阱'](https://tonybai.com/2006/05/31/take-care-of-trap-when-invoking-lib-functions/)（2006-05-31）
+- [世界园艺博览会游记](https://tonybai.com/2006/05/30/sy-expo2006-tour-note/)（2006-05-30）
+- [突破英语句型之'生存必备篇'](https://tonybai.com/2006/05/29/learn-some-sentential-form-for-living/)（2006-05-29）
+- [我与世界杯-写在世界杯开幕前](https://tonybai.com/2006/05/29/share-my-worldcup-experience/)（2006-05-29）
+- ['堕落'的一周](https://tonybai.com/2006/05/26/fall-backward-this-week/)（2006-05-26）
+- [算法时间复杂性之渐近法分析基础](https://tonybai.com/2006/05/23/the-base-of-algorithm-complexity-asymptotic-analysis/)（2006-05-23）
+- [推荐看看'核震过后'](https://tonybai.com/2006/05/23/recommend-file-after-10-earthquake/)（2006-05-23）
+- [国奥改历史，巴萨夺欧冠](https://tonybai.com/2006/05/18/barca-win-champion-league/)（2006-05-18）
+- [口语学习笔记之'内心表白'](https://tonybai.com/2006/05/16/spoken-english-note-series-express-yourself/)（2006-05-16）
+- [口语学习笔记之'提醒忠告'](https://tonybai.com/2006/05/11/spoken-english-note-series-remind-and-advice/)（2006-05-11）
+- [晚上吃一碗蛋炒饭](https://tonybai.com/2006/05/11/have-egg-fried-rice-for-supper/)（2006-05-11）
+- [算法描述中的'Pseudocode Conventions'](https://tonybai.com/2006/05/10/pseudocode-conventions-in-algorithm-description/)（2006-05-10）
+- [口语学习笔记之'随意的谈话'](https://tonybai.com/2006/05/08/spoken-english-note-series-talk-freely/)（2006-05-08）
+- [你提供默认选项了吗](https://tonybai.com/2006/05/08/supply-the-default-option/)（2006-05-08）
+- [2006梅月靓乐](https://tonybai.com/2006/05/07/recommend-music-of-2006-04/)（2006-05-07）
+- [口语学习笔记之'见面分手'](https://tonybai.com/2006/05/04/spoken-english-note-series-hello-and-bye/)（2006-05-04）
+- [口语学习笔记之'日期与时间'](https://tonybai.com/2006/05/03/spoken-english-note-series-date-and-time/)（2006-05-03）
+- [Unix Shell Scripting之'扫盲篇'](https://tonybai.com/2006/05/02/an-introduction-on-unix-shell-scripting/)（2006-05-02）
+- [口语学习笔记-'电话沟通'](https://tonybai.com/2006/05/01/spoken-english-note-communication-on-telephone/)（2006-05-01）
+- [口语学习笔记之'恋爱和结婚'](https://tonybai.com/2006/04/29/spoken-english-note-series-love-and-marriage/)（2006-04-29）
+- [口语学习笔记之'生病受伤时'](https://tonybai.com/2006/04/27/spoken-english-note-series-fall-ill/)（2006-04-27）
+- ['祸'不单行](https://tonybai.com/2006/04/26/misfortunes-never-come-singly/)（2006-04-26）
+- [口语学习笔记之'享受闲暇时间'](https://tonybai.com/2006/04/25/spoken-english-note-series-enjoy-spare-time/)（2006-04-25）
+- [遇到系统的高可用性问题](https://tonybai.com/2006/04/25/a-problem-about-high-available-service/)（2006-04-25）
+- [今年五一要加班](https://tonybai.com/2006/04/24/work-overtime-on-may-day-vacation/)（2006-04-24）
+- [口语学习笔记之'在家中'](https://tonybai.com/2006/04/24/spoken-english-note-series-at-home/)（2006-04-24）
+- [想开拖拉机吗，那你得会修！](https://tonybai.com/2006/04/21/learn-repair-tractor-before-you-drive-it/)（2006-04-21）
+- [成为BlogBus第二十五期优秀乘客](https://tonybai.com/2006/04/20/become-the-25th-periodical-excellent-passenger-of-blogbus/)（2006-04-20）
+- [记录德兰修女箴言](https://tonybai.com/2006/04/18/sayings-from-mother-theresa/)（2006-04-18）
+- ['该出手时就出手'](https://tonybai.com/2006/04/17/buy-moto-a780/)（2006-04-17）
+- ['男女不分'](https://tonybai.com/2006/04/17/make-mistake-in-differentiating-gender/)（2006-04-17）
+- [我的铃声我做主](https://tonybai.com/2006/04/17/make-mobile-bell-myself/)（2006-04-17）
+- [恼人的'素数回文'](https://tonybai.com/2006/04/16/solve-prime-palindromes/)（2006-04-16）
+- [为什么布鲁诺薪水不如阿诺德？](https://tonybai.com/2006/04/14/why-arnold-better-than-bruno/)（2006-04-14）
+- [Blog已成为交友中心？](https://tonybai.com/2006/04/13/blog-to-be-friend-making-center/)（2006-04-13）
+- [开始'亡羊补牢'](https://tonybai.com/2006/04/12/begin-fix-before-lost-too-much/)（2006-04-12）
+- [一组业余之作](https://tonybai.com/2006/04/10/a-group-of-amateur-work/)（2006-04-10）
+- [暖春-一次心灵的净化](https://tonybai.com/2006/04/07/film-nuan-chun/)（2006-04-07）
+- [算法的回归](https://tonybai.com/2006/04/07/the-return-of-algorithm/)（2006-04-07）
+- [推荐一首'老歌'-'让泪化作相思雨'](https://tonybai.com/2006/04/07/recommend-an-old-music/)（2006-04-07）
+- [第一道ACM练习题](https://tonybai.com/2006/04/05/do-an-acm-exercise/)（2006-04-05）
+- [我来'Mixing Milk'](https://tonybai.com/2006/04/05/solve-mixing-milk/)（2006-04-05）
+- [2006桃月靓乐](https://tonybai.com/2006/04/02/recommend-music-of-2006-03/)（2006-04-02）
+- [做真实的自己-答友之困惑](https://tonybai.com/2006/04/02/to-be-yourself/)（2006-04-02）
+- [追求'lint-clean'](https://tonybai.com/2006/03/31/pursue-lint-clean/)（2006-03-31）
+- [我的本本3岁了](https://tonybai.com/2006/03/30/my-laptop-3-years-old/)（2006-03-30）
+- [见识思维导图](https://tonybai.com/2006/03/29/learn-mindmap/)（2006-03-29）
+- [当数组作参数时](https://tonybai.com/2006/03/27/when-array-passed-as-arguments/)（2006-03-27）
+- ['right-left'规则再举例](https://tonybai.com/2006/03/26/another-example-for-c-right-left-rule/)（2006-03-26）
+- [理解C复杂声明之'优先级规则'](https://tonybai.com/2006/03/26/understand-priority-rule-for-parse-c-declaration/)（2006-03-26）
+- [品味'勇敢的游戏2'](https://tonybai.com/2006/03/23/thought-on-jumanji2/)（2006-03-23）
+- ['大力神杯' vs. 两个'奥斯卡小金人'](https://tonybai.com/2006/03/16/one-worldcup-vs-two-oscar-award/)（2006-03-16）
+- [想去旅行](https://tonybai.com/2006/03/16/want-to-travel/)（2006-03-16）
+- ['阳光'小罗](https://tonybai.com/2006/03/15/sunshine-ronaldinho/)（2006-03-15）
+- [GCC警告选项例解](https://tonybai.com/2006/03/14/explain-gcc-warning-options-by-examples/)（2006-03-14）
+- [理发与洗澡之遐想篇](https://tonybai.com/2006/03/14/thought-on-haircut-and-bath/)（2006-03-14）
+- [今年欧冠甚好看](https://tonybai.com/2006/03/11/champions-league-is-brilliant-this-year/)（2006-03-11）
+- [女人放假后的'环境变化'](https://tonybai.com/2006/03/08/variation-after-women-are-all-on-vacation/)（2006-03-08）
+- ['阴影是条纸龙'](https://tonybai.com/2006/03/07/shadow-is-a-paper-dragon/)（2006-03-07）
+- [初识泰国电影](https://tonybai.com/2006/03/05/be-aware-of-tailand-film/)（2006-03-05）
+- [草根化的'雷锋精神'](https://tonybai.com/2006/03/04/popular-leifeng-spirit/)（2006-03-04）
+- [美丽的'花枝'](https://tonybai.com/2006/03/03/beautiful-wenhuazhi/)（2006-03-03）
+- [Kernel 'head.S'](https://tonybai.com/2006/03/02/kernel-head/)（2006-03-02）
+- ['瘦死的骆驼不如马'](https://tonybai.com/2006/03/01/dead-camel-thinner-than-a-horse/)（2006-03-01）
+- [2006杏月靓乐](https://tonybai.com/2006/03/01/recommend-music-of-2006-02/)（2006-03-01）
+- ['阿拉贡'的'暴力史'](https://tonybai.com/2006/02/28/a-history-of-violence/)（2006-02-28）
+- [好博客值几文？](https://tonybai.com/2006/02/28/how-much-is-a-good-blog/)（2006-02-28）
+- [谁是世界足坛王者之王？](https://tonybai.com/2006/02/28/who-is-the-king-of-football/)（2006-02-28）
+- [Compressed 'head.S'](https://tonybai.com/2006/02/25/compressed-head/)（2006-02-25）
+- ['名符其实'的国足](https://tonybai.com/2006/02/23/national-football-team-deserve-its-fame/)（2006-02-23）
+- [听广播入睡](https://tonybai.com/2006/02/22/sleep-with-radio/)（2006-02-22）
+- [贴点经典台词](https://tonybai.com/2006/02/18/classic-actor-dialogue/)（2006-02-18）
+- [Transfer to '32-bit'](https://tonybai.com/2006/02/17/transfer-to-32bit/)（2006-02-17）
+- [Outline 'memory layout'](https://tonybai.com/2006/02/15/outline-memory-layout/)（2006-02-15）
+- [改写两则笑话](https://tonybai.com/2006/02/15/two-jokes/)（2006-02-15）
+- [独过情人节](https://tonybai.com/2006/02/14/spend-valentine-day-alone/)（2006-02-14）
+- [小议'霍元甲'](https://tonybai.com/2006/02/12/thoughts-on-huoyuanjia/)（2006-02-12）
+- [Goto 'Bootstrap'](https://tonybai.com/2006/02/11/goto-bootstrap/)（2006-02-11）
+- [Inside the 'i386'](https://tonybai.com/2006/02/09/inside-the-i386/)（2006-02-09）
+- [Retired 'bootsect.S'](https://tonybai.com/2006/02/08/retired-bootsect/)（2006-02-08）
+- [“隐”在春节](https://tonybai.com/2006/02/06/be-undertone-in-the-chinese-new-year/)（2006-02-06）
+- [体味“年文化”](https://tonybai.com/2006/02/06/appreciate-the-culture-of-spring-festival/)（2006-02-06）
+- [2006正月靓乐](https://tonybai.com/2006/01/24/recommend-music-of-2006-01/)（2006-01-24）
+- [回家过年啦](https://tonybai.com/2006/01/24/go-home-for-spring-festival/)（2006-01-24）
+- [将无哩头进行到底](https://tonybai.com/2006/01/23/insist-on-loony-tone/)（2006-01-23）
+- [收到Ubuntu光盘](https://tonybai.com/2006/01/23/got-the-ubuntu-disc/)（2006-01-23）
+- [选择Blog站点](https://tonybai.com/2006/01/18/choose-blog-service-provider/)（2006-01-18）
+- [make the world know China](https://tonybai.com/2006/01/16/make-the-world-know-china/)（2006-01-16）
+- [部门联欢小记](https://tonybai.com/2006/01/15/note-of-the-department-get-together/)（2006-01-15）
+- [又是一年考研时](https://tonybai.com/2006/01/14/the-time-of-one-year-exam-for-postgraduate/)（2006-01-14）
+- [给“沙场点兵”一些掌声](https://tonybai.com/2006/01/10/some-applause-to-the-troops-of-the-battlefield/)（2006-01-10）
+- [听说发论文要掏钱](https://tonybai.com/2006/01/07/have-to-pay-for-issuing-the-papers/)（2006-01-07）
+- [Hacker Culture摘要](https://tonybai.com/2006/01/05/hacker-culture-summary/)（2006-01-05）
+- [一个军迷的忧虑](https://tonybai.com/2006/01/03/worries-of-a-military-fan/)（2006-01-03）
+- [中国电影100年了](https://tonybai.com/2006/01/02/100-years-of-chinese-movie/)（2006-01-02）
+- [迎来本命年](https://tonybai.com/2006/01/01/my-animal-year/)（2006-01-01）
+- [2005腊月靓乐](https://tonybai.com/2005/12/29/recommend-music-of-2005-12/)（2005-12-29）
+- [圣诞后说](https://tonybai.com/2005/12/28/say-something-after-christmas/)（2005-12-28）
+- [失望的“火焰杯”](https://tonybai.com/2005/12/17/the-goblet-of-fire-disappoint-me/)（2005-12-17）
+- [说说电影](https://tonybai.com/2005/12/16/something-about-movies/)（2005-12-16）
+- [差异学习](https://tonybai.com/2005/12/13/differences-in-learning/)（2005-12-13）
+- [APR分析-线程篇](https://tonybai.com/2005/12/08/apr-thread/)（2005-12-08）
+- [学习虚存-自上而下](https://tonybai.com/2005/11/30/learn-virtual-mem-f/)（2005-11-30）
+- [汇编之路-复习栈操作](https://tonybai.com/2005/11/24/assembly-series-review-stack-operation/)（2005-11-24）
+- [童心未泯](https://tonybai.com/2005/11/14/still-childish/)（2005-11-14）
+- [汇编之路-栈操作与栈帧](https://tonybai.com/2005/11/13/assembly-series-stack-oper-and-frame/)（2005-11-13）
+- [打开汇编之门](https://tonybai.com/2005/11/12/open-the-gate-to-assembly-language/)（2005-11-12）
+- [再说内存](https://tonybai.com/2005/11/02/talk-about-memory-again/)（2005-11-02）
+- [也谈字节序问题](https://tonybai.com/2005/09/28/also-talk-about-byte-order/)（2005-09-28）
+- [解疑sigsuspend](https://tonybai.com/2005/09/22/understand-sigsuspend/)（2005-09-22）
+- [理解Zombie和Daemon Process](https://tonybai.com/2005/09/21/understand-zombie-and-daemon-process/)（2005-09-21）
+- [改格](https://tonybai.com/2005/09/19/change-image/)（2005-09-19）
+- [理解dup和dup2](https://tonybai.com/2005/09/19/understand-dup-and-dup2/)（2005-09-19）
+- [理解ASCII码](https://tonybai.com/2005/09/11/learn-ascii/)（2005-09-11）
+- [我还健康](https://tonybai.com/2005/09/08/i-am-still-healthy/)（2005-09-08）
+- [走马观花ANSI C标准-类型表示](https://tonybai.com/2005/08/19/c-standard-overview-type-representation/)（2005-08-19）
+- [分析“参数传递”](https://tonybai.com/2005/08/12/analysis-on-args-passing/)（2005-08-12）
+- [七夕感悟](https://tonybai.com/2005/08/11/thought-on-chinese-valentine-day/)（2005-08-11）
+- [C复杂声明解析](https://tonybai.com/2005/08/09/an-explanation-of-complex-c-declaration/)（2005-08-09）
+- [也谈内存对齐](https://tonybai.com/2005/08/09/also-talk-about-memory-alignment/)（2005-08-09）
+- [走马观花ANSI C标准-类型](https://tonybai.com/2005/08/06/c-standard-overview-type/)（2005-08-06）
+- [走马观花ANSI C标准-标识符](https://tonybai.com/2005/08/05/c-standard-overview-identifier/)（2005-08-05）
+- [走马观花ANSI C标准-环境](https://tonybai.com/2005/08/04/c-standard-overview-envi/)（2005-08-04）
+- [寝室晨起混乱用语](https://tonybai.com/2005/08/02/morning-get-up-words/)（2005-08-02）
+- [转帖“华为的冬天”](https://tonybai.com/2005/07/29/foward-the-winter-of-huawei/)（2005-07-29）
+- [走马观花ANSI C标准-介绍](https://tonybai.com/2005/07/28/introduction-on-c-standard-overview-series/)（2005-07-28）
+- [朋友的一次社招经历](https://tonybai.com/2005/07/26/an-interview-experience-of-my-friend/)（2005-07-26）
+- [重操旧业](https://tonybai.com/2005/07/17/resume-my-old-profession/)（2005-07-17）
+- [同步问题讨论-Tony与Alex的对话系列](https://tonybai.com/2005/06/09/tony-alex-dialog-on-synchronization/)（2005-06-09）
+- [从技术到管理的对话-Tony与Alex的对话系列](https://tonybai.com/2005/06/05/tony-alex-dialog-on-from-tech-to-management/)（2005-06-05）
+- [关于Tony与Alex的对话系列的一点说明](https://tonybai.com/2005/05/24/an-introduction-on-tony-alex-dialog-series/)（2005-05-24）
+- [My first knowledge share](https://tonybai.com/2005/04/19/my-first-knowledge-share/)（2005-04-19）
+- [闲说“招式”与“内功”](https://tonybai.com/2005/04/18/thoughts-about-different-kungfu/)（2005-04-18）
+- [微软又推出新语言了](https://tonybai.com/2005/04/15/microsoft-publish-new-language/)（2005-04-15）
+- [又一个“孔乙己”吗](https://tonybai.com/2005/04/08/another-kongyiji/)（2005-04-08）
+- [关注，AOP](https://tonybai.com/2005/01/28/focus-aop/)（2005-01-28）
+- [Hello，AOP](https://tonybai.com/2005/01/22/hello-aop/)（2005-01-22）
+- [Build ArgoUML and AndroMDA](https://tonybai.com/2005/01/19/build-argouml-and-andromda/)（2005-01-19）
+- [饮水机的加热保护](https://tonybai.com/2005/01/16/heating-protection-of-water-dispenser/)（2005-01-16）
+- [开放与封闭](https://tonybai.com/2005/01/09/open-and-close/)（2005-01-09）
+- [由一段话想到的](https://tonybai.com/2005/01/09/thoughts-by-some-words/)（2005-01-09）
+- [另一种“所见即所得”](https://tonybai.com/2005/01/08/another_wysiwyg/)（2005-01-08）
+- [Oolong and Gnoloo](https://tonybai.com/2005/01/06/oolong-and-gnoloo/)（2005-01-06）
+- [写在岁末](https://tonybai.com/2005/01/01/an-essay-at-the-end-of-year/)（2005-01-01）
+- [再谈Mock Object](https://tonybai.com/2004/12/28/talk-about-mock-object-again/)（2004-12-28）
+- [认识Mock Object](https://tonybai.com/2004/12/10/learn-mock-object/)（2004-12-10）
+- [如何编写类中的setter和getter](https://tonybai.com/2004/12/08/how-implement-setter-and-getter/)（2004-12-08）
+- [Advanced CVS](https://tonybai.com/2004/12/02/advanced-cvs/)（2004-12-02）
+- [Everything is an object](https://tonybai.com/2004/11/22/everything-is-an-object/)（2004-11-22）
+- [CVS Primer](https://tonybai.com/2004/11/17/cvs-primer/)（2004-11-17）
+- [连接Oracle](https://tonybai.com/2004/09/16/connect-oracle/)（2004-09-16）
+- [本不是第一篇的第一篇](https://tonybai.com/2004/09/15/the-first-blog/)（2004-09-15）
+
+## 九、追踪结论
+
+Tony Bai 的公开轨迹是一条从长期程序员写作、Go 语言资料和开源实践，延伸到云原生、Rust、AI 与行业观察的连续记录。后续更新以个人站归档和 `bigwhite` 账号的出版物/项目仓库为主。
