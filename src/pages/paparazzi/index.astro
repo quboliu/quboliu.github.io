@@ -55,14 +55,14 @@ const tieredPaparazziPages = tierOrder.map(tier => ({
     pageTitle="Paparazzi"
     pageDesc="Independent dossiers tracking notable blogs and projects — separate from Posts. Public avatars are tried in priority order, with initials as the final fallback."
   >
-    <div class="grid grid-cols-1 gap-y-4 sm:gap-y-5">
+    <div class="grid grid-cols-1 gap-y-2 sm:gap-y-2.5">
       {
         tieredPaparazziPages.map(({ tier, pages }) => (
           <section
-            class="border-border w-full border-t pt-4 first:border-t-0 first:pt-0"
+            class="border-border w-full border-t pt-2 first:border-t-0 first:pt-0 sm:pt-3 sm:first:pt-0"
             aria-label={tierLabels[tier]}
           >
-            <ul class="grid grid-cols-2 gap-x-1 gap-y-2 sm:grid-cols-3 sm:gap-x-1.5 sm:gap-y-2.5 md:grid-cols-4">
+            <ul class="grid grid-cols-2 gap-x-0.5 gap-y-1 sm:grid-cols-3 sm:gap-x-1 sm:gap-y-1.5 md:grid-cols-4">
               {pages.map(page => {
                 const slug = getSlug(page.id);
                 const href = getRelativeLocaleUrl(locale, `paparazzi/${slug}`);
@@ -82,7 +82,7 @@ const tieredPaparazziPages = tierOrder.map(tier => ({
                       aria-label={`Open ${subjectName} dossier`}
                     >
                       <span
-                        class="border-border bg-background relative block h-11 w-11 overflow-hidden rounded-full border shadow-sm transition-transform duration-300 group-hover:scale-105 sm:h-[52px] sm:w-[52px]"
+                        class="border-border bg-background relative block h-12 w-12 overflow-hidden rounded-full border shadow-sm transition-transform duration-300 group-hover:scale-105 sm:h-14 sm:w-14"
                         title={avatarTitle}
                       >
                         <Avatar
@@ -91,7 +91,7 @@ const tieredPaparazziPages = tierOrder.map(tier => ({
                           fallback={getInitials(subjectName)}
                         />
                       </span>
-                      <span class="text-foreground mt-0.5 text-[11px] font-semibold">
+                      <span class="text-foreground mt-0.5 text-xs font-semibold">
                         {subjectName}
                       </span>
                       <span class="text-muted-foreground mt-0.5 text-[10px]">
