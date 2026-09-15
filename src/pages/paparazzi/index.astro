@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import config from "@/config";
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const paparazziPages = (
+  await getCollection("pages", ({ id }) => id.startsWith("paparazzi/"))
+).sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const getSlug = (id: string) => id.split("/").at(-1) ?? id;
+---
+
+<Layout
+  title={`Paparazzi | ${config.site.title}`}
+  description="Independent dossiers tracking notable blogs and projects."
+>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main
+    pageTitle="Paparazzi"
+    pageDesc="Independent dossiers tracking notable blogs and projects — separate from Posts."
+  >
+    <ul class="grid gap-6 sm:grid-cols-2">
+      {
+        paparazziPages.map(page => {
+          const slug = getSlug(page.id);
+          const href = getRelativeLocaleUrl(locale, `paparazzi/${slug}`);
+
+          return (
+            <li class="border-border rounded border p-5">
+              <h2 class="text-xl font-semibold">
+                <a
+                  href={href}
+                  class="text-foreground hover:text-accent no-underline hover:underline"
+                >
+                  {page.data.title}
+                </a>
+              </h2>
+              <p class="text-muted-foreground mt-2">{page.data.description}</p>
+              <a
+                href={href}
+                class="text-accent mt-5 inline-block no-underline hover:underline"
+              >
+                Open dossier →
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </Main>
+
+  <Footer />
+</Layout>
