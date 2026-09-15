@@ -34,6 +34,16 @@ const pages = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
+    subjectName: z.string().optional(),
+    avatarCandidates: z
+      .array(
+        z.object({
+          url: z.url(),
+          source: z.string(),
+          profileUrl: z.url().optional(),
+        })
+      )
+      .default([]),
     ogImage: z.string().optional(),
     canonicalURL: z.string().optional(),
   }),

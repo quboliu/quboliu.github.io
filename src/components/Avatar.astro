@@ -1,0 +1,80 @@
+---
+interface AvatarCandidate {
+  url: string;
+  source: string;
+}
+
+interface Props {
+  alt: string;
+  fallback: string;
+  candidates?: AvatarCandidate[];
+}
+
+const { alt, fallback, candidates = [] } = Astro.props;
+const urls = candidates.map(candidate => candidate.url);
+---
+
+<div class="relative flex h-full w-full items-center justify-center">
+  <span
+    class={`bg-accent/10 text-accent flex h-full w-full items-center justify-center text-3xl font-semibold ${urls.length > 0 ? "hidden" : ""}`}
+    data-avatar-fallback
+    aria-hidden="true"
+  >
+    {fallback}
+  </span>
+  {
+    urls.length > 0 && (
+      <img
+        src={urls[0]}
+        alt={alt}
+        class="absolute inset-0 h-full w-full object-cover"
+        data-avatar-image
+        data-avatar-candidates={JSON.stringify(urls)}
+        loading="lazy"
+        decoding="async"
+        referrerpolicy="no-referrer"
+      />
+    )
+  }
+</div>
+
+<script>
+  const initializeAvatars = () => {
+    const avatarImages = document.querySelectorAll<HTMLImageElement>(
+      "[data-avatar-image]:not([data-avatar-initialized])"
+    );
+
+    avatarImages.forEach(image => {
+      image.dataset.avatarInitialized = "true";
+      const fallback = image.parentElement?.querySelector<HTMLElement>(
+        "[data-avatar-fallback]"
+      );
+      const candidates = JSON.parse(
+        image.dataset.avatarCandidates ?? "[]"
+      ) as string[];
+      let candidateIndex = 0;
+
+      const tryNextCandidate = () => {
+        candidateIndex += 1;
+        const nextCandidate = candidates[candidateIndex];
+
+        if (nextCandidate) {
+          image.src = nextCandidate;
+          return;
+        }
+
+        image.classList.add("hidden");
+        fallback?.classList.remove("hidden");
+      };
+
+      image.addEventListener("error", tryNextCandidate);
+
+      if (image.complete && image.naturalWidth === 0) {
+        tryNextCandidate();
+      }
+    });
+  };
+
+  initializeAvatars();
+  document.addEventListener("astro:page-load", initializeAvatars);
+</script>

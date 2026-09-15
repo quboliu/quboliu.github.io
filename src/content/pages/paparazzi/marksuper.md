@@ -1,6 +1,17 @@
 ---
 title: "marksuper.xyz"
 description: "跟踪 marksuper.xyz 的文章、作者与主题变化。"
+subjectName: "Mark"
+avatarCandidates:
+  - url: "https://marksuper.xyz/picture/mine.jpg"
+    source: "博客个人头像"
+    profileUrl: "https://marksuper.xyz/about/"
+  - url: "https://avatars.githubusercontent.com/u/66867637?v=4"
+    source: "GitHub"
+    profileUrl: "https://github.com/LittleBeeMark"
+  - url: "https://github.com/LittleBeeMark.png?size=400"
+    source: "GitHub profile image"
+    profileUrl: "https://github.com/LittleBeeMark"
 ---
 
 > 由 blog-paparazzi skill 产出。全部 63 篇文章链接已逐一验证可访问。
