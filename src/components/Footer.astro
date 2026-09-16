@@ -1,6 +1,5 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import Socials from "./Socials.astro";
 import { useTranslations } from "@/i18n";
 
 type Props = {
@@ -18,7 +17,6 @@ const currentYear = new Date().getFullYear();
   {...attrs}
 >
   <div class="text-muted-foreground py-6 text-center text-sm">
-    <Socials />
     <p class="mt-2">
       {t.footer.copyright} &#169; {currentYear} · {t.footer.allRightsReserved}
     </p>

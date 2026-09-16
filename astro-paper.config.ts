@@ -28,18 +28,6 @@ export default defineAstroPaperConfig({
     },
     search: "pagefind",
   },
-  socials: [
-    {
-      name: "github",
-      url: "https://github.com/quboliu",
-      linkTitle: "quboliu on GitHub",
-    },
-    {
-      name: "notion",
-      url: "https://jvzi.notion.site/",
-      linkTitle: "Orange Garden on Notion",
-    },
-  ],
   shareLinks: [
     { name: "x", url: "https://x.com/intent/post?url=" },
     { name: "telegram", url: "https://t.me/share/url?url=" },
