@@ -15,7 +15,7 @@ avatarCandidates:
     profileUrl: "https://github.com/LittleBeeMark"
 ---
 
-> 由 blog-paparazzi skill 产出。全部 63 篇文章链接已逐一验证可访问。
+> 由 paparazzi skill 产出。全部 63 篇文章链接已逐一验证可访问。
 
 ## 〇、博客档案与作者情报
 
