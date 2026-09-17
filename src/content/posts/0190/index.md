@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-17T12:11:00+08:00
+modDatetime: 2026-09-17T12:23:41+08:00
 timezone: "Asia/Shanghai"
-title: "不要把数据想成方块：从字节序列到语义世界"
+title: "重置直觉（二）——数据先是字节序列，语义来自解释规则"
 area: "software-engineering"
 featured: false
 draft: false
