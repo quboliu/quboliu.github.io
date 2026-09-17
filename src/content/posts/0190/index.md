@@ -1,13 +1,14 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-17T12:11:00+08:00
-modDatetime: 2026-09-17T12:23:41+08:00
+modDatetime: 2026-09-17T12:26:03+08:00
 timezone: "Asia/Shanghai"
 title: "重置直觉（二）——数据先是字节序列，语义来自解释规则"
 area: "software-engineering"
 featured: false
 draft: false
 tags:
+  - "重置直觉"
   - "数据模型"
   - "编码"
   - "存储系统"
