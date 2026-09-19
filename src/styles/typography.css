@@ -5,7 +5,7 @@
   .app-prose {
     @apply prose max-w-none;
 
-    line-height: 1.6;
+    line-height: 1.5;
 
     h1,
     h2,
