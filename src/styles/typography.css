@@ -1,5 +1,11 @@
 @plugin "@tailwindcss/typography";
 
+/* Keep every heading upright, including inline emphasis in Markdown headings. */
+:is(h1, h2, h3, h4, h5, h6),
+:is(h1, h2, h3, h4, h5, h6) * {
+  font-style: normal;
+}
+
 @layer base {
   /* ===== Bear Blog style article typography ===== */
   .app-prose {
@@ -16,10 +22,6 @@
     th {
       color: var(--heading);
       @apply mb-3;
-    }
-
-    h3 {
-      @apply italic;
     }
 
     p,
