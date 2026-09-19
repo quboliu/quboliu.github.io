@@ -117,47 +117,53 @@ const ogImage = ogImageUrl
   <main
     id="main-content"
     lang={lang ?? locale}
-    class:list={["app-layout", { "mt-8": !config.features.showBackButton }]}
+    class:list={[
+      "app-layout reading-layout",
+      { "mt-8": !config.features.showBackButton },
+    ]}
     data-pagefind-body
   >
-    <h1
-      lang={lang}
-      style={{ viewTransitionName: toTransitionName(title) }}
-      class="text-heading inline-block max-w-full text-2xl font-bold [overflow-wrap:anywhere] sm:text-3xl"
-    >
-      {title}
-    </h1>
+    <header class="article-header">
+      <h1
+        lang={lang}
+        style={{ viewTransitionName: toTransitionName(title) }}
+        class="text-heading inline-block max-w-full text-2xl font-bold [overflow-wrap:anywhere] sm:text-3xl"
+      >
+        {title}
+      </h1>
 
-    <div class="my-2 flex flex-wrap items-center gap-2">
-      <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
-      <span aria-hidden="true">·</span>
-      <span>
-        {t.post.areaLabel}: <Area {area} />
-      </span>
-      <EditPost {hideEditPost} {post} class="max-sm:hidden" />
+      <div class="my-2 flex flex-wrap items-center gap-2">
+        <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
+        <span aria-hidden="true">·</span>
+        <span>
+          {t.post.areaLabel}: <Area {area} />
+        </span>
+      </div>
+
+      <ul class="mt-4 flex flex-wrap gap-x-4 gap-y-2">
+        {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
+      </ul>
+    </header>
+
+    <div class="reading-grid">
+      <TableOfContents {headings} />
+
+      <article
+        id="article"
+        lang={lang}
+        class:list={[
+          "mt-8 w-full",
+          "app-prose max-w-app",
+          "prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)",
+        ]}
+      >
+        <Content />
+      </article>
     </div>
-
-    <ul class="mt-4 flex flex-wrap gap-x-4 gap-y-2">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
-    </ul>
-
-    <article
-      id="article"
-      lang={lang}
-      class:list={[
-        "mt-8 w-full",
-        "app-prose max-w-app",
-        "prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)",
-      ]}
-    >
-      <Content />
-    </article>
-
-    <TableOfContents {headings} />
 
     <hr class="my-8 border-dashed" />
 
-    <EditPost class="sm:hidden" {hideEditPost} {post} />
+    <EditPost {hideEditPost} {post} />
 
     <BackToTopButton />
 

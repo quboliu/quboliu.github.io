@@ -17,33 +17,33 @@
 /* Light theme values (Bear default) */
 :root,
 [data-theme="light"] {
-  --background: #ffffff;
-  --foreground: #444444;
-  --heading: #222222;
-  --accent: #3273dc;
+  --background: #fdfcf9;
+  --foreground: #393b3b;
+  --heading: #222625;
+  --accent: #28645e;
   --accent-foreground: #ffffff;
-  --muted: #f2f2f2;
+  --muted: #f1f0eb;
   --code-background: #f4f6f8;
   --code-border: #d5dce3;
-  --muted-foreground: #777777;
-  --border: #dddddd;
+  --muted-foreground: #6c706d;
+  --border: #e2e3dc;
   --font-main:
-    Verdana, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-    "Noto Sans SC", sans-serif;
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
 }
 
 /* Dark theme values (Bear default) */
 [data-theme="dark"] {
-  --background: #01242e;
-  --foreground: #dddddd;
-  --heading: #eeeeee;
-  --accent: #8cc2dd;
-  --accent-foreground: #01242e;
-  --muted: #000000;
-  --code-background: #011627;
-  --code-border: #345061;
-  --muted-foreground: #9ab5bd;
-  --border: #1e4552;
+  --background: #1c201f;
+  --foreground: #d3d7d2;
+  --heading: #eff1eb;
+  --accent: #93c6ba;
+  --accent-foreground: #1c201f;
+  --muted: #272d2a;
+  --code-background: #232927;
+  --code-border: #3b4540;
+  --muted-foreground: #a1aaa3;
+  --border: #38403b;
 }
 
 @layer base {
