@@ -143,3 +143,11 @@ const allMonthLinks = groupPostsByMonth(allPosts).map(
 
   <Footer noMarginTop={page.lastPage > 1} />
 </Layout>
+
+<style>
+  @media (max-width: 40rem) {
+    .timeline-post-list :global(li > span) {
+      flex-basis: 105px;
+    }
+  }
+</style>

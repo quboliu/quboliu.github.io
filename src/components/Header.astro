@@ -50,7 +50,7 @@ const navItems = [
   {t.a11y.skipToContent}
 </a>
 
-<header class="app-layout site-header">
+<header class="app-layout pt-5 pb-2">
   <a
     href={getRelativeLocaleUrl(locale, "")}
     class="text-foreground inline-flex items-center gap-2 text-xl font-bold no-underline"
@@ -68,13 +68,13 @@ const navItems = [
     </svg>
     {site.title}
   </a>
-  <nav id="nav-menu" class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+  <nav id="nav-menu" class="mt-1 flex flex-wrap items-center gap-x-2">
     {
       navItems.map(({ path, label }) => (
         <a
           href={getRelativeLocaleUrl(locale, path)}
           class:list={[
-            "text-muted-foreground hover:text-heading no-underline hover:underline",
+            "text-accent no-underline hover:underline",
             {
               "active-nav":
                 path === "posts"

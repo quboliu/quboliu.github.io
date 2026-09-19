@@ -14,11 +14,15 @@ const { title, lang, pubDatetime } = data;
 const date = dayjs(pubDatetime).format("YYYY-MM-DD");
 ---
 
-<li class="post-row">
-  <time datetime={pubDatetime.toISOString()} class="post-date">{date}</time>
+<li class="flex gap-2 py-0.5">
+  <span
+    aria-hidden="true"
+    class="text-muted-foreground shrink-0 basis-[130px] font-mono text-[15px]"
+    >{date}</span
+  >
   <a
     href={getPostUrl(id, filePath, Astro.currentLocale)}
-    class="post-title min-w-0 no-underline hover:underline"
+    class="text-accent min-w-0 no-underline hover:underline"
   >
     <Heading
       lang={lang}

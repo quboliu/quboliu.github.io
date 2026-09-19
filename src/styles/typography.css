@@ -5,12 +5,7 @@
   .app-prose {
     @apply prose max-w-none;
 
-    font-size: 1.0625rem;
-    line-height: 1.85;
-    --tw-prose-body: var(--foreground);
-    --tw-prose-headings: var(--heading);
-    --tw-prose-bullets: var(--muted-foreground);
-    --tw-prose-counters: var(--muted-foreground);
+    line-height: 1.6;
 
     h1,
     h2,
@@ -23,19 +18,8 @@
       @apply mb-3;
     }
 
-    h2 {
-      margin-top: 2.6em;
-      font-size: 1.45em;
-      line-height: 1.45;
-    }
     h3 {
-      margin-top: 2em;
-      font-size: 1.18em;
-      line-height: 1.5;
-      font-style: normal;
-    }
-    p {
-      margin-block: 1.25em;
+      @apply italic;
     }
 
     p,
@@ -65,7 +49,7 @@
 
     hr {
       border: 0;
-      border-top: 1px solid var(--border);
+      border-top: 1px dashed var(--muted-foreground);
     }
 
     img {
@@ -110,16 +94,11 @@
     }
 
     blockquote {
-      border-left: 2px solid var(--border);
+      border-left: 1px solid #999;
       color: var(--foreground);
       padding-left: 20px;
-      font-style: normal;
-      font-weight: 400;
-      @apply wrap-break-word;
-      p::before,
-      p::after {
-        content: none;
-      }
+      font-style: italic;
+      @apply wrap-break-word opacity-90;
     }
 
     time {

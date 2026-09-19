@@ -29,7 +29,7 @@ const { tags } = Astro.props;
             aria-current={index === 0 ? "location" : undefined}
             aria-label={`#${name}，${count} 篇文章`}
             title={`${count} 篇文章`}
-            class="tag-nav-link inline-flex items-center gap-0.5 rounded px-2 py-1 text-sm whitespace-nowrap no-underline transition-colors"
+            class="tag-nav-link inline-flex items-center gap-0.5 rounded-full px-2 py-1 text-xs whitespace-nowrap no-underline transition-colors"
           >
             <span class="tag-hash" aria-hidden="true">
               #
@@ -150,17 +150,19 @@ const { tags } = Astro.props;
   }
 
   .tag-nav-link[data-tag-weight="medium"] {
+    font-size: 0.8125rem;
     font-weight: 500;
   }
 
   .tag-nav-link[data-tag-weight="high"] {
     color: var(--foreground);
-    font-weight: 500;
+    font-size: 0.875rem;
+    font-weight: 600;
   }
 
   .tag-nav-link[aria-current="location"] {
-    color: var(--accent);
-    background-color: var(--muted);
+    color: var(--accent-foreground);
+    background-color: var(--accent);
     font-weight: 600;
   }
 

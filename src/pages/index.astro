@@ -20,9 +20,7 @@ const t = useTranslations(locale);
 
 const posts = await getCollection("posts");
 const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts
-  .filter(({ data }) => data.featured)
-  .slice(0, 3);
+const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 const homePath = getRelativeLocaleUrl(locale, "");
 ---
@@ -33,9 +31,9 @@ const homePath = getRelativeLocaleUrl(locale, "");
     id="main-content"
     data-layout="index"
     data-home-path={homePath}
-    class="app-layout home-layout"
+    class="app-layout"
   >
-    <section id="hero" class="pt-4 pb-12">
+    <section id="hero" class="pt-4 pb-6">
       <h1 class="my-4 inline-block text-2xl font-bold">
         Hi, I&apos;m quboliu.
         <a
@@ -71,9 +69,9 @@ const homePath = getRelativeLocaleUrl(locale, "");
 
     {
       featuredPosts.length > 0 && (
-        <section id="featured" class="pb-10">
+        <section id="featured" class="pb-6">
           <h2 class="text-xl font-semibold">{t.home.featured}</h2>
-          <ul class="mt-4 list-none p-0">
+          <ul class="list-none p-0">
             {featuredPosts.map(data => (
               <Card variant="h3" {...data} />
             ))}
@@ -86,7 +84,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
       recentPosts.length > 0 && (
         <section id="recent-posts" class="pb-6">
           <h2 class="text-xl font-semibold">{t.home.recentPosts}</h2>
-          <ul class="mt-4 list-none p-0">
+          <ul class="list-none p-0">
             {recentPosts.slice(0, postsConfig.perIndex).map(data => (
               <Card variant="h3" {...data} />
             ))}
