@@ -1,6 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-09-23T19:13:15+08:00
+modDatetime: 2026-09-23T19:34:53+08:00
 timezone: "Asia/Shanghai"
 title: "Deployment + PVC 能替代 StatefulSet 吗？从源码看状态、身份与副本边界"
 area: "kubernetes"
@@ -10,9 +11,11 @@ tags:
   - "Kubernetes"
   - "Deployment"
   - "StatefulSet"
+  - "InstanceSet"
+  - "Operator"
   - "持久化存储"
   - "系统设计"
-description: "从 Kubernetes 控制器源码与权威定义出发，区分数据持久化、Pod 身份和副本互换性，判断 Deployment 加 PVC 何时可用，以及无状态服务的真正边界。"
+description: "结合 Kubernetes 与 KubeBlocks 源码，区分数据持久化、稳定成员身份和数据库角色运维，判断 Deployment、StatefulSet 与 InstanceSet 的适用边界。"
 ---
 先给结论：**Deployment 挂 PVC 可以运行有持久数据的服务，但“有卷”并不等于“有了 StatefulSet 的语义”。** 能否替代，取决于应用需要的究竟是“重建后还能读到数据”，还是“编号为 0 的成员重建后仍是编号 0、拿回自己的卷，并按特定次序加入集群”。前者可以由 Deployment 加固定 PVC 完成；后者需要 StatefulSet 或另外实现同等的成员管理机制。
 
@@ -78,7 +81,36 @@ Kubernetes 官方对 Deployment 的描述是管理 Pod 和 ReplicaSet，通常�
 
 例如三个成员各自维护本地日志或分片，成员 0 重建必须接回成员 0 的卷，其他节点要用稳定名称联系它；扩容和更新还要求一定顺序。单个 Deployment 加一个 PVC 不能表达这些对应关系。即使预先创建多个 PVC，普通 Deployment 也没有内置机制把某个新 Pod 稳定绑定到“原成员 0 的 PVC”。使用 StatefulSet 的序号、成员 DNS 和 `volumeClaimTemplates` 更直接；复制、选主、成员变更和数据迁移仍须由数据库本身或 Operator 完成。[StatefulSet 用途与局限](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
-## 四、两个常见误解会造成真实故障
+## 四、再往上一层：Operator 与 KubeBlocks InstanceSet
+
+StatefulSet 解决了稳定成员身份、专属 PVC 和默认的生命周期顺序，却不知道谁是数据库主节点、哪一个副本的磁盘损坏、升级主节点之前是否完成切换。这些判断涉及**成员角色和数据层操作**，需要应用协议与更贴近业务的控制器。Kubernetes 的 [Operator 模式](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/)允许用自定义资源和控制循环编码这类运维知识；Operator 可以继续管理 StatefulSet，也可以实现自己的工作负载对象。
+
+![三层工作负载需求：Deployment 管理可互换的计算副本；StatefulSet 维持成员与专属 PVC 的稳定映射；KubeBlocks InstanceSet 面向需要角色路由和指定成员运维的数据库组件。](./workload-boundaries.png)
+
+*图：从可互换副本，到稳定成员身份，再到数据库角色与运维动作。Image Gen 绘制的概念示意；右侧 InstanceSet 特指 KubeBlocks 自定义资源，图中连线不代表它负责实现数据库复制或共识。*
+
+### InstanceSet 增加了什么
+
+[KubeBlocks](https://kubeblocks.io/docs/release-1_0_2/user_docs/concepts/concept) 自 v0.9 起，在**自己的数据库管理体系内**用 InstanceSet 取代先前生成的 StatefulSet。它属于 `workloads.kubeblocks.io` API 组，是项目提供的 CRD，不是 Kubernetes 内置的第三种控制器。一个 instance 不只有 Pod，还可以包含与其配套的 PVC、Service 和 ConfigMap 等对象。[KubeBlocks v1.0.2 的 InstanceSet API 源码](https://github.com/apecloud/kubeblocks/blob/v1.0.2/apis/workloads/v1/instanceset_types.go)
+
+源码中的 `InstanceSetSpec` 能具体说明新增的控制维度：`defaultTemplateOrdinals` 可表达不连续的成员序号，`instances` 可覆盖默认模板以配置不同规格的成员；`roles` 从 Pod 角色标签获得成员角色，`memberUpdateStrategy` 可按成员策略更新，`membershipReconfiguration` 暴露切换动作。它仍保留稳定实例身份与每个实例的存储需求；部分 Pod 变更还可按更新策略就地完成。这里讨论的是 **KubeBlocks v1.0.2** 的 API，不能把旧版文档中的字段原样当作当前配置使用。[InstanceSet API 源码](https://github.com/apecloud/kubeblocks/blob/v1.0.2/apis/workloads/v1/instanceset_types.go)、[KubeBlocks 设计介绍](https://kubeblocks.io/blog/instanceset-introduction)
+
+一个能看出差别的场景是三副本数据库：`db-0`、`db-1`、`db-2` 各有自己的卷，损坏的是 `db-1`。普通 StatefulSet 缩容默认从最大序号开始，缩成两个会先移除 `db-2`；手工删除 `db-1`，控制器又会尝试重建它。KubeBlocks 为指定成员下线提供了上层操作流程，并通过 InstanceSet 管理实例；其 PostgreSQL 文档给出了指定下线某个 Pod 的操作示例。这说明固定序号的缩容方式不足以表达这类维护意图。[StatefulSet 顺序保证](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#deployment-and-scaling-guarantees)、[KubeBlocks v1.0.2 指定实例下线](https://kubeblocks.io/docs/release-1_0_2/kubeblocks-for-postgresql/04-operations/09-decommission-a-specific-replica)
+
+另一个场景是主从数据库升级：先识别当前主从，再决定服务路由、更新次序与是否切换主节点。KubeBlocks 描述了角色探测、按角色选择 Service 目标及角色感知更新；其 v1.0.2 API 中的 `roles` 读取的是 Pod 上的角色标签。这些标签是**对数据库角色的观测**，不是选主协议本身。若探测滞后或旧主仍能写入，单靠标签和 Service 无法证明“全系统只有一个主节点”；复制正确性、切换和 fencing 仍需数据库与运维协议承担。这是由角色标签的工作方式推得的边界。[KubeBlocks 角色机制](https://kubeblocks.io/blog/instanceset-introduction)、[InstanceSet API 源码](https://github.com/apecloud/kubeblocks/blob/v1.0.2/apis/workloads/v1/instanceset_types.go)
+
+### 把三层需求放进同一张选型表
+
+| 领域或服务 | 副本必须具备的性质 | 合适的工作负载机制 |
+| --- | --- | --- |
+| Web API、前端、无固定身份的消费者或 Worker，权威数据在外部数据库或队列 | 任一副本可接手请求或任务；本地缓存可丢弃或重建 | **Deployment**；业务系统有状态，不妨碍计算副本无状态 |
+| 单副本工具或嵌入式数据库，数据在固定 PVC 上 | 接回同一份卷即可；可接受停机升级，并对单写入者和故障替换另作保证 | **Deployment + PVC** 可以成立；若还要固定 Pod 身份，再考虑 StatefulSet |
+| 分片数据库成员、日志 Broker 或共识成员，各自有数据目录和对等节点地址 | 同一成员重建后沿用身份与专属 PVC，需要可预测的 Pod 生命周期 | **StatefulSet + 应用协议**；有复杂运维时可由 Operator 管理它 |
+| KubeBlocks 所支持的数据库组件，需要按主从角色路由、选择特定成员维护、配置异构实例或角色感知更新 | 稳定成员之外，还要把数据库运维意图纳入控制循环 | **KubeBlocks 的 InstanceSet 及其上层 Operator API**；其他 Operator 可能采用不同实现 |
+
+因此，InstanceSet 是“StatefulSet 是否足够”的一个真实例子，而不是所有有状态服务的默认升级选项。只有当选用的数据库、KubeBlocks 版本与其运维模型都匹配，并且团队能够承担这套 CRD 与控制器的运行维护时，才有理由引入它。**名称叫 InstanceSet 不会自动提供高可用保证；保证取决于数据库协议、探测、切换、存储与控制器如何协同。**[KubeBlocks 概念文档](https://kubeblocks.io/docs/release-1_0_2/user_docs/concepts/concept)、[Kubernetes Operator 模式](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/)
+
+## 五、两个常见误解会造成真实故障
 
 **“PVC 是持久的，所以可以随意滚动更新。”** 假设单副本 Deployment 的旧 Pod 和新 Pod 都引用 `db-data`。滚动更新允许它们在某段时间并存。若卷是 RWO 且两者被调度到同一节点，两个 Pod 可能同时访问数据；若是 RWOP，新 Pod 可能必须等待旧 Pod 释放卷，更新可能暂时卡住。这两种结果都不是数据库主备切换协议。`maxSurge: 0` 或 `Recreate` 可减少升级时的重叠，但不能把所有故障、手动删除、网络分区都统一成“安全接管”。[Deployment 更新策略](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy)、[PV 访问模式](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)
 
@@ -86,16 +118,17 @@ Kubernetes 官方对 Deployment 的描述是管理 Pod 和 ReplicaSet，通常�
 
 再补一条存储生命周期：StatefulSet 默认保留由模板生成的 PVC，即使缩容或删除 StatefulSet；也提供 `persistentVolumeClaimRetentionPolicy` 来配置相关删除行为。**PVC 是否保留**与底层 PV 的回收策略又是不同层次，不能把控制器删除等同于数据备份或销毁。[StatefulSet PVC 保留策略](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention)、[PV 生命周期](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#lifecycle-of-a-volume-and-claim)
 
-## 五、实际选型：先做“替换实验”
+## 六、实际选型：先做“替换实验”
 
-给某个服务画出边界：输入从哪里来，权威状态在哪里，副本保存了什么，输出和副作用落在哪里。然后假设**任意一个 Pod 突然消失**，问五个问题：
+给某个服务画出边界：输入从哪里来，权威状态在哪里，副本保存了什么，输出和副作用落在哪里。然后假设**任意一个 Pod 突然消失**，问六个问题：
 
 1. 新 Pod 只靠请求、配置与共享后端，能否恢复正确服务？若能，计算副本通常可按无状态处理；丢缓存后的冷启动成本另算。
 2. 它必须叫原来的名字、继续担任原来的成员或分片吗？若是，需要稳定身份与成员恢复机制。
 3. 它必须接回**属于这个成员**的那份数据吗？若是，需要明确的成员到卷映射，而不是“所有副本写同一个 PVC”。
 4. 在旧实例是否真正停止尚不确定时，新实例可以开始吗？若不能，必须定义挂载排他、接管及必要的 fencing；不要仅凭副本数为 1 推断安全。
 5. 加减成员和更新版本有没有业务顺序、复制进度或选主条件？若有，StatefulSet 可以承担一部分 Pod 顺序，应用或 Operator 还得验证数据层条件。
+6. 是否必须按**当前角色**而非固定序号操作，或者指定某个成员下线、恢复？若是，需要查看目标数据库的 Operator 是否提供对应语义；KubeBlocks InstanceSet 是其中一种实现。
 
-据此，选择可以简化为：**只要数据在外部且副本可互换，用 Deployment；单副本挂固定 PVC 且接受其故障与升级约束，也可以用 Deployment；需要稳定的成员身份、成员专属卷或有序生命周期，优先 StatefulSet；需要复杂复制和故障转移，再在其上使用应用自身协议或 Operator。** StatefulSet 的 `Parallel` 模式会放宽创建、缩容顺序，选择它时不要再假设默认 `OrderedReady` 的等待行为。[StatefulSet Pod 管理策略](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#pod-management-policies)
+据此，选择可以简化为：**只要数据在外部且副本可互换，用 Deployment；单副本挂固定 PVC 且接受其故障与升级约束，也可以用 Deployment；需要稳定的成员身份、成员专属卷或有序生命周期，优先 StatefulSet；需要按数据库角色和指定成员编排运维动作，使用理解该数据库的 Operator，KubeBlocks 的 InstanceSet 是一例。** StatefulSet 的 `Parallel` 模式会放宽创建、缩容顺序，选择它时不要再假设默认 `OrderedReady` 的等待行为。[StatefulSet Pod 管理策略](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#pod-management-policies)
 
-最后，用一句可操作的定义收束：**“无状态副本”不是没有任何状态，而是没有必须由这个副本独占并带到下一次请求或下一任 Pod 的权威状态和身份。** 状态可以存在于整个业务系统里；决定 Deployment 还是 StatefulSet 的，是这个状态是否与某个具体成员绑定，以及更换成员时需要怎样的顺序和排他保证。
+最后，用一句可操作的定义收束：**“无状态副本”不是没有任何状态，而是没有必须由这个副本独占并带到下一次请求或下一任 Pod 的权威状态和身份。** 状态可以存在于整个业务系统里；副本是否要稳定身份，决定 Deployment 与 StatefulSet 的选择；角色和业务运维动作是否需要进入控制循环，则决定是否再采用针对该应用的 Operator。
