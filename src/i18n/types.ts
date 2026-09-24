@@ -32,6 +32,8 @@ export interface UIStrings {
     timeline: string;
     areas: string;
     tags: string;
+    value: string;
+    llm: string;
     navigationLabel: string;
     loading: string;
     loadMore: string;

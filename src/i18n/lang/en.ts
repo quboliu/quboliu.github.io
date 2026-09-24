@@ -34,6 +34,8 @@ export default {
     timeline: "Timeline",
     areas: "Areas",
     tags: "Tags",
+    value: "Reading Value",
+    llm: "LLM Text Share",
     navigationLabel: "Post views",
     loading: "Loading more posts…",
     loadMore: "Load more",

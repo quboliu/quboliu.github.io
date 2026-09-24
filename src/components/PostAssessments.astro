@@ -1,0 +1,53 @@
+---
+import {
+  POST_VALUE_ASSESSMENTS,
+  POST_VALUE_REVIEWED_AT,
+} from "@/data/postValueAssessments";
+import { getPostLlmAssessment } from "@/data/postLlmAssessments";
+
+type Props = { postId: string };
+const { postId } = Astro.props;
+const value = POST_VALUE_ASSESSMENTS[postId];
+const llm = getPostLlmAssessment(postId);
+const llmLabel =
+  llm.kind === "no-evidence"
+    ? "无依据 · 0–100%"
+    : llm.kind === "no-added-prose"
+      ? "0% · 无新增正文"
+      : `约 ${llm.estimate}% · 范围 ${llm.low}–${llm.high}%`;
+---
+
+{
+  value && (
+    <details class="border-border bg-muted/20 max-w-app mt-6 rounded border px-4 py-3 text-sm">
+      <summary class="cursor-pointer font-medium">
+        本站评估：阅读价值 {value.score}/100 · LLM 文字含量 {llmLabel}
+      </summary>
+      <div class="mt-3 space-y-2">
+        <p>
+          <strong>阅读价值：</strong>
+          {value.reason}
+        </p>
+        <p class="text-muted-foreground text-xs">
+          固定量尺的编辑评价；审阅于 {POST_VALUE_REVIEWED_AT}
+          。数值不表示价值倍数。
+        </p>
+        <p>
+          <strong>LLM 文字含量：</strong>
+          {llmLabel}。{llm.basis}
+        </p>
+        <p>
+          <strong>参与环节：</strong>
+          {llm.roles.join("、") || "未记录"}
+        </p>
+        <p>
+          <strong>统计范围：</strong>
+          {llm.scope}
+        </p>
+        <p class="text-muted-foreground text-xs">
+          比例只针对本站新增自然语言正文；第三方原文、引文、代码和图示不计入。
+        </p>
+      </div>
+    </details>
+  )
+}

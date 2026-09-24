@@ -3,7 +3,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
 
-type View = "timeline" | "areas" | "tags";
+type View = "timeline" | "areas" | "tags" | "value" | "llm";
 
 type Props = {
   active: View;
@@ -28,6 +28,16 @@ const views = [
     key: "tags" as const,
     href: getRelativeLocaleUrl(locale, "posts/tags"),
     label: t.views.tags,
+  },
+  {
+    key: "value" as const,
+    href: getRelativeLocaleUrl(locale, "posts/value"),
+    label: t.views.value,
+  },
+  {
+    key: "llm" as const,
+    href: getRelativeLocaleUrl(locale, "posts/llm"),
+    label: t.views.llm,
   },
 ];
 ---
