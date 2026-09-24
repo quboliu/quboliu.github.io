@@ -1,0 +1,206 @@
+---
+lang: "zh-CN"
+pubDatetime: 2026-09-24T13:09:51+08:00
+timezone: "Asia/Shanghai"
+title: "转载｜Consistency Models｜一致性模型"
+area: "software-engineering"
+featured: false
+draft: false
+tags:
+  - "转载"
+  - "分布式系统"
+  - "一致性模型"
+  - "Jepsen"
+description: "Jepsen 一致性模型指南的完整中英双语转载：可点击的模型地图、操作与历史的基本概念、模型蕴含关系和可用性边界。"
+---
+import mapUrl from "./map.svg?url";
+
+> **来源与版权｜Source and copyright**
+>
+> **原文｜Original:** [Consistency Models](https://jepsen.io/consistency/models)（Jepsen）
+>
+> **版权｜Copyright:** © Jepsen, LLC. 本文据已获公开转载、翻译及原图使用授权制作。英文按原文顺序保留，中文译文紧随每段；代码、链接、地图说明与四条脚注均保留。地图中的模型链接已改为指向 Jepsen 原站的绝对地址，以便在本站点击。｜Reproduced and translated with permission provided to the publisher. English text follows the original order; Chinese translation follows each passage. Code, links, map description, and all four notes are retained. Links in the copied map point to the original Jepsen pages.
+>
+> **范围｜Scope:** 本页只转载所给的 `Consistency Models` 页面；地图链接指向的各模型专页可在原站继续阅读。｜This page reproduces the linked `Consistency Models` page; individual model pages remain available at Jepsen.
+
+Jepsen analyzes the safety properties of distributed systems–most notably, identifying violations of consistency models. But what are consistency models? What phenomena do they allow? What kind of consistency does a given program really need?
+
+> Jepsen 分析分布式系统的安全性，尤其着力于发现系统违反一致性模型的情形。但一致性模型究竟是什么？它们允许出现哪些现象？一个程序真正需要的是哪一种一致性？
+
+In this reference guide, we provide basic definitions, intuitive explanations, and theoretical underpinnings of various consistency models for engineers and academics alike.
+
+> 这份参考指南面向工程师和研究者，提供各种一致性模型的基本定义、直观解释及其理论基础。
+
+<object data={mapUrl} type="image/svg+xml" aria-label="Jepsen consistency model map｜Jepsen 一致性模型地图" style={{ width: "100%", aspectRatio: "515 / 530" }} />
+
+*[查看原站的可点击地图｜Open the interactive map at Jepsen](https://jepsen.io/consistency/models/map.svg)*
+
+This clickable map (adapted from [Bailis, Davidson, Fekete et al.](http://www.vldb.org/pvldb/vol7/p181-bailis.pdf) and [Viotti and Vukolic](https://arxiv.org/pdf/1512.00168.pdf)) shows the relationships between common consistency models for concurrent systems. Arrows show the relationship between consistency models. For instance, strict serializable implies both serializability and linearizability, linearizability implies sequential consistency, and so on. Colors show how available each model is, for a distributed system on an asynchronous network.
+
+> 这张可点击的地图改编自 [Bailis、Davidson、Fekete 等人](https://www.vldb.org/pvldb/vol7/p181-bailis.pdf)以及 [Viotti 与 Vukolić](https://arxiv.org/pdf/1512.00168.pdf) 的工作，展示并发系统中常见一致性模型之间的关系。箭头表示模型之间的蕴含关系：例如，严格可串行化同时蕴含可串行化和线性一致性，线性一致性又蕴含顺序一致性，依此类推。颜色表示在异步网络上的分布式系统中，各模型可达到的可用性。
+
+## Map text alternative｜地图文字说明
+
+This map shows consistency models arranged in a hierarchy. The strongest model shown is [strict serializable](https://jepsen.io/consistency/models/strict-serializable). Strict serializable unifies two disjoint families of consistency models: those over multi-object transactions, and those for single object operations. When we say that model x implies y, we mean that for every history where x holds, y does too; x is “stronger” than y.
+
+> 这张地图把一致性模型排列成一个层级。图中最强的是[严格可串行化](https://jepsen.io/consistency/models/strict-serializable)。它汇合了两组不同的模型：一组约束多对象事务，另一组约束单对象操作。说模型 x 蕴含 y，是指每一段满足 x 的历史也满足 y；因此 x 比 y“更强”。
+
+On the multi-object side, strict serializable implies [serializable](https://jepsen.io/consistency/models/serializable), which in turn implies [repeatable read](https://jepsen.io/consistency/models/repeatable-read) and [snapshot isolation](https://jepsen.io/consistency/models/snapshot-isolation). Snapshot isolation (assuming a generalized definition) and repeatable read both imply [monotonic atomic view](https://jepsen.io/consistency/models/monotonic-atomic-view). Repeatable read implies [cursor stability](https://jepsen.io/consistency/models/cursor-stability). Cursor stability and monotonic atomic view both imply [read committed](https://jepsen.io/consistency/models/read-committed), which implies [read uncommitted](https://jepsen.io/consistency/models/read-uncommitted).
+
+> 在多对象一侧，严格可串行化蕴含[可串行化](https://jepsen.io/consistency/models/serializable)，后者分别蕴含[可重复读](https://jepsen.io/consistency/models/repeatable-read)和[快照隔离](https://jepsen.io/consistency/models/snapshot-isolation)。快照隔离（采用广义定义时）和可重复读都蕴含[单调原子视图](https://jepsen.io/consistency/models/monotonic-atomic-view)。可重复读蕴含[游标稳定性](https://jepsen.io/consistency/models/cursor-stability)。游标稳定性与单调原子视图都蕴含[读已提交](https://jepsen.io/consistency/models/read-committed)，而读已提交又蕴含[读未提交](https://jepsen.io/consistency/models/read-uncommitted)。
+
+For single-object models, strict serializable implies [linearizable](https://jepsen.io/consistency/models/linearizable), which implies [sequential](https://jepsen.io/consistency/models/sequential), which implies [causal](https://jepsen.io/consistency/models/causal). Causal implies [writes follow reads](https://jepsen.io/consistency/models/writes-follow-reads) and [PRAM](https://jepsen.io/consistency/models/pram). PRAM implies [monotonic reads](https://jepsen.io/consistency/models/monotonic-reads), [monotonic writes](https://jepsen.io/consistency/models/monotonic-writes),and [read your writes](https://jepsen.io/consistency/models/read-your-writes).
+
+> 对于单对象模型，严格可串行化蕴含[线性一致性](https://jepsen.io/consistency/models/linearizable)，后者蕴含[顺序一致性](https://jepsen.io/consistency/models/sequential)，再蕴含[因果一致性](https://jepsen.io/consistency/models/causal)。因果一致性蕴含[写遵循读](https://jepsen.io/consistency/models/writes-follow-reads)和 [PRAM](https://jepsen.io/consistency/models/pram)。PRAM 蕴含[单调读](https://jepsen.io/consistency/models/monotonic-reads)、[单调写](https://jepsen.io/consistency/models/monotonic-writes)和[读己之写](https://jepsen.io/consistency/models/read-your-writes)。
+
+All models at or stronger than cursor stability, snapshot isolation, and sequential cannot be totally available in asynchronous networks. All models at or stronger than read your writes can be at most sticky available. Weaker models (of those listed here) can be totally available.
+
+> 所有强度不低于游标稳定性、快照隔离或顺序一致性的模型，在异步网络中都无法做到完全可用。所有强度不低于读己之写的模型，最多只能做到粘性可用。图中更弱的那些模型则可以做到完全可用。
+
+## Fundamental Concepts｜基本概念
+
+### Systems｜系统
+
+*Distributed* systems are a type of *concurrent* system, and much of the literature on concurrency control applies directly to distributed systems. Indeed, most of the concepts we’re going to discuss were originally formulated for single-node concurrent systems. There are, however, some important differences in *availability* and *performance*.
+
+> *分布式*系统属于*并发*系统，因此并发控制领域的大量文献也直接适用于分布式系统。实际上，接下来讨论的许多概念最初都是为单机并发系统提出的。不过，两者在*可用性*与*性能*方面确有一些重要差异。
+
+Systems have a logical *state* which changes over time. For instance, a simple system could be a single integer variable, with states like `0`, `3`, and `42`. A mutex has only two states: locked or unlocked. The states of a key-value store might be maps of keys to values, for instance: `{cat: 1, dog: 1}`, or `{cat: 4}`.
+
+> 系统具有随时间变化的逻辑*状态*。例如，一个最简单的系统可以只有一个整数变量，其状态可能是 `0`、`3` 或 `42`。互斥锁只有两种状态：已加锁或未加锁。键值存储的状态则可能是一张从键到值的映射，例如 `{cat: 1, dog: 1}` 或 `{cat: 4}`。
+
+### Processes｜进程
+
+A *process*[1](#fn-1) is a logically single-threaded program which performs computation and runs operations. Processes are never asynchronous—we model asynchronous computation via independent processes. We say “logically single-threaded” to emphasize that while a process can only do one thing at a time, its implementation may be spread across multiple threads, operating system processes, or even physical nodes—just so long as those components provide the illusion of a coherent single-threaded program.
+
+> *进程*[1](#fn-1)是一个逻辑上单线程的程序，它执行计算与操作。进程本身从不异步；异步计算由彼此独立的进程来建模。强调“逻辑上单线程”，是因为进程同一时间只能做一件事，但其实现可以横跨多个线程、操作系统进程，甚至物理节点；只要这些组件对外呈现为一个连贯的单线程程序即可。
+
+### Operations｜操作
+
+An operation is a transition from state to state. For instance, a single-variable system might have operations like `read` and `write`, which get and set the value of that variable, respectively. A counter might have operations like *increments*, *decrements*, and *reads*. For an SQL store, an operation might be a *transaction*, composed of some number of *selects*, *update*, *deletes*, and so on.
+
+> 操作是从一种状态到另一种状态的转移。例如，单变量系统可能有 `read` 与 `write` 操作，分别获取和设置该变量的值。计数器可以执行递增、递减和读取。对于 SQL 存储系统，一次操作可以是一笔事务，包含若干次查询、更新、删除等动作。
+
+#### Functions, Arguments & Return Values｜函数、参数与返回值
+
+In theory, we could give every state transition a unique name. A lock has exactly two transitions: `lock` and `unlock`. An integer register has an infinite number of reads and writes: `read-the-value-1`, `read-the-value-2`, …, and `write-1`, `write-2`, ….
+
+> 理论上，我们可以给每一种状态转移单独起名。锁恰有两种转移：`lock` 和 `unlock`。整数寄存器则有无穷多种读写：`read-the-value-1`、`read-the-value-2`……以及 `write-1`、`write-2`……。
+
+To make this more tractable, we break up these transitions into *functions* like `read`, `write`, `cas`, `increment`, etc., and *values* that parameterize those functions. In a single register system, a write of 1 could be written:
+
+> 为了让表示更易处理，我们把状态转移拆分成 `read`、`write`、`cas`、`increment` 等*函数*，以及为函数提供参数的*值*。在单寄存器系统里，把 1 写入寄存器可表示为：
+
+```clojure
+{:f :write, :value 1}
+```
+
+Given a key-value store, we might increment the value of key “a” by 3 like so:
+
+> 如果对象是键值存储，把键 `a` 的值增加 3 可以这样表示：
+
+```clojure
+{:f :increment, :value ["a" 3]}
+```
+
+In a transactional store, the value could be a complex transaction. Here we read the current value of `a`, finding 2, and set `b` to `3`, in a single state transition:
+
+> 在事务型存储中，值本身可以是一笔复杂的事务。下面在同一次状态转移中读出 `a` 的当前值 2，并把 `b` 设为 `3`：
+
+```clojure
+{:f :txn, :value [[:read "a" 2] [:write "b" 3]]}
+```
+
+#### Invocation & Completion Times｜调用时刻与完成时刻
+
+Operations, in general, take time. In a multithreaded program, an operation might be a function call. In distributed systems, an operation might mean sending a request to a server, and receiving a response.
+
+> 一般来说，操作需要时间才能完成。在多线程程序中，一次操作可能是一次函数调用；在分布式系统中，它可能是向服务器发送请求并收到响应。
+
+To model this, we say that each operation has an *invocation time* and, should it complete, a strictly greater *completion time*, both given by an imaginary[2](#fn-2), perfectly synchronized, globally accessible clock.[3](#fn-3) We refer to these clocks as providing a *real-time* order, as opposed to clocks that only track causal ordering.[4](#fn-4)
+
+> 为此，我们规定每次操作都有一个*调用时刻*；如果操作完成，还会有一个严格晚于调用时刻的*完成时刻*。这两个时刻由一只想象中的[2](#fn-2)、完美同步且全局可访问的时钟给出。[3](#fn-3) 这种时钟提供的是*实时*顺序，而不是只追踪因果顺序的时钟所提供的顺序。[4](#fn-4)
+
+#### Concurrency｜并发
+
+Since operations take time, two operations might overlap in time. For instance, given two operations A and B, A could begin, B could begin, A could complete, and then B could complete. We say that two operations A and B are *concurrent* if there is some time during which A and B are both executing.
+
+> 操作需要时间，因此两次操作在时间上可能重叠。比如操作 A 开始，接着 B 开始，然后 A 完成，最后 B 完成。只要存在某段时间 A 和 B 都在执行，我们就称它们是*并发*的。
+
+Processes are single-threaded, which implies that no two operations executed by the same process are ever concurrent.
+
+> 进程是单线程的，因此同一进程执行的任意两次操作都不会并发。
+
+#### Crashes｜崩溃
+
+If an operation does not complete for some reason (perhaps because it timed out or a critical component crashed) that operation *has no completion time*, and must, in general, be considered concurrent with every operation after its invocation. It may or may not execute.
+
+> 如果某次操作因超时或关键组件崩溃等原因没有完成，它就*没有完成时刻*；一般必须认为它与调用之后的每一次操作都可能并发。它究竟有没有执行，无法仅凭此判断。
+
+A process with an operation in this state is effectively stuck, and can never invoke another operation again. If it *were* to invoke another operation, it would violate our single-threaded constraint: processes only do one thing at a time.
+
+> 带着这样一项未完成操作的进程实际上已被卡住，不能再调用下一项操作。若它又调用了新操作，就违背了我们的单线程约束：一个进程同一时间只能做一件事。
+
+### Histories｜历史
+
+A *history* is a collection of operations, including their concurrent structure.
+
+> *历史*是操作及其并发结构的集合。
+
+Some papers represent this as a set of operations, where each operation includes two numbers, representing their invocation and completion time; concurrent structure is inferred by comparing the time windows between processes.
+
+> 有些论文把历史表示为一组操作，每项操作带有两个数字，分别代表调用和完成时刻；比较不同进程的操作时间区间，就能推断它们之间的并发结构。
+
+Jepsen [represents a history](https://github.com/jepsen-io/history) as an ordered list of invocation and completion operations, effectively splitting each operation in two. This representation is more convenient for algorithms which iterate over the history, keeping a representation of concurrent operations and possible states.
+
+> Jepsen [将历史表示为](https://github.com/jepsen-io/history)按顺序排列的调用事件和完成事件，等于把每次操作拆成两半。这种表示更便于检查算法遍历历史，同时维护一份当前并发操作与可能状态的记录。
+
+### Consistency Models｜一致性模型
+
+A *consistency model* is a set of histories. We use consistency models to define which histories are “good”, or “legal” in a system. When we say a history “violates serializability” or “is not serializable”, we mean that the history is not in the set of serializable histories.
+
+> *一致性模型*是一组历史。我们用它界定系统中哪些历史是“好的”或“合法的”。说一段历史“违反可串行化”或“不可串行化”，意思是它不属于可串行化历史的集合。
+
+We say that consistency model A implies model B if A is a subset of B. For example, linearizability implies sequential consistency because every history which is linearizable is also sequentially consistent. This allows us to relate consistency models in a hierarchy.
+
+> 如果模型 A 是模型 B 的子集，就说 A 蕴含 B。例如，线性一致性蕴含顺序一致性，因为每一段线性一致的历史也都满足顺序一致性。我们因此可以把一致性模型组织成层级关系。
+
+Speaking informally, we refer to smaller, more restrictive consistency models as “stronger”, and larger, more permissive consistency models as “weaker”.
+
+> 非正式地说，集合越小、限制越严格的模型越“强”；集合越大、允许的行为越多的模型越“弱”。
+
+Not all consistency models are directly comparable. Often, two models allow different behavior, but neither contains the other. For example, [Snapshot Isolation](https://jepsen.io/consistency/models/snapshot-isolation) allows a phenomena called [A5B (Write Skew)](https://jepsen.io/consistency/phenomena/a5b), which is prohibited by [Repeatable Read](https://jepsen.io/consistency/models/repeatable-read). However, Repeatable Read allows [G-single](https://jepsen.io/consistency/phenomena/g-single) over predicates, which are prohibited by Snapshot Isolation. Neither model is strictly stronger than the other; we say Snapshot Isolation and Repeatable Read are *incomparable*.
+
+> 并非所有一致性模型都能直接比较。两个模型可能各自允许对方禁止的行为，彼此都不包含对方。例如，[快照隔离](https://jepsen.io/consistency/models/snapshot-isolation)允许 [A5B（写偏斜）](https://jepsen.io/consistency/phenomena/a5b)，而[可重复读](https://jepsen.io/consistency/models/repeatable-read)禁止它；反过来，可重复读允许涉及谓词的 [G-single](https://jepsen.io/consistency/phenomena/g-single) 异常，而快照隔离禁止它。两者谁也不严格强于谁，我们称它们*不可比较*。
+
+---
+
+## Notes｜脚注
+
+<a id="fn-1"></a>
+
+**1.** Different texts may refer to processes as nodes, hosts, actors, agents, sites, or threads, often with subtle distinctions depending on context.
+
+> **1.** 不同文献可能把进程称为节点、主机、参与者、代理、站点或线程；这些词在具体语境中往往有细微区别。
+
+<a id="fn-2"></a>
+
+**2.** This magical synchronized clock doesn’t actually need to exist, but some consistency models imply that *if such a clock were to exist*, some operations would happen before others.
+
+> **2.** 这只神奇的同步时钟实际上无须存在。不过有些一致性模型的含义是：*如果*这样的时钟存在，某些操作就必须先于另一些操作发生。
+
+<a id="fn-3"></a>
+
+**3.** You may have heard “relativity means there is no such thing as simultaneity” used as an argument that synchronized clocks cannot exist. This is a misunderstanding: the equations of special and general relativity provide exact equations for time transformations, and it is possible to define any number of sensible, globally-synchronized time clocks. Consistency constraints that refer to these clocks will depend on the *choice* of clock, e.g. depending on one’s reference frame, a system might or might not provide linearizability. The good news is that a.) for all intents and purposes, clocks on earth are so close to each other’s velocities and accelerations that errors are much smaller than side-channel latencies, and b.) many of the algorithms for ensuring real-time bounds in asynchronous networks use causal messages to enforce a real-time order, and the resulting order is therefore invariant across *all* reference frames.
+
+> **3.** 你可能听过一种说法：“相对论意味着不存在同时性”，并据此认为同步时钟不可能存在。这是一种误解：狭义和广义相对论的方程给出了精确的时间变换公式，我们可以据此定义多种合理的全局同步时钟。引用这些时钟的一致性约束会取决于*选用哪一只*时钟；例如，在不同参考系下，一个系统可能满足，也可能不满足线性一致性。好消息是：一方面，就实际用途而言，地球上的时钟之间速度和加速度差异造成的误差远小于旁路通信的延迟；另一方面，异步网络中许多保证实时边界的算法使用因果消息来建立实时顺序，因此所得顺序在*所有*参考系下都保持不变。
+
+<a id="fn-4"></a>
+
+**4.** “Real-time” also refers to programs that guarantee execution in a certain time duration, but we’re using the term to refer to time in the real world, as opposed to possibly unsynchronized local clocks, or some kind of logical temporal relationship.
+
+> **4.** “实时”也可以指保证在某段时限内完成的程序；但这里我们用它指真实世界中的时间，以区别于可能不同步的本地时钟，或某种纯逻辑的时间关系。
+
+---
+
+*Copyright © Jepsen, LLC. 中文翻译由本站提供。｜Chinese translation by this site.*
