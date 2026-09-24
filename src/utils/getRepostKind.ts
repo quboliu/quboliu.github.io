@@ -30,3 +30,7 @@ export function getRepostKind({ data }: PostWithData): RepostKind | null {
 
   return null;
 }
+
+export function isRepostPost(post: PostWithData) {
+  return getRepostKind(post) !== null;
+}

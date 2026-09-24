@@ -1,0 +1,120 @@
+---
+type TypeLink = {
+  slug: string;
+  name: string;
+  count: number;
+};
+
+type Props = {
+  types: TypeLink[];
+};
+
+const { types } = Astro.props;
+---
+
+<nav
+  aria-label="Type navigation"
+  class="border-border bg-background/95 sticky top-0 z-20 -mx-5 min-w-0 overflow-x-auto border-y px-5 py-3 backdrop-blur xl:top-6 xl:z-10 xl:mx-0 xl:max-h-[calc(100vh-3rem)] xl:self-start xl:overflow-y-auto xl:border-0 xl:bg-transparent xl:px-0 xl:py-0 xl:backdrop-blur-none"
+>
+  <ul class="flex min-w-max gap-2 xl:min-w-0 xl:flex-col xl:gap-1">
+    {
+      types.map(({ slug, name, count }, index) => (
+        <li>
+          <a
+            href={`#type-${slug}`}
+            data-type-nav={slug}
+            aria-current={index === 0 ? "location" : undefined}
+            class="type-nav-link text-muted-foreground hover:text-accent flex items-baseline justify-between gap-3 rounded px-2 py-1.5 text-sm no-underline transition-colors"
+          >
+            <span>{name}</span>
+            <span class="font-mono text-xs" aria-label={`${count} posts`}>
+              {count}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  let typeNavigationController: AbortController | undefined;
+
+  function initTypeNavigation() {
+    typeNavigationController?.abort();
+    typeNavigationController = new AbortController();
+
+    const links = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>("[data-type-nav]")
+    );
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-type-section]")
+    );
+
+    if (links.length === 0 || sections.length === 0) return;
+
+    const { signal } = typeNavigationController;
+
+    function setActive(slug?: string) {
+      links.forEach(link => {
+        if (link.dataset.typeNav === slug) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    }
+
+    function updateActive() {
+      const marker = window.scrollY + Math.min(window.innerHeight * 0.3, 220);
+      let current = sections[0];
+
+      for (const section of sections) {
+        if (section.offsetTop <= marker) current = section;
+      }
+
+      const atPageEnd =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+      if (atPageEnd) current = sections.at(-1) ?? current;
+
+      setActive(current.dataset.typeSection);
+    }
+
+    let animationFrame: number | undefined;
+    function requestUpdate() {
+      if (animationFrame !== undefined) return;
+      animationFrame = window.requestAnimationFrame(() => {
+        animationFrame = undefined;
+        updateActive();
+      });
+    }
+
+    links.forEach(link => {
+      link.addEventListener("click", () => setActive(link.dataset.typeNav), {
+        signal,
+      });
+    });
+    window.addEventListener("scroll", requestUpdate, { passive: true, signal });
+    window.addEventListener("resize", requestUpdate, { passive: true, signal });
+    updateActive();
+  }
+
+  document.addEventListener("astro:page-load", initTypeNavigation);
+</script>
+
+<style>
+  nav {
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .type-nav-link[aria-current="location"] {
+    color: var(--accent);
+    background-color: var(--muted);
+    font-weight: 600;
+  }
+</style>

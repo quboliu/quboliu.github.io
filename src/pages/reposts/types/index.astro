@@ -1,0 +1,98 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import RepostsViewNavigation from "@/components/RepostsViewNavigation.astro";
+import TypeNavigation from "@/components/TypeNavigation.astro";
+import Card from "@/components/Card.astro";
+import Footer from "@/components/Footer.astro";
+import { getRepostKind, type RepostKind } from "@/utils/getRepostKind";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+const t = useTranslations(Astro.currentLocale);
+const posts = getSortedPosts(
+  await getCollection("posts", ({ data }) => !data.draft)
+);
+
+const typeDefinitions: Array<{
+  slug: RepostKind;
+  name: string;
+}> = [
+  { slug: "essays", name: "Essays" },
+  { slug: "papers", name: "Papers" },
+  { slug: "documentation", name: "Documentation" },
+];
+
+const types = typeDefinitions.map(type => ({
+  ...type,
+  posts: posts.filter(post => getRepostKind(post) === type.slug),
+}));
+
+const typeLinks = types.map(({ slug, name, posts: typePosts }) => ({
+  slug,
+  name,
+  count: typePosts.length,
+}));
+---
+
+<Layout
+  title={`${t.views.types} | ${t.pages.repostsTitle} | ${config.site.title}`}
+  description={t.pages.repostTypesDesc}
+>
+  <Header />
+  <Breadcrumb />
+
+  <Main pageTitle={t.pages.repostsTitle} pageDesc={t.pages.repostTypesDesc}>
+    <RepostsViewNavigation active="types" />
+
+    <div class="grid gap-8 xl:grid-cols-[188px_minmax(0,1fr)]">
+      <TypeNavigation types={typeLinks} />
+
+      <div class="mx-auto w-full max-w-[800px] min-w-0 space-y-12 xl:mx-0">
+        {
+          types.map(type => (
+            <section
+              id={`type-${type.slug}`}
+              data-type-section={type.slug}
+              class="scroll-mt-20"
+            >
+              <header class="border-border mb-3 border-b pb-3">
+                <h2 class="text-xl font-semibold">
+                  <a
+                    href={`#type-${type.slug}`}
+                    class="text-foreground no-underline hover:underline"
+                  >
+                    {type.name}
+                  </a>
+                  <sup class="text-muted-foreground ms-1 text-sm font-normal">
+                    {type.posts.length}
+                  </sup>
+                </h2>
+              </header>
+
+              <ul class="type-post-list">
+                {type.posts.map(post => (
+                  <Card {...post} variant="h3" />
+                ))}
+              </ul>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </Main>
+
+  <Footer />
+</Layout>
+
+<style>
+  @media (max-width: 40rem) {
+    .type-post-list :global(li > span) {
+      flex-basis: 105px;
+    }
+  }
+</style>

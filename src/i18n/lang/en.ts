@@ -35,6 +35,7 @@ export default {
     timeline: "Timeline",
     areas: "Areas",
     tags: "Tags",
+    types: "Types",
     value: "Signal",
     llm: "Blend",
     navigationLabel: "Post views",
@@ -65,6 +66,9 @@ export default {
 
     repostsTitle: "Reposts",
     repostsDesc: "Authorized reprints and bilingual translations.",
+    repostAreasDesc: "Browse reposts by subject area.",
+    repostTagsDesc: "Browse reposts by tag.",
+    repostTypesDesc: "Browse reposts by content type.",
 
     areasTitle: "Areas",
     areasDesc: "Browse posts by their primary subject area.",

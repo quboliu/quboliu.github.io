@@ -30,6 +30,7 @@ const navLabels: Record<string, string> = {
   reposts: t.nav.reposts,
   areas: t.nav.areas,
   tags: t.nav.tags,
+  types: t.views.types,
   paparazzi: t.nav.paparazzi,
   about: t.nav.about,
   archives: t.nav.archives,
@@ -39,13 +40,15 @@ const navLabels: Record<string, string> = {
 // if breadcrumb is Home > Posts > [page] <etc>, replace Posts with the
 // localized page label. Named views such as /posts/areas/ remain expanded.
 if (
-  breadcrumbList[0] === "posts" &&
+  ["posts", "reposts"].includes(breadcrumbList[0]) &&
   (!breadcrumbList[1] || !isNaN(Number(breadcrumbList[1])))
 ) {
+  const sectionLabel =
+    breadcrumbList[0] === "reposts" ? t.nav.reposts : t.nav.posts;
   breadcrumbList.splice(
     0,
     2,
-    `${t.nav.posts} (${t.pagination.page.toLowerCase()} ${breadcrumbList[1] || 1})`
+    `${sectionLabel} (${t.pagination.page.toLowerCase()} ${breadcrumbList[1] || 1})`
   );
 }
 

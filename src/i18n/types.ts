@@ -33,6 +33,7 @@ export interface UIStrings {
     timeline: string;
     areas: string;
     tags: string;
+    types: string;
     value: string;
     llm: string;
     navigationLabel: string;
@@ -63,6 +64,9 @@ export interface UIStrings {
 
     repostsTitle: string;
     repostsDesc: string;
+    repostAreasDesc: string;
+    repostTagsDesc: string;
+    repostTypesDesc: string;
 
     areasTitle: string;
     areasDesc: string;

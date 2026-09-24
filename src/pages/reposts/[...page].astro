@@ -1,0 +1,152 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Card from "@/components/Card.astro";
+import Footer from "@/components/Footer.astro";
+import Pagination from "@/components/Pagination.astro";
+import InfinitePostList from "@/components/InfinitePostList.astro";
+import RepostsViewNavigation from "@/components/RepostsViewNavigation.astro";
+import TimelineNavigation from "@/components/TimelineNavigation.astro";
+import { isRepostPost } from "@/utils/getRepostKind";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+import dayjs from "dayjs";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  return paginate(getSortedPosts(posts).filter(isRepostPost), {
+    pageSize: config.posts.perPage,
+  });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+const allPosts = getSortedPosts(
+  await getCollection("posts", ({ data }) => !data.draft)
+).filter(isRepostPost);
+
+function groupPostsByMonth(posts: typeof page.data) {
+  return posts.reduce<
+    Array<{
+      slug: string;
+      label: string;
+      posts: typeof page.data;
+    }>
+  >((groups, post) => {
+    const date = dayjs(post.data.pubDatetime);
+    const slug = date.format("YYYY-MM");
+    const previousGroup = groups.at(-1);
+
+    if (previousGroup?.slug === slug) {
+      previousGroup.posts.push(post);
+    } else {
+      groups.push({
+        slug,
+        label: date.format("MMMM YYYY"),
+        posts: [post],
+      });
+    }
+
+    return groups;
+  }, []);
+}
+
+const monthGroups = groupPostsByMonth(page.data);
+const monthLinks = monthGroups.map(({ slug, label, posts }) => ({
+  slug,
+  label,
+  count: posts.length,
+  href: `#month-${slug}`,
+}));
+
+function getTimelineHref(slug: string, firstPost: (typeof allPosts)[number]) {
+  const pageNumber =
+    Math.floor(allPosts.indexOf(firstPost) / config.posts.perPage) + 1;
+  const path = pageNumber === 1 ? "reposts" : `reposts/${pageNumber}`;
+  return `${getRelativeLocaleUrl(locale, path)}#month-${slug}`;
+}
+
+const allMonthLinks = groupPostsByMonth(allPosts).map(
+  ({ slug, label, posts }) => ({
+    slug,
+    label,
+    count: posts.length,
+    href: getTimelineHref(slug, posts[0]),
+  })
+);
+---
+
+<Layout title={`${t.pages.repostsTitle} | ${config.site.title}`}>
+  <Header />
+  <Breadcrumb />
+
+  <Main pageTitle={t.pages.repostsTitle} pageDesc={t.pages.repostsDesc}>
+    <RepostsViewNavigation active="timeline" />
+
+    <div class="grid gap-8 xl:grid-cols-[188px_minmax(0,1fr)]">
+      <TimelineNavigation
+        months={page.currentPage === 1 ? allMonthLinks : monthLinks}
+      />
+
+      <InfinitePostList nextUrl={page.url.next}>
+        <div
+          data-post-list
+          class="mx-auto w-full max-w-[800px] min-w-0 space-y-12 xl:mx-0"
+        >
+          {
+            monthGroups.map(({ slug, label, posts }) => (
+              <section
+                id={`month-${slug}`}
+                data-timeline-section={slug}
+                data-timeline-label={label}
+                data-timeline-count={posts.length}
+                class="scroll-mt-20"
+              >
+                <header class="border-border mb-3 border-b pb-3">
+                  <h2 class="text-xl font-semibold">
+                    <a
+                      href={`#month-${slug}`}
+                      class="text-foreground no-underline hover:underline"
+                    >
+                      {label}
+                    </a>
+                    <sup
+                      data-timeline-count
+                      class="text-muted-foreground ms-1 text-sm font-normal"
+                    >
+                      {posts.length}
+                    </sup>
+                  </h2>
+                </header>
+
+                <ul data-timeline-posts class="timeline-post-list">
+                  {posts.map(post => (
+                    <Card {...post} variant="h3" />
+                  ))}
+                </ul>
+              </section>
+            ))
+          }
+        </div>
+      </InfinitePostList>
+    </div>
+  </Main>
+
+  <Pagination id="post-pagination" {page} />
+  <Footer noMarginTop={page.lastPage > 1} />
+</Layout>
+
+<style>
+  @media (max-width: 40rem) {
+    .timeline-post-list :global(li > span) {
+      flex-basis: 105px;
+    }
+  }
+</style>
