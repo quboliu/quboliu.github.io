@@ -1,0 +1,1003 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100%"
+   height="100%"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="consistency.svg"
+   viewBox="0 0 515.00001 529.99999">
+  <style>
+    a { cursor: pointer; }
+  </style>
+  <defs
+     id="defs4">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect10152"
+       is_visible="true" />
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend"
+       style="overflow:visible">
+      <path
+         id="path4312"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend"
+       style="overflow:visible">
+      <path
+         id="path4330"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Send"
+       style="overflow:visible">
+      <path
+         id="path4318"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Send"
+       style="overflow:visible">
+      <path
+         id="path4336"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend"
+       style="overflow:visible">
+      <path
+         id="path4324"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend"
+       style="overflow:visible">
+      <path
+         id="path4306"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="4"
+     inkscape:cx="109.04501"
+     inkscape:cy="330.91314"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="2184"
+     inkscape:window-height="1998"
+     inkscape:window-x="26"
+     inkscape:window-y="20"
+     inkscape:window-maximized="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4101"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       originx="-160px"
+       originy="-55.000024px" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-160,-37.362183)">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3165"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"><flowRegion
+         id="flowRegion3167"><rect
+           id="rect3169"
+           width="435"
+           height="118.57143"
+           x="117.14286"
+           y="85.219322" /></flowRegion><flowPara
+         id="flowPara3171" /></flowRoot>    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+       x="555.35712"
+       y="224.1479"
+       id="text3201"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3203"
+         x="555.35712"
+         y="224.1479" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+       x="315.67267"
+       y="184.64114"
+       id="text3249"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3251"
+         x="315.67267"
+         y="184.64114" /></text>
+    <rect
+       ry="3.3333311"
+       y="447.36218"
+       x="160"
+       height="29.999992"
+       width="105.00001"
+       id="rect4053-2"
+       style="fill:#feb5da;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+       x="180.15991"
+       y="466.52618"
+       id="text3181-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3183-5"
+         x="180.15991"
+         y="466.52618">不可用</tspan></text>
+    <rect
+       ry="3.3333333"
+       y="492.36218"
+       x="160"
+       height="30.000008"
+       width="105.00001"
+       id="rect4095-9"
+       style="fill:#ffaa26;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+       x="169.90047"
+       y="512.36218"
+       id="text3193-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="169.90047"
+         y="512.36218"
+         id="tspan9902">粘性可用</tspan></text>
+    <rect
+       ry="3.3333333"
+       y="537.36218"
+       x="160"
+       height="29.999987"
+       width="105.00001"
+       id="rect4087-6"
+       style="fill:#81bffc;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+       x="172.8295"
+       y="557.36218"
+       id="text3271-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="172.8295"
+         y="557.36218"
+         id="tspan9904">完全可用</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+       x="285"
+       y="458.42282"
+       id="text9923"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="285"
+         y="458.42282"
+         id="tspan10170">某些网络故障下不可用；为保证安全，部分或</tspan><tspan
+         sodipodi:role="line"
+         x="285"
+         y="473.42282"
+         id="tspan10182">全部节点必须暂停操作。</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+       x="285"
+       y="503.42282"
+       id="text9927"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="285"
+         y="503.42282"
+         id="tspan9935">每个无故障节点均可用，但客户端必须始终连接</tspan><tspan
+         sodipodi:role="line"
+         x="285"
+         y="518.42285"
+         id="tspan10188">同一组服务器，不能切换到新服务器。</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+       x="285"
+       y="548.42291"
+       id="text9937"
+       sodipodi:linespacing="125%"><tspan
+         id="tspan10317"
+         sodipodi:role="line"
+         x="285"
+         y="548.42291">每个无故障节点均可用，即使网络已经</tspan><tspan
+         sodipodi:role="line"
+         x="285"
+         y="563.42291"
+         id="tspan10373">完全中断。</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+       x="494.46967"
+       y="725.07275"
+       id="text9966"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9968"
+         x="494.46967"
+         y="725.07275" /></text>
+    <a
+       id="a10468"
+       xlink:href="/posts/0199/#strict-serializable"
+       target="_top">
+      <g
+         transform="translate(-30,-35)"
+         id="g10016">
+        <rect
+           style="fill:#feb5da;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="rect4051"
+           width="115.00001"
+           height="30.000002"
+           x="340"
+           y="72.362183"
+           ry="5" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="350.00204"
+           y="92.362183"
+           id="text3173"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3175"
+             x="350.00204"
+             y="92.362183">严格可串行化</tspan></text>
+      </g>
+    </a>
+    <a
+       id="a10607"
+       xlink:href="/posts/0199/#linearizable"
+       target="_top">
+      <g
+         transform="translate(-44.999995,-39.999995)"
+         id="g10021">
+        <rect
+           style="fill:#feb5da;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="rect4097"
+           width="90.000008"
+           height="30.000006"
+           x="450"
+           y="127.36218"
+           ry="5" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="461.36945"
+           y="147.36218"
+           id="text3177"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3179"
+             x="461.36945"
+             y="147.36218">线性一致性</tspan></text>
+      </g>
+    </a>
+    <a
+       id="a10480"
+       xlink:href="/posts/0199/#serializable"
+       target="_top">
+      <g
+         transform="translate(15,-35)"
+         id="g10104">
+        <rect
+           ry="5"
+           y="122.36218"
+           x="220"
+           height="30.000008"
+           width="84.999992"
+           id="rect4053"
+           style="fill:#feb5da;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="231.11531"
+           y="142.36218"
+           id="text3181"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3183"
+             x="231.11531"
+             y="142.36218">可串行化</tspan></text>
+      </g>
+    </a>
+    <a
+       id="a10493"
+       xlink:href="/posts/0199/#repeatable-read"
+       target="_top">
+      <g
+         transform="translate(-5,-35)"
+         id="g10098">
+        <rect
+           ry="5"
+           y="177.36218"
+           x="165"
+           height="44.999996"
+           width="85.000008"
+           id="rect4059"
+           style="fill:#feb5da;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="176.10773"
+           y="197.36218"
+           id="text3185"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3187"
+             x="176.10773"
+             y="197.36218">可重复</tspan><tspan
+             sodipodi:role="line"
+             x="176.10773"
+             y="212.36218"
+             id="tspan3247">读</tspan></text>
+      </g>
+    </a>
+    <a
+       id="a10521"
+       xlink:href="/posts/0199/#snapshot-isolation"
+       target="_top">
+      <g
+         transform="translate(5,-40)"
+         id="g10092">
+        <rect
+           style="fill:#feb5da;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="rect4055"
+           width="75.000008"
+           height="44.999996"
+           x="275"
+           y="182.36218"
+           ry="5" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="286.59097"
+           y="202.36218"
+           id="text3189"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3191"
+             x="286.59097"
+             y="202.36218">快照</tspan><tspan
+             sodipodi:role="line"
+             x="286.59097"
+             y="217.36218"
+             id="tspan3255">隔离</tspan></text>
+      </g>
+    </a>
+    <a
+       id="a10571"
+       xlink:href="/posts/0199/#causal"
+       target="_top">
+      <g
+         transform="translate(54.77273,-29.999997)"
+         id="g10031">
+        <rect
+           ry="5"
+           y="242.36218"
+           x="450"
+           height="30"
+           width="60.000008"
+           id="rect4095"
+           style="fill:#ffaa26;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="461.3504"
+           y="262.36218"
+           id="text3193"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3195"
+             x="461.3504"
+             y="262.36218">因果一致性</tspan></text>
+      </g>
+    </a>
+    <a
+       id="a10577"
+       xlink:href="/posts/0199/#sequential"
+       target="_top">
+      <g
+         transform="translate(15,-35)"
+         id="g10026">
+        <rect
+           ry="4.8529391"
+           y="182.36218"
+           x="450"
+           height="30.000006"
+           width="79.999977"
+           id="rect4099"
+           style="fill:#feb5da;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="460.7692"
+           y="202.36218"
+           id="text3205"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3207"
+             x="460.7692"
+             y="202.36218">顺序一致性</tspan></text>
+      </g>
+    </a>
+    <a
+       id="a10565"
+       xlink:href="/posts/0199/#pram"
+       target="_top">
+      <g
+         transform="translate(5,-5)"
+         id="g10050">
+        <rect
+           style="fill:#ffaa26;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="rect4089"
+           width="54.999985"
+           height="29.999987"
+           x="530"
+           y="272.36218"
+           ry="5" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="540.91028"
+           y="292.36218"
+           id="text3209"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3211"
+             x="540.91028"
+             y="292.36218">PRAM</tspan></text>
+      </g>
+    </a>
+    <a
+       id="a10535"
+       xlink:href="/posts/0199/#writes-follow-reads"
+       target="_top">
+      <g
+         transform="translate(-35,10)"
+         id="g10036">
+        <rect
+           style="fill:#81bffc;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="rect4103"
+           width="60.000008"
+           height="60"
+           x="360"
+           y="312.36218"
+           ry="5" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="371.22702"
+           y="332.36218"
+           id="text3213"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3215"
+             x="371.22702"
+             y="332.36218">写</tspan><tspan
+             sodipodi:role="line"
+             x="371.22702"
+             y="347.36218"
+             id="tspan3217">遵循</tspan><tspan
+             sodipodi:role="line"
+             x="371.22702"
+             y="362.36218"
+             id="tspan3219">读</tspan></text>
+      </g>
+    </a>
+    <a
+       id="a10550"
+       xlink:href="/posts/0199/#monotonic-writes"
+       target="_top">
+      <g
+         transform="translate(-25,25)"
+         id="g10055">
+        <rect
+           style="fill:#81bffc;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="rect4113"
+           width="84.999992"
+           height="44.999985"
+           x="540"
+           y="312.36218"
+           ry="5" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="551.94275"
+           y="332.36218"
+           id="text3227"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3229"
+             x="551.94275"
+             y="332.36218">单调</tspan><tspan
+             sodipodi:role="line"
+             x="551.94275"
+             y="347.36218"
+             id="tspan3231">写</tspan></text>
+      </g>
+    </a>
+    <a
+       id="a10557"
+       xlink:href="/posts/0199/#read-your-writes"
+       target="_top">
+      <g
+         transform="translate(-30,15)"
+         id="g10061">
+        <rect
+           ry="5"
+           y="307.36218"
+           x="650"
+           height="60"
+           width="55.000008"
+           id="rect4091"
+           style="fill:#ffaa26;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="660.1795"
+           y="327.36218"
+           id="text3233"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3235"
+             x="660.1795"
+             y="327.36218">读</tspan><tspan
+             sodipodi:role="line"
+             x="660.1795"
+             y="342.36218"
+             id="tspan3237">己之</tspan><tspan
+             sodipodi:role="line"
+             x="660.1795"
+             y="357.36218"
+             id="tspan3239">写</tspan></text>
+      </g>
+    </a>
+    <a
+       id="a10507"
+       xlink:href="/posts/0199/#cursor-stability"
+       target="_top">
+      <g
+         transform="translate(50,-30)"
+         id="g10080">
+        <rect
+           style="fill:#feb5da;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="rect4061"
+           width="65"
+           height="44.999996"
+           x="110"
+           y="237.36218"
+           ry="5" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="120.34509"
+           y="257.36218"
+           id="text3241"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3243"
+             x="120.34509"
+             y="257.36218">游标</tspan><tspan
+             sodipodi:role="line"
+             x="120.34509"
+             y="272.36218"
+             id="tspan3245">稳定性</tspan></text>
+      </g>
+    </a>
+    <a
+       id="a10500"
+       xlink:href="/posts/0199/#monotonic-atomic-view"
+       target="_top">
+      <g
+         transform="translate(30,-35)"
+         id="g10086">
+        <rect
+           ry="5"
+           y="242.36218"
+           x="235"
+           height="44.999996"
+           width="89.999992"
+           id="rect4059-0"
+           style="fill:#81bffc;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="245.12312"
+           y="262.36218"
+           id="text3257"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3259"
+             x="245.12312"
+             y="262.36218">单调</tspan><tspan
+             sodipodi:role="line"
+             x="245.12312"
+             y="277.36218"
+             id="tspan3263">原子视图</tspan></text>
+      </g>
+    </a>
+    <a
+       id="a10514"
+       xlink:href="/posts/0199/#read-committed"
+       target="_top">
+      <g
+         transform="translate(50,-30)"
+         id="g10074">
+        <rect
+           style="fill:#81bffc;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="rect4085"
+           width="85"
+           height="45.000011"
+           x="110"
+           y="302.36218"
+           ry="5" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="120.91356"
+           y="322.36218"
+           id="text3265"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3267"
+             x="120.91356"
+             y="322.36218">读</tspan><tspan
+             sodipodi:role="line"
+             x="120.91356"
+             y="337.36218"
+             id="tspan3269">已提交</tspan></text>
+      </g>
+    </a>
+    <a
+       id="a10528"
+       xlink:href="/posts/0199/#read-uncommitted"
+       target="_top">
+      <g
+         transform="translate(50,-25)"
+         id="g10068">
+        <rect
+           ry="5"
+           y="362.36218"
+           x="110"
+           height="45.000011"
+           width="100"
+           id="rect4087"
+           style="fill:#81bffc;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="120"
+           y="382.36218"
+           id="text3271"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3273"
+             x="120"
+             y="382.36218">读</tspan><tspan
+             sodipodi:role="line"
+             x="120"
+             y="397.36218"
+             id="tspan3275">未提交</tspan></text>
+      </g>
+    </a>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow2Mend);display:inline"
+       d="m 207.40385,337.36218 -2.3077,-19.99999"
+       id="path4117"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-end="#g10074"
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start="#g10068"
+       inkscape:connection-start-point="d4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       d="m 199.03846,272.36218 -3.07692,-20"
+       id="path5499"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#g10074"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-end="#g10080"
+       inkscape:connection-end-point="d4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       d="m 239.71154,272.36218 33.07693,-20"
+       id="path5501"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-end="#g10086"
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start="#g10074"
+       inkscape:connection-start-point="d4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       d="m 312.59615,207.36218 2.3077,-20"
+       id="path6467"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-end="#g10092"
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start="#g10086"
+       inkscape:connection-start-point="d4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       d="m 195.96154,207.36218 3.07692,-20"
+       id="path6469"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#g10080"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-end="#g10098"
+       inkscape:connection-end-point="d4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       d="m 303.1,142.36218 -16,-24.99999"
+       id="path7047"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-end="#g10104"
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start="#g10092"
+       inkscape:connection-start-point="d4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       d="m 229.5,142.36218 29.99999,-24.99999"
+       id="path7433"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-end="#g10104"
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start="#g10098"
+       inkscape:connection-start-point="d4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       d="m 304.5,87.362183 36,-19.999998"
+       id="path7627"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#g10104"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-end="#g10016"
+       inkscape:connection-end-point="d4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       d="M 425.25001,87.362188 392.25,67.362185"
+       id="path7821"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-end="#g10016"
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start="#g10021"
+       inkscape:connection-start-point="d4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       d="M 491.24999,147.36218 463.75001,117.36219"
+       id="path8015"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-end="#g10021"
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start="#g10026"
+       inkscape:connection-start-point="d4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow2Mend);display:inline"
+       d="m 527.9021,212.36219 -16.03148,-35"
+       id="path8209"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-end="#g10026"
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start="#g10031"
+       inkscape:connection-start-point="d4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       d="M 620,329.71512 580.71427,297.36217"
+       id="path8983"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-end="#g10050"
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start="#g10061"
+       inkscape:connection-start-point="d4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       d="m 558.95161,337.36218 2.58064,-40.00001"
+       id="path9177"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-end-point="d4"
+       inkscape:connection-end="#g10050"
+       inkscape:connection-start="#g10055"
+       inkscape:connection-start-point="d4" />
+    <a
+       id="a10543"
+       xlink:href="/posts/0199/#monotonic-reads"
+       target="_top">
+      <g
+         transform="translate(-27.5,17)"
+         id="g10124">
+        <rect
+           ry="5"
+           y="320.36218"
+           x="437.5"
+           height="44.999985"
+           width="84.999992"
+           id="rect4105"
+           style="fill:#81bffc;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="449.19675"
+           y="340.36218"
+           id="text3221"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3223"
+             x="449.19675"
+             y="340.36218">单调</tspan><tspan
+             sodipodi:role="line"
+             x="449.19675"
+             y="355.36218"
+             id="tspan3225">读</tspan></text>
+      </g>
+    </a>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       d="m 484.43547,337.36218 56.77421,-40.00001"
+       id="path9179"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#g10124"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-end="#g10050"
+       inkscape:connection-end-point="d4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       d="m 385.00001,331.50251 128.2,-89.14032"
+       id="path9565"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-end-point="d4"
+       inkscape:connection-end="#g10031"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-start="#g10036" />
+    <path
+       inkscape:connector-curvature="0"
+       inkscape:connector-type="polyline"
+       id="path10134"
+       d="m 554.93801,267.36218 -12.6033,-24.99999"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       inkscape:connection-end="#g10031"
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start="#g10050"
+       inkscape:connection-start-point="d4" />
+    <path
+       inkscape:connector-curvature="0"
+       inkscape:connector-type="polyline"
+       id="path10142"
+       d="m 272.78846,207.36218 -33.07692,-20"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);display:inline"
+       inkscape:connection-end="#g10098"
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start="#g10086"
+       inkscape:connection-start-point="d4" />
+    <g
+       id="g10216"
+       transform="translate(-2.499996,0)">
+      <path
+         inkscape:connector-curvature="0"
+         id="path10154"
+         d="m 260,418.98718 280,0"
+         style="fill:none;stroke:#bbbbbb;stroke-width:0.99118924px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <rect
+         ry="0"
+         y="407.61218"
+         x="370"
+         height="19.75"
+         width="60"
+         id="rect10160"
+         style="fill:#ffffff;fill-opacity:1;stroke:none" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10156"
+         y="422.36218"
+         x="380"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#847272;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+         xml:space="preserve"><tspan
+           y="422.36218"
+           x="380"
+           id="tspan10158"
+           sodipodi:role="line">图例</tspan></text>
+    </g>
+  </g>
+</svg>
