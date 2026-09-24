@@ -7,7 +7,7 @@ const configured = Boolean(repoId && categoryId);
 {
   (configured || import.meta.env.DEV) && (
     <section class="mt-10" aria-labelledby="comments-title">
-      <hr class="border-border mb-8 border-dashed" />
+      <hr class="border-border mb-8" />
       <h2 id="comments-title" class="mb-6 text-xl font-semibold">
         Comments
       </h2>
@@ -31,7 +31,7 @@ const configured = Boolean(repoId && categoryId);
           async
         />
       ) : (
-        <p class="border-border bg-muted/40 text-muted-foreground rounded-xl border p-4 text-sm">
+        <p class="border-border bg-muted/40 text-muted-foreground rounded border p-4 text-sm">
           Development note: enable GitHub Discussions and set both public Giscus
           environment variables to show comments here.
         </p>

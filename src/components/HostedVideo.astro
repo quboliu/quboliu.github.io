@@ -16,7 +16,7 @@ const { src, title, poster, captions, mimeType = "video/mp4" } = Astro.props;
     playsinline
     preload="metadata"
     poster={poster}
-    class="border-border bg-muted/30 aspect-video w-full rounded-2xl border"
+    class="border-border bg-muted/30 aspect-video w-full rounded border"
     aria-label={title}
   >
     <source {src} type={mimeType} />

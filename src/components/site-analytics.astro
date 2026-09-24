@@ -10,7 +10,7 @@ const hasDashboard = Boolean(PUBLIC_UMAMI_WEBSITE_ID && PUBLIC_UMAMI_SHARE_URL);
 
 <section
   id="site-traffic"
-  class="not-prose border-border bg-background mt-12 rounded-lg border p-4 sm:p-6"
+  class="not-prose border-border bg-background mt-12 rounded border p-4 sm:p-6"
   aria-labelledby="site-traffic-title"
 >
   {
@@ -38,7 +38,7 @@ const hasDashboard = Boolean(PUBLIC_UMAMI_WEBSITE_ID && PUBLIC_UMAMI_SHARE_URL);
             Open full dashboard
           </a>
         </div>
-        <div class="border-border overflow-hidden rounded-lg border">
+        <div class="border-border overflow-hidden rounded border">
           <iframe
             src={PUBLIC_UMAMI_SHARE_URL}
             title="Site traffic dashboard"

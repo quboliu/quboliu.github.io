@@ -51,7 +51,7 @@
 
     hr {
       border: 0;
-      border-top: 1px dashed var(--muted-foreground);
+      border-top: 1px solid var(--border);
     }
 
     img {
@@ -68,7 +68,8 @@
     }
 
     figcaption {
-      @apply opacity-75;
+      @apply text-muted-foreground text-sm;
+      font-style: normal;
     }
 
     table {
@@ -157,12 +158,26 @@
   font-style: normal !important;
 }
 
+/* Markdown image captions are written as an emphasized paragraph directly
+   after an image. Keep that convention visually quiet and upright. */
+.app-prose p:has(> img:only-child) + p:has(> em:only-child) {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-top: 0.75rem;
+}
+
+.app-prose p:has(> img:only-child) + p > em:only-child {
+  color: inherit;
+  font-style: normal;
+}
+
 /* Keep the code surface above Tailwind Typography's prose utilities. */
 .app-prose pre {
   background: var(--code-background);
   border: 1px solid var(--code-border);
-  border-radius: 0.5rem;
-  padding: 2.75rem 1rem 1rem;
+  border-radius: 0.25rem;
+  padding: 1rem 4.75rem 1rem 1rem;
   overflow-x: auto;
   line-height: 1.65;
 }
@@ -187,17 +202,23 @@
 
 .code-block .copy-code {
   position: absolute;
-  top: 0.5rem;
-  right: 0.75rem;
+  top: 0.45rem;
+  right: 0.45rem;
   border: 1px solid var(--code-border);
   background: var(--code-background);
-  color: var(--foreground);
+  color: var(--muted-foreground);
   border-radius: 0.25rem;
-  padding: 0.2rem 0.5rem;
+  padding: 0.15rem 0.45rem;
   font: 500 0.75rem/1.4 var(--font-main);
+  opacity: 0.8;
+  transition:
+    color 120ms ease,
+    border-color 120ms ease,
+    opacity 120ms ease;
 }
 
 .code-block .copy-code:hover {
   border-color: var(--accent);
   color: var(--accent);
+  opacity: 1;
 }
