@@ -14,32 +14,62 @@ const { tags } = Astro.props;
 
 <nav
   aria-label="Tag navigation"
-  class="border-border max-h-52 min-w-0 overflow-y-auto border-y py-3 xl:sticky xl:top-6 xl:max-h-[calc(100vh-3rem)] xl:self-start xl:border-0 xl:py-0"
+  class="border-border min-w-0 border-y py-3 xl:sticky xl:top-6 xl:self-start xl:border-y-0 xl:border-r xl:py-0 xl:pr-4"
 >
-  <ul class="flex flex-wrap content-start gap-1.5">
-    {
-      tags.map(({ slug, name, count }, index) => (
-        <li>
-          <a
-            href={`#tag-${slug}`}
-            data-tag-nav={slug}
-            data-tag-weight={
-              count >= 4 ? "high" : count >= 2 ? "medium" : "low"
-            }
-            aria-current={index === 0 ? "location" : undefined}
-            aria-label={`#${name}，${count} 篇文章`}
-            title={`${count} 篇文章`}
-            class="tag-nav-link inline-flex items-center gap-0.5 rounded-full px-2 py-1 text-xs whitespace-nowrap no-underline transition-colors"
+  <div class="mb-3 flex items-baseline justify-between gap-2">
+    <label for="tag-filter" class="text-foreground text-sm font-semibold">
+      筛选标签
+    </label>
+    <span class="text-muted-foreground text-xs">{tags.length} 个</span>
+  </div>
+  <input
+    id="tag-filter"
+    type="search"
+    autocomplete="off"
+    placeholder="输入标签名称"
+    class="border-border bg-background text-foreground placeholder:text-muted-foreground focus-visible:outline-accent mb-2 w-full rounded border px-2.5 py-1.5 text-sm focus-visible:outline-2 focus-visible:outline-offset-1"
+  />
+  <div
+    data-tag-list
+    class="tag-nav-list max-h-44 overflow-y-auto xl:max-h-[calc(100vh-9rem)]"
+  >
+    <ul class="grid grid-cols-2 gap-1 xl:grid-cols-1">
+      {
+        tags.map(({ slug, name, count }, index) => (
+          <li
+            data-tag-item
+            data-tag-search={`${name} ${slug}`.toLocaleLowerCase()}
           >
-            <span class="tag-hash" aria-hidden="true">
-              #
-            </span>
-            <span>{name}</span>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+            <a
+              href={`#tag-${slug}`}
+              data-tag-nav={slug}
+              aria-current={index === 0 ? "location" : undefined}
+              aria-label={`#${name}，${count} 篇文章`}
+              title={`${name} · ${count} 篇文章`}
+              class="tag-nav-link flex min-w-0 items-center justify-between gap-1.5 rounded px-2 py-1.5 text-sm no-underline transition-colors"
+            >
+              <span class="min-w-0 truncate">
+                <span class="tag-hash" aria-hidden="true">
+                  #
+                </span>
+                {name}
+              </span>
+              <span
+                class="tag-count shrink-0 text-xs tabular-nums"
+                aria-hidden="true"
+              >
+                {count}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p data-tag-empty hidden class="text-muted-foreground px-2 py-3 text-sm">
+      没有匹配的标签
+    </p>
+  </div>
+  <p data-tag-status aria-live="polite" class="sr-only"></p>
 </nav>
 
 <script>
@@ -52,27 +82,53 @@ const { tags } = Astro.props;
     const links = Array.from(
       document.querySelectorAll<HTMLAnchorElement>("[data-tag-nav]")
     );
+    const filter = document.querySelector<HTMLInputElement>("#tag-filter");
+    const items = Array.from(
+      document.querySelectorAll<HTMLLIElement>("[data-tag-item]")
+    );
+    const empty = document.querySelector<HTMLElement>("[data-tag-empty]");
+    const status = document.querySelector<HTMLElement>("[data-tag-status]");
+    const list = document.querySelector<HTMLElement>("[data-tag-list]");
     const sections = Array.from(
       document.querySelectorAll<HTMLElement>("[data-tag-section]")
     );
 
-    if (links.length === 0 || sections.length === 0) return;
+    if (links.length === 0 || sections.length === 0 || !filter || !list) return;
 
     const { signal } = tagNavigationController;
+    const filterInput: HTMLInputElement = filter;
+    const scrollList: HTMLElement = list;
 
     function keepLinkVisible(link: HTMLAnchorElement) {
-      const navigation = link.closest("nav");
-      if (!navigation || navigation.scrollHeight <= navigation.clientHeight)
-        return;
+      if (link.closest("[data-tag-item]")?.hasAttribute("hidden")) return;
+      if (scrollList.scrollHeight <= scrollList.clientHeight) return;
 
-      const navigationRect = navigation.getBoundingClientRect();
+      const navigationRect = scrollList.getBoundingClientRect();
       const linkRect = link.getBoundingClientRect();
 
       if (linkRect.top < navigationRect.top) {
-        navigation.scrollTop += linkRect.top - navigationRect.top - 4;
+        scrollList.scrollTop += linkRect.top - navigationRect.top - 4;
       } else if (linkRect.bottom > navigationRect.bottom) {
-        navigation.scrollTop += linkRect.bottom - navigationRect.bottom + 4;
+        scrollList.scrollTop += linkRect.bottom - navigationRect.bottom + 4;
       }
+    }
+
+    function applyFilter() {
+      const query = filterInput.value
+        .trim()
+        .replace(/^#/, "")
+        .toLocaleLowerCase();
+      let visible = 0;
+
+      for (const item of items) {
+        item.hidden = !item.dataset.tagSearch?.includes(query);
+        if (!item.hidden) visible += 1;
+      }
+
+      if (empty) empty.hidden = visible > 0;
+      if (status)
+        status.textContent = `显示 ${visible} / ${items.length} 个标签`;
+      scrollList.scrollTop = 0;
     }
 
     function setActive(slug?: string) {
@@ -116,6 +172,8 @@ const { tags } = Astro.props;
         signal,
       });
     });
+    filterInput.addEventListener("input", applyFilter, { signal });
+    applyFilter();
     window.addEventListener("scroll", requestUpdate, { passive: true, signal });
     window.addEventListener("resize", requestUpdate, { passive: true, signal });
     updateActive();
@@ -125,49 +183,35 @@ const { tags } = Astro.props;
 </script>
 
 <style>
-  nav {
+  .tag-nav-list {
     overflow-anchor: none;
-    scrollbar-width: none;
-  }
-
-  nav::-webkit-scrollbar {
-    display: none;
+    scrollbar-width: thin;
   }
 
   .tag-nav-link {
-    color: var(--muted-foreground);
-    background-color: color-mix(in srgb, var(--muted) 72%, var(--background));
+    color: var(--foreground);
   }
 
   .tag-nav-link:hover {
     color: var(--accent);
-    background-color: color-mix(in srgb, var(--accent) 12%, var(--background));
+    background-color: var(--muted);
   }
 
   .tag-hash {
     color: var(--accent);
-    opacity: 0.72;
   }
 
-  .tag-nav-link[data-tag-weight="medium"] {
-    font-size: 0.8125rem;
-    font-weight: 500;
-  }
-
-  .tag-nav-link[data-tag-weight="high"] {
-    color: var(--foreground);
-    font-size: 0.875rem;
-    font-weight: 600;
+  .tag-count {
+    color: var(--muted-foreground);
   }
 
   .tag-nav-link[aria-current="location"] {
-    color: var(--accent-foreground);
-    background-color: var(--accent);
+    color: var(--accent);
+    background-color: var(--muted);
     font-weight: 600;
   }
 
-  .tag-nav-link[aria-current="location"] .tag-hash {
-    color: currentColor;
-    opacity: 1;
+  .tag-nav-link[aria-current="location"] .tag-count {
+    color: var(--accent);
   }
 </style>
