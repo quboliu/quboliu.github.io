@@ -14,12 +14,14 @@ avatarCandidates:
 
 ## 〇、档案与追踪入口
 
+- **五档定位（2026-09-24）：** 第三档。参与编著[《Go 程序员面试笔试宝典》](https://golang.design/go-questions/)，并在[个人博客](https://qcrao.com/archives/)持续发表 Go 与系统专题，具备多种独立可核验的作品。
+
 - **博客：** [qcrao.com](https://qcrao.com/)，站点使用 Hugo 主题 Maupassant；[归档页](https://qcrao.com/archives/)是文章总目录，RSS 为 [index.xml](https://qcrao.com/index.xml)。
 - **调查截点：** 2026-09-15。博客归档页解析出 78 篇带标题、日期和链接的文章；[归档页](https://qcrao.com/archives/)。
 - **日期范围：** 2019-01-16 至 2026-07-16。
 - **按年份：** 2019 年 21 篇、2020 年 9 篇、2021 年 24 篇、2022 年 8 篇、2023 年 7 篇、2025 年 8 篇、2026 年 1 篇。
 - **更新节奏：** 相邻文章日期间隔中位数约 13.0 天；去除超过 180 天的停更间隔后，中位数约 13.0 天。2025 年集中更新《把 DDIA 读厚》系列，2026 年目前有一篇 AI 视频制作风险卡片文章。
-- **第二档依据：** [《Go 程序员面试笔试宝典》](https://golang.design/go-questions/)是饶全成参与编著的纸质书，在线站点明确列出作者、ISBN 978-7-111-70242-9，并提供纸书内容的在线补充；此外 [qcrao/Interview](https://github.com/qcrao/Interview) 约 168 stars、[qcrao/bulk-delete-chatGPT](https://github.com/qcrao/bulk-delete-chatGPT) 约 139 stars，均超过 100 stars。star 数按 2026-09-15 GitHub 页面/API 快照记录。
+- **代表作品证据：** [《Go 程序员面试笔试宝典》](https://golang.design/go-questions/)是饶全成参与编著的纸质书，在线站点明确列出作者、ISBN 978-7-111-70242-9，并提供纸书内容的在线补充；此外 [qcrao/Interview](https://github.com/qcrao/Interview) 约 168 stars、[qcrao/bulk-delete-chatGPT](https://github.com/qcrao/bulk-delete-chatGPT) 约 139 stars，均超过 100 stars。star 数按 2026-09-15 GitHub 页面/API 快照记录。
 - **作者情报：** [GitHub 用户 API](https://api.github.com/users/qcrao) 显示账号为 `qcrao`，公开姓名为 qcrao，website 指向 qcrao.com，所在地 Singapore，公开仓库 174 个、followers 548；About 页自述为一线互联网码农，专注 Go、后端架构和个人成长。
 - **书籍与社区入口：** [Go 程序员面试笔试宝典](https://golang.design/go-questions/)由饶全成、欧长坤、楚秦等编著，站点提供目录、勘误和讨论入口；[关于页](https://qcrao.com/about/)还列出博客园、知乎、掘金和微信公众号“码农桃花源”。
 - **个人作品入口：** About 页提到 [TubeVocab](https://www.tubevocab.com/)、[GitWorktree](https://www.gitworktree.org/) 和 [Comicory](https://www.comicory.com/) 等 AI/工具类作品；近年的 GitHub 动态也出现 ChatGPT 批量删除插件等实验性项目。

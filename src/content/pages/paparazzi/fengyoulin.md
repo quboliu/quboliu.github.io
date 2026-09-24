@@ -2,11 +2,13 @@
 title: "深度探索 Go 语言"
 description: "追踪封幼林与幼麟实验室的 Go runtime、编译器和底层原理资料。"
 subjectName: "封幼林 / 幼麟实验室"
-paparazziTier: "star"
+paparazziTier: "notable"
 avatarCandidates: []
 ---
 
 ## 〇、档案与追踪入口
+
+- **五档定位（2026-09-24）：** 第四档。[《深度探索 Go 语言》在线版](https://book-go-runtime.netlify.app/#/)及[配套视频](https://www.bilibili.com/list/567195437?bvid=BV1CG411u7sc&oid=430727770)是明确的专题作品；缺少可独立核验的长期文章归档。
 
 - **身份依据：** 本站 Go 大佬清单将“封幼林”与在线书籍《深度探索 Go 语言》关联；[原始条目](https://quboliu.github.io/posts/0063/)。
 - **作者资料：** 当前可直接复核的身份线索是原始清单中的作者名、在线书籍和“幼麟实验室”公开教学入口；没有把搜索结果中的同名账号或未能稳定访问的出版商页面当作身份凭证。

@@ -2,7 +2,7 @@
 title: "qyuhen"
 description: "追踪雨痕的 Go 学习笔记与公开资料。"
 subjectName: "雨痕 / Q.yuhen"
-paparazziTier: "star"
+paparazziTier: "notable"
 avatarCandidates:
   - url: "https://avatars.githubusercontent.com/u/465305?v=4"
     source: "GitHub"
@@ -10,6 +10,8 @@ avatarCandidates:
 ---
 
 ## 〇、档案与追踪入口
+
+- **五档定位（2026-09-24）：** 第四档。[公开资料仓库](https://github.com/qyuhen/book)具有大量关注，并连接四套语言学习资料；但正文与发布日期主要位于外部平台，尚不足以核实持续作品的全貌。
 
 - **身份确认：** 原始清单列名为“雨痕”，并指向 [GitHub `qyuhen`](https://github.com/qyuhen)；该账号显示名为 Q.yuhen。[原始条目](https://quboliu.github.io/posts/0063/)
 - **资料载体：** 这不是传统博客，而是一个以 README 汇总语雀专栏的公开资料仓库：[qyuhen/book](https://github.com/qyuhen/book)。因此以下按“资料单元”而不是博客文章统计。
@@ -41,4 +43,4 @@ avatarCandidates:
 
 ## 四、追踪结论
 
-雨痕以高 star 的公开学习资料仓库满足第二档条件；当前可见动态是资料目录而非持续更新的博客。后续追踪优先检查 GitHub README 提交和四个语雀专栏是否出现新章节。
+雨痕的公开学习资料仓库获得了较多关注；当前可见动态是资料目录，正文与发布时间需要进一步核实，因此归入第四档。后续追踪优先检查 GitHub README 提交和四个语雀专栏是否出现新章节。

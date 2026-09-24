@@ -14,12 +14,14 @@ avatarCandidates:
 
 ## 〇、档案与追踪入口
 
+- **五档定位（2026-09-24）：** 第三档。[《Go 语言原本》](https://golang.design/under-the-hood/)、[博客归档](https://changkun.de/blog/posts/)与研究入口共同支撑多项代表作品，影响跨 Go 教学与人机交互研究。
+
 - **博客：** [Changkun's Blog](https://changkun.de/blog/)，中文版导航名为“欧长坤的博客”；站点 generator 为 Hugo 0.91.2。[博客首页](https://changkun.de/blog/)
 - **调查截点：** 2026-09-15。博客首页显示 284 篇 Blogs；本次抓取 6 个归档分页并解析出 280 篇带标题、日期和链接的文章。[文章索引](https://changkun.de/blog/posts/)
 - **日期范围：** 2009-04-25 至 2026-09-06。日期取文章页 listing 中的 dateCreated，不用抓取时间替代。
 - **按年份：** 2009 年 35 篇、2010 年 22 篇、2011 年 16 篇、2012 年 15 篇、2013 年 50 篇、2014 年 33 篇、2015 年 19 篇、2016 年 23 篇、2017 年 27 篇、2018 年 18 篇、2019 年 2 篇、2020 年 9 篇、2021 年 3 篇、2022 年 2 篇、2023 年 1 篇、2026 年 5 篇。
 - **更新节奏：** 相邻文章日期间隔中位数约 5.0 天；去除超过 180 天的长期停更间隔后，中位数约 5.0 天。2021 年后文章数量显著下降，2026 年又恢复连续更新。
-- **第二档依据：** [Go 语言原本](https://golang.design/under-the-hood/) 的公开仓库 [golang-design/under-the-hood](https://github.com/golang-design/under-the-hood) 在调查截点约有 4,354 stars、493 forks，超过 100 stars；另有 [Go 程序员面试笔试宝典](https://golang.design/go-questions/) 这一公开资料项目。star 数来自 2026-09-15 GitHub API 快照。
+- **代表作品证据：** [Go 语言原本](https://golang.design/under-the-hood/) 的公开仓库 [golang-design/under-the-hood](https://github.com/golang-design/under-the-hood) 在调查截点约有 4,354 stars、493 forks，超过 100 stars；另有 [Go 程序员面试笔试宝典](https://golang.design/go-questions/) 这一公开资料项目。star 数来自 2026-09-15 GitHub API 快照。
 - **作者情报：** [GitHub 用户 API](https://api.github.com/users/changkun) 显示账号为 `changkun`，姓名 Changkun Ou，简介为 “Science and art, life in between.”，任职信息含 Founder @latere-ai、ex. @mimuc @sixt，地点 Munich，公开仓库 148 个、followers 4,845。
 - **履历与研究入口：** [个人主页](https://changkun.de/)、[履历页](https://changkun.de/s/cv)、[LMU 团队页](https://www.medien.ifi.lmu.de/team/changkun.ou/)、[Google Scholar](https://scholar.google.de/citations?user=3qjB-eUAAAAJ)。博客侧栏自述为人机交互研究者、工程师和写作者。
 - **社交入口：** 个人站点直接列出 [GitHub](https://github.com/changkun)、[LinkedIn](https://www.linkedin.com/in/changkun/)、[YouTube](https://www.youtube.com/channel/UCtujb7c9eudbVEkAsIRZR3w)、[Stack Overflow](https://stackoverflow.com/users/3819460/changkun)、[Telegram](https://t.me/ouchangkun) 和 [Instagram](https://www.instagram.com/ouchangkun)。原站的 Twitter 入口当前返回 404，未作为可验证账号发布。

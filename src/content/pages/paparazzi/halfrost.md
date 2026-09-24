@@ -11,6 +11,8 @@ avatarCandidates:
 
 ## 〇、档案与追踪入口
 
+- **五档定位（2026-09-24）：** 第三档。[LeetCode-Go](https://github.com/halfrost/LeetCode-Go)与[Halfrost-Field](https://github.com/halfrost/Halfrost-Field)覆盖算法训练、源码和系统设计，均有持续可见的公共使用入口。
+
 - **身份确认：** [GitHub `halfrost`](https://github.com/halfrost) 的个人资料将网站指向 halfrost.com。
 - **最新可核验动态（2026-09-15）：** [`LeetCode-Go`](https://github.com/halfrost/LeetCode-Go) 当日更新；[Halfrost-Field](https://github.com/halfrost/Halfrost-Field) 的仓库说明明确为“源码解析、系统设计与工程实践笔记”。
 - **文章入口：** [Halfrost-Field 源码](https://github.com/halfrost/Halfrost-Field)。个人站在本次抓取环境出现证书校验问题，未将不可复核的网页内容计入统计。

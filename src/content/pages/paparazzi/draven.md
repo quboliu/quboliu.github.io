@@ -14,12 +14,14 @@ avatarCandidates:
 
 ## 〇、档案与追踪入口
 
+- **五档定位（2026-09-24）：** 第三档。[《Go 语言设计与实现》](https://draven.co/golang/)、[公开分析仓库](https://github.com/draveness/analyze)与[博客](https://draven.co/)构成相互印证的长期作品；近年更新放缓不抹去既有影响。
+
 - **博客：** [面向信仰编程](https://draven.co/)，站点 generator 为 Hugo 0.80.0，RSS 为 [feed.xml](https://draven.co/feed.xml)。
 - **调查截点：** 2026-09-15。博客归档页当前解析出 210 篇带标题、日期和链接的唯一文章；[归档页](https://draven.co/)。
 - **日期范围：** 2015-04-05 至 2022-03-19。
 - **按年份：** 2015 年 11 篇、2016 年 38 篇、2017 年 35 篇、2018 年 16 篇、2019 年 43 篇、2020 年 48 篇、2021 年 18 篇、2022 年 1 篇。
 - **更新节奏：** 相邻文章日期间隔中位数约 6.0 天；去除超过 180 天的停更间隔后，中位数约 6.0 天。2020–2021 年是主要密集产出期，2022 年后归档更新明显放缓。
-- **第二档依据：** [Go 语言设计与实现](https://draven.co/golang/) 及其 [示例代码仓库](https://github.com/draveness/go-internal)（调查截点约 279 stars）满足书籍/开源资料条件；同时博客源码仓库 [analyze](https://github.com/draveness/analyze) 约有 8,078 stars。star 数按 2026-09-15 GitHub 页面/API 快照记录。
+- **代表作品证据：** [Go 语言设计与实现](https://draven.co/golang/) 及其 [示例代码仓库](https://github.com/draveness/go-internal)（调查截点约 279 stars）满足书籍/开源资料条件；同时博客源码仓库 [analyze](https://github.com/draveness/analyze) 约有 8,078 stars。star 数按 2026-09-15 GitHub 页面/API 快照记录。
 - **作者情报：** [GitHub 用户 API](https://api.github.com/users/draveness) 显示 Draven 的账号是 `draveness`，简介为 HFT / C++ / Go，任职信息含 @spectra-fund，地点 Beijing，公开仓库 51 个、followers 13,176，个人站点指向 draven.co。
 - **职业与项目入口：** [博客](https://draven.co/)、[GitHub](https://github.com/draveness) 和 [分析仓库](https://github.com/draveness/analyze) 互相指向；后者描述为 Draven's Blog，是公开的博客内容/分析资料仓库。
 - **社交入口：** 原站旧 Twitter 入口当前返回 404，未将其作为可验证账号发布；当前保留 [GitHub](https://github.com/draveness) 与 [RSS](https://draven.co/feed.xml) 两个可复核入口。

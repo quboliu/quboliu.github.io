@@ -11,6 +11,8 @@ avatarCandidates:
 
 ## 〇、档案与追踪入口
 
+- **五档定位（2026-09-24）：** 第三档。[go-gin-example](https://github.com/eddycjy/go-gin-example)、[Go 学习路线图](https://github.com/eddycjy/go-developer-roadmap)和[博客源码](https://github.com/eddycjy/blog)提供多项可核验的 Go 教学作品。
+
 - **身份确认：** [GitHub `eddycjy`](https://github.com/eddycjy) 的个人资料指向 eddycjy.com；本文据此将账号与“煎鱼”对应。
 - **最新可核验动态（2026-09-15）：** [`go-gin-example`](https://github.com/eddycjy/go-gin-example)、[Go 学习路线图](https://github.com/eddycjy/go-developer-roadmap) 当日仍有仓库更新；博客源码仓库也在 2026-09-09 更新。[仓库列表](https://github.com/eddycjy?tab=repositories&sort=updated)
 - **公开入口：** [博客源码](https://github.com/eddycjy/blog)。个人站在本次抓取环境出现证书校验问题，故不把不可复核的网页内容写入档案，也不虚构文章总数与更新节奏。

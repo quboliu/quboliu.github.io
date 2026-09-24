@@ -2,7 +2,7 @@
 title: "marksuper.xyz"
 description: "跟踪 marksuper.xyz 的文章、作者与主题变化。"
 subjectName: "Mark"
-paparazziTier: "indie"
+paparazziTier: "notable"
 avatarCandidates:
   - url: "https://marksuper.xyz/picture/mine.jpg"
     source: "博客个人头像"
@@ -18,6 +18,8 @@ avatarCandidates:
 > 由 paparazzi skill 产出。全部 63 篇文章链接已逐一验证可访问。
 
 ## 〇、博客档案与作者情报
+
+- **五档定位（2026-09-24）：** 第四档。[个人博客归档](https://marksuper.xyz/archives/)包含六年间 63 篇持续积累的后端与系统文章，具备清晰专题，但尚未核实更广泛的代表项目。
 
 ### 博客地址
 

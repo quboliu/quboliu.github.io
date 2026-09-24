@@ -14,13 +14,15 @@ avatarCandidates:
 
 ## 〇、档案与追踪入口
 
+- **五档定位（2026-09-24）：** 第三档。[长期博客归档](https://tonybai.com/archives/)、[《Go 语言精进之路》相关资料](https://github.com/bigwhite/publication)与多个 Go 项目形成持续、可复核的专业作品群。
+
 - **博客：** [Tony Bai](https://tonybai.com/)；首页自称“一个程序员的心路历程”，站点生成器为 Hugo。[首页](https://tonybai.com/)
 - **调查截点：** 2026-09-15。归档页当前可解析出 2,051 个带标题、日期和链接的唯一文章条目；[完整归档](https://tonybai.com/archives/)。
 - **统计口径：** 以站点归档页为主，日期取每个条目的 archive metadata；本次 discover.py 只发现 1,964 条，而归档页发现 2,051 条，差异来自 sitemap/listing 过滤，故采用归档页这一更完整的站内索引。
 - **日期范围：** 2004-09-15 至 2026-09-15。
 - **按年份：** 2004 年 27 篇、2005 年 77 篇、2006 年 214 篇、2007 年 109 篇、2008 年 99 篇、2009 年 91 篇、2010 年 70 篇、2011 年 82 篇、2012 年 76 篇、2013 年 57 篇、2014 年 39 篇、2015 年 28 篇、2016 年 33 篇、2017 年 51 篇、2018 年 26 篇、2019 年 35 篇、2020 年 41 篇、2021 年 63 篇、2022 年 68 篇、2023 年 66 篇、2024 年 77 篇、2025 年 312 篇、2026 年 310 篇。
 - **更新节奏：** 相邻归档条目的日期间隔中位数约 2.0 天；去除超过 180 天的长期停更间隔后，中位数约 2.0 天。早期记录与近年高频更新混在同一归档中，单一平均值不能代表全部时期。
-- **第二档依据：** [GitHub `bigwhite`](https://github.com/bigwhite) 的公开资料列出《Go 语言精进之路》配套代码；同时 [gopherdaily](https://github.com/bigwhite/gopherdaily)（1,072 stars）、[experiments](https://github.com/bigwhite/experiments)（889 stars）、[publication](https://github.com/bigwhite/publication)（347 stars）和 [GoProgrammingFromBeginnerToMaster](https://github.com/bigwhite/GoProgrammingFromBeginnerToMaster)（278 stars）均超过 100 stars。star 数按 2026-09-15 GitHub API 快照记录。
+- **代表作品证据：** [GitHub `bigwhite`](https://github.com/bigwhite) 的公开资料列出《Go 语言精进之路》配套代码；同时 [gopherdaily](https://github.com/bigwhite/gopherdaily)（1,072 stars）、[experiments](https://github.com/bigwhite/experiments)（889 stars）、[publication](https://github.com/bigwhite/publication)（347 stars）和 [GoProgrammingFromBeginnerToMaster](https://github.com/bigwhite/GoProgrammingFromBeginnerToMaster)（278 stars）均超过 100 stars。star 数按 2026-09-15 GitHub API 快照记录。
 - **作者情报：** GitHub API 显示 Tony Bai 的账号是 `bigwhite`，个人简介为 architect and go programmer at Reachauto，公开仓库 76 个、followers 1,902，个人站点指向 tonybai.com。[GitHub 用户 API](https://api.github.com/users/bigwhite)
 - **社交入口：** 站点直接列出 [GitHub](https://github.com/bigwhite)、[X](https://x.com/tony_bai)、[Bluesky](https://bsky.app/profile/tonybai.com)、[Reddit](https://www.reddit.com/user/tonybai_cn/) 和 [豆瓣](https://www.douban.com/people/tony_bai)。这些是站点导航中的作者入口，确认度高；知乎入口因当前返回 403，不作为可验证链接发布。
 - **博客源码判断：** 站点 generator 标记为 Hugo；在 `bigwhite` 的公开仓库列表中没有确认到 tonybai.com 的站点源码仓库，因此只记录公开代码和出版物仓库，不把它们误判为博客源码。[GitHub 仓库列表](https://github.com/bigwhite?tab=repositories)

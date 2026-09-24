@@ -2,11 +2,13 @@
 title: "HHTCodeRv"
 description: "追踪 HHTCodeRv（haohongfan）的 Go 源码分析与工程文章。"
 subjectName: "HHTCodeRv / haohongfan"
-paparazziTier: "star"
+paparazziTier: "indie"
 avatarCandidates: []
 ---
 
 ## 〇、档案与追踪入口
+
+- **五档定位（2026-09-24）：** 第五档。目前可靠入口是[博客园作者页](https://www.cnblogs.com/457220157-FTD)及少数平台文章，已核实的作品主要停留在 2021 年；资料不足以支持更高档位，不能据此推断作者能力。
 
 - **身份依据：** 本站 Go 大佬清单把 HHTCodeRv 与《Go 源码分析与实战》关联；[原始条目](https://quboliu.github.io/posts/0063/)。公开文章均署名 `haohongfan` 或 `HHFCodeRv`，两者在 [51CTO 作者页](https://blog.51cto.com/u_15177889/article/year2021/month10) 和 [博客园作者页](https://www.cnblogs.com/457220157-FTD) 中同时出现。
 - **最新可复核资料：** [博客园作者页](https://www.cnblogs.com/457220157-FTD) 可见 2021-11-17 的《性能优化 | Go Ballast 让内存控制更加丝滑》；[51CTO 归档](https://blog.51cto.com/u_15177889/article/year2021/month10) 显示该账号 2021 年集中发布 Go 源码阅读文章。

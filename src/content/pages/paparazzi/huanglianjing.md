@@ -2,7 +2,7 @@
 title: "huanglianjing.com"
 description: "追踪黄廉净个人站的 Go、数据库、基础设施、AI 与读书记录。"
 subjectName: "黄廉净 / huanglianjing"
-paparazziTier: "indie"
+paparazziTier: "notable"
 avatarCandidates:
   - url: "https://avatars.githubusercontent.com/u/6270403?v=4"
     source: "GitHub"
@@ -13,6 +13,8 @@ avatarCandidates:
 ---
 
 ## 〇、博客档案与作者情报
+
+- **五档定位（2026-09-24）：** 第四档。[个人站文章归档](https://huanglianjing.com/article)截至上次调查有 122 篇，Go、数据库与基础设施专题持续多年；更广范围的作品采用情况尚缺证据。
 
 ### 博客地址与统计
 
@@ -71,7 +73,7 @@ avatarCandidates:
 
 - **身份确认：** [GitHub 用户 API](https://api.github.com/users/huanglianjing)显示 login 为 huanglianjing，blog 字段为 huanglianjing.com，所在地为 China；public name 和 bio 字段为空。
 - **公开账号快照：** 截至 2026-09-15，GitHub profile 显示 7 个 public repositories、21 个 followers；账号创建于 2013-12-27，profile updated_at 为 2026-07-11。数字会变化，仅作为调查截点记录。
-- **第三档依据：** 当前可核验的 7 个公开仓库中，最高 star 数为 [huanglianjing.com](https://github.com/huanglianjing/huanglianjing.com) 的 1 star；blog、article、moonterm、tool 等仓库均未超过 100 stars。本次没有找到其出版/开源书籍或知名网站系列课程，因此按规则保留在第三档。
+- **公开证据：** 上次调查可核验的 7 个公开仓库中，最高 star 数为 [huanglianjing.com](https://github.com/huanglianjing/huanglianjing.com) 的 1 star；本次没有找到其出版或开源书籍、广泛采用的工具等更强证据，因此归入第四档。
 - **项目动向：** [blog](https://github.com/huanglianjing/blog) 是当前网站源码，最近一次 push 为 2026-08-30；[article](https://github.com/huanglianjing/article) 是文章仓库，最近一次 push 同为 2026-08-30；[moonterm](https://github.com/huanglianjing/moonterm) 最近一次 push 为 2026-08-29；[tool](https://github.com/huanglianjing/tool) 最近一次 push 为 2026-08-02。
 - **历史项目：** [huanglianjing.com](https://github.com/huanglianjing/huanglianjing.com)是旧站源码，最近一次 push 为 2026-05-17；[gradient](https://github.com/huanglianjing/gradient)和[moolody](https://github.com/huanglianjing/moolody)分别是渐变图片/视频与旋律生成器实验项目，star 数均为 0。
 - **技术画像：** 公开文章从 Go 基础、标准库、并发、缓存和消息队列出发，延伸到 MySQL/Redis/MongoDB/ClickHouse，再进入 Linux、博客工程、AI coding agent 和阅读记录；技术宽度大于单一语言专栏，但目前仍属于个人知识型站点。
@@ -282,6 +284,6 @@ Go 是站点最大的技术分类，从基础语法、标准库、runtime、并�
 
 ## 十、追踪结论
 
-黄廉净（huanglianjing）的公开轨迹是一份持续扩张的个人技术知识库：2021 年从 Go、Kafka、Redis 和 Linux 基础开始，2023–2025 年形成 Go 工程库、数据库和系统基础设施的密集内容，2026 年则增加了 AI coding agent、博客重构、NAS 和个人效率主题。站点的文章规模和更新频率值得持续跟踪，但当前项目影响力证据仍不足以进入第二档。
+黄廉净（huanglianjing）的公开轨迹是一份持续扩张的个人技术知识库：2021 年从 Go、Kafka、Redis 和 Linux 基础开始，2023–2025 年形成 Go 工程库、数据库和系统基础设施的密集内容，2026 年则增加了 AI coding agent、博客重构、NAS 和个人效率主题。站点的文章规模和更新频率值得持续跟踪；当前作品证据支持第四档。
 
 后续优先检查 [文章 API](https://huanglianjing.com/api/article/list?page=0)、[sitemap](https://huanglianjing.com/sitemap.xml)、[article 仓库](https://github.com/huanglianjing/article)和 [blog 仓库](https://github.com/huanglianjing/blog)；若未来出现 100+ star 项目、公开书籍或系列课程，再按分档规则重新评估。

@@ -14,12 +14,14 @@ avatarCandidates:
 
 ## 〇、档案与追踪入口
 
+- **五档定位（2026-09-24）：** 第三档。[Go 夜读](https://github.com/talkgo/night)社区、[learning-golang](https://github.com/yangwenmai/learning-golang)和[博客归档](https://maiyang.me/post/)提供多项持续可验证的 Go 社区作品。
+
 - **博客：** [maiyang.me](https://maiyang.me/)，站点 generator 为 Hugo 0.62.2；文章归档分为 8 页，RSS 为 [post/index.xml](https://maiyang.me/post/index.xml)。
 - **调查截点：** 2026-09-15。博客归档页解析出 362 篇带标题、日期和链接的唯一文章；[归档入口](https://maiyang.me/post/)。
 - **日期范围：** 2013-07-29 至 2026-08-17。
 - **按年份：** 2013 年 42 篇、2014 年 14 篇、2015 年 9 篇、2016 年 55 篇、2017 年 72 篇、2018 年 88 篇、2019 年 32 篇、2020 年 27 篇、2021 年 7 篇、2022 年 2 篇、2025 年 6 篇、2026 年 8 篇。
 - **更新节奏：** 全部相邻文章日期间隔中位数约 2.0 天；去除超过 180 天的停更间隔后，中位数约 2.0 天。2013–2016 年早期更新密集，2025–2026 年恢复为 AI/Cursor 和产品实践主题。
-- **第二档依据：** [talkgo/night](https://github.com/talkgo/night) 调查截点约 12,287 stars、[learning-golang](https://github.com/yangwenmai/learning-golang) 约 2,948 stars，均超过 100 stars；同时 About 页记录 Go 夜读自 2018-03-21 发起并持续公开活动。star 数按 2026-09-15 GitHub 页面/API 快照记录。
+- **代表作品证据：** [talkgo/night](https://github.com/talkgo/night) 调查截点约 12,287 stars、[learning-golang](https://github.com/yangwenmai/learning-golang) 约 2,948 stars，均超过 100 stars；同时 About 页记录 Go 夜读自 2018-03-21 发起并持续公开活动。star 数按 2026-09-15 GitHub 页面/API 快照记录。
 - **作者情报：** [GitHub 用户 API](https://api.github.com/users/yangwenmai) 显示账号为 `yangwenmai`，公开姓名为 maiyang，简介为 Gopher、Rustacean、CloudNative、DevOps、Blockchain，并标注 Go 夜读 Creator；所在地 Shenzhen, China，公开仓库 202 个、followers 1,519。
 - **社区与职业入口：** [Go 夜读仓库](https://github.com/talkgo/night) 的项目描述为通过 Bilibili 直播分享 Go 技术；[Go 夜读官网](http://talkgo.org/) 和 [talkgo GitHub 组织](https://github.com/talkgo/) 是持续追踪社区活动的入口。About 页还记录其 TGO 深圳董事会、TUG 华南区 Leader、Go/TiDB 等项目贡献经历。
 - **AI 与产品近况：** [About](https://maiyang.me/about/) 记录其 2025 年 5 月成为 Cursor 中国区首位 Ambassador，并创建 Cursor Insider；公开产品入口包括 [Contextly](https://ctxly.ai/)、[CastMind.ai](https://castmind.ai/)、[ContextEcho](https://www.contextecho.top/) 和 [Cursor Insider](https://cursor-insider.com/)。

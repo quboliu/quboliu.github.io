@@ -2,7 +2,7 @@
 title: "LeoYang90"
 description: "追踪 Leo Yang（LeoYang90）的 Go、Laravel、Swoole、算法与系统编程资料。"
 subjectName: "Leo Yang / LeoYang90"
-paparazziTier: "star"
+paparazziTier: "notable"
 avatarCandidates:
   - url: "https://raw.githubusercontent.com/LeoYang90/leoyang90.github.io/master/images/master.jpg"
     source: "旧博客头像"
@@ -16,6 +16,8 @@ avatarCandidates:
 ---
 
 ## 〇、博客档案与作者情报
+
+- **五档定位（2026-09-24）：** 第四档。[Laravel 源码资料](https://github.com/LeoYang90/laravel-source-analysis)、[Go 内部笔记](https://github.com/LeoYang90/Golang-Internal-Notes)与历史博客形成成体系的专题资料；可见长期更新和跨社区影响较有限。
 
 ### 博客地址与统计
 
@@ -40,7 +42,7 @@ avatarCandidates:
 
 - 旧博客 30 篇集中在 2017-03 至 2017-10，按发表日期计算的相邻文章间隔中位数约 **3 天**；这是一个阶段性高密度写作窗口，而不是全生命周期更新频率。
 - 2017 年的博客从 Composer 自动加载、Laravel Facade/Container/HTTP 一路写到数据库和框架服务，之后这些文章被整理进 [laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis) GitBook 仓库，形成 40 个更细的源码章节。
-- 2018 年的 Swoole 仓库延续了运行时源码路线，集中拆解内存、Reactor、Server、Worker、Timer、OpenSSL 和进程系统；该仓库目前 97 stars，单独还未达到第二档的 100-star 项目门槛。
+- 2018 年的 Swoole 仓库延续了运行时源码路线，集中拆解内存、Reactor、Server、Worker、Timer、OpenSSL 和进程系统；该仓库在上次调查时有 97 stars，可作为专题资料的使用线索。
 - 2019 年的 [Golang-Internal-Notes](https://github.com/LeoYang90/Golang-Internal-Notes) 与 [Study](https://github.com/LeoYang90/Study) 把重心扩展到 Go runtime、网络、数据库、算法和 Unix 系统编程；Study 中保留的 2024 年提交是当前可见资料里最新的一轮集中更新。
 - 2021 年 Laravel 仓库仍有内容 push，2024 年 Study 有动态规划、链表和树等连续更新；此后没有核验到新的长篇原创技术站点或新书项目。GitHub 仓库的 updated_at 可能因 issue、fork 或元数据变化而变化，不能等同于新文章。
 
@@ -48,9 +50,9 @@ avatarCandidates:
 
 - **公开身份：** [GitHub 用户 API](https://api.github.com/users/LeoYang90)显示 login 为 LeoYang90，public name、blog、location、bio 均为空；账号创建于 2015-12-30，公开仓库数为 9，followers 为 90，profile 的 updated_at 为 2026-07-11。
 - **旧站自述：** 旧博客 About 页以 Leo Yang 为署名，站点 tagline 是 “Life and Learn!”；页面列出 GitHub 和一个知乎账号，但知乎当前返回 403，无法把它当作本次可复核的活跃入口。[About 源文件](https://github.com/LeoYang90/leoyang90.github.io/blob/master/about/index.html)
-- **第二档依据：** [laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis) 约 389 stars、90 forks；[Golang-Internal-Notes](https://github.com/LeoYang90/Golang-Internal-Notes) 约 385 stars、78 forks；两个原创项目均超过 100 stars，满足“有 star 数较高的明星项目”这一硬性条件。数字按 2026-09-15 GitHub API 快照记录，后续会变化。
+- **代表作品证据：** [laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis) 约 389 stars、90 forks；[Golang-Internal-Notes](https://github.com/LeoYang90/Golang-Internal-Notes) 约 385 stars、78 forks。数字按 2026-09-15 GitHub API 快照记录，后续会变化；关注数仅作作品传播线索，不作为分档硬门槛。
 - **项目活动快照：** Laravel 仓库最近一次代码 push 为 2021-08-16；Go 内部笔记最近一次代码 push 为 2019-10-11；Swoole 最近一次代码 push 为 2018-09-24；Study 最近一次代码 push 为 2024-03-30。GitHub API 同时显示这些仓库在 2026 年仍有 metadata updated_at 变化，但本报告把代码 commit 和元数据更新分开记录。
-- **公开仓库全貌：** 其余仓库包括 [etcd fork](https://github.com/LeoYang90/etcd)、[tls fork](https://github.com/LeoYang90/tls)、[forkArticle fork](https://github.com/LeoYang90/forkArticle)、[swoole-src fork](https://github.com/LeoYang90/swoole-src)、[leoyang90.github.io](https://github.com/LeoYang90/leoyang90.github.io)和 [Study](https://github.com/LeoYang90/Study)；这些项目的 stars 较少或属于 fork，不作为第二档的核心依据。
+- **公开仓库全貌：** 其余仓库包括 [etcd fork](https://github.com/LeoYang90/etcd)、[tls fork](https://github.com/LeoYang90/tls)、[forkArticle fork](https://github.com/LeoYang90/forkArticle)、[swoole-src fork](https://github.com/LeoYang90/swoole-src)、[leoyang90.github.io](https://github.com/LeoYang90/leoyang90.github.io)和 [Study](https://github.com/LeoYang90/Study)；这些项目的 stars 较少或属于 fork，不作为当前分档的核心依据。
 - **技术画像：** 早期是 PHP/Laravel 源码和博客写作，随后进入 Swoole、Go runtime、网络、数据库、算法与操作系统基础；资料组织方式从博客文章转为 GitHub 仓库和目录化笔记。
 - **履历边界：** 没有找到稳定的在线简历、个人履历页或可核验的雇主信息；除旧站自署 Leo Yang 外，不对工作经历做推断。
 
@@ -351,4 +353,4 @@ APUE 章节、进程、线程、信号、文件 I/O、内存管理、内核同�
 
 LeoYang90 的公开技术轨迹不是持续运营的个人博客，而是一组阶段性、源码导向的学习资料：2017 年先以 Laravel/Composer 博客建立写作脉络，2018 年深入 Swoole，2019 年转向 Go runtime、网络、数据库、算法和 Unix 基础，2024 年仍能看到 Study 仓库的算法笔记更新。
 
-他进入 Paparazzi **第二档**有明确的项目证据，而不是根据文章数量推测：[laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis) 与 [Golang-Internal-Notes](https://github.com/LeoYang90/Golang-Internal-Notes) 均已超过 100 stars。需要特别保留的追踪判断是：当前没有可靠的在线博客首页，旧域名存在跳转风险；后续应优先检查 GitHub 仓库 commit、release、README 和 Study 的新文件，而不是跟踪旧域名的搜索结果。
+他目前归入 Paparazzi **第四档**：[laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis) 与 [Golang-Internal-Notes](https://github.com/LeoYang90/Golang-Internal-Notes) 是可核验的专题资料，但现有证据尚不足以支持更广范围的持续影响。需要特别保留的追踪判断是：当前没有可靠的在线博客首页，旧域名存在跳转风险；后续应优先检查 GitHub 仓库 commit、release、README 和 Study 的新文件，而不是跟踪旧域名的搜索结果。

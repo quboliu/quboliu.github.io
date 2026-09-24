@@ -2,7 +2,7 @@
 title: "xargin.com"
 description: "跟踪 xargin.com 的文章、作者与主题变化。"
 subjectName: "Xargin"
-paparazziTier: "star"
+paparazziTier: "notable"
 avatarCandidates:
   - url: "https://avatars.githubusercontent.com/u/384546?v=4"
     source: "GitHub"
@@ -13,6 +13,8 @@ avatarCandidates:
 ---
 
 ## 〇
+
+- **五档定位（2026-09-24）：** 第四档。[个人博客归档](https://xargin.com/sitemap-posts.xml)包含 188 篇 Go、分布式系统与工程文章，专题持续多年；尚未核实同量级的独立工具或研究成果。
 
 ### 站点概览
 

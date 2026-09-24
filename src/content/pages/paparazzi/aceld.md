@@ -11,6 +11,8 @@ avatarCandidates:
 
 ## 〇、档案与追踪入口
 
+- **五档定位（2026-09-24）：** 第三档。[Zinx](https://github.com/aceld/zinx)、[Golang 修养之路](https://github.com/aceld/golang)和网络资料构成多项持续维护的代表作品；专业影响集中在 Go 开发者社区。
+
 - **身份确认：** 原始清单给出“刘丹冰 / aceld”，与 [GitHub `aceld`](https://github.com/aceld) 一致。
 - **最新可核验动态（2026-09-15）：** [Golang 修养之路](https://github.com/aceld/golang)、[Zinx](https://github.com/aceld/zinx) 当日更新；[libevent](https://github.com/aceld/libevent) 亦于前一日更新。
 - **资料入口：** [GitHub](https://github.com/aceld)、[Zinx](https://github.com/aceld/zinx)、[Golang 修养之路](https://github.com/aceld/golang)。
