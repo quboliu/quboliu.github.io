@@ -9,6 +9,12 @@ import config from "@/config";
 
 const { site, features } = config;
 
+type Props = {
+  activeSection?: "posts" | "reposts";
+};
+
+const { activeSection } = Astro.props;
+
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
 
@@ -78,9 +84,11 @@ const navItems = [
             "text-accent no-underline hover:underline",
             {
               "active-nav":
-                path === "posts"
-                  ? isPostsSection
-                  : isActive(path === "" ? "/" : `/${path}`),
+                activeSection !== undefined
+                  ? path === activeSection
+                  : path === "posts"
+                    ? isPostsSection
+                    : isActive(path === "" ? "/" : `/${path}`),
             },
           ]}
         >
