@@ -6,15 +6,16 @@ import dayjs from "dayjs";
 
 type Props = {
   variant?: "h2" | "h3";
+  repostKind?: string;
 } & CollectionEntry<"posts">;
 
-const { variant: Heading = "h2", id, data, filePath } = Astro.props;
+const { variant: Heading = "h2", repostKind, id, data, filePath } = Astro.props;
 
 const { title, lang, pubDatetime } = data;
 const date = dayjs(pubDatetime).format("YYYY-MM-DD");
 ---
 
-<li class="flex gap-2 py-0.5">
+<li class="flex gap-2 py-0.5" data-repost-kind={repostKind}>
   <span
     aria-hidden="true"
     class="text-muted-foreground shrink-0 basis-[130px] font-mono text-[15px]"

@@ -1,0 +1,123 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Card from "@/components/Card.astro";
+import Footer from "@/components/Footer.astro";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import { getRepostKind, type RepostKind } from "@/utils/getRepostKind";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+const t = useTranslations(Astro.currentLocale);
+const posts = getSortedPosts(await getCollection("posts"))
+  .map(post => ({ post, kind: getRepostKind(post) }))
+  .filter(
+    (entry): entry is { post: (typeof entry)["post"]; kind: RepostKind } =>
+      entry.kind !== null
+  );
+
+const filters: Array<{ key: "all" | RepostKind; label: string }> = [
+  { key: "all", label: "All" },
+  { key: "essays", label: "Essays" },
+  { key: "papers", label: "Papers" },
+  { key: "documentation", label: "Documentation" },
+];
+
+const countFor = (key: (typeof filters)[number]["key"]) =>
+  key === "all" ? posts.length : posts.filter(post => post.kind === key).length;
+---
+
+<Layout title={`${t.pages.repostsTitle} | ${config.site.title}`}>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main pageTitle={t.pages.repostsTitle} pageDesc={t.pages.repostsDesc}>
+    <nav class="border-border mb-6 border-b" aria-label="Repost filters">
+      <ul class="flex flex-wrap gap-x-5 gap-y-1" role="list">
+        {
+          filters.map(({ key, label }, index) => (
+            <li>
+              <button
+                type="button"
+                data-repost-filter={key}
+                aria-pressed={index === 0 ? "true" : "false"}
+                class:list={[
+                  "repost-filter text-muted-foreground hover:text-accent inline-block border-b-2 border-transparent px-1 pb-2 text-sm transition-colors",
+                  { "text-accent border-accent font-medium": index === 0 },
+                ]}
+              >
+                {label}
+                <span class="text-muted-foreground ms-1 font-normal">
+                  {countFor(key)}
+                </span>
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <p
+      id="repost-filter-status"
+      class="text-muted-foreground mb-3 text-sm"
+      aria-live="polite"
+    >
+      Showing all {posts.length} posts.
+    </p>
+
+    <ul class="blog-posts" data-repost-list>
+      {
+        posts.map(({ post, kind }) => (
+          <Card {...post} variant="h2" repostKind={kind} />
+        ))
+      }
+    </ul>
+  </Main>
+
+  <Footer />
+</Layout>
+
+<script>
+  function initRepostFilters() {
+    const buttons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-repost-filter]")
+    );
+    const posts = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-repost-kind]")
+    );
+    const status = document.querySelector<HTMLElement>("#repost-filter-status");
+
+    for (const button of buttons) {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.repostFilter ?? "all";
+        let visible = 0;
+
+        for (const post of posts) {
+          const show = filter === "all" || post.dataset.repostKind === filter;
+          post.hidden = !show;
+          if (show) visible += 1;
+        }
+
+        for (const item of buttons) {
+          const active = item === button;
+          item.setAttribute("aria-pressed", String(active));
+          item.classList.toggle("text-accent", active);
+          item.classList.toggle("border-accent", active);
+          item.classList.toggle("font-medium", active);
+          item.classList.toggle("text-muted-foreground", !active);
+        }
+
+        if (status) {
+          const label = button.firstChild?.textContent?.trim() ?? filter;
+          status.textContent = `Showing ${visible} ${label.toLowerCase()} posts.`;
+        }
+      });
+    }
+  }
+
+  document.addEventListener("astro:page-load", initRepostFilters);
+</script>

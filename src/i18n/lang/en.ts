@@ -4,6 +4,7 @@ export default {
   nav: {
     home: "Home",
     posts: "Posts",
+    reposts: "Reposts",
     areas: "Areas",
     tags: "Tags",
     paparazzi: "Paparazzi",
@@ -61,6 +62,9 @@ export default {
 
     postsTitle: "Posts",
     postsDesc: "All the articles I've posted.",
+
+    repostsTitle: "Reposts",
+    repostsDesc: "Authorized reprints and bilingual translations.",
 
     areasTitle: "Areas",
     areasDesc: "Browse posts by their primary subject area.",

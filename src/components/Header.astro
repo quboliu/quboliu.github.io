@@ -34,6 +34,7 @@ const isPostsSection = ["/posts", "/areas", "/tags"].some(
 const navItems = [
   { path: "", label: t.nav.home },
   { path: "posts", label: t.nav.posts },
+  { path: "reposts", label: t.nav.reposts },
   ...(features.showArchives
     ? [{ path: "archives", label: t.nav.archives }]
     : []),
