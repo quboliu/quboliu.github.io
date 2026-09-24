@@ -10,6 +10,7 @@ import { POST_VALUE_ASSESSMENTS } from "@/data/postValueAssessments";
 import { getPostLlmAssessment } from "@/data/postLlmAssessments";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { getPostUrl } from "@/utils/getPostPaths";
+import { isOriginalPost } from "@/utils/isOriginalPost";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
 import dayjs from "dayjs";
@@ -20,7 +21,10 @@ const { mode } = Astro.props;
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
 const posts = getSortedPosts(
-  await getCollection("posts", ({ data }) => !data.draft)
+  await getCollection(
+    "posts",
+    ({ data }) => !data.draft && isOriginalPost({ data })
+  )
 );
 const missing = posts.filter(post => !POST_VALUE_ASSESSMENTS[post.id]);
 if (missing.length) {
@@ -51,8 +55,8 @@ const noEvidenceCount = entries.filter(
 const isValue = mode === "value";
 const pageTitle = isValue ? "阅读价值" : "LLM 文字含量";
 const pageDesc = isValue
-  ? "按固定的 0–100 量尺评估本站文章的阅读价值；点选轴上的文章或拖动范围筛选。"
-  : "估计本站新增正文中保留的 LLM 生成或改写文字比例，并分别说明制作环节与依据。";
+  ? "只按固定的 0–100 量尺评估本站原创文章的阅读价值；点选轴上的文章或拖动范围筛选。"
+  : "只估计本站原创文章中保留的 LLM 生成或改写文字比例，并分别说明制作环节与依据。";
 
 function llmLabel(entry: (typeof entries)[number]) {
   if (entry.llm.kind === "no-evidence") return "无依据 · 0–100%";
@@ -83,13 +87,12 @@ function llmLabel(entry: (typeof entries)[number]) {
         {
           isValue ? (
             <p class="mt-1">
-              数值是本站编辑评价，综合内容质量和长期适用价值。采用固定量尺，新文章加入时旧分数不会自动改变；分数不表示价值倍数。
+              仅收录本站原创文章。数值是本站编辑评价，综合内容质量和长期适用价值。采用固定量尺，新文章加入时旧分数不会自动改变；分数不表示价值倍数。
             </p>
           ) : (
             <p class="mt-1">
-              分母仅含本站新增的自然语言正文，原作者文字、引文、代码和图示不计入。空心标记表示缺少制作依据，0–100%
-              是不确定范围；纯转载而无新增正文按展示约定放在
-              0%，不代表原作者的写作方式。
+              仅收录本站原创文章。分母仅含本站新增的自然语言正文，引文、代码和图示不计入。空心标记表示缺少制作依据，0–100%
+              是不确定范围。
             </p>
           )
         }
