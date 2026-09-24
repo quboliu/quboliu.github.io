@@ -1,3 +1,20 @@
+/* Jepsen's TeX Gyre Schola body face, paired with Noto Serif SC for Hanzi. */
+@font-face {
+  font-family: "TeX Gyre Schola";
+  src: url("/fonts/texgyreschola-regular-webfont.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TeX Gyre Schola";
+  src: url("/fonts/texgyreschola-italic-webfont.woff") format("woff");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
 /* Register design tokens for Tailwind v4 — Bear Blog style */
 @theme inline {
   --color-background: var(--background);
@@ -28,8 +45,8 @@
   --muted-foreground: #777777;
   --border: #dddddd;
   --font-main:
-    Verdana, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-    "Noto Sans SC", sans-serif;
+    "TeX Gyre Schola", "Noto Serif SC", "Noto Serif CJK SC",
+    "Source Han Serif SC", "Songti SC", SimSun, serif;
 }
 
 /* Dark theme values (Bear default) */
