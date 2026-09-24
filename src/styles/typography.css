@@ -99,7 +99,6 @@
       border-left: 1px solid #999;
       color: var(--foreground);
       padding-left: 20px;
-      font-style: italic;
       @apply wrap-break-word opacity-90;
     }
 
@@ -150,6 +149,12 @@
       @apply border-border rounded-sm border px-0.5 py-px;
     }
   }
+}
+
+/* Override Typography's italic blockquote default, including nested emphasis. */
+.app-prose blockquote,
+.app-prose blockquote * {
+  font-style: normal !important;
 }
 
 /* Keep the code surface above Tailwind Typography's prose utilities. */

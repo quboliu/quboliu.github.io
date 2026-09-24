@@ -66,6 +66,8 @@
 @layer base {
   html {
     font-family: var(--font-main);
+    /* Preserve real Latin italics while keeping Han glyphs upright. */
+    font-synthesis-style: none;
   }
   h1,
   h2,
