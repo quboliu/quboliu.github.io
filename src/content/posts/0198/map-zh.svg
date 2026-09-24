@@ -322,15 +322,11 @@
            ry="5" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="350.00204"
-           y="92.362183"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3173"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3175"
-             x="350.00204"
-             y="92.362183">严格可串行化</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="91.362184">严格可串行化</tspan></text>
       </g>
     </a>
     <a
@@ -350,15 +346,11 @@
            ry="5" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="461.36945"
-           y="147.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3177"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3179"
-             x="461.36945"
-             y="147.36218">线性一致性</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="91.362184">线性一致性</tspan></text>
       </g>
     </a>
     <a
@@ -378,15 +370,11 @@
            style="fill:#feb5da;fill-opacity:1;fill-rule:nonzero;stroke:none" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="231.11531"
-           y="142.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3181"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3183"
-             x="231.11531"
-             y="142.36218">可串行化</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="91.362184">可串行化</tspan></text>
       </g>
     </a>
     <a
@@ -406,19 +394,11 @@
            style="fill:#feb5da;fill-opacity:1;fill-rule:nonzero;stroke:none" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="176.10773"
-           y="197.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3185"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3187"
-             x="176.10773"
-             y="197.36218">可重复</tspan><tspan
-             sodipodi:role="line"
-             x="176.10773"
-             y="212.36218"
-             id="tspan3247">读</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="91.362184">可重复读</tspan></text>
       </g>
     </a>
     <a
@@ -438,19 +418,11 @@
            ry="5" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="286.59097"
-           y="202.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3189"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3191"
-             x="286.59097"
-             y="202.36218">快照</tspan><tspan
-             sodipodi:role="line"
-             x="286.59097"
-             y="217.36218"
-             id="tspan3255">隔离</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="91.362184">快照隔离</tspan></text>
       </g>
     </a>
     <a
@@ -470,15 +442,11 @@
            style="fill:#ffaa26;fill-opacity:1;fill-rule:nonzero;stroke:none" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="461.3504"
-           y="262.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3193"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3195"
-             x="461.3504"
-             y="262.36218">因果一致性</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="83.862184">因果</tspan><tspan sodipodi:role="line" x="397.500005" y="98.862184">一致性</tspan></text>
       </g>
     </a>
     <a
@@ -498,15 +466,11 @@
            style="fill:#feb5da;fill-opacity:1;fill-rule:nonzero;stroke:none" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="460.7692"
-           y="202.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3205"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3207"
-             x="460.7692"
-             y="202.36218">顺序一致性</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="91.362184">顺序一致性</tspan></text>
       </g>
     </a>
     <a
@@ -526,15 +490,11 @@
            ry="5" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="540.91028"
-           y="292.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3209"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3211"
-             x="540.91028"
-             y="292.36218">PRAM</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="91.362184">PRAM</tspan></text>
       </g>
     </a>
     <a
@@ -554,23 +514,11 @@
            ry="5" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="371.22702"
-           y="332.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3213"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3215"
-             x="371.22702"
-             y="332.36218">写</tspan><tspan
-             sodipodi:role="line"
-             x="371.22702"
-             y="347.36218"
-             id="tspan3217">遵循</tspan><tspan
-             sodipodi:role="line"
-             x="371.22702"
-             y="362.36218"
-             id="tspan3219">读</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="83.862184">写</tspan><tspan sodipodi:role="line" x="397.500005" y="98.862184">遵循读</tspan></text>
       </g>
     </a>
     <a
@@ -590,19 +538,11 @@
            ry="5" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="551.94275"
-           y="332.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3227"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3229"
-             x="551.94275"
-             y="332.36218">单调</tspan><tspan
-             sodipodi:role="line"
-             x="551.94275"
-             y="347.36218"
-             id="tspan3231">写</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="91.362184">单调写</tspan></text>
       </g>
     </a>
     <a
@@ -622,23 +562,11 @@
            style="fill:#ffaa26;fill-opacity:1;fill-rule:nonzero;stroke:none" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="660.1795"
-           y="327.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3233"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3235"
-             x="660.1795"
-             y="327.36218">读</tspan><tspan
-             sodipodi:role="line"
-             x="660.1795"
-             y="342.36218"
-             id="tspan3237">己之</tspan><tspan
-             sodipodi:role="line"
-             x="660.1795"
-             y="357.36218"
-             id="tspan3239">写</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="91.362184">读己之写</tspan></text>
       </g>
     </a>
     <a
@@ -658,19 +586,11 @@
            ry="5" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="120.34509"
-           y="257.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3241"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3243"
-             x="120.34509"
-             y="257.36218">游标</tspan><tspan
-             sodipodi:role="line"
-             x="120.34509"
-             y="272.36218"
-             id="tspan3245">稳定性</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="83.862184">游标</tspan><tspan sodipodi:role="line" x="397.500005" y="98.862184">稳定性</tspan></text>
       </g>
     </a>
     <a
@@ -690,19 +610,11 @@
            style="fill:#81bffc;fill-opacity:1;fill-rule:nonzero;stroke:none" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="245.12312"
-           y="262.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3257"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3259"
-             x="245.12312"
-             y="262.36218">单调</tspan><tspan
-             sodipodi:role="line"
-             x="245.12312"
-             y="277.36218"
-             id="tspan3263">原子视图</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="91.362184">单调原子视图</tspan></text>
       </g>
     </a>
     <a
@@ -722,19 +634,11 @@
            ry="5" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="120.91356"
-           y="322.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3265"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3267"
-             x="120.91356"
-             y="322.36218">读</tspan><tspan
-             sodipodi:role="line"
-             x="120.91356"
-             y="337.36218"
-             id="tspan3269">已提交</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="91.362184">读已提交</tspan></text>
       </g>
     </a>
     <a
@@ -754,19 +658,11 @@
            style="fill:#81bffc;fill-opacity:1;fill-rule:nonzero;stroke:none" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="120"
-           y="382.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3271"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3273"
-             x="120"
-             y="382.36218">读</tspan><tspan
-             sodipodi:role="line"
-             x="120"
-             y="397.36218"
-             id="tspan3275">未提交</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="91.362184">读未提交</tspan></text>
       </g>
     </a>
     <path
@@ -916,19 +812,11 @@
            style="fill:#81bffc;fill-opacity:1;fill-rule:nonzero;stroke:none" />
         <text
            xml:space="preserve"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
-           x="449.19675"
-           y="340.36218"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Museo Sans;-inkscape-font-specification:Museo Sans"
+           x="397.500005"
+           y="87.362184"
            id="text3221"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan3223"
-             x="449.19675"
-             y="340.36218">单调</tspan><tspan
-             sodipodi:role="line"
-             x="449.19675"
-             y="355.36218"
-             id="tspan3225">读</tspan></text>
+           sodipodi:linespacing="125%"><tspan sodipodi:role="line" x="397.500005" y="91.362184">单调读</tspan></text>
       </g>
     </a>
     <path
