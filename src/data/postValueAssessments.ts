@@ -1,5 +1,5 @@
 /** Fixed editorial positions for the published post corpus. Review the article before changing a score. */
-export const POST_VALUE_REVIEWED_AT = "2026-09-24";
+export const POST_VALUE_REVIEWED_AT = "2026-09-25";
 
 export type PostValueAssessment = {
   score: number;
@@ -753,5 +753,10 @@ export const POST_VALUE_ASSESSMENTS: Record<string, PostValueAssessment> = {
     score: 86,
     reason:
       "Jepsen 的模型关系图和基础定义具有长期参考价值，本站完整中英对照并保留地图。",
+  },
+  "0202": {
+    score: 94,
+    reason:
+      "以固定版本源码、提交历史和内存模型贯通 Go 并发格言，并单列校注限制过强结论。",
   },
 };

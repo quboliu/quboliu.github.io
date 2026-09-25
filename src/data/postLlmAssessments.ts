@@ -103,6 +103,16 @@ export const POST_LLM_ASSESSMENTS: Record<string, PostLlmAssessment> = {
     basis:
       "依据本站本次双语转载的制作会话，LLM 参与中文翻译和整理；未保留逐句编辑轨迹，范围较宽。",
   },
+  "0202": {
+    kind: "estimated",
+    estimate: 98,
+    low: 95,
+    high: 100,
+    roles: ["起草", "翻译", "技术校注", "插图"],
+    scope: "本站自然语言正文；引用、代码、提交记录与图示文字除外",
+    basis:
+      "英文研究稿由 Claude 起草，中文直译、补充校注与排版由 Codex 完成，Image Gen 生成插图。",
+  },
 };
 
 export function getPostLlmAssessment(id: string): PostLlmAssessment {
