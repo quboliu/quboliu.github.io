@@ -52,8 +52,8 @@ const sortedEntries = [...entries].sort((a, b) => {
 const isValue = mode === "value";
 const pageTitle = isValue ? "阅读价值" : "LLM 文字含量";
 const pageDesc = isValue
-  ? "按固定的 0–100 量尺排列本站原创文章。"
-  : "按估计的 LLM 生成或改写文字比例排列本站原创文章。";
+  ? "Original posts ranked on a fixed 0–100 scale."
+  : "Original posts ranked by the estimated share of LLM-generated or rewritten prose.";
 
 function llmLabel(entry: (typeof entries)[number]) {
   if (entry.llm.kind === "no-evidence") return "无依据";
@@ -73,14 +73,6 @@ function llmLabel(entry: (typeof entries)[number]) {
 
     <section class="mx-auto w-full max-w-[800px] pb-16 xl:mx-0">
       <h2 class="sr-only">{pageTitle}</h2>
-      <p class="text-muted-foreground border-border mb-3 border-b pb-3 text-sm">
-        {
-          isValue
-            ? "数值综合内容质量和长期适用价值；新文章加入时旧分数不自动改变。"
-            : "比例只计算本站新增的自然语言正文；引文、代码和图示不计入。"
-        }
-      </p>
-
       <ol>
         {
           sortedEntries.map(entry => (
