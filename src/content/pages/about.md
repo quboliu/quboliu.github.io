@@ -11,6 +11,10 @@ The visual design is inspired by [Herman's blog](https://herman.bearblog.dev/) (
 
 Follow new posts through the [RSS feed](/rss.xml).
 
+## Guestbook
+
+Leave a note, a thought, or simply say hello in the [guestbook](/guestbook/).
+
 ## Source
 
 The source is available on [GitHub](https://github.com/quboliu/quboliu.github.io).

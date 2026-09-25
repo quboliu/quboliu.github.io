@@ -1,4 +1,10 @@
 ---
+type Props = {
+  heading?: string;
+  showDivider?: boolean;
+};
+
+const { heading = "Comments", showDivider = true } = Astro.props;
 const repoId = import.meta.env.PUBLIC_GISCUS_REPO_ID;
 const categoryId = import.meta.env.PUBLIC_GISCUS_CATEGORY_ID;
 const configured = Boolean(repoId && categoryId);
@@ -6,10 +12,13 @@ const configured = Boolean(repoId && categoryId);
 
 {
   (configured || import.meta.env.DEV) && (
-    <section class="mt-10" aria-labelledby="comments-title">
-      <hr class="border-border mb-8" />
+    <section
+      class:list={{ "mt-10": showDivider }}
+      aria-labelledby="comments-title"
+    >
+      {showDivider && <hr class="border-border mb-8" />}
       <h2 id="comments-title" class="mb-6 text-xl font-semibold">
-        Comments
+        {heading}
       </h2>
       {configured ? (
         <script

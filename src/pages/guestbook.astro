@@ -1,0 +1,23 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Comments from "@/components/Comments.astro";
+import Footer from "@/components/Footer.astro";
+import config from "@/config";
+
+const title = "Guestbook";
+const description = "Leave a note, a thought, or simply say hello.";
+---
+
+<Layout title={`${title} | ${config.site.title}`} description={description}>
+  <Header />
+  <Breadcrumb />
+  <Main pageTitle={title} pageDesc={description}>
+    <div class="max-w-[800px]">
+      <Comments heading="Messages" showDivider={false} />
+    </div>
+  </Main>
+  <Footer />
+</Layout>
