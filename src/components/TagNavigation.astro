@@ -10,30 +10,31 @@ type Props = {
 };
 
 const { tags } = Astro.props;
+const largestCount = Math.max(...tags.map(tag => tag.count), 1);
+
+function tagSize(count: number) {
+  const weight = Math.log(count + 1) / Math.log(largestCount + 1);
+  return `${(0.76 + weight * 0.34).toFixed(2)}rem`;
+}
 ---
 
 <nav
   aria-label="Tag navigation"
-  class="border-border min-w-0 border-y py-3 xl:sticky xl:top-6 xl:self-start xl:border-y-0 xl:border-r xl:py-0 xl:pr-4"
+  class="border-border min-w-0 border-y py-3 xl:sticky xl:top-6 xl:self-start xl:border-y-0 xl:py-0"
 >
-  <div class="mb-3 flex items-baseline justify-between gap-2">
-    <label for="tag-filter" class="text-foreground text-sm font-semibold">
-      筛选标签
-    </label>
-    <span class="text-muted-foreground text-xs">{tags.length} 个</span>
-  </div>
+  <label for="tag-filter" class="sr-only">筛选标签</label>
   <input
     id="tag-filter"
     type="search"
     autocomplete="off"
-    placeholder="输入标签名称"
-    class="border-border bg-background text-foreground placeholder:text-muted-foreground focus-visible:outline-accent mb-2 w-full rounded border px-2.5 py-1.5 text-sm focus-visible:outline-2 focus-visible:outline-offset-1"
+    placeholder={`搜索 ${tags.length} 个标签`}
+    class="border-border text-foreground placeholder:text-muted-foreground focus:border-accent mb-3 w-full border-x-0 border-t-0 border-b bg-transparent px-0 py-1.5 text-sm outline-none"
   />
   <div
     data-tag-list
-    class="tag-nav-list max-h-44 overflow-y-auto xl:max-h-[calc(100vh-9rem)]"
+    class="tag-nav-list max-h-44 overflow-y-auto xl:max-h-[calc(100vh-7rem)]"
   >
-    <ul class="grid grid-cols-2 gap-1 xl:grid-cols-1">
+    <ul class="flex flex-wrap items-baseline gap-x-2.5 gap-y-1.5">
       {
         tags.map(({ slug, name, count }, index) => (
           <li
@@ -46,20 +47,13 @@ const { tags } = Astro.props;
               aria-current={index === 0 ? "location" : undefined}
               aria-label={`#${name}，${count} 篇文章`}
               title={`${name} · ${count} 篇文章`}
-              class="tag-nav-link flex min-w-0 items-center justify-between gap-1.5 rounded px-2 py-1.5 text-sm no-underline transition-colors"
+              class="tag-nav-link inline-block py-0.5 leading-tight no-underline transition-colors"
+              style={`font-size: ${tagSize(count)}`}
             >
-              <span class="min-w-0 truncate">
-                <span class="tag-hash" aria-hidden="true">
-                  #
-                </span>
-                {name}
+              <span class="tag-hash" aria-hidden="true">
+                #
               </span>
-              <span
-                class="tag-count shrink-0 text-xs tabular-nums"
-                aria-hidden="true"
-              >
-                {count}
-              </span>
+              {name}
             </a>
           </li>
         ))
@@ -185,33 +179,30 @@ const { tags } = Astro.props;
 <style>
   .tag-nav-list {
     overflow-anchor: none;
-    scrollbar-width: thin;
+    scrollbar-width: none;
+  }
+
+  .tag-nav-list::-webkit-scrollbar {
+    display: none;
   }
 
   .tag-nav-link {
-    color: var(--foreground);
+    color: var(--muted-foreground);
   }
 
   .tag-nav-link:hover {
     color: var(--accent);
-    background-color: var(--muted);
   }
 
   .tag-hash {
     color: var(--accent);
-  }
-
-  .tag-count {
-    color: var(--muted-foreground);
+    opacity: 0.65;
   }
 
   .tag-nav-link[aria-current="location"] {
     color: var(--accent);
-    background-color: var(--muted);
     font-weight: 600;
-  }
-
-  .tag-nav-link[aria-current="location"] .tag-count {
-    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 </style>
