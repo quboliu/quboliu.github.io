@@ -80,17 +80,15 @@ function llmLabel(entry: (typeof entries)[number]) {
       data-entries={JSON.stringify(entries)}
       class="pb-16"
     >
-      <div
-        class="border-border bg-muted/30 mb-5 rounded border px-4 py-3 text-sm"
-      >
-        <h2 class="font-semibold">{pageTitle}</h2>
+      <div class="mb-6 max-w-[800px] text-sm">
+        <h2 class="sr-only">{pageTitle}</h2>
         {
           isValue ? (
-            <p class="mt-1">
+            <p class="text-muted-foreground">
               仅收录本站原创文章。数值是本站编辑评价，综合内容质量和长期适用价值。采用固定量尺，新文章加入时旧分数不会自动改变；分数不表示价值倍数。
             </p>
           ) : (
-            <p class="mt-1">
+            <p class="text-muted-foreground">
               仅收录本站原创文章。分母仅含本站新增的自然语言正文，引文、代码和图示不计入。空心标记表示缺少制作依据，0–100%
               是不确定范围。
             </p>
@@ -99,12 +97,12 @@ function llmLabel(entry: (typeof entries)[number]) {
       </div>
 
       <div
-        class="border-border mb-5 flex flex-wrap items-end gap-3 border-b pb-4 text-sm"
+        class="border-border mb-8 flex flex-wrap items-end gap-x-5 gap-y-3 border-b pb-3 text-sm"
       >
         <button
           type="button"
           data-sort
-          class="border-border hover:border-accent rounded border px-3 py-1.5"
+          class="text-muted-foreground hover:text-accent py-1 underline underline-offset-4"
           aria-label="切换数值排序方向">排序：高 → 低 ↕</button
         >
         <label class="flex items-center gap-2">
@@ -117,7 +115,7 @@ function llmLabel(entry: (typeof entries)[number]) {
             max="100"
             value="0"
             aria-label="筛选范围下限"
-            class="border-border bg-background w-16 rounded border px-2 py-1"
+            class="border-border w-14 border-x-0 border-t-0 border-b bg-transparent px-1 py-1 font-mono text-sm"
           />
         </label>
         <label class="flex items-center gap-2">
@@ -130,7 +128,7 @@ function llmLabel(entry: (typeof entries)[number]) {
             max="100"
             value="100"
             aria-label="筛选范围上限"
-            class="border-border bg-background w-16 rounded border px-2 py-1"
+            class="border-border w-14 border-x-0 border-t-0 border-b bg-transparent px-1 py-1 font-mono text-sm"
           />
         </label>
         <button type="button" data-reset class="text-accent underline"
@@ -146,25 +144,25 @@ function llmLabel(entry: (typeof entries)[number]) {
       </div>
 
       <div
-        class="post-axis-layout grid gap-5 xl:grid-cols-[210px_minmax(0,1fr)] xl:gap-8"
+        class="post-axis-layout grid gap-8 xl:grid-cols-[188px_minmax(0,1fr)]"
       >
         <aside
-          class="border-border bg-background sticky top-4 h-fit rounded border p-3 sm:p-4"
+          class="sticky top-6 hidden h-fit xl:block"
           aria-label={`${pageTitle}纵轴`}
         >
-          <h2 class="mb-1 text-sm font-semibold sm:text-base">总览轴</h2>
-          <p class="text-muted-foreground mb-3 text-xs">
+          <h2 class="mb-1 text-sm font-medium">总览轴</h2>
+          <p class="text-muted-foreground mb-2 text-xs">
             点选文章，拖动上下把手筛选。
           </p>
           <div
             data-axis-plot
             role="group"
-            class="post-axis-plot mx-auto h-[460px] w-full"
+            class="post-axis-plot mx-auto h-[420px] w-full"
           >
           </div>
           <p
             data-range-label
-            class="text-muted-foreground mt-3 text-center text-xs"
+            class="text-muted-foreground mt-2 text-center text-xs"
           >
             0–100{isValue ? " 分" : "%"}
           </p>
@@ -185,10 +183,10 @@ function llmLabel(entry: (typeof entries)[number]) {
           >
             显示 {entries.length} / {entries.length} 篇文章
           </p>
-          <ol data-post-list class="space-y-2">
+          <ol data-post-list>
             {
               sortedEntries.map(entry => (
-                <li class="border-border rounded border px-4 py-3">
+                <li class="border-border border-b py-3 first:pt-0">
                   <div class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                     <a
                       class="text-accent no-underline hover:underline"
@@ -201,7 +199,7 @@ function llmLabel(entry: (typeof entries)[number]) {
                     </span>
                   </div>
                   <p class="text-muted-foreground mt-1 text-xs">{entry.date}</p>
-                  <p class="mt-2 text-sm">
+                  <p class="mt-1.5 text-sm">
                     {isValue ? entry.value.reason : entry.llm.basis}
                   </p>
                   {!isValue && (
@@ -317,7 +315,7 @@ function llmLabel(entry: (typeof entries)[number]) {
     }
 
     function makeRow(entry: Entry) {
-      const item = element("li", "", "border-border rounded border px-4 py-3");
+      const item = element("li", "", "border-border border-b py-3 first:pt-0");
       item.dataset.entryId = entry.id;
       const header = element(
         "div",
@@ -346,7 +344,7 @@ function llmLabel(entry: (typeof entries)[number]) {
         element(
           "p",
           mode === "value" ? entry.value.reason : entry.llm.basis,
-          "mt-2 text-sm"
+          "mt-1.5 text-sm"
         )
       );
       if (mode === "llm") {
@@ -598,8 +596,8 @@ function llmLabel(entry: (typeof entries)[number]) {
 </script>
 
 <style is:global>
-  .post-axis-selected {
-    border-color: var(--accent) !important;
+  [data-post-list] .post-axis-selected {
+    background: color-mix(in srgb, var(--muted) 42%, transparent);
   }
   .post-axis-plot {
     position: relative;
@@ -610,15 +608,15 @@ function llmLabel(entry: (typeof entries)[number]) {
     top: 8%;
     bottom: 8%;
     left: 50%;
-    width: 2px;
+    width: 1px;
     background: var(--border);
   }
   .post-axis-range-band {
     position: absolute;
-    left: calc(50% - 12px);
-    width: 24px;
-    border-radius: 12px;
-    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    left: calc(50% - 4px);
+    width: 8px;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
     pointer-events: none;
   }
   .post-axis-tick {
@@ -644,84 +642,61 @@ function llmLabel(entry: (typeof entries)[number]) {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border: 1px solid var(--accent);
-    border-radius: 50%;
+    border-radius: 1px;
     background: var(--accent);
     transform: translate(-50%, -50%);
   }
   .post-axis-dot.post-axis-selected::after {
-    width: 12px;
-    height: 12px;
-    box-shadow:
-      0 0 0 3px var(--background),
-      0 0 0 5px var(--accent);
+    width: 8px;
+    height: 8px;
   }
   .post-axis-unknown {
     position: absolute;
     z-index: 3;
     top: 50%;
     left: 88%;
-    width: 34px;
-    height: 34px;
-    border: 2px solid var(--accent);
-    border-radius: 50%;
+    min-width: 24px;
+    height: 22px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
     background: var(--background);
     color: var(--accent);
-    font: 600 11px monospace;
+    font: 500 11px monospace;
     transform: translate(-50%, -50%);
     cursor: pointer;
   }
   .post-axis-uncertainty {
     position: absolute;
     z-index: 1;
-    left: 47%;
-    width: 6%;
-    background: color-mix(in srgb, var(--accent) 32%, transparent);
+    left: calc(50% - 2px);
+    width: 4px;
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
     pointer-events: none;
   }
   .post-axis-unknown-range {
     position: absolute;
     top: 8%;
     bottom: 8%;
-    left: 87%;
-    width: 3px;
-    border-left: 2px dashed var(--accent);
-    opacity: 0.4;
+    left: 88%;
+    width: 1px;
+    border-left: 1px dashed var(--accent);
+    opacity: 0.35;
     pointer-events: none;
   }
   .post-axis-handle {
     position: absolute;
     z-index: 4;
     left: 50%;
-    width: 34px;
-    height: 14px;
-    border: 2px solid var(--accent);
-    border-radius: 9px;
+    width: 22px;
+    height: 10px;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
     background: var(--background);
     transform: translate(-50%, -50%);
     cursor: ns-resize;
     touch-action: none;
-  }
-  @media (max-width: 79.999rem) {
-    .post-axis-layout {
-      grid-template-columns: minmax(100px, 26%) minmax(0, 1fr);
-    }
-  }
-  @media (max-width: 35rem) {
-    .post-axis-layout {
-      grid-template-columns: 88px minmax(0, 1fr);
-      gap: 12px;
-    }
-    .post-axis-tick {
-      font-size: 10px;
-    }
-    .post-axis-unknown {
-      left: 82%;
-      width: 30px;
-      height: 30px;
-      font-size: 10px;
-    }
   }
 </style>
