@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getPostUrl } from "@/utils/getPostPaths";
+import { toTransitionName } from "@/utils/toTransitionName";
+import dayjs from "dayjs";
+
+type Props = {
+  variant?: "h2" | "h3";
+} & CollectionEntry<"posts">;
+
+const { variant: Heading = "h2", id, data, filePath } = Astro.props;
+
+const { title, lang, pubDatetime } = data;
+const date = dayjs(pubDatetime).format("YYYY-MM-DD");
+---
+
+<li class="flex gap-2 py-0.5">
+  <span
+    aria-hidden="true"
+    class="text-muted-foreground shrink-0 basis-[130px] font-mono text-[15px]"
+    >{date}</span
+  >
+  <a
+    href={getPostUrl(id, filePath, Astro.currentLocale)}
+    class="text-accent min-w-0 no-underline hover:underline"
+  >
+    <Heading
+      lang={lang}
+      transition:name={toTransitionName(title)}
+      class="inline text-inherit"
+    >
+      {title}
+    </Heading>
+  </a>
+</li>

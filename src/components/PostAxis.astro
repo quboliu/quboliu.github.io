@@ -1,0 +1,112 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import PostsViewNavigation from "@/components/PostsViewNavigation.astro";
+import { POST_VALUE_ASSESSMENTS } from "@/data/postValueAssessments";
+import { getPostLlmAssessment } from "@/data/postLlmAssessments";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import { getPostUrl } from "@/utils/getPostPaths";
+import { isOriginalPost } from "@/utils/isOriginalPost";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+import dayjs from "dayjs";
+
+type Mode = "value" | "llm";
+type Props = { mode: Mode };
+const { mode } = Astro.props;
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+const posts = getSortedPosts(
+  await getCollection(
+    "posts",
+    ({ data }) => !data.draft && isOriginalPost({ data })
+  )
+);
+const missing = posts.filter(post => !POST_VALUE_ASSESSMENTS[post.id]);
+if (missing.length) {
+  throw new Error(
+    `Reading value assessments missing for: ${missing.map(post => post.id).join(", ")}`
+  );
+}
+
+const entries = posts.map(post => ({
+  id: post.id,
+  title: post.data.title,
+  date: dayjs(post.data.pubDatetime).format("YYYY-MM-DD"),
+  url: getPostUrl(post.id, post.filePath, locale),
+  value: POST_VALUE_ASSESSMENTS[post.id],
+  llm: getPostLlmAssessment(post.id),
+}));
+const sortedEntries = [...entries].sort((a, b) => {
+  const aScore = mode === "value" ? a.value.score : a.llm.estimate;
+  const bScore = mode === "value" ? b.value.score : b.llm.estimate;
+  if (aScore === null)
+    return bScore === null ? b.date.localeCompare(a.date) : 1;
+  if (bScore === null) return -1;
+  return bScore - aScore || b.date.localeCompare(a.date);
+});
+const isValue = mode === "value";
+const pageTitle = isValue ? "阅读价值" : "LLM 文字含量";
+const pageDesc = isValue
+  ? "Original posts ranked on a fixed 0–100 scale."
+  : "Original posts ranked by the estimated share of LLM-generated or rewritten prose.";
+
+function llmLabel(entry: (typeof entries)[number]) {
+  if (entry.llm.kind === "no-evidence") return "无依据";
+  if (entry.llm.kind === "no-added-prose") return "0%";
+  return `约 ${entry.llm.estimate}%`;
+}
+---
+
+<Layout
+  title={`${pageTitle} | ${t.pages.postsTitle} | ${config.site.title}`}
+  description={pageDesc}
+>
+  <Header />
+  <Breadcrumb />
+  <Main pageTitle={t.pages.postsTitle} pageDesc={pageDesc}>
+    <PostsViewNavigation active={mode} />
+
+    <section class="mx-auto w-full max-w-[800px] pb-16 xl:mx-0">
+      <h2 class="sr-only">{pageTitle}</h2>
+      <ol>
+        {
+          sortedEntries.map(entry => (
+            <li class="flex items-baseline gap-2 py-0.5">
+              <span class="text-muted-foreground w-[7.5rem] shrink-0 font-mono text-[15px]">
+                {entry.date}
+              </span>
+              <a
+                class="text-accent min-w-0 flex-1 no-underline hover:underline"
+                href={entry.url}
+              >
+                {entry.title}
+              </a>
+              <span class="text-muted-foreground shrink-0 font-mono text-xs">
+                {isValue ? entry.value.score : llmLabel(entry)}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+  </Main>
+  <Footer />
+</Layout>
+
+<style>
+  @media (max-width: 40rem) {
+    li {
+      gap: 0.5rem;
+    }
+
+    li > span {
+      width: 6.5rem;
+      font-size: 0.75rem;
+    }
+  }
+</style>

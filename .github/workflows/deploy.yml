@@ -1,0 +1,89 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.PUBLIC_GOOGLE_SITE_VERIFICATION }}
+      PUBLIC_GISCUS_REPO_ID: ${{ vars.PUBLIC_GISCUS_REPO_ID }}
+      PUBLIC_GISCUS_CATEGORY_ID: ${{ vars.PUBLIC_GISCUS_CATEGORY_ID }}
+      PUBLIC_UMAMI_SCRIPT_URL: ${{ vars.PUBLIC_UMAMI_SCRIPT_URL }}
+      PUBLIC_UMAMI_WEBSITE_ID: ${{ vars.PUBLIC_UMAMI_WEBSITE_ID }}
+      PUBLIC_UMAMI_SHARE_URL: ${{ vars.PUBLIC_UMAMI_SHARE_URL }}
+    steps:
+      - name: Checkout formal site
+        uses: actions/checkout@v7
+        with:
+          path: site
+          persist-credentials: false
+
+      - name: Checkout private drafts
+        uses: actions/checkout@v7
+        with:
+          repository: quboliu/mindindex
+          ref: main
+          path: drafts
+          ssh-key: ${{ secrets.MINDINDEX_DEPLOY_KEY }}
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            site/package-lock.json
+            drafts/package-lock.json
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build formal site and its search index
+        working-directory: site
+        run: |
+          npm ci
+          npm run build
+
+      - name: Build draft site and its separate search index
+        working-directory: drafts
+        run: |
+          npm ci
+          npm run build
+
+      - name: Combine published files
+        run: |
+          test -f site/dist/index.html
+          test -f drafts/dist/index.html
+          test ! -e site/dist/blog-drafts
+          mkdir site/dist/blog-drafts
+          cp -a drafts/dist/. site/dist/blog-drafts/
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

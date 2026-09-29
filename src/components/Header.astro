@@ -1,0 +1,128 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
+import IconSearch from "@/assets/icons/IconSearch.svg";
+import IconMoon from "@/assets/icons/IconMoon.svg";
+import { stripBase, stripLocale } from "@/utils/withBase";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+const { site, features } = config;
+
+type Props = {
+  activeSection?: "posts" | "reposts";
+};
+
+const { activeSection } = Astro.props;
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+
+// Strip the base prefix so isActive comparisons work regardless of deploy subdirectory.
+const relativePath = stripBase(Astro.url.pathname);
+const pathWithoutTrailingSlash =
+  relativePath.endsWith("/") && relativePath !== "/"
+    ? relativePath.slice(0, -1)
+    : relativePath;
+
+const currentPath = stripLocale(pathWithoutTrailingSlash, locale);
+
+const isActive = (path: string) => {
+  const currentPathArray = currentPath.split("/").filter(p => p.trim());
+  const pathArray = path.split("/").filter(p => p.trim());
+  return currentPath === path || currentPathArray[0] === pathArray[0];
+};
+
+const isPostsSection = ["/posts", "/areas", "/tags"].some(
+  path => currentPath === path || currentPath.startsWith(`${path}/`)
+);
+
+const navItems = [
+  { path: "", label: t.nav.home },
+  { path: "posts", label: t.nav.posts },
+  { path: "reposts", label: t.nav.reposts },
+  ...(features.showArchives
+    ? [{ path: "archives", label: t.nav.archives }]
+    : []),
+  { path: "paparazzi", label: t.nav.paparazzi },
+  { path: "about", label: t.nav.about },
+];
+---
+
+<a
+  id="skip-to-content"
+  href="#main-content"
+  class="bg-background text-accent absolute inset-s-16 -top-full z-50 px-3 py-2 backdrop-blur-lg transition-all focus:top-4"
+>
+  {t.a11y.skipToContent}
+</a>
+
+<header class="app-layout pt-5 pb-2">
+  <a
+    href={getRelativeLocaleUrl(locale, "")}
+    class="text-foreground inline-flex items-center gap-2 text-xl font-bold no-underline"
+  >
+    <svg viewBox="0 0 64 64" class="size-6" role="img" aria-label="orange logo">
+      <path d="M33 13c0-6 5-10 11-10 0 6-5 10-11 10z" fill="#22c55e"></path>
+      <path
+        d="M32 18v-6"
+        stroke="#92400e"
+        stroke-width="3"
+        stroke-linecap="round"></path>
+      <circle cx="32" cy="38" r="19" fill="#f97316"></circle>
+      <ellipse cx="26" cy="31" rx="6" ry="4" fill="#fdba74" opacity="0.7"
+      ></ellipse>
+    </svg>
+    {site.title}
+  </a>
+  <nav id="nav-menu" class="mt-1 flex flex-wrap items-center gap-x-2">
+    {
+      navItems.map(({ path, label }) => (
+        <a
+          href={getRelativeLocaleUrl(locale, path)}
+          class:list={[
+            "text-accent no-underline hover:underline",
+            {
+              "active-nav":
+                activeSection !== undefined
+                  ? path === activeSection
+                  : path === "posts"
+                    ? isPostsSection
+                    : isActive(path === "" ? "/" : `/${path}`),
+            },
+          ]}
+        >
+          {label}
+        </a>
+      ))
+    }
+    <span class="ms-auto flex items-center gap-1">
+      {
+        features.search !== false && (
+          <a
+            href={getRelativeLocaleUrl(locale, "search")}
+            class="text-muted-foreground hover:text-accent inline-block p-1"
+            title={t.nav.search}
+            aria-label={t.nav.search}
+          >
+            <IconSearch class="size-5" />
+          </a>
+        )
+      }
+      {
+        features.lightAndDarkMode && (
+          <button
+            id="theme-btn"
+            class="focus-outline hover:[&>svg]:stroke-accent relative size-7"
+            title={t.a11y.toggleTheme}
+            aria-label="auto"
+            aria-live="polite"
+          >
+            <IconMoon class="absolute top-[50%] left-[50%] size-5 translate-[-50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+            <IconSunHigh class="absolute top-[50%] left-[50%] size-5 translate-[-50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+          </button>
+        )
+      }
+    </span>
+  </nav>
+</header>

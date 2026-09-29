@@ -1,0 +1,208 @@
+---
+type TagLink = {
+  slug: string;
+  name: string;
+  count: number;
+};
+
+type Props = {
+  tags: TagLink[];
+};
+
+const { tags } = Astro.props;
+const largestCount = Math.max(...tags.map(tag => tag.count), 1);
+
+function tagSize(count: number) {
+  const weight = Math.log(count + 1) / Math.log(largestCount + 1);
+  return `${(0.76 + weight * 0.34).toFixed(2)}rem`;
+}
+---
+
+<nav
+  aria-label="Tag navigation"
+  class="border-border min-w-0 border-y py-3 xl:sticky xl:top-6 xl:self-start xl:border-y-0 xl:py-0"
+>
+  <label for="tag-filter" class="sr-only">筛选标签</label>
+  <input
+    id="tag-filter"
+    type="search"
+    autocomplete="off"
+    placeholder={`搜索 ${tags.length} 个标签`}
+    class="border-border text-foreground placeholder:text-muted-foreground focus:border-accent mb-3 w-full border-x-0 border-t-0 border-b bg-transparent px-0 py-1.5 text-sm outline-none"
+  />
+  <div
+    data-tag-list
+    class="tag-nav-list max-h-44 overflow-y-auto xl:max-h-[calc(100vh-7rem)]"
+  >
+    <ul class="flex flex-wrap items-baseline gap-x-2.5 gap-y-1.5">
+      {
+        tags.map(({ slug, name, count }, index) => (
+          <li
+            data-tag-item
+            data-tag-search={`${name} ${slug}`.toLocaleLowerCase()}
+          >
+            <a
+              href={`#tag-${slug}`}
+              data-tag-nav={slug}
+              aria-current={index === 0 ? "location" : undefined}
+              aria-label={`#${name}，${count} 篇文章`}
+              title={`${name} · ${count} 篇文章`}
+              class="tag-nav-link inline-block py-0.5 leading-tight no-underline transition-colors"
+              style={`font-size: ${tagSize(count)}`}
+            >
+              <span class="tag-hash" aria-hidden="true">
+                #
+              </span>
+              {name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p data-tag-empty hidden class="text-muted-foreground px-2 py-3 text-sm">
+      没有匹配的标签
+    </p>
+  </div>
+  <p data-tag-status aria-live="polite" class="sr-only"></p>
+</nav>
+
+<script>
+  let tagNavigationController: AbortController | undefined;
+
+  function initTagNavigation() {
+    tagNavigationController?.abort();
+    tagNavigationController = new AbortController();
+
+    const links = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>("[data-tag-nav]")
+    );
+    const filter = document.querySelector<HTMLInputElement>("#tag-filter");
+    const items = Array.from(
+      document.querySelectorAll<HTMLLIElement>("[data-tag-item]")
+    );
+    const empty = document.querySelector<HTMLElement>("[data-tag-empty]");
+    const status = document.querySelector<HTMLElement>("[data-tag-status]");
+    const list = document.querySelector<HTMLElement>("[data-tag-list]");
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-tag-section]")
+    );
+
+    if (links.length === 0 || sections.length === 0 || !filter || !list) return;
+
+    const { signal } = tagNavigationController;
+    const filterInput: HTMLInputElement = filter;
+    const scrollList: HTMLElement = list;
+
+    function keepLinkVisible(link: HTMLAnchorElement) {
+      if (link.closest("[data-tag-item]")?.hasAttribute("hidden")) return;
+      if (scrollList.scrollHeight <= scrollList.clientHeight) return;
+
+      const navigationRect = scrollList.getBoundingClientRect();
+      const linkRect = link.getBoundingClientRect();
+
+      if (linkRect.top < navigationRect.top) {
+        scrollList.scrollTop += linkRect.top - navigationRect.top - 4;
+      } else if (linkRect.bottom > navigationRect.bottom) {
+        scrollList.scrollTop += linkRect.bottom - navigationRect.bottom + 4;
+      }
+    }
+
+    function applyFilter() {
+      const query = filterInput.value
+        .trim()
+        .replace(/^#/, "")
+        .toLocaleLowerCase();
+      let visible = 0;
+
+      for (const item of items) {
+        item.hidden = !item.dataset.tagSearch?.includes(query);
+        if (!item.hidden) visible += 1;
+      }
+
+      if (empty) empty.hidden = visible > 0;
+      if (status)
+        status.textContent = `显示 ${visible} / ${items.length} 个标签`;
+      scrollList.scrollTop = 0;
+    }
+
+    function setActive(slug?: string) {
+      links.forEach(link => {
+        if (link.dataset.tagNav === slug) {
+          link.setAttribute("aria-current", "location");
+          keepLinkVisible(link);
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    }
+
+    function updateActive() {
+      const marker = window.scrollY + 32;
+      let current = sections[0];
+
+      for (const section of sections) {
+        if (section.offsetTop <= marker) current = section;
+      }
+
+      const atPageEnd =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+      if (atPageEnd) current = sections.at(-1) ?? current;
+
+      setActive(current.dataset.tagSection);
+    }
+
+    let animationFrame: number | undefined;
+    function requestUpdate() {
+      if (animationFrame !== undefined) return;
+      animationFrame = window.requestAnimationFrame(() => {
+        animationFrame = undefined;
+        updateActive();
+      });
+    }
+
+    links.forEach(link => {
+      link.addEventListener("click", () => setActive(link.dataset.tagNav), {
+        signal,
+      });
+    });
+    filterInput.addEventListener("input", applyFilter, { signal });
+    applyFilter();
+    window.addEventListener("scroll", requestUpdate, { passive: true, signal });
+    window.addEventListener("resize", requestUpdate, { passive: true, signal });
+    updateActive();
+  }
+
+  document.addEventListener("astro:page-load", initTagNavigation);
+</script>
+
+<style>
+  .tag-nav-list {
+    overflow-anchor: none;
+    scrollbar-width: none;
+  }
+
+  .tag-nav-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tag-nav-link {
+    color: var(--muted-foreground);
+  }
+
+  .tag-nav-link:hover {
+    color: var(--accent);
+  }
+
+  .tag-hash {
+    color: var(--accent);
+    opacity: 0.65;
+  }
+
+  .tag-nav-link[aria-current="location"] {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

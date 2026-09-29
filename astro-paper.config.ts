@@ -1,0 +1,39 @@
+import { defineAstroPaperConfig } from "./src/types/config";
+
+export default defineAstroPaperConfig({
+  site: {
+    url: "https://quboliu.github.io/",
+    title: "quboliu",
+    description: "Notes on software, tools, and ideas.",
+    author: "quboliu",
+    profile: "https://github.com/quboliu",
+    ogImage: "default-og.jpg",
+    lang: "en",
+    timezone: "America/New_York",
+    dir: "ltr",
+  },
+  posts: {
+    perPage: 50,
+    perIndex: 10,
+    scheduledPostMargin: 15 * 60 * 1000,
+  },
+  features: {
+    lightAndDarkMode: true,
+    dynamicOgImage: false,
+    showArchives: false,
+    showBackButton: true,
+    editPost: {
+      enabled: true,
+      url: "https://github.com/quboliu/quboliu.github.io/edit/main/",
+    },
+    search: "pagefind",
+  },
+  shareLinks: [
+    { name: "x", url: "https://x.com/intent/post?url=" },
+    { name: "telegram", url: "https://t.me/share/url?url=" },
+    {
+      name: "mail",
+      url: "mailto:?subject=See%20this%20post&body=",
+    },
+  ],
+});

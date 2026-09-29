@@ -1,0 +1,45 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import config from "@/config";
+
+export const getStaticPaths = (async () => {
+  const paparazziPages = await getCollection("pages", ({ id }) =>
+    id.startsWith("paparazzi/")
+  );
+
+  return paparazziPages.map(page => ({
+    params: { slug: page.id.split("/").at(-1) ?? page.id },
+    props: { page },
+  }));
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<Layout
+  title={`${page.data.title} | Paparazzi | ${config.site.title}`}
+  description={page.data.description}
+  ogImage={page.data.ogImage}
+  canonicalURL={page.data.canonicalURL}
+>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main
+    pageTitle={page.data.title}
+    pageDesc={page.data.description}
+    class="app-prose"
+  >
+    <Content />
+  </Main>
+
+  <Footer />
+</Layout>

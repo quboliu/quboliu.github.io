@@ -1,0 +1,237 @@
+---
+import { useTranslations } from "@/i18n";
+
+type Props = {
+  nextUrl?: string;
+};
+
+const { nextUrl } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
+---
+
+<div id="post-feed" data-post-feed data-next-url={nextUrl}>
+  <slot />
+
+  <div data-post-feed-sentinel class="h-px" aria-hidden="true"></div>
+
+  <div
+    class="flex min-h-12 flex-col items-center justify-center gap-2 py-4 text-sm"
+    data-post-feed-status
+  >
+    <p data-post-feed-loading role="status" hidden>{t.views.loading}</p>
+    <button
+      type="button"
+      data-post-feed-load-more
+      class="border-border text-accent hover:border-accent rounded border px-3 py-1.5 no-underline"
+      hidden>{t.views.loadMore}</button
+    >
+    <p data-post-feed-error class="text-accent" role="alert" hidden>
+      {t.views.error}
+    </p>
+    <p data-post-feed-end class="text-muted-foreground" hidden>
+      {t.views.end}
+    </p>
+  </div>
+</div>
+
+<script>
+  let postFeedController: AbortController | undefined;
+  let postFeedObserver: IntersectionObserver | undefined;
+
+  function initPostFeed() {
+    postFeedController?.abort();
+    postFeedObserver?.disconnect();
+    postFeedController = new AbortController();
+
+    const feed = document.querySelector<HTMLElement>("[data-post-feed]");
+    const list = feed?.querySelector<HTMLElement>("[data-post-list]");
+    const sentinel = feed?.querySelector<HTMLElement>(
+      "[data-post-feed-sentinel]"
+    );
+    const loading = feed?.querySelector<HTMLElement>(
+      "[data-post-feed-loading]"
+    );
+    const loadMore = feed?.querySelector<HTMLButtonElement>(
+      "[data-post-feed-load-more]"
+    );
+    const error = feed?.querySelector<HTMLElement>("[data-post-feed-error]");
+    const end = feed?.querySelector<HTMLElement>("[data-post-feed-end]");
+    const pagination = document.querySelector<HTMLElement>(
+      "[data-post-pagination]"
+    );
+
+    if (
+      !feed ||
+      !list ||
+      !sentinel ||
+      !loading ||
+      !loadMore ||
+      !error ||
+      !end
+    ) {
+      return;
+    }
+
+    const postFeed = feed;
+    const postList = list;
+    const postSentinel = sentinel;
+    const postLoading = loading;
+    const postLoadMore = loadMore;
+    const postError = error;
+    const postEnd = end;
+    const { signal } = postFeedController;
+    let next = postFeed.dataset.nextUrl ?? "";
+    let loadingPromise: Promise<boolean> | undefined;
+    let failed = false;
+
+    function updateEndState() {
+      const hasNext = Boolean(next);
+      postSentinel.hidden = !hasNext;
+      postEnd.hidden = hasNext;
+      if (!hasNext) {
+        postLoadMore.hidden = true;
+      }
+    }
+
+    function appendNextPosts(nextList: HTMLElement) {
+      for (const nextChild of Array.from(nextList.children)) {
+        const nextPost = nextChild.cloneNode(true);
+        if (!(nextPost instanceof HTMLElement)) {
+          postList.append(nextPost);
+          continue;
+        }
+
+        const timelineSlug = nextPost.dataset.timelineSection;
+        const existingSection = Array.from(postList.children).find(
+          (child): child is HTMLElement =>
+            child instanceof HTMLElement &&
+            child.dataset.timelineSection === timelineSlug
+        );
+        const incomingPosts = nextPost.querySelector<HTMLElement>(
+          "[data-timeline-posts]"
+        );
+        if (!timelineSlug || !incomingPosts || !existingSection) {
+          postList.append(nextPost);
+          continue;
+        }
+
+        const existingPosts = existingSection.querySelector<HTMLElement>(
+          "[data-timeline-posts]"
+        );
+        if (!existingPosts) {
+          postList.append(nextPost);
+          continue;
+        }
+
+        existingPosts.append(
+          ...Array.from(incomingPosts.children, post => post.cloneNode(true))
+        );
+        const count = String(existingPosts.children.length);
+        existingSection.dataset.timelineCount = count;
+        existingSection
+          .querySelectorAll<HTMLElement>("[data-timeline-count]")
+          .forEach(element => {
+            element.textContent = count;
+          });
+      }
+
+      document.dispatchEvent(new CustomEvent("post-feed:appended"));
+    }
+
+    function loadNextPage(): Promise<boolean> {
+      if (!next) return Promise.resolve(false);
+      if (loadingPromise) return loadingPromise;
+
+      loadingPromise = (async () => {
+        failed = false;
+        postLoading.hidden = false;
+        postLoadMore.hidden = true;
+        postError.hidden = true;
+
+        try {
+          const response = await fetch(next, {
+            headers: { Accept: "text/html" },
+            signal,
+          });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+          const html = await response.text();
+          const document = new DOMParser().parseFromString(html, "text/html");
+          const nextFeed =
+            document.querySelector<HTMLElement>("[data-post-feed]");
+          const nextList =
+            nextFeed?.querySelector<HTMLElement>("[data-post-list]");
+
+          if (!nextFeed || !nextList || nextList.children.length === 0) {
+            throw new Error("The next post page has no post list");
+          }
+
+          appendNextPosts(nextList);
+          next = nextFeed.dataset.nextUrl ?? "";
+          postFeed.dataset.nextUrl = next;
+          updateEndState();
+          return true;
+        } catch {
+          if (!signal.aborted) {
+            failed = true;
+            postError.hidden = false;
+            postLoadMore.hidden = false;
+            pagination?.removeAttribute("hidden");
+          }
+          return false;
+        } finally {
+          loadingPromise = undefined;
+          postLoading.hidden = true;
+        }
+      })();
+
+      return loadingPromise;
+    }
+
+    async function loadUntil(sectionId: string) {
+      while (next && !document.getElementById(sectionId)) {
+        const didLoad = await loadNextPage();
+        if (!didLoad) return;
+      }
+
+      document
+        .getElementById(sectionId)
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    postLoadMore.addEventListener("click", loadNextPage, { signal });
+    document.addEventListener(
+      "post-feed:load-until",
+      event => {
+        const request = event as CustomEvent<{ sectionId?: unknown }>;
+        if (typeof request.detail?.sectionId === "string") {
+          void loadUntil(request.detail.sectionId);
+        }
+      },
+      { signal }
+    );
+
+    if (next) {
+      pagination?.setAttribute("hidden", "true");
+
+      if ("IntersectionObserver" in window) {
+        postFeedObserver = new IntersectionObserver(
+          entries => {
+            if (!failed && entries.some(entry => entry.isIntersecting)) {
+              void loadNextPage();
+            }
+          },
+          { rootMargin: "900px 0px" }
+        );
+        postFeedObserver.observe(postSentinel);
+      } else {
+        postLoadMore.hidden = false;
+      }
+    }
+
+    updateEndState();
+  }
+
+  document.addEventListener("astro:page-load", initPostFeed);
+  initPostFeed();
+</script>

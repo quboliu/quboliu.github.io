@@ -1,0 +1,41 @@
+---
+type Props = {
+  src: string;
+  title: string;
+  poster?: string;
+  captions?: string;
+  mimeType?: string;
+};
+
+const { src, title, poster, captions, mimeType = "video/mp4" } = Astro.props;
+---
+
+<figure class="not-prose my-8">
+  <video
+    controls
+    playsinline
+    preload="metadata"
+    poster={poster}
+    class="border-border bg-muted/30 aspect-video w-full rounded border"
+    aria-label={title}
+  >
+    <source {src} type={mimeType} />
+    {
+      captions && (
+        <track
+          kind="captions"
+          src={captions}
+          srclang="zh"
+          label="Chinese captions"
+          default
+        />
+      )
+    }
+    Your browser does not support HTML video. <a href={src}
+      >Open the video file</a
+    >.
+  </video>
+  <figcaption class="text-muted-foreground mt-2 px-1 text-center text-sm">
+    {title}
+  </figcaption>
+</figure>

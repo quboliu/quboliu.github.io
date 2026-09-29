@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { useTranslations } from "@/i18n";
+
+type Props = {
+  noMarginTop?: boolean;
+} & HTMLAttributes<"footer">;
+
+const { noMarginTop = false, class: className, ...attrs } = Astro.props;
+
+const t = useTranslations(Astro.currentLocale);
+const currentYear = new Date().getFullYear();
+---
+
+<footer
+  class:list={["app-layout", { "mt-auto": !noMarginTop }, className]}
+  {...attrs}
+>
+  <div class="text-muted-foreground py-6 text-center text-sm">
+    <p class="mt-2">
+      {t.footer.copyright} &#169; {currentYear} · {t.footer.allRightsReserved}
+    </p>
+  </div>
+</footer>

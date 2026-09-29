@@ -1,0 +1,21 @@
+---
+import config from "@/config";
+
+const { socials } = config;
+---
+
+<div class="flex flex-wrap items-center gap-x-2">
+  {
+    socials.map(({ name, url, linkTitle }) => (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-accent underline hover:no-underline"
+        title={linkTitle}
+      >
+        {linkTitle ?? name}
+      </a>
+    ))
+  }
+</div>
