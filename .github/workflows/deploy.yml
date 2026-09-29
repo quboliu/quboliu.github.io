@@ -55,6 +55,11 @@ jobs:
       - name: Ensure each article lives in one repository
         run: node site/scripts/check-post-exclusivity.mjs site drafts
 
+      - name: Ensure About pages match
+        run: |
+          cmp site/src/content/pages/about.md drafts/src/content/pages/about.md
+          cmp site/src/pages/about.astro drafts/src/pages/about.astro
+
       - name: Build formal site and its search index
         working-directory: site
         run: |

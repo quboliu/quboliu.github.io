@@ -34,7 +34,7 @@ if (unclassifiedPages.length) {
 const tieredPaparazziPages = PAPARAZZI_TIERS.map(tier => ({
   ...tier,
   pages: paparazziPages.filter(page => page.data.paparazziTier === tier.slug),
-}));
+})).filter(tier => tier.pages.length > 0);
 ---
 
 <Layout
