@@ -51,4 +51,4 @@ if (duplicates.length) {
   throw new Error(`Articles must exist in exactly one source repository:\n${duplicates.join("\n")}`);
 }
 
-console.log(`Post exclusivity passed: ${formalPosts.length} formal, ${draftPosts.length} draft.`);
+process.stdout.write(`Post exclusivity passed: ${formalPosts.length} formal, ${draftPosts.length} draft.\n`);
