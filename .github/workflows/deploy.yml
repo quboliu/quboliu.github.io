@@ -52,6 +52,9 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Ensure each article lives in one repository
+        run: node site/scripts/check-post-exclusivity.mjs site drafts
+
       - name: Build formal site and its search index
         working-directory: site
         run: |
