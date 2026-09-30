@@ -152,6 +152,21 @@
   }
 }
 
+/* All article prose shares the same aligned margins, in either language. */
+.app-prose :is(p, li) {
+  text-align: justify;
+  text-align-last: start;
+  hyphens: auto;
+}
+
+/* Preserve the alignment and literal identifiers in headings and code. */
+.app-prose .bilingual-block-title,
+.app-prose :is(pre, code) {
+  text-align: start;
+  text-align-last: auto;
+  hyphens: none;
+}
+
 /* Override Typography's italic blockquote default, including nested emphasis. */
 .app-prose blockquote,
 .app-prose blockquote * {

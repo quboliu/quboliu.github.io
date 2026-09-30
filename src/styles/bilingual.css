@@ -90,7 +90,7 @@
   margin-block-start: 0.2em;
 }
 
-.bilingual-prose .bilingual-math {
+.app-prose .bilingual-math {
   display: inline-block;
   max-width: 100%;
   overflow-x: auto;
@@ -101,11 +101,11 @@
   padding-inline: 0.15em;
 }
 
-.bilingual-prose .katex-display {
+.app-prose .katex-display {
   max-width: 100%;
 }
 
-.bilingual-prose .katex-display > .bilingual-math {
+.app-prose .katex-display > .bilingual-math {
   display: block;
 }
 
