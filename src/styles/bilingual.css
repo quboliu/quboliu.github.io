@@ -1,7 +1,6 @@
 /* DDIA dual(): two consecutive language blocks with equal typographic weight. */
 .bilingual-prose {
   max-width: 48rem;
-  line-height: 1.72;
 }
 
 .bilingual-prose p {
@@ -15,8 +14,6 @@
 
 .bilingual-unit > [lang] {
   color: inherit;
-  font-size: inherit;
-  line-height: inherit;
   min-width: 0;
 }
 
@@ -38,13 +35,7 @@
 
 .bilingual-heading .post-title-prefix {
   display: block;
-  color: var(--bilingual-accent);
-  font-size: 0.6em;
   margin-block-end: 0.6em;
-}
-
-.bilingual-heading {
-  color: var(--bilingual-accent);
 }
 
 .bilingual-prose .comment-replies {
@@ -54,7 +45,6 @@
 }
 
 .bilingual-prose [lang|="zh"] {
-  font-family: var(--font-chinese);
   font-style: normal;
 }
 
@@ -66,14 +56,11 @@
 .bilingual-prose :is(h2, h3, h4, h5, h6),
 .bilingual-heading,
 .bilingual-heading [lang|="zh"] {
-  font-family: var(--font-heading);
   font-style: normal;
-  line-height: 1.35;
   text-wrap: pretty;
 }
 
 .bilingual-prose h2 {
-  color: var(--bilingual-accent);
   margin-block: 1.8em 0.7em;
 }
 
@@ -98,23 +85,9 @@
   margin-inline-start: 0;
 }
 
-.bilingual-prose .bilingual-block-title {
-  font-family: var(--font-heading);
-  color: var(--bilingual-accent);
-  line-height: 1.35;
-}
-
 .bilingual-block-title .heading-zh {
   display: block;
   margin-block-start: 0.2em;
-}
-
-.bilingual-prose .bilingual-block-title strong {
-  color: inherit;
-}
-
-.bilingual-prose .bilingual-block-title [lang|="zh"] {
-  font-family: var(--font-heading);
 }
 
 .bilingual-prose .bilingual-math {
@@ -144,10 +117,8 @@
 .app-prose .translator-note {
   margin-block: 1.2em;
   padding: 0.8em 1em;
-  border-inline-start: 3px solid var(--bilingual-accent);
-  background: var(--bilingual-note-background);
-  font-size: 0.9em;
-  line-height: 1.65;
+  border-inline-start: 3px solid var(--border);
+  background: var(--muted);
   font-style: normal;
 }
 
@@ -160,15 +131,8 @@
 }
 
 .app-prose .bilingual-caption {
-  color: var(--muted-foreground);
-  font-size: 0.9em;
-  line-height: 1.5;
   margin-block: 0.65em 1.5em;
   font-style: normal;
-}
-
-.app-prose .bilingual-caption :is(p, strong, [lang]) {
-  color: inherit;
 }
 
 .app-prose .bilingual-caption > span[lang] {
@@ -187,8 +151,6 @@
   display: table;
   width: 100%;
   table-layout: fixed;
-  font-size: 0.9em;
-  line-height: 1.5;
 }
 
 .bilingual-prose :is(th, td) {
@@ -227,11 +189,6 @@
     color: var(--heading);
     font-weight: 700;
   }
-}
-
-.bilingual-prose [data-footnotes] {
-  font-size: 0.9em;
-  line-height: 1.6;
 }
 
 @media print {

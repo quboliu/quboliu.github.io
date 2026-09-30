@@ -44,13 +44,6 @@
   --code-border: #d5dce3;
   --muted-foreground: #777777;
   --border: #dddddd;
-  --font-chinese:
-    "Noto Serif SC", "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC",
-    SimSun, serif;
-  --font-heading:
-    "DejaVu Sans", "Noto Sans CJK SC", "Noto Sans SC", system-ui, sans-serif;
-  --bilingual-accent: #1a5276;
-  --bilingual-note-background: #eef4f8;
   --font-main:
     "TeX Gyre Schola", "Noto Serif SC", "Noto Serif CJK SC",
     "Source Han Serif SC", "Songti SC", SimSun, serif;
@@ -58,8 +51,6 @@
 
 /* Dark theme values (Bear default) */
 [data-theme="dark"] {
-  --bilingual-accent: #8cc2dd;
-  --bilingual-note-background: #103440;
   --background: #01242e;
   --foreground: #dddddd;
   --heading: #eeeeee;
