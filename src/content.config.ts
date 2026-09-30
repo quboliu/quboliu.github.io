@@ -14,6 +14,7 @@ const posts = defineCollection({
     z.object({
       author: z.string().default(config.site.author),
       lang: z.string().optional(),
+      bilingual: z.boolean().default(false),
       pubDatetime: z.date(),
       modDatetime: z.date().optional().nullable(),
       title: z.string(),

@@ -19,6 +19,7 @@ import AdjacentPostNav from "./_components/AdjacentPostNav.astro";
 import Comments from "@/components/Comments.astro";
 import PostAssessments from "@/components/PostAssessments.astro";
 import TableOfContents from "./_components/TableOfContents.astro";
+import BilingualTitle from "@/components/BilingualTitle.astro";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
 
@@ -133,9 +134,12 @@ const ogImage = ogImageUrl
     <h1
       lang={lang}
       style={{ viewTransitionName: toTransitionName(title) }}
-      class="text-heading inline-block max-w-full text-2xl font-bold [overflow-wrap:anywhere] sm:text-3xl"
+      class:list={[
+        "text-heading inline-block max-w-full text-2xl font-bold [overflow-wrap:anywhere] sm:text-3xl",
+        { "bilingual-heading": post.data.bilingual },
+      ]}
     >
-      {title}
+      <BilingualTitle title={title} bilingual={post.data.bilingual} />
     </h1>
 
     <div class="my-2 flex flex-wrap items-center gap-2">
@@ -159,6 +163,7 @@ const ogImage = ogImageUrl
       class:list={[
         "mt-8 w-full",
         "app-prose max-w-app",
+        { "bilingual-prose": post.data.bilingual },
         "prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)",
       ]}
     >
@@ -236,6 +241,35 @@ const ogImage = ogImageUrl
     }
   }
   addHeadingLinks();
+
+  function initMathScrolling() {
+    const math = document.querySelectorAll(".bilingual-prose .bilingual-math");
+    const update = () => {
+      for (const formula of math) {
+        if (formula.scrollWidth > formula.clientWidth + 1) {
+          formula.tabIndex = 0;
+          formula.setAttribute("role", "group");
+          formula.setAttribute(
+            "aria-label",
+            "Scrollable formula / 可横向滚动的公式"
+          );
+        } else {
+          formula.removeAttribute("tabindex");
+          formula.removeAttribute("role");
+          formula.removeAttribute("aria-label");
+        }
+      }
+    };
+    const observer = new ResizeObserver(update);
+    for (const formula of math) observer.observe(formula);
+    update();
+    document.addEventListener(
+      "astro:before-swap",
+      () => observer.disconnect(),
+      { once: true }
+    );
+  }
+  initMathScrolling();
 
   function initTocSpy() {
     const links = Array.from(document.querySelectorAll("[data-toc-link]"));

@@ -8,6 +8,7 @@ import remarkCollapse from "remark-collapse";
 import remarkMath from "remark-math";
 import rehypeCallouts from "rehype-callouts";
 import rehypeKatex from "rehype-katex";
+import rehypeRaw from "rehype-raw";
 import {
   transformerNotationDiff,
   transformerNotationHighlight,
@@ -15,6 +16,7 @@ import {
 } from "@shikijs/transformers";
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import config from "./astro-paper.config";
+import rehypeBilingual from "./src/utils/rehypeBilingual.mjs";
 
 export default defineConfig({
   site: config.site.url,
@@ -39,7 +41,23 @@ export default defineConfig({
         remarkToc,
         [remarkCollapse, { test: "Table of contents" }],
       ],
-      rehypePlugins: [rehypeKatex, rehypeCallouts],
+      rehypePlugins: [
+        rehypeKatex,
+        rehypeCallouts,
+        [
+          rehypeRaw,
+          {
+            passThrough: [
+              "mdxjsEsm",
+              "mdxFlowExpression",
+              "mdxJsxFlowElement",
+              "mdxJsxTextElement",
+              "mdxTextExpression",
+            ],
+          },
+        ],
+        rehypeBilingual,
+      ],
     }),
     shikiConfig: {
       themes: { light: "github-light", dark: "github-dark" },

@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
+import { checkBilingualFormat } from "./bilingual-format.mjs";
 
 const postsRoot = path.resolve("src/content/posts");
 const errors = [];
@@ -93,6 +94,11 @@ for (const file of postFiles) {
   const bodyLines = body.split(/\r?\n/);
   const bodyLineOffset = (raw.slice(0, frontmatter[0].length).match(/\n/g) ?? [])
     .length;
+  if (/^bilingual:\s*true\s*$/m.test(frontmatter[1])) {
+    for (const problem of await checkBilingualFormat(body)) {
+      report(file, bodyLineOffset + problem.line, problem.message);
+    }
+  }
   const headings = [];
   const visibleLines = [];
   const structureItems = [];

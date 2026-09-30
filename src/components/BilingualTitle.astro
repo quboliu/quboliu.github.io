@@ -1,0 +1,34 @@
+---
+type Props = { title: string; bilingual: boolean };
+const { title, bilingual } = Astro.props;
+const separator = title.lastIndexOf("｜");
+const paired =
+  bilingual &&
+  separator > 0 &&
+  /[a-zA-Z]/.test(title.slice(0, separator)) &&
+  /\p{Script=Han}/u.test(title.slice(separator + 1));
+const original = title.slice(0, separator);
+const prefixMatch = original.match(/^(.*?[|｜]\s*)(.*)$/);
+const prefix =
+  prefixMatch && /\p{Script=Han}/u.test(prefixMatch[1]) ? prefixMatch[1] : "";
+const english = prefix ? prefixMatch![2] : original;
+---
+
+{
+  paired ? (
+    <Fragment>
+      {prefix && <span class="post-title-prefix">{prefix}</span>}
+      <>
+        <span lang="en">{english}</span>
+        <span class="bilingual-separator" aria-hidden="true">
+          ｜
+        </span>
+        <span lang="zh-CN" class="heading-zh">
+          {title.slice(separator + 1)}
+        </span>
+      </>
+    </Fragment>
+  ) : (
+    title
+  )
+}

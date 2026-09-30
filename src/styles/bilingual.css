@@ -1,0 +1,242 @@
+/* DDIA dual(): two consecutive language blocks with equal typographic weight. */
+.bilingual-prose {
+  max-width: 48rem;
+  line-height: 1.72;
+}
+
+.bilingual-prose p {
+  margin-block: 1em;
+}
+
+.bilingual-unit {
+  margin-block: 1em;
+  min-width: 0;
+}
+
+.bilingual-unit > [lang] {
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  min-width: 0;
+}
+
+.bilingual-unit > [lang] + [lang] {
+  margin-block-start: 1em;
+}
+
+.bilingual-unit > [lang] > :first-child {
+  margin-block-start: 0;
+}
+
+.bilingual-unit > [lang] > :last-child {
+  margin-block-end: 0;
+}
+
+.bilingual-prose .list-translation {
+  margin-block: 1em;
+}
+
+.bilingual-heading .post-title-prefix {
+  display: block;
+  color: var(--bilingual-accent);
+  font-size: 0.6em;
+  margin-block-end: 0.6em;
+}
+
+.bilingual-heading {
+  color: var(--bilingual-accent);
+}
+
+.bilingual-prose .comment-replies {
+  padding-inline-start: min(3vw, 1.25rem);
+  margin-inline-start: 0;
+  border-inline-start: 1px solid var(--border);
+}
+
+.bilingual-prose [lang|="zh"] {
+  font-family: var(--font-chinese);
+  font-style: normal;
+}
+
+.bilingual-prose [lang|="zh"] em,
+.bilingual-prose [lang|="zh"] i {
+  font-style: normal;
+}
+
+.bilingual-prose :is(h2, h3, h4, h5, h6),
+.bilingual-heading,
+.bilingual-heading [lang|="zh"] {
+  font-family: var(--font-heading);
+  font-style: normal;
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.bilingual-prose h2 {
+  color: var(--bilingual-accent);
+  margin-block: 1.8em 0.7em;
+}
+
+.bilingual-separator {
+  display: none;
+}
+
+.bilingual-heading .heading-zh {
+  display: block;
+  margin-block-start: 0.2em;
+}
+
+.bilingual-prose .bilingual-heading:has(> .heading-link) {
+  position: relative;
+  padding-inline-end: 1.2em;
+}
+
+.bilingual-prose .bilingual-heading > .heading-link {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  margin-inline-start: 0;
+}
+
+.bilingual-prose .bilingual-block-title {
+  font-family: var(--font-heading);
+  color: var(--bilingual-accent);
+  line-height: 1.35;
+}
+
+.bilingual-block-title .heading-zh {
+  display: block;
+  margin-block-start: 0.2em;
+}
+
+.bilingual-prose .bilingual-block-title strong {
+  color: inherit;
+}
+
+.bilingual-prose .bilingual-block-title [lang|="zh"] {
+  font-family: var(--font-heading);
+}
+
+.bilingual-prose .bilingual-math {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: middle;
+  padding-block: 0.25em;
+  /* Leave room for italic glyph ink and subscripts at the formula's edge. */
+  padding-inline: 0.15em;
+}
+
+.bilingual-prose .katex-display {
+  max-width: 100%;
+}
+
+.bilingual-prose .katex-display > .bilingual-math {
+  display: block;
+}
+
+.bilingual-prose .bilingual-anchor-alias {
+  scroll-margin-top: 6rem;
+}
+
+.app-prose .source-note,
+.app-prose .translator-note {
+  margin-block: 1.2em;
+  padding: 0.8em 1em;
+  border-inline-start: 3px solid var(--bilingual-accent);
+  background: var(--bilingual-note-background);
+  font-size: 0.9em;
+  line-height: 1.65;
+  font-style: normal;
+}
+
+.app-prose :is(.source-note, .translator-note) > :first-child {
+  margin-block-start: 0;
+}
+
+.app-prose :is(.source-note, .translator-note) > :last-child {
+  margin-block-end: 0;
+}
+
+.app-prose .bilingual-caption {
+  color: var(--muted-foreground);
+  font-size: 0.9em;
+  line-height: 1.5;
+  margin-block: 0.65em 1.5em;
+  font-style: normal;
+}
+
+.app-prose .bilingual-caption :is(p, strong, [lang]) {
+  color: inherit;
+}
+
+.app-prose .bilingual-caption > span[lang] {
+  display: block;
+}
+
+.app-prose .bilingual-caption > span[lang] + span[lang] {
+  margin-block-start: 0.35em;
+}
+
+.bilingual-prose :is(figure, img, table, pre) {
+  max-width: 100%;
+}
+
+.bilingual-prose table {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.bilingual-prose :is(th, td) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.bilingual-prose pre code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 40em) {
+  .bilingual-prose .bilingual-wide-table,
+  .bilingual-prose .bilingual-wide-table :is(tbody, tr, td) {
+    display: block;
+    width: auto;
+  }
+
+  .bilingual-prose .bilingual-wide-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .bilingual-prose .bilingual-wide-table tr {
+    margin-block-end: 1em;
+  }
+
+  .bilingual-prose .bilingual-wide-table td::before {
+    content: attr(data-label);
+    display: block;
+    color: var(--heading);
+    font-weight: 700;
+  }
+}
+
+.bilingual-prose [data-footnotes] {
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+@media print {
+  .bilingual-heading,
+  .bilingual-caption {
+    break-after: avoid;
+  }
+}

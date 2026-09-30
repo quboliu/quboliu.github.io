@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./theme.css";
 @import "./typography.css";
+@import "./bilingual.css";
 @import "rehype-callouts/theme/obsidian";
 @import "katex/dist/katex.min.css";
 
@@ -61,7 +62,6 @@
   & li a {
     @apply text-accent no-underline hover:underline;
   }
-
 }
 
 :target {
