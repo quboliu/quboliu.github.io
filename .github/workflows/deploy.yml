@@ -76,9 +76,9 @@ jobs:
         run: |
           test -f site/dist/index.html
           test -f drafts/dist/index.html
-          test ! -e site/dist/blog-drafts
-          mkdir site/dist/blog-drafts
-          cp -a drafts/dist/. site/dist/blog-drafts/
+          test ! -e site/dist/d
+          mkdir site/dist/d
+          cp -a drafts/dist/. site/dist/d/
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
