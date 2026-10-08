@@ -4,6 +4,10 @@ import { glob } from "astro/loaders";
 import config from "@/config";
 import { AREA_SLUGS } from "@/data/areas";
 import { CONTENT_TYPE_SLUGS } from "@/data/contentTypes";
+import {
+  PAPARAZZI_CATEGORY_SLUGS,
+  PAPARAZZI_SUBJECT_TYPES,
+} from "@/data/paparazziCategories";
 import { PAPARAZZI_TIER_SLUGS } from "@/data/paparazziTiers";
 
 export const BLOG_PATH = "src/content/posts";
@@ -37,6 +41,14 @@ const pages = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     subjectName: z.string().optional(),
+    paparazziCategory: z.enum(PAPARAZZI_CATEGORY_SLUGS).default("people"),
+    subjectType: z.enum(PAPARAZZI_SUBJECT_TYPES).default("person"),
+    verifiedDate: z
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/)
+      .optional(),
+    website: z.url().optional(),
+    relatedProducts: z.array(z.string()).default([]),
     paparazziTier: z.enum(PAPARAZZI_TIER_SLUGS).optional(),
     avatarCandidates: z
       .array(

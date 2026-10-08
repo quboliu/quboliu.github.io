@@ -1,0 +1,11 @@
+---
+import Directory from "@/components/paparazzi/Directory.astro";
+import { PAPARAZZI_CATEGORIES } from "@/data/paparazziCategories";
+export function getStaticPaths() {
+  return PAPARAZZI_CATEGORIES.map(category => ({
+    params: { category: category.slug },
+  }));
+}
+---
+
+<Directory categorySlug={Astro.params.category} />
