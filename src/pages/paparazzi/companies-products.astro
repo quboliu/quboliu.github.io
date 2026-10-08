@@ -1,0 +1,106 @@
+---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import PaparazziNavigation from "@/components/PaparazziNavigation.astro";
+import config from "@/config";
+import { AREAS } from "@/data/areas";
+import { getAssetPath } from "@/utils/withBase";
+const locale = Astro.currentLocale ?? config.site.lang;
+const pages = (
+  await getCollection(
+    "pages",
+    ({ id, data }) =>
+      id.startsWith("paparazzi/") &&
+      data.paparazziSection === "companies-products"
+  )
+).sort((a, b) => a.data.title.localeCompare(b.data.title));
+for (const page of pages) {
+  if (!page.data.paparazziArea || !page.data.logo || !page.data.logoSource) {
+    throw new Error(
+      `Company/product dossier must declare paparazziArea, logo and logoSource: ${page.id}`
+    );
+  }
+}
+const areas = AREAS.map(area => ({
+  ...area,
+  pages: pages.filter(page => page.data.paparazziArea === area.slug),
+})).filter(area => area.pages.length > 0);
+---
+
+<Layout
+  title={`公司与产品 | Paparazzi | ${config.site.title}`}
+  description="Independent dossiers tracking companies and products, grouped by field."
+>
+  <Header />
+  <Breadcrumb />
+  <Main
+    pageTitle="Paparazzi"
+    pageDesc="Independent dossiers tracking companies and products — grouped by field."
+  >
+    <PaparazziNavigation active="companies-products" />
+    <div class="grid grid-cols-1 gap-y-1 sm:gap-y-1.5">
+      {
+        areas.map(({ name, description, pages }) => (
+          <section
+            class="border-border w-full border-t pt-5 first:border-t-0 first:pt-0"
+            aria-label={name}
+          >
+            <h2 class="text-foreground text-lg font-semibold">
+              {name}{" "}
+              <span class="text-muted-foreground text-sm">
+                ({pages.length})
+              </span>
+            </h2>
+            <p class="text-muted-foreground mb-3 text-sm">{description}</p>
+            <ul class="grid grid-cols-2 gap-x-0 gap-y-2 sm:grid-cols-3 sm:gap-x-0.5 sm:gap-y-2 md:grid-cols-4">
+              {pages.map(page => {
+                const slug = page.id.split("/").at(-1);
+                const subjectName = page.data.subjectName ?? page.data.title;
+                const logo = page.data.logo!;
+                return (
+                  <li class="group flex justify-center text-center">
+                    <a
+                      href={getRelativeLocaleUrl(locale, `paparazzi/${slug}`)}
+                      class="flex flex-col items-center no-underline"
+                      aria-label={`Open ${subjectName} dossier`}
+                    >
+                      <span class="border-border bg-background relative block h-[84px] w-[84px] overflow-hidden border shadow-sm transition-transform duration-300 group-hover:scale-105 sm:h-24 sm:w-24">
+                        <img
+                          src={
+                            /^https?:\/\//.test(logo)
+                              ? logo
+                              : getAssetPath(logo)
+                          }
+                          alt={`${subjectName} logo`}
+                          class="h-full w-full object-contain"
+                          width="96"
+                          height="96"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </span>
+                      <span class="text-foreground text-sm leading-tight font-semibold">
+                        {subjectName}
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))
+      }
+      {
+        !pages.length && (
+          <p class="text-muted-foreground text-sm">暂无公司与产品档案。</p>
+        )
+      }
+    </div>
+  </Main>
+  <Footer />
+</Layout>

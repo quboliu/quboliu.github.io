@@ -36,10 +36,26 @@ const { Content } = await render(page);
   <Main
     pageTitle={page.data.title}
     pageDesc={page.data.description}
-    class="app-prose"
+    class={page.data.paparazziSection === "companies-products"
+      ? "app-prose company-dossier"
+      : "app-prose"}
   >
-    <Content />
+    {
+      page.data.paparazziSection === "companies-products" ? (
+        <div lang="zh-CN">
+          <Content />
+        </div>
+      ) : (
+        <Content />
+      )
+    }
   </Main>
 
   <Footer />
 </Layout>
+
+<style>
+  :global(.company-dossier > p) {
+    font-style: normal;
+  }
+</style>

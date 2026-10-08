@@ -6,13 +6,18 @@ import Header from "@/components/Header.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import Main from "@/components/Main.astro";
 import Footer from "@/components/Footer.astro";
+import PaparazziNavigation from "@/components/PaparazziNavigation.astro";
 import Avatar from "@/components/Avatar.astro";
 import config from "@/config";
 import { PAPARAZZI_TIERS } from "@/data/paparazziTiers";
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const paparazziPages = (
-  await getCollection("pages", ({ id }) => id.startsWith("paparazzi/"))
+  await getCollection(
+    "pages",
+    ({ id, data }) =>
+      id.startsWith("paparazzi/") && data.paparazziSection === "people"
+  )
 ).sort((a, b) => a.data.title.localeCompare(b.data.title));
 
 const getSlug = (id: string) => id.split("/").at(-1) ?? id;
@@ -49,6 +54,7 @@ const tieredPaparazziPages = PAPARAZZI_TIERS.map(tier => ({
     pageTitle="Paparazzi"
     pageDesc="Independent dossiers tracking notable blogs and projects — separate from Posts. Public avatars are tried in priority order, with initials as the final fallback."
   >
+    <PaparazziNavigation active="people" />
     <div class="grid grid-cols-1 gap-y-1 sm:gap-y-1.5">
       {
         tieredPaparazziPages.map(({ name, description, pages }) => (

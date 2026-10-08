@@ -4,6 +4,7 @@ import { glob } from "astro/loaders";
 import config from "@/config";
 import { AREA_SLUGS } from "@/data/areas";
 import { CONTENT_TYPE_SLUGS } from "@/data/contentTypes";
+import { PAPARAZZI_SECTION_SLUGS } from "@/data/paparazziSections";
 import { PAPARAZZI_TIER_SLUGS } from "@/data/paparazziTiers";
 
 export const BLOG_PATH = "src/content/posts";
@@ -37,6 +38,10 @@ const pages = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     subjectName: z.string().optional(),
+    paparazziSection: z.enum(PAPARAZZI_SECTION_SLUGS).default("people"),
+    paparazziArea: z.enum(AREA_SLUGS).optional(),
+    logo: z.string().optional(),
+    logoSource: z.url().optional(),
     paparazziTier: z.enum(PAPARAZZI_TIER_SLUGS).optional(),
     avatarCandidates: z
       .array(

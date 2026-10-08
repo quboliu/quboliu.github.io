@@ -1,0 +1,39 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import config from "@/config";
+import {
+  PAPARAZZI_SECTIONS,
+  type PaparazziSection,
+} from "@/data/paparazziSections";
+interface Props {
+  active: PaparazziSection;
+}
+const { active } = Astro.props;
+const locale = Astro.currentLocale ?? config.site.lang;
+---
+
+<nav class="border-border mb-6 border-b" aria-label="Paparazzi 栏目">
+  <ul class="flex flex-wrap gap-x-5 gap-y-1" role="list">
+    {
+      PAPARAZZI_SECTIONS.map(section => (
+        <li>
+          <a
+            href={getRelativeLocaleUrl(locale, section.path)}
+            aria-current={active === section.slug ? "page" : undefined}
+            class:list={[
+              "inline-block border-b-2 border-transparent px-1 pb-2 text-sm no-underline transition-colors",
+              {
+                "text-accent border-accent font-medium":
+                  active === section.slug,
+                "text-muted-foreground hover:text-accent":
+                  active !== section.slug,
+              },
+            ]}
+          >
+            {section.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
