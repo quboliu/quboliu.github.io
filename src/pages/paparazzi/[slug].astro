@@ -1,30 +1,26 @@
 ---
 import type { GetStaticPaths } from "astro";
-import { render } from "astro:content";
-import { getRelativeLocaleUrl } from "astro:i18n";
+import { getCollection, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
 import Footer from "@/components/Footer.astro";
 import config from "@/config";
-import {
-  getPaparazziCategory,
-  SUBJECT_TYPE_NAMES,
-} from "@/data/paparazziCategories";
-import { getPaparazziDossiers, dossierSlug } from "@/utils/paparazzi";
+
 export const getStaticPaths = (async () => {
-  return (await getPaparazziDossiers()).map(page => ({
-    params: { slug: dossierSlug(page) },
+  const paparazziPages = await getCollection("pages", ({ id }) =>
+    id.startsWith("paparazzi/")
+  );
+
+  return paparazziPages.map(page => ({
+    params: { slug: page.id.split("/").at(-1) ?? page.id },
     props: { page },
   }));
 }) satisfies GetStaticPaths;
+
 const { page } = Astro.props;
 const { Content } = await render(page);
-const locale = Astro.currentLocale ?? config.site.lang;
-const category = getPaparazziCategory(page.data.paparazziCategory)!;
-const categoryUrl = getRelativeLocaleUrl(
-  locale,
-  `paparazzi/category/${category.slug}`
-);
 ---
 
 <Layout
@@ -34,73 +30,16 @@ const categoryUrl = getRelativeLocaleUrl(
   canonicalURL={page.data.canonicalURL}
 >
   <Header />
-  <main id="main-content" class="app-layout pt-8 pb-8" lang="zh-CN">
-    <nav
-      aria-label="breadcrumb"
-      class="text-muted-foreground mb-6 flex flex-wrap items-center gap-2 text-sm"
-    >
-      <a href={getRelativeLocaleUrl(locale, "")} class="hover:text-accent"
-        >首页</a
-      ><span aria-hidden="true">/</span>
-      <a
-        href={getRelativeLocaleUrl(locale, "paparazzi")}
-        class="hover:text-accent">Paparazzi</a
-      ><span aria-hidden="true">/</span>
-      <a href={categoryUrl} class="hover:text-accent">{category.name}</a><span
-        aria-hidden="true">/</span
-      >
-      <span aria-current="page">{page.data.subjectName ?? page.data.title}</span
-      >
-    </nav>
-    <header class="border-border mb-8 border-b pb-6">
-      <p class="text-accent mb-3 text-sm">
-        {SUBJECT_TYPE_NAMES[page.data.subjectType]}档案
-      </p>
-      <h1 class="text-2xl leading-snug font-semibold sm:text-3xl">
-        {page.data.title}
-      </h1>
-      <p class="text-muted-foreground mt-3 leading-relaxed">
-        {page.data.description}
-      </p>
-      <div
-        class="text-muted-foreground mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm"
-      >
-        {
-          page.data.verifiedDate && (
-            <span>
-              最近核查：
-              <time datetime={page.data.verifiedDate}>
-                {page.data.verifiedDate}
-              </time>
-            </span>
-          )
-        }
-        {
-          page.data.website && (
-            <a href={page.data.website} class="text-accent">
-              官方网站 ↗
-            </a>
-          )
-        }
-        {
-          page.data.relatedProducts.length > 0 && (
-            <span>关联产品：{page.data.relatedProducts.join("、")}</span>
-          )
-        }
-      </div>
-    </header>
-    <article class="app-prose"><Content /></article>
-    <nav class="border-border mt-10 border-t pt-5" aria-label="返回栏目">
-      <a href={categoryUrl} class="text-accent text-sm"
-        >← 返回{category.name}</a>
-    </nav>
-  </main>
+
+  <Breadcrumb />
+
+  <Main
+    pageTitle={page.data.title}
+    pageDesc={page.data.description}
+    class="app-prose"
+  >
+    <Content />
+  </Main>
+
   <Footer />
 </Layout>
-<style>
-  header p {
-    text-align: justify;
-    text-align-last: start;
-    hyphens: auto;
-  }
-</style>
