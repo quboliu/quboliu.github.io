@@ -76,9 +76,29 @@ jobs:
         run: |
           test -f site/dist/index.html
           test -f drafts/dist/index.html
+          test ! -e site/dist/mindindex
+          mkdir site/dist/mindindex
+          cp -a drafts/dist/. site/dist/mindindex/
           test ! -e site/dist/d
-          mkdir site/dist/d
-          cp -a drafts/dist/. site/dist/d/
+          mkdir -p site/dist/d
+          cat << 'EOF' > site/dist/d/index.html
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>Redirecting to /mindindex/</title>
+            <link rel="canonical" href="/mindindex/">
+            <meta http-equiv="refresh" content="0; url=/mindindex/">
+            <script>
+              const target = window.location.pathname.replace(/^\/d(?:\/|$)/, "/mindindex/");
+              window.location.replace(target + window.location.search + window.location.hash);
+            </script>
+          </head>
+          <body>
+            <p>Redirecting to <a href="/mindindex/">/mindindex/</a>...</p>
+          </body>
+          </html>
+          EOF
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3

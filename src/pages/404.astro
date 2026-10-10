@@ -12,6 +12,12 @@ const t = useTranslations(locale);
 ---
 
 <Layout title={`${t.notFound.title} | ${config.site.title}`}>
+  <script is:inline>
+    if (window.location.pathname === "/d" || window.location.pathname.startsWith("/d/")) {
+      const target = window.location.pathname.replace(/^\/d(?:\/|$)/, "/mindindex/");
+      window.location.replace(target + window.location.search + window.location.hash);
+    }
+  </script>
   <Header />
 
   <main
