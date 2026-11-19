@@ -28,8 +28,13 @@
   }
 }
 
-@utility max-w-app {
-  max-width: 960px;
+@theme {
+  --container-app: 960px;
+}
+
+/* Shift the filter into the outer margin while keeping its grid track in place. */
+@utility outset-filter {
+  translate: max(calc((var(--container-app) - 100vw) / 2), calc(-100% - 2rem));
 }
 
 @utility app-layout {
