@@ -11,7 +11,10 @@ import config from "@/config";
 
 const title = useTranslations(Astro.currentLocale).nav.jottings;
 const description = "Short notes and passing thoughts.";
-const entries = (await getCollection("jottings")).sort(
+// Keep the template in the collection so Astro also watches an empty feed.
+const entries = (
+  await getCollection("jottings", ({ id }) => id !== "_template")
+).sort(
   (a, b) =>
     b.data.pubDatetime.getTime() - a.data.pubDatetime.getTime() ||
     a.id.localeCompare(b.id)

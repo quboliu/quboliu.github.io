@@ -58,7 +58,7 @@ const pages = defineCollection({
 });
 
 const jottings = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/jottings" }),
+  loader: glob({ pattern: "**/*.md", base: "./src/content/jottings" }),
   schema: z.object({
     pubDatetime: z.date(),
     title: z.string().optional(),
