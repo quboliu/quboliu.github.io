@@ -2,6 +2,7 @@ export interface UIStrings {
   nav: {
     home: string;
     posts: string;
+    jottings: string;
     reposts: string;
     areas: string;
     tags: string;

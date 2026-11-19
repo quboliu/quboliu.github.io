@@ -57,4 +57,13 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { posts, pages };
+const jottings = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/jottings" }),
+  schema: z.object({
+    pubDatetime: z.date(),
+    title: z.string().optional(),
+    lang: z.string().optional(),
+  }),
+});
+
+export const collections = { posts, pages, jottings };
