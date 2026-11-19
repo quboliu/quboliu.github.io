@@ -35,7 +35,7 @@ const tagLinks = tagGroups.map(({ tag, tagName, posts: tagPosts }) => ({
   <Main pageTitle={t.pages.repostsTitle} pageDesc={t.pages.repostTagsDesc}>
     <RepostsViewNavigation active="tags" />
 
-    <div class="grid gap-8 xl:grid-cols-[220px_minmax(0,1fr)]">
+    <div class="xl:archive-filter-columns grid gap-8 [--filter-width:220px]">
       <TagNavigation tags={tagLinks} />
 
       <div class="mx-auto w-full max-w-[800px] min-w-0 space-y-8 xl:mx-0">

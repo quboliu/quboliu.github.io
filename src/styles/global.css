@@ -32,9 +32,20 @@
   --container-app: 960px;
 }
 
-/* Shift the filter into the outer margin while keeping its grid track in place. */
-@utility outset-filter {
-  translate: max(calc((var(--container-app) - 100vw) / 2), calc(-100% - 2rem));
+/* Put the first grid track in the gutter so the list starts at the main content edge. */
+@utility archive-filter-columns {
+  --filter-gap: 2rem;
+  --filter-outset: min(
+    calc((100vw - var(--container-app)) / 2),
+    calc(var(--filter-width, 188px) + var(--filter-gap))
+  );
+  --post-date-width: 7.5rem;
+  margin-inline-start: calc(0px - var(--filter-outset));
+  column-gap: var(--filter-gap);
+  grid-template-columns: calc(var(--filter-outset) - var(--filter-gap)) minmax(
+      0,
+      1fr
+    );
 }
 
 @utility app-layout {

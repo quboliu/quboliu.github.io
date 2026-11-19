@@ -106,7 +106,7 @@ const allMonthLinks = groupPostsByMonth(allPosts).map(
       )
     }
 
-    <div class="grid gap-8 xl:grid-cols-[188px_minmax(0,1fr)]">
+    <div class="xl:archive-filter-columns grid gap-8">
       <TimelineNavigation
         months={page.currentPage === 1 ? allMonthLinks : monthLinks}
       />

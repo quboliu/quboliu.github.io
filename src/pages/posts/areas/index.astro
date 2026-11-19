@@ -51,7 +51,7 @@ const areaLinks = areas.map(({ slug, name, posts }) => ({
   <Main pageTitle={t.pages.postsTitle} pageDesc={t.pages.areasDesc}>
     <PostsViewNavigation active="areas" />
 
-    <div class="grid gap-8 xl:grid-cols-[188px_minmax(0,1fr)]">
+    <div class="xl:archive-filter-columns grid gap-8">
       <AreaNavigation areas={areaLinks} />
 
       <div class="mx-auto w-full max-w-[800px] min-w-0 space-y-12 xl:mx-0">
