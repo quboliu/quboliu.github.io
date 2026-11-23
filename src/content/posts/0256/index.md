@@ -1,7 +1,7 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-11-24T00:05:07+08:00
-modDatetime: 2026-11-24T00:11:52+08:00
+modDatetime: 2026-11-24T00:17:51+08:00
 timezone: "Asia/Shanghai"
 title: "《远大前程》博客agent制作小结"
 area: "ai-and-agents"
@@ -13,7 +13,13 @@ tags:
   - "英语"
 description: "记录《远大前程》英文原著播客案例的制作过程。"
 ---
-<audio controls preload="none" src="/audio/great-expectations-podcast-example.mp3" aria-label="《远大前程》播客案例示范"></audio>
+<audio controls preload="metadata" src="/audio/great-expectations-podcast-example.mp3" aria-label="《远大前程》播客案例示范"></audio>
+
+<script data-astro-rerun>
+  document.querySelector('audio[src="/audio/great-expectations-podcast-example.mp3"]')?.load();
+</script>
+
+如果音频无法播放，请多次刷新页面，直到播放三角组件变黑、可以点击。
 
 这个项目全称由Muse主导和制作，基本的制作流程是，选参照物，选素材，选模型，做脚本(剧本)，制作。
 
