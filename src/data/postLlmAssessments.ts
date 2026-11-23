@@ -34,6 +34,15 @@ export const POST_LLM_ASSESSMENTS: Record<string, PostLlmAssessment> = {
     scope: "本站新增的自然语言正文；图示除外",
     basis: "作者确认：正文全部由本人手打，LLM 文字含量为 0%。",
   },
+  "0256": {
+    kind: "estimated",
+    estimate: 0,
+    low: 0,
+    high: 0,
+    roles: [],
+    scope: "本站新增的自然语言正文；图示除外",
+    basis: "作者确认：正文的 LLM 文字含量为 0%。",
+  },
 };
 
 export function getPostLlmAssessment(id: string): PostLlmAssessment {

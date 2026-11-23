@@ -1,8 +1,9 @@
 ---
 lang: "zh-CN"
 pubDatetime: 2026-11-24T00:05:07+08:00
+modDatetime: 2026-11-24T00:11:52+08:00
 timezone: "Asia/Shanghai"
-title: "英文原著《远大前程》播客案例示范"
+title: "《远大前程》博客agent制作小结"
 area: "ai-and-agents"
 featured: false
 draft: false
