@@ -49,7 +49,7 @@ const typeLinks = types.map(({ slug, name, posts: typePosts }) => ({
   <Main pageTitle={t.pages.repostsTitle} pageDesc={t.pages.repostTypesDesc}>
     <RepostsViewNavigation active="types" />
 
-    <div class="grid gap-8 xl:grid-cols-[188px_minmax(0,1fr)]">
+    <div class="xl:archive-filter-columns grid gap-8">
       <TypeNavigation types={typeLinks} />
 
       <div class="mx-auto w-full max-w-[800px] min-w-0 space-y-12 xl:mx-0">
