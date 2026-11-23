@@ -14,7 +14,7 @@ const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
     <nav
       id="toc"
       aria-label="Table of contents"
-      class="text-muted-foreground border-border fixed top-28 right-4 z-10 hidden max-h-[70vh] w-56 overflow-y-auto border-l bg-transparent ps-3 text-sm xl:block 2xl:w-64"
+      class="text-muted-foreground border-border fixed top-28 z-10 hidden max-h-[70vh] max-w-56 overflow-y-auto border-l bg-transparent ps-3 text-sm xl:block 2xl:max-w-64"
     >
       <p class="text-foreground mb-2 font-semibold">On this page</p>
       <ul class="space-y-1">
@@ -33,3 +33,12 @@ const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
     </nav>
   )
 }
+
+<style>
+  nav {
+    /* Keep the fixed outline inside the gutter beside the centered page. */
+    --toc-edge: 1rem;
+    inset-inline-end: var(--toc-edge);
+    width: calc((100% - var(--container-app)) / 2 - var(--toc-edge));
+  }
+</style>
