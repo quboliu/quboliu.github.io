@@ -3,6 +3,7 @@ import { ClientRouter } from "astro:transitions";
 import { resolveDefaultOgImagePath } from "@/utils/resolveDefaultOgImagePath";
 import { getAssetPath } from "@/utils/withBase";
 import config from "@/config";
+import { editionRoutes, isEnglishEdition } from "@/utils/contentEdition";
 import "@/styles/global.css";
 import Analytics from "@/components/Analytics.astro";
 
@@ -26,12 +27,18 @@ const {
 
 const socialImageURL = new URL(ogImage, Astro.site ?? Astro.url);
 const rssHref = getAssetPath("rss.xml");
+const editions = editionRoutes(Astro.url.pathname);
+const language = isEnglishEdition(Astro.url.pathname)
+  ? "en"
+  : editions?.paired && Astro.url.pathname !== "/"
+    ? "zh-CN"
+    : (Astro.currentLocale ?? site.lang);
 ---
 
 <!doctype html>
 <html
   dir={site.dir ?? "ltr"}
-  lang={Astro.currentLocale ?? site.lang}
+  lang={language}
   class="overflow-y-scroll scroll-smooth"
 >
   <head>
@@ -56,6 +63,22 @@ const rssHref = getAssetPath("rss.xml");
       href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200..900&display=swap"
     />
     <link rel="canonical" href={canonicalURL} />
+    {
+      editions?.paired && (
+        <>
+          <link
+            rel="alternate"
+            hreflang="zh-CN"
+            href={new URL(editions.original, Astro.site).href}
+          />
+          <link
+            rel="alternate"
+            hreflang="en"
+            href={new URL(editions.english, Astro.site).href}
+          />
+        </>
+      )
+    }
     <meta name="generator" content={Astro.generator} />
 
     <!-- Primary meta -->

@@ -66,4 +66,29 @@ const jottings = defineCollection({
   }),
 });
 
-export const collections = { posts, pages, jottings };
+const englishEdition = z.object({
+  title: z.string().min(1),
+  sourceDigest: z.string().regex(/^[a-f0-9]{64}$/),
+});
+
+const englishPosts = defineCollection({
+  loader: glob({
+    pattern: "**/_en.{md,mdx}",
+    base: BLOG_PATH,
+    generateId: ({ entry }) => entry.split("/").slice(0, -1).join("/"),
+  }),
+  schema: englishEdition.extend({ description: z.string().min(1) }),
+});
+
+const englishJottings = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./src/content/jottings-en" }),
+  schema: englishEdition.partial({ title: true }),
+});
+
+export const collections = {
+  posts,
+  pages,
+  jottings,
+  englishPosts,
+  englishJottings,
+};

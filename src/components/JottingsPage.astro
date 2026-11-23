@@ -1,0 +1,68 @@
+---
+import { getCollection, render } from "astro:content";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Datetime from "@/components/Datetime.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Main from "@/components/Main.astro";
+import Layout from "@/layouts/Layout.astro";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+type Props = { english?: boolean };
+const { english = false } = Astro.props;
+const translations = new Map(
+  english
+    ? (await getCollection("englishJottings")).map(entry => [entry.id, entry])
+    : []
+);
+const title = useTranslations(Astro.currentLocale).nav.jottings;
+const description = "Short notes and passing thoughts.";
+// Keep the template in the collection so Astro also watches an empty feed.
+const entries = (
+  await getCollection("jottings", ({ id }) => id !== "_template")
+).sort(
+  (a, b) =>
+    b.data.pubDatetime.getTime() - a.data.pubDatetime.getTime() ||
+    a.id.localeCompare(b.id)
+);
+---
+
+<Layout title={`${title} | ${config.site.title}`} description={description}>
+  <Header />
+  <Breadcrumb />
+  <Main pageTitle={title} pageDesc={description}>
+    {
+      entries.length === 0 && (
+        <p class="text-muted-foreground">No jottings yet.</p>
+      )
+    }
+    <div
+      class="divide-border divide-y"
+      data-pagefind-body={entries.length > 0 ? true : undefined}
+    >
+      {
+        entries.map(async entry => {
+          const edition = english ? translations.get(entry.id) : entry;
+          if (!edition) throw new Error(`Missing English jotting ${entry.id}`);
+          const { Content } = await render(edition);
+          return (
+            <article id={entry.id} class="py-5 first:pt-0">
+              <a href={`#${entry.id}`} class="inline-block hover:underline">
+                <Datetime pubDatetime={entry.data.pubDatetime} />
+              </a>
+              <div
+                class="app-prose mt-2"
+                lang={english ? "en" : entry.data.lang}
+              >
+                {edition.data.title && <h2>{edition.data.title}</h2>}
+                <Content />
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </Main>
+  <Footer />
+</Layout>

@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import { getRepostKind } from "@/utils/getRepostKind";
+import { getPostUrl } from "@/utils/getPostPaths";
+import { englishPath } from "@/utils/contentEdition";
+import config from "@/config";
+
+type Props = { view: "home" | "posts" | "reposts" };
+const { view } = Astro.props;
+const title = { home: config.site.title, posts: "Posts", reposts: "Reposts" }[
+  view
+];
+const posts = getSortedPosts(await getCollection("posts")).filter(
+  post =>
+    view === "home" || (getRepostKind(post) !== null) === (view === "reposts")
+);
+const translations = new Map(
+  (await getCollection("englishPosts")).map(entry => [entry.id, entry.data])
+);
+const postDate = new Intl.DateTimeFormat("en", {
+  dateStyle: "medium",
+  timeZone: config.site.timezone,
+});
+---
+
+<Layout title={view === "home" ? title : `${title} | ${config.site.title}`}>
+  <Header />
+  <Main pageTitle={title}>
+    {view === "home" && <p class="mb-4">{config.site.description}</p>}
+    {
+      posts.length === 0 ? (
+        <p class="text-muted-foreground">No reposts yet.</p>
+      ) : (
+        <ul class="blog-posts">
+          {posts.map(post => (
+            <li>
+              <time datetime={post.data.pubDatetime.toISOString()}>
+                {postDate.format(post.data.pubDatetime)}
+              </time>
+              <a
+                class="text-accent min-w-0 no-underline hover:underline"
+                href={englishPath(getPostUrl(post.id, post.filePath))}
+              >
+                {translations.get(post.id)?.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </Main>
+  <Footer />
+</Layout>

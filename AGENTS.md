@@ -1,5 +1,12 @@
 # AGENTS.md
 
+## 正式站中英文同步
+
+- 正式站发布的 Posts、Reposts 和 Jottings 必须同时提供中文和英文版本，由同一个页眉按钮双向切换。现有中文链接保持有效，英文链接使用 `/en/` 前缀。草稿站不适用本节。
+- Posts 和 Reposts 的英文稿与 `index.md` 或 `index.mdx` 同目录，文件名为 `_en.md` 或 `_en.mdx`。Jottings 的英文稿放在 `src/content/jottings-en/`，与中文随记同名。共用文章编号、发布日期、图片、附件和音频。
+- 新发、修改、移除或迁移正式内容时，在同一次提交中处理两种语言。正文、标题、摘要、图注、链接和更正都要同步核对。已有对应英文原文时沿用原文，保留出处。英文译文的制作方式不沿用对中文原稿的 LLM 文字含量声明。
+- 完成同步核对后，用 `sha256sum <中文源文件>` 将英文稿的 `sourceDigest` 更新为中文源文件的 SHA-256。缺少英文稿或校验不匹配时，正式站构建失败。发布前运行 `npm run content:check` 和 `npm run build`，并检查双向切换和附件。
+
 ## 部署约定
 
 - 本项目中，用户说「部署」即指 push 到 GitHub `main` 分支；GitHub Actions 会自动构建并发布到 https://quboliu.github.io，无需其他部署步骤。

@@ -1,0 +1,5 @@
+---
+sourceDigest: "5c70b7b043c0954033f2ec6c2b7372f5583804c16a36dbe833a84b9670d2eca0"
+---
+
+It feels like developers in Chinese-speaking circles have grown obsessed with Claude. Maybe it is a fixation: there is this shiny thing out there, and if I cannot get my hands on it, I can't sleep or eat in peace. It is a little different from using Apple products years ago. Apple had some recognition and cachet with the general public. Claude's appeal is mostly confined to programmers, and perhaps only a small fraction of them. Tell plenty of programmers or people outside the field that you have access to Claude and you will get an “Oh,” not the “Wow” you might have got with Apple back then. In that sense, I don't think vanity explains the excitement around Claude. It probably has created a marketing effect, though suspending Chinese users' accounts was not marketing. The effect is like wanting a really good phone or car, or even a particularly good fishing rod and a great spot to cast it. It is enough to make you lose your appetite and think about little else.

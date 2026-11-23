@@ -6,6 +6,11 @@ import IconMoon from "@/assets/icons/IconMoon.svg";
 import { stripBase, stripLocale } from "@/utils/withBase";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
+import {
+  editionRoutes,
+  englishPath,
+  isEnglishEdition,
+} from "@/utils/contentEdition";
 
 const { site, features } = config;
 
@@ -17,6 +22,12 @@ const { activeSection } = Astro.props;
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
+const english = isEnglishEdition(Astro.url.pathname);
+const editions = editionRoutes(Astro.url.pathname);
+const localizedNavUrl = (path: string) =>
+  english && ["", "posts", "reposts", "jottings"].includes(path)
+    ? englishPath(path)
+    : getRelativeLocaleUrl(locale, path);
 
 // Strip the base prefix so isActive comparisons work regardless of deploy subdirectory.
 const relativePath = stripBase(Astro.url.pathname);
@@ -60,7 +71,7 @@ const navItems = [
 
 <header class="app-layout pt-5 pb-2">
   <a
-    href={getRelativeLocaleUrl(locale, "")}
+    href={localizedNavUrl("")}
     class="text-foreground inline-flex items-center gap-2 text-xl font-bold no-underline"
   >
     <svg viewBox="0 0 64 64" class="size-6" role="img" aria-label="orange logo">
@@ -80,7 +91,7 @@ const navItems = [
     {
       navItems.map(({ path, label }) => (
         <a
-          href={getRelativeLocaleUrl(locale, path)}
+          href={localizedNavUrl(path)}
           class:list={[
             "text-accent no-underline hover:underline",
             {
@@ -98,6 +109,20 @@ const navItems = [
       ))
     }
     <span class="ms-auto flex items-center gap-1">
+      {
+        editions && (
+          <a
+            href={english ? editions.original : editions.english}
+            hreflang={english ? "zh-CN" : "en"}
+            lang={english ? "zh-CN" : "en"}
+            data-edition-switch
+            data-jottings-switch={currentPath === "/jottings" ? "" : undefined}
+            class="text-accent px-1 no-underline hover:underline"
+          >
+            {english ? "中文" : "English"}
+          </a>
+        )
+      }
       {
         features.search !== false && (
           <a
@@ -127,3 +152,30 @@ const navItems = [
     </span>
   </nav>
 </header>
+
+<script>
+  document.addEventListener(
+    "click",
+    event => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const link = target.closest<HTMLAnchorElement>("[data-jottings-switch]");
+      if (!link) return;
+
+      const jottings = Array.from(
+        document.querySelectorAll<HTMLElement>("#main-content article[id]")
+      );
+      const current =
+        jottings.find(jotting => `#${jotting.id}` === location.hash) ??
+        (scrollY > 0
+          ? jottings.find(
+              jotting => jotting.getBoundingClientRect().bottom > 40
+            )
+          : undefined);
+      const url = new URL(link.href);
+      url.hash = current?.id ?? "";
+      link.href = url.href;
+    },
+    { capture: true }
+  );
+</script>

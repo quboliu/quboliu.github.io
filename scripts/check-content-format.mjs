@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { checkBilingualFormat } from "./bilingual-format.mjs";
+import { checkEnglishEditions } from "./check-english-editions.mjs";
 
 const postsRoot = path.resolve("src/content/posts");
 const errors = [];
@@ -46,6 +47,8 @@ function checkLocalAsset(file, line, rawTarget) {
     report(file, line, `references a missing local asset: ${rawTarget}`);
   }
 }
+
+checkEnglishEditions(postFiles, path.resolve("src/content/jottings"), report);
 
 for (const file of postFiles) {
   const raw = fs.readFileSync(file, "utf8");

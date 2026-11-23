@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import PostPage from "@/pages/posts/[...slug]/_components/PostPage.astro";
+import { getArticlePages } from "@/utils/getArticlePages";
+
+export async function getStaticPaths() {
+  const titles = new Map(
+    (await getCollection("englishPosts")).map(entry => [entry.id, entry])
+  );
+  return (await getArticlePages()).map(({ params, props }) => {
+    const english = titles.get(props.post.id);
+    if (!english) throw new Error(`Missing English article ${props.post.id}`);
+    const localize = (post: typeof props.prevPost) =>
+      post && { ...post, title: titles.get(post.id)?.data.title ?? post.title };
+
+    return {
+      params,
+      props: {
+        ...props,
+        english,
+        prevPost: localize(props.prevPost),
+        nextPost: localize(props.nextPost),
+      },
+    };
+  });
+}
+---
+
+<PostPage {...Astro.props} />
