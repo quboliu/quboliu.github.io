@@ -24,7 +24,17 @@ const NO_EVIDENCE: PostLlmAssessment = {
   basis: "目前没有可核查的逐稿制作记录，无法判断保留在正文中的模型文字比例。",
 };
 
-export const POST_LLM_ASSESSMENTS: Record<string, PostLlmAssessment> = {};
+export const POST_LLM_ASSESSMENTS: Record<string, PostLlmAssessment> = {
+  "0255": {
+    kind: "estimated",
+    estimate: 0,
+    low: 0,
+    high: 0,
+    roles: [],
+    scope: "本站新增的自然语言正文；图示除外",
+    basis: "作者确认：正文全部由本人手打，LLM 文字含量为 0%。",
+  },
+};
 
 export function getPostLlmAssessment(id: string): PostLlmAssessment {
   return POST_LLM_ASSESSMENTS[id] ?? NO_EVIDENCE;
