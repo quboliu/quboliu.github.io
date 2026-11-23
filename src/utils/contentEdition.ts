@@ -14,7 +14,7 @@ export function editionRoutes(pathname: string) {
   const path = stripLocale(stripBase(pathname), "en").replace(/\/+$/, "");
   if (
     path === "" ||
-    /^\/(jottings|posts|reposts)$/.test(path) ||
+    /^\/(jottings|posts|reposts|search)$/.test(path) ||
     /^\/posts\/\d+$/.test(path)
   ) {
     return {

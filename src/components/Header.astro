@@ -116,6 +116,8 @@ const navItems = [
             hreflang={english ? "zh-CN" : "en"}
             lang={english ? "zh-CN" : "en"}
             data-edition-switch
+            data-astro-reload={currentPath === "/search" ? true : undefined}
+            data-search-switch={currentPath === "/search" ? "" : undefined}
             data-jottings-switch={currentPath === "/jottings" ? "" : undefined}
             class="text-accent px-1 no-underline hover:underline"
           >
@@ -126,7 +128,12 @@ const navItems = [
       {
         features.search !== false && (
           <a
-            href={getRelativeLocaleUrl(locale, "search")}
+            href={
+              english
+                ? englishPath("search")
+                : getRelativeLocaleUrl(locale, "search")
+            }
+            data-astro-reload
             class="text-muted-foreground hover:text-accent inline-block p-1"
             title={t.nav.search}
             aria-label={t.nav.search}
@@ -159,8 +166,15 @@ const navItems = [
     event => {
       const target = event.target;
       if (!(target instanceof Element)) return;
-      const link = target.closest<HTMLAnchorElement>("[data-jottings-switch]");
+      const link = target.closest<HTMLAnchorElement>("[data-edition-switch]");
       if (!link) return;
+      const url = new URL(link.href);
+      if (link.hasAttribute("data-search-switch")) {
+        url.search = location.search;
+        link.href = url.href;
+        return;
+      }
+      if (!link.hasAttribute("data-jottings-switch")) return;
 
       const jottings = Array.from(
         document.querySelectorAll<HTMLElement>("#main-content article[id]")
@@ -172,7 +186,6 @@ const navItems = [
               jotting => jotting.getBoundingClientRect().bottom > 40
             )
           : undefined);
-      const url = new URL(link.href);
       url.hash = current?.id ?? "";
       link.href = url.href;
     },
