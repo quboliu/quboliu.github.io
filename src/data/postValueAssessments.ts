@@ -16,4 +16,8 @@ export const POST_VALUE_ASSESSMENTS: Record<string, PostValueAssessment> = {
     score: 70,
     reason: "记录多 agent 开发游戏模组的分工、通信、成本与人工介入，提供具体实践经验；结论主要来自单个项目。",
   },
+  "0256": {
+    score: 60,
+    reason: "记录英文原著播客的素材选择、音色调研与制作过程，并附有试听案例；经验主要来自单个项目。",
+  },
 };
