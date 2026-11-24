@@ -1,35 +1,32 @@
-import { getAssetPath, stripBase, stripLocale } from "./withBase";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import {
+  getAssetPath,
+  isEnglishEdition,
+  stripBase,
+  stripLocale,
+} from "./withBase";
 
-export function isEnglishEdition(pathname: string) {
-  return /^\/en(?:\/|$)/.test(stripBase(pathname));
+export { isEnglishEdition } from "./withBase";
+
+export function getEditionLocale(pathname: string) {
+  // A tag named "en" must not select the English edition of the site.
+  return isEnglishEdition(pathname) ? "en" : "zh-CN";
 }
 
-export function englishPath(path: string) {
-  return getAssetPath(
-    `en/${path.replace(/^\/+|\/+$/g, "")}`.replace(/\/?$/, "/")
-  );
+export function originalEditionPath(pathname: string) {
+  return stripLocale(stripBase(pathname), "en");
 }
 
 export function editionRoutes(pathname: string) {
-  const path = stripLocale(stripBase(pathname), "en").replace(/\/+$/, "");
-  if (
-    path === "" ||
-    /^\/(jottings|posts|reposts|search)$/.test(path) ||
-    /^\/posts\/\d+$/.test(path)
-  ) {
+  const path = originalEditionPath(pathname).replace(/^\/+|\/+$/g, "");
+  if (path === "404" || path === "404.html") {
     return {
-      original: getAssetPath(path ? `${path}/` : ""),
-      english: englishPath(path),
-      paired: true,
+      original: getAssetPath("404.html"),
+      english: getRelativeLocaleUrl("en", "404"),
     };
   }
-  // The English archives are single pages, so a filter view opens its archive.
-  const archive = path.match(/^\/(posts|reposts)(?:\/|$)/)?.[1];
-  return archive
-    ? {
-        original: getAssetPath(`${archive}/`),
-        english: englishPath(archive),
-        paired: false,
-      }
-    : null;
+  return {
+    original: getRelativeLocaleUrl("zh-CN", path),
+    english: getRelativeLocaleUrl("en", path),
+  };
 }

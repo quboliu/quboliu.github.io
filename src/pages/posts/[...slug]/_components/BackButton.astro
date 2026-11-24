@@ -25,15 +25,30 @@ const t = useTranslations(locale);
 }
 
 <script>
+  import {
+    getAssetPath,
+    isEnglishEdition,
+    stripBase,
+    stripLocale,
+  } from "@/utils/withBase";
+
   function updateGoBackUrl() {
     const backButton: HTMLAnchorElement | null =
       document.querySelector("#back-button");
 
     const backUrl = sessionStorage.getItem("backUrl");
 
-    if (backUrl && backButton) {
-      backButton.href = backUrl;
-    }
+    if (!backUrl || !backButton) return;
+
+    const target = new URL(backUrl, window.location.origin);
+    if (target.origin !== window.location.origin) return;
+
+    const path = stripLocale(stripBase(target.pathname), "en");
+    if (path === "/mindindex" || path.startsWith("/mindindex/")) return;
+    target.pathname = getAssetPath(
+      isEnglishEdition(window.location.pathname) ? `en${path}` : path
+    );
+    backButton.href = target.href;
   }
 
   document.addEventListener("astro:page-load", updateGoBackUrl);

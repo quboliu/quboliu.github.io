@@ -12,6 +12,7 @@ import { getTagGroups } from "@/utils/getTagGroups";
 import { isOriginalPost } from "@/utils/isOriginalPost";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
+import { getTagLabel } from "@/utils/getTagLabel";
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
@@ -19,7 +20,10 @@ const posts = await getCollection(
   "posts",
   ({ data }) => !data.draft && isOriginalPost({ data })
 );
-const tagGroups = getTagGroups(posts);
+const tagGroups = getTagGroups(posts).map(group => ({
+  ...group,
+  tagName: getTagLabel(group.tagName, Astro.currentLocale === "en"),
+}));
 const tagLinks = tagGroups.map(({ tag, tagName, posts: tagPosts }) => ({
   slug: tag,
   name: tagName,

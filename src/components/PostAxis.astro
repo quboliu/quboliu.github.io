@@ -10,6 +10,7 @@ import { POST_VALUE_ASSESSMENTS } from "@/data/postValueAssessments";
 import { getPostLlmAssessment } from "@/data/postLlmAssessments";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { getPostUrl } from "@/utils/getPostPaths";
+import { getEditionPostTitle } from "@/utils/getEnglishPost";
 import { isOriginalPost } from "@/utils/isOriginalPost";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
@@ -20,6 +21,7 @@ type Props = { mode: Mode };
 const { mode } = Astro.props;
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
+const english = locale === "en";
 const posts = getSortedPosts(
   await getCollection(
     "posts",
@@ -33,14 +35,16 @@ if (missing.length) {
   );
 }
 
-const entries = posts.map(post => ({
-  id: post.id,
-  title: post.data.title,
-  date: dayjs(post.data.pubDatetime).format("YYYY-MM-DD"),
-  url: getPostUrl(post.id, post.filePath, locale),
-  value: POST_VALUE_ASSESSMENTS[post.id],
-  llm: getPostLlmAssessment(post.id),
-}));
+const entries = await Promise.all(
+  posts.map(async post => ({
+    id: post.id,
+    title: await getEditionPostTitle(post.id, post.data.title, english),
+    date: dayjs(post.data.pubDatetime).format("YYYY-MM-DD"),
+    url: getPostUrl(post.id, post.filePath, locale),
+    value: POST_VALUE_ASSESSMENTS[post.id],
+    llm: getPostLlmAssessment(post.id),
+  }))
+);
 const sortedEntries = [...entries].sort((a, b) => {
   const aScore = mode === "value" ? a.value.score : a.llm.estimate;
   const bScore = mode === "value" ? b.value.score : b.llm.estimate;
@@ -50,15 +54,22 @@ const sortedEntries = [...entries].sort((a, b) => {
   return bScore - aScore || b.date.localeCompare(a.date);
 });
 const isValue = mode === "value";
-const pageTitle = isValue ? "阅读价值" : "LLM 文字含量";
+const pageTitle = english
+  ? isValue
+    ? "Reading value"
+    : "LLM content in the source text"
+  : isValue
+    ? "阅读价值"
+    : "LLM 文字含量";
 const pageDesc = isValue
   ? "Original posts ranked on a fixed 0–100 scale."
-  : "Original posts ranked by the estimated share of LLM-generated or rewritten prose.";
+  : "Original posts ranked by the estimated share of LLM-generated or rewritten prose in the source text.";
 
 function llmLabel(entry: (typeof entries)[number]) {
-  if (entry.llm.kind === "no-evidence") return "无依据";
+  if (entry.llm.kind === "no-evidence")
+    return english ? "No evidence" : "无依据";
   if (entry.llm.kind === "no-added-prose") return "0%";
-  return `约 ${entry.llm.estimate}%`;
+  return english ? `≈ ${entry.llm.estimate}%` : `约 ${entry.llm.estimate}%`;
 }
 ---
 

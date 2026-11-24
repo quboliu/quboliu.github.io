@@ -12,6 +12,7 @@ export type PostLlmAssessment = {
   roles: string[];
   scope: string;
   basis: string;
+  basisEn?: string;
 };
 
 const NO_EVIDENCE: PostLlmAssessment = {
@@ -22,10 +23,14 @@ const NO_EVIDENCE: PostLlmAssessment = {
   roles: [],
   scope: "本站新增的自然语言正文；第三方原文、代码与图示除外",
   basis: "目前没有可核查的逐稿制作记录，无法判断保留在正文中的模型文字比例。",
+  basisEn:
+    "There is no draft history to verify how much model-generated prose remains in the source text.",
 };
 
 export const POST_LLM_ASSESSMENTS: Record<string, PostLlmAssessment> = {
   "0255": {
+    basisEn:
+      "The author confirms that they typed the entire source text by hand and that its LLM content is 0%.",
     kind: "estimated",
     estimate: 0,
     low: 0,
@@ -35,6 +40,8 @@ export const POST_LLM_ASSESSMENTS: Record<string, PostLlmAssessment> = {
     basis: "作者确认：正文全部由本人手打，LLM 文字含量为 0%。",
   },
   "0256": {
+    basisEn:
+      "The author confirms that the LLM content of the source text is 0%.",
     kind: "estimated",
     estimate: 0,
     low: 0,
@@ -44,6 +51,7 @@ export const POST_LLM_ASSESSMENTS: Record<string, PostLlmAssessment> = {
     basis: "作者确认：正文的 LLM 文字含量为 0%。",
   },
   "0070": {
+    basisEn: "The author reports that the source text contains 20% LLM prose.",
     kind: "estimated",
     estimate: 20,
     low: 20,

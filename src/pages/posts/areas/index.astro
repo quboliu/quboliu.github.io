@@ -8,7 +8,7 @@ import AreaNavigation from "@/components/AreaNavigation.astro";
 import PostsViewNavigation from "@/components/PostsViewNavigation.astro";
 import Card from "@/components/Card.astro";
 import Footer from "@/components/Footer.astro";
-import { AREAS } from "@/data/areas";
+import { getAreas } from "@/data/areas";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { isOriginalPost } from "@/utils/isOriginalPost";
 import { useTranslations } from "@/i18n";
@@ -23,10 +23,11 @@ const posts = getSortedPosts(
   )
 );
 
-const areas = AREAS.map(area => ({
-  ...area,
-  posts: posts.filter(post => post.data.area === area.slug),
-}))
+const areas = getAreas(Astro.currentLocale === "en")
+  .map(area => ({
+    ...area,
+    posts: posts.filter(post => post.data.area === area.slug),
+  }))
   .filter(area => area.posts.length > 0)
   .sort(
     (areaA, areaB) =>

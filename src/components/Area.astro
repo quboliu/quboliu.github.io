@@ -8,13 +8,12 @@ type Props = {
 };
 
 const { area } = Astro.props;
-const definition = getAreaBySlug(area);
+const locale = Astro.currentLocale ?? config.site.lang;
+const definition = getAreaBySlug(area, locale === "en");
 
 if (!definition) {
   throw new Error(`Unknown Area slug: ${area}`);
 }
-
-const locale = Astro.currentLocale ?? config.site.lang;
 ---
 
 <a

@@ -94,6 +94,78 @@ export const AREA_SLUGS = AREAS.map(({ slug }) => slug) as [
   ...AreaSlug[],
 ];
 
-export function getAreaBySlug(slug: string) {
-  return AREAS.find(area => area.slug === slug);
+export function getAreaBySlug(slug: string, english = false) {
+  const area = AREAS.find(entry => entry.slug === slug);
+  return area && localizeArea(area, english);
+}
+
+const englishLabels: Record<
+  AreaSlug,
+  Pick<AreaDefinition, "name" | "description">
+> = {
+  "distributed-systems": {
+    name: "Distributed Systems",
+    description:
+      "Consensus, consistency, replication, clocks, snapshots, coordination, and engineering practice.",
+  },
+  kubernetes: {
+    name: "Kubernetes",
+    description:
+      "Design, resources, control loops, APIs, scheduling, operators, and the foundations in Borg, Omega, and etcd.",
+  },
+  "storage-systems": {
+    name: "Storage Systems",
+    description:
+      "Distributed block storage, volume engines, replication, backups, recovery, and cloud-native data paths.",
+  },
+  databases: {
+    name: "Databases",
+    description:
+      "Database engines, storage and compression, cloud-native architectures, and evaluations.",
+  },
+  "ai-and-agents": {
+    name: "AI and Agents",
+    description:
+      "LLMs, coding agent runtimes and tools, vibe coding, and engineering and design with AI assistance.",
+  },
+  go: {
+    name: "Go",
+    description:
+      "Language mechanics, the runtime, test organization, reading source code, and software architecture.",
+  },
+  "operating-systems": {
+    name: "Operating Systems",
+    description:
+      "Processes, threads, IPC, context switching, TTYs, CPU privilege levels, and other low-level topics.",
+  },
+  algorithms: {
+    name: "Algorithms and Data Structures",
+    description: "Study notes and project scaffolding for algorithm practice.",
+  },
+  "software-engineering": {
+    name: "Software Engineering",
+    description:
+      "Architecture and design, debugging and performance, client application engineering, and open-source tools.",
+  },
+  "tools-and-workflow": {
+    name: "Tools and Workflow",
+    description:
+      "Blog infrastructure, image hosting, scripts, networking, and personal knowledge management.",
+  },
+  "notes-and-thoughts": {
+    name: "Notes and Thoughts",
+    description:
+      "Personal essays, ideas across fields, and readings on mental models.",
+  },
+};
+
+function localizeArea(
+  area: (typeof AREAS)[number],
+  english: boolean
+): AreaDefinition {
+  return english ? { ...area, ...englishLabels[area.slug] } : area;
+}
+
+export function getAreas(english: boolean) {
+  return AREAS.map(area => localizeArea(area, english));
 }

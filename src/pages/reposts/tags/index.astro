@@ -12,12 +12,16 @@ import { getRepostKind } from "@/utils/getRepostKind";
 import { getTagGroups } from "@/utils/getTagGroups";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
+import { getTagLabel } from "@/utils/getTagLabel";
 
 const t = useTranslations(Astro.currentLocale);
 const posts = (await getCollection("posts", ({ data }) => !data.draft)).filter(
   post => getRepostKind(post) !== null
 );
-const tagGroups = getTagGroups(posts);
+const tagGroups = getTagGroups(posts).map(group => ({
+  ...group,
+  tagName: getTagLabel(group.tagName, Astro.currentLocale === "en"),
+}));
 const tagLinks = tagGroups.map(({ tag, tagName, posts: tagPosts }) => ({
   slug: tag,
   name: tagName,

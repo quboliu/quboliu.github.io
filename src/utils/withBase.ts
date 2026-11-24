@@ -44,3 +44,7 @@ export function getAssetPath(path: string): string {
   }
   return baseRoot + normalizedPath;
 }
+
+export function isEnglishEdition(pathname: string) {
+  return /^\/en(?:\/|$)/.test(stripBase(pathname));
+}

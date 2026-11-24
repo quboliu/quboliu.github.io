@@ -9,8 +9,7 @@ import Layout from "@/layouts/Layout.astro";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
 
-type Props = { english?: boolean };
-const { english = false } = Astro.props;
+const english = Astro.currentLocale === "en";
 const translations = new Map(
   english
     ? (await getCollection("englishJottings")).map(entry => [entry.id, entry])

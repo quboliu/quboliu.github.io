@@ -1,6 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { getPostUrl } from "@/utils/getPostPaths";
+import { getEditionLocale } from "@/utils/contentEdition";
+import { getEditionPostTitle } from "@/utils/getEnglishPost";
 import { toTransitionName } from "@/utils/toTransitionName";
 import dayjs from "dayjs";
 
@@ -10,7 +12,11 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
-const { title, lang, pubDatetime } = data;
+const locale = getEditionLocale(Astro.url.pathname);
+const english = locale === "en";
+const title = await getEditionPostTitle(id, data.title, english);
+const lang = english ? "en" : data.lang;
+const { pubDatetime } = data;
 const date = dayjs(pubDatetime).format("YYYY-MM-DD");
 ---
 
@@ -21,7 +27,7 @@ const date = dayjs(pubDatetime).format("YYYY-MM-DD");
     >{date}</span
   >
   <a
-    href={getPostUrl(id, filePath, Astro.currentLocale)}
+    href={getPostUrl(id, filePath, locale)}
     class="text-accent min-w-0 no-underline hover:underline"
   >
     <Heading

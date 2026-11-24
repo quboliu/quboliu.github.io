@@ -17,10 +17,12 @@ import {
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import config from "./astro-paper.config";
 import rehypeBilingual from "./src/utils/rehypeBilingual.mjs";
+import { englishPages } from "./src/integrations/englishPages";
 
 export default defineConfig({
   site: config.site.url,
   integrations: [
+    englishPages(),
     mdx(),
     sitemap({
       filter: page =>
@@ -28,8 +30,8 @@ export default defineConfig({
     }),
   ],
   i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
+    locales: ["zh-CN", "en"],
+    defaultLocale: "zh-CN",
     routing: {
       prefixDefaultLocale: false,
     },
