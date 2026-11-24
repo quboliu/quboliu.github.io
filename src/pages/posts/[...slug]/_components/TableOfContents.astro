@@ -3,10 +3,27 @@ type Heading = { depth: number; slug: string; text: string };
 
 type Props = {
   headings: Heading[];
+  bilingual?: boolean;
 };
 
-const { headings } = Astro.props;
+const { headings, bilingual = false } = Astro.props;
 const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
+
+function formatTocText(text: string): string {
+  if (!bilingual) return text;
+  const match = text.match(/^(.*?)(?:｜|\s\/\s)([\s\S]*)$/);
+  if (!match) return text;
+  const before = match[1].trim();
+  const after = match[2].trim();
+  if (
+    before &&
+    !/\p{Script=Han}/u.test(before) &&
+    /\p{Script=Han}/u.test(after)
+  ) {
+    return before;
+  }
+  return text;
+}
 ---
 
 {
@@ -25,7 +42,7 @@ const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
               data-toc-link={h.slug}
               class="hover:text-foreground block border-l-2 border-transparent ps-2 leading-snug break-words no-underline"
             >
-              {h.text}
+              {formatTocText(h.text)}
             </a>
           </li>
         ))}
