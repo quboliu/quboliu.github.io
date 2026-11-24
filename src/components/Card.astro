@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { getPostUrl } from "@/utils/getPostPaths";
+import { getListTitle } from "@/utils/getRepostKind";
 import { getEditionLocale } from "@/utils/contentEdition";
 import { getEditionPostTitle } from "@/utils/getEnglishPost";
 import { toTransitionName } from "@/utils/toTransitionName";
@@ -15,7 +16,8 @@ const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 const locale = getEditionLocale(Astro.url.pathname);
 const english = locale === "en";
 const title = await getEditionPostTitle(id, data.title, english);
-const lang = english ? "en" : data.lang;
+const displayTitle = english ? title : getListTitle(title, data.bilingual);
+const lang = english || displayTitle !== title ? "en" : data.lang;
 const { pubDatetime } = data;
 const date = dayjs(pubDatetime).format("YYYY-MM-DD");
 ---
@@ -35,7 +37,7 @@ const date = dayjs(pubDatetime).format("YYYY-MM-DD");
       transition:name={toTransitionName(title)}
       class="inline text-inherit"
     >
-      {title}
+      {displayTitle}
     </Heading>
   </a>
 </li>

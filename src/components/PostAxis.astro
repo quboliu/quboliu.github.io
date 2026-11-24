@@ -10,6 +10,7 @@ import { POST_VALUE_ASSESSMENTS } from "@/data/postValueAssessments";
 import { getPostLlmAssessment } from "@/data/postLlmAssessments";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { getPostUrl } from "@/utils/getPostPaths";
+import { getListTitle } from "@/utils/getRepostKind";
 import { getEditionPostTitle } from "@/utils/getEnglishPost";
 import { isOriginalPost } from "@/utils/isOriginalPost";
 import { useTranslations } from "@/i18n";
@@ -38,7 +39,9 @@ if (missing.length) {
 const entries = await Promise.all(
   posts.map(async post => ({
     id: post.id,
-    title: await getEditionPostTitle(post.id, post.data.title, english),
+    title: english
+      ? await getEditionPostTitle(post.id, post.data.title, true)
+      : getListTitle(post.data.title, post.data.bilingual),
     date: dayjs(post.data.pubDatetime).format("YYYY-MM-DD"),
     url: getPostUrl(post.id, post.filePath, locale),
     value: POST_VALUE_ASSESSMENTS[post.id],

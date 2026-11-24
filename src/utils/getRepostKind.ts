@@ -48,3 +48,19 @@ export function getPostEyebrow(post: PostWithData): string | null {
   if (post.data.bilingual) parts.push("Bilingual");
   return parts.length ? parts.join(" · ") : null;
 }
+
+export function getListTitle(title: string, bilingual = false): string {
+  const separator = title.lastIndexOf("｜");
+  if (separator <= 0) return title;
+  const before = title.slice(0, separator).trim();
+  const after = title.slice(separator + 1).trim();
+  if (
+    before &&
+    /[a-zA-Z]/.test(before) &&
+    (bilingual || !/\p{Script=Han}/u.test(before)) &&
+    /\p{Script=Han}/u.test(after)
+  ) {
+    return before;
+  }
+  return title;
+}
