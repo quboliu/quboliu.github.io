@@ -45,6 +45,7 @@
 }
 
 .bilingual-prose [lang|="zh"] {
+  font-family: var(--font-bilingual-zh);
   font-style: normal;
 }
 

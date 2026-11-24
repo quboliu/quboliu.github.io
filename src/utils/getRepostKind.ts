@@ -34,3 +34,17 @@ export function getRepostKind({ data }: PostWithData): RepostKind | null {
 export function isRepostPost(post: PostWithData) {
   return getRepostKind(post) !== null;
 }
+
+const REPOST_EYEBROW_LABELS: Record<RepostKind, string> = {
+  essays: "Repost",
+  papers: "Paper",
+  documentation: "Documentation",
+};
+
+export function getPostEyebrow(post: PostWithData): string | null {
+  const kind = getRepostKind(post);
+  const parts: string[] = [];
+  if (kind) parts.push(REPOST_EYEBROW_LABELS[kind]);
+  if (post.data.bilingual) parts.push("Bilingual");
+  return parts.length ? parts.join(" · ") : null;
+}

@@ -47,6 +47,8 @@
   --font-main:
     "TeX Gyre Schola", "Noto Serif SC", "Noto Serif CJK SC",
     "Source Han Serif SC", "Songti SC", SimSun, serif;
+  --font-bilingual-zh:
+    "LXGW WenKai Screen", "Kaiti SC", "STKaiti", KaiTi, serif;
 }
 
 /* Dark theme values (Bear default) */

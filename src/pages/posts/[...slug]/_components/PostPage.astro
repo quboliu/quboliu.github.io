@@ -7,7 +7,7 @@ import Datetime from "@/components/Datetime.astro";
 import Tag from "@/components/Tag.astro";
 import Area from "@/components/Area.astro";
 import { getPostUrl } from "@/utils/getPostPaths";
-import { getRepostKind } from "@/utils/getRepostKind";
+import { getRepostKind, getPostEyebrow } from "@/utils/getRepostKind";
 import { slugifyStr } from "@/utils/slugify";
 import { toTransitionName } from "@/utils/toTransitionName";
 import EditPost from "./EditPost.astro";
@@ -60,6 +60,7 @@ const title = english?.data.title ?? originalTitle;
 const description = english?.data.description ?? originalDescription;
 const lang = english ? "en" : originalLang;
 const bilingual = !english && post.data.bilingual;
+const eyebrow = getPostEyebrow({ data: { ...post.data, bilingual } });
 const { Content, headings } = await render(english ?? post);
 
 let ogImageUrl: string | undefined;
@@ -102,6 +103,14 @@ const ogImage = ogImageUrl
     class:list={["app-layout", { "mt-8": !config.features.showBackButton }]}
     data-pagefind-body
   >
+    {
+      eyebrow && (
+        <p class="text-muted-foreground mb-2 font-mono text-xs tracking-[0.08em] uppercase">
+          {eyebrow}
+        </p>
+      )
+    }
+
     <h1
       lang={lang}
       style={{ viewTransitionName: toTransitionName(title) }}
