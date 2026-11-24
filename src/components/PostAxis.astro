@@ -15,7 +15,7 @@ import { getEditionPostTitle } from "@/utils/getEnglishPost";
 import { isOriginalPost } from "@/utils/isOriginalPost";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
-import dayjs from "dayjs";
+import { toPostDate } from "@/utils/formatPostDate";
 
 type Mode = "value" | "llm";
 type Props = { mode: Mode };
@@ -42,7 +42,7 @@ const entries = await Promise.all(
     title: english
       ? await getEditionPostTitle(post.id, post.data.title, true)
       : getListTitle(post.data.title, post.data.bilingual),
-    date: dayjs(post.data.pubDatetime).format("YYYY-MM-DD"),
+    date: toPostDate(post.data.pubDatetime, post.data.timezone).format("YYYY-MM-DD"),
     url: getPostUrl(post.id, post.filePath, locale),
     value: POST_VALUE_ASSESSMENTS[post.id],
     llm: getPostLlmAssessment(post.id),

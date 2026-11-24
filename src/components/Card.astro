@@ -5,7 +5,7 @@ import { getListTitle } from "@/utils/getRepostKind";
 import { getEditionLocale } from "@/utils/contentEdition";
 import { getEditionPostTitle } from "@/utils/getEnglishPost";
 import { toTransitionName } from "@/utils/toTransitionName";
-import dayjs from "dayjs";
+import { toPostDate } from "@/utils/formatPostDate";
 
 type Props = {
   variant?: "h2" | "h3";
@@ -18,8 +18,8 @@ const english = locale === "en";
 const title = await getEditionPostTitle(id, data.title, english);
 const displayTitle = english ? title : getListTitle(title, data.bilingual);
 const lang = english || displayTitle !== title ? "en" : data.lang;
-const { pubDatetime } = data;
-const date = dayjs(pubDatetime).format("YYYY-MM-DD");
+const { pubDatetime, timezone } = data;
+const date = toPostDate(pubDatetime, timezone).format("YYYY-MM-DD");
 ---
 
 <li class="flex gap-2 py-0.5">

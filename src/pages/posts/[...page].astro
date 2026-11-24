@@ -17,7 +17,7 @@ import { isOriginalPost } from "@/utils/isOriginalPost";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
 import { emptyPostPage } from "@/utils/emptyPostPage";
-import dayjs from "dayjs";
+import { toPostDate } from "@/utils/formatPostDate";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = await getCollection(
@@ -49,7 +49,7 @@ function groupPostsByMonth(posts: typeof page.data) {
       posts: typeof page.data;
     }>
   >((groups, post) => {
-    const date = dayjs(post.data.pubDatetime);
+    const date = toPostDate(post.data.pubDatetime, post.data.timezone);
     const slug = date.format("YYYY-MM");
     const previousGroup = groups.at(-1);
 
