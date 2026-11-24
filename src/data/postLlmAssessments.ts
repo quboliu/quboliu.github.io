@@ -60,6 +60,26 @@ export const POST_LLM_ASSESSMENTS: Record<string, PostLlmAssessment> = {
     scope: "本站新增的自然语言正文；图示除外",
     basis: "作者指定本文 LLM 文字含量为 20%。",
   },
+  "0119": {
+    kind: "estimated",
+    estimate: 80,
+    low: 65,
+    high: 95,
+    roles: ["评价", "起草"],
+    scope: "转载说明与评价摘要中的本站新增自然语言；canonical 原文除外",
+    basis:
+      "页面明确标注评价摘要来自 GPT-5.6-sol；估计只看本站新增的摘要与说明，原作不计。",
+  },
+  "0198": {
+    kind: "estimated",
+    estimate: 90,
+    low: 75,
+    high: 100,
+    roles: ["翻译", "排版", "核查"],
+    scope: "本站中文译文和地图文字说明；Jepsen 英文原文除外",
+    basis:
+      "依据本站本次双语转载的制作会话，LLM 参与中文翻译和整理；未保留逐句编辑轨迹，范围较宽。",
+  },
 };
 
 export function getPostLlmAssessment(id: string): PostLlmAssessment {

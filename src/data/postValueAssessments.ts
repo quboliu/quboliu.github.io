@@ -36,4 +36,24 @@ export const POST_VALUE_ASSESSMENTS: Record<string, PostValueAssessment> = {
     reason:
       "以实际工具对比与失败经历讲解 Coding Agent 入门，适合团队交流；产品细节更新很快。",
   },
+  "0119": {
+    score: 72,
+    reason:
+      "Paxos 魔法比喻有助于形成直觉，附加评价指出多处技术边界；原文不宜单作实现依据。",
+  },
+  "0128": {
+    score: 74,
+    reason:
+      "完整双语演讲逐字稿把 Agent 的远程调用、幂等与权限连到分布式系统，偏经验性介绍。",
+  },
+  "0186": {
+    score: 80,
+    reason:
+      "完整双语转载 DDIA 阅读回顾和评论，保留多视角材料；本站原创判断相对有限。",
+  },
+  "0198": {
+    score: 86,
+    reason:
+      "Jepsen 的模型关系图和基础定义具有长期参考价值，本站完整中英对照并保留地图。",
+  },
 };
