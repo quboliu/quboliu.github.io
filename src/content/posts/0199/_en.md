@@ -1,14 +1,15 @@
 ---
-sourceDigest: "f126a4b751536edf16bea84ba22772cc49d6b9d77cd01aad07b9481a0bcd7da3"
+sourceDigest: "10978630a1adcd78f72b541d2a85194807189954f37f314514c69bd4c965375e"
 title: "Consistency Models Reference"
 description: "Reference covering the sixteen consistency model pages linked from Jepsen's map, including definitions, availability bounds, and formalisms."
 ---
 
 <aside class="source-note">
 
-**Source and copyright**
+**Source**
 
-This authorized reference covers the sixteen model pages linked from Jepsen's consistency-model map. Each section identifies and links its source. Original text copyright © Jepsen, LLC.
+- **Original:** [Jepsen Consistency Models](https://jepsen.io/consistency/models) (16 model pages)
+- **Copyright:** © Jepsen, LLC
 
 </aside>
 

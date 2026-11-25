@@ -1,5 +1,5 @@
 ---
-sourceDigest: "b412bf234339cd31caed6bfc0ddc01f20e714a8683465f7a00bd779465b85803"
+sourceDigest: "8cfcf1d9b5eee8d15a9fece7edc5b72517756d6828c1e8dedb218fe5b0bbd0f8"
 title: "What I learned from the book Designing Data-Intensive Applications?"
 description: "Dr Milan Milanovic's comprehensive review of Designing Data-Intensive Applications and 46 reader comments on storage, replication, and consistency."
 ---
@@ -10,7 +10,6 @@ description: "Dr Milan Milanovic's comprehensive review of Designing Data-Intens
 
 - **Author:** Dr Milan Milanović (Tech World With Milan Newsletter)
 - **Original:** [What I learned from the book Designing Data-Intensive Applications](https://newsletter.techworld-with-milan.com/p/what-i-learned-from-the-book-designing) (2025-06-19)
-- **Note:** Complete reproduction of the original article and 46 reader comments.
 
 </aside>
 

@@ -18,11 +18,10 @@ description: "Jepsen 一致性模型地图中 16 个模型专页的中英双语�
 
 <aside class="source-note">
 
-**来源与版权**
+**原文信息**
 
-本文经授权整理并翻译 Jepsen 一致性模型地图所链接的 16 个模型专页。每节标题下均列出原文标题与链接；英文按原文要点整理，中文紧随其后。原文版权 © Jepsen, LLC；中文翻译由本站提供。
-
-This authorized bilingual reference covers the sixteen model pages linked from Jepsen's consistency-model map. Each section identifies and links its source. Original text copyright © Jepsen, LLC; adaptation and Chinese translation by this site.
+- **原文**：[Jepsen Consistency Models](https://jepsen.io/consistency/models)（16 个模型专页）
+- **版权**：© Jepsen, LLC
 
 </aside>
 

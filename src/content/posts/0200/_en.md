@@ -1,22 +1,15 @@
 ---
-sourceDigest: "f98fbec17afdf6158305878d9bb9c768b5a273ec95800427553df404c7b9acc8"
+sourceDigest: "948665e9a69ac2205dc27b82c2502215df7ce72f80df419a8021782e9260c310"
 title: "Enjoy Every Sandwich"
 description: "Brad Montague's essay from Warren Zevon's advice to enjoy every sandwich to a bad airport sandwich and paying attention to being alive."
 ---
 
 <aside class="source-note">
 
-**Source and Permission**
+**Source**
 
-**Author:** Brad Montague
-
-**Original Title:** _Enjoy Every Sandwich_
-
-**Original Publication Date:** September 22, 2026
-
-**Original Article:** [Enjoy Every Sandwich](https://bradmontague.substack.com/p/enjoy-every-sandwich)
-
-本文经授权制作并发布中英双语版。英文正文按原文顺序保留，中文译文紧随相应段落；原文插画与链接一并保留。｜This bilingual edition is reproduced and translated with permission. The English text follows the original order, with the Chinese translation immediately after each corresponding passage. The original illustrations and links are retained.
+- **Author:** Brad Montague
+- **Original:** [Enjoy Every Sandwich](https://bradmontague.substack.com/p/enjoy-every-sandwich) (2026-09-22)
 
 </aside>
 

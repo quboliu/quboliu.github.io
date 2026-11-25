@@ -20,13 +20,11 @@ modDatetime: 2026-09-30T19:34:20+08:00
 ---
 <aside class="source-note">
 
-**视频来源**
+**原文信息**
 
-- 演讲：Salman Munaf，*AI Agents Are Also Distributed Systems*
-- 活动：AI Engineer World's Fair，2024 年 7 月 2 日
-- 原视频：[YouTube｜AI Agents Are Also Distributed Systems](https://www.youtube.com/watch?v=hD9-V56FNRI)
-
-本文按视频时间线整理，保留所提供文字稿中的完整英文现场口语、停顿与重复，以及逐句中文对照；仅调整标题层级、时间戳和排版以便阅读。幻灯片编号按演讲中的切换顺序标注。
+- **演讲**：Salman Munaf，*AI Agents Are Also Distributed Systems*
+- **活动**：AI Engineer World's Fair（2024-07-02）
+- **原视频**：[YouTube](https://www.youtube.com/watch?v=hD9-V56FNRI)
 
 </aside>
 

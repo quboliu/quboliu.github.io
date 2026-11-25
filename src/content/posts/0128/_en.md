@@ -1,18 +1,16 @@
 ---
-sourceDigest: "c415c4cffa30957e2df0d4f18c617a0da434500530f495d051ee5c4db897f18f"
+sourceDigest: "388d1d09974ad7c7076b8d69d1215764d1b0cbd1776a1e7f22b1c54056d345f7"
 title: "AI Agents Are Also Distributed Systems"
 description: "Full transcript of Salman Munaf's AI Engineer World's Fair 2024 talk on agent loops, remote tool calls, idempotency, state, and observability."
 ---
 
 <aside class="source-note">
 
-**Video Source**
+**Source**
 
-- Talk: Salman Munaf, *AI Agents Are Also Distributed Systems*
-- Event: AI Engineer World's Fair, July 2, 2024
-- Original video: [YouTube — AI Agents Are Also Distributed Systems](https://www.youtube.com/watch?v=hD9-V56FNRI)
-
-Organized along the video timeline, preserving the full spoken transcript with only heading levels, timestamps, and formatting adjusted for readability. Slide numbers follow the talk's order.
+- **Speaker:** Salman Munaf, *AI Agents Are Also Distributed Systems*
+- **Event:** AI Engineer World's Fair (2024-07-02)
+- **Video:** [YouTube](https://www.youtube.com/watch?v=hD9-V56FNRI)
 
 </aside>
 

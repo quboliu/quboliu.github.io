@@ -1,18 +1,16 @@
 ---
-sourceDigest: "e14afcbc67a3a8e2f3e575894361df35e9a88df746a66ba3688d9f5da448f7ae"
+sourceDigest: "5e9faa2682fab013873d0918936c91ffda5ee00c13a93f7a068279142b93c5f0"
 title: "A Magical Study Report on Paxos"
 description: "English translation of canonical's essay on Paxos through magical metaphors, preserving all five original figures and commentary."
 ---
 
 <aside class="source-note">
 
-**Repost Note**
+**Source**
 
-- Original author: canonical
-- Original article: [Zhihu — *Paxos的魔法学研究报告*](https://zhuanlan.zhihu.com/p/193117183)
-- Completeness basis: [Author's Markdown source in repository](https://github.com/entropy-cloud/nop-entropy/blob/c8739a5c544b1e0ea1d4ee3d644ce71c62b6a030/docs/theory/paxos.md)
-
-This edition is translated from the author's public Markdown source, preserving all five original figures and the NopPlatform links at the end. Aside from this note and the review summary below, no original content was added or removed.
+- **Author:** canonical
+- **Original:** [Zhihu — *Paxos的魔法学研究报告*](https://zhuanlan.zhihu.com/p/193117183)
+- **Source Markdown:** [GitHub](https://github.com/entropy-cloud/nop-entropy/blob/c8739a5c544b1e0ea1d4ee3d644ce71c62b6a030/docs/theory/paxos.md)
 
 </aside>
 

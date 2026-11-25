@@ -21,13 +21,11 @@ description: "canonical《Paxos的魔法学研究报告》全文转载，保留�
 
 <aside class="source-note">
 
-**转载说明**
+**原文信息**
 
-- 原作者：canonical
-- 原文：[知乎《Paxos的魔法学研究报告》](https://zhuanlan.zhihu.com/p/193117183)
-- 完整性依据：[作者仓库中的 Markdown 源文件](https://github.com/entropy-cloud/nop-entropy/blob/c8739a5c544b1e0ea1d4ee3d644ce71c62b6a030/docs/theory/paxos.md)
-
-本文以作者公开的 Markdown 源文件为正文校对依据，并按知乎原文补齐文末的 NopPlatform 项目链接，保留全部正文和 5 幅原图。除本段转载说明和下面的评价摘要外，没有增删原文内容。
+- **作者**：canonical
+- **原文**：[知乎《Paxos的魔法学研究报告》](https://zhuanlan.zhihu.com/p/193117183)
+- **源文件**：[GitHub Markdown](https://github.com/entropy-cloud/nop-entropy/blob/c8739a5c544b1e0ea1d4ee3d644ce71c62b6a030/docs/theory/paxos.md)
 
 </aside>
 

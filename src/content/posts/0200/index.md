@@ -20,14 +20,10 @@ modDatetime: 2026-09-30T19:34:20+08:00
 
 <aside class="source-note">
 
-**来源与授权**
+**原文信息**
 
 - **作者**：Brad Montague
-- **原题**：_Enjoy Every Sandwich_
-- **日期**：September 22, 2026
-- **原文**：[Enjoy Every Sandwich](https://bradmontague.substack.com/p/enjoy-every-sandwich)
-
-本文经授权制作并发布中英双语版。英文正文按原文顺序保留，中文译文紧随相应段落；原文插画与链接一并保留。｜This bilingual edition is reproduced and translated with permission. The English text follows the original order, with the Chinese translation immediately after each corresponding passage. The original illustrations and links are retained.
+- **原文**：[Enjoy Every Sandwich](https://bradmontague.substack.com/p/enjoy-every-sandwich)（2026-09-22）
 
 </aside>
 
