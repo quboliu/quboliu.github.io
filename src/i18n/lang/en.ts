@@ -66,7 +66,7 @@ export default {
     postsDesc: "All the articles I've posted.",
 
     repostsTitle: "Reposts",
-    repostsDesc: "Authorized reprints and bilingual translations.",
+    repostsDesc: "Reprints and Bilingual Translations",
     repostAreasDesc: "Browse reposts by subject area.",
     repostTagsDesc: "Browse reposts by tag.",
     repostTypesDesc: "Browse reposts by content type.",

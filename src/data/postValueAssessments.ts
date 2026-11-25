@@ -29,6 +29,13 @@ export const POST_VALUE_ASSESSMENTS: Record<string, PostValueAssessment> = {
     reason:
       "记录英文原著播客的素材选择、音色调研与制作过程，并附有试听案例；经验主要来自单个项目。",
   },
+  "0257": {
+    reasonEn:
+      "Reflects on account access, isolated environments, and the cost of splitting attention based on personal experience with a podcast and a game mod.",
+    score: 66,
+    reason:
+      "结合播客和游戏模组项目，记录账号授权、环境隔离和注意力开销等具体问题。判断来自作者的个人实践。",
+  },
   "0070": {
     reasonEn:
       "Introduces coding agents through tool comparisons and examples of what went wrong. Useful for team discussion. Product details change quickly.",

@@ -1,5 +1,7 @@
 ---
-sourceDigest: "a32c49de8889a554ca0ede3052d2cfc99478630ed84d3d87e318970f5bab7873"
+sourceDigest: "9330ec71fc65da10ea98a343805ffdc55cfb5b3948a62bb9b720e516896a5139"
+title: "Notes on Using Personal Agents"
+description: "Reflections on account access, isolated environments, and the cost of splitting attention after using personal agents for a literary podcast and a historical Bannerlord mod."
 ---
 
 Around November 3, I used the break between jobs to work on a few things that had been on my mind.

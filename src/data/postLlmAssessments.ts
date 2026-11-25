@@ -28,6 +28,17 @@ const NO_EVIDENCE: PostLlmAssessment = {
 };
 
 export const POST_LLM_ASSESSMENTS: Record<string, PostLlmAssessment> = {
+  "0257": {
+    basisEn:
+      "The author confirms that they typed the entire Chinese original by hand and that its LLM content is 0%.",
+    kind: "estimated",
+    estimate: 0,
+    low: 0,
+    high: 0,
+    roles: [],
+    scope: "中文原稿的正文",
+    basis: "作者确认中文原稿全部由本人手敲，LLM 文字含量为 0%。",
+  },
   "0255": {
     basisEn:
       "The author confirms that they typed the entire source text by hand and that its LLM content is 0%.",

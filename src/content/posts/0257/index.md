@@ -1,6 +1,15 @@
 ---
+lang: "zh-CN"
 pubDatetime: 2026-11-23T04:28:55-05:00
-lang: zh-CN
+timezone: "America/New_York"
+title: "personal agent使用小结"
+area: "ai-and-agents"
+featured: false
+draft: false
+tags:
+  - "AI"
+  - "Agent"
+description: "从英文原著播客和骑砍2历史模组两个项目出发，回顾使用 personal agent 时的账号授权、环境隔离和注意力开销。"
 ---
 
 大概从11.03开始，也趁着离职充电这个时间，做了一下几个一直“抓心挠肝”的事情。
