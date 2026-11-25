@@ -21,23 +21,29 @@ modDatetime: 2026-09-30T19:34:20+08:00
 ---
 <aside class="source-note">
 
-**Subtitle｜副标题：** Most engineers skim DDIA. I read it twice, and here’s why it rewired my mental model.
+**原文信息**
 
-大多数工程师只是略读 DDIA。我把它读了两遍，下面就是它为何重塑了我的思维模型。
-
-**Author｜作者：** Dr Milan Milanović（Tech World With Milan Newsletter）
-
-**Publication date｜发布日期：** 2025-06-19（UTC）
-
-**Original article｜原文链接：** [What I learned from the book Designing Data-Intensive Applications](https://newsletter.techworld-with-milan.com/p/what-i-learned-from-the-book-designing)
-
-**Engagement｜互动数据：** ❤️ 1,009 次点赞 · 💬 46 条评论 · 🔁 137 次转发
-
-本文是 Dr Milan Milanović 原文的完整中英对照转载，正文与评论均予以保留；图片继续使用 Substack CDN 链接。中文译文紧随英文原文段落或列表。
+- **作者**：Dr Milan Milanović（Tech World With Milan Newsletter）
+- **原文**：[What I learned from the book Designing Data-Intensive Applications](https://newsletter.techworld-with-milan.com/p/what-i-learned-from-the-book-designing)（2025-06-19）
+- **说明**：完整中英对照转载，保留原文正文与 46 条读者评论。
 
 </aside>
 
----
+<div class="bilingual-unit">
+
+<div lang="en">
+
+Most engineers skim DDIA. I read it twice, and here’s why it rewired my mental model.
+
+</div>
+
+<div lang="zh-CN">
+
+大多数工程师只是略读 DDIA。我把它读了两遍，下面就是它为何重塑了我的思维模型。
+
+</div>
+
+</div>
 
 <div class="bilingual-unit">
 

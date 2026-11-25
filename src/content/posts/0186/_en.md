@@ -1,26 +1,20 @@
 ---
-sourceDigest: "3a56b6e0e3de3c9bcb16d75fbfc44075bebb69e910c96c0372d304e38d3f1d69"
+sourceDigest: "b412bf234339cd31caed6bfc0ddc01f20e714a8683465f7a00bd779465b85803"
 title: "What I learned from the book Designing Data-Intensive Applications?"
 description: "Dr Milan Milanovic's comprehensive review of Designing Data-Intensive Applications and 46 reader comments on storage, replication, and consistency."
 ---
 
 <aside class="source-note">
 
-**Subtitle
+**Source**
 
-**Author
-
-**Publication date
-
-**Original article
-
-**Engagement
-
-Complete reproduction of Dr Milan Milanović's original article and 46 reader comments.
+- **Author:** Dr Milan Milanović (Tech World With Milan Newsletter)
+- **Original:** [What I learned from the book Designing Data-Intensive Applications](https://newsletter.techworld-with-milan.com/p/what-i-learned-from-the-book-designing) (2025-06-19)
+- **Note:** Complete reproduction of the original article and 46 reader comments.
 
 </aside>
 
----
+Most engineers skim DDIA. I read it twice, and here’s why it rewired my mental model.
 
 With 2 decades of experience in software engineering, I consider myself knowledgeable across a range of topics, including NoSQL databases, Big Data, transactions, sharding, and more.
 

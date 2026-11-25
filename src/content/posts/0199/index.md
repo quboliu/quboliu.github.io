@@ -18,7 +18,7 @@ description: "Jepsen 一致性模型地图中 16 个模型专页的中英双语�
 
 <aside class="source-note">
 
-**来源与版权｜Source and copyright**
+**来源与版权**
 
 本文经授权整理并翻译 Jepsen 一致性模型地图所链接的 16 个模型专页。每节标题下均列出原文标题与链接；英文按原文要点整理，中文紧随其后。原文版权 © Jepsen, LLC；中文翻译由本站提供。
 
@@ -32,7 +32,7 @@ This authorized bilingual reference covers the sixteen model pages linked from J
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Strong Serializability](https://jepsen.io/consistency/models/strict-serializable) · © Jepsen, LLC
+- **原文**：Jepsen, [Strong Serializability](https://jepsen.io/consistency/models/strict-serializable) · © Jepsen, LLC
 
 </aside>
 
@@ -92,7 +92,7 @@ Herlihy 与 Wing 的定义是：若一段历史等价于某个事务依次执行
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Linearizability](https://jepsen.io/consistency/models/linearizable) · © Jepsen, LLC
+- **原文**：Jepsen, [Linearizability](https://jepsen.io/consistency/models/linearizable) · © Jepsen, LLC
 
 </aside>
 
@@ -152,7 +152,7 @@ Herlihy 与 Wing 认为，如果历史 H 存在一个等价的顺序历史 S，S
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Serializability](https://jepsen.io/consistency/models/serializable) · © Jepsen, LLC
+- **原文**：Jepsen, [Serializability](https://jepsen.io/consistency/models/serializable) · © Jepsen, LLC
 
 </aside>
 
@@ -212,7 +212,7 @@ ANSI SQL 把可串行化执行定义为与某次串行执行产生相同效果�
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Repeatable Read](https://jepsen.io/consistency/models/repeatable-read) · © Jepsen, LLC
+- **原文**：Jepsen, [Repeatable Read](https://jepsen.io/consistency/models/repeatable-read) · © Jepsen, LLC
 
 </aside>
 
@@ -256,7 +256,7 @@ In the preventative interpretation of ANSI isolation, repeatable read prohibits 
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Snapshot Isolation](https://jepsen.io/consistency/models/snapshot-isolation) · © Jepsen, LLC
+- **原文**：Jepsen, [Snapshot Isolation](https://jepsen.io/consistency/models/snapshot-isolation) · © Jepsen, LLC
 
 </aside>
 
@@ -334,7 +334,7 @@ Berenson 等人的算法为每个事务分配一个快照，将事务自己的�
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Causal Consistency](https://jepsen.io/consistency/models/causal) · © Jepsen, LLC
+- **原文**：Jepsen, [Causal Consistency](https://jepsen.io/consistency/models/causal) · © Jepsen, LLC
 
 </aside>
 
@@ -394,7 +394,7 @@ Causal memory builds on Lamport's happens-before relation. It preserves each pro
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Sequential Consistency](https://jepsen.io/consistency/models/sequential) · © Jepsen, LLC
+- **原文**：Jepsen, [Sequential Consistency](https://jepsen.io/consistency/models/sequential) · © Jepsen, LLC
 
 </aside>
 
@@ -438,7 +438,7 @@ Lamport 的定义是：执行结果等价于把所有处理器的操作按某个
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [PRAM](https://jepsen.io/consistency/models/pram) · © Jepsen, LLC
+- **原文**：Jepsen, [PRAM](https://jepsen.io/consistency/models/pram) · © Jepsen, LLC
 
 </aside>
 
@@ -482,7 +482,7 @@ PRAM holds when session order—the order of operations on each process—is a s
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Writes Follow Reads](https://jepsen.io/consistency/models/writes-follow-reads) · © Jepsen, LLC
+- **原文**：Jepsen, [Writes Follow Reads](https://jepsen.io/consistency/models/writes-follow-reads) · © Jepsen, LLC
 
 </aside>
 
@@ -526,7 +526,7 @@ The visibility and session orders, restricted to read/write pairs, must be a sub
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Monotonic Writes](https://jepsen.io/consistency/models/monotonic-writes) · © Jepsen, LLC
+- **原文**：Jepsen, [Monotonic Writes](https://jepsen.io/consistency/models/monotonic-writes) · © Jepsen, LLC
 
 </aside>
 
@@ -570,7 +570,7 @@ Session order restricted to write/write pairs must be a subset of arbitration or
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Read Your Writes](https://jepsen.io/consistency/models/read-your-writes) · © Jepsen, LLC
+- **原文**：Jepsen, [Read Your Writes](https://jepsen.io/consistency/models/read-your-writes) · © Jepsen, LLC
 
 </aside>
 
@@ -614,7 +614,7 @@ Session order restricted to write/read pairs must be a subset of visibility orde
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Cursor Stability](https://jepsen.io/consistency/models/cursor-stability) · © Jepsen, LLC
+- **原文**：Jepsen, [Cursor Stability](https://jepsen.io/consistency/models/cursor-stability) · © Jepsen, LLC
 
 </aside>
 
@@ -674,7 +674,7 @@ Adya 通过禁止 G1 和 G-cursor(x) 定义游标稳定性：限制在单一对�
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Monotonic Atomic View](https://jepsen.io/consistency/models/monotonic-atomic-view) · © Jepsen, LLC
+- **原文**：Jepsen, [Monotonic Atomic View](https://jepsen.io/consistency/models/monotonic-atomic-view) · © Jepsen, LLC
 
 </aside>
 
@@ -734,7 +734,7 @@ Bailis、Davidson、Fekete 等人提出了 MAV。按 Adya 的术语，它禁止 
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Read Committed](https://jepsen.io/consistency/models/read-committed) · © Jepsen, LLC
+- **原文**：Jepsen, [Read Committed](https://jepsen.io/consistency/models/read-committed) · © Jepsen, LLC
 
 </aside>
 
@@ -794,7 +794,7 @@ Under Adya's preventative interpretation, read committed prohibits P0 dirty writ
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Read Uncommitted](https://jepsen.io/consistency/models/read-uncommitted) · © Jepsen, LLC
+- **原文**：Jepsen, [Read Uncommitted](https://jepsen.io/consistency/models/read-uncommitted) · © Jepsen, LLC
 
 </aside>
 
@@ -854,7 +854,7 @@ ANSI 在这一隔离级别上几乎不作约束。Adya 的预防式解释禁止 
 
 <aside class="source-note">
 
-**原文｜Source:** Jepsen, [Monotonic Reads](https://jepsen.io/consistency/models/monotonic-reads) · © Jepsen, LLC
+- **原文**：Jepsen, [Monotonic Reads](https://jepsen.io/consistency/models/monotonic-reads) · © Jepsen, LLC
 
 </aside>
 

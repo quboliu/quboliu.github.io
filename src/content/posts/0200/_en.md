@@ -1,5 +1,5 @@
 ---
-sourceDigest: "87b4914b4aac2d7adc9314760cb1acc235ffe1373addc0dd20e6255c21633323"
+sourceDigest: "f98fbec17afdf6158305878d9bb9c768b5a273ec95800427553df404c7b9acc8"
 title: "Enjoy Every Sandwich"
 description: "Brad Montague's essay from Warren Zevon's advice to enjoy every sandwich to a bad airport sandwich and paying attention to being alive."
 ---
