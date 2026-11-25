@@ -1,5 +1,5 @@
 ---
-sourceDigest: "03a2ad58512c901b36a45a07111641fce5d88c104488cd982f969b91cf13dbd0"
+sourceDigest: "38680284b588ef364c7f9943681d50cee084943a2585e50eef72eedcdba66230"
 ---
 
 Today I revisited Salman Munaf's talk [AI Agents Are Also Distributed Systems](https://quboliu.github.io/en/posts/0128/), which includes this passage:
