@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import type { GetStaticPathsOptions } from "astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
@@ -32,21 +33,49 @@ const { page } = Astro.props;
 const area = getAreaBySlug(Astro.props.area.slug, Astro.currentLocale === "en");
 if (!area) throw new Error("Area page has no matching area");
 const locale = Astro.currentLocale ?? config.site.lang;
+// Preserve the old area URLs for the relocated Jepsen guides.
+const movedTo =
+  area.slug === "software-engineering" && page.total === 0
+    ? getAreaBySlug("distributed-systems", locale === "en")
+    : undefined;
+const destination =
+  movedTo && getRelativeLocaleUrl(locale, `areas/${movedTo.slug}/`);
 const t = useTranslations(locale);
 ---
 
 <Layout
   title={`${area.name} | ${t.pages.areasTitle} | ${config.site.title}`}
   description={area.description}
+  canonicalURL={destination && new URL(destination, config.site.url).href}
 >
+  <Fragment slot="head">
+    {
+      destination && (
+        <>
+          <meta http-equiv="refresh" content={`0;url=${destination}`} />
+          <meta name="robots" content="noindex" />
+        </>
+      )
+    }
+  </Fragment>
   <Header />
 
   <Breadcrumb />
 
   <Main pageTitle={area.name} pageDesc={area.description}>
-    <ul>
-      {page.data.map(data => <Card {...data} />)}
-    </ul>
+    {
+      destination ? (
+        <a class="text-accent underline" href={destination}>
+          {movedTo?.name}
+        </a>
+      ) : (
+        <ul>
+          {page.data.map(data => (
+            <Card {...data} />
+          ))}
+        </ul>
+      )
+    }
   </Main>
 
   <Pagination {page} />

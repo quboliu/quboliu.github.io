@@ -1,5 +1,5 @@
 ---
-sourceDigest: "10978630a1adcd78f72b541d2a85194807189954f37f314514c69bd4c965375e"
+sourceDigest: "e09c5393de1e8145d1e560b7c0caa3b97fde5bc03dea09d08be9d65e4a00dc84"
 title: "Consistency Models Reference"
 description: "Reference covering the sixteen consistency model pages linked from Jepsen's map, including definitions, availability bounds, and formalisms."
 ---

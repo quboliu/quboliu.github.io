@@ -5,7 +5,7 @@ timezone: "Asia/Shanghai"
 title: "Consistency Models Reference｜一致性模型术语参考"
 contentType: "repost"
 bilingual: true
-area: "software-engineering"
+area: "distributed-systems"
 featured: false
 draft: false
 tags:

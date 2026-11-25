@@ -35,6 +35,9 @@ const areaLinks = areas.map(({ slug, name, posts }) => ({
   name,
   count: posts.length,
 }));
+const hasSoftwareEngineering = areas.some(
+  area => area.slug === "software-engineering"
+);
 ---
 
 <Layout
@@ -58,6 +61,10 @@ const areaLinks = areas.map(({ slug, name, posts }) => ({
               data-area-section={area.slug}
               class="scroll-mt-20"
             >
+              {area.slug === "distributed-systems" &&
+                !hasSoftwareEngineering && (
+                  <div id="area-software-engineering" class="scroll-mt-20" />
+                )}
               <header class="border-border mb-3 border-b pb-3">
                 <h2 class="text-xl font-semibold">
                   <a
