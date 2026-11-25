@@ -14,16 +14,16 @@ tags:
   - "可靠性"
   - "可观测性"
   - "安全"
-description: "Salman Munaf 在 AI Engineer World's Fair 2024 的完整演讲逐字稿：从 Agent 循环、远程工具调用与状态管理，到幂等性、补偿、权限和可观测性。"
+description: "Salman Munaf 在 AI Engineer World's Fair 2026 的完整演讲逐字稿：从 Agent 循环、远程工具调用与状态管理，到幂等性、补偿、权限和可观测性。"
 bilingual: true
-modDatetime: 2026-09-30T19:34:20+08:00
+modDatetime: 2026-11-25T14:16:00+08:00
 ---
 <aside class="source-note">
 
 **原文信息**
 
-- **演讲**：Salman Munaf，*AI Agents Are Also Distributed Systems*
-- **活动**：AI Engineer World's Fair（2024-07-02）
+- **演讲**：Salman Munaf，*AI Agents Are Just Distributed Systems Now*
+- **活动**：AI Engineer World's Fair 2026（2026-07-02；YouTube 发布于 2026-08-29）
 - **原视频**：[YouTube](https://www.youtube.com/watch?v=hD9-V56FNRI)
 
 </aside>
@@ -34,7 +34,7 @@ modDatetime: 2026-09-30T19:34:20+08:00
 
 ## 开场引言（00:13–01:06）
 
-**幻灯片 1：*AI Agents Are Also Distributed Systems | Salman Munaf | Leadership 1 • July 2, 2024***
+**幻灯片 1：*AI Agents Are Also Distributed Systems | Salman Munaf | Leadership 1 • July 2, 2026***
 
 ### 00:13–00:20
 
